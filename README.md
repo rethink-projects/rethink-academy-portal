@@ -1,4 +1,4 @@
-![App Screenshot](https://media-exp2.licdn.com/dms/image/C4D2DAQFudaW6r08CJQ/profile-treasury-image-shrink_160_160/0/1657021785294?e=1657648800&v=beta&t=LF_HCQRwkiiY-0NSVO2KdGd5xM7DNOex_jjcJJzmw8Y)
+![Rethink Academy Logo](https://github.com/rethink-projects/rethink-academy-portal/blob/main/public/logo.png?raw=true)
 
 # Rethink Academy Portal
 
