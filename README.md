@@ -15,19 +15,13 @@ Com isso iremos percorrer as seguintes etapas: a de imersão com levantamento de
 
 ## Squads & Problemáticas
 
-<hr>
-<br>
-
 #### 🥷 Tech Squad
 
 Como podemos criar um ambiente único em que todos os conteúdos relacionados a hard skills estejam centralizados para que todos os estagiários possam acessar e acompanhar?
-<br>
-<br>
 
 #### 🧙‍♂️ Mestre dos Magos
 
 Como podemos criar um ambiente que possibilite o registro de horas dos estagiários, trazendo visibilidade de todas as atividades atreladas a eles e o tempo dedicado a cada tarefa?
-<br><br>
 
 #### ❤️ Squad s2
 
