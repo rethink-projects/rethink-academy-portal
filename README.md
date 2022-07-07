@@ -14,8 +14,6 @@
  <a href="#-tecnologias">Tecnologias</a> • 
  <a href="#-roadmap">Roadmap</a> • 
  <a href="#-contribuidores">Contribuidores</a> • 
- <a href="#-autor">Autor</a> • 
- <a href="#user-content--licença">Licença</a>
 </p>
 
 ## 💻 Sobre o projeto
