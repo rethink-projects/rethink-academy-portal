@@ -7,11 +7,12 @@
 </h4>
 
 <p align="center">
- <a href="#-sobre-o-projeto">Sobre</a> •
- <a href="#-squads-&-problematicas">Squads e Problematicas</a> • 
+ <a href="#-sobre">Sobre</a> •
+ <a href="#-squads">Squads e Problematicas</a> • 
  <a href="#-layout">Layout</a> • 
  <a href="#-como-executar-o-projeto">Como executar</a> • 
  <a href="#-tecnologias">Tecnologias</a> • 
+ <a href="#-roadmap">Roadmap</a> • 
  <a href="#-contribuidores">Contribuidores</a> • 
  <a href="#-autor">Autor</a> • 
  <a href="#user-content--licença">Licença</a>
@@ -19,6 +20,7 @@
 
 ## 💻 Sobre o projeto
 
+<div id="#-sobre"></div>
 <p>O <strong>Rethink Academy</strong> ainda possui muitas possibilidades de evolução para atender todas as necessidades tanto dos estagiários inseridos no programa, como da empresa.
 
 Desta forma, o propósito do desafio é criar, por meio de um produto digital, um ambiente único para os colaboradores do Rethink Academy, para que assim as informações referentes ao programa estejam centralizadas e a visualização de atividades esteja disponível para todos, bem como os conteúdos de aulas, dentre outros aspectos.
@@ -33,6 +35,7 @@ Com isso iremos percorrer as seguintes etapas: a de imersão com levantamento de
 
 ## Squads & Problemáticas
 
+<div id="#-squads"></div>
 #### 🥷 Tech Squad
 
 <p>Como podemos criar um ambiente único em que todos os conteúdos relacionados a hard skills estejam centralizados para que todos os estagiários possam acessar e acompanhar?</p>
@@ -59,11 +62,11 @@ O layout da aplicação está disponível no Figma:
   <img alt="Made by Rethink Academy" src="https://img.shields.io/badge/Figma-Layout-yellowgreen">
 </a>
 
----
-
 <!-- ROADMAP -->
 
 ## 🎢 Roadmap
+
+<div id="#-roadmap"></div>
 
 - [x] Boilerplate inicial do Projeto
 - [x] Documentação do Projeto.
