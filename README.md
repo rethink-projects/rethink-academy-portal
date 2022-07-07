@@ -66,18 +66,21 @@ O layout da aplicação está disponível no Figma:
 - [x] Boilerplate inicial do Projeto
 - [x] Documentação do Projeto.
 - [ ] Desenvolvimento do Design System
-  - [ ] Componente Grid
-  - [ ] Componente Typography
-  - [ ] Componente Button
-  - [ ] Componente Spinner
-  - [ ] Componente ToolTips
-  - [ ] Componente BreadCrumbs
-  - [ ] Componente Text Input
-  - [ ] Componente TextArea
-  - [ ] Componente Dropdown
-  - [ ] Componente Date Picker
-  - [ ] Componente Radio Box
-  - [ ] Componente Checkbox
+
+### ⚙️ Status de desenvolvimento
+
+| **Componente**  | Status |
+| --------------- | :----: |
+| **Button**      |   ✅   |
+| **TextInput**   |   ☑️   |
+| **Textarea**    |   ☑️   |
+| **Dropdown**    |   ☑️   |
+| **Date Picker** |   ☑️   |
+| **Radio Input** |   ☑️   |
+| **CheckBox**    |   ☑️   |
+| **Tooltips**    |   ☑️   |
+| **Breadcrumb**  |   ☑️   |
+| **Spinner**     |   ☑️   |
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
