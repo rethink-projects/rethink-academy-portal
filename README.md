@@ -135,14 +135,14 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 <small>💚 Um super thanks 👏 para essa galera que está fazendo esse produto sair do campo da ideia e se tornando um produto Rethink Academy :)</small>
 
-<table align="center">
+<table>
   <strong>Suporte</strong>
   <tr>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/46483368?v=4" width="100px;" alt="Embaixador Rethink Academy"/><br /><sub><b>Filipe Prado</b></sub></a><br /><a href="https://rethink.dev" title="Embaixador Rethink Academy">👨‍🚀</a></td>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/82178938?v=4" width="100px;" alt="Assistente - Rethink Academy"/><br /><sub><b>Gabriel Gomes</b></sub></a><br /><a href="https://rethink.dev" title="Assistente - Rethink Academy">👨‍🚀</a></td>
   </tr>
 </table>
-<table align="center">
+<table>
   <strong>Tech Squad</strong>
   <tr>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102805505?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Felipe Reggiane</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
