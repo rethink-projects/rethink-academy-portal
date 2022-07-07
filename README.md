@@ -33,9 +33,10 @@ Com isso iremos percorrer as seguintes etapas: a de imersão com levantamento de
 
 </p>
 
-## Squads & Problemáticas
+## Squads
 
 <div id="#-squads"></div>
+
 #### 🥷 Tech Squad
 
 <p>Como podemos criar um ambiente único em que todos os conteúdos relacionados a hard skills estejam centralizados para que todos os estagiários possam acessar e acompanhar?</p>
@@ -48,8 +49,6 @@ Com isso iremos percorrer as seguintes etapas: a de imersão com levantamento de
 
 <p>Como podemos criar um ambiente em que o estagiário possa acompanhar a evolução do seu contrato, das suas avaliações de soft skills e seu desenvolvimento pessoal?</p>
 
----
-
 ## 🎨 Layout
 
 O layout da aplicação está disponível no Figma:
@@ -61,8 +60,6 @@ O layout da aplicação está disponível no Figma:
 <a href="https://www.figma.com/file/EBZhQTuJxfdbIAXmlCFfvv/Design-System---Rethink-Portal">
   <img alt="Made by Rethink Academy" src="https://img.shields.io/badge/Figma-Layout-yellowgreen">
 </a>
-
-<!-- ROADMAP -->
 
 ## 🎢 Roadmap
 
@@ -83,8 +80,6 @@ O layout da aplicação está disponível no Figma:
   - [ ] Componente Date Picker
   - [ ] Componente Radio Box
   - [ ] Componente Checkbox
-
----
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
@@ -133,13 +128,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 > Veja o arquivo [package.json](https://github.com/rethink-projects/rethink-academy-portal/package.json)
 
----
-
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
 ## 👨‍💻 Contribuidores
 
-💚 Um super thanks 👏 para essa galera que está fazendo esse produto sair do campo da ideia e se tornando um produto Rethink Academy :)
+<small>💚 Um super thanks 👏 para essa galera que está fazendo esse produto sair do campo da ideia e se tornando um produto Rethink Academy :)</small>
 
 <table>
   <tr>
@@ -151,6 +144,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ---
 
-Feito com 💚 pelo time Rethink Academy 👋🏽 [Entre em contato!](https://github.com/filiperethink)
+### Feito com 💚 pelo time Rethink Academy 👋🏽 [Entre em contato!](https://github.com/filiperethink)
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
