@@ -1,7 +1,7 @@
+<div id="top"></div>
 <h1 align="center">
     <img alt="NextLevelWeek" title="#NextLevelWeek" src="https://github.com/rethink-projects/rethink-academy-portal/blob/main/public/logo.png?raw=true" />
 </h1>
-
 <h4 align="center"> 
 	🚧  O projeto Rethink Academy Portal está em Desenvolvimento 🚀 🚧
 </h4>
@@ -61,6 +61,30 @@ O layout da aplicação está disponível no Figma:
 
 ---
 
+<!-- ROADMAP -->
+
+## 🎢 Roadmap
+
+- [x] Boilerplate inicial do Projeto
+- [x] Documentação do Projeto.
+- [ ] Desenvolvimento do Design System
+  - [ ] Componente Grid
+  - [ ] Componente Typography
+  - [ ] Componente Button
+  - [ ] Componente Spinner
+  - [ ] Componente ToolTips
+  - [ ] Componente BreadCrumbs
+  - [ ] Componente Text Input
+  - [ ] Componente TextArea
+  - [ ] Componente Dropdown
+  - [ ] Componente Date Picker
+  - [ ] Componente Radio Box
+  - [ ] Componente Checkbox
+
+---
+
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
+
 ## 🚀 Como executar o projeto
 
 Esse é o nosso repo para o frontend da aplicação.
@@ -93,6 +117,8 @@ $ npm run start
 
 ---
 
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
+
 ## 🛠 Tecnologias
 
 As seguintes ferramentas foram usadas na construção do projeto:
@@ -105,6 +131,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 > Veja o arquivo [package.json](https://github.com/rethink-projects/rethink-academy-portal/package.json)
 
 ---
+
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
 
 ## 👨‍💻 Contribuidores
 
@@ -121,3 +149,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ---
 
 Feito com 💚 pelo time Rethink Academy 👋🏽 [Entre em contato!](https://github.com/filiperethink)
+
+<p align="right">(<a href="#top">Voltar ao topo</a>)</p>
