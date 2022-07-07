@@ -142,6 +142,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102805505?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Felipe Reggiane</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102759771?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Ana Ramos</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
       <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102822686?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Lucas de Paula</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
+       <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102760281?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Sthéphany Tezza</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
   </tr>
  
   <tr>
@@ -149,7 +150,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102757800?v=4" width="100px;" alt="Assistente - Rethink Academy"/><br /><sub><b>Fabiana Kamo</b></sub></a><br /><a href="https://rethink.dev" title="Assistente - Rethink Academy">🥷</a></td>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/64514117?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Fernando Henrique</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
     <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102760382?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Gabriel Melo</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
-      <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102760281?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Sthéphany Tezza</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
      <td align="center"><a href="https://rethink.dev"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/102779256?v=4" width="100px;" alt="Estagiário - Rethink Academy"/><br /><sub><b>Amanda Duarte</b></sub></a><br /><a href="https://rethink.dev" title="Estagiário - Rethink Academy">🥷</a></td>
   </tr>
 </table>
