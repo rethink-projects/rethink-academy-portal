@@ -133,7 +133,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ## Contribuindo
 
-Abaixo vamos explicar um pouco sobre como iremos trabalhar no github
+Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 
 1. Antes de começar sua nova Feature.
 2. Crie uma Branch para ela (`git checkout -b feature/AmazingFeature`)
