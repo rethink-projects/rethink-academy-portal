@@ -1,0 +1,14 @@
+:root {
+  --heading-one: 72px;
+  --heading-two: 64px;
+  --heading-three: 56px;
+  --heading-four: 48px;
+  --heading-five: 40px;
+  --heading-six: 32px;
+
+  --title-one: 24px;
+  --title-two: 20px;
+
+  --paragraphy: 16px;
+  --caption: 12px;
+}
