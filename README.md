@@ -135,12 +135,18 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 
-1. Antes de começar sua nova Feature.
-2. Crie uma Branch para ela (`git checkout -b feature/AmazingFeature`)
-3. Commit suas alterações sendo bem objetivo (`git commit -m 'Add some AmazingFeature'`)
-4. Push sua Branch para o nosso repo online (`git push origin feature/AmazingFeature`)
-5. Agora vá [para o repositorio](https://github.com/rethink-projects/rethink-academy-portal/pulls) faça um Pull Request.
-6. Não esqueça de marcar o Embaixador e o Assistente para fazer o code review da sua branch.
+1. Antes de começar sua nova Feature crie uma Branch para ela:<br>
+   `$ git checkout -b feature/AmazingFeature`
+   <br>
+
+2. Commit suas alterações sendo bem objetivo:<br>
+   `$ git commit -m 'Add some AmazingFeature'`
+   <br>
+3. Push sua Branch para o nosso repo online:<br>
+   `$ git push origin feature/AmazingFeature`
+   <br>
+4. Agora faça [Pull Request](https://github.com/rethink-projects/rethink-academy-portal/pulls).
+5. Não esqueça de marcar o Embaixador e o Assistente para fazer o code review da sua branch.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
