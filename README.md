@@ -193,6 +193,7 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 ### Participantes.
 
 [x] - Filipe Prado
+[x] - Lucas Araújo
 [x] - Gabriel Melo
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
