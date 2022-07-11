@@ -190,4 +190,8 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 
 ### Feito com 💚 pelo time Rethink Academy 👋🏽 [Entre em contato!](https://github.com/filiperethink)
 
+### Participantes.
+
+[x] - Filipe Prado
+
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
