@@ -194,4 +194,6 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 
 [x] - Filipe Prado
 [x] - Lucas Araújo
+[x] - Gabriel Melo
+
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
