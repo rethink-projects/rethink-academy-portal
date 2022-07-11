@@ -201,5 +201,6 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
 [x] - Amanda Duarte
+[x] - Gabriel Gomes 2
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
