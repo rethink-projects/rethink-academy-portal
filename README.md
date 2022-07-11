@@ -193,7 +193,11 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 ### Participantes.
 
 [x] - Filipe Prado
+<<<<<<< HEAD
 [x] - Felipe Reggiane
+=======
+[x] - Lucas Araújo
+>>>>>>> main
 [x] - Gabriel Melo
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
