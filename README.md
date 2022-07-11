@@ -200,6 +200,10 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 [x] - Gabriel Melo
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
+<<<<<<< HEAD
 [x] - Ana Clara Ramos
+=======
+[x] - Gabriel Gomes 2
+>>>>>>> main
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
