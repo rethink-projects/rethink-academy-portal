@@ -194,7 +194,9 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 
 [x] - Filipe Prado
 [x] - Fernando Henrique
+[x] - Felipe Reggiane
 [x] - Lucas Araújo
+[x] - Sthéphany Tezza
 [x] - Gabriel Melo
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
