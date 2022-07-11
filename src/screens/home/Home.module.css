@@ -23,7 +23,7 @@
   border-radius: 5px;
   color: var(--color-secundary);
   background-color: var(--color-primary);
-  font-size: var(--caption);
+  font-size: var(--paragraphy);
   padding: 10px 14px;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .home_inner span {
-  font-size: var(--caption);
+  font-size: var(--paragraphy);
   color: var(--color-base);
   text-align: center;
 }
