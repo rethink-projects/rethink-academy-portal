@@ -193,6 +193,10 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 ### Participantes.
 
 [x] - Filipe Prado
+<<<<<<< HEAD
+[x] - Gabriel Melo
+=======
 [x] - Fabiana Kamo
+>>>>>>> 0b055a7d42cf36e54431c8ffeae365699f97b92c
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>
