@@ -200,6 +200,7 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 [x] - Gabriel Melo
 [x] - Fabiana Kamo
 [x] - Gabriel Gomes
+[x] - Ana Clara Ramos
 [x] - Amanda Duarte
 [x] - Gabriel Gomes 2
 
