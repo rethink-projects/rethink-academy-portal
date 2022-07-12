@@ -1,0 +1,39 @@
+.btn_social_primary,
+.btn_social_secundary {
+  margin: 10px 10px;
+  background-color: var(--color-secundary-active);
+  color: var(--color-base);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  gap: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 236px;
+  height: 56px;
+  border: none;
+}
+
+.btn_social_p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.btn_social_primary:hover {
+  background-color: var(--color-secundary-hover);
+}
+
+.btn_social_secundary {
+  background-color: #ffffff;
+  color: var(--color-secundary-active);
+  border: 1px solid var(--color-secundary-active);
+}
+
+.btn_social_secundary:hover {
+  border: 2.5px solid var(--color-secundary-active);
+}
