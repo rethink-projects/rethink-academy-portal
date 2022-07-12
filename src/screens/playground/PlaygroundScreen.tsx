@@ -1,7 +1,12 @@
+// CSS
+
 import React from "react";
 import SocialButton from "../../components/SocialButton/SocialButton";
 import Spinner from "../../components/Spinner/Spinner";
+import ButtonLeft from "../../components/ButtonLeft/ButtonLeft";
+
 import styles from "./Playground.module.css";
+
 
 function PlaygroundScreen() {
   return (
@@ -13,6 +18,14 @@ function PlaygroundScreen() {
       <div className={styles.sub_content}>
         <SocialButton type='secundary' onClick={() => console.log("clicou")} />
         <SocialButton onClick={() => console.log("clicou")} />
+        <ButtonLeft
+          type="primary"
+          size="large"
+          iconPosition="left"
+          text="Button Label"
+          icon="LightBulb"
+          onClick={() => {}}
+        />
       </div>
       <div className={styles.sub_content}>
         <Spinner size='big' type='light' isLoading={true} />
