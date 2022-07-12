@@ -8,21 +8,33 @@ type SpinnerProps = {
 };
 
 const Spinner = ({ type, size, isLoading }: SpinnerProps) => {
-  const default_loading_spinner =
-    type === "light"
-      ? size === "big"
-        ? styles.default_loading_spinner
-        : ` ${styles.small_light_loading_spinner}
-      ${styles.default_loading_spinner}`
-      : size === "big"
-      ? ` ${styles.dark_loading_spinner}
-     ${styles.default_loading_spinner}`
-      : ` ${styles.dark_loading_spinner}
-     ${styles.small_dark_loading_spinner}`;
+
+  const getClassByType = () => {
+    
+    let currentType = styles.default_loading_spinner;
+    let config = type + size;
+    switch (config) {
+      case "lightsmall":
+        currentType = styles.small_light_loading_spinner;
+        break;
+
+      case "darksmall":
+        currentType = styles.small_dark_loading_spinner;
+        break;
+
+      case "darkbig":
+        currentType = styles.dark_loading_spinner;
+        break;
+
+      default:
+        break;
+    }
+    return currentType;
+  };
 
   return (
     <div className={styles.spinner_container}>
-      {isLoading && <div className={default_loading_spinner}></div>}
+      {isLoading && <div className={getClassByType()}></div>}
     </div>
   );
 };

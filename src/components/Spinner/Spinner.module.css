@@ -1,6 +1,7 @@
 .default_loading_spinner,
 .dark_loading_spinner,
-.small_light_loading_spinner {
+.small_light_loading_spinner,
+.small_dark_loading_spinner {
   width: 56px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -21,7 +22,6 @@
 }
 
 .dark_loading_spinner {
-  width: 56px;
   background: radial-gradient(
         farthest-side,
         var(--color-secundary) 100%,
