@@ -4,7 +4,7 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-color: var(--color-icon-disable);
+  background-color: var(--color-base);
 }
 
 .main_content {
@@ -14,12 +14,11 @@
 }
 
 .sub_content {
+  max-width: 236px;
   margin-top: 50px;
-}
-.sub_content span {
-  color: var(--color-secundary);
-  font-weight: bold;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .dropdowns {
