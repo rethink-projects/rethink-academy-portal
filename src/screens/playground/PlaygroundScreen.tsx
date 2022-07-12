@@ -1,6 +1,8 @@
-import React from "react";
-import Button from "../../components/Button/Button";
+// CSS
 import styles from "./Playground.module.css";
+
+// Button Icon Left
+import ButtonLeft from "../../components/ButtonLeft/ButtonLeft";
 
 function PlaygroundScreen() {
   return (
@@ -9,9 +11,19 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>insira abaixo o seu componente:</p>
       </div>
-      <div className={styles.sub_content}>
+      {/* <div className={styles.sub_content}>
         <span>Componente Button</span>
         <Button />
+      </div> */}
+      <div>
+        <ButtonLeft
+          type="primary"
+          size="large"
+          iconPosition="left"
+          text="Button Label"
+          icon="LightBulb"
+          onClick={() => {}}
+        />
       </div>
     </div>
   );
