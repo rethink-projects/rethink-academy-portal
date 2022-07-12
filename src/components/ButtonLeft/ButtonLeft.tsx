@@ -5,7 +5,7 @@ import styles from "./ButtonLeft.module.css";
 import Images from "../../../src/assets/index";
 
 type ButtonLeftProps = {
-  type: "primary" | "secondary" | "outline";
+  type?: "primary" | "secondary" | "outline";
   size?: "large" | "medium" | "small";
   iconPosition?: "left" | "right";
   text: string;
@@ -19,16 +19,16 @@ const ButtonLeft = ({
   iconPosition = "left",
   text,
   onClick,
-  icon,
 }: ButtonLeftProps) => {
   let iconImg = Images.icons[iconPosition];
 
   return (
     <button
+      disabled
       className={`${styles[type]} ${styles[size]} ${styles.btn_default}`}
       onClick={onClick}
     >
-      <img src={iconImg} alt="A light bulb Icon on the Left" />
+      <img src={iconImg} alt='A light bulb Icon on the Left' />
       <span>{text}</span>
     </button>
   );
