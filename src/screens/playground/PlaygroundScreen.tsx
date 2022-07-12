@@ -1,5 +1,5 @@
+import React from "react";
 import Button from "../../components/Button/Button";
-import Spinner from "../../components/Spinner/Spinner";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
@@ -12,13 +12,6 @@ function PlaygroundScreen() {
       <div className={styles.sub_content}>
         <span>Componente Button</span>
         <Button />
-      </div>
-      <div className={styles.sub_content}>
-        <span>Componente Spinner</span>
-        <Spinner isLoading type="light" size="small" />
-        <Spinner isLoading type="light" size="big" />
-        <Spinner isLoading type="dark" size="small"/>
-        <Spinner isLoading type="dark" size="big" />
       </div>
     </div>
   );
