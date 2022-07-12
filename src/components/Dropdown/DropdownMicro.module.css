@@ -4,7 +4,7 @@
   align-items: center;
   /* a borda vai adicionar um pixel de cada lado */
   width: 241px;
-  height: 46px;
+  height: 30px;
 
   background: var(--color-base) !important;
   border: 1px solid var(--color-tertiary-hover);
@@ -17,6 +17,8 @@
 .dropdown img {
   margin-left: 18.25px;
   margin-right: 14.25px;
+  width: 13px;
+  height: 9.5px;
 }
 
 .dropdown span {
@@ -24,8 +26,8 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 20px;
 
   color: var(--color-tertiary-active) !important;
 }
@@ -35,7 +37,11 @@
   align-items: center;
 
   position: absolute;
-  right: 17px;
+  right: 14px;
+}
+.rightImage img {
+  width: 9px;
+  height: 5px;
 }
 
 .dropdown_content {
@@ -48,15 +54,15 @@
   background-color: var(--color-base) !important;
 
   width: 241px;
-  height: 40px;
+  height: 30px;
 }
 
 .dropdown_content p {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
 
   margin-left: 16px;
   color: var(--color-tertiary-active);
