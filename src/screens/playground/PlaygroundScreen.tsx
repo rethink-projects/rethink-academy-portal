@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../components/Button/Button";
+import Textarea from "../../components/Textarea/Textarea";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
@@ -12,6 +13,14 @@ function PlaygroundScreen() {
       <div className={styles.sub_content}>
         <span>Componente Button</span>
         <Button />
+      </div>
+      <div className={styles.sub_content}>
+        <span>Componente Textarea</span>
+        <div className={styles.sub_content_textarea}>
+          <Textarea placeholder="Place Holder" label="Large" caption="Element caption" type="large" />
+          <Textarea placeholder="Place Holder" label="Default" caption="Element caption" disabled />
+          <Textarea placeholder="Place Holder" label="Small" caption="Element caption" type="small" />
+        </div>
       </div>
     </div>
   );

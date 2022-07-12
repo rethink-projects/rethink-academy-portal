@@ -19,5 +19,9 @@
 .sub_content span {
   color: var(--color-secundary);
   font-weight: bold;
-  margin-bottom: 10px;
+}
+
+.sub_content_textarea{
+  display: flex;
+  gap: 20px;
 }
