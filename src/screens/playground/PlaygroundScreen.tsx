@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../components/Button/Button";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
@@ -10,8 +11,10 @@ function PlaygroundScreen() {
         <p>insira abaixo o seu componente:</p>
       </div>
       <div className={styles.sub_content}>
-        <span>Componente Button</span>
-        <Button />
+        <span>Componente Checkbox</span>
+        <Checkbox />
+        <Checkbox disabled />
+        <Checkbox disabled checked />
       </div>
     </div>
   );
