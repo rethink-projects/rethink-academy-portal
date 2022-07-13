@@ -1,0 +1,94 @@
+.btn_w_icon_right_default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+
+  width: 177px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+
+  border-radius: 6px;
+  border: 1px solid rgba(27, 27, 27, 0.3);
+
+  cursor: pointer;
+}
+
+/* Sizes */
+.large {
+  height: 72px;
+  padding: 24px 32px;
+}
+
+.medium {
+  height: 56px;
+  padding: 16px 32px;
+}
+
+.small {
+  height: 40px;
+  padding: 8px 32px;
+}
+
+/* Types */
+
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-secundary);
+
+  font-weight: 500;
+}
+
+.secondary {
+  background-color: var(--color-secundary);
+  color: var(--color-base);
+}
+
+.secondary img {
+  filter: brightness(0) invert(1);
+}
+
+.outline {
+  background-color: var(--color-base);
+  border-color: solid var(--color-secundary);
+  color: var(--color-secundary);
+
+  font-weight: 500;
+}
+
+.disabled {
+  cursor: default;
+
+  background-color: #f9f9f9;
+  color: var(--color-tertiary);
+
+  pointer-events: none;
+}
+
+.disabled img {
+  filter: opacity(0.5) drop-shadow(0 0 0 white);
+}
+
+/* Hover */
+.primary:hover {
+  background-color: var(--color-primary-active);
+}
+
+.secondary:hover {
+  background-color: var(--color-secundary-hover);
+}
+
+.outline:hover {
+  background-color: var(--color-secundary);
+  border-color: var(--color-secundary);
+  color: var(--color-base);
+
+  font-weight: 400;
+}
+
+.outline:hover img {
+  filter: brightness(0) invert(1);
+}
