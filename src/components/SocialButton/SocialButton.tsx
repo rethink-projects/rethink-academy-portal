@@ -1,16 +1,16 @@
 import { Images } from "../../assets";
 import styles from "./SocialButton.module.css";
 
-type SocialButton = {
-  type: "primary" | "secundary";
-  onClick: () => void;
+type SocialButtonType = {
+  type?: "primary" | "secundary";
+  onClick?: () => void;
 };
 
-function SocialButton({ type, onClick }: SocialButton) {
+function SocialButton({ type = "primary", onClick }: SocialButtonType) {
   const classNameButton =
     type === "primary"
       ? `${styles.btn_social_primary}`
-      : `${styles.btn_social_secundary} `;
+      : `${styles.btn_social_secundary}`;
 
   return (
     <div>

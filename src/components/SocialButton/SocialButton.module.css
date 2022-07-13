@@ -1,10 +1,8 @@
 .btn_social_primary,
 .btn_social_secundary {
-  margin: 10px 10px;
-  background-color: var(--color-secundary-active);
+  background-color: transparent;
   color: var(--color-base);
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 16px 32px;
@@ -14,6 +12,7 @@
   width: 236px;
   height: 56px;
   border: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn_social_p {
@@ -24,16 +23,26 @@
   line-height: 150%;
 }
 
+/* Primary */
+.btn_social_primary {
+  background-color: var(--color-secundary);
+}
 .btn_social_primary:hover {
   background-color: var(--color-secundary-hover);
 }
 
+/* Secondary */
+
 .btn_social_secundary {
-  background-color: #ffffff;
   color: var(--color-secundary-active);
   border: 1px solid var(--color-secundary-active);
 }
 
 .btn_social_secundary:hover {
-  border: 2.5px solid var(--color-secundary-active);
+  border: 2px solid var(--color-secundary-active);
+}
+
+.btn_social_primary:active,
+.btn_social_secundary:active {
+  transform: scale(0.9);
 }

@@ -9,7 +9,7 @@ function PlaygroundScreen() {
     <div className={styles.playground_container}>
       <div className={styles.main_content}>
         <h2>Playground de Componentes</h2>
-        <p>insira abaixo o seu componente:</p>
+        <p>Insira abaixo o seu componente:</p>
       </div>
       <div className={styles.sub_content}>
         <span>Componente IconButton</span>

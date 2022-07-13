@@ -1,9 +1,17 @@
 import logo from "./logo.png";
+import arrow from "./arrowIcon.png";
+import IconLeft from "./IconLeft.svg";
+import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
-import vectorIcon from "./vector.svg";
 
 export const Images = {
   logo,
+  arrow,
   google: googleIcon,
-  vector: vectorIcon,
+  icons: {
+    left: IconLeft,
+    right: IconRight,
+  },
 };
+
+export default Images;
