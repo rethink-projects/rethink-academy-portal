@@ -35,7 +35,7 @@ function PlaygroundScreen() {
 
       <div className={styles.sub_content}>
         <span>Componente Input Search</span>
-        <InputSearch hasIcon caption="Busque por um curso" onChange={onChange} placeholder="teste" label="teste" type="micro"></InputSearch>
+        <InputSearch hasIcon caption="Element caption" onChange={onChange} placeholder="teste" label="teste" type="micro"></InputSearch>
       </div>
     </div>
   );

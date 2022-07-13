@@ -61,6 +61,7 @@
 .input_search_micro:focus {
   outline: 1px solid var(--color-input-outline);
   box-shadow: 0px 0px 0px 4px rgba(71, 80, 213, 0.15);
+  border: 1px solid transparent;
 }
 
 /* Disable */
@@ -70,6 +71,7 @@
 .input_search_disable_small,
 .input_search_disable_micro {
   border: 1px solid var(--color-input);
+  pointer-events: none;
 }
 
 /* ----------------------------- */
@@ -168,7 +170,7 @@
 .input_search_small,
 .input_search_disable_small,
 .input_search_micro,
-.input_search_disabe_micro {
+.input_search_disable_micro {
   width: 301px;
   padding: 0px 15px 0 12px;
   gap: 8px;

@@ -4,16 +4,19 @@ import { Images } from "../../assets";
 
 
 type TypeInput = {
-    label: string;
+    label?: string;
     type: "micro" | "default" | "small" | "large";
     onChange?: (value: string) => string;
     placeholder: string;
     caption?: string;
     hasIcon: boolean;
+    disable?: boolean;
 }
 
-const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption }: TypeInput) => {
+const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, disable }: TypeInput) => {
     const [contentInput, setcontentInput] = useState("");
+
+    const input_search_ = disable === true ? "input_search_disable_" : "input_search_";
 
     const handleClick = () => {
         setcontentInput("");
@@ -32,7 +35,7 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption }: T
             </label>
 
             <div className={styles.search_field}>
-                <input style={{ backgroundImage: `url(${Images.icons.search})` }} value={contentInput} className={styles["input_search_" + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                <input style={{ backgroundImage: `url(${Images.icons.search})` }} value={contentInput} className={styles[input_search_ + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChangeInput(event.target.value);
                 }} />
                 <div className={styles["reset_input_" + type]}>
