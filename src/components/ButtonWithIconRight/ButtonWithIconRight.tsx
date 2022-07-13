@@ -24,7 +24,8 @@ const ButtonWithIconRight = ({
       onClick={onClick}
       className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
     >
-      {text} <img src={Images[icon]} alt={`${icon} icon`} />
+      {text}
+      <img src={Images[icon]} alt={`${icon} icon`} />
     </button>
   );
 };
