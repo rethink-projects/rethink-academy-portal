@@ -32,14 +32,14 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption }: T
             </label>
 
             <div className={styles.search_field}>
-                <input style={{ backgroundImage: `url(${Images.search})` }} value={contentInput} className={styles["input_search_" + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                <input style={{ backgroundImage: `url(${Images.icons.search})` }} value={contentInput} className={styles["input_search_" + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChangeInput(event.target.value);
                 }} />
                 <div className={styles["reset_input_" + type]}>
                     {hasIcon && contentInput.length > 0 &&
                         <>
-                            <img className={styles["filled_input_" + type]} onClick={() => handleClick()} src={Images.filledInput} />
-                            <img className={styles["divider_input_" + type]} src={Images.dividerInput} />
+                            <img className={styles["filled_input_" + type]} onClick={() => handleClick()} src={Images.icons.filledInput} />
+                            <img className={styles["divider_input_" + type]} src={Images.icons.dividerInput} />
                         </>
                     }
                 </div>
