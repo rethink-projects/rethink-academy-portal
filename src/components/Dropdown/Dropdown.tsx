@@ -40,16 +40,23 @@ const DropDown = ({
   return (
     <div>
       <div
-        className={
-          [styles.dropdown,
-          (isFilled && styles.dropdown_filled),(isActive && styles.dropdown_active),(disabled && styles.dropdown_disabled),styles["dropdown_"+size]].join(" ")
-        }
+        className={[
+          styles.dropdown,
+          isFilled && styles.dropdown_filled,
+          isActive && styles.dropdown_active,
+          disabled && styles.dropdown_disabled,
+          styles["dropdown_" + size],
+        ].join(" ")}
         id={`dropdown${chave}`}
         onClick={() => setIsActive(!isActive)}
       >
         <img className="eye" src={Images.icons.eye} alt="Visualize" />
         <span>{placeholder}</span>
-        <div className={[styles.rightImage, styles["rightImage_"+size]].join(" ")}>
+        <div
+          className={[styles.rightImage, styles["rightImage_" + size]].join(
+            " "
+          )}
+        >
           <img src={Images.icons.showmore} alt="Visualize" />
         </div>
         {isActive &&
@@ -57,7 +64,12 @@ const DropDown = ({
             <div
               key={index * startGap}
               style={{ top: `${(index + 1) * itemDropSize + startGap}px` }}
-              className={[styles.dropdown_content,styles["dropdown_content_"+size]].join(" ")}
+              className={[
+                styles.dropdown_content,
+                styles["dropdown_content_" + size],
+                index == 0 && styles.dropdown_content_first,
+                index == content.length - 1 && styles.dropdown_content_lastt,
+              ].join(" ")}
               onClick={() => (setPlaceholder(item), setIsFilled(true))}
             >
               <p>{item}</p>
