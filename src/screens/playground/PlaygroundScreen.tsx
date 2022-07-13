@@ -32,7 +32,11 @@ function PlaygroundScreen() {
           <DropDown chave={1} content={dropdownContent} size="large" />
           <DropDown chave={2} content={dropdownContent} />
           <DropDown chave={3} content={dropdownContent} size="small" />
+        </div>
+        <div className={styles.dropdowns}>
+          
           <DropDown chave={4} content={dropdownContent} size="micro" />
+          <DropDown chave={5} content={dropdownContent} size="micro" disabled />
         </div>
       </div>
       <div className={styles.sub_content}>

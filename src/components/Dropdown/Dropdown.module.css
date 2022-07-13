@@ -12,9 +12,14 @@
   align-self: stretch;
   cursor: pointer;
 }
-.dropdown img {
+.left_img {
+  display: flex;
   margin-left: 18.25px;
   margin-right: 14.25px;
+}
+
+.left_img_small, .left_img_micro {
+
 }
 
 .dropdown span {
@@ -103,10 +108,6 @@
   height: 30px;
 }
 
-.dropdown_micro img {
-  width: 13px;
-  height: 9.5px;
-}
 
 .dropdown_micro span {
   font-size: 14px;
@@ -117,10 +118,7 @@
   right: 14px;
 }
 
-.rightImage_micro img {
-  width: 9px;
-  height: 5px;
-}
+
 
 .dropdown_content_micro {
   height: 30px;
@@ -137,10 +135,7 @@
   height: 38px;
 }
 
-.dropdown_small img {
-  width: 16.25px;
-  height: 11.25px;
-}
+
 
 .dropdown_small span {
   font-size: 14px;
@@ -150,9 +145,7 @@
 .rightImage_small {
   right: 14px;
 }
-.rightImage_small img {
-  width: 11.25px;
-}
+
 
 .dropdown_content_small {
   height: 35px;

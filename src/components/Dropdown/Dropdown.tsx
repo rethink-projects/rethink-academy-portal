@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Images } from "../../assets/";
 import styles from "./Dropdown.module.css";
-
+import Eye from "@mui/icons-material/VisibilityOutlined";
+import ArrowDown from "@mui/icons-material/KeyboardArrowDownOutlined";
+import ArrowUp from "@mui/icons-material/KeyboardArrowUpOutlined";
 type DropDownProps = {
   chave: number;
   content: string[];
@@ -13,7 +15,7 @@ type DropDownProps = {
 const DropDown = ({
   content,
   chave = 0,
-  initialText = "Escolha uma opção",
+  initialText = "Escolha",
   size = "default",
   disabled = false,
 }: DropDownProps) => {
@@ -21,9 +23,13 @@ const DropDown = ({
     size === "large" ? 61 : size === "small" ? 36 : size === "micro" ? 31 : 41;
   const startGap =
     size === "large" ? 12 : size === "micro" ? 4 : size === "small" ? 8 : 14;
+  const iconSize = size === "small" || size === "micro" ? 17 : 22;
+  const color = disabled
+    ? "var(--color-tertiary-hover)"
+    : "var(--color-tertiary-active)";
 
   const [isActive, setIsActive] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Placeholder");
+  const [placeholder, setPlaceholder] = useState(initialText);
   const [isFilled, setIsFilled] = useState(false);
 
   document.addEventListener("click", (e: Event) => {
@@ -34,6 +40,17 @@ const DropDown = ({
     ) {
       // Clicked out of the box
       setIsActive(false);
+      console.log("aqui");
+    }
+  });
+  document.addEventListener("click", (e: Event) => {
+    if (
+      document
+        .getElementById("arrowDown" + chave)!
+        .contains(e.target as HTMLInputElement)
+    ) {
+      // Clicked out of the box
+      setIsActive(!isActive);
     }
   });
 
@@ -50,14 +67,26 @@ const DropDown = ({
         id={`dropdown${chave}`}
         onClick={() => setIsActive(!isActive)}
       >
-        <img className="eye" src={Images.icons.eye} alt="Visualize" />
+        <div className={styles.left_img} onClick={() => setIsActive(!isActive)}>
+          <Eye sx={{ fontSize: iconSize, color: color }} />
+        </div>
+        {/* <img src={Images.icons.eye} alt="Visualize" /> */}
         <span>{placeholder}</span>
         <div
+          onClick={() => setIsActive(!isActive)}
           className={[styles.rightImage, styles["rightImage_" + size]].join(
             " "
           )}
         >
-          <img src={Images.icons.showmore} alt="Visualize" />
+          {!isActive ? (
+            <ArrowDown
+              id={"arrowDown" + chave}
+              sx={{ fontSize: iconSize * 1.3, color: color }}
+            />
+          ) : (
+            <ArrowUp sx={{ fontSize: iconSize * 1.3, color: color }} />
+          )}
+          {/* <img src={Images.icons.showmore} alt="Visualize" /> */}
         </div>
         {isActive &&
           content.map((item, index) => (
