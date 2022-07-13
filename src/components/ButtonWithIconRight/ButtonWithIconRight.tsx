@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./ButtonWithIconRight.module.css";
-import { Icons } from "../../assets/index";
+import { Images } from "../../assets/index";
 
 type ButtonWithIconRightProps = {
   type: "primary" | "secondary" | "outline" | "disabled";
@@ -24,7 +24,7 @@ const ButtonWithIconRight = ({
       onClick={onClick}
       className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
     >
-      {text} <img src={Icons[icon]} alt={`${icon} icon`} />
+      {text} <img src={Images[icon]} alt={`${icon} icon`} />
     </button>
   );
 };
