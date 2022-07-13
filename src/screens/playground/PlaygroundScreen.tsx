@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../components/Button/Button";
+import IconButton from "../../components/IconButton/IconButton";
 import Textarea from "../../components/Textarea/Textarea";
 import ButtonWithIconRight from "../../components/ButtonWithIconRight/ButtonWithIconRight";
 import SocialButton from "../../components/SocialButton/SocialButton";
@@ -7,6 +8,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import ButtonLeft from "../../components/ButtonLeft/ButtonLeft";
 
 import styles from "./Playground.module.css";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
 function PlaygroundScreen() {
   return (
@@ -16,45 +18,25 @@ function PlaygroundScreen() {
         <p>Insira abaixo o seu componente:</p>
       </div>
       <div className={styles.sub_content}>
-        <SocialButton type="secundary" onClick={() => console.log("clicou")} />
-        <SocialButton onClick={() => console.log("clicou")} />
-        <ButtonLeft
-          size="small"
-          icon="LightBulb"
-          text="Fazer login"
-          onClick={() => {}}
-        />
-      </div>
-      <div className={styles.sub_content}>
-        <Spinner size="big" type="light" isLoading={true} />
-        <Spinner size="small" type="light" isLoading={true} />
-      </div>
-      <div className={styles.sub_content}>
-        <span>Componente Button w/ Icon Right</span>
-        <ButtonWithIconRight
-          type="primary"
-          size="large"
-          text="Button label"
-          icon="arrow"
-        />
-        <ButtonWithIconRight
-          type="secondary"
-          size="medium"
-          text="Button label"
-          icon="arrow"
-        />
-        <ButtonWithIconRight
-          type="outline"
-          size="medium"
-          text="Button label"
-          icon="arrow"
-        />
-        <ButtonWithIconRight
-          type="disabled"
-          size="small"
-          text="Button label"
-          icon="arrow"
-        />
+        <span>Componente IconButton</span>
+        <IconButton size="big" type="primary" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
+        <IconButton size="small" type="primary" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
+        <IconButton size="big" type="secundary" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
+        <IconButton size="small" type="secundary" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
+        <IconButton size="big" type="ghost" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
+        <IconButton size="small" type="ghost" onClick={() => {}}>
+          <AccessAlarmIcon />
+        </IconButton>
       </div>
       <div className={styles.sub_content}>
         <span>Componente Textarea</span>
