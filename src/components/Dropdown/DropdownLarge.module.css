@@ -15,9 +15,6 @@
   cursor: pointer;
 }
 .dropdown img {
-  display: flex;
-  align-items: center;
-
   margin-left: 18.25px;
   margin-right: 14.25px;
 }

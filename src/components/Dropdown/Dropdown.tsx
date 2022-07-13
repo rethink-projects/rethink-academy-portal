@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Images } from "../../assets/";
-import stylesLarge from "./DropdownLarge.module.css";
-import stylesSmall from "./DropdownSmall.module.css";
-import stylesMicro from "./DropdownMicro.module.css";
-import stylesDefault from "./Dropdown.module.css";
+import styles from "./Dropdown.module.css";
 
 type DropDownProps = {
   chave: number;
@@ -20,14 +17,6 @@ const DropDown = ({
   size = "default",
   disabled = false,
 }: DropDownProps) => {
-  const styles =
-    size === "large"
-      ? stylesLarge
-      : size === "small"
-      ? stylesSmall
-      : size === "micro"
-      ? stylesMicro
-      : stylesDefault;
   const itemDropSize =
     size === "large" ? 61 : size === "small" ? 36 : size === "micro" ? 31 : 41;
   const startGap =
@@ -52,20 +41,15 @@ const DropDown = ({
     <div>
       <div
         className={
-          styles.dropdown +
-          " " +
-          (isFilled && styles.dropdown_filled) +
-          " " +
-          (isActive && styles.dropdown_active) +
-          " " +
-          (disabled && styles.dropdown_disabled)
+          [styles.dropdown,
+          (isFilled && styles.dropdown_filled),(isActive && styles.dropdown_active),(disabled && styles.dropdown_disabled),styles["dropdown_"+size]].join(" ")
         }
         id={`dropdown${chave}`}
         onClick={() => setIsActive(!isActive)}
       >
         <img className="eye" src={Images.icons.eye} alt="Visualize" />
         <span>{placeholder}</span>
-        <div className={styles.rightImage}>
+        <div className={[styles.rightImage, styles["rightImage_"+size]].join(" ")}>
           <img src={Images.icons.showmore} alt="Visualize" />
         </div>
         {isActive &&
@@ -73,7 +57,7 @@ const DropDown = ({
             <div
               key={index * startGap}
               style={{ top: `${(index + 1) * itemDropSize + startGap}px` }}
-              className={styles.dropdown_content}
+              className={[styles.dropdown_content,styles["dropdown_content_"+size]].join(" ")}
               onClick={() => (setPlaceholder(item), setIsFilled(true))}
             >
               <p>{item}</p>

@@ -5,12 +5,10 @@
   /* a borda vai adicionar um pixel de cada lado */
   width: 241px;
   height: 46px;
-
   background: var(--color-base) !important;
   border: 1px solid var(--color-tertiary-hover);
   box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
   border-radius: 4px;
-
   align-self: stretch;
   cursor: pointer;
 }
@@ -81,4 +79,87 @@
 }
 .dropdown_disabled span {
   color: var(--color-icon-element) !important;
+}
+
+.dropdown_large {
+  height: 62px;
+}
+
+.dropdown_large span {
+  font-size: 18px;
+}
+
+.dropdown_content_large {
+  height: 60px;
+}
+
+.dropdown_content_large p {
+  font-size: 18px;
+  line-height: 28px;
+  margin-left: 16px;
+}
+
+.dropdown_micro {
+  height: 30px;
+}
+
+.dropdown_micro img {
+  width: 13px;
+  height: 9.5px;
+}
+
+.dropdown_micro span {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rightImage_micro {
+  right: 14px;
+}
+
+.rightImage_micro img {
+  width: 9px;
+  height: 5px;
+}
+
+.dropdown_content_micro {
+  height: 30px;
+}
+
+.dropdown_content_micro p {
+  font-size: 14px;
+  line-height: 20px;
+
+  margin-left: 16px;
+}
+
+.dropdown_small {
+  height: 38px;
+}
+
+.dropdown_small img {
+  width: 16.25px;
+  height: 11.25px;
+}
+
+.dropdown_small span {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rightImage_small {
+  right: 14px;
+}
+.rightImage_small img {
+  width: 11.25px;
+}
+
+.dropdown_content_small {
+  height: 35px;
+}
+
+.dropdown_content_small p {
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: 16px;
 }
