@@ -12,9 +12,9 @@ function PlaygroundScreen() {
       </div>
       <div className={styles.sub_content}>
         <span>Componente Checkbox</span>
-        <Checkbox />
-        <Checkbox disabled />
-        <Checkbox disabled checked />
+        <Checkbox name="Teste" />
+        <Checkbox name="Não se atreva a me marcar" disabled />
+        <Checkbox name="Marque para ser feliz" disabled checked />
       </div>
     </div>
   );

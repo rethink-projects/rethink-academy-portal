@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-duplicate-props */
-import React, { useState } from "react";
+import { useState } from "react";
 import style from "./Checkbox.module.css";
 
 type checkboxProps = {
@@ -13,9 +12,8 @@ const Checkbox = ({
   disabled = false,
   checked = false,
 }: checkboxProps) => {
-  // const Checkbox = () => {
   const [isChecked, setIsChecked] = useState(checked);
-  // const [isDisabled, setIsDisabled] = useState(disabled);
+
   return (
     <label className={style.container}>
       <input
@@ -42,7 +40,7 @@ const Checkbox = ({
           fill={isChecked ? "#F9F9F9" : ""}
         />
       </svg>
-      Não se atreva a me marcar
+      {name}
     </label>
   );
 };
