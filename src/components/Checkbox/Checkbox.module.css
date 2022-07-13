@@ -32,7 +32,9 @@
 }
 
 .checkbox_active {
-  background: var(--color-feedback);
+  /* background: var(--color-feedback); */
+  background: rgba(25, 66, 198, 1);
+
   border-radius: 2px;
 }
 
