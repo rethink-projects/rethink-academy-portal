@@ -2,6 +2,9 @@ import React from "react";
 import Button from "../../components/Button/Button";
 import styles from "./Playground.module.css";
 
+// Simple Button
+import SimpleButton from "../../components/SimpleButton/SimpleButton";
+
 function PlaygroundScreen() {
   return (
     <div className={styles.playground_container}>
@@ -9,9 +12,8 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>insira abaixo o seu componente:</p>
       </div>
-      <div className={styles.sub_content}>
-        <span>Componente Button</span>
-        <Button />
+      <div>
+        <SimpleButton type="secondary" size="big" text="Simple Button" onClick={() => {}} /> 
       </div>
     </div>
   );
