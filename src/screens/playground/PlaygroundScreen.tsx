@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../components/Button/Button";
+import Textarea from "../../components/Textarea/Textarea";
 import ButtonWithIconRight from "../../components/ButtonWithIconRight/ButtonWithIconRight";
 import SocialButton from "../../components/SocialButton/SocialButton";
 import Spinner from "../../components/Spinner/Spinner";
@@ -54,6 +55,14 @@ function PlaygroundScreen() {
           text="Button label"
           icon="arrow"
         />
+      </div>
+      <div className={styles.sub_content}>
+        <span>Componente Textarea</span>
+        <div className={styles.sub_content_textarea}>
+          <Textarea placeholder="Place Holder" label="Large" caption="Element caption" type="large" />
+          <Textarea placeholder="Place Holder" label="Default Disabled" caption="Element caption" disabled />
+          <Textarea placeholder="Place Holder" label="Small" caption="Element caption" type="small" />
+        </div>
       </div>
     </div>
   );
