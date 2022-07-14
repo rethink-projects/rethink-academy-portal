@@ -6,12 +6,12 @@ import styles from "./InputText.module.css";
 type InputTextProps = {
   type: "micro" | "default" | "small" | "large";
   placeholder: string;
-  onChange: () => void;
+  onChange?: () => void;
   hasIcon: Boolean;
   iconPosition?: "left" | "both" | "right";
-  iconName?: "calendar";
   label: string;
-  elementCaption: string;
+  nameInput: string;
+  elementCaption?: string;
   left?: JSX.Element;
   right?: JSX.Element;
 };
@@ -23,6 +23,7 @@ const InputText = ({
   hasIcon,
   iconPosition,
   label,
+  nameInput,
   elementCaption,
   left,
   right,
@@ -62,7 +63,7 @@ const InputText = ({
 
   return (
     <label className={container}>
-      <span className={inputLabel}>{label}</span>
+      <p className={inputLabel}>{label}</p>
       <div className={input}>
         {hasIcon && iconPosition !== "right" && (
           <div className={icon}>{hasIcon && left}</div>
@@ -71,7 +72,7 @@ const InputText = ({
         <input
           className={field}
           type="text"
-          name="placeholder"
+          name={nameInput}
           required
           placeholder={placeholder}
           onChange={onChange}
@@ -81,7 +82,9 @@ const InputText = ({
           <div className={icon}>{hasIcon && right}</div>
         )}
       </div>
-      <span className={styles.inputText_caption}>{elementCaption}</span>
+      {elementCaption && (
+        <p className={styles.inputText_caption}>{elementCaption}</p>
+      )}
     </label>
   );
 };
