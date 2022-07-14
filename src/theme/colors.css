@@ -19,6 +19,7 @@
   --color-tertiary-active: #706e64;
 
   /* Feedback */
+  --color-item-selected: #1942c6;
   --color-feedback: #2c60f5;
   --color-feedback-success: #48a135;
   --color-feedback-warning: #facc15;

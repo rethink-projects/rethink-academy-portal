@@ -7,8 +7,9 @@ import Textarea from "../../components/Textarea/Textarea";
 import ButtonWithIconRight from "../../components/ButtonWithIconRight/ButtonWithIconRight";
 import SocialButton from "../../components/SocialButton/SocialButton";
 import Spinner from "../../components/Spinner/Spinner";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import Radio from "../../components/Radio/Radio";
 
 function PlaygroundScreen() {
 
@@ -32,24 +33,6 @@ function PlaygroundScreen() {
           onClick={() => { }}
         />
         <span>Componente IconButton</span>
-        <IconButton size="big" type="primary" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
-        <IconButton size="small" type="primary" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
-        <IconButton size="big" type="secundary" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
-        <IconButton size="small" type="secundary" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
-        <IconButton size="big" type="ghost" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
-        <IconButton size="small" type="ghost" onClick={() => { }}>
-          <AccessAlarmIcon />
-        </IconButton>
       </div>
       <div className={styles.sub_content}>
         <span>Componente Textarea</span>
@@ -58,6 +41,10 @@ function PlaygroundScreen() {
           <Textarea placeholder="Place Holder" label="Default Disabled" caption="Element caption" disabled />
           <Textarea placeholder="Place Holder" label="Small" caption="Element caption" type="small" />
         </div>
+        <span>Componente Checkbox</span>
+        <Checkbox name="Teste" />
+        <Checkbox name="Não se atreva a me marcar" disabled />
+        <Checkbox name="Marque para ser feliz" disabled checked />
       </div>
 
       <div className={styles.sub_content}>
