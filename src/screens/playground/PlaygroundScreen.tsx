@@ -1,3 +1,6 @@
+import React from "react";
+import Button from "../../components/Button/Button";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
 import Radio from "../../components/Radio/Radio";
 
@@ -9,17 +12,10 @@ function PlaygroundScreen() {
         <p>Insira abaixo o seu componente:</p>
       </div>
       <div className={styles.sub_content}>
-        <Radio
-          data={[
-            { title: "Primeiro" },
-            { title: "Segundo" },
-            { title: "Terceiro", disabled: true },
-            { title: "Quarto", disabled: true },
-            { title: "Quinto", disabled: true },
-          ]}
-          radioFor="chose"
-          checked="Quinto"
-        />
+        <span>Componente Checkbox</span>
+        <Checkbox name="Teste" />
+        <Checkbox name="Não se atreva a me marcar" disabled />
+        <Checkbox name="Marque para ser feliz" disabled checked />
       </div>
     </div>
   );
