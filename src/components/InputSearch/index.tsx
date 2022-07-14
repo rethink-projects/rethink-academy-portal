@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import styles from "./index.module.css";
 import { Images } from "../../assets";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 
 type TypeInput = {
@@ -27,6 +28,25 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, dis
         onChange!(valueInput);
     }
 
+    const sizeIcon = {
+        large: {
+            width: 19,
+            height: 19,
+        },
+        default: {
+            width: 16,
+            height: 16,
+        },
+        small: {
+            width: 13,
+            height: 13,
+        },
+        micro: {
+            width: 13,
+            height: 13,
+        }
+    }
+
 
     return (
         <form className={styles["form_search_" + type]}>
@@ -41,8 +61,9 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, dis
                 <div className={styles["reset_input_" + type]}>
                     {hasIcon && contentInput.length > 0 &&
                         <>
-                            <img className={styles["filled_input_" + type]} onClick={() => handleClick()} src={Images.icons.filledInput} />
-                            <img className={styles["divider_input_" + type]} src={Images.icons.dividerInput} />
+                            <CloseOutlinedIcon style={sizeIcon[type]} className={styles["filled_input_" + type]} onClick={() => handleClick()} />
+
+                            <div className={styles["divider_input_" + type]} />
                         </>
                     }
                 </div>

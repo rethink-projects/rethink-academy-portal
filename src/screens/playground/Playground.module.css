@@ -16,6 +16,15 @@
 .sub_content {
   max-width: 236px;
   margin-top: 50px;
+}
+.sub_content span {
+  color: var(--color-secundary);
+  font-weight: bold;
+}
+
+.sub_content_textarea{
+  display: flex;
+  gap: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
