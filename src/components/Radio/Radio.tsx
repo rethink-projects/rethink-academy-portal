@@ -5,19 +5,30 @@ interface checkboxProps {
   data: Array<{ title: string; disabled?: boolean }>;
   checked?: string;
   radioFor: string;
+  disabled?: boolean;
 }
 
-const Radio = ({ data, radioFor, checked }: checkboxProps) => {
+const Radio = ({
+  data,
+  radioFor,
+  checked,
+  disabled = false,
+}: checkboxProps) => {
   const [isChecked, setIsChecked] = useState(checked ? checked : "false");
 
+  const handleChange = (setter: string) => {
+    if (disabled) return;
+    setIsChecked(setter);
+  };
+
   return (
-    <>
+    <div className={style.container}>
       {data.map((item, index) => (
-        <label className={style.container} key={index + radioFor}>
+        <label className={style.form_item} key={index + radioFor}>
           <input
             className={style.radio_input}
             type="radio"
-            onChange={() => setIsChecked(item.title)}
+            onChange={() => handleChange(item.title)}
             disabled={item.disabled}
             name={radioFor}
           />
@@ -48,7 +59,7 @@ const Radio = ({ data, radioFor, checked }: checkboxProps) => {
           {item.title}
         </label>
       ))}
-    </>
+    </div>
   );
 };
 

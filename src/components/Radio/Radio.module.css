@@ -1,3 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form_item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}
+
 .radio_input[type="radio"] {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -45,12 +58,6 @@
 
 .radio_active_disabled {
   border: 1px solid rgba(182, 180, 180, 1);
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .radio_inner {
