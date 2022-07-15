@@ -74,7 +74,7 @@ const InputSearch = ({ label, type = "default", placeholder = "Search", onChange
             </label>
 
             <div className={styles.search_field}>
-                <input style={{ backgroundImage: `url(${CloseOutlinedIcon})` }} value={contentInput} className={styles[input_search_ + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                <input value={contentInput} className={styles[input_search_ + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChangeInput(event.target.value);
                 }} />
                 <div className={styles["reset_input_" + type]}>
