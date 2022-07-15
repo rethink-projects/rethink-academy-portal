@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/Button/Button";
 import ButtonLeft from "../../components/ButtonLeft/ButtonLeft";
-import InputSearch from "../../components/InputSearch";
+import InputSearch from "../../components/InputSearch/InputSearch";
 import IconButton from "../../components/IconButton/IconButton";
 import Textarea from "../../components/Textarea/Textarea";
 import ButtonWithIconRight from "../../components/ButtonWithIconRight/ButtonWithIconRight";
@@ -49,7 +49,7 @@ function PlaygroundScreen() {
 
       <div className={styles.sub_content}>
         <span>Componente Input Search</span>
-        <InputSearch hasIcon caption="Element caption" onChange={onChange} placeholder="teste" label="Element label" type="micro"></InputSearch>
+        <InputSearch label="Element label" caption="Element caption" hasIcon onChange={onChange}></InputSearch>
       </div>
     </div>
   );

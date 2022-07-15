@@ -1,20 +1,20 @@
 import { ChangeEvent, useState } from "react";
-import styles from "./index.module.css";
-import { Images } from "../../assets";
+import styles from "./InputSearch.module.css";
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 
 type TypeInput = {
     label?: string;
-    type: "micro" | "default" | "small" | "large";
+    type?: "micro" | "default" | "small" | "large";
     onChange?: (value: string) => string;
-    placeholder: string;
+    placeholder?: string;
     caption?: string;
     hasIcon: boolean;
     disable?: boolean;
 }
 
-const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, disable }: TypeInput) => {
+const InputSearch = ({ label, type = "default", placeholder = "Search", onChange, hasIcon, caption, disable }: TypeInput) => {
     const [contentInput, setcontentInput] = useState("");
 
     const input_search_ = disable === true ? "input_search_disable_" : "input_search_";
@@ -28,7 +28,7 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, dis
         onChange!(valueInput);
     }
 
-    const sizeIcon = {
+    const sizeCloseIcon = {
         large: {
             width: 19,
             height: 19,
@@ -47,6 +47,25 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, dis
         }
     }
 
+    const sizeSearchIcon = {
+        large: {
+            width: 20,
+            height: 20,
+        },
+        default: {
+            width: 17,
+            height: 17,
+        },
+        small: {
+            width: 14,
+            height: 14,
+        },
+        micro: {
+            width: 14,
+            height: 14,
+        }
+    }
+
 
     return (
         <form className={styles["form_search_" + type]}>
@@ -55,19 +74,19 @@ const InputSearch = ({ label, type, placeholder, onChange, hasIcon, caption, dis
             </label>
 
             <div className={styles.search_field}>
-                <input style={{ backgroundImage: `url(${Images.icons.search})` }} value={contentInput} className={styles[input_search_ + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                <input style={{ backgroundImage: `url(${CloseOutlinedIcon})` }} value={contentInput} className={styles[input_search_ + type]} type="text" name="search" placeholder={placeholder} onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChangeInput(event.target.value);
                 }} />
                 <div className={styles["reset_input_" + type]}>
                     {hasIcon && contentInput.length > 0 &&
                         <>
-                            <CloseOutlinedIcon style={sizeIcon[type]} className={styles["filled_input_" + type]} onClick={() => handleClick()} />
+                            <CloseOutlinedIcon style={sizeCloseIcon[type]} className={styles["filled_input_" + type]} onClick={() => handleClick()} />
 
                             <div className={styles["divider_input_" + type]} />
                         </>
                     }
                 </div>
-
+                <SearchOutlinedIcon style={sizeSearchIcon[type]} className={styles["searchIcon_input_" + type]} />
             </div>
             <label className={styles.caption}>{caption}</label>
 
