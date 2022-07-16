@@ -2,9 +2,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  /* a borda vai adicionar um pixel de cada lado */
   width: 100%;
-  /* min-width: 241px; */
+  min-width: 241px;
   height: 46px;
   background: var(--color-base) !important;
   border: 1px solid var(--color-tertiary-hover);
@@ -155,7 +154,6 @@
 }
 
 .dropdown_content:hover {
-  /* background-color: var(--color-tertiary-hover) !important; */
   border: 1px solid;
   border-color: var(--color-feedback);
   margin-bottom: 3px;
