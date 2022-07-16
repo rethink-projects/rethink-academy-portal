@@ -2,8 +2,6 @@ import logo from "./logo.png";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
-import eye from "./eye.svg";
-import showmore from "./showmore.svg";
 
 export const Images = {
   logo,
@@ -11,8 +9,6 @@ export const Images = {
   icons: {
     left: IconLeft,
     right: IconRight,
-    eye, 
-    showmore,
   },
 };
 
