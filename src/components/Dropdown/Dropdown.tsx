@@ -18,7 +18,7 @@ const DropDown = ({
   size = "default",
   disabled = false,
 }: DropDownProps) => {
-  var itemDropSize: number, startGap: number, iconSize, color: string;
+  let itemDropSize: number, startGap: number, iconSize, color: string;
   switch (disabled) {
     case true:
       color = "var(--color-tertiary-hover)";
