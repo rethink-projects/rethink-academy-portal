@@ -4,8 +4,9 @@ import Spinner from "../../components/Spinner/Spinner";
 import DropDown from "../../components/Dropdown/Dropdown";
 import ButtonLeft from "../../components/ButtonLeft/ButtonLeft";
 import Button from "../../components/Button/Button";
-
+import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
+import Radio from "../../components/Radio/Radio";
 
 function PlaygroundScreen() {
   const dropdownContent = ["List Item1", "List Item2"];
@@ -42,6 +43,10 @@ function PlaygroundScreen() {
         <Button />
         <Spinner size="big" type="light" isLoading={true} />
         <Spinner size="small" type="light" isLoading={true} />
+        <span>Componente Checkbox</span>
+        <Checkbox name="Teste" />
+        <Checkbox name="Não se atreva a me marcar" disabled />
+        <Checkbox name="Marque para ser feliz" disabled checked />
       </div>
     </div>
   );
