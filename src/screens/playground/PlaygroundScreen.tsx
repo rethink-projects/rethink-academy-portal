@@ -1,4 +1,3 @@
-
 import React from "react";
 import SocialButton from "../../components/SocialButton/SocialButton";
 import Spinner from "../../components/Spinner/Spinner";
@@ -17,12 +16,12 @@ function PlaygroundScreen() {
         <p>Insira abaixo o seu componente:</p>
       </div>
       <div className={styles.sub_content}>
-        <SocialButton type='secundary' onClick={() => console.log("clicou")} />
+        <SocialButton type="secundary" onClick={() => console.log("clicou")} />
         <SocialButton onClick={() => console.log("clicou")} />
         <ButtonLeft
-          size='small'
-          icon='LightBulb'
-          text='Fazer login'
+          size="small"
+          icon="LightBulb"
+          text="Fazer login"
           onClick={() => {}}
         />
       </div>
@@ -34,7 +33,6 @@ function PlaygroundScreen() {
           <DropDown chave={3} content={dropdownContent} size="small" />
         </div>
         <div className={styles.dropdowns}>
-          
           <DropDown chave={4} content={dropdownContent} size="micro" />
           <DropDown chave={5} content={dropdownContent} size="micro" disabled />
         </div>
@@ -42,8 +40,8 @@ function PlaygroundScreen() {
       <div className={styles.sub_content}>
         <span>Componente Button</span>
         <Button />
-        <Spinner size='big' type='light' isLoading={true} />
-        <Spinner size='small' type='light' isLoading={true} />
+        <Spinner size="big" type="light" isLoading={true} />
+        <Spinner size="small" type="light" isLoading={true} />
       </div>
     </div>
   );

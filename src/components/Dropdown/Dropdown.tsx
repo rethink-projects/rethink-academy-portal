@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { Images } from "../../assets/";
+import { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
-import Eye from "@mui/icons-material/VisibilityOutlined";
-import ArrowDown from "@mui/icons-material/KeyboardArrowDownOutlined";
-import ArrowUp from "@mui/icons-material/KeyboardArrowUpOutlined";
+import IconEye from "@mui/icons-material/VisibilityOutlined";
+import IconArrow from "@mui/icons-material/KeyboardArrowDownOutlined";
+
 type DropDownProps = {
   chave: number;
   content: string[];
@@ -19,40 +18,53 @@ const DropDown = ({
   size = "default",
   disabled = false,
 }: DropDownProps) => {
-  const itemDropSize =
-    size === "large" ? 61 : size === "small" ? 36 : size === "micro" ? 31 : 41;
-  const startGap =
-    size === "large" ? 12 : size === "micro" ? 4 : size === "small" ? 8 : 14;
-  const iconSize = size === "small" || size === "micro" ? 17 : 22;
-  const color = disabled
-    ? "var(--color-tertiary-hover)"
-    : "var(--color-tertiary-active)";
+  var itemDropSize: number, startGap: number, iconSize, color: string;
+  switch (disabled) {
+    case true:
+      color = "var(--color-tertiary-hover)";
+      break;
+    default:
+      color = "var(--color-tertiary-active)";
+      break;
+  }
+  switch (size) {
+    case "large":
+      itemDropSize = 62;
+      startGap = 12;
+      iconSize = 22;
+      break;
+    case "small":
+      itemDropSize = 37;
+      startGap = 8;
+      iconSize = 17;
+      break;
+    case "micro":
+      itemDropSize = 32;
+      startGap = 4;
+      iconSize = 17;
+      break;
+    default:
+      itemDropSize = 42;
+      startGap = 14;
+      iconSize = 22;
+      break;
+  }
 
   const [isActive, setIsActive] = useState(false);
   const [placeholder, setPlaceholder] = useState(initialText);
   const [isFilled, setIsFilled] = useState(false);
 
-  document.addEventListener("click", (e: Event) => {
-    if (
-      !document
-        .getElementById("dropdown" + chave)!
-        .contains(e.target as HTMLInputElement)
-    ) {
-      // Clicked out of the box
-      setIsActive(false);
-      console.log("aqui");
-    }
-  });
-  document.addEventListener("click", (e: Event) => {
-    if (
-      document
-        .getElementById("arrowDown" + chave)!
-        .contains(e.target as HTMLInputElement)
-    ) {
-      // Clicked out of the box
-      setIsActive(!isActive);
-    }
-  });
+  useEffect(() => {
+    document.addEventListener("click", (e: Event) => {
+      if (
+        !document
+          .getElementById("dropdown" + chave)!
+          .contains(e.target as HTMLInputElement)
+      ) {
+        setIsActive(false);
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -68,26 +80,26 @@ const DropDown = ({
         onClick={() => setIsActive(!isActive)}
       >
         <div className={styles.left_img} onClick={() => setIsActive(!isActive)}>
-          <Eye sx={{ fontSize: iconSize, color: color }} />
+          <IconEye sx={{ fontSize: iconSize, color: color }} />
         </div>
-        {/* <img src={Images.icons.eye} alt="Visualize" /> */}
         <span>{placeholder}</span>
+
         <div
-          onClick={() => setIsActive(!isActive)}
+          id={"rightImage" + chave}
           className={[styles.rightImage, styles["rightImage_" + size]].join(
             " "
           )}
         >
-          {!isActive ? (
-            <ArrowDown
-              id={"arrowDown" + chave}
-              sx={{ fontSize: iconSize * 1.3, color: color }}
-            />
-          ) : (
-            <ArrowUp sx={{ fontSize: iconSize * 1.3, color: color }} />
-          )}
-          {/* <img src={Images.icons.showmore} alt="Visualize" /> */}
+          <IconArrow
+            className={"arrowDown" + chave}
+            sx={{
+              fontSize: iconSize * 1.3,
+              color: color,
+              transform: `rotate(${isActive && 180}deg)`,
+            }}
+          />
         </div>
+
         {isActive &&
           content.map((item, index) => (
             <div
@@ -96,8 +108,8 @@ const DropDown = ({
               className={[
                 styles.dropdown_content,
                 styles["dropdown_content_" + size],
-                index == 0 && styles.dropdown_content_first,
-                index == content.length - 1 && styles.dropdown_content_lastt,
+                index === 0 && styles.dropdown_content_first,
+                index === content.length - 1 && styles.dropdown_content_last,
               ].join(" ")}
               onClick={() => (setPlaceholder(item), setIsFilled(true))}
             >
