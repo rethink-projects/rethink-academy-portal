@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
 import Radio from "../../components/Radio/Radio";
+import Label from "../../components/Label/Label";
 
 function PlaygroundScreen() {
   return (
@@ -16,6 +17,52 @@ function PlaygroundScreen() {
         <Checkbox name="Teste" />
         <Checkbox name="Não se atreva a me marcar" disabled />
         <Checkbox name="Marque para ser feliz" disabled checked />
+      </div>
+
+      <div className={styles.sub_content}>
+        <span>Componente Label</span>
+        <Label
+          color="primary"
+          size="large"
+          iconPosition="both"
+          text="label"
+          icon="info"
+        />
+        <Label
+          color="secondary"
+          size="large"
+          iconPosition="right"
+          text="label"
+          icon="info"
+        />
+        <Label
+          color="accent"
+          size="large"
+          iconPosition="none"
+          text="label"
+          icon="info"
+        />
+        <Label
+          color="danger"
+          size="default"
+          iconPosition="both"
+          text="label"
+          icon="info"
+        />
+        <Label
+          color="warning"
+          size="small"
+          iconPosition="both"
+          text="label"
+          icon="info"
+        />
+        <Label
+          color="success"
+          size="micro"
+          iconPosition="both"
+          text="label"
+          icon="info"
+        />
       </div>
     </div>
   );

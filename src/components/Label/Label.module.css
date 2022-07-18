@@ -1,0 +1,100 @@
+.label_default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 150px;
+
+  width: fit-content;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Sizes */
+.large {
+  max-width: 127px;
+  height: 44px;
+
+  padding: 0px 12px;
+  gap: 9px;
+
+  font-size: 18px;
+}
+.large img {
+  width: 21px;
+  height: 21px;
+}
+
+.default {
+  max-width: 111px;
+  height: 36px;
+
+  padding: 0px 10px;
+  gap: 8px;
+
+  font-size: 16px;
+}
+.default img {
+  width: 17px;
+  height: 17px;
+}
+
+.small {
+  max-width: 87px;
+  height: 28px;
+
+  padding: 0px 8px;
+  gap: 5px;
+
+  font-size: 14px;
+}
+.small img {
+  width: 14px;
+  height: 14px;
+}
+
+.micro {
+  max-width: 62px;
+  height: 20px;
+
+  padding: 0px 4px;
+  gap: 3px;
+
+  font-size: 12px;
+}
+.micro img {
+  width: 10px;
+  height: 10px;
+}
+
+/* Colors */
+.primary {
+  background-color: var(--color-item-selected);
+  color: var(--color-base);
+}
+
+.secondary {
+  background-color: rgba(130, 168, 248, 0.35);
+  color: #222995;
+}
+
+.accent {
+  background-color: #f5e0f3;
+  color: #892e82;
+}
+
+.danger {
+  background-color: #f7dedf;
+  color: #952226;
+}
+
+.warning {
+  background-color: #faecdb;
+  color: #865013;
+}
+
+.success {
+  background-color: #def7ea;
+  color: #18683d;
+}
