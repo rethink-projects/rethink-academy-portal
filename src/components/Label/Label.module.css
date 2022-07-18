@@ -1,11 +1,12 @@
 .label_default {
   display: flex;
-  justify-content: center;
   align-items: center;
   border-radius: 150px;
 
   width: fit-content;
-
+}
+.label_default span {
+  color: inherit;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
@@ -13,62 +14,81 @@
 
 /* Sizes */
 .large {
-  max-width: 127px;
   height: 44px;
-
-  padding: 0px 14px;
-  gap: 9px;
-
+  padding: 0 14px;
   font-size: 18px;
 }
+.large span {
+  margin: 10px;
+}
+.label_large span {
+  color: inherit;
+  margin: 0 100px !important;
+}
 
-.large img {
-  width: 21px;
-  height: 21px;
+.both_gap_padding_large {
+  padding: 0px 12px;
+}
+
+.large svg {
+  transform: scale(1.1);
 }
 
 .default {
-  max-width: 111px;
   height: 36px;
-
-  padding: 0px 10px;
-  gap: 8px;
+  padding: 0px 12px;
 
   font-size: 16px;
 }
-.default img {
-  width: 17px;
-  height: 17px;
+
+.default span {
+  margin: 5px;
+}
+
+.both_gap_padding_default {
+  padding: 0px 10px;
+}
+
+.default svg {
+  transform: scale(0.9);
+  margin: none !important;
 }
 
 .small {
-  max-width: 87px;
   height: 28px;
-
   padding: 0px 8px;
-  gap: 5px;
-
   font-size: 14px;
 }
-.small img {
-  width: 14px;
-  height: 14px;
+.small span {
+  margin: 5px;
+}
+.both_gap_padding_small {
+  padding: 0px 8px;
+}
+
+.small svg {
+  width: 17px;
+  margin: none;
 }
 
 .micro {
-  max-width: 62px;
   height: 20px;
-
-  padding: 0px 4px;
-  gap: 3px;
-
+  padding: 0px 8px;
   font-size: 12px;
 }
-.micro img {
-  width: 10px;
-  height: 10px;
+
+.micro span {
+  margin: 3px;
 }
 
+.micro svg {
+  margin: none;
+  width: 12px;
+}
+
+.both_gap_padding_micro {
+  padding: 0px 4px;
+}
 /* Colors */
 .primary {
   background-color: var(--color-item-selected);

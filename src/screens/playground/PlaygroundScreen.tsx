@@ -1,8 +1,4 @@
-import React from "react";
-import Button from "../../components/Button/Button";
-import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
-import Radio from "../../components/Radio/Radio";
 import Label from "../../components/Label/Label";
 import IconInfo from "@mui/icons-material/InfoOutlined";
 
@@ -13,13 +9,6 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
       </div>
-      {/* <div className={styles.sub_content}>
-        <span>Componente Checkbox</span>
-        <Checkbox name="Teste" />
-        <Checkbox name="Não se atreva a me marcar" disabled />
-        <Checkbox name="Marque para ser feliz" disabled checked />
-      </div> */}
-
       <div className={styles.sub_content}>
         <span>Componente Label</span>
         <Label color="primary" size="large" iconPosition="both" text="label">
@@ -34,7 +23,7 @@ function PlaygroundScreen() {
         <Label color="danger" size="default" iconPosition="left" text="label">
           <IconInfo />
         </Label>
-        <Label color="warning" size="small" iconPosition="both" text="label">
+        <Label color="warning" size="small" iconPosition="right" text="label">
           <IconInfo />
         </Label>
         <Label color="success" size="micro" iconPosition="left" text="label">

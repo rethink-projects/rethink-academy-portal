@@ -15,14 +15,17 @@ const Label = ({
   text,
   children,
 }: LabelProps) => {
+  const both_gap = iconPosition == "both" ? "both_gap_padding" : "";
+
   return (
-    <div className={`${style.label_default} ${style[color]} ${style[size]} `}>
-      {iconPosition === "left" || iconPosition === "both" ? children : ""}
-      {/* {iconPosition == "both" && children} */}
-      {text}
-      {iconPosition === "right" || iconPosition === "both" ? children : ""}
-      {/* {iconPosition == "right" && children}
-      {iconPosition == "both" && children} */}
+    <div
+      className={`${style.label_default} ${style[color]} ${style[size]} ${
+        style[both_gap + "_" + size]
+      } }  `}
+    >
+      {(iconPosition === "left" || iconPosition === "both") && children}
+      <span>{text}</span>
+      {(iconPosition === "right" || iconPosition === "both") && children}
     </div>
   );
 };
