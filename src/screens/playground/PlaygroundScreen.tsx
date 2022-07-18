@@ -25,42 +25,21 @@ function PlaygroundScreen() {
         <Label color="primary" size="large" iconPosition="both" text="label">
           <IconInfo />
         </Label>
-        <Label
-          color="secondary"
-          size="large"
-          iconPosition="right"
-          text="label"
-        />
-        {/* <IconInfo /> */}
-        {/* </Label> */}
-        {/* <Label
-          color="accent"
-          size="large"
-          iconPosition="none"
-          text="label"
-          icon="info"
-        />
-        <Label
-          color="danger"
-          size="default"
-          iconPosition="both"
-          text="label"
-          icon="info"
-        />
-        <Label
-          color="warning"
-          size="small"
-          iconPosition="both"
-          text="label"
-          icon="info"
-        />
-        <Label
-          color="success"
-          size="micro"
-          iconPosition="both"
-          text="label"
-          icon="info"
-        /> */}
+        <Label color="secondary" size="large" iconPosition="right" text="label">
+          <IconInfo />
+        </Label>
+        <Label color="accent" size="large" iconPosition="none" text="label">
+          <IconInfo />
+        </Label>
+        <Label color="danger" size="default" iconPosition="left" text="label">
+          <IconInfo />
+        </Label>
+        <Label color="warning" size="small" iconPosition="both" text="label">
+          <IconInfo />
+        </Label>
+        <Label color="success" size="micro" iconPosition="left" text="label">
+          <IconInfo />
+        </Label>
       </div>
     </div>
   );

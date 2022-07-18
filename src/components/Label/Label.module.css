@@ -16,7 +16,7 @@
   max-width: 127px;
   height: 44px;
 
-  padding: 0px 12px;
+  padding: 0px 14px;
   gap: 9px;
 
   font-size: 18px;
@@ -74,7 +74,6 @@
   background-color: var(--color-item-selected);
   color: var(--color-base);
 }
-
 
 .secondary {
   background-color: rgba(130, 168, 248, 0.35);
