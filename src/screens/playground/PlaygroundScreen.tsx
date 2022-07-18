@@ -25,14 +25,15 @@ function PlaygroundScreen() {
         <Label color="primary" size="large" iconPosition="both" text="label">
           <IconInfo />
         </Label>
-        {/* <Label
+        <Label
           color="secondary"
           size="large"
           iconPosition="right"
           text="label"
-          icon="info"
         />
-        <Label
+        {/* <IconInfo /> */}
+        {/* </Label> */}
+        {/* <Label
           color="accent"
           size="large"
           iconPosition="none"
