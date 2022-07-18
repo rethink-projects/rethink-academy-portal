@@ -20,7 +20,7 @@
   display: flex;
 }
 .sub_content span {
-  color: var(--color-secundary);
+  color: var(--color-secondary);
   font-weight: bold;
 }
 

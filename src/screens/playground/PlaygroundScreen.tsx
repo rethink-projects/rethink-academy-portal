@@ -4,12 +4,18 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 import styles from "./Playground.module.css";
 import Radio from "../../components/Radio/Radio";
 
+// Simple Button
+import SimpleButton from "../../components/SimpleButton/SimpleButton";
+
 function PlaygroundScreen() {
   return (
     <div className={styles.playground_container}>
       <div className={styles.main_content}>
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
+      </div>
+      <div>
+        <SimpleButton type="secondary" size="big" text="Simple Button" onClick={() => {}} /> 
       </div>
       <div className={styles.sub_content}>
         <span>Componente Checkbox</span>
