@@ -1,6 +1,8 @@
 :root {
   --color-base: #ffffff;
   --color-opacity-1: rgba(0, 0, 0, 0.1);
+  --color-input: #f9f9f9;
+  --color-input-outline: #82a8f8;
   /* Primary */
   --color-primary: #d3fa3a;
 
@@ -8,9 +10,9 @@
   --color-primary-active: #bde034;
 
   /* Secondary */
-  --color-secundary: #1b1b1b;
-  --color-secundary-hover: #3b3b3b;
-  --color-secundary-active: #1b1b1b;
+  --color-secondary: #1b1b1b;
+  --color-secondary-hover: #3b3b3b;
+  --color-secondary-active: #1b1b1b;
 
   /* tertiary */
   --color-tertiary: #838383;

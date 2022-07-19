@@ -11,21 +11,3 @@
   align-items: center;
   gap: 5px;
 }
-
-.playground_container_inner span {
-  font-weight: bold;
-}
-.playground_button {
-  appearance: none;
-  border: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  padding: 12px 16px;
-  max-width: 150px;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}

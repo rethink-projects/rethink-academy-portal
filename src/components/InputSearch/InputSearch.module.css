@@ -1,0 +1,324 @@
+/* Comum */
+
+.form_search_micro,
+.form_search_small,
+.form_search_default,
+.form_search_large {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 323px;
+}
+
+.label_default,
+.label_large,
+.label_small,
+.label_micro {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+
+  width: 323px;
+}
+
+.input_search_default,
+.input_search_large,
+.input_search_small,
+.input_search_micro,
+.input_search_disable_default,
+.input_search_disable_large,
+.input_search_disable_small,
+.input_search_disable_micro {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+  background-color: var(--color-input);
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+
+  color: var(--color-secundary-active);
+}
+
+/* hover */
+
+.input_search_large:hover,
+.input_search_default:hover,
+.input_search_small:hover,
+.input_search_micro:hover {
+  border: 1px solid var(--color-tertiary-hover);
+  box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+}
+
+/* Pressed */
+
+.input_search_large:focus,
+.input_search_default:focus,
+.input_search_small:focus,
+.input_search_micro:focus {
+  outline: 1px solid var(--color-input-outline);
+  box-shadow: 0px 0px 0px 4px rgba(71, 80, 213, 0.15);
+  border: 1px solid transparent;
+}
+
+/* Disable */
+
+.input_search_disable_large,
+.input_search_disable_default,
+.input_search_disable_small,
+.input_search_disable_micro {
+  border: 1px solid var(--color-input);
+  pointer-events: none;
+}
+
+/* ----------------------------- */
+
+/* Form Large */
+
+.label_large {
+  height: 28px;
+
+  font-size: 18px;
+  line-height: 28px;
+
+  color: var(--color-secundary-hover);
+}
+
+.input_search_large,
+.input_search_disable_large {
+  width: 60%;
+  max-width: 287px;
+  padding: 0 112px 0 16px;
+  height: 60px;
+  gap: 12px;
+
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.input_search_large::placeholder {
+  width: 56px;
+  height: 28px;
+  color: var(--color-tertiary);
+}
+
+.caption {
+  width: 323px;
+  height: 16px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: var(--color-tertiary-active);
+}
+
+/* ----------------------------------------- */
+
+/* form default */
+
+.label_default {
+  height: 24px;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  color: var(--color-secundary-hover);
+}
+
+.input_search_default,
+.input_search_disable_default {
+  width: 67%;
+  max-width: 295px;
+  padding: 0px 93px 0 12px;
+  gap: 12px;
+
+  height: 48px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input_search_default::placeholder {
+  width: 50px;
+  height: 24px;
+  color: var(--color-tertiary);
+}
+
+/* ---------------------------------- */
+
+/* form small */
+
+.label_small {
+  height: 20px;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  color: var(--color-secundary-hover);
+}
+
+.input_search_small,
+.input_search_disable_small,
+.input_search_micro,
+.input_search_disable_micro {
+  width: 70%;
+  max-width: 296px;
+  padding: 0px 83px 0 12px;
+  gap: 8px;
+
+  height: 40px;
+
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.input_search_small::placeholder {
+  width: 43px;
+  height: 20px;
+  color: var(--color-tertiary);
+}
+
+/* ---------------------------------------- */
+
+/* Form micro */
+
+.label_micro {
+  height: 16px;
+
+  font-size: 12px;
+  line-height: 16px;
+
+  color: var(--color-secundary-hover);
+}
+
+.input_search_micro,
+.input_search_disable_micro {
+  gap: 4px;
+
+  height: 32px;
+
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.input_search_micro::placeholder {
+  width: 37px;
+  height: 16px;
+  color: var(--color-tertiary);
+}
+
+.filled_input_large {
+  cursor: pointer;
+  color: var(--color-tertiary);
+}
+
+.filled_input_default {
+  cursor: pointer;
+  color: var(--color-tertiary);
+}
+
+.filled_input_small,
+.filled_input_micro {
+  cursor: pointer;
+  color: var(--color-tertiary);
+}
+
+.filled_input_large > svg > path,
+.filled_input_default > svg > path,
+.filled_input_small > svg > path,
+.filled_input_micro > svg > path {
+  fill: var(--color-tertiary);
+}
+
+.divider_input_large {
+  width: 1px;
+  height: 28px;
+  background-color: var(--color-icon-background);
+}
+
+.divider_input_default {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-icon-background);
+}
+
+.divider_input_small,
+.divider_input_micro {
+  width: 1px;
+  height: 20px;
+  background-color: var(--color-icon-background);
+}
+
+.search_field {
+  position: relative;
+  width: 323px;
+}
+
+.reset_input_large,
+.reset_input_default,
+.reset_input_small,
+.reset_input_micro {
+  right: 55px;
+  top: 17px;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.reset_input_default {
+  top: 13px;
+  right: 47px;
+}
+
+.reset_input_small {
+  top: 11px;
+  right: 39px;
+  gap: 10px;
+}
+
+.reset_input_micro {
+  top: 7px;
+  right: 35px;
+  gap: 6px;
+}
+
+.searchIcon_input_large,
+.searchIcon_input_default,
+.searchIcon_input_small,
+.searchIcon_input_micro {
+  color: var(--color-tertiary);
+}
+
+.searchIcon_input_large {
+  right: 20px;
+  position: absolute;
+  top: 21px;
+}
+
+.searchIcon_input_default {
+  right: 16px;
+  position: absolute;
+  top: 17px;
+}
+
+.searchIcon_input_small {
+  right: 15px;
+  position: absolute;
+  top: 14px;
+}
+
+.searchIcon_input_micro {
+  right: 15px;
+  position: absolute;
+  top: 10px;
+}
