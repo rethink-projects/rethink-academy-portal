@@ -4,6 +4,7 @@ import IconInfo from "@mui/icons-material/InfoOutlined";
 
 // Simple Button
 import SimpleButton from "../../components/SimpleButton/SimpleButton";
+import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 
 function PlaygroundScreen() {
   return (
@@ -17,7 +18,7 @@ function PlaygroundScreen() {
           type="secondary"
           size="big"
           text="Simple Button"
-          onClick={() => {}}
+          onClick={() => { }}
         />
       </div>
       <div className={styles.sub_content}>
@@ -40,6 +41,7 @@ function PlaygroundScreen() {
         <Label color="success" size="micro" iconPosition="left" text="label">
           <IconInfo />
         </Label>
+        <CardTrilhas title="Title" description="Description"></CardTrilhas>
       </div>
     </div>
   );
