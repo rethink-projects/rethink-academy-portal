@@ -31,3 +31,9 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.dropdowns {
+  display: flex;
+  margin: 10px;
+  gap: 15px;
+}
