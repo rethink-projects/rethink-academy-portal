@@ -1,5 +1,6 @@
 :root {
   --color-base: #ffffff;
+  --color-opacity-1: rgba(0, 0, 0, 0.1);
   --color-input: #f9f9f9;
   --color-input-outline: #82a8f8;
   /* Primary */
@@ -22,7 +23,10 @@
   --color-item-selected: #1942c6;
   --color-feedback: #2c60f5;
   --color-feedback-success: #48a135;
+  --color-feedback-success-text: #0e3e25;
+
   --color-feedback-warning: #facc15;
+  --color-feedback-warning-text: #b26b1a;
 
   --color-feedback-error: #da1e28;
   --color-feedback-error-hover: #da6066;
@@ -32,4 +36,22 @@
   --color-icon-disable: #d9d9d9;
   --color-icon-element: #b6b4b4;
   --color-icon-background: #d4d4d4;
+
+  /* Toast Colors */
+
+  /* Info */
+  --color-toast-info: #191e6c;
+  --color-toast--light-info: #dedff7;
+
+  /* Success */
+  --color-toast-success: #0e3e26;
+  --color-toast--light-success: #def7ea;
+
+  /* Warning */
+  --color-toast-warning: #59360d;
+  --color-toast--light-warning: #faecdb;
+
+  /* Error */
+  --color-toast-error: #6c191d;
+  --color-toast--light-error: #f7dedf;
 }
