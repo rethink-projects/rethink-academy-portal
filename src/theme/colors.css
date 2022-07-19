@@ -1,5 +1,7 @@
 :root {
   --color-base: #ffffff;
+  --color-input: #f9f9f9;
+  --color-input-outline: #82a8f8;
   /* Primary */
   --color-primary: #d3fa3a;
 
