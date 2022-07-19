@@ -11,15 +11,8 @@ function PlaygroundScreen() {
 
   return (
     <div className={styles.playground_container}>
-      <div className={styles.main_content}>
-        <h2>Playground de Componentes</h2>
-        <p>Insira abaixo o seu componente:</p>
-      </div>
-      <div className={styles.sub_content}>
-        <span>Componente Checkbox</span>
-        <Checkbox name="Teste" />
-        <Checkbox name="Não se atreva a me marcar" disabled />
-        <Checkbox name="Marque para ser feliz" disabled checked />
+      <div className={styles.playground_container_inner}>
+        <h1>Manter essa tela Limpa, após criar o componente</h1>
       </div>
       <div className={styles.sub_content}>
         <span>Modal</span>
