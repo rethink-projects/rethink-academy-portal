@@ -13,7 +13,12 @@ function PlaygroundScreen() {
         <p>Insira abaixo o seu componente:</p>
       </div>
       <div>
-        <SimpleButton type="secondary" size="big" text="Simple Button" onClick={() => {}} /> 
+        <SimpleButton
+          type="secondary"
+          size="big"
+          text="Simple Button"
+          onClick={() => {}}
+        />
       </div>
       <div className={styles.sub_content}>
         <span>Componente Label</span>
