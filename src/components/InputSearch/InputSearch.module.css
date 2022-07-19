@@ -90,9 +90,9 @@
 
 .input_search_large,
 .input_search_disable_large {
-  width: 100%;
+  width: 60%;
   max-width: 287px;
-  padding: 0 20px 0 16px;
+  padding: 0 112px 0 16px;
   height: 60px;
   gap: 12px;
 
@@ -134,9 +134,9 @@
 
 .input_search_default,
 .input_search_disable_default {
-  width: 100%;
+  width: 67%;
   max-width: 295px;
-  padding: 0px 16px 0 12px;
+  padding: 0px 93px 0 12px;
   gap: 12px;
 
   height: 48px;
@@ -168,9 +168,9 @@
 .input_search_disable_small,
 .input_search_micro,
 .input_search_disable_micro {
-  width: 100%;
+  width: 70%;
   max-width: 296px;
-  padding: 0px 15px 0 12px;
+  padding: 0px 83px 0 12px;
   gap: 8px;
 
   height: 40px;
@@ -258,6 +258,7 @@
 
 .search_field {
   position: relative;
+  width: 323px;
 }
 
 .reset_input_large,
