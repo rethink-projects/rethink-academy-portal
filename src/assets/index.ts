@@ -10,10 +10,12 @@ import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
 
 
+import info from "./infoIcon.png";
 export const Images = {
   logo,
   checkbox,
   arrow,
+  info,
   google: googleIcon,
   icons: {
     left: IconLeft,

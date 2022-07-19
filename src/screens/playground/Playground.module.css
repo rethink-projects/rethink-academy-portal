@@ -20,7 +20,7 @@
   display: flex;
 }
 .sub_content span {
-  color: var(--color-secundary);
+  color: var(--color-secondary);
   font-weight: bold;
 }
 
@@ -30,4 +30,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.dropdowns {
+  display: flex;
+  margin: 10px;
+  gap: 15px;
 }
