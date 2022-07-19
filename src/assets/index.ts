@@ -5,6 +5,7 @@ import arrow from "./arrowIcon.png";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
+import avatarImage from "./avatarImage.svg";
 
 export const Images = {
   logo,
@@ -15,6 +16,7 @@ export const Images = {
     left: IconLeft,
     right: IconRight,
   },
+  avatar: avatarImage,
 };
 
 export default Images;
