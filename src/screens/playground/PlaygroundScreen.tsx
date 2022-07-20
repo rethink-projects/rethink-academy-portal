@@ -5,6 +5,7 @@ import IconInfo from "@mui/icons-material/InfoOutlined";
 // Simple Button
 import SimpleButton from "../../components/SimpleButton/SimpleButton";
 import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
+import TrilhasComponent from "../home/components/trilhas/TrilhasComponent";
 
 function PlaygroundScreen() {
   return (
@@ -13,16 +14,16 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
       </div>
-      <div>
+      {/* <div>
         <SimpleButton
           type="secondary"
           size="big"
           text="Simple Button"
           onClick={() => { }}
         />
-      </div>
+      </div> */}
       <div className={styles.sub_content}>
-        <span>Componente Label</span>
+        {/* <span>Componente Label</span>
         <Label color="primary" size="large" iconPosition="both" text="label">
           <IconInfo />
         </Label>
@@ -40,8 +41,10 @@ function PlaygroundScreen() {
         </Label>
         <Label color="success" size="micro" iconPosition="left" text="label">
           <IconInfo />
-        </Label>
+        </Label> */}
+        <TrilhasComponent />
         <CardTrilhas title="Title" description="Description"></CardTrilhas>
+
       </div>
     </div>
   );

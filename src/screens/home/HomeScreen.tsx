@@ -13,14 +13,6 @@ function HomeScreen() {
         <span>⏰ Em Breve iniciaremos nossos trabalhos...</span>
         <span>⚠️ Por enquanto confira nossa tela de componentes</span>
 
-        <div className={styles.box_trilhas_container}>
-          <div className={styles.box_trilhas_header}>
-            <h1 className={styles.box_trilhas_header_title}>Trilhas</h1>
-          </div>
-          <div className={styles.box_trilhas_cards}>
-
-          </div>
-        </div>
       </div>
       <button onClick={() => navigate("/playground")}>
         Ir para Playground de componentes

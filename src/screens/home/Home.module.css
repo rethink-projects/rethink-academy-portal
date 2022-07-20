@@ -53,19 +53,3 @@
   color: var(--color-base);
   text-align: center;
 }
-
-.box_trilhas_header {
-  margin-bottom: 24px;
-  display: flex;
-  gap: 12px;
-}
-
-.box_trilhas_header_title {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 120%;
-
-  color: var(--color-secondary);
-}
