@@ -1,6 +1,8 @@
 :root {
   --color-base: #ffffff;
   --color-opacity-1: rgba(0, 0, 0, 0.1);
+  --color-opacity-2: rgba(0, 0, 0, 0.2);
+  --color-opacity-white: rgba(255, 255, 255, 0.2);
   --color-input: #f9f9f9;
   --color-input-outline: #82a8f8;
   /* Primary */
@@ -54,4 +56,12 @@
   /* Error */
   --color-toast-error: #6c191d;
   --color-toast--light-error: #f7dedf;
+
+  /* Tag */
+  --color-tag-dark: #4750d5;
+  --color-tag-light: #f3f3fc;
+  --color-tag-font-light: #222995;
+  --color-tag-hover-dark: #2c35bf;
+  --color-tag-pressed-light-background: #c9ccf3;
+  --color-tag-pressed-light-font: #0f1242;
 }

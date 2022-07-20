@@ -37,13 +37,13 @@
 
 .primary {
   background-color: var(--color-primary);
-  color: var(--color-secundary);
+  color: var(--color-secondary);
 
   font-weight: 500;
 }
 
 .secondary {
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
   color: var(--color-base);
 }
 
@@ -53,8 +53,8 @@
 
 .outline {
   background-color: var(--color-base);
-  border-color: solid var(--color-secundary);
-  color: var(--color-secundary);
+  border-color: solid var(--color-secondary);
+  color: var(--color-secondary);
 
   font-weight: 500;
 }
@@ -78,12 +78,12 @@
 }
 
 .secondary:hover {
-  background-color: var(--color-secundary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .outline:hover {
-  background-color: var(--color-secundary);
-  border-color: var(--color-secundary);
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
   color: var(--color-base);
 
   font-weight: 400;
