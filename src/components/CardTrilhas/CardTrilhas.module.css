@@ -1,5 +1,5 @@
 .container {
-  width: 440px;
+  width: 706px;
   height: 318px;
   border: 1px solid #e2fa85;
 }
@@ -12,6 +12,21 @@
 .card_image {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.div_image {
+  height: 318px;
+  width: 263.93px;
+  position: absolute;
+  background: linear-gradient(
+    150.96deg,
+    #e2fa85 -8.49%,
+    #ffffff 50.75%,
+    #e2fa85 112.88%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.8;
 }
 
 .card_image img {
@@ -56,5 +71,9 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
+  color: var(--color-tertiary-active);
+}
+
+.card_progressBar {
   color: var(--color-tertiary-active);
 }

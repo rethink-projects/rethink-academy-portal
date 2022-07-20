@@ -13,12 +13,13 @@ const CardTrilhas = ({ title, description }: TypeCardTrilhas) => {
             <div className={styles.container_inner}>
                 <div className={styles.card_image}>
                     <img src={image} />
+                    <div className={styles.div_image}></div>
                 </div>
                 <div className={styles.card_content}>
                     <div className={styles.card_content_inner}>
                         <h1 className={styles.card_content_title}>{title}</h1>
                         <p className={styles.card_content_description}>{description}</p>
-                        <p>Substitua essa tag pela barra de progresso</p>
+                        <p className={styles.card_progressBar}>Substitua essa tag pela barra de progresso</p>
                     </div>
                 </div>
             </div>
