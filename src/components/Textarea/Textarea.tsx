@@ -18,6 +18,9 @@ function Textarea({
   label,
   disabled,
 }: TextareaProps) {
+
+  const disabledClass = disabled ? styles.textarea_disabled : "";
+
   return (
     <div
       className={[
@@ -33,7 +36,7 @@ function Textarea({
         className={[
           styles.textarea_default,
           styles["textarea_" + type],
-          styles["textarea_disabled_" + disabled],
+          disabledClass,
         ].join(" ")}
       ></textarea>
       {caption && <p className={styles.textarea_caption}>{caption}</p>}
