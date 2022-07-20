@@ -1,4 +1,52 @@
 .container {
-  padding: 0 27.5px;
-  color: var(--color-base);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 368px;
+  height: 65px;
+  background-color: var(--color-base);
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+}
+.container span {
+  width: 101px;
+  margin-left: 27.5px;
+  margin-right: 32px;
+}
+.divisoria {
+  flex-shrink: 0;
+  width: 1px;
+  height: 40px;
+  background-color: var(--color-icon-background);
+}
+
+.state {
+  margin-left: 32px;
+  margin-right: 27.5px;
+}
+.blocked {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.blocked span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-secondary-hover);
+}
+
+.padlock_border {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #9dba2b;
+  border-radius: 3px;
+}
+.padlock_border svg {
+  color: #9dba2b;
+  width: 19px;
 }

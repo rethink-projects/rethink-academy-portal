@@ -7,6 +7,7 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  margin-bottom: 24px;
 }
 .icon_container {
   display: flex;
@@ -17,9 +18,9 @@
   border-radius: 4px;
   background-color: black !important;
 }
-.icon_container svg path {
-  width: 16.25px;
-  height: 16.25px;
+.icon_container svg {
+  width: 21.7px;
+  height: 21.7px;
   color: var(--color-base);
 }
 
