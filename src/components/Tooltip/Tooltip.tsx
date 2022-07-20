@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Tooltip.css";
+import styles from "./Tooltip.module.css";
 
 const Tooltip = (props: any) => {
   let timeout: any;
@@ -18,7 +18,7 @@ const Tooltip = (props: any) => {
 
   return (
     <div
-      className="tooltip_wrapper"
+      className={styles.tooltip_wrapper}
       // When to show the tooltip
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
@@ -26,8 +26,12 @@ const Tooltip = (props: any) => {
       {/* Wrapping */}
       {props.children}
       {active && (
-        
-        <div className={`tooltip_tip ${props.direction || "top"}`}>
+        <div
+          className={[
+            styles.tooltip_tip,
+            styles["tooltip_tip_" + props.direction],
+          ].join(" ")}
+        >
           {/* Content */}
           {props.content}
         </div>
