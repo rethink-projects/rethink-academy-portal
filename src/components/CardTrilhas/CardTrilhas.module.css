@@ -1,8 +1,45 @@
+/* Course completed */
+
+.container_completed {
+  width: 706px;
+  height: 318px;
+  border-radius: 4px;
+  border: 1px solid #bde034;
+  position: relative;
+}
+
+.effect_image_completed {
+  height: 318px;
+  width: 263.93px;
+  position: absolute;
+  background: linear-gradient(
+    150.96deg,
+    #e2fa85 -8.49%,
+    #ffffff 50.75%,
+    #e2fa85 112.88%
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ----------------------------------- */
+
+/* Course no-completed */
+
 .container {
   width: 706px;
   height: 318px;
-  border: 1px solid #e2fa85;
+  border: 1px solid #b6b4b4;
+  border-radius: 4px;
+  position: relative;
 }
+
+.effect_image {
+  height: 318px;
+  width: 263.93px;
+  position: absolute;
+}
+
+/* ----------------------------------- */
 
 .container_inner {
   display: flex;
@@ -15,31 +52,12 @@
   position: relative;
 }
 
-.div_image {
-  height: 318px;
-  width: 263.93px;
-  position: absolute;
-  background: linear-gradient(
-    150.96deg,
-    #e2fa85 -8.49%,
-    #ffffff 50.75%,
-    #e2fa85 112.88%
-  );
-  mix-blend-mode: multiply;
-  opacity: 0.8;
-}
-
 .card_image img {
   height: 318px;
   width: 263.93px;
 }
 
 .card_content {
-  width: 440px;
-  height: 318px;
-}
-
-.card_content_inner {
   width: 392px;
   height: 234px;
   display: flex;
@@ -48,6 +66,8 @@
   padding: 42px 24px;
 
   color: var(--color-base);
+
+  opacity: 1;
 }
 
 .card_content_title {
