@@ -6,15 +6,15 @@ import PadLock from '@mui/icons-material/LockOutlined';
 type TypeCardTrilhas = {
     title: string;
     description: string;
-    inputCourseTrilha?: {
+    inputTrilha?: {
         totalVideo: number;
         watched: number
     }
     image?: string;
 }
 
-const CardTrilhas = ({ title, description, inputCourseTrilha }: TypeCardTrilhas) => {
-    const { totalVideo, watched } = inputCourseTrilha!;
+const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
+    const { totalVideo, watched } = inputTrilha!;
 
     const coursecompleted = (): boolean => {
         return false //totalVideo === watched
