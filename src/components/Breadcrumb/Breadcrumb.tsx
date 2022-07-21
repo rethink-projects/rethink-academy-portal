@@ -1,27 +1,39 @@
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import style from "./Breadcrumb.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 type BreadcrumbProps = {
-  pathNames: Array<string>;
+  pathTitles: Array<string>;
   pathLinks: Array<string>;
 };
+/* 
+playground
+      <div>
+        <h3>Breadcrumb</h3>
+        <Breadcrumb
+          pathTitles={["Home", "Playground"]}
+          pathLinks={["/", "playground"]}
+        />
+      </div>
 
-const Breadcrumb = ({ pathNames, pathLinks }: BreadcrumbProps) => {
+*/
+
+const Breadcrumb = ({ pathTitles, pathLinks }: BreadcrumbProps) => {
   const navigate = useNavigate();
-  const pathLastElementIndex = pathNames.length - 1;
+  //const location = useLocation();
+  const pathLastElementIndex = pathTitles.length - 1;
 
   let directory = "";
   const pathArray: Array<string> = [];
-  for (let i = 0; i < pathNames.length; i++) {
-    directory += `/${pathLinks[i]}`;
+  for (let i = 0; i < pathTitles.length; i++) {
+    directory += pathLinks[i];
     pathArray[i] = directory;
   }
 
   return (
     <nav className={style.breadcrumbContainer}>
-      {pathNames.map((value, index) => {
+      {pathTitles.map((value, index) => {
         if (index != pathLastElementIndex) {
           return (
             <>
@@ -37,7 +49,7 @@ const Breadcrumb = ({ pathNames, pathLinks }: BreadcrumbProps) => {
         }
       })}
       <span className={style.currentPage}>
-        {pathNames[pathLastElementIndex]}
+        {pathTitles[pathLastElementIndex]}
       </span>
     </nav>
   );
