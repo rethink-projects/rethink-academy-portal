@@ -9,7 +9,12 @@ type AvatarProps = {
   component: JSX.Element;
 };
 
-const Avatar = ({ type, size, onClick, component }: AvatarProps) => {
+const Avatar = ({
+  type = "text",
+  size = "default",
+  onClick,
+  component,
+}: AvatarProps) => {
   return <div className={`${styles[type]} ${styles[size]}`}>{component}</div>;
 };
 
