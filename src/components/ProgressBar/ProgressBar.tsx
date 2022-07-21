@@ -10,7 +10,7 @@ type ProgressBarProps = {
 
 const ProgressBar = ({
   size = "medium",
-  color = "light",
+  color = "dark",
   totalValue,
   relativeValue,
 }: ProgressBarProps) => {
