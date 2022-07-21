@@ -4,12 +4,12 @@ import React from "react";
 import styles from "./Badge.module.css";
 
 type BadgeProps = {
-  color: "primary" | "secondary" | "accent" | "danger" | "warning" | "success";
-  size: "micro" | "default" | "small" | "large";
+  color?: "primary" | "secondary" | "accent" | "danger" | "warning" | "success";
+  size?: "micro" | "default" | "small" | "large";
   icon: JSX.Element;
 };
 
-const Badge = ({ color, size, icon }: BadgeProps) => {
+const Badge = ({ color = "primary", size = "default", icon }: BadgeProps) => {
   return <div className={`${styles[color]} ${styles[size]}`}>{icon}</div>;
 };
 
