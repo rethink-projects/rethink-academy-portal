@@ -4,36 +4,43 @@ import style from "./Breadcrumb.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 type BreadcrumbProps = {
-  pathTitles: Array<string>;
-  pathLinks: Array<string>;
+  breadcrumbItems: Array<BreadcrumbItemProps>;
 };
+
+type BreadcrumbItemProps = {
+  title: string;
+  link: string;
+  current?: boolean;
+};
+
 /* 
 playground
       <div>
         <h3>Breadcrumb</h3>
         <Breadcrumb
-          pathTitles={["Home", "Playground"]}
-          pathLinks={["/", "playground"]}
+          breadcrumbItems={[
+            { title: "home", link: "/" },
+            { title: "playground", current: true, link: "playground" },
+          ]}
         />
       </div>
-
 */
 
-const Breadcrumb = ({ pathTitles, pathLinks }: BreadcrumbProps) => {
+const Breadcrumb = ({ breadcrumbItems }: BreadcrumbProps) => {
   const navigate = useNavigate();
   //const location = useLocation();
-  const pathLastElementIndex = pathTitles.length - 1;
+  const pathLastElementIndex = breadcrumbItems.length - 1;
 
   let directory = "";
   const pathArray: Array<string> = [];
-  for (let i = 0; i < pathTitles.length; i++) {
-    directory += pathLinks[i];
+  for (let i = 0; i < breadcrumbItems.length; i++) {
+    directory += breadcrumbItems[i].link;
     pathArray[i] = directory;
   }
 
   return (
     <nav className={style.breadcrumbContainer}>
-      {pathTitles.map((value, index) => {
+      {breadcrumbItems.map((value, index) => {
         if (index != pathLastElementIndex) {
           return (
             <>
@@ -41,7 +48,7 @@ const Breadcrumb = ({ pathTitles, pathLinks }: BreadcrumbProps) => {
                 className={style.previousPages}
                 onClick={() => navigate(pathArray[index])}
               >
-                {value}
+                {value.title}
               </span>
               <KeyboardArrowRightIcon />
             </>
@@ -49,7 +56,7 @@ const Breadcrumb = ({ pathTitles, pathLinks }: BreadcrumbProps) => {
         }
       })}
       <span className={style.currentPage}>
-        {pathTitles[pathLastElementIndex]}
+        {breadcrumbItems[pathLastElementIndex].title}
       </span>
     </nav>
   );
