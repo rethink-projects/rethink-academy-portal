@@ -7,8 +7,8 @@ import SimpleButton from "../../components/SimpleButton/SimpleButton";
 import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 
 function PlaygroundScreen() {
-  const courseVideos = {
-    totalVideo: 31,
+  const inputCourseTrilha = {
+    totalVideo: 30,
     watched: 30,
   }
   return (
@@ -45,7 +45,7 @@ function PlaygroundScreen() {
         <Label color="success" size="micro" iconPosition="left" text="label">
           <IconInfo />
         </Label>
-        <CardTrilhas courseVideos={courseVideos} title="Title" description="Description"></CardTrilhas>
+        <CardTrilhas inputCourseTrilha={inputCourseTrilha} title="Title" description="Description"></CardTrilhas>
       </div>
     </div>
   );

@@ -8,10 +8,13 @@
   position: relative;
 }
 
+.container_completed:hover {
+  border: 1px solid #9dba2b;
+}
+
 .effect_image_completed {
   height: 318px;
   width: 263.93px;
-  position: absolute;
   background: linear-gradient(
     150.96deg,
     #e2fa85 -8.49%,
@@ -23,8 +26,6 @@
 
 /* ----------------------------------- */
 
-/* Course no-completed */
-
 .container {
   width: 706px;
   height: 318px;
@@ -33,15 +34,12 @@
   position: relative;
 }
 
-.effect_image {
-  height: 318px;
-  width: 263.93px;
-  position: absolute;
+.container:hover {
+  border: 1px solid #706e64;
 }
 
-/* ----------------------------------- */
-
 .container_inner {
+  border-radius: inherit;
   display: flex;
   flex-direction: row;
 }
@@ -49,12 +47,9 @@
 .card_image {
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.card_image img {
   height: 318px;
   width: 263.93px;
+  border-radius: inherit;
 }
 
 .card_content {
@@ -93,6 +88,118 @@
   line-height: 150%;
   color: var(--color-tertiary-active);
 }
+
+/* Card Blocked */
+
+.container_video_blocked {
+  width: 704px;
+  height: 317px;
+  border: 2px solid var(--color-secondary-hover);
+  border-radius: 4px;
+  background: var(--color-secondary-hover);
+  opacity: 0.8;
+
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  transform: translate(-1px, -2px);
+}
+
+.container_video_blocked:hover {
+  background-color: var(--color-secondary-active);
+  border: 2px solid var(--color-secondary-active);
+}
+
+.content_video_blocked {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  text-align: justify;
+}
+
+.content_video_blocked h1 {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  color: var(--color-base);
+}
+
+.content_video_blocked p {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #f9f9f9;
+  width: 300px;
+}
+
+.container_padlock {
+  width: 154px;
+  height: 154px;
+  border-radius: 19px;
+  border: 12px solid #d3fa3a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 58px 0 82px;
+}
+
+.container_padlock svg {
+  width: 90px;
+  height: 90px;
+  color: #d3fa3a;
+}
+
+/* --------------------------------- */
+
+/* Hover card completed and incomplete */
+
+.hover_card {
+  height: 318px;
+  width: 704px;
+  position: absolute;
+  top: 0;
+
+  border-radius: 4px;
+  border-radius: inherit;
+}
+
+.container_completed:hover .effect_card_completed {
+  width: 263.93px;
+  height: 100%;
+  background: linear-gradient(
+    150.96deg,
+    #bde034 -8.49%,
+    #ffffff 50.75%,
+    #bde034 112.88%
+  );
+  mix-blend-mode: multiply;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.container:hover .effect_card_incomplete {
+  width: 263.93px;
+  height: 100%;
+  background: linear-gradient(
+    150.96deg,
+    #b6b4b4 -8.49%,
+    #ffffff 50.75%,
+    #b6b4b4 112.88%
+  );
+  mix-blend-mode: multiply;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+/* --------------------------------------- */
 
 .card_progressBar {
   color: var(--color-tertiary-active);

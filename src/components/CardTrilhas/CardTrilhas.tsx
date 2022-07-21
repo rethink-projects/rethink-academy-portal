@@ -1,34 +1,40 @@
 import React from 'react'
 import styles from "./CardTrilhas.module.css";
 import image from "../../assets/academyCardTrilhas.png";
+import PadLock from '@mui/icons-material/LockOutlined';
 
 type TypeCardTrilhas = {
     title: string;
     description: string;
-    courseVideos?: {
+    inputCourseTrilha?: {
         totalVideo: number;
         watched: number
     }
     image?: string;
 }
 
-const CardTrilhas = ({ title, description, courseVideos }: TypeCardTrilhas) => {
-    const { totalVideo, watched } = courseVideos!;
+const CardTrilhas = ({ title, description, inputCourseTrilha }: TypeCardTrilhas) => {
+    const { totalVideo, watched } = inputCourseTrilha!;
 
-    const completedCourse = () => {
-        return totalVideo === watched
+    const coursecompleted = (): boolean => {
+        return false //totalVideo === watched
+    }
+
+    const videoBlocked = (): boolean => {
+        return false
     }
 
 
-    const completedCourseClass_container = completedCourse() ? styles.container_completed : styles.container
-    const completedCourseClass_effect_img = completedCourse() ? styles.effect_image_completed : styles.effect_image
-    // const completedCourseClass_effect_card = totalVideo === watched ? styles.effect_card_completed_hover : ""
+    const completedCourseClass_container = coursecompleted() ? styles.container_completed : styles.container
+    const completedCourseClass_effect_img = coursecompleted() ? styles.effect_image_completed : styles.effect_image_incomplete
+    const completedCourseClass_effect_card_hover = coursecompleted() ? styles.effect_card_completed : styles.effect_card_incomplete
+    const videoBlockedClass = videoBlocked() ? styles.container_video_blocked : "";
+
 
     return (
         <div className={completedCourseClass_container}>
             <div className={styles.container_inner}>
-                <div className={styles.card_image}>
-                    <img src={image} />
+                <div style={{ backgroundImage: `url(${image})` }} className={styles.card_image}>
                     <div className={completedCourseClass_effect_img}></div>
                 </div>
                 <div className={styles.card_content}>
@@ -37,14 +43,24 @@ const CardTrilhas = ({ title, description, courseVideos }: TypeCardTrilhas) => {
                     <p className={styles.card_progressBar}>Substitua essa tag pela barra de progresso</p>
                 </div>
             </div>
-            {/* <div className={completedCourseClass_effect_card}>
-                <div>
+            {videoBlocked() ?
+                <div className={videoBlockedClass}>
+                    <div className={styles.container_padlock}>
+                        <PadLock />
+                    </div>
+                    <div className={styles.content_video_blocked}>
+                        <h1>Trilha Bloqueada!</h1>
+                        <p>Assista pelo menos um curso da Trilha nome para desbloquear.</p>
+                    </div>
+                </div>
+                :
+                <div className={styles.hover_card}>
+                    <div className={completedCourseClass_effect_card_hover}></div>
 
                 </div>
-                <div></div>
-            </div> */}
+            }
 
-        </div>
+        </div >
     )
 }
 
