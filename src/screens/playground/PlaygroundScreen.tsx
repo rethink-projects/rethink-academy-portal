@@ -1,11 +1,4 @@
-import React from "react";
 import styles from "./Playground.module.css";
-import Label from "../../components/Label/Label";
-import IconInfo from "@mui/icons-material/InfoOutlined";
-
-// Simple Button
-import SimpleButton from "../../components/SimpleButton/SimpleButton";
-import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 import TrilhasComponent from "../home/components/trilhas/TrilhasComponent";
 
 function PlaygroundScreen() {

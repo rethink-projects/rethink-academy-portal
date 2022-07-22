@@ -12,6 +12,10 @@
   width: 101px;
   margin-left: 27.5px;
   margin-right: 32px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--color-secondary-hover);
 }
 .divisoria {
   flex-shrink: 0;
@@ -24,6 +28,11 @@
   margin-left: 32px;
   margin-right: 27.5px;
 }
+.progress_container {
+  /* display: flex; */
+  width: 148px;
+}
+
 .blocked {
   display: flex;
   flex-direction: row;
@@ -49,4 +58,22 @@
 .padlock_border svg {
   color: #9dba2b;
   width: 19px;
+}
+
+.ProgressBar_small {
+  width: 10px;
+}
+.free {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.free span {
+  margin: 0;
+  width: 30px;
+  margin-right: 7px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-tertiary-active);
 }
