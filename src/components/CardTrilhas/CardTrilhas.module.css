@@ -59,6 +59,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 42px 24px;
+  word-wrap: break-word;
 
   color: var(--color-base);
 
@@ -202,5 +203,29 @@
 /* --------------------------------------- */
 
 .card_progressBar {
-  color: var(--color-tertiary-active);
+  width: 100%;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--color-primary-active);
+}
+
+.card_progressBar span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.legend_progressBar {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+
+  margin-top: 15px;
+
+  color: var(--color-tertiary);
 }
