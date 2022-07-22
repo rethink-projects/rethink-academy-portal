@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./CardTrilhas.module.css";
 import image from "../../assets/academyCardTrilhas.png";
 import PadLock from '@mui/icons-material/LockOutlined';
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 type TypeCardTrilhas = {
     title: string;
@@ -15,6 +16,10 @@ type TypeCardTrilhas = {
 
 const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     const { totalVideo, watched } = inputTrilha!;
+
+    const calcPercentage = (): number => {
+        return Math.floor((watched / totalVideo) * 100);
+    }
 
     const coursecompleted = (): boolean => {
         return false //totalVideo === watched
@@ -39,8 +44,13 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
                 </div>
                 <div className={styles.card_content}>
                     <h1 className={styles.card_content_title}>{title}</h1>
-                    <p className={styles.card_content_description}>{description}</p>
-                    <p className={styles.card_progressBar}>Substitua essa tag pela barra de progresso</p>
+                    <p className={styles.card_content_description}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                    {/* <p className={styles.card_progressBar}>Substitua essa tag pela barra de progresso</p> */}
+                    <div className={styles.card_progressBar}>
+                        <span>{`${calcPercentage()}%`}</span>
+                        <ProgressBar relativeValue={watched} totalValue={totalVideo} />
+                    </div>
+
                 </div>
             </div>
             {videoBlocked() ?
