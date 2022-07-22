@@ -1,0 +1,45 @@
+.container_external_light,
+.container_external_dark {
+  width: 342px;
+  overflow: hidden;
+}
+
+.container_external_light {
+  background-color: var(--color-base);
+}
+
+.container_external_dark {
+  background: var(--color-progressbar-external-dark);
+}
+
+.container_internal_light,
+.container_internal_dark {
+  transition: width 2s;
+}
+
+.container_internal_light {
+  background: var(--color-primary);
+}
+
+.container_internal_dark {
+  background: var(--color-primary-active);
+}
+
+.large,
+.medium,
+.small {
+  border-radius: 50px;
+}
+
+.large {
+  height: 17px;
+}
+
+.medium {
+  height: 8px;
+}
+
+.small {
+  height: 6px;
+  min-width: 2px;
+}
