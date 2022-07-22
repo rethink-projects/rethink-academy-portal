@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Playground.module.css";
 import Label from "../../components/Label/Label";
 import IconInfo from "@mui/icons-material/InfoOutlined";
@@ -13,14 +14,10 @@ function PlaygroundScreen() {
   }
   return (
     <div className={styles.playground_container}>
-      <div className={styles.main_content}>
-        <h2>Playground de Componentes</h2>
-        <p>Insira abaixo o seu componente:</p>
-      </div>
-      <div className={styles.sub_content}>
+
+      <div className={styles.playground_container_inner}>
+        {/* <h1>Manter essa tela Limpa, após criar o componente</h1> */}
         <span>Componente Card Trilhas</span>
-
-
         <CardTrilhas inputTrilha={inputTrilha} title="Title" description="Description"></CardTrilhas>
       </div>
     </div>
