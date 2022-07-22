@@ -16,9 +16,8 @@ function PlaygroundScreen() {
     <div className={styles.playground_container}>
 
       <div className={styles.playground_container_inner}>
-        {/* <h1>Manter essa tela Limpa, após criar o componente</h1> */}
-        <span>Componente Card Trilhas</span>
-        <CardTrilhas inputTrilha={inputTrilha} title="Title" description="Description"></CardTrilhas>
+        <h1>Manter essa tela Limpa, após criar o componente</h1>
+
       </div>
     </div>
   );

@@ -202,7 +202,8 @@
 
 /* --------------------------------------- */
 
-.card_progressBar {
+.card_progressBar_complete,
+.card_progressBar_incomplete {
   width: 100%;
   display: flex;
   gap: 7px;
@@ -214,6 +215,10 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
+}
+
+.card_progressBar_incomplete {
+  color: var(--color-secondary-hover);
 }
 
 .legend_progressBar {

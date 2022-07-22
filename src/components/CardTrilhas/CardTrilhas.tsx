@@ -22,12 +22,14 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     }
 
     const courseCompleted = (): boolean => {
-        return false //totalVideo === watched
+        return true //totalVideo === watched
     }
 
     const videoBlocked = (): boolean => {
         return false
     }
+
+    const card_progressBar = courseCompleted() ? styles.card_progressBar_complete : styles.card_progressBar_incomplete;
 
 
     const completedCourseClass_container = courseCompleted() ? styles.container_completed : styles.container
@@ -45,7 +47,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
                 <div className={styles.card_content}>
                     <h1 className={styles.card_content_title}>{title}</h1>
                     <p className={styles.card_content_description}>{description}</p>
-                    <div className={styles.card_progressBar}>
+                    <div className={card_progressBar}>
                         <span>{`${calcPercentage()}%`}</span>
                         <ProgressBar relativeValue={watched} totalValue={totalVideo} />
                     </div>
