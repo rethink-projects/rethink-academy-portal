@@ -7,7 +7,7 @@ import SimpleButton from "../../components/SimpleButton/SimpleButton";
 import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 
 function PlaygroundScreen() {
-  const inputCourseTrilha = {
+  const inputTrilha = {
     totalVideo: 30,
     watched: 30,
   }
@@ -17,35 +17,11 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
       </div>
-      <div>
-        <SimpleButton
-          type="secondary"
-          size="big"
-          text="Simple Button"
-          onClick={() => { }}
-        />
-      </div>
       <div className={styles.sub_content}>
-        <span>Componente Label</span>
-        <Label color="primary" size="large" iconPosition="both" text="label">
-          <IconInfo />
-        </Label>
-        <Label color="secondary" size="large" iconPosition="right" text="label">
-          <IconInfo />
-        </Label>
-        <Label color="accent" size="large" iconPosition="none" text="label">
-          <IconInfo />
-        </Label>
-        <Label color="danger" size="default" iconPosition="left" text="label">
-          <IconInfo />
-        </Label>
-        <Label color="warning" size="small" iconPosition="right" text="label">
-          <IconInfo />
-        </Label>
-        <Label color="success" size="micro" iconPosition="left" text="label">
-          <IconInfo />
-        </Label>
-        <CardTrilhas inputCourseTrilha={inputCourseTrilha} title="Title" description="Description"></CardTrilhas>
+        <span>Componente Card Trilhas</span>
+
+
+        <CardTrilhas inputTrilha={inputTrilha} title="Title" description="Description"></CardTrilhas>
       </div>
     </div>
   );
