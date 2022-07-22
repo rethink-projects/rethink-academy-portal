@@ -50,6 +50,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
                         <span>{`${calcPercentage()}%`}</span>
                         <ProgressBar relativeValue={watched} totalValue={totalVideo} />
                     </div>
+                    <p className={styles.legend_progressBar}>20 de 20 cursos concluídos.</p>
 
                 </div>
             </div>
