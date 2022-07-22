@@ -170,6 +170,8 @@
 
   border-radius: 4px;
   border-radius: inherit;
+
+  cursor: pointer;
 }
 
 .container_completed:hover .effect_card_completed {
