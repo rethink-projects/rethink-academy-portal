@@ -21,3 +21,24 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
+.scroll_light,
+body {
+  overflow: auto;
+}
+
+.scroll_light::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+  background: var(--color-secondary-active);
+  border-radius: 4px;
+}
+
+.scroll_light::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  border: 1px solid black;
+  background: var(--color-primary);
+  background-clip: padding-box;
+  border-radius: 4px;
+  width: 6px !important;
+}
