@@ -21,7 +21,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     return Math.floor((watched / totalVideo) * 100);
   };
 
-  const coursecompleted = (): boolean => {
+  const courseCompleted = (): boolean => {
     return false; //totalVideo === watched
   };
 
@@ -29,13 +29,13 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     return false;
   };
 
-  const completedCourseClass_container = coursecompleted()
+  const completedCourseClass_container = courseCompleted()
     ? styles.container_completed
     : styles.container;
-  const completedCourseClass_effect_img = coursecompleted()
+  const completedCourseClass_effect_img = courseCompleted()
     ? styles.effect_image_completed
     : styles.effect_image_incomplete;
-  const completedCourseClass_effect_card_hover = coursecompleted()
+  const completedCourseClass_effect_card_hover = courseCompleted()
     ? styles.effect_card_completed
     : styles.effect_card_incomplete;
   const videoBlockedClass = videoBlocked()
@@ -53,9 +53,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
         </div>
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{title}</h1>
-          <p className={styles.card_content_description}>
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-          </p>
+          <p className={styles.card_content_description}>{description}</p>
           <div className={styles.card_progressBar}>
             <span>{`${calcPercentage()}%`}</span>
             <ProgressBar relativeValue={watched} totalValue={totalVideo} />
