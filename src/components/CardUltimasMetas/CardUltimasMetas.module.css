@@ -1,0 +1,116 @@
+.CardUltimasMetas_container{
+    display: flex;
+    flex-direction: column;
+    width: 368px;
+    height: 198px;
+    gap: 24px;
+}
+
+.CardUltimasMetas_title{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.CardUltimasMetas_title h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+    color: var(--color-secondary);
+}
+
+.CardUltimasMetas_info{
+    display: flex;
+    flex-direction: column;
+    width: 328px;
+    height: 110px;
+    padding: 16px 20px;
+    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.CardUltimasMetas_inner{
+    display: flex;
+    height: 72px;
+    align-items: center;
+}
+
+.CardUltimasMetas_inner_info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    margin-right: 40px;
+    gap: 4px;
+}
+
+.CardUltimasMetas_info h1{
+    color: var(--color-secondary-hover);
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.CardUltimasMetas_info p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-tertiary-active);
+
+}
+
+.cardUltimasMetas_arrow{
+    color: var(--color-tertiary);
+    height: 17.5px;
+    cursor: pointer;
+}
+
+.CardUltimasMetas_line{
+    width: 328px;
+    height: 0px;
+
+    opacity: 0.1;
+    /* Cores/Secundária-Preto */
+
+    border: 0.5px solid #1B1B1B;
+    background-color: #1B1B1B;
+
+    /* Inside auto layout */
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.CardUltimasMetas_progress{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress_metas{
+    display: flex;
+}
+
+.progress_metas p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-secondary);
+}
+
+.progress_metas span{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-tertiary);
+}
