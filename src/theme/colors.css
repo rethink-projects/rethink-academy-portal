@@ -54,4 +54,7 @@
   /* Error */
   --color-toast-error: #6c191d;
   --color-toast--light-error: #f7dedf;
+
+  /* Progress Bar */
+  --color-progressbar-external-dark: rgba(212, 212, 212, 0.5);
 }
