@@ -21,7 +21,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
         return Math.floor((watched / totalVideo) * 100);
     }
 
-    const coursecompleted = (): boolean => {
+    const courseCompleted = (): boolean => {
         return false //totalVideo === watched
     }
 
@@ -30,9 +30,9 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     }
 
 
-    const completedCourseClass_container = coursecompleted() ? styles.container_completed : styles.container
-    const completedCourseClass_effect_img = coursecompleted() ? styles.effect_image_completed : styles.effect_image_incomplete
-    const completedCourseClass_effect_card_hover = coursecompleted() ? styles.effect_card_completed : styles.effect_card_incomplete
+    const completedCourseClass_container = courseCompleted() ? styles.container_completed : styles.container
+    const completedCourseClass_effect_img = courseCompleted() ? styles.effect_image_completed : styles.effect_image_incomplete
+    const completedCourseClass_effect_card_hover = courseCompleted() ? styles.effect_card_completed : styles.effect_card_incomplete
     const videoBlockedClass = videoBlocked() ? styles.container_video_blocked : "";
 
 
@@ -44,8 +44,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
                 </div>
                 <div className={styles.card_content}>
                     <h1 className={styles.card_content_title}>{title}</h1>
-                    <p className={styles.card_content_description}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                    {/* <p className={styles.card_progressBar}>Substitua essa tag pela barra de progresso</p> */}
+                    <p className={styles.card_content_description}>{description}</p>
                     <div className={styles.card_progressBar}>
                         <span>{`${calcPercentage()}%`}</span>
                         <ProgressBar relativeValue={watched} totalValue={totalVideo} />

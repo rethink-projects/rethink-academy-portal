@@ -208,12 +208,10 @@
   gap: 7px;
   align-items: center;
   color: var(--color-primary-active);
-}
 
-.card_progressBar span {
   font-family: "Roboto";
   font-style: normal;
-  font-weight: 400 !important;
+  font-weight: 400;
   font-size: 16px;
   line-height: 150%;
 }
