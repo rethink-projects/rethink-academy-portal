@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./CardTrilhas.module.css";
-import image from "../../assets/academyCardTrilhas.png";
+import image from "../../../../assets/academyCardTrilhas.png";
 import PadLock from "@mui/icons-material/LockOutlined";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 
 type TypeCardTrilhas = {
   title: string;

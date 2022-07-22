@@ -1,5 +1,5 @@
 import styles from "./TrilhasScreen.module.css";
-import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
+import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 
 const TrilhasScreen = () => {
   const inputTrilha = {
