@@ -1,6 +1,11 @@
 import styles from "./TrilhasScreen.module.css";
+import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 
 const TrilhasScreen = () => {
+  const inputTrilha = {
+    totalVideo: 30,
+    watched: 30,
+  };
   return (
     <div className={styles.trilhas_container}>
       <div className={styles.text_container}>
@@ -14,10 +19,26 @@ const TrilhasScreen = () => {
           remaining essentially unchanged.
         </div>
         <div className={styles.cards_container}>
-          <div className={styles.teste}>CARD 1</div>
-          <div className={styles.teste}>CARD 2</div>
-          <div className={styles.teste}>CARD 3</div>
-          <div className={styles.teste}>CARD 4</div>
+          <CardTrilhas
+            inputTrilha={inputTrilha}
+            title="Title"
+            description="Description"
+          ></CardTrilhas>
+          <CardTrilhas
+            inputTrilha={inputTrilha}
+            title="Title"
+            description="Description"
+          ></CardTrilhas>
+          <CardTrilhas
+            inputTrilha={inputTrilha}
+            title="Title"
+            description="Description"
+          ></CardTrilhas>
+          <CardTrilhas
+            inputTrilha={inputTrilha}
+            title="Title"
+            description="Description"
+          ></CardTrilhas>
         </div>
       </div>
     </div>
