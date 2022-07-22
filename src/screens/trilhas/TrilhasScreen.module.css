@@ -1,16 +1,16 @@
-.tela_supra {
+/* .tela_supra {
   display: flex;
   width: 100vw;
-  height: 100vh;
-  /* overflow: hidden; */
-}
+  height: 100vh; */
+/* overflow: hidden; */
+/* }
 
 .barra_lateral {
   height: 100vh;
   flex-shrink: 0;
   width: 90px;
   background-color: red;
-}
+} */
 
 .trilhas_container {
   display: flex;
