@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./CardUltimasMetas.module.css"
 import Images from "../../assets/index";
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 
 type cardProps = {
@@ -32,9 +33,7 @@ const CardUltimasMetas = ({quantMetas, mes, quantMetasConcluidas}: cardProps) =>
                     <p>{quantMetasConcluidas} </p>
                     <span>/{quantMetas} </span>
                 </div>
-                <div className={styles.progressbar} >
-                    <p>barra</p>
-                </div>
+                <ProgressBar totalValue={quantMetas} relativeValue={quantMetasConcluidas}  />
                 <img src={Images.AmpulhetaUltimasMetas} alt="ampulheta" />
             </div>
         </div>
