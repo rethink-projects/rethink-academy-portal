@@ -12,6 +12,7 @@ function HomeScreen() {
         <span>🚨 Essa Tela está em desenvolvimento</span>
         <span>⏰ Em Breve iniciaremos nossos trabalhos...</span>
         <span>⚠️ Por enquanto confira nossa tela de componentes</span>
+
       </div>
       <button onClick={() => navigate("/playground")}>
         Ir para Playground de componentes
