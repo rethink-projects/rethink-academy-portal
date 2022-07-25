@@ -3,11 +3,6 @@ import IconMap from "@mui/icons-material/MapOutlined";
 import CardTrilhasHome from "./trilhasSubComponents/CardTrilhasHome";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 
-type TrilhasComponentType = {
-  name: string;
-  dataInput: Object;
-};
-
 //Componente a ser usado na HOME
 const TrilhasComponent = () => {
   const user = {
@@ -29,7 +24,7 @@ const TrilhasComponent = () => {
       },
     ],
   };
-  
+
   return (
     <div className={styles.trilhas_container}>
       <div className={styles.trilhas_title_container}>
@@ -40,7 +35,12 @@ const TrilhasComponent = () => {
         </div>
         <span>Trilhas</span>
       </div>
-      <CardTrilhasHome />
+      <div className={styles.cards_container}>
+        <CardTrilhasHome isBlocked name={"Academy"} />
+        <CardTrilhasHome  name={"Produto"}/>
+        <CardTrilhasHome isBlocked name={"Design"}/>
+        <CardTrilhasHome name={"Engenharia"}/>
+      </div>
       {/*  />
           </TrilhasComponent> */}
     </div>

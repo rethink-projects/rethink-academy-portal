@@ -16,6 +16,7 @@
   font-size: 20px;
   line-height: 120%;
   color: var(--color-secondary-hover);
+  flex-shrink: 0;
 }
 .divisoria {
   flex-shrink: 0;

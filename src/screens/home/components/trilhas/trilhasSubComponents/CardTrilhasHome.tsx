@@ -5,18 +5,17 @@ import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 
 type CardTrilhasHome = {
   name?: string;
-  dataInput?: Object;
+  isBlocked?: boolean;
 };
 
 //Componente do componente trilhas da HOME
-const CardTrilhasHome = ({ name }: CardTrilhasHome) => {
-  const [isBlocked, setIsBlocked] = useState(false);
+const CardTrilhasHome = ({ name, isBlocked = false }: CardTrilhasHome) => {
   const videoAmount = 100;
   const totalWatched = 66;
 
   return (
     <div className={styles.container}>
-      <span>{name}Academy</span>
+      <span>{name}</span>
       <div className={styles.divisoria}></div>
       <div className={styles.state}>
         {isBlocked ? (
