@@ -20,7 +20,7 @@ const ProgressBar = ({
 
   return (
     <div
-      style={{ width: width + "px" }}
+      style={{ width: width }}
       className={`${styles[size]} ${styles.container_external} ${
         color === "light"
           ? styles.container_external_light
