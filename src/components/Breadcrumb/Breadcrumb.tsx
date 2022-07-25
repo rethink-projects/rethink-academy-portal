@@ -10,7 +10,6 @@ type BreadcrumbProps = {
 type BreadcrumbItemProps = {
   title: string;
   link: string;
-  current?: boolean;
 };
 
 const Breadcrumb = ({ breadcrumbItems }: BreadcrumbProps) => {
