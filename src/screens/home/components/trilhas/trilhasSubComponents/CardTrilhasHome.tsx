@@ -1,15 +1,14 @@
-import React, { useState } from "react";
 import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 
 type CardTrilhasHome = {
   name?: string;
-  isBlocked?: boolean;
+  blocked?: boolean;
 };
 
 //Componente do componente trilhas da HOME
-const CardTrilhasHome = ({ name, isBlocked = false }: CardTrilhasHome) => {
+const CardTrilhasHome = ({ name, blocked = false }: CardTrilhasHome) => {
   const videoAmount = 100;
   const totalWatched = 66;
 
@@ -18,7 +17,7 @@ const CardTrilhasHome = ({ name, isBlocked = false }: CardTrilhasHome) => {
       <span>{name}</span>
       <div className={styles.divisoria}></div>
       <div className={styles.state}>
-        {isBlocked ? (
+        {blocked ? (
           <div className={styles.blocked}>
             <div className={styles.padlock_border}>
               <IconPadlock />
