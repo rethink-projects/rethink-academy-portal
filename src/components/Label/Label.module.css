@@ -1,0 +1,121 @@
+.label_default {
+  display: flex;
+  align-items: center;
+  border-radius: 150px;
+
+  width: fit-content;
+}
+.label_default span {
+  color: inherit;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Sizes */
+.large {
+  height: 44px;
+  padding: 0 14px;
+  font-size: 18px;
+}
+.large span {
+  margin: 10px;
+}
+.label_large span {
+  color: inherit;
+  margin: 0 100px !important;
+}
+
+.both_gap_padding_large {
+  padding: 0px 12px;
+}
+
+.large svg {
+  transform: scale(1.1);
+}
+
+.default {
+  height: 36px;
+  padding: 0px 12px;
+
+  font-size: 16px;
+}
+
+.default span {
+  margin: 5px;
+}
+
+.both_gap_padding_default {
+  padding: 0px 10px;
+}
+
+.default svg {
+  transform: scale(0.9);
+  margin: none !important;
+}
+
+.small {
+  height: 28px;
+  padding: 0px 8px;
+  font-size: 14px;
+}
+.small span {
+  margin: 5px;
+}
+.both_gap_padding_small {
+  padding: 0px 8px;
+}
+
+.small svg {
+  width: 17px;
+  margin: none;
+}
+
+.micro {
+  height: 20px;
+  padding: 0px 8px;
+  font-size: 12px;
+}
+
+.micro span {
+  margin: 3px;
+}
+
+.micro svg {
+  margin: none;
+  width: 12px;
+}
+
+.both_gap_padding_micro {
+  padding: 0px 4px;
+}
+/* Colors */
+.primary {
+  background-color: var(--color-item-selected);
+  color: var(--color-base);
+}
+
+.secondary {
+  background-color: rgba(130, 168, 248, 0.35);
+  color: #222995;
+}
+
+.accent {
+  background-color: #f5e0f3;
+  color: #892e82;
+}
+
+.danger {
+  background-color: #f7dedf;
+  color: #952226;
+}
+
+.warning {
+  background-color: #faecdb;
+  color: #865013;
+}
+
+.success {
+  background-color: #def7ea;
+  color: #18683d;
+}
