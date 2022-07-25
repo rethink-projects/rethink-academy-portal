@@ -3,8 +3,8 @@ import React from "react";
 import styles from "./Avatar.module.css";
 
 type AvatarProps = {
-  type: "image" | "text" | "icon";
-  size: "large" | "default" | "small" | "micro";
+  type?: "image" | "text" | "icon";
+  size?: "large" | "default" | "small" | "micro";
   onClick?: () => void;
   component: JSX.Element;
 };
