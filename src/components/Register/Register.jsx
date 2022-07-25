@@ -4,16 +4,25 @@ import React from "react";
 import styles from "./Register.module.css";
 
 // Components
-import IconButton from "../IconButton/IconButton";
+import Tasks from "./Components/Tasks";
 
 // Icons
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import { Task } from "@mui/icons-material";
-import Tasks from "./Components/Tasks";
 
 const Register = () => {
+  const tasks = [
+    { title: "Protótipo - Portal Rethink", status: "progress", time: "--" },
+    { title: "Alinhamento com a Squad", status: "completed", time: "1h" },
+    {
+      title: "Redesign Uber - Curso UX...",
+      status: "completed",
+      time: "45min",
+    },
+    { title: "Daily Engenharia", status: "completed", time: "15min" },
+  ];
+
   return (
     <div className={styles.register_container}>
       <div className={styles.register_title}>
@@ -50,36 +59,15 @@ const Register = () => {
             <p className={styles.register_body_title_time}>Tempo</p>
           </div>
           <div className={styles.register_body_infos}>
-            <Tasks
-              title="Protótipo - Portal Rethink"
-              status="progress"
-              time="--"
-            />
-            <Tasks
-              title="Alinhamento com a Squad"
-              status="completed"
-              time="1h"
-            />
-            <Tasks
-              title="Redesign Uber - Curso UX..."
-              status="completed"
-              time="45min"
-            />
-            <Tasks
-              title="Redesign Uber - Curso UX..."
-              status="completed"
-              time="45min"
-            />
-            <Tasks
-              title="Redesign Uber - Curso UX..."
-              status="completed"
-              time="45min"
-            />
-            <Tasks
-              title="Redesign Uber - Curso UX..."
-              status="completed"
-              time="45min"
-            />
+            {tasks &&
+              tasks.map((task) => (
+                <Tasks
+                  key={task.title}
+                  title={task.title}
+                  status={task.status}
+                  time={task.time}
+                />
+              ))}
           </div>
         </div>
       </div>
