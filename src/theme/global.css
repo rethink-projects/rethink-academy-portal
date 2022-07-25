@@ -40,5 +40,4 @@ body::-webkit-scrollbar {
   background: var(--color-tertiary-hover);
   background-clip: padding-box;
   border-radius: 12px;
-  max-width: 1%;
 }
