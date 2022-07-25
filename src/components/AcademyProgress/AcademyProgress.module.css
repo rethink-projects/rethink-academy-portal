@@ -1,0 +1,56 @@
+.background {
+  width: 1184px;
+  height: 507px;
+  position: relative;
+}
+.line_one {
+  position: absolute;
+  bottom: 41px;
+  right: 822px;
+}
+.line_two {
+  position: absolute;
+  bottom: 41px;
+  right: 464px;
+}
+.line_three {
+  position: absolute;
+  bottom: 41px;
+  right: 106px;
+}
+.first_stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  position: absolute;
+  height: 125px;
+  width: 258px;
+  left: 59px;
+  top: 304px;
+}
+.second_stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  position: absolute;
+  height: 125px;
+  width: 258px;
+  left: 403px;
+  top: 231px;
+}
+.third_stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  position: absolute;
+  height: 125px;
+  width: 258px;
+  left: 761px;
+  top: 159px;
+}
+
+.emblem_one {
+  position: absolute;
+  top: 217px;
+  left: 333px;
+}
