@@ -64,4 +64,7 @@
   --color-tag-hover-dark: #2c35bf;
   --color-tag-pressed-light-background: #c9ccf3;
   --color-tag-pressed-light-font: #0f1242;
+
+  /* Progress Bar */
+  --color-progressbar-external-dark: rgba(212, 212, 212, 0.5);
 }
