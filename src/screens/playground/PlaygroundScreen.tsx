@@ -8,9 +8,7 @@ function PlaygroundScreen() {
         <h1>Manter essa tela Limpa, após criar o componente</h1>
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
-        <div className={styles.playground_container_inner}>
-          <TrilhasComponent />
-        </div>
+        <div className={styles.playground_container_inner}></div>
       </div>
     </div>
   );
