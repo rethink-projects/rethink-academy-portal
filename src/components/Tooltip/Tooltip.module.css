@@ -22,8 +22,9 @@
   color: var(--color-base);
   background: var(--tooltip-background-color);
   font-size: 16px;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 24px;
+  width: max-content;
+  max-width: 384px;
 }
 
 /* CSS border triangles */
@@ -41,7 +42,7 @@
 
 /* Absolute positioning */
 .tooltip_tip_top {
-  top: calc(var(--tooltip-margin) * -2.2);
+  top: calc(var(--tooltip-margin) * -2.4);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -20px;
 }
@@ -53,11 +54,11 @@
 }
 
 .tooltip_tip_top-right {
-  top: calc(var(--tooltip-margin) * -1.8);
+  top: calc(var(--tooltip-margin) * -2.2);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -30px;
   left: 100%;
-  transform: translateX(-5%);
+  transform: translateX(-10%);
 }
 
 .tooltip_tip_top-left::before {
@@ -67,11 +68,11 @@
 }
 
 .tooltip_tip_top-left {
-  top: calc(var(--tooltip-margin) * -1.8);
+  top: calc(var(--tooltip-margin) * -2.2);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -30px;
   left: 100%;
-  transform: translateX(-105%);
+  transform: translateX(-100%);
 }
 
 .tooltip_tip_top::before {
@@ -96,7 +97,7 @@
 
 /* Absolute positioning */
 .tooltip_tip_bottom {
-  bottom: calc(var(--tooltip-margin) * -2.8);
+  bottom: calc(var(--tooltip-margin) * -2.9);
   border-top: 8px solid var(--tooltip-border-color);;
 }
 /* CSS border triangles */
@@ -107,9 +108,9 @@
 
 /* Absolute positioning */
 .tooltip_tip_bottom-right {
-  bottom: calc(var(--tooltip-margin) * -2.8);
+  bottom: calc(var(--tooltip-margin) * -2.9);
   border-top: 8px solid var(--tooltip-border-color);;
-  transform: translateX(0);
+  transform: translateX(-5%);
 }
 /* CSS border triangles */
 .tooltip_tip_bottom-right::before {
@@ -120,9 +121,9 @@
 
 /* Absolute positioning */
 .tooltip_tip_bottom-left {
-  bottom: calc(var(--tooltip-margin) * -2.8);
+  bottom: calc(var(--tooltip-margin) * -2.9);
   border-top: 8px solid var(--tooltip-border-color);;
-  transform: translateX(-100%);
+  transform: translateX(-95%);
 }
 /* CSS border triangles */
 .tooltip_tip_bottom-left::before {

@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import styles from "./Tooltip.module.css";
 
-const Tooltip = (props: any) => {
+type TooltipType = {
+  children: JSX.Element;
+  direction:
+    | "top"
+    | "right"
+    | "bottom"
+    | "left"
+    | "top-right"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-left";
+  content: string;
+};
+
+const Tooltip = ({ children, direction, content }: TooltipType) => {
   let timeout: any;
   const [active, setActive] = useState(false);
 
   const showTip = () => {
     timeout = setTimeout(() => {
       setActive(true);
-    }, props.delay || 100);
+    }, timeout || 100);
   };
 
   const hideTip = () => {
@@ -24,16 +38,16 @@ const Tooltip = (props: any) => {
       onMouseLeave={hideTip}
     >
       {/* Wrapping */}
-      {props.children}
+      {children}
       {active && (
         <div
           className={[
             styles.tooltip_tip,
-            styles["tooltip_tip_" + props.direction],
+            styles["tooltip_tip_" + direction],
           ].join(" ")}
         >
           {/* Content */}
-          {props.content}
+          <p>{content}</p>
         </div>
       )}
     </div>
