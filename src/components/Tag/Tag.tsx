@@ -30,7 +30,7 @@ const Tag = ({
       }}
     >
       <div className={styles.divLeft}>
-        <div className={styles.AddIcon}>
+        <div onClick={onClickAdd} className={styles.AddIcon}>
           <AddIcon />
         </div>
         <span>{text}</span>
@@ -38,7 +38,7 @@ const Tag = ({
 
       <div className={styles.divRight}>
         <div className={styles.barra}></div>
-        <div className={styles.ClearIcon}>
+        <div onClick={onClickDelete} className={styles.ClearIcon}>
           <ClearIcon className="ClearIcon" />
         </div>
       </div>
