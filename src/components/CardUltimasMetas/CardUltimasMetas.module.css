@@ -77,8 +77,8 @@
     opacity: 0.1;
     /* Cores/Secundária-Preto */
 
-    border: 0.5px solid #1B1B1B;
-    background-color: #1B1B1B;
+    border: 0.5px solid var(--color-secondary);
+    background-color: var(--color-secondary);
 
     /* Inside auto layout */
 
