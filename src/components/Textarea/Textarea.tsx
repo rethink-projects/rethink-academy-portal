@@ -4,7 +4,7 @@ import styles from "./Textarea.module.css";
 type TextareaProps = {
   type?: "default" | "small" | "large";
   placeholder: string;
-  onChange?: () => void;
+  onChangetext?: (e:any) => void;
   caption?: string;
   label?: string;
   disabled?: boolean;
@@ -13,11 +13,14 @@ type TextareaProps = {
 function Textarea({
   type = "default",
   placeholder,
-  onChange,
+  onChangetext,
   caption,
   label,
   disabled,
 }: TextareaProps) {
+
+  const disabledClass = disabled ? styles.textarea_disabled : "";
+
   return (
     <div
       className={[
@@ -33,8 +36,9 @@ function Textarea({
         className={[
           styles.textarea_default,
           styles["textarea_" + type],
-          styles["textarea_disabled_" + disabled],
+          disabledClass,
         ].join(" ")}
+        onChange={onChangetext}
       ></textarea>
       {caption && <p className={styles.textarea_caption}>{caption}</p>}
     </div>
