@@ -1,3 +1,4 @@
+// import styles from "./Tag.module.css";
 import styles from "./Tag.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -20,17 +21,24 @@ const Tag = ({
 }: TagProps) => {
   const [toggle, setToggle] = useState(false);
 
+  const handleAdd = () => {
+    setToggle(true);
+    onClickAdd();
+  };
+
+  const handleDelete = () => {
+    setToggle(false);
+    onClickDelete();
+  };
+
   return (
     <div
       className={`${styles[color]} ${styles[size]} ${styles.container_tag} ${
         !toggle ? "" : color === "dark" ? styles.activeDark : styles.activeLight
       }`}
-      onClick={() => {
-        toggle ? setToggle(false) : setToggle(true);
-      }}
     >
       <div className={styles.divLeft}>
-        <div onClick={onClickAdd} className={styles.AddIcon}>
+        <div onClick={handleAdd} className={styles.AddIcon}>
           <AddIcon />
         </div>
         <span>{text}</span>
@@ -38,7 +46,7 @@ const Tag = ({
 
       <div className={styles.divRight}>
         <div className={styles.barra}></div>
-        <div onClick={onClickDelete} className={styles.ClearIcon}>
+        <div onClick={handleDelete} className={styles.ClearIcon}>
           <ClearIcon className="ClearIcon" />
         </div>
       </div>
