@@ -8,6 +8,7 @@ import arrow from "./arrowIcon.png";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
+import avatarImage from "./avatarImage.svg";
 
 
 import info from "./infoIcon.png";
@@ -24,6 +25,7 @@ export const Images = {
     filledInput,
     dividerInput,
   },
+  avatar: avatarImage,
 };
 
 export default Images;
