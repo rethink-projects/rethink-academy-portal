@@ -1,0 +1,93 @@
+/*  Div externa e Element label */
+
+.textarea_default_container{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    color: var(--color-secundary-active);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.textarea_container_small{
+    gap: 4px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.textarea_container_large{
+    gap: 12px;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+/* Text area */
+
+.textarea_default{
+    height: 94px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px 16px;
+    resize: none;
+
+    border: 1px solid var(--color-icon-background);
+    border-radius: 4px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-secundary);
+    background-color: #F9F9F9; /* Precisa colocar essa cor no colors.css */
+}
+
+.textarea_default::placeholder{
+    color: var(--color-tertiary-active);
+}
+
+.textarea_default:hover{
+    box-shadow: 0px 0px 0px 4px #6C6F931A; /* Precisa colocar essa cor no colors.css */
+}
+
+.textarea_default:focus-visible{
+    outline: 1px solid var(--color-feedback);
+    box-shadow: 0px 0px 0px 4.5px #4750D526; /* Precisa colocar essa cor no colors.css */
+    border: 1px solid transparent;
+}
+
+.textarea_small{
+    height: 82px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 12px;
+
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.textarea_large{
+    height: 106px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px 20px;
+
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.textarea_disabled{
+    pointer-events: none;
+}
+
+/* Element caption */
+
+.textarea_caption{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-tertiary-active);
+}

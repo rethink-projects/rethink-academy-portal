@@ -1,0 +1,63 @@
+.btn_icon_primary {
+  background: var(--color-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.btn_icon_primary:hover {
+  background-color: var(--color-primary-active);
+}
+
+.btn_icon_secundary {
+  background: var(--color-base);
+  border: 1px solid #000000;
+  border-radius: 6px;
+}
+
+.btn_icon_secundary:hover {
+  background-color: var(--color-secundary-active);
+}
+
+.btn_icon_secundary:hover > svg > path {
+  fill: var(--color-base);
+}
+
+.btn_icon_ghost {
+  background-color: transparent;
+  border: none;
+}
+
+.btn_icon_ghost > svg > path {
+  fill: var(--color-tertiary);
+}
+
+.btn_icon_ghost:hover > svg > path {
+  fill: var(--color-secundary-active);
+}
+
+.btn_icon_small,
+.btn_icon_big {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn_icon_small {
+  width: 56px;
+  height: 56px;
+}
+
+.btn_icon_small > svg {
+}
+
+.btn_icon_big {
+  width: 72px;
+  height: 72px;
+}
+
+.btn_icon_big > svg {
+  width: 23.33px;
+  height: 33.33px;
+}
