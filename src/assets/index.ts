@@ -8,6 +8,7 @@ import arrow from "./arrowIcon.png";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
+import avatarImage from "./avatarImage.svg";
 
 import MedalUltimasMetas from "./MedalUltimasMetas.svg";
 import AmpulhetaUltimasMetas from "./AmpulhetaUltimasMetas.svg";
@@ -30,6 +31,7 @@ export const Images = {
   MedalUltimasMetas,
   AmpulhetaUltimasMetas,
   FlagUltimasMetas,
+  avatar: avatarImage,
 };
 
 export default Images;

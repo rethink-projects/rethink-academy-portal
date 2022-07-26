@@ -12,10 +12,10 @@ type modalProps = {
     onClose: VoidFunction;
     nameCheckbox?: string;
     id?: string;
-    isModalOpen: boolean;
+    onClickConfirm?: VoidFunction;
 }
 
-const Modal = ({children, title, description, onClose = () => {}, nameCheckbox, id="outside", isModalOpen} : modalProps) => {
+const Modal = ({children, title, description, onClose = () => {}, nameCheckbox, id="outside", onClickConfirm} : modalProps) => {
 
     const [disabledConfirm, setDisabledConfirm] = useState(false);
     const disabledConfirmClass = disabledConfirm ? styles.modal_actions_confirm_disabled : "";
@@ -24,6 +24,15 @@ const Modal = ({children, title, description, onClose = () => {}, nameCheckbox, 
         if(e.target.id === id){
             onClose();
         }
+    }
+
+    // parte para mostrar o onClick do confirm.
+    const handleClickConfirm = () => {
+        console.log(true);
+    }
+    
+    if(!onClickConfirm){
+        onClickConfirm = handleClickConfirm;
     }
     
     return (
@@ -44,7 +53,7 @@ const Modal = ({children, title, description, onClose = () => {}, nameCheckbox, 
                     </div>
                     <div className={styles.modal_actions_buttons} > 
                         <button className={styles.modal_actions_cancel} onClick={onClose} >Cancel</button>
-                        <button className={[styles.modal_actions_confirm, disabledConfirmClass].join(" ")}>Confirm</button>
+                        <button className={[styles.modal_actions_confirm, disabledConfirmClass].join(" ")} onClick={onClickConfirm}>Confirm</button>
                     </div>
                 </div>
             </div>
