@@ -10,17 +10,12 @@ import SimpleButton from "../../components/SimpleButton/SimpleButton";
 import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
 
 function PlaygroundScreen() {
-  const inputTrilha = {
-    totalVideo: 30,
-    watched: 15,
-  }
 
   return (
     <div className={styles.playground_container}>
 
       <div className={styles.playground_container_inner}>
         <h1>Manter essa tela Limpa, após criar o componente</h1>
-        <CardTrilhas image={image} title="Academy" inputTrilha={inputTrilha} description="Description" />
       </div>
     </div>
   );
