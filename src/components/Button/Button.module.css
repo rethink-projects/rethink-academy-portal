@@ -7,15 +7,15 @@
   border: none;
   border-radius: 5px;
   color: var(--color-base);
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
   font-size: var(--paragraphy);
   padding: 10px 14px;
 }
 
 .button_container:hover {
-  background-color: var(--color-secundary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .button_container:active {
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
 }

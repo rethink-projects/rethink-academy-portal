@@ -69,7 +69,7 @@
 }
 
 .dropdown_filled span {
-  color: var(--color-secundary-active) !important;
+  color: var(--color-secondary-active) !important;
 }
 .dropdown_disabled {
   background-color: #f9f9f9 !important;

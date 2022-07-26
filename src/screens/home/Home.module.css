@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh;
   gap: 5px;
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
 }
 .home_container h4 {
   width: 450px;
@@ -21,7 +21,7 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  color: var(--color-secundary);
+  color: var(--color-secondary);
   background-color: var(--color-primary);
   font-size: var(--paragraphy);
   padding: 10px 14px;
@@ -41,11 +41,11 @@
   transform: translateX(-20px);
 }
 .home_inner button:hover {
-  background-color: var(--color-secundary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .home_inner button:active {
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
 }
 
 .home_inner span {
