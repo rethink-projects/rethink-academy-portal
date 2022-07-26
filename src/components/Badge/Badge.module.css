@@ -1,0 +1,80 @@
+.primary {
+    background: #4750D5;
+    color: var(--color-base);
+}
+
+.secondary {
+    background: #DEDFF7;
+    color: #222995;
+}
+
+.accent {
+    background: #F5E0F3;
+    color: #892E82;
+}
+
+.danger {
+    background: #F7DEDF;
+    color: #952226;
+}
+
+.warning {
+    background: #FAECDB;
+    color: #865013;
+}
+
+.success {
+    background: #DEF7EA;
+    color: #18683D;
+}
+
+.large,
+.default,
+.small,
+.micro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.large {
+    width: 48px;
+    height: 48px;
+}
+
+.default {
+    width: 40px;
+    height: 40px;
+}
+
+.small {
+    width: 32px;
+    height: 32px;
+}
+
+.micro {
+    width: 20px;
+    height: 20px;
+}
+
+.large svg {
+    width: 24px;
+    height: 24px;
+}
+
+.default svg {
+    width: 20px;
+    height: 20px;
+}
+
+.small svg {
+    width: 16px;
+    height: 16px;
+}
+
+.micro svg {
+    width: 12px;
+    height: 12px;
+}
