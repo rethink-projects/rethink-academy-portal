@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from "./CardTrilhas.module.css";
-import image from "../../assets/academyCardTrilhas.png";
 import PadLock from '@mui/icons-material/LockOutlined';
 import ProgressBar from "../ProgressBar/ProgressBar";
+
+// Ajustar div content_video_blocked e legend_progressBar quando os dados ficarem prontos
 
 type TypeCardTrilhas = {
     title: string;
@@ -14,7 +15,7 @@ type TypeCardTrilhas = {
     image?: string;
 }
 
-const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
+const CardTrilhas = ({ title, description, inputTrilha, image }: TypeCardTrilhas) => {
     const { totalVideo, watched } = inputTrilha!;
 
     const calcPercentage = (): number => {
@@ -49,7 +50,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
                     <p className={styles.card_content_description}>{description}</p>
                     <div className={card_progressBar}>
                         <span>{`${calcPercentage()}%`}</span>
-                        <ProgressBar relativeValue={watched} totalValue={totalVideo} />
+                        <ProgressBar width={242} relativeValue={watched} totalValue={totalVideo} />
                     </div>
                     <p className={styles.legend_progressBar}>20 de 20 cursos concluídos.</p>
 
