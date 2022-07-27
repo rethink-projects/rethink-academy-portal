@@ -9,7 +9,8 @@ function HomeScreen() {
   }
   return (
     <div className={styles.home_container}>
-      <h1>{user.email}</h1>
+      <h4>Olá {user.email}</h4>
+      <p>Bem-vindo, essa é a tela Principal</p>
     </div>
   );
 }

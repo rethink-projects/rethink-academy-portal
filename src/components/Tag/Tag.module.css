@@ -1,0 +1,199 @@
+/* Padrão geral */
+.container_tag {
+  border-radius: 150px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.divRight,
+.divLeft {
+  display: flex;
+}
+
+.divLeft > span {
+  align-self: center;
+}
+
+.barra {
+  width: 1px;
+  border-radius: 4px;
+}
+
+.ClearIcon,
+.AddIcon {
+  cursor: pointer;
+}
+
+/* Temas */
+
+.dark {
+  background-color: var(--color-tag-dark);
+  color: var(--color-base);
+}
+
+.dark .barra {
+  background: var(--color-opacity-white);
+}
+
+.dark:hover {
+  background-color: var(--color-tag-hover-dark);
+  color: var(--color-base);
+}
+
+.activeDark {
+  background-color: var(--color-base);
+  border: 1px solid var(--color-tag-dark);
+  color: var(--color-tag-dark);
+}
+
+.activeDark .barra {
+  background-color: var(--color-opacity-2);
+}
+
+.dark:active {
+  background-color: var(--color-tag-font-light);
+  color: var(--color-base);
+}
+
+.light {
+  background-color: var(--color-tag-light);
+  color: var(--color-tag-font-light);
+}
+
+.light .barra {
+  background: var(--color-opacity-1);
+}
+
+.light:hover {
+  background-color: var(--color-toast--light-info);
+  color: var(--color-toast-info);
+}
+
+.activeLight {
+  background-color: var(--color-tag-dark);
+  color: var(--color-base);
+}
+
+.light:active {
+  background-color: var(--color-tag-pressed-light-background);
+  color: var(--color-tag-pressed-light-font);
+}
+
+/* Large */
+.large {
+  padding: 8px 10px 8px 8px;
+  gap: 12px;
+  min-width: 116px;
+  height: 28px;
+  font-size: 18px;
+}
+
+.large .ClearIcon > svg,
+.large .AddIcon > svg {
+  width: 27.5px;
+  height: 27.5px;
+}
+
+.large .barra {
+  margin-top: 2px;
+  height: 24px;
+}
+
+.large .divRight {
+  gap: 4.45px;
+}
+
+.large .divLeft {
+  gap: 5px;
+}
+
+/* Default */
+
+.default {
+  padding: 6px 8px;
+  height: 24px;
+  gap: 8px;
+  min-width: 88px;
+
+  font-size: 16px;
+}
+
+.default .barra {
+  height: 20px;
+  margin-top: 1px;
+}
+
+.default .ClearIcon > svg,
+.default .AddIcon > svg {
+  width: 23px;
+  height: 23px;
+}
+
+.default .divRight {
+  gap: 4px;
+}
+
+.default .divLeft {
+  gap: 5px;
+}
+
+/* Small */
+.small {
+  padding: 5px 7px 5px 6px;
+  min-width: 81px;
+  height: 18px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.small .barra {
+  height: 16px;
+  margin-top: 0.5px;
+}
+
+.small .ClearIcon > svg,
+.small .AddIcon > svg {
+  height: 18px;
+  width: 18px;
+}
+
+.small .divRight {
+  gap: 2px;
+}
+
+.small .divLeft {
+  gap: 4px;
+}
+
+/* Micro */
+.micro {
+  padding: 3px 3px;
+  height: 13px;
+  min-width: 61px;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.micro .barra {
+  margin-top: 1px;
+  height: 12px;
+}
+
+.micro .ClearIcon > svg,
+.micro .AddIcon > svg {
+  width: 14px;
+  height: 14px;
+}
+
+.micro .divRight {
+  gap: 4px;
+}
+
+.micro .divLeft {
+  gap: 2px;
+}

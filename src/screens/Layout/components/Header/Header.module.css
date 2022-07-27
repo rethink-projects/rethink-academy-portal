@@ -1,5 +1,17 @@
 .header_container {
-  background-color: teal;
+  background-color: var(--color-base);
   height: 70px;
   width: 100%;
+}
+
+.header_inner {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header_inner > button {
+  margin-right: 20px;
 }
