@@ -1,14 +1,15 @@
 import React from "react";
 import style from "./ButtonWithIconRight.module.css";
 import { Images } from "../../assets/index";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 type ButtonWithIconRightProps = {
   type: "primary" | "secondary" | "outline" | "disabled";
   size: "large" | "medium" | "small";
   text: string;
-  icon: "arrow";
+  icon: JSX.Element;
   onClick?: () => void;
-  //iconPosition: "left" | "right";
+  width?: number;
 };
 
 const ButtonWithIconRight = ({
@@ -16,16 +17,17 @@ const ButtonWithIconRight = ({
   size,
   text,
   icon,
-  //iconPosition
+  width = 181,
   onClick,
 }: ButtonWithIconRightProps) => {
   return (
     <button
       onClick={onClick}
       className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
+      style={{ width: width }}
     >
       {text}
-      <img src={Images[icon]} alt={`${icon} icon`} />
+      {icon}
     </button>
   );
 };
