@@ -10,6 +10,9 @@ import IconRight from "./IconRight.svg";
 import googleIcon from "./googleIcon.svg";
 import avatarImage from "./avatarImage.svg";
 
+import MedalUltimasMetas from "./MedalUltimasMetas.svg";
+import AmpulhetaUltimasMetas from "./AmpulhetaUltimasMetas.svg";
+import FlagUltimasMetas from "./FlagUltimasMetas.svg";
 
 import info from "./infoIcon.png";
 export const Images = {
@@ -25,6 +28,9 @@ export const Images = {
     filledInput,
     dividerInput,
   },
+  MedalUltimasMetas,
+  AmpulhetaUltimasMetas,
+  FlagUltimasMetas,
   avatar: avatarImage,
 };
 
