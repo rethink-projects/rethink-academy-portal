@@ -104,7 +104,7 @@
 .inputText_iconDefault > svg > path,
 .inputText_iconSmall > svg > path,
 .inputText_iconMicro > svg > path {
-    fill: var(--color-secundary-hover);
+    fill: var(--color-tertiary-active);
 }
 
 .inputText_iconLarge svg,
