@@ -41,7 +41,7 @@
   font-style: normal;
   font-weight: 400;
 
-  color: var(--color-secundary-active);
+  color: var(--color-secondary-active);
 }
 
 /* hover */
@@ -85,7 +85,7 @@
   font-size: 18px;
   line-height: 28px;
 
-  color: var(--color-secundary-hover);
+  color: var(--color-secondary-hover);
 }
 
 .input_search_large,
@@ -129,7 +129,7 @@
   font-size: 16px;
   line-height: 24px;
 
-  color: var(--color-secundary-hover);
+  color: var(--color-secondary-hover);
 }
 
 .input_search_default,
@@ -161,7 +161,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: var(--color-secundary-hover);
+  color: var(--color-secondary-hover);
 }
 
 .input_search_small,
@@ -195,7 +195,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: var(--color-secundary-hover);
+  color: var(--color-secondary-hover);
 }
 
 .input_search_micro,
