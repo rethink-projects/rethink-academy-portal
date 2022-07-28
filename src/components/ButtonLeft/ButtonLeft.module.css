@@ -43,12 +43,12 @@
 }
 
 .secondary {
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
   color: var(--color-base);
 }
 
 .secondary:hover {
-  background-color: var(--color-secundary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .outline {
@@ -56,6 +56,6 @@
 }
 
 .outline:hover {
-  background-color: var(--color-secundary-active);
+  background-color: var(--color-secondary-active);
   color: var(--color-base);
 }
