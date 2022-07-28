@@ -15,7 +15,7 @@
 }
 
 .btn_icon_secundary:hover {
-  background-color: var(--color-secundary-active);
+  background-color: var(--color-secondary-active);
 }
 
 .btn_icon_secundary:hover > svg > path {
@@ -32,7 +32,7 @@
 }
 
 .btn_icon_ghost:hover > svg > path {
-  fill: var(--color-secundary-active);
+  fill: var(--color-secondary-active);
 }
 
 .btn_icon_small,

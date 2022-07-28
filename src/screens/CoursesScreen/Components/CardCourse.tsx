@@ -1,8 +1,10 @@
 import React from 'react'
-import ButtonWithIconRight from '../../../components/ButtonWithIconRight/ButtonWithIconRight';
+import ButtonWithIcon from '../../../components/ButtonWithIcon/ButtonWithIcon';
 import styles from "./CardCourse.module.css";
 import IconVerified from '@mui/icons-material/VerifiedOutlined';
 import IconTask from '@mui/icons-material/TaskAltOutlined';
+import IconArrow from '@mui/icons-material/East';
+import IconAlert from '@mui/icons-material/ErrorOutlineOutlined';
 
 const CardCourse = () => {
 
@@ -25,8 +27,8 @@ const CardCourse = () => {
                     </div> */}
                 </div>
                 <div className={styles.actions_card}>
-                    <ButtonWithIconRight type='primary' text='Ir para o curso' icon='arrow' size='medium' />
-                    <ButtonWithIconRight type='secondary' text='Coletar emblema' icon='arrow' size='medium' />
+                    <ButtonWithIcon icon={<IconArrow />} width={218} position="right" type='primary' text='Ir para o curso' size='medium' />
+                    <ButtonWithIcon icon={<IconVerified />} width={218} position="right" type='secondary' text='Coletar emblema' size='medium' />
                 </div>
             </div>
         </div>
