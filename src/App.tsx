@@ -17,7 +17,7 @@ function App() {
           <Route path="/">
             <Route index element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/dashboard" element={<Layout />}>
+            <Route path="/home" element={<Layout />}>
               <Route index element={<HomeScreen />} />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
