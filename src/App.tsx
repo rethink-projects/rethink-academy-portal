@@ -18,8 +18,10 @@ function App() {
             <Route path="/dashboard" element={<Layout />}>
               <Route index element={<HomeScreen />} />
             </Route>
+            <Route path="/trilhas" element={<Layout />}>
+              <Route index element={<TrilhasScreen />} />
+            </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
-            <Route path="/trilhas" element={<TrilhasScreen />} />
           </Route>
         </Routes>
       </AuthProvider>
