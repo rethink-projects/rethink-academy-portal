@@ -6,7 +6,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   let [user, setUser] = useState<ICurrentUser>(null!);
 
   let setCurrentUser = (user: ICurrentUser) => {
-    console.log(user);
     setUser(user);
   };
 
