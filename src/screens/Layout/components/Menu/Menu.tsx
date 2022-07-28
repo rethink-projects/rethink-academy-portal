@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Images from "../../../../assets";
+import MenuItem from "../MenuItem/MenuItem";
 import styles from "./Menu.module.css";
 
 function Menu() {
@@ -28,6 +29,25 @@ function Menu() {
           className={styles.menu_header_img}
           src={Images.logoRaSecondary}
           alt='RatRa'
+        />
+      </div>
+      <div className={styles.menu_body}>
+        <MenuItem isOpen={isOpen} text='Home' icon={Images.icons.IconHome} />
+        <MenuItem
+          isOpen={isOpen}
+          text='Seu Desenvolvimento'
+          icon={Images.icons.DevelopmentIcon}
+        />
+        <MenuItem isOpen={isOpen} text='Cursos' icon={Images.icons.ratIcon} />
+        <MenuItem
+          isOpen={isOpen}
+          text='Registro de Horas'
+          icon={Images.icons.ClockHome}
+        />
+        <MenuItem
+          isOpen={isOpen}
+          text='Contrato'
+          icon={Images.icons.ContractIcon}
         />
       </div>
     </div>

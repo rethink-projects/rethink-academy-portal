@@ -6,9 +6,15 @@ import search from "./search.svg";
 
 import arrow from "./arrowIcon.png";
 import avatarImage from "./avatarImage.svg";
+import ClockHome from "./clock.svg";
+import ContractIcon from "./contractIcon.svg";
+import DevelopmentIcon from "./developmentIcon.svg";
+import IconEdit from "./edit.svg";
 import googleIcon from "./googleIcon.svg";
+import IconHome from "./IconHome.svg";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
+import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 
 import raArrow from "./login-arrow.svg";
@@ -34,6 +40,12 @@ export const Images = {
     filledInput,
     dividerInput,
     IconToggle,
+    IconHome,
+    IconEdit,
+    ClockHome,
+    ratIcon,
+    ContractIcon,
+    DevelopmentIcon,
   },
   avatar: avatarImage,
 };
