@@ -1,9 +1,9 @@
 import React from "react";
 import Table from "./components/table/Table";
 import TextEditor from "./components/textEditor/TextEditor";
-import styles from "./Notes.module.css";
+import styles from "./NotesScreen.module.css";
 
-const Notes = () => {
+const NotesScreen = () => {
   return (
     <div className={styles.notes_container}>
       <Table />
@@ -12,4 +12,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default NotesScreen;
