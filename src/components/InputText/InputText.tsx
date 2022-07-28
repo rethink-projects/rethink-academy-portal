@@ -9,7 +9,7 @@ type InputTextProps = {
   onChange?: () => void;
   hasIcon: Boolean;
   iconPosition?: "left" | "both" | "right";
-  label: string;
+  label?: string;
   nameInput: string;
   elementCaption?: string;
   left?: JSX.Element;
@@ -63,7 +63,8 @@ const InputText = ({
 
   return (
     <label className={container}>
-      <p className={inputLabel}>{label}</p>
+      {label && <p className={inputLabel}>{label}</p>}
+
       <div className={input}>
         {hasIcon && iconPosition !== "right" && (
           <div className={icon}>{hasIcon && left}</div>
