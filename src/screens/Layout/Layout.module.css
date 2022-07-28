@@ -1,0 +1,10 @@
+.layout_container {
+  display: flex;
+  width: 100%;
+}
+
+.layout_container_content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
