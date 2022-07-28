@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./CursosScreen.module.css";
 
 const CursosScreen = () => {
@@ -22,11 +23,13 @@ const CursosScreen = () => {
   return (
     <div className={styles.center}>
       <div className={styles.container_cursos}>
-        <div className={styles.route}>
-          <p>
-            Home {">"} Trilhas {">"} Cursos
-          </p>
-        </div>
+        <Breadcrumb
+          breadcrumbItems={[
+            { title: "Home", link: "/home" },
+            { title: "Trilhas", link: "/trilhas" },
+            { title: "Cursos", link: "#" },
+          ]}
+        />
         <div className={styles.title}>
           <p>{`Programa de Cursos | ${trilha}`}</p>
         </div>
