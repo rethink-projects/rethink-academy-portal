@@ -2,9 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 11px;
+  gap: 8px;
 
-  width: 177px;
+  /* width: 200px; */
 
   font-family: "Roboto";
   font-style: normal;
@@ -15,6 +15,11 @@
   border: 1px solid rgba(27, 27, 27, 0.3);
 
   cursor: pointer;
+}
+
+.btn_w_icon_right_default svg {
+  width: 17px;
+  height: 17px;
 }
 
 /* Sizes */
@@ -47,10 +52,6 @@
   color: var(--color-base);
 }
 
-.secondary img {
-  filter: brightness(0) invert(1);
-}
-
 .outline {
   background-color: var(--color-base);
   border-color: solid var(--color-secondary);
@@ -68,10 +69,6 @@
   pointer-events: none;
 }
 
-.disabled img {
-  filter: opacity(0.5) drop-shadow(0 0 0 white);
-}
-
 /* Hover */
 .primary:hover {
   background-color: var(--color-primary-active);
@@ -87,8 +84,4 @@
   color: var(--color-base);
 
   font-weight: 400;
-}
-
-.outline:hover img {
-  filter: brightness(0) invert(1);
 }
