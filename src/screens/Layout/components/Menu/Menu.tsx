@@ -23,30 +23,40 @@ function Menu() {
               : styles.menu_header_img_toggle_closed
           }
           src={Images.icons.IconToggle}
-          alt='Icon Toggle Menu'
+          alt="Icon Toggle Menu"
         />
         <img
           className={styles.menu_header_img}
           src={Images.logoRaSecondary}
-          alt='RatRa'
+          alt="RatRa"
         />
       </div>
       <div className={styles.menu_body}>
-        <MenuItem isOpen={isOpen} text='Home' icon={Images.icons.IconHome} />
+        <MenuItem
+          link="/"
+          isOpen={isOpen}
+          text="Home"
+          icon={Images.icons.IconHome}
+        />
         <MenuItem
           isOpen={isOpen}
-          text='Seu Desenvolvimento'
+          text="Seu Desenvolvimento"
           icon={Images.icons.DevelopmentIcon}
         />
-        <MenuItem isOpen={isOpen} text='Cursos' icon={Images.icons.ratIcon} />
+        <MenuItem
+          link="/trilhas"
+          isOpen={isOpen}
+          text="Cursos"
+          icon={Images.icons.ratIcon}
+        />
         <MenuItem
           isOpen={isOpen}
-          text='Registro de Horas'
+          text="Registro de Horas"
           icon={Images.icons.ClockHome}
         />
         <MenuItem
           isOpen={isOpen}
-          text='Contrato'
+          text="Contrato"
           icon={Images.icons.ContractIcon}
         />
       </div>
