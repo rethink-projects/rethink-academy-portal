@@ -10,6 +10,18 @@ type CardTrilhasHome = {
     };
 };
 
+type TypeTrilhaUser = {
+    trilha: number,
+    courses:
+    {
+        course_id: number,
+        lastWatched_class_id: string,
+        watched: string[],
+        completed: boolean
+    }[]
+
+}
+
 //Componente do componente trilhas da HOME
 const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
     const videoAmount = 100;
@@ -47,14 +59,14 @@ const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
             name: "Nothink",
             trilha: 3,
             lastCourse: 4,
-            completed: false
+            completed: true
         },
         {
             id: 2,
             name: "NodeJS",
             trilha: 3,
             lastCourse: 24,
-            completed: false
+            completed: true
         }
     ]
 
@@ -64,13 +76,18 @@ const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
 
 
     const filterCoursesByTrilha = () => {
-        return courses.filter((course) => course.trilha === trilha.id);
+        return courses.filter((course) => course.trilha === trilha.id && course.completed === true);
+    }
+
+    const filterCoursesUserByCompleted = (trilhaUser: TypeTrilhaUser) => {
+        return trilhaUser.courses.filter(courseUser => courseUser.completed === true);
     }
 
     const findCoursesCompletedByTrilhaUser = () => {
         const getTrilhaUser = findTrilhaUser(trilha.id);
         if (getTrilhaUser) {
-            return getTrilhaUser.courses.filter(courseUser => courseUser.completed === true);
+            // return getTrilhaUser.courses.filter(courseUser => courseUser.completed === true);
+            return filterCoursesUserByCompleted(getTrilhaUser);
         }
         else {
             return [];
@@ -81,7 +98,8 @@ const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
         const totalCursos = filterCoursesByTrilha();
         const getTrilha = findTrilhaUser(trilha.id);
         if (getTrilha) {
-            const cursosCompletados = getTrilha.courses.filter(course => course.completed === true);
+            // const cursosCompletados = getTrilha.courses.filter(course => course.completed === true);
+            const cursosCompletados = filterCoursesUserByCompleted(getTrilha);
             return totalCursos.length === cursosCompletados.length && totalCursos.length > 0;
         } else {
             return false;
