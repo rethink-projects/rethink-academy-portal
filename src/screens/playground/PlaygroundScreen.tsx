@@ -7,7 +7,7 @@ import image from "../../assets/academyCardTrilhas.png";
 
 // Simple Button
 import SimpleButton from "../../components/SimpleButton/SimpleButton";
-import CardTrilhas from "../../components/CardTrilhas/CardTrilhas";
+import CardTrilhas from "../trilhas/components/CardTrilhas/CardTrilhas";
 
 function PlaygroundScreen() {
 

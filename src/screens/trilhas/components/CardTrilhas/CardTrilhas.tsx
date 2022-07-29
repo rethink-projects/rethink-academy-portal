@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./CardTrilhas.module.css";
 import PadLock from '@mui/icons-material/LockOutlined';
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 
 // Ajustar div content_video_blocked e legend_progressBar quando os dados ficarem prontos
 
