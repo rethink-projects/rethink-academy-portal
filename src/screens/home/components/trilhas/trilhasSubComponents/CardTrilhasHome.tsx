@@ -86,7 +86,6 @@ const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
     const findCoursesCompletedByTrilhaUser = () => {
         const getTrilhaUser = findTrilhaUser(trilha.id);
         if (getTrilhaUser) {
-            // return getTrilhaUser.courses.filter(courseUser => courseUser.completed === true);
             return filterCoursesUserByCompleted(getTrilhaUser);
         }
         else {
@@ -98,7 +97,6 @@ const CardTrilhasHome = ({ trilha }: CardTrilhasHome) => {
         const totalCursos = filterCoursesByTrilha();
         const getTrilha = findTrilhaUser(trilha.id);
         if (getTrilha) {
-            // const cursosCompletados = getTrilha.courses.filter(course => course.completed === true);
             const cursosCompletados = filterCoursesUserByCompleted(getTrilha);
             return totalCursos.length === cursosCompletados.length && totalCursos.length > 0;
         } else {
