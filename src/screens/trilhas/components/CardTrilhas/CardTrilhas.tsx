@@ -39,16 +39,20 @@ const CardTrilhas = ({
   if (blocked) {
     onClick = () => {};
   }
-
+  const card_progressBar = courseCompleted()
+    ? styles.card_progressBar_complete
+    : styles.card_progressBar_incomplete;
   const completedCourseClass_container = courseCompleted()
     ? styles.container_completed
     : styles.container;
   const completedCourseClass_effect_img = courseCompleted()
     ? styles.effect_image_completed
     : styles.effect_image_incomplete;
+
   const completedCourseClass_effect_card_hover = courseCompleted()
     ? styles.effect_card_completed
     : styles.effect_card_incomplete;
+
   const videoBlockedClass = videoBlocked()
     ? styles.container_video_blocked
     : "";
@@ -65,7 +69,7 @@ const CardTrilhas = ({
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{title}</h1>
           <p className={styles.card_content_description}>{description}</p>
-          <div className={styles.card_progressBar}>
+          <div className={card_progressBar}>
             <span>{`${calcPercentage()}%`}</span>
             <ProgressBar
               relativeValue={watched}
