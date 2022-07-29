@@ -52,7 +52,15 @@ const renderCard = (
       )
   );
 
-  return <CardCourse key={index} title={curso.name} concluded={concluded} />;
+  return (
+    <CardCourse
+      onClickIrAoCurso={() => console.log("Foi para o curso")}
+      onClickColetarEmblema={() => console.log("Coletou o emblema")}
+      key={index}
+      title={curso.name}
+      concluded={concluded}
+    />
+  );
 };
 
 const CursosScreen = () => {

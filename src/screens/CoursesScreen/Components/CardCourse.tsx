@@ -10,9 +10,16 @@ type cardCourseProp = {
   title: string;
   //   1: concluido, 2: encaminhado, 3: não começou ainda
   concluded: number;
+  onClickIrAoCurso: () => void;
+  onClickColetarEmblema: () => void;
 };
 
-const CardCourse = ({ title, concluded }: cardCourseProp) => {
+const CardCourse = ({
+  onClickColetarEmblema,
+  onClickIrAoCurso,
+  title,
+  concluded,
+}: cardCourseProp) => {
   const textConcluded =
     concluded === 1
       ? "Parabéns! Você concluiu esse curso!"
@@ -39,6 +46,7 @@ const CardCourse = ({ title, concluded }: cardCourseProp) => {
         </div>
         <div className={styles.actions_card}>
           <ButtonWithIcon
+            onClick={onClickIrAoCurso}
             icon={<IconArrow />}
             width={218}
             position="right"
@@ -47,6 +55,7 @@ const CardCourse = ({ title, concluded }: cardCourseProp) => {
             size="medium"
           />
           <ButtonWithIcon
+            onClick={onClickColetarEmblema}
             icon={<IconVerified />}
             width={218}
             position="right"
