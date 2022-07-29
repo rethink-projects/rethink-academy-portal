@@ -1,11 +1,147 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
+import { useEffect } from "react";
 
 const TrilhasScreen = () => {
-  const inputTrilha = {
-    totalVideo: 30,
-    watched: 30,
+  const user = {
+    id: 1,
+    name: "Fernando",
+    main: "engenharia",
+    trilhas: [
+      {
+        trilha_id: 3,
+        courses: [
+          {
+            course_id: 1,
+            lastWatched_class_id: "iax9dhaiudshasip1",
+            watched: ["iax9dhaiudshasip1", "iax9dhaiudshasip1"],
+            completed: true,
+          },
+          {
+            course_id: 2,
+            lastWatched_class_id: "iax9dhaiudshasip1",
+            watched: [],
+            completed: true,
+          },
+        ],
+      },
+      {
+        trilha_id: 4,
+        courses: [
+          {
+            course_id: 1,
+            lastWatched_class_id: "iax9dhaiudshasip1",
+            watched: ["iax9dhaiudshasip1", "iax9dhaiudshasip1"],
+            completed: true,
+          },
+          {
+            course_id: 2,
+            lastWatched_class_id: "iax9dhaiudshasip1",
+            watched: [],
+            completed: false,
+          },
+        ],
+      },
+    ],
   };
+  let trilhas = [
+    { name: "academy", id: 1, description: "descrição" },
+    { name: "design", id: 2, description: "Descrição Design" },
+    { name: "engenharia", id: 3, description: "Descrição Engenharia" },
+    { name: "produto", id: 4, description: "Descrição Produto" },
+  ];
+
+  const courses = [
+    {
+      id: 1,
+      name: "Nothink",
+      trilha: 3,
+      lastCourse: 4,
+      completed: false,
+      description: "descrição",
+    },
+    {
+      id: 2,
+      name: "NodeJS",
+      trilha: 3,
+      lastCourse: 24,
+      completed: false,
+      description: "descrição",
+    },
+    {
+      id: 3,
+      name: "Nothink",
+      trilha: 4,
+      lastCourse: 4,
+      completed: false,
+      description: "descrição",
+    },
+    {
+      id: 4,
+      name: "NodeJS",
+      trilha: 4,
+      lastCourse: 24,
+      completed: false,
+      description: "descrição",
+    },
+  ];
+
+  const getTrilhaInputs = (i: number) => {
+    let totalVideo = 0;
+    let watched = 0;
+    if (user.trilhas.filter((trilha) => trilha.trilha_id === i)[0] != null) {
+      watched = user.trilhas
+        .filter((trilha) => trilha.trilha_id === i)[0]
+        .courses.filter((course) => course.completed == true).length;
+    }
+    courses.forEach((course) => {
+      if (course.trilha === i) {
+        totalVideo++;
+      }
+    });
+    return {
+      totalVideo,
+      watched,
+    };
+  };
+  const getTrailTitle = (i: number) => {
+    const title = trilhas.filter((x) => x.id === i)[0].name;
+
+    return title[0].toUpperCase() + title.substring(1).toLowerCase();
+  };
+  const getTrailDescription = (i: number) => {
+    const description = trilhas.filter((x) => x.id === i)[0].description;
+    return description;
+  };
+  const getPreviousTrailId = (i: number) => {
+    if (i > 1) {
+      return i - 1;
+    } else {
+      return trilhas.length;
+    }
+  };
+
+  const isBlocked = (i: number) => {
+    if (
+      trilhas[0].id === i ||
+      getTrilhaInputs(getPreviousTrailId(i)).watched > 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  //reordena o array trilhas
+  const main_id = trilhas.filter((x) => x.name === user.main)[0].id;
+  let newArray = [];
+  for (let i = main_id - 1; i < trilhas.length; i++) {
+    newArray.push(trilhas[i]);
+  }
+  for (let i = 0; i < main_id - 1; i++) {
+    newArray.push(trilhas[i]);
+  }
+  trilhas = newArray;
+
   return (
     <div className={styles.trilhas_container}>
       <div className={styles.text_container}>
@@ -19,7 +155,22 @@ const TrilhasScreen = () => {
           remaining essentially unchanged.
         </div>
         <div className={styles.cards_container}>
-          <CardTrilhas
+          {trilhas.map((item, index) => (
+            <CardTrilhas
+              key={item.id}
+              inputTrilha={getTrilhaInputs(item.id)}
+              onClick={() => console.log(item.id)}
+              title={getTrailTitle(item.id)}
+              description={getTrailDescription(item.id)}
+              blocked={isBlocked(item.id)!}
+            ></CardTrilhas>
+          ))}
+          {/* <CardTrilhas
+            inputTrilha={getTrilhaInputs(3)}
+            title={getTrailTitle(3)}
+            description={getTrailDescription(3)}
+          ></CardTrilhas> */}
+          {/* <CardTrilhas
             inputTrilha={inputTrilha}
             title="Title"
             description="Description"
@@ -33,12 +184,7 @@ const TrilhasScreen = () => {
             inputTrilha={inputTrilha}
             title="Title"
             description="Description"
-          ></CardTrilhas>
-          <CardTrilhas
-            inputTrilha={inputTrilha}
-            title="Title"
-            description="Description"
-          ></CardTrilhas>
+          ></CardTrilhas> */}
         </div>
       </div>
     </div>

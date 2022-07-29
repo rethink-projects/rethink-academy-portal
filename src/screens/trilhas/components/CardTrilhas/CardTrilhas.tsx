@@ -12,22 +12,34 @@ type TypeCardTrilhas = {
     watched: number;
   };
   image?: string;
+  blocked: boolean;
+  onClick: () => void;
 };
 
-const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
+const CardTrilhas = ({
+  onClick,
+  title,
+  description,
+  inputTrilha,
+  blocked,
+}: TypeCardTrilhas) => {
   const { totalVideo, watched } = inputTrilha!;
 
   const calcPercentage = (): number => {
-    return Math.floor((watched / totalVideo) * 100);
+    return Math.floor((watched / (totalVideo > 0 ? totalVideo : 1)) * 100);
   };
 
   const courseCompleted = (): boolean => {
-    return false; //totalVideo === watched
+    return calcPercentage() === 100; //totalVideo === watched
   };
 
   const videoBlocked = (): boolean => {
-    return false;
+    return blocked;
   };
+
+  if (blocked) {
+    onClick = () => {};
+  }
 
   const completedCourseClass_container = courseCompleted()
     ? styles.container_completed
@@ -43,7 +55,7 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
     : "";
 
   return (
-    <div className={completedCourseClass_container}>
+    <div className={completedCourseClass_container} onClick={() => onClick()}>
       <div className={styles.container_inner}>
         <div
           style={{ backgroundImage: `url(${image})` }}
@@ -56,10 +68,13 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
           <p className={styles.card_content_description}>{description}</p>
           <div className={styles.card_progressBar}>
             <span>{`${calcPercentage()}%`}</span>
-            <ProgressBar relativeValue={watched} totalValue={totalVideo} />
+            <ProgressBar
+              relativeValue={watched}
+              totalValue={totalVideo > 0 ? totalVideo : 1}
+            />
           </div>
           <p className={styles.legend_progressBar}>
-            20 de 20 cursos concluídos.
+            {`${watched} de ${totalVideo} curso(s) concluído(s).`}
           </p>
         </div>
       </div>
