@@ -1,6 +1,5 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
-import { useEffect } from "react";
 
 const TrilhasScreen = () => {
   const user = {
@@ -85,7 +84,7 @@ const TrilhasScreen = () => {
       description: "descrição",
     },
   ];
-  const getTrailInputs = (i: number) => {
+  const getProgressBarInputs = (i: number) => {
     let totalVideo = 0;
     let watched = 0;
     if (user.trilhas.filter((trilha) => trilha.trilha_id === i)[0] != null) {
@@ -123,7 +122,7 @@ const TrilhasScreen = () => {
     if (
       trilhas[1].id === i ||
       i === 1 ||
-      getTrailInputs(getPreviousTrailId(i)).watched > 0
+      getProgressBarInputs(getPreviousTrailId(i)).watched > 0
     ) {
       return false;
     } else {
@@ -133,15 +132,15 @@ const TrilhasScreen = () => {
 
   //reordena o array trilhas
   const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
-  let newArray = [];
-  newArray.push(trilhas[0]);
+  const auxArray = [];
+  auxArray.push(trilhas[0]);
   for (let i = main_id - 1; i < trilhas.length; i++) {
-    newArray.push(trilhas[i]);
+    auxArray.push(trilhas[i]);
   }
   for (let i = 1; i < main_id - 1; i++) {
-    newArray.push(trilhas[i]);
+    auxArray.push(trilhas[i]);
   }
-  trilhas = newArray;
+  trilhas = auxArray;
 
   return (
     <div className={styles.trilhas_container}>
@@ -156,36 +155,16 @@ const TrilhasScreen = () => {
           remaining essentially unchanged.
         </div>
         <div className={styles.cards_container}>
-          {trilhas.map((item, index) => (
+          {trilhas.map((item) => (
             <CardTrilhas
               key={item.id}
-              inputTrilha={getTrailInputs(item.id)}
+              inputTrilha={getProgressBarInputs(item.id)}
               onClick={() => console.log(item.id)}
               title={getTrailTitle(item.id)}
               description={getTrailDescription(item.id)}
               blocked={isBlocked(item.id)!}
             ></CardTrilhas>
           ))}
-          {/* <CardTrilhas
-            inputTrilha={getTrailInputs(3)}
-            title={getTrailTitle(3)}
-            description={getTrailDescription(3)}
-          ></CardTrilhas> */}
-          {/* <CardTrilhas
-            inputTrilha={inputTrilha}
-            title="Title"
-            description="Description"
-          ></CardTrilhas>
-          <CardTrilhas
-            inputTrilha={inputTrilha}
-            title="Title"
-            description="Description"
-          ></CardTrilhas>
-          <CardTrilhas
-            inputTrilha={inputTrilha}
-            title="Title"
-            description="Description"
-          ></CardTrilhas> */}
         </div>
       </div>
     </div>
