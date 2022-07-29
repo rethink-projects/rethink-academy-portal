@@ -26,7 +26,7 @@ const TrilhasScreen = () => {
         ],
       },
       {
-        trilha_id: 4,
+        trilha_id: 3,
         courses: [
           {
             course_id: 1,
@@ -44,13 +44,13 @@ const TrilhasScreen = () => {
       },
     ],
   };
+
   let trilhas = [
     { name: "academy", id: 1, description: "descrição" },
     { name: "design", id: 2, description: "Descrição Design" },
     { name: "engenharia", id: 3, description: "Descrição Engenharia" },
     { name: "produto", id: 4, description: "Descrição Produto" },
   ];
-
   const courses = [
     {
       id: 1,
@@ -85,8 +85,7 @@ const TrilhasScreen = () => {
       description: "descrição",
     },
   ];
-
-  const getTrilhaInputs = (i: number) => {
+  const getTrailInputs = (i: number) => {
     let totalVideo = 0;
     let watched = 0;
     if (user.trilhas.filter((trilha) => trilha.trilha_id === i)[0] != null) {
@@ -105,7 +104,7 @@ const TrilhasScreen = () => {
     };
   };
   const getTrailTitle = (i: number) => {
-    const title = trilhas.filter((x) => x.id === i)[0].name;
+    const title = trilhas.filter((trilha) => trilha.id === i)[0].name;
 
     return title[0].toUpperCase() + title.substring(1).toLowerCase();
   };
@@ -114,30 +113,32 @@ const TrilhasScreen = () => {
     return description;
   };
   const getPreviousTrailId = (i: number) => {
-    if (i > 1) {
+    if (i > 2) {
       return i - 1;
     } else {
       return trilhas.length;
     }
   };
-
   const isBlocked = (i: number) => {
     if (
-      trilhas[0].id === i ||
-      getTrilhaInputs(getPreviousTrailId(i)).watched > 0
+      trilhas[1].id === i ||
+      i === 1 ||
+      getTrailInputs(getPreviousTrailId(i)).watched > 0
     ) {
       return false;
     } else {
       return true;
     }
   };
+
   //reordena o array trilhas
-  const main_id = trilhas.filter((x) => x.name === user.main)[0].id;
+  const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
   let newArray = [];
+  newArray.push(trilhas[0]);
   for (let i = main_id - 1; i < trilhas.length; i++) {
     newArray.push(trilhas[i]);
   }
-  for (let i = 0; i < main_id - 1; i++) {
+  for (let i = 1; i < main_id - 1; i++) {
     newArray.push(trilhas[i]);
   }
   trilhas = newArray;
@@ -158,7 +159,7 @@ const TrilhasScreen = () => {
           {trilhas.map((item, index) => (
             <CardTrilhas
               key={item.id}
-              inputTrilha={getTrilhaInputs(item.id)}
+              inputTrilha={getTrailInputs(item.id)}
               onClick={() => console.log(item.id)}
               title={getTrailTitle(item.id)}
               description={getTrailDescription(item.id)}
@@ -166,7 +167,7 @@ const TrilhasScreen = () => {
             ></CardTrilhas>
           ))}
           {/* <CardTrilhas
-            inputTrilha={getTrilhaInputs(3)}
+            inputTrilha={getTrailInputs(3)}
             title={getTrailTitle(3)}
             description={getTrailDescription(3)}
           ></CardTrilhas> */}
