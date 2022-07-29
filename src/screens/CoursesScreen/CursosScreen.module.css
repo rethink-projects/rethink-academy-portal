@@ -1,0 +1,52 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_cursos {
+  /* background-color: red; */
+  margin: 24px 104px 31px 96px;
+  width: 1440px;
+}
+
+.route {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  word-spacing: 11px;
+
+  color: #838383;
+}
+
+.title {
+  margin-top: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+
+  color: #1b1b1b;
+}
+
+.cards {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+   */
+  /* background-color: aqua; */
+}
+
+.curso {
+  background-color: blue;
+  width: 1440px;
+  height: 186px;
+}
