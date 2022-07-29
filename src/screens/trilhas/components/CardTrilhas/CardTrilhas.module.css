@@ -10,6 +10,8 @@
 
 .container_completed:hover {
   border: 1px solid #9dba2b;
+
+  cursor: pointer;
 }
 
 .effect_image_completed {
@@ -32,6 +34,8 @@
   border: 1px solid #b6b4b4;
   border-radius: 4px;
   position: relative;
+
+  cursor: pointer;
 }
 
 .container:hover {
@@ -110,6 +114,7 @@
 .container_video_blocked:hover {
   background-color: var(--color-secondary-active);
   border: 2px solid var(--color-secondary-active);
+  cursor: auto;
 }
 
 .content_video_blocked {
@@ -202,25 +207,6 @@
 
 /* --------------------------------------- */
 
-.card_progressBar_complete,
-.card_progressBar_incomplete {
-  width: 100%;
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  color: var(--color-primary-active);
-
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-}
-
-.card_progressBar_incomplete {
-  color: var(--color-secondary-hover);
-}
-
 .legend_progressBar {
   font-family: "Roboto";
   font-style: normal;
@@ -231,4 +217,22 @@
   margin-top: 15px;
 
   color: var(--color-tertiary);
+}
+.card_progressBar_complete,
+.card_progressBar_incomplete {
+  width: 100%;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.card_progressBar_complete span,
+.card_progressBar_incomplete span {
+  color: var(--color-primary-active) !important;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.card_progressBar_incomplete span {
+  color: var(--color-secondary-hover) !important;
 }
