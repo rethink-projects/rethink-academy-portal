@@ -36,12 +36,10 @@ const CardTrilhas = ({
     return blocked;
   };
 
-  if (blocked) {
-    onClick = () => {};
-  }
   const card_progressBar = courseCompleted()
     ? styles.card_progressBar_complete
     : styles.card_progressBar_incomplete;
+
   const completedCourseClass_container = courseCompleted()
     ? styles.container_completed
     : styles.container;
@@ -56,7 +54,9 @@ const CardTrilhas = ({
   const videoBlockedClass = videoBlocked()
     ? styles.container_video_blocked
     : "";
-
+  if (blocked) {
+    onClick = () => {};
+  }
   return (
     <div className={completedCourseClass_container} onClick={() => onClick()}>
       <div className={styles.container_inner}>
