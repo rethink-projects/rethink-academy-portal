@@ -2,14 +2,17 @@ import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
 
+type Trilhas = { name: string; id: number; description: string };
 const TrilhasScreen = () => {
+  const trails: Array<Trilhas> = [];
+
   const user = {
     id: 1,
     name: "Fernando",
     main: "engenharia",
     trilhas: [
       {
-        trilha_id: 3,
+        trilha_id: 4,
         courses: [
           {
             course_id: 1,
@@ -26,7 +29,7 @@ const TrilhasScreen = () => {
         ],
       },
       {
-        trilha_id: 3,
+        trilha_id: 1,
         courses: [
           {
             course_id: 1,
@@ -85,16 +88,17 @@ const TrilhasScreen = () => {
       description: "descrição",
     },
   ];
-  const getProgressBarInputs = (i: number) => {
+
+  const getProgressBarInputs = (id: number) => {
     let totalVideo = 0;
     let watched = 0;
-    if (user.trilhas.filter((trilha) => trilha.trilha_id === i)[0] != null) {
+    if (user.trilhas.filter((trilha) => trilha.trilha_id === id)[0] != null) {
       watched = user.trilhas
-        .filter((trilha) => trilha.trilha_id === i)[0]
+        .filter((trilha) => trilha.trilha_id === id)[0]
         .courses.filter((course) => course.completed == true).length;
     }
     courses.forEach((course) => {
-      if (course.trilha === i) {
+      if (course.trilha === id) {
         totalVideo++;
       }
     });
@@ -103,46 +107,62 @@ const TrilhasScreen = () => {
       watched,
     };
   };
+
   const getTrailTitle = (i: number) => {
     const title = trilhas.filter((trilha) => trilha.id === i)[0].name;
 
     return title[0].toUpperCase() + title.substring(1).toLowerCase();
   };
+
   const getTrailDescription = (i: number) => {
-    const description = trilhas.filter((x) => x.id === i)[0].description;
+    const description = trails.filter((trail) => trail.id === i)[0].description;
     return description;
   };
-  const getPreviousTrailId = (i: number) => {
-    if (i > 2) {
-      return i - 1;
+
+  const getPreviousTrailId = (id: number) => {
+    if (id > 2) {
+      return id - 1;
     } else {
-      return trilhas.length;
+      return trails.length;
     }
   };
-  const isBlocked = (i: number) => {
+
+  const getPreviousTrailName = (id: number) => {
+    let name;
+    if (id > 2) {
+      name = trilhas.filter((trilha) => trilha.id === id - 1)[0].name;
+    } else {
+      name = trilhas.filter((trilha) => trilha.id === trilhas.length)[0].name;
+    }
+    return name[0].toUpperCase() + name.substring(1).toLowerCase();
+  };
+
+  const isBlocked = (id: number) => {
     if (
-      trilhas[1].id === i ||
-      i === 1 ||
-      getProgressBarInputs(getPreviousTrailId(i)).watched > 0
+      trails[1].id === id ||
+      id === 1 ||
+      getProgressBarInputs(getPreviousTrailId(id)).watched > 0
     ) {
       return false;
     } else {
       return true;
     }
   };
+
   const navigate = useNavigate();
 
-  //reordena o array trilhas
-  const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
-  const auxArray = [];
-  auxArray.push(trilhas[0]);
-  for (let i = main_id - 1; i < trilhas.length; i++) {
-    auxArray.push(trilhas[i]);
-  }
-  for (let i = 1; i < main_id - 1; i++) {
-    auxArray.push(trilhas[i]);
-  }
-  trilhas = auxArray;
+  const setTrails = () => {
+    const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
+    trails.push(trilhas[0]);
+    for (let i = main_id - 1; i < trilhas.length; i++) {
+      trails.push(trilhas[i]);
+    }
+    for (let i = 1; i < main_id - 1; i++) {
+      trails.push(trilhas[i]);
+    }
+  };
+
+  setTrails();
 
   return (
     <div className={styles.container}>
@@ -159,7 +179,7 @@ const TrilhasScreen = () => {
           </div>
         </div>
         <div className={styles.cards_container}>
-          {trilhas.map((item) => (
+          {trails.map((item) => (
             <CardTrilhas
               key={item.id}
               inputTrilha={getProgressBarInputs(item.id)}
@@ -167,6 +187,7 @@ const TrilhasScreen = () => {
               title={getTrailTitle(item.id)}
               description={getTrailDescription(item.id)}
               blocked={isBlocked(item.id)!}
+              previous={getPreviousTrailName(item.id)}
             ></CardTrilhas>
           ))}
         </div>

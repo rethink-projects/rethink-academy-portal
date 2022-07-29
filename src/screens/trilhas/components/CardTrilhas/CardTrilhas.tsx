@@ -13,6 +13,7 @@ type TypeCardTrilhas = {
   image?: string;
   blocked: boolean;
   onClick: () => void;
+  previous: string;
 };
 
 const CardTrilhas = ({
@@ -21,6 +22,7 @@ const CardTrilhas = ({
   description,
   inputTrilha,
   blocked,
+  previous,
 }: TypeCardTrilhas) => {
   const calcPercentage = (): number => {
     return Math.floor((watched / (totalVideo > 0 ? totalVideo : 1)) * 100);
@@ -53,48 +55,6 @@ const CardTrilhas = ({
     ? styles.container_video_blocked
     : "";
   return (
-    <div className={completedCourseClass_container}>
-      <div className={styles.container_inner}>
-        <div
-          style={{ backgroundImage: `url(${image})` }}
-          className={styles.card_image}
-        >
-          <div className={completedCourseClass_effect_img}></div>
-        </div>
-        <div className={styles.card_content}>
-          <h1 className={styles.card_content_title}>{title}</h1>
-          <p className={styles.card_content_description}>{description}</p>
-          <div className={card_progressBar}>
-            <span>{`${calcPercentage()}%`}</span>
-            <ProgressBar
-              width={242}
-              relativeValue={watched}
-              totalValue={totalVideo}
-            />
-          </div>
-          <p className={styles.legend_progressBar}>
-            20 de 20 cursos concluídos.
-          </p>
-        </div>
-      </div>
-      {videoBlocked() ? (
-        <div className={videoBlockedClass}>
-          <div className={styles.container_padlock}>
-            <PadLock />
-          </div>
-          <div className={styles.content_video_blocked}>
-            <h1>Trilha Bloqueada!</h1>
-            <p>Assista pelo menos um curso da Trilha nome para desbloquear.</p>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.hover_card}>
-          <div className={completedCourseClass_effect_card_hover}></div>
-        </div>
-      )}
-    </div>
-  );
-  return (
     <div className={completedCourseClass_container} onClick={() => onClick()}>
       <div className={styles.container_inner}>
         <div
@@ -109,6 +69,7 @@ const CardTrilhas = ({
           <div className={card_progressBar}>
             <span>{`${calcPercentage()}%`}</span>
             <ProgressBar
+              width={242}
               relativeValue={watched}
               totalValue={totalVideo > 0 ? totalVideo : 1}
             />
@@ -125,7 +86,10 @@ const CardTrilhas = ({
           </div>
           <div className={styles.content_video_blocked}>
             <h1>Trilha Bloqueada!</h1>
-            <p>Assista pelo menos um curso da Trilha nome para desbloquear.</p>
+            <p>
+              {`Assista pelo menos um curso da Trilha ${previous} para
+              desbloquear.`}
+            </p>
           </div>
         </div>
       ) : (
