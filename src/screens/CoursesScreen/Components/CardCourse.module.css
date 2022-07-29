@@ -48,6 +48,14 @@
   margin-top: 19px;
 }
 
+.IconTask {
+  color: var(--color-icon-task);
+}
+
+.IconAlert {
+  color: var(--color-icon-alert);
+}
+
 .status_card {
   font-family: "Roboto";
   font-style: normal;
