@@ -1,5 +1,6 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
+import { useNavigate } from "react-router-dom";
 
 const TrilhasScreen = () => {
   const user = {
@@ -129,6 +130,7 @@ const TrilhasScreen = () => {
       return true;
     }
   };
+  const navigate = useNavigate();
 
   //reordena o array trilhas
   const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
@@ -159,7 +161,7 @@ const TrilhasScreen = () => {
             <CardTrilhas
               key={item.id}
               inputTrilha={getProgressBarInputs(item.id)}
-              onClick={() => console.log(item.id)}
+              onClick={() => navigate("" + item.id)}
               title={getTrailTitle(item.id)}
               description={getTrailDescription(item.id)}
               blocked={isBlocked(item.id)!}
