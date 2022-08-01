@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import CardCourse from "../CoursesScreen/Components/CardCourse";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
