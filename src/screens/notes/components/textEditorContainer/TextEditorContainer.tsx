@@ -9,6 +9,7 @@ import PrivacyToggle from "./components/PrivacyToggle/PrivacyToggle";
 // Icons
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import TextEditor from "../textEditor/TextEditor";
 
 const textEditorContainer = () => {
   return (
@@ -30,7 +31,9 @@ const textEditorContainer = () => {
         </div>
       </div>
 
-      <div className={style.textEditor}></div>
+      <div>
+        <TextEditor/>
+      </div>
 
       <div className={style.containerBottom}>
         <div className={style.saveDeleteButtons}>

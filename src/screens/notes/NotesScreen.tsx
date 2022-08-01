@@ -8,7 +8,6 @@ const NotesScreen = () => {
   return (
     <div className={styles.notes_container}>
       <Table />
-      <TextEditor />
       <TextEditorContainer />
     </div>
   );
