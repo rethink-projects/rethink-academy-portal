@@ -4,6 +4,7 @@ import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
+import IconPadlock from "@mui/icons-material/LockOutlined";
 
 type AcordeonProps = {
   width?: number;
@@ -34,11 +35,11 @@ const Acordeon = ({
     id: 1,
     name: "Aqui está o nome do módulo",
     blocked: false,
-    completed: true,
+    completed: false,
     classes: [
       {
         id: "xasdxcdefewr",
-        name: "O nome dessa aula é eeeeeeeeee eeeeeeeeeeeeeee eeeeeeeeeeeee eeesse",
+        name: "O nome dessa aula é esse",
         url: "link",
         completed: true,
         description: "texto de descrição",
@@ -66,9 +67,10 @@ const Acordeon = ({
             <IconCheckedCircle
               sx={{ color: "var(--color-feedback-success)" }}
             />
-          ) :
-           module.blocked ? (
-            <IconCheckedCircle />
+          ) : module.blocked ? (
+            <div className={styles.padlock_border}>
+              <IconPadlock />
+            </div>
           ) : (
             <IconCircle />
           )}

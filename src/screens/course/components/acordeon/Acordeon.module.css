@@ -53,6 +53,10 @@
   align-items: center;
   height: 44px;
   min-width: 348px;
+  cursor: pointer;
+}
+.acordeon_item:hover {
+  background-color: #e2fa85;
 }
 
 .acordeon_left_side {
@@ -79,4 +83,19 @@
 
 .module_disabled {
   pointer-events: none;
+  color: var(--color-tertiary);
+}
+
+.padlock_border {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 19.5px;
+  height: 19.5px;
+  border: 2px solid var(--color-tertiary);
+  border-radius: 3px;
+}
+.module_disabled svg {
+  width: 15px;
 }
