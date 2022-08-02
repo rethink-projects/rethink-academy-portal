@@ -5,7 +5,6 @@ function PlaygroundScreen() {
     <div className={styles.playground_container}>
       <div className={styles.playground_container_inner}>
         <h1>Manter essa tela Limpa, após criar o componente</h1>
-        
       </div>
     </div>
   );
