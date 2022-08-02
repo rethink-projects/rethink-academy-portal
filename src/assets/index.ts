@@ -23,6 +23,11 @@ import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
 
 import info from "./infoIcon.png";
+
+import HardSkillsIconNote from "./HardSkillsIconNote.svg";
+import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
+import DPIconNote from "./DPIconNote.svg";
+
 export const Images = {
   logo,
   checkbox,
@@ -48,6 +53,9 @@ export const Images = {
     DevelopmentIcon,
   },
   avatar: avatarImage,
+  HardSkillsIconNote,
+  SoftSkillsIconNote,
+  DPIconNote,
 };
 
 export default Images;
