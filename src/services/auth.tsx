@@ -11,7 +11,7 @@ function RequireAuth({ children }: RequireAuthType) {
   const auth = useAuth();
 
   const localStorageUser: ICurrentUser = JSON.parse(
-    localStorage.getItem("@nothink:user")!
+    localStorage.getItem("@portarethinkacademy:user")!
   );
 
   useEffect(() => {

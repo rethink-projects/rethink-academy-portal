@@ -14,6 +14,7 @@ import googleIcon from "./googleIcon.svg";
 import IconHome from "./IconHome.svg";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
+import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 import save from "./saveIcon.svg";
@@ -61,6 +62,7 @@ export const Images = {
     DevelopmentIcon,
     save,
     trash,
+    LogoutIcon,
   },
   avatar: avatarImage,
   HardSkillsIconNote,
