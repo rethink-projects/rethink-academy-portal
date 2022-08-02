@@ -44,12 +44,12 @@ function Menu() {
               : styles.menu_header_img_toggle_closed
           }
           src={Images.icons.IconToggle}
-          alt='Icon Toggle Menu'
+          alt="Icon Toggle Menu"
         />
         <img
           className={styles.menu_header_img}
           src={Images.logoRaSecondary}
-          alt='RatRa'
+          alt="RatRa"
         />
       </div>
       <div className={isOpen ? styles.menu_body_open : styles.menu_body_closed}>
@@ -62,7 +62,12 @@ function Menu() {
             text='Seu Desenvolvimento'
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem isOpen={isOpen} text='Cursos' icon={Images.icons.ratIcon} />
+          <MenuItem
+            link="/trilhas"
+            isOpen={isOpen}
+            text="Cursos"
+            icon={Images.icons.ratIcon}
+          />
           <MenuItem
             isOpen={isOpen}
             text='Registro de Horas'
