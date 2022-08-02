@@ -1,4 +1,3 @@
-import React from "react";
 // CSS
 import styles from "./Avatar.module.css";
 
@@ -6,16 +5,16 @@ type AvatarProps = {
   type?: "image" | "text" | "icon";
   size?: "large" | "default" | "small" | "micro";
   onClick?: () => void;
-  component: JSX.Element;
+  children: JSX.Element;
 };
 
 const Avatar = ({
   type = "text",
   size = "default",
   onClick,
-  component,
+  children,
 }: AvatarProps) => {
-  return <div className={`${styles[type]} ${styles[size]}`}>{component}</div>;
+  return <div className={`${styles[type]} ${styles[size]}`}>{children}</div>;
 };
 
 export default Avatar;
