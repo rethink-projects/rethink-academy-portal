@@ -56,26 +56,26 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text='Home' icon={Images.icons.IconHome} />
+          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
           <MenuItem
             isOpen={isOpen}
-            text='Seu Desenvolvimento'
+            text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
           <MenuItem
-          link="/trilhas"
-          isOpen={isOpen}
-          text="Cursos"
-          icon={Images.icons.ratIcon}
-        />
+            link="/trilhas"
+            isOpen={isOpen}
+            text="Cursos"
+            icon={Images.icons.ratIcon}
+          />
           <MenuItem
             isOpen={isOpen}
-            text='Registro de Horas'
+            text="Registro de Horas"
             icon={Images.icons.ClockHome}
           />
           <MenuItem
             isOpen={isOpen}
-            text='Contrato'
+            text="Contrato"
             icon={Images.icons.ContractIcon}
           />
         </div>
@@ -87,7 +87,7 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            onClick={handleLogout}
+            // onClick={() => handleLogout}
             text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
             customCss={
@@ -105,15 +105,15 @@ function Menu() {
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
             <Avatar
-              size='default'
+              size="default"
               onClick={() => {}}
               type={user.email ? "image" : "text"}
             >
               <img
-                referrerPolicy='no-referrer'
+                referrerPolicy="no-referrer"
                 className={styles.avatar_img}
                 src={user.avatarUrl}
-                alt='Avatar'
+                alt="Avatar"
               />
             </Avatar>
             {isOpen && <span>{user.name}</span>}
