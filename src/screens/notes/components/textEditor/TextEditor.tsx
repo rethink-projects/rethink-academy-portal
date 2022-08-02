@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import styles from "./TextEditor.module.css";
 
-const TextEditor = () => {
+const TextEditor = ({ initialValue }: any) => {
+  const [value, setValue] = useState(initialValue ?? "");
+  useEffect(() => setValue(initialValue ?? ""), [initialValue]);
   return (
-    <div>TextEditor</div>
-  )
-}
+    <div className={styles.text_container}>
+      <Editor
+        apiKey="gs05di5c7tnxror00ff8kzcpuf1nvc9pjiffq6yx4kx1ouao"
+        initialValue={"<p>Por favor insira seu texto aqui...</p>"}
+        value={value}
+        onEditorChange={(newValue, editor) => setValue(newValue)}
+        init={{
+          resize: false,
+          height: "65vh",
+          statusbar: false,
+          menubar: false,
+          plugins: "lists link",
+          toolbar:
+            "fontfamily | blocks | " +
+            "bold italic underline strikethrough " +
+            "forecolor backcolor align " +
+            "bullist numlist outdent indent link | ",
+          content_style: "body { background-color: #F9F9F9; }",
+        }}
+      />
+    </div>
+  );
+};
 
-export default TextEditor
+export default TextEditor;

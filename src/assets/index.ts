@@ -16,6 +16,11 @@ import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import save from "./saveIcon.svg";
+import trash from "./trashIcon.svg";
+import academyHat from "./academyHat.svg";
+import lampIcon from "./lampIcon.svg";
+import dpIcon from "./dpIcon.svg";
 
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
@@ -38,6 +43,9 @@ export const Images = {
   raArrow,
   logoRethink,
   logoRaSecondary,
+  academyHat,
+  lamp: lampIcon,
+  desenvolvimentoPessoal: dpIcon,
   icons: {
     left: IconLeft,
     right: IconRight,
@@ -51,6 +59,8 @@ export const Images = {
     ratIcon,
     ContractIcon,
     DevelopmentIcon,
+    save,
+    trash,
   },
   avatar: avatarImage,
   HardSkillsIconNote,

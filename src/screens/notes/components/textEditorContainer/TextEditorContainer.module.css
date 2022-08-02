@@ -1,0 +1,78 @@
+.textEditorContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  position: fixed;
+  left: 50%;
+  right: 0px;
+  height: 100vh;
+  width: auto;
+
+  border-width: 1px 0px 0px 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+
+  background-color: #f9f9f9;
+}
+
+/* Header */
+
+.containerTop {
+  padding: 2vh 5.5vw 2.2vh 0.83vw;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titleAndToggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+.titleAndToggle input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: 15.5vw;
+  background: none;
+  outline: none;
+  font-weight: 300;
+  font-size: 32px;
+  color: #1b1b1b;
+  opacity: 0.5;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Bottom */
+
+.containerBottom {
+  display: flex;
+  justify-content: flex-end;
+
+  border-width: 1px 0px 0px 0px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.saveDeleteButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  padding: 2.2vh 5.5vw 0vh 0vw;
+}
