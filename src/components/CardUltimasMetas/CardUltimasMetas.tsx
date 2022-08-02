@@ -6,12 +6,12 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 
 
 type cardProps = {
-    quantMetas: number;
-    mes: string;
-    quantMetasConcluidas: number;
+    quantityGoals: number;
+    mounth: string;
+    quantityGoalsCompleted: number;
 }
 
-const CardUltimasMetas = ({quantMetas, mes, quantMetasConcluidas}: cardProps) => {
+const CardUltimasMetas = ({quantityGoals, mounth, quantityGoalsCompleted}: cardProps) => {
   return (
     <div className={styles.CardUltimasMetas_container}>
         <div className={styles.CardUltimasMetas_title} >
@@ -20,20 +20,20 @@ const CardUltimasMetas = ({quantMetas, mes, quantMetasConcluidas}: cardProps) =>
         </div>
         <div className={styles.CardUltimasMetas_info} >
             <div className={styles.CardUltimasMetas_inner} >
-                <img src={Images.MedalUltimasMetas} alt="medalha ultimas metas" />
+                <img src={Images.MedalUltimasMetas} alt="medalha ultimas Goals" />
                 <div className={styles.CardUltimasMetas_inner_info}>
-                    <h1>Avaliação de {mes}</h1>
-                    <p>{quantMetas<10 ? `0${quantMetas}` : quantMetas} Metas</p>
+                    <h1>Avaliação de {mounth}</h1>
+                    <p>{quantityGoals<10 ? `0${quantityGoals}` : quantityGoals} Metas</p>
                 </div>
                 <ArrowForwardIosRoundedIcon onClick={() => {}} className={styles.cardUltimasMetas_arrow} />
             </div>
             <div className={styles.CardUltimasMetas_line} ></div>
             <div className={styles.CardUltimasMetas_progress} >
-                <div className={styles.progress_metas} >
-                    <p>{quantMetasConcluidas} </p>
-                    <span>/{quantMetas} </span>
+                <div className={styles.progress_Goals} >
+                    <p>{quantityGoalsCompleted} </p>
+                    <span>/{quantityGoals} </span>
                 </div>
-                <ProgressBar totalValue={quantMetas} relativeValue={quantMetasConcluidas}  />
+                <ProgressBar width={256} totalValue={quantityGoals} relativeValue={quantityGoalsCompleted}  />
                 <img src={Images.AmpulhetaUltimasMetas} alt="ampulheta" />
             </div>
         </div>
