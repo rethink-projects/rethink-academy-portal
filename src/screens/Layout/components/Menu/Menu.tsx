@@ -82,26 +82,26 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            onClick={handleLogout}
+            // onClick={handleLogout}
             text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
             customCss={
               isOpen
                 ? { padding: "0px", margin: "0px" }
                 : {
-                    padding: "0px",
-                    margin: "0px",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }
+                  padding: "0px",
+                  margin: "0px",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }
             }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
             <Avatar
               size='default'
-              onClick={() => {}}
+              onClick={() => { }}
               type={user.email ? "image" : "text"}
             >
               <img
