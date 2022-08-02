@@ -56,10 +56,10 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text='Home' icon={Images.icons.IconHome} />
+          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
           <MenuItem
             isOpen={isOpen}
-            text='Seu Desenvolvimento'
+            text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
           <MenuItem
@@ -70,12 +70,12 @@ function Menu() {
           />
           <MenuItem
             isOpen={isOpen}
-            text='Registro de Horas'
+            text="Registro de Horas"
             icon={Images.icons.ClockHome}
           />
           <MenuItem
             isOpen={isOpen}
-            text='Contrato'
+            text="Contrato"
             icon={Images.icons.ContractIcon}
           />
         </div>
@@ -110,10 +110,10 @@ function Menu() {
               type={user.email ? "image" : "text"}
             >
               <img
-                referrerPolicy='no-referrer'
+                referrerPolicy="no-referrer"
                 className={styles.avatar_img}
                 src={user.avatarUrl}
-                alt='Avatar'
+                alt="Avatar"
               />
             </Avatar>
             {isOpen && <span>{user.name}</span>}
