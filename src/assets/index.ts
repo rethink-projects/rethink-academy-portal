@@ -20,6 +20,7 @@ import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
 import homeBackground from "./homeBackground.jpg";
 import AcademyIcon from "./AcademyIcon.svg";
+import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 
@@ -67,6 +68,7 @@ export const Images = {
     ratIcon,
     ContractIcon,
     DevelopmentIcon,
+    LogoutIcon,
   },
   avatar: avatarImage,
 };
