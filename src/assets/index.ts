@@ -27,9 +27,17 @@ import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
+import Emblem from "./Emblem.png";
+import Emblem_Disable from "./Emblem_Disable.png";
+import chat from "./chat.png";
+import level_Icon from "./level_Icon.svg";
 
 import info from "./infoIcon.png";
 export const Images = {
+  chat,
+  level_Icon,
+  Emblem_Disable,
+  Emblem,
   AcademyIcon,
   homeBackground,
   logo,

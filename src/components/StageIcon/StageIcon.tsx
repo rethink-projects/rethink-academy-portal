@@ -1,21 +1,17 @@
 import React from "react";
 import Images from "../../assets";
 import Styles from "./StageIcon.module.css";
-const StageIcon = () => {
+const StageIcon = ({ disabled = false }: { disabled?: boolean }) => {
   return (
-    <div className={Styles.outer_border}>
+    <div
+      className={!disabled ? Styles.outer_border : Styles.outer_border_disabled}
+    >
       <div className={Styles.white_background}>
-        <div className={Styles.helper}>
-          <div className={Styles.emblem_background_border}>
-            <div className={Styles.emblem_background}>
-              <img
-                src={Images.AcademyIcon}
-                alt="Stage Emblem"
-                className={Styles.emblem}
-              />
-            </div>
-          </div>
-        </div>
+        <img
+          src={!disabled ? Images.Emblem : Images.Emblem_Disable}
+          alt="Stage Emblem"
+          className={Styles.emblem}
+        />
       </div>
     </div>
   );

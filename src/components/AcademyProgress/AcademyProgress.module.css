@@ -52,5 +52,50 @@
 .emblem_one {
   position: absolute;
   top: 217px;
-  left: 333px;
+  left: 331px;
+}
+.emblem_two {
+  position: absolute;
+  top: 157px;
+  left: 690px;
+}
+.emblem_three {
+  position: absolute;
+  top: 98px;
+  left: 1047px;
+}
+
+.chat {
+  position: absolute;
+  top: 39px;
+  left: 40px;
+}
+
+.chat_text {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 10px;
+  padding-left: 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 120%;
+
+  color: #ffffff;
+}
+
+span {
+  font-size: 32px;
+  line-height: 38px;
+}
+
+.progress_bars {
+  position: absolute;
+  display: flex;
+  top: 449px;
+  left: 22px;
+  gap: 16px;
 }
