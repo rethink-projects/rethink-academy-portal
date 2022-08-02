@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
+import CourseScreen from "./screens/CourseScreen/CourseScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
@@ -19,10 +20,15 @@ function App() {
               <Route index element={<HomeScreen />} />
             </Route>
             <Route path='/playground' element={<PlaygroundScreen />} />
+            <Route path="/trilhas/:id" element={<Layout />}>
+              {/* <Route index element={<CursosScreen />} />
+                <Route path="cursos" element={<CursosScreen />} /> */}
+              <Route path="curso/:id" element={<CourseScreen />} />
+            </Route>
           </Route>
         </Routes>
       </AuthProvider>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
