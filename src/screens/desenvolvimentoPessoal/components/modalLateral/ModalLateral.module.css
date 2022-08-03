@@ -13,116 +13,59 @@
   }
   
   .modal_container {
-    min-width: 480px;
-    min-height: 300px;
-    width: fit-content;
+    width: 376px;
     height: 100%;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
     background-color: var(--color-base);
     position: absolute;
     top: 0;
-    right: 0;
-    border-radius: 4px;
+    /* right: 0; */
   }
-  
-  .modal_content {
+
+  .modal_header{
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 32px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 20px 20px 20px;
   }
-  
-  .modal_content_icon {
-    cursor: pointer;
-    position: absolute;
-    right: 16.5px;
-    top: 16.5px;
-    color: #cfd0e2;
-  }
-  
-  .modal_text {
+
+  .modal_header_text{
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 100%;
   }
-  
-  .modal_title {
-    font-family: "Roboto";
+
+  .modal_header_title{
+    width: 106px;
+    height: 24px;
+
+    font-family: 'Roboto';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
-    line-height: 28px;
-    text-align: justify;
-    color: var(--color-secondary);
+    line-height: 120%;
+
+    color: var(--color-secondary-hover);
   }
-  
-  .modal_description {
-    text-align: justify;
-    font-family: "Roboto";
+
+  .modal_header_description{
+    width: 173px;
+    height: 19px;
+    
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 24px;
-    color: var(--color-secondary);
-  }
-  
-  .modal_children {
-    min-height: 56px;
-  }
-  
-  .modal_actions {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal_actions_buttons {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .modal_actions_cancel {
-    height: 48px;
-    width: 98px;
-    background-color: transparent;
-    border: none;
-    border-radius: 4px;
-  
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    color: var(--color-secondary);
-  
-    cursor: pointer;
-  }
-  
-  .modal_actions_cancel:hover {
+    line-height: 120%;
+    
     color: var(--color-tertiary);
+
   }
   
-  .modal_actions_confirm,
-  .modal_actions_confirm_disabled {
-    height: 48px;
-    width: 98px;
-    background-color: var(--color-item-selected);
-    color: var(--color-base);
-    border: none;
+  .modal_header_escape {
     cursor: pointer;
-    border-radius: 4px;
+    color: var(--color-tertiary);
+    
   }
   
-  .modal_actions_confirm:hover {
-    background-color: var(--color-feedback);
-  }
-  
-  .modal_actions_confirm_disabled {
-    background-color: var(--color-tertiary);
-    color: var(--color-icon-disable);
-    pointer-events: none;
-  }
   
