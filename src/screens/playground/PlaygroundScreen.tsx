@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import CardInfoCurso from "../course/components/card/CardInfoCurso";
 import CardCurso from "../course/components/card/CardInfoCurso";
+import Acordeon from "../course/components/acordeon/Acordeon";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {

@@ -44,33 +44,38 @@ function Menu() {
               : styles.menu_header_img_toggle_closed
           }
           src={Images.icons.IconToggle}
-          alt='Icon Toggle Menu'
+          alt="Icon Toggle Menu"
         />
         <img
           className={styles.menu_header_img}
           src={Images.logoRaSecondary}
-          alt='RatRa'
+          alt="RatRa"
         />
       </div>
       <div className={isOpen ? styles.menu_body_open : styles.menu_body_closed}>
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text='Home' icon={Images.icons.IconHome} />
+          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
           <MenuItem
             isOpen={isOpen}
-            text='Seu Desenvolvimento'
+            text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem isOpen={isOpen} text='Cursos' icon={Images.icons.ratIcon} />
+          <MenuItem
+            link="/trilhas"
+            isOpen={isOpen}
+            text="Cursos"
+            icon={Images.icons.ratIcon}
+          />
           <MenuItem
             isOpen={isOpen}
-            text='Registro de Horas'
+            text="Registro de Horas"
             icon={Images.icons.ClockHome}
           />
           <MenuItem
             isOpen={isOpen}
-            text='Contrato'
+            text="Contrato"
             icon={Images.icons.ContractIcon}
           />
         </div>
@@ -82,33 +87,33 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            onClick={handleLogout}
+            // onClick={handleLogout}
             text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
             customCss={
               isOpen
                 ? { padding: "0px", margin: "0px" }
                 : {
-                    padding: "0px",
-                    margin: "0px",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }
+                  padding: "0px",
+                  margin: "0px",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }
             }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
             <Avatar
               size='default'
-              onClick={() => {}}
+              onClick={() => { }}
               type={user.email ? "image" : "text"}
             >
               <img
-                referrerPolicy='no-referrer'
+                referrerPolicy="no-referrer"
                 className={styles.avatar_img}
                 src={user.avatarUrl}
-                alt='Avatar'
+                alt="Avatar"
               />
             </Avatar>
             {isOpen && <span>{user.name}</span>}
