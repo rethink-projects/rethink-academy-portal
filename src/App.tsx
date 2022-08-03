@@ -17,10 +17,14 @@ function App() {
           <Route path="/">
             <Route index element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
+            <Route path="/dashboard" element={<Layout />}>
+              <Route index element={<HomeScreen />} />
+            </Route>
+            <Route path="/playground" element={<PlaygroundScreen />} />
             <Route path="/home" element={<Layout />}>
               <Route index element={<HomeScreen />} />
             </Route>
-            <Route path='/playground' element={<PlaygroundScreen />} />
+            <Route path="/playground" element={<PlaygroundScreen />} />
 
             <Route path="/trilhas/" element={<Layout />}>
               <Route index />
@@ -30,11 +34,10 @@ function App() {
                 <Route path="curso/:id" element={<CourseScreen />} />
               </Route>
             </Route>
-
           </Route>
         </Routes>
       </AuthProvider>
-    </BrowserRouter >
+    </BrowserRouter>
   );
 }
 

@@ -5,6 +5,7 @@
   gap: 10px;
   background-color: var(--color-base);
 }
+
 .playground_container_inner {
   display: flex;
   flex-direction: column;
