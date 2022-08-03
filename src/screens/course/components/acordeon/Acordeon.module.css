@@ -41,7 +41,7 @@
 
 .right_side svg {
   width: 16px;
-  height: 120px;
+  height: 21px;
 }
 
 /*---------- MENU DO ACORDEON ABERTO ----------*/
@@ -56,7 +56,7 @@
   justify-content: space-between;
   align-items: center;
   height: 44px;
-  min-width: 348px;
+  min-width: 350px;
   cursor: pointer;
 }
 
@@ -67,23 +67,14 @@
 .acordeon_left_side {
   display: flex;
   align-items: center;
-  margin-left: 13.25px;
+  margin-left: 12.25px;
   gap: 9.25px;
 }
 
 .acordeon_right_side {
   display: flex;
   align-items: center;
-  margin-right: 17.25px;
-}
-
-.acordeon_left_side svg path {
-  width: 20px;
-}
-
-.acordeon_right_side svg {
-  width: 16px;
-  height: 120px;
+  margin-right: 11.25px;
 }
 
 /*---------- ACORDEON DISABLED ----------*/
