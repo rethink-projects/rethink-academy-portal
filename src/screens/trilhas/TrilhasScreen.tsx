@@ -149,8 +149,6 @@ const TrilhasScreen = () => {
     }
   };
 
-  const navigate = useNavigate();
-
   const setTrails = () => {
     const main_id = trilhas.filter((trilha) => trilha.name === user.main)[0].id;
     trails.push(trilhas[0]);
@@ -163,35 +161,33 @@ const TrilhasScreen = () => {
   };
 
   setTrails();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      <div className={styles.trilhas_container}>
-        <div className={styles.text_container}>
-          <div className={styles.title}>Trilhas</div>
-          <div className={styles.description}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </div>
-        </div>
-        <div className={styles.cards_container}>
-          {trails.map((item) => (
-            <CardTrilhas
-              key={item.id}
-              inputTrilha={getProgressBarInputs(item.id)}
-              onClick={() => navigate("" + item.id)}
-              title={getTrailTitle(item.id)}
-              description={getTrailDescription(item.id)}
-              blocked={isBlocked(item.id)!}
-              previous={getPreviousTrailName(item.id)}
-            ></CardTrilhas>
-          ))}
+      <div className={styles.text_container}>
+        <div className={styles.title}>Trilhas</div>
+        <div className={styles.description}>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged.
         </div>
       </div>
+      <div style={{ width: "704px" }}></div>
+      {trails.map((item) => (
+        <CardTrilhas
+          key={item.id}
+          inputTrilha={getProgressBarInputs(item.id)}
+          onClick={() => navigate("" + item.id)}
+          title={getTrailTitle(item.id)}
+          description={getTrailDescription(item.id)}
+          blocked={isBlocked(item.id)!}
+          previous={getPreviousTrailName(item.id)}
+        ></CardTrilhas>
+      ))}
     </div>
   );
 };
