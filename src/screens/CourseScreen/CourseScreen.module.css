@@ -1,8 +1,13 @@
+.container {
+  overflow-y: auto;
+}
+
 .inner_container {
   padding: 24px 104px 67px 112px;
   display: flex;
   gap: 112px;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  height: 3000px;
 }
 
 .content_course {
@@ -50,8 +55,11 @@
 }
 
 .practical_information {
-  margin-top: 24px;
-  width: 462px;
-  height: 806px;
-  border: 1px solid black;
+  margin-top: 48px;
+  position: relative;
+}
+
+.card_info {
+  position: fixed;
+  right: 104px;
 }
