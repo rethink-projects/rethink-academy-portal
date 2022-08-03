@@ -1,7 +1,7 @@
-import { link } from "fs/promises";
 import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./CourseScreen.module.css";
+import Acordeon from "../course/components/acordeon/Acordeon";
 
 const CourseScreen = () => {
     const location = useLocation();
@@ -84,6 +84,7 @@ const CourseScreen = () => {
 
                     <div className={styles.modules}>
                         <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
+                        <Acordeon width={848} />
                     </div>
                 </div>
                 <div className={styles.practical_information}>
