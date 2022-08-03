@@ -35,7 +35,7 @@ const Acordeon = ({
     id: 1,
     name: "Aqui está o nome do módulo",
     blocked: false,
-    completed: false,
+    completed: true,
     classes: [
       {
         id: "xasdxcdefewr",
@@ -83,7 +83,7 @@ const Acordeon = ({
       {isOpen && classes != null && (
         <div className={styles.acordeon_container}>
           {classes.map((clas) => (
-            <div className={styles.acordeon_item} style={{ width: width }}>
+            <div className={styles.acordeon_item} style={{ width: width + 2 }}>
               <div className={styles.acordeon_left_side}>
                 <IconVideoCam />
                 {clas.name}

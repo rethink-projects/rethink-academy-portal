@@ -7,7 +7,7 @@ function PlaygroundScreen() {
       <div className={styles.playground_container_inner}>
         <h1>Manter essa tela Limpa, após criar o componente</h1>
         <Acordeon width={0} />
-        <Acordeon width={0} />
+        <Acordeon width={500} />
       </div>
     </div>
   );
