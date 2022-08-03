@@ -1,5 +1,6 @@
 .container_extern{
-    padding-left: 50px;
+    padding-left: 30px;
+    padding-right: 10px;
     padding-top: 24px;
     width: 43%;
 }
@@ -19,6 +20,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 10px;
 }
 
 .table_header_inner_title{
