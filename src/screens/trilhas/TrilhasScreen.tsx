@@ -90,32 +90,28 @@ const TrilhasScreen = () => {
   ];
 
   const getProgressBarInputs = (id: number) => {
-    let totalVideo = 0;
     let watched = 0;
     if (user.trilhas.filter((trilha) => trilha.trilha_id === id)[0] != null) {
       watched = user.trilhas
         .filter((trilha) => trilha.trilha_id === id)[0]
         .courses.filter((course) => course.completed == true).length;
     }
-    courses.forEach((course) => {
-      if (course.trilha === id) {
-        totalVideo++;
-      }
-    });
+    const totalVideo = courses.filter((course) => course.trilha === id).length;
     return {
       totalVideo,
       watched,
     };
   };
 
-  const getTrailTitle = (i: number) => {
-    const title = trilhas.filter((trilha) => trilha.id === i)[0].name;
+  const getTrailTitle = (id: number) => {
+    const title = trilhas.filter((trilha) => trilha.id === id)[0].name;
 
     return title[0].toUpperCase() + title.substring(1).toLowerCase();
   };
 
-  const getTrailDescription = (i: number) => {
-    const description = trails.filter((trail) => trail.id === i)[0].description;
+  const getTrailDescription = (id: number) => {
+    const description = trails.filter((trail) => trail.id === id)[0]
+      .description;
     return description;
   };
 
@@ -129,12 +125,18 @@ const TrilhasScreen = () => {
 
   const getPreviousTrailName = (id: number) => {
     let name;
+    let trail;
     if (id > 2) {
-      name = trilhas.filter((trilha) => trilha.id === id - 1)[0].name;
+      trail = trilhas.find((trilha) => trilha.id === id - 1);
     } else {
-      name = trilhas.filter((trilha) => trilha.id === trilhas.length)[0].name;
+      trail = trilhas.find((trilha) => trilha.id === trilhas.length);
     }
-    return name[0].toUpperCase() + name.substring(1).toLowerCase();
+    if (trail == null) {
+      return "";
+    } else {
+      name = trail.name;
+      return name[0].toUpperCase() + name.substring(1).toLowerCase();
+    }
   };
 
   const isBlocked = (id: number) => {
