@@ -65,9 +65,10 @@ function Menu() {
           <MenuItem
             link="/trilhas"
             isOpen={isOpen}
-            text="Cursos"
+            text="Trilhas"
             icon={Images.icons.ratIcon}
           />
+          <MenuItem isOpen={isOpen} text="Trilhas" icon={Images.icons.ratIcon} />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"
@@ -105,8 +106,8 @@ function Menu() {
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
             <Avatar
-              size='default'
-              onClick={() => { }}
+              size="default"
+              onClick={() => {}}
               type={user.email ? "image" : "text"}
             >
               <img

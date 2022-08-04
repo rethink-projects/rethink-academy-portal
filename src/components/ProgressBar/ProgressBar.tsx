@@ -16,24 +16,22 @@ const ProgressBar = ({
   totalValue,
   relativeValue,
 }: ProgressBarProps) => {
-  const internalDivWidth = (relativeValue * width) / totalValue;
+  const internalDivWidth = totalValue === 0 ? 0 : (relativeValue * width) / totalValue;
 
   return (
     <div
       style={{ width: width }}
-      className={`${styles[size]} ${styles.container_external} ${
-        color === "light"
+      className={`${styles[size]} ${styles.container_external} ${color === "light"
           ? styles.container_external_light
           : styles.container_external_dark
-      } `}
+        } `}
     >
       <div
         style={{ width: internalDivWidth }}
-        className={`${styles[size]} ${
-          color === "light"
+        className={`${styles[size]} ${color === "light"
             ? styles.container_internal_light
             : styles.container_internal_dark
-        }`}
+          }`}
       ></div>
     </div>
   );
