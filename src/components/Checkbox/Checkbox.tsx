@@ -1,5 +1,3 @@
-import { esES } from "@mui/x-data-grid";
-import { useState } from "react";
 import style from "./Checkbox.module.css";
 
 type checkboxProps = {
