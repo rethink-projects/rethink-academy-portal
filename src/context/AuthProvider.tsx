@@ -12,13 +12,13 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   let signin = async (type: TypeProvider, callback: VoidFunction) => {
     const user = await firebaseInstance.loginWithFirebase("google");
     setUser(user);
-    localStorage.setItem("@nothink:user", JSON.stringify(user));
+    localStorage.setItem("@portarethinkacademy:user", JSON.stringify(user));
     callback();
   };
 
   let signout = (callback: VoidFunction) => {
     setUser(null!);
-    localStorage.removeItem("@nothink:user");
+    localStorage.removeItem("@portarethinkacademy:user");
     callback();
   };
 

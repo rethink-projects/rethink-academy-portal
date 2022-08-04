@@ -14,6 +14,7 @@ import googleIcon from "./googleIcon.svg";
 import IconHome from "./IconHome.svg";
 import IconLeft from "./IconLeft.svg";
 import IconRight from "./IconRight.svg";
+import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 import arrowTask from "./arrowTask.svg";
@@ -48,6 +49,7 @@ export const Images = {
     ratIcon,
     ContractIcon,
     DevelopmentIcon,
+    LogoutIcon,
   },
   avatar: avatarImage,
 };
