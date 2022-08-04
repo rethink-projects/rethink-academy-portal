@@ -1,0 +1,31 @@
+.breadcrumbContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+span {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-tertiary);
+}
+
+.previousPages:hover {
+  cursor: pointer;
+  color: var(--color-feedback);
+}
+
+.currentPage {
+  font-weight: 500;
+}
+
+.breadcrumbContainer svg {
+  height: 16px;
+  width: 16px;
+
+  fill: var(--color-tertiary);
+
+  margin-top: 2px;
+}

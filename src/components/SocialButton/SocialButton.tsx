@@ -13,16 +13,14 @@ function SocialButton({ type = "primary", onClick }: SocialButtonType) {
       : `${styles.btn_social_secundary}`;
 
   return (
-    <div>
-      <button onClick={onClick} className={classNameButton}>
-        <img
-          className={styles.btn_social_img}
-          src={Images.google}
-          alt={"Google Icon"}
-        />
-        <p className={styles.btn_social_p}>Entrar com o Google</p>
-      </button>
-    </div>
+    <button onClick={onClick} className={classNameButton}>
+      <img
+        className={styles.btn_social_img}
+        src={Images.google}
+        alt={"Google Icon"}
+      />
+      <p className={styles.btn_social_p}>Entrar com o Google</p>
+    </button>
   );
 }
 

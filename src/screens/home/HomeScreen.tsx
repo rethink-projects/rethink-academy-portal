@@ -1,22 +1,16 @@
-import React from "react";
-import { useNavigate } from "react-router";
-import { Images } from "../../assets";
+import { useAuth } from "../../context/AuthContext";
 import styles from "./Home.module.css";
 
 function HomeScreen() {
-  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.home_container}>
-      <div className={styles.home_inner}>
-        <img src={Images.logo} alt='Logo Rethink Academy' />
-        <span>🚨 Essa Tela está em desenvolvimento</span>
-        <span>⏰ Em Breve iniciaremos nossos trabalhos...</span>
-        <span>⚠️ Por enquanto confira nossa tela de componentes</span>
-
-      </div>
-      <button onClick={() => navigate("/playground")}>
-        Ir para Playground de componentes
-      </button>
+      <h4>Olá {user.email}</h4>
+      <p>Bem-vindo, essa é a tela Principal</p>
     </div>
   );
 }
