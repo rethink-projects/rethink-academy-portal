@@ -4,6 +4,7 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Register from "../../components/Register/Register";
 import StageIcon from "../../components/StageIcon/StageIcon";
 import { useAuth } from "../../context/AuthContext";
+import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import Styles from "./Home.module.css";
 
 function HomeScreen() {
@@ -18,6 +19,7 @@ function HomeScreen() {
       <div className={Styles.left_content}>
         <AcademyProgress />
         <Register />
+        <TrilhasComponent />
       </div>
       <div className={Styles.user_menu}>
         <div className={Styles.user_image}>
