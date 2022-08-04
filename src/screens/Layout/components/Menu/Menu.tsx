@@ -56,7 +56,12 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
+          <MenuItem
+            link="/dashboard"
+            isOpen={isOpen}
+            text="Home"
+            icon={Images.icons.IconHome}
+          />
           <MenuItem
             isOpen={isOpen}
             text="Seu Desenvolvimento"
@@ -68,7 +73,6 @@ function Menu() {
             text="Trilhas"
             icon={Images.icons.ratIcon}
           />
-          <MenuItem isOpen={isOpen} text="Trilhas" icon={Images.icons.ratIcon} />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"
@@ -95,12 +99,12 @@ function Menu() {
               isOpen
                 ? { padding: "0px", margin: "0px" }
                 : {
-                  padding: "0px",
-                  margin: "0px",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                }
+                    padding: "0px",
+                    margin: "0px",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }
             }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />

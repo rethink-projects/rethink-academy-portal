@@ -20,18 +20,16 @@ function App() {
             <Route path="/dashboard" element={<Layout />}>
               <Route index element={<HomeScreen />} />
             </Route>
-            <Route path="/playground" element={<PlaygroundScreen />} />
-            <Route path="/home" element={<Layout />}>
-              <Route index element={<HomeScreen />} />
-            </Route>
+            
             <Route path="/playground" element={<PlaygroundScreen />} />
 
             <Route path="/trilhas/" element={<Layout />}>
-              <Route index />
-              <Route path="/trilhas/:id">
-                <Route index />
-                <Route path="cursos" />
-                <Route path="curso/:id" element={<CourseScreen />} />
+              <Route index element={<TrilhasScreen />}>
+                <Route path=":id">
+                  <Route index />
+                  <Route path="cursos" />
+                  <Route path="curso/:id" element={<CourseScreen />} />
+                </Route>
               </Route>
             </Route>
           </Route>

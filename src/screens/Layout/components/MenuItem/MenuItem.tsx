@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./MenuItem.module.css";
 
 type MenuItemProps = {
@@ -10,11 +10,12 @@ type MenuItemProps = {
 };
 
 function MenuItem({ link = "#", isOpen, text, icon }: MenuItemProps) {
+  const navigate = useNavigate();
   return (
     <div
       className={isOpen ? styles.menu_body_item : styles.menu_body_item_closed}
-      style={customCss}
-      onClick={onClick}
+      // style={customCss}
+      onClick={() => navigate(link)}
     >
       <img src={icon} alt="Icon Home" />
       {isOpen ? (
