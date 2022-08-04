@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
-import CourseScreen from "./screens/CourseScreen/CourseScreen";
+import CourseScreen from "./screens/course/CourseScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
