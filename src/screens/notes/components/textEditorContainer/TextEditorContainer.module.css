@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   right: 0px;
   width: 57%;
+  height: calc(100vh - 72px);
   border-width: 1px 0px 0px 1px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.1);
