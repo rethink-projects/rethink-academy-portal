@@ -10,16 +10,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
   
   .modal_container {
+    
     width: 376px;
     height: 100%;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
     background-color: var(--color-base);
     position: absolute;
     top: 0;
-    /* right: 0; */
+    right: 0;
+    overflow: auto;
   }
 
   .modal_header{
@@ -27,6 +30,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 24px 20px 20px 20px;
+    border-bottom: 1px solid var(--color-opacity-1);
   }
 
   .modal_header_text{
