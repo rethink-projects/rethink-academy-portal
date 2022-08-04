@@ -1,0 +1,43 @@
+.contract_outer_container {
+  padding-left: 3.5%;
+  padding-right: 10%;
+  padding-top: 24px;
+}
+
+.contract_inner_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.breadcrumb {
+  width: 8.5%;
+}
+
+.contract_title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.contract_status {
+  width: 53%;
+}
+
+.contract_status h1 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.contract_status p {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+

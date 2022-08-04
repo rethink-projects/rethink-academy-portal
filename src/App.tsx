@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
+import ContractScreen from "./screens/contract/ContractScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
@@ -17,6 +18,9 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/dashboard' element={<Layout />}>
               <Route index element={<HomeScreen />} />
+            </Route>
+            <Route path="/contrato" element={<Layout />}>
+              <Route index element={<ContractScreen />} />
             </Route>
             <Route path='/playground' element={<PlaygroundScreen />} />
           </Route>
