@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
-import DesenvolvimentoPessoalScreen from "./screens/desenvolvimentoPessoal/DesenvolvimentoPessoalScreen";
+import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
@@ -20,7 +20,7 @@ function App() {
               <Route index element={<HomeScreen />} />
             </Route>
             <Route path="/desenvolvimentoPessoal" element={<Layout />}>
-              <Route index element={<DesenvolvimentoPessoalScreen />} />
+              <Route index element={<PersonalDevelopmentScreen />} />
             </Route>
             <Route path='/playground' element={<PlaygroundScreen />} />
           </Route>

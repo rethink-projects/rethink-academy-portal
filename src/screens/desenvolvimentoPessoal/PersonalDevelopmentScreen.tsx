@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ModalLateral from './components/modalLateral/ModalLateral'
 
-const DesenvolvimentoPessoalScreen = () => {
+const PersonalDevelopmentScreen = () => {
     const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -12,4 +12,4 @@ const DesenvolvimentoPessoalScreen = () => {
   )
 }
 
-export default DesenvolvimentoPessoalScreen
+export default PersonalDevelopmentScreen

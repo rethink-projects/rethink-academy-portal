@@ -150,61 +150,68 @@ const goalsData = [
 
 const DropdownModalLateral = () => {
   const [goals, setGoals] = useState<GoalsDataType[]>(goalsData);
-  console.log(goals)
 
   const handleClick = (id: number) => {
     setGoals(() =>
       goals.map((goal: any) => {
-        console.log(goal)
         if (goal.id === id) {
           let toogleIsOpen = goal.isOpen;
           return {
             ...goal,
             isOpen: !toogleIsOpen,
           };
-          console.log(goal)
-        }
-        else{
-          return{
+        } else {
+          return {
             ...goal,
-          }
+          };
         }
       })
     );
-    console.log(goals);
   };
 
-  // const currentClass = isOpen
-  //   ? styles.dropdown_container_open
-  //   : styles.dropdown_container_closed;
-
-  const [concludeGoals, setConcludeGoals] = useState(1);
-
-  function getGoalsConclude() {
-    let i = 0;
-    let j = 0;
-    if ((j < goals.length, j++)) {
-      if ((i < goals[j].goalsIntern.length, i++)) {
-        if (goals[j].goalsIntern[i].conclude == true) {
-          setConcludeGoals(concludeGoals + 1);
+  const handleIsChecked = (props: any) => {
+    setGoals(() =>
+      goals.map((goal: any) => {
+        if (goal.id === props.idGoal) {
+          let toogleIsOpen = goal.isOpen;
+          return {
+            ...goal,
+            goalsIntern: goal.goalsIntern.map((goalsIntern: any) => {
+              if (goalsIntern.id === props.id) {
+                return {
+                  ...goalsIntern,
+                  conclude: props.props,
+                };
+              } else {
+                return {
+                  ...goalsIntern,
+                };
+              }
+            }),
+          };
+        } else {
+          return {
+            ...goal,
+          };
         }
-      }
-    }
-
-    return concludeGoals;
-  }
-  console.log(concludeGoals);
+      })
+    );
+  };
 
   return (
     <div>
-      {goals.map((goal:GoalsDataType) => (
-        <div className={goal.isOpen ? styles.dropdown_container_open
-          : styles.dropdown_container_closed}
-          key={goal.id}>
+      {goals.map((goal: GoalsDataType) => (
+        <div
+          className={
+            goal.isOpen
+              ? styles.dropdown_container_open
+              : styles.dropdown_container_closed
+          }
+          key={goal.id}
+        >
           <div className={styles.dropdown_header}>
             <h1 className={styles.dropdown_header_title}>{goal.name}</h1>
             <ExpandMoreRoundedIcon
-              // onClick={() => handleClick(goal.id)}
               onClick={() => handleClick(goal.id)}
               className={
                 goal.isOpen
@@ -217,24 +224,36 @@ const DropdownModalLateral = () => {
             <div className={styles.dropdown_content} key={goal.id}>
               <div className={styles.dropdown_content_progress}>
                 <div className={styles.dropdown_content_quantity}>
-                  <p>{getGoalsConclude()} </p>
+                  <p>
+                    {
+                      goal.goalsIntern.filter((item) => item.conclude === true)
+                        .length
+                    }
+                  </p>
                   <span>/{goal.goalsIntern.length} </span>
                 </div>
                 <ProgressBar
                   width={306}
                   totalValue={goal.goalsIntern.length}
-                  relativeValue={concludeGoals}
+                  relativeValue={
+                    goal.goalsIntern.filter((item) => item.conclude === true)
+                      .length
+                  }
                 />
               </div>
-              {goal.goalsIntern.map((goalsIntern,index) => (
-                <>
+              {goal.goalsIntern.map((goalsIntern) => (
                 <Checkbox
                   name={goalsIntern.title}
-                  checked={goalsIntern.conclude}
-                  key={index}
+                  isChecked={goalsIntern.conclude}
+                  setIsChecked={(props) =>
+                    handleIsChecked({
+                      id: goalsIntern.id,
+                      props,
+                      idGoal: goal.id,
+                    })
+                  }
+                  key={goalsIntern.id}
                 />
-                {console.log(goalsIntern.conclude)}
-                </>
               ))}
             </div>
           )}
