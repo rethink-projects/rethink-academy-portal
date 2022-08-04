@@ -1,21 +1,10 @@
 import { AccessTime } from "@mui/icons-material";
-import { useAuth } from "../../../../context/AuthContext";
-import userEvent from "@testing-library/user-event";
-import React from "react";
 import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import Badge from "../../../../components/Badge/Badge";
 import styles from "./CardInfoCurso.module.css";
 
 const CardInfoCurso = () => {
-  // const { user } = useAuth();
-  // console.log(user);
-
-  // if (!user) {
-  //   return <div>Loading...</div>;
-  // }
-  // return <div>{user.email}</div>;
-
   return (
     <div className={styles.card_container}>
       <h1 className={styles.title}>Informações Práticas</h1>
@@ -46,7 +35,7 @@ const CardInfoCurso = () => {
       </div>
       <h1 className={styles.title}>O que você vai aprender neste curso:</h1>
       <div className={styles.topicos}>
-        <ul>
+        <ul className={styles.list}>
           <li>
             <p>Metodologia Double Diamond</p>
           </li>
@@ -63,7 +52,7 @@ const CardInfoCurso = () => {
       </div>
       <h1 className={styles.title}>Habilidades que você terá:</h1>
       <div>
-        <ul>
+        <ul className={styles.list}>
           <li>
             <p>Produzir e aplicar um Teste de Usabilidade</p>
           </li>
