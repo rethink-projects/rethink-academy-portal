@@ -8,14 +8,24 @@
   width: 1px;
 }
 
-.checkbox {
-  display: inline-block;
+.default {
   height: 15.5px;
   width: 15.5px;
+  padding: 4.5px;
+}
+
+.small {
+  height: 11px;
+  width: 11px;
+  padding: 3.5px;
+}
+
+.checkbox {
+  display: inline-block;
+
   background: var(--color-base);
   border: 1px solid var(--color-icon-background);
   border-radius: 2px;
-  padding: 4.5px;
 }
 
 .checkbox:hover {
