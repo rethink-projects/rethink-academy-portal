@@ -14,7 +14,7 @@
 /* Header */
 
 .containerTop {
-  padding: 2vh 5.5vw 2.2vh 0.83vw;
+  padding: 2vh 20px 2.2vh 0.83vw;
 
   display: flex;
   flex-direction: column;
@@ -69,5 +69,5 @@
   gap: 10px;
   flex-wrap: wrap;
 
-  padding: 2.2vh 5.5vw 0vh 0vw;
+  padding: 2.2vh 20px 0vh 0vw;
 }
