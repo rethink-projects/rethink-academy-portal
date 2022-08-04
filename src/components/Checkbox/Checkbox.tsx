@@ -1,26 +1,31 @@
+import { esES } from "@mui/x-data-grid";
 import { useState } from "react";
 import style from "./Checkbox.module.css";
 
 type checkboxProps = {
-  name?: string;
+  name: string;
   disabled?: boolean;
-  checked?: boolean;
+  // checked?: boolean;
+  isChecked: boolean;
+  setIsChecked: (isChecked: boolean) => void;
 };
 
 const Checkbox = ({
   name,
   disabled = false,
-  checked = false,
+  isChecked = false,
+  setIsChecked,
 }: checkboxProps) => {
-  const [isChecked, setIsChecked] = useState(checked);
+  // const [isChecked, setIsChecked] = useState(checked);
 
   return (
     <label className={style.container}>
       <input
         className={style.checkbox_input}
         type="checkbox"
-        onChange={() => setIsChecked(!isChecked)}
+        onChange={(e) => setIsChecked(!isChecked)}
         disabled={disabled}
+        checked={isChecked}
       />
       <svg
         className={`${style.checkbox} ${
