@@ -1,32 +1,31 @@
 import style from "./Checkbox.module.css";
 
 type checkboxProps = {
+  size?: "default" | "small";
   name: string;
   disabled?: boolean;
-  // checked?: boolean;
   isChecked: boolean;
   setIsChecked: (isChecked: boolean) => void;
 };
 
 const Checkbox = ({
   name,
+  size = "default",
   disabled = false,
   isChecked = false,
   setIsChecked,
 }: checkboxProps) => {
-  // const [isChecked, setIsChecked] = useState(checked);
-
   return (
     <label className={style.container}>
       <input
         className={style.checkbox_input}
         type="checkbox"
-        onChange={(e) => setIsChecked(!isChecked)}
+        onChange={(event) => setIsChecked(event.target.checked)}
         disabled={disabled}
         checked={isChecked}
       />
       <svg
-        className={`${style.checkbox} ${
+        className={`${style.checkbox} ${style[size]} ${
           isChecked ? style.checkbox_active : ""
         }`}
         aria-hidden
