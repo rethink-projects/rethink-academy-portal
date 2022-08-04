@@ -1,7 +1,7 @@
 .textEditorContainer {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   right: 0px;
   width: 57%;
   height: calc(100vh - 72px);
@@ -53,6 +53,12 @@
   flex-wrap: wrap;
 }
 
+/* Text Editor */
+
+.textEditor {
+  height: 75%;
+}
+
 /* Bottom */
 
 .containerBottom {
@@ -69,5 +75,5 @@
   gap: 10px;
   flex-wrap: wrap;
 
-  padding: 2.2vh 20px 0vh 0vw;
+  padding: 2.2vh 20px 5px 0vw;
 }

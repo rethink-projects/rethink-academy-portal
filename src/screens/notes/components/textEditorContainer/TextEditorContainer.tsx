@@ -31,8 +31,8 @@ const textEditorContainer = () => {
         </div>
       </div>
 
-      <div>
-        <TextEditor/>
+      <div className={style.textEditor}>
+        <TextEditor />
       </div>
 
       <div className={style.containerBottom}>
