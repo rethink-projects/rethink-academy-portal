@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import style from "./PrivacyToggle.module.css";
 
-import Images from "../../../../../../assets";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 
