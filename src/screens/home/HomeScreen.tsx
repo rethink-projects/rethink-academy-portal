@@ -1,6 +1,7 @@
 import Images from "../../assets";
 import AcademyProgress from "../../components/AcademyProgress/AcademyProgress";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import Register from "../../components/Register/Register";
 import StageIcon from "../../components/StageIcon/StageIcon";
 import { useAuth } from "../../context/AuthContext";
 import Styles from "./Home.module.css";
@@ -16,6 +17,7 @@ function HomeScreen() {
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress />
+        <Register />
       </div>
       <div className={Styles.user_menu}>
         <div className={Styles.user_image}>

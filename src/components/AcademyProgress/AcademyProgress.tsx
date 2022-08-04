@@ -61,7 +61,7 @@ const AcademyProgress = () => {
         />
         <ProgressBar
           totalValue={100}
-          relativeValue={100}
+          relativeValue={50}
           size="large"
           width={342}
         />
