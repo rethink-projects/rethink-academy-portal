@@ -22,7 +22,6 @@ h6 {
   padding: 0;
 }
 
-<<<<<<< HEAD
 *::-webkit-scrollbar {
   background: transparent;
   width: 14px;
@@ -42,8 +41,6 @@ h6 {
   border-radius: 12px;
 }
 
-=======
->>>>>>> screen/course
 body {
-  overflow-x: hidden;
+  overflow: hidden;
 }

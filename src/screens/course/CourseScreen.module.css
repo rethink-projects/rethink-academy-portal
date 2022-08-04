@@ -1,8 +1,13 @@
-.inner_container {
-  padding: 24px 104px 67px 112px;
+.box {
+  width: 100%;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+.container {
   display: flex;
-  gap: 112px;
   justify-content: space-around;
+  flex-shrink: 0;
 }
 
 .content_course {
@@ -11,6 +16,8 @@
   gap: 24px;
   flex-direction: column;
   width: 848px;
+
+  margin-top: 24px;
 }
 
 .title {
@@ -50,8 +57,12 @@
 }
 
 .practical_information {
-  margin-top: 24px;
-  width: 462px;
-  height: 806px;
-  border: 1px solid black;
+  flex-shrink: 0;
+  height: 100%;
+  width: 464px;
+}
+
+.card_info {
+  position: fixed;
+  margin-top: 72px;
 }
