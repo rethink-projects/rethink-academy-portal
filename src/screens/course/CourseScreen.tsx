@@ -92,6 +92,22 @@ const CourseScreen = () => {
                     <div className={styles.modules}>
                         <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
                         <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+                        <Acordeon width={848} />
+
                     </div>
                 </div>
                 <div className={styles.practical_information}>
