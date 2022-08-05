@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "./ProgressBar.module.css";
 
 type ProgressBarProps = {
   size?: "large" | "medium" | "small";
   color?: "light" | "dark";
-  width?: number;
+  width?: string;
   totalValue: number;
   relativeValue: number;
 };
@@ -12,26 +11,31 @@ type ProgressBarProps = {
 const ProgressBar = ({
   size = "medium",
   color = "dark",
-  width = 342,
+  width = "342",
   totalValue,
   relativeValue,
 }: ProgressBarProps) => {
-  const internalDivWidth = totalValue === 0 ? 0 : (relativeValue * width) / totalValue;
+  const widthValue = width.replace(/\D/g, "") as unknown as number;
+  const widthMeasurement = width.match(/\D/g) as unknown as string;
+  const internalDivWidth =
+    totalValue === 0 ? 0 : (relativeValue * widthValue) / totalValue;
 
   return (
     <div
-      style={{ width: width }}
-      className={`${styles[size]} ${styles.container_external} ${color === "light"
+      style={{ width: widthValue + widthMeasurement }}
+      className={`${styles[size]} ${styles.container_external} ${
+        color === "light"
           ? styles.container_external_light
           : styles.container_external_dark
-        } `}
+      } `}
     >
       <div
-        style={{ width: internalDivWidth }}
-        className={`${styles[size]} ${color === "light"
+        style={{ width: internalDivWidth + widthMeasurement }}
+        className={`${styles[size]} ${
+          color === "light"
             ? styles.container_internal_light
             : styles.container_internal_dark
-          }`}
+        }`}
       ></div>
     </div>
   );
