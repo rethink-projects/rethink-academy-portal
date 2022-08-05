@@ -102,6 +102,31 @@ const goalsData = [
         title: "Meta 07",
         conclude: false,
       },
+      {
+        id: 8,
+        title: "Finalizar protótipo",
+        conclude: false,
+      },
+      {
+        id: 9,
+        title: "Meta 04",
+        conclude: false,
+      },
+      {
+        id: 10,
+        title: "Meta 05",
+        conclude: false,
+      },
+      {
+        id: 11,
+        title: "Meta 06",
+        conclude: false,
+      },
+      {
+        id: 12,
+        title: "Meta 07",
+        conclude: false,
+      },
     ],
   },
   {
@@ -220,8 +245,10 @@ const DropdownModalLateral = () => {
               }
             />
           </div>
-          {goal.isOpen && (
-            <div className={styles.dropdown_content} key={goal.id}>
+
+            <div className={ goal.isOpen
+              ? styles.dropdown_content_open
+              : styles.dropdown_content_closed} key={goal.id}>
               <div className={styles.dropdown_content_progress}>
                 <div className={styles.dropdown_content_quantity}>
                   <p>
@@ -241,22 +268,24 @@ const DropdownModalLateral = () => {
                   }
                 />
               </div>
-              {goal.goalsIntern.map((goalsIntern) => (
-                <Checkbox
-                  name={goalsIntern.title}
-                  isChecked={goalsIntern.conclude}
-                  setIsChecked={(props) =>
-                    handleIsChecked({
-                      id: goalsIntern.id,
-                      props,
-                      idGoal: goal.id,
-                    })
-                  }
-                  key={goalsIntern.id}
-                />
-              ))}
+              {goal.isOpen && (
+                goal.goalsIntern.map((goalsIntern) => (
+                    <Checkbox
+                      name={goalsIntern.title}
+                      isChecked={goalsIntern.conclude}
+                      setIsChecked={(props) =>
+                        handleIsChecked({
+                          id: goalsIntern.id,
+                          props,
+                          idGoal: goal.id,
+                        })
+                      }
+                      key={goalsIntern.id}
+                    />
+                ))
+              )}
             </div>
-          )}
+
         </div>
       ))}
     </div>
