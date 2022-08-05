@@ -271,6 +271,7 @@ const DropdownModalLateral = () => {
               {goal.isOpen && (
                 goal.goalsIntern.map((goalsIntern) => (
                     <Checkbox
+                    size="small"
                       name={goalsIntern.title}
                       isChecked={goalsIntern.conclude}
                       setIsChecked={(props) =>
