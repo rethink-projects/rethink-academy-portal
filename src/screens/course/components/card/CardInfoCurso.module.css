@@ -1,3 +1,4 @@
+/*
 .title {
   font-family: "Roboto";
   font-style: normal;
@@ -28,70 +29,107 @@ p {
   flex-direction: column;
   align-items: flex-start;
   padding: 48px;
-  gap: 24px;
+   gap: 24px;
 
   border: 1px solid #000000;
   border-radius: 4px;
 }
 
-.card_container > h1 {
-  /* font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 120%;
-
-  color: #3b3b3b; */
-
-  /* font-size: 20px;
-   */
-  /* font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 120%;
-  color: #3b3b3b;
-  margin-bottom: 8px; */
-}
-
 .informacoes_praticas {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+   gap: 24px;
 }
 
 .info_nivel {
-  margin-bottom: 8px;
+  * margin-bottom: 8px; 
   display: flex;
   align-items: center;
-  gap: 31px;
-}
-
-.informacoes_praticas > h1 {
-  /* font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 120%;
-  color: #3b3b3b; */
+   gap: 31px; 
 }
 
 .info_description {
   width: 208px;
 }
 
-.info_description > p {
-  /* margin-top: 8px;
+.topicos {
+   margin-bottom: 8px; 
+}
+
+.list {
+  margin-left: 9px;
+  list-style-type: none;
+}
+
+li {
+  color: #706e64;
+  display: flex;
+}
+
+li:before {
+  content: "\2022";
+  display: flex;
+   margin-top: 3px; 
+  margin-right: 10px;
+  color: #706e64;
+}
+*/
+
+.title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: #3b3b3b;
+  /* margin-bottom: 8px; */
+}
+
+p {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
 
-  color: #706e64; */
+  color: #706e64;
 }
 
-.topicos {
+.card_container {
+  width: 464px;
+  min-height: 808px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 48px;
+  gap: 32px;
+
+  border: 1px solid #000000;
+  border-radius: 4px;
+}
+
+.informacoes_praticas {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  gap: 32px;
+}
+
+.info_nivel {
+  /* margin-bottom: 8px; */
+  display: flex;
+  align-items: center;
+  gap: 31px;
+}
+
+.info_description {
+  width: 208px;
+}
+
+.title_space {
   margin-bottom: 8px;
 }
 
