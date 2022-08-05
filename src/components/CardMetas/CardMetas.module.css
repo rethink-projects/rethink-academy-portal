@@ -1,0 +1,113 @@
+.CardUltimasMetas_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 438px;
+  height: 386px;
+  padding: 16px 20px;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+
+.CardUltimasMetas_inner {
+  display: flex;
+  height: 72px;
+  align-items: center;
+
+  padding-bottom: 16px;
+
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.CardUltimasMetas_inner_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  margin-right: auto;
+  gap: 4px;
+}
+
+.CardUltimasMetas_info h1 {
+  color: var(--color-secondary-hover);
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.CardUltimasMetas_info p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-tertiary-active);
+}
+
+.cardUltimasMetas_arrow {
+  color: var(--color-tertiary);
+  height: 17.5px;
+  cursor: pointer;
+}
+
+/* Metas */
+
+.Metas_Container {
+  position: inherit;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+
+  overflow-y: scroll;
+
+  padding: 6px 0px 16px 0px;
+  height: 222px;
+}
+
+/* Footer */
+.divisingLine {
+  display: flex;
+  align-self: center;
+  height: 0.5px;
+  width: 479px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 6px;
+}
+
+.CardUltimasMetas_progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress_Goals {
+  display: flex;
+  align-items: center;
+}
+
+.progress_Goals p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+
+  margin-right: 1px;
+
+  color: var(--color-secondary);
+}
+
+.progress_Goals span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+
+  color: var(--color-tertiary);
+}

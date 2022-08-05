@@ -18,6 +18,10 @@ import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 
+import MedalUltimasMetas from "./MedalUltimasMetas.svg";
+import MedalStarMetas from "./MedalStarMetas.svg";
+import AmpulhetaUltimasMetas from "./AmpulhetaUltimasMetas.svg";
+import FlagUltimasMetas from "./FlagUltimasMetas.svg";
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
@@ -49,6 +53,10 @@ export const Images = {
     DevelopmentIcon,
     LogoutIcon,
   },
+  MedalUltimasMetas,
+  AmpulhetaUltimasMetas,
+  MedalStarMetas,
+  FlagUltimasMetas,
   avatar: avatarImage,
 };
 
