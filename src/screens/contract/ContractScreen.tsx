@@ -2,6 +2,24 @@ import React from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import styles from "./ContractScreen.module.css";
+import { CorporateFare, Schedule, BusinessCenter, DirectionsBus, LaptopMac, InfoOutlined, UploadFileOutlined } from "@mui/icons-material";
+import NewDocumentCard from "./components/NewDocumentCard/NewDocumentCard";
+
+
+const Info = {
+  college: "Universidade do Estado de Minas Gerais",
+  semester: 7,
+  workStartTime: 13,
+  workEndTime: 19,
+  transportationVoucher: 130,
+  materialsProvided: [
+    "Computador",
+    "Teclado",
+    "Mouse",
+    "Monitor",
+    "Apoio ergonômico",
+  ],
+};
 
 const ContractScreen = () => {
   return (
@@ -30,8 +48,36 @@ const ContractScreen = () => {
               width={870}
             />
           </div>
+          <h1>Documentos</h1>
+          <div className={styles.cards_container}>
+            <NewDocumentCard/>
+            <NewDocumentCard/>
+            <NewDocumentCard/>
+            <NewDocumentCard/>
+            <NewDocumentCard/>
+            
+          </div>
         </div>
-        <div className={styles.contract_info}>Suas Informações</div>
+        <div className={styles.contract_info}>
+          <h1>Suas Informações</h1>
+          <div className={styles.contract_info_card}>
+            <div className={styles.contract_info_card_content}>
+              <p> <CorporateFare/> Faculdade</p>
+              <span>{Info.college}</span>
+              <p> <Schedule/> Período</p>
+              <span>{`${Info.semester}º`}</span>
+              <p> <BusinessCenter/> Horário de trabalho</p>
+              <span>{`${Info.workStartTime}h-${Info.workEndTime}h`}</span>
+              <p> <DirectionsBus/> Média de gasto com Vale Transporte</p>
+              <span>{`R$${Info.transportationVoucher}/mês`}</span>
+              <p> <LaptopMac/> Materiais Fornecidos</p>
+              <span>{Info.materialsProvided.join(", ")}</span>
+              <div className={styles.card_content_line} />
+              <small><InfoOutlined color="disabled"/> Caso haja algum erro ou algo precise ser atualizado, entre em contato com o RH/Embaixador.</small>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
