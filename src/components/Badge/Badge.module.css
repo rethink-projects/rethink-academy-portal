@@ -28,6 +28,11 @@
     color: #18683D;
 }
 
+.dark {
+    background: var(--color-secondary);
+    color: var(--color-base);
+}
+
 .large,
 .default,
 .small,

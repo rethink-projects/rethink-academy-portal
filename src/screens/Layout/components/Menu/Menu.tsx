@@ -62,12 +62,7 @@ function Menu() {
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem
-            link="/trilhas"
-            isOpen={isOpen}
-            text="Cursos"
-            icon={Images.icons.ratIcon}
-          />
+          <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"
@@ -94,19 +89,19 @@ function Menu() {
               isOpen
                 ? { padding: "0px", margin: "0px" }
                 : {
-                  padding: "0px",
-                  margin: "0px",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                }
+                    padding: "0px",
+                    margin: "0px",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }
             }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
             <Avatar
-              size='default'
-              onClick={() => { }}
+              size="default"
+              onClick={() => {}}
               type={user.email ? "image" : "text"}
             >
               <img
