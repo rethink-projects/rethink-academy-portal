@@ -56,23 +56,13 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem
-            link="/dashboard"
-            isOpen={isOpen}
-            text="Home"
-            icon={Images.icons.IconHome}
-          />
+          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
           <MenuItem
             isOpen={isOpen}
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem
-            link="/trilhas"
-            isOpen={isOpen}
-            text="Trilhas"
-            icon={Images.icons.ratIcon}
-          />
+          <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"

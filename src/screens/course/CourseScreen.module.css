@@ -42,8 +42,11 @@
 }
 
 .modules {
+  display: flex;
+  flex-direction: column;
   margin-top: 8px;
   gap: 16px;
+  margin-bottom: 67px;
 }
 
 .title_modules {

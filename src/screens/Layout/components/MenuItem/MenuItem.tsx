@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import styles from "./MenuItem.module.css";
 
 type MenuItemProps = {
@@ -6,16 +5,15 @@ type MenuItemProps = {
   text: string;
   customCss?: React.CSSProperties;
   icon: string;
-  link?: string;
+  onClick?: () => void;
 };
 
-function MenuItem({ link = "#", isOpen, text, icon }: MenuItemProps) {
-  const navigate = useNavigate();
+function MenuItem({ isOpen, text, icon, customCss, onClick }: MenuItemProps) {
   return (
     <div
       className={isOpen ? styles.menu_body_item : styles.menu_body_item_closed}
-      // style={customCss}
-      onClick={() => navigate(link)}
+      style={customCss}
+      onClick={onClick}
     >
       <img src={icon} alt="Icon Home" />
       {isOpen ? (
