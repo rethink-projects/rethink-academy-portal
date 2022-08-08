@@ -1,7 +1,9 @@
 .dropdown {
-  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  padding-left:
   width: 100%;
   min-width: 241px;
   height: 46px;
@@ -12,6 +14,16 @@
   align-self: stretch;
   cursor: pointer;
 }
+
+.dropdown_inner {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  
+}
+
 .left_img {
   display: flex;
   margin-left: 18.25px;
