@@ -4,7 +4,14 @@ import React from "react";
 import styles from "./Badge.module.css";
 
 type BadgeProps = {
-  color?: "primary" | "secondary" | "accent" | "danger" | "warning" | "success";
+  color?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "danger"
+    | "warning"
+    | "success"
+    | "dark";
   size?: "micro" | "default" | "small" | "large";
   icon: JSX.Element;
 };
