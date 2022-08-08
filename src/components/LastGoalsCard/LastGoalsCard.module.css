@@ -1,4 +1,4 @@
-.CardUltimasMetas_container{
+.LastGoalsCard_container{
     display: flex;
     flex-direction: column;
     width: 368px;
@@ -6,13 +6,13 @@
     gap: 24px;
 }
 
-.CardUltimasMetas_title{
+.LastGoalsCard_title{
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.CardUltimasMetas_title h1{
+.LastGoalsCard_title h1{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
@@ -21,7 +21,7 @@
     color: var(--color-secondary);
 }
 
-.CardUltimasMetas_info{
+.LastGoalsCard_info{
     display: flex;
     flex-direction: column;
     width: 328px;
@@ -31,13 +31,13 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.CardUltimasMetas_inner{
+.LastGoalsCard_inner{
     display: flex;
     height: 72px;
     align-items: center;
 }
 
-.CardUltimasMetas_inner_info{
+.LastGoalsCard_inner_info{
     display: flex;
     flex-direction: column;
     margin-left: 16px;
@@ -45,7 +45,7 @@
     gap: 4px;
 }
 
-.CardUltimasMetas_info h1{
+.LastGoalsCard_info h1{
     color: var(--color-secondary-hover);
     font-family: 'Roboto';
     font-style: normal;
@@ -54,7 +54,7 @@
     line-height: 120%;
 }
 
-.CardUltimasMetas_info p{
+.LastGoalsCard_info p{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -64,40 +64,34 @@
 
 }
 
-.cardUltimasMetas_arrow{
+.LastGoalsCard_arrow{
     color: var(--color-tertiary);
     height: 17.5px;
     cursor: pointer;
 }
 
-.CardUltimasMetas_line{
+.LastGoalsCard_line{
     width: 328px;
     height: 0px;
-
     opacity: 0.1;
-    /* Cores/Secundária-Preto */
-
     border: 0.5px solid var(--color-secondary);
     background-color: var(--color-secondary);
-
-    /* Inside auto layout */
-
     flex: none;
     align-self: stretch;
     flex-grow: 0;
 }
 
-.CardUltimasMetas_progress{
+.LastGoalsCard_progress{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.progress_metas{
+.progress_Goals{
     display: flex;
 }
 
-.progress_metas p{
+.progress_Goals p{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -106,7 +100,7 @@
     color: var(--color-secondary);
 }
 
-.progress_metas span{
+.progress_Goals span{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
