@@ -112,7 +112,7 @@ const CourseScreen = () => {
                 </div>
                 <div className={styles.practical_information}>
                     <div className={styles.card_info}>
-                        <CardInfoCurso />
+                        <CardInfoCurso author="Fernando Henrique" authorDescription="Meu nome é Fernando Henrique. Tenho 21 anos de idade e sou desenvolverdor na Rethink Tecnologia" level="Iniciante" learn={["react"]} module_class={{ module: 1, class: 1 }} skills={["react"]} avatar={"https://lh3.googleusercontent.com/ogw/AOh-ky1Wi2_jWlZYQbYRe3xWHdnt2u9dYA2jPp9BYsij=s32-c-mo"} />
                     </div>
                 </div>
             </div>
