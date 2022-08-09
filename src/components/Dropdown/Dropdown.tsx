@@ -11,7 +11,7 @@ type DropdownProps = {
   initialText?: string;
   width?: number;
   disabled?: boolean;
-  children?: JSX.Element;
+  leftIcon?: JSX.Element;
 };
 
 const Dropdown = ({
@@ -22,7 +22,7 @@ const Dropdown = ({
   disabled,
   size = "default",
   width,
-  children,
+  leftIcon,
 }: DropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [placeholder, setPlaceholder] = useState(initialText);
@@ -54,7 +54,7 @@ const Dropdown = ({
         ].join(" ")}
       >
         <div className={styles.inner_left}>
-          {children ?? <IconEye />}
+          {leftIcon ?? <IconEye />}
           {placeholder}
         </div>
         <IconArrow />
