@@ -4,20 +4,18 @@ import IconEye from "@mui/icons-material/VisibilityOutlined";
 import IconArrow from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 type DropdownProps = {
-  value: string;
   setValue: (value: string) => void;
   options: string[];
-  key: string;
+  id: string;
   size?: "small" | "micro" | "default" | "large";
   initialText?: string;
   disabled?: boolean;
 };
 
 const Dropdown = ({
-  value,
   setValue,
   options,
-  key,
+  id,
   initialText = "Escolha uma opção",
   disabled,
   size = "default",
@@ -30,7 +28,7 @@ const Dropdown = ({
     document.addEventListener("click", (e: Event) => {
       if (
         !document
-          .getElementById("dropdown" + key)!
+          .getElementById("dropdown" + id)!
           .contains(e.target as HTMLInputElement)
       ) {
         setIsActive(false);
@@ -39,12 +37,44 @@ const Dropdown = ({
   }, []);
 
   return (
-    <div className={styles.dropdown}>
-      <div className={styles.dropdown_inner}>
-        <IconEye />
-        {initialText}
+    <div className={styles.dropdown_container}>
+      <div
+        id={`dropdown${id}`}
+        onClick={() => setIsActive(!isActive)}
+        className={[
+          styles.dropdown,
+          isFilled && styles.dropdown_filled,
+          isActive && styles.dropdown_active,
+          disabled && styles.dropdown_disabled,
+          styles["dropdown_" + size],
+        ].join(" ")}
+      >
+        <div className={styles.inner_left}>
+          <IconEye />
+          {placeholder}
+        </div>
+        <IconArrow />
       </div>
-      <IconArrow />
+      <div className={styles.dropdown_options_container}>
+        {isActive &&
+          options.map((option, index) => (
+            <div
+              className={[
+                styles.dropdown_option,
+                styles["dropdown_option_" + size],
+              ].join(" ")}
+              key={index}
+              onClick={() => (
+                setIsActive(!isActive),
+                setPlaceholder(option),
+                setValue(option),
+                setIsFilled(true)
+              )}
+            >
+              {option}
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
