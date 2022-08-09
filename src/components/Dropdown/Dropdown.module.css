@@ -2,8 +2,8 @@
 /* ------- COM TAMANHOS DEFAULT -------*/
 
 .dropdown_container {
-  width: 500px;
   flex-shrink: 0;
+  min-width: 242px;
 }
 
 .dropdown,

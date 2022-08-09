@@ -9,7 +9,9 @@ type DropdownProps = {
   id: string;
   size?: "small" | "micro" | "default" | "large";
   initialText?: string;
+  width?: number;
   disabled?: boolean;
+  children?: JSX.Element;
 };
 
 const Dropdown = ({
@@ -19,6 +21,8 @@ const Dropdown = ({
   initialText = "Escolha uma opção",
   disabled,
   size = "default",
+  width,
+  children,
 }: DropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [placeholder, setPlaceholder] = useState(initialText);
@@ -37,7 +41,7 @@ const Dropdown = ({
   }, []);
 
   return (
-    <div className={styles.dropdown_container}>
+    <div className={styles.dropdown_container} style={{ width: width }}>
       <div
         id={`dropdown${id}`}
         onClick={() => setIsActive(!isActive)}
@@ -50,7 +54,7 @@ const Dropdown = ({
         ].join(" ")}
       >
         <div className={styles.inner_left}>
-          <IconEye />
+          {children ?? <IconEye />}
           {placeholder}
         </div>
         <IconArrow />
