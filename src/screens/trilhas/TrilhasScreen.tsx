@@ -1,10 +1,39 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { log } from "console";
+import { useEffect, useState } from "react";
 
 type Trilhas = { name: string; id: number; description: string };
 const TrilhasScreen = () => {
-  const trails: Array<Trilhas> = [];
+  // const trails: Array<Trilhas> = [];
+
+  const getTrails = async () => {
+    // setTrilhas(await getTrails())
+    return (await axios.get("http://localhost:4000/api/trail")).data;
+  }
+
+
+  // let trilhas: Array<Trilhas> = getTrails();
+
+  const [trilhas, setTrilhas] = useState([]);
+
+  // let trilhas: Array<Trilhas> = getTrails();
+
+  const teste = async () => {
+    setTrilhas(await getTrails())
+  }
+
+  useEffect(() => {
+    teste();
+  }, []);
+
+
+
+  console.log(trilhas);
+
+
 
   const user = {
     id: 1,
@@ -48,12 +77,7 @@ const TrilhasScreen = () => {
     ],
   };
 
-  let trilhas = [
-    { name: "academy", id: 1, description: "descrição" },
-    { name: "design", id: 2, description: "Descrição Design" },
-    { name: "engenharia", id: 3, description: "Descrição Engenharia" },
-    { name: "produto", id: 4, description: "Descrição Produto" },
-  ];
+
   const courses = [
     {
       id: 1,
