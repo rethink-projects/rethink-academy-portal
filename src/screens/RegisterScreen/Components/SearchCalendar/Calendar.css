@@ -1,0 +1,54 @@
+/* Altura do retângulo da data */
+.rs-calendar-panel.rs-calendar-compact .rs-calendar-table-row:not(.rs-calendar-table-header-row) .rs-calendar-table-cell-content {
+    /* height: 45px !important; */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Cor do círculo da data atual */
+.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day {
+    background-color: #9DBA2B !important;
+    height: 30px !important;
+    width: 30px !important;
+    padding: 4px !important;
+    padding-right: 5px !important;
+}
+
+/* Cor da linha que seleciona o range */
+.rs-calendar-table-cell-in-range:before {
+    background-color: var(--color-primary-hover) !important;
+    height: 35px !important;
+    margin-top: 8px !important;
+}
+
+.rs-calendar-table-cell-content:hover {
+    background-color: var(--color-base) !important;
+    box-shadow: inset 0 0 0 1px #9DBA2B !important;
+    height: 40px !important;
+    border-radius: 5px;
+    margin-top: 2px !important;
+}
+
+/* Cor da borda da data selecionada */
+.rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+    box-shadow: inset 0 0 0 1px #9DBA2B !important;
+    border-radius: 5px;
+    background-color: var(--color-primary-hover) !important;
+    height: 40px !important;
+    margin-top: 1px !important;
+    padding-top: 2px !important;
+}
+
+.rs-calendar-panel .rs-calendar-table-cell {
+    padding: 0 !important;
+}
+
+.rs-calendar-table-row {
+    height: 45px !important;
+}
+
+/* cores anteriores
+--rs-calendar-range-bg: rgba(204, 233, 255, 0.5);
+#cce9ff80
+ */
