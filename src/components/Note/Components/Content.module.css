@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
-    height: 32px;
+    height: 40px;
     padding: 8px;
     border-radius: 4px 4px 0 0;
 }
@@ -49,16 +49,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    color: var(--color-secondary);
+    width: 28px;
+    height: 28px;
     border: none;
+    box-sizing: border-box;
     background: transparent;
 }
 
-.content_header_actions_icon svg {
+.backgroundRed:hover {
+    background: #8C131A;
+    border-radius: 4px;
+}
+
+.backgroundGreen:hover {
+    background: #48A135;
+    border-radius: 4px;
+}
+
+.backgroundYellow:hover {
+    background: #FACC15;
+    border-radius: 4px;
+}
+
+.white {
+    color: var(--color-base);
+}
+
+.black {
+    color: var(--color-secondary);
+}
+
+.content_header_actions_icon  svg  {
     width: 20px;
     height: 20px;
+    padding: 4px;
 }
 
 .content_body {

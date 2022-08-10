@@ -6,6 +6,7 @@ import styles from "./Content.module.css";
 // Icons
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "../../Tooltip/Tooltip";
 
 type ContentProps = {
   id: string;
@@ -25,10 +26,20 @@ const Content = ({
   onClickEdit,
 }: ContentProps) => {
   const [textDescription, setTextDescription] = useState(text);
+  const [editable, setEditable] = useState(false);
+  const [textareaheight, setTextareaheight] = useState(1);
 
   let color1 = "",
     color2 = "",
     color = "";
+
+  let themeButton = priority === 1 ? "white" : "black";
+  let themeBackgroundButton = "backgroundRed";
+  if (priority === 2) {
+    themeBackgroundButton = "backgroundYellow";
+  } else if (priority === 3) {
+    themeBackgroundButton = "backgroundGreen";
+  }
 
   const defineColors = () => {
     if (priority === 1) {
@@ -53,8 +64,6 @@ const Content = ({
     defineColors();
   };
 
-  const [editable, setEditable] = useState(false);
-
   const edit = () => {
     onClickEdit(id);
     setEditable(true);
@@ -73,8 +82,6 @@ const Content = ({
       setEditable(false);
     }
   };
-
-  const [textareaheight, setTextareaheight] = useState(1);
 
   function handleChange(event: any) {
     const height = event.target.scrollHeight;
@@ -102,15 +109,23 @@ const Content = ({
         <div className={styles.content_header_actions}>
           <button
             onClick={() => edit()}
-            className={styles.content_header_actions_icon}
+            className={`${styles.content_header_actions_icon} ${styles[themeButton]} ${styles[themeBackgroundButton]}`}
           >
-            <BorderColorIcon />
+            <Tooltip
+              content="Editar"
+              direction="top"
+              children={<BorderColorIcon />}
+            />
           </button>
           <button
             onClick={() => onClickDelete(id)}
-            className={styles.content_header_actions_icon}
+            className={`${styles.content_header_actions_icon} ${styles[themeButton]} ${styles[themeBackgroundButton]}`}
           >
-            <DeleteIcon />
+            <Tooltip
+              content="Remover"
+              direction="top-left"
+              children={<DeleteIcon />}
+            />
           </button>
         </div>
       </div>
