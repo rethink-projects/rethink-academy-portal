@@ -1,8 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CardCourse from "./Components/CardCourse";
 import styles from "./CursosScreen.module.css";
+import axios from "axios";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 interface CoursesUser {
   course_id: number;
@@ -128,6 +130,35 @@ const CursosScreen = () => {
 
   let selectedTrack = "";
 
+  // useEffect(() => {
+  // const getTrails = async () => {
+  //   const response = (await axios.get("http://localhost:4000/api/trail")).data;
+  //   if (response.trail) {
+
+  //     console.log(response.trail);
+  //   }
+  // }
+  // getTrails();
+  // const fetch = async () => {
+  //   const response = await axios
+  //     .get("http://localhost:4000/api/trail")
+  //     .catch((err) => {
+  //       console.log("api error", err);
+  //     });
+  //   console.log(response!.data.trail);
+  // };
+  // fetch();
+  // }, []);
+
+  const getTrail = async () => {
+    const url = "http://localhost:4000/api/trail";
+    const obj = await fetch(url).then((res) => res.json());
+    const trail = obj.trail;
+    console.log(trail);
+  };
+  getTrail();
+
+  
   // Encontrando o nome da trilha escolhida com o id = trilha_id
   trilhas.map(
     (trilha) => trilha.id === trilha_id && (selectedTrack = trilha.name)
