@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./CourseScreen.module.css";
-import Acordeon from "./components/acordeon/Acordeon";
+import Acordeon from "../../components/Acordeon/Acordeon";
 import CardInfoCurso from "./components/card/CardInfoCurso";
 
 const CourseScreen = () => {
