@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import SearchTasks from "./Components/SearchCalendar/SearchTasks";
+import SearchCalendar from "./Components/SearchCalendar/SearchCalendar";
 
 import styles from "./RegisterScreen.module.css";
 
@@ -25,7 +25,7 @@ const RegisterScreen = () => {
       <div className={styles.register_registerTasks}></div>
       <div className={styles.register_reminders}></div>
       <div className={styles.register_searchTasks}>
-        <SearchTasks />
+        <SearchCalendar />
       </div>
     </div>
   );

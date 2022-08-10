@@ -9,7 +9,7 @@ import * as React from "react";
 import InputSearch from "../../../../components/InputSearch/InputSearch";
 
 //CSS
-import styles from "./SearchTasks.module.css";
+import styles from "./SearchCalendar.module.css";
 
 // Calendar
 import CalendarComponent from "./Calendar";
