@@ -74,8 +74,8 @@ const Acordeon = ({
           ) : (
             <IconCircle />
           )}
-          {`Módulo 1 - ${module.name}`}
           {/* isso ainda será alterado */}
+          {`Módulo 1 - ${module.name}`}
         </div>
         <div className={styles.right_side}>
           <IconMore />
