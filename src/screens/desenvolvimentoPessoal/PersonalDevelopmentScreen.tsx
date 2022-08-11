@@ -8,10 +8,15 @@ const PersonalDevelopmentScreen = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className={style.centralizando}>
-      <CardMetas />
-      {/* <button onClick={() => setModalOpen(true)}>Open Modal</button> */}
-      {/* {isModalOpen && <ModalLateral onClose={() => setModalOpen(false)} />} */}
+    <div className={style.screenInner}>
+      <div className={style.centralizando}>
+        <div className={style.metasContainer}>
+          <h2>Metas</h2>
+          <CardMetas />
+        </div>
+        {/* <button onClick={() => setModalOpen(true)}>Open Modal</button> */}
+        {/* {isModalOpen && <ModalLateral onClose={() => setModalOpen(false)} />} */}
+      </div>
     </div>
   );
 };

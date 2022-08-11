@@ -1,8 +1,28 @@
+.screenInner {
+  background-color: #f4f4f4;
+}
+
 .centralizando {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
 
-  height: 50vh;
+  height: 100vh;
   padding-right: 20vw;
+  padding-top: 10vh;
+}
+
+.metasContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.metasContainer h2 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+
+  color: #1b1b1b;
 }
