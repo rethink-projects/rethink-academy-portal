@@ -4,7 +4,7 @@
   justify-content: flex-start;
   width: 438px;
   height: 386px;
-  padding: 16px 20px;
+  padding: 16px 16px;
   gap: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -17,6 +17,7 @@
   align-items: center;
 
   padding-bottom: 16px;
+  padding-right: 8px;
 
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
 }
@@ -47,6 +48,11 @@
   color: var(--color-tertiary-active);
 }
 
+.CardUltimasMetas_inner svg {
+  height: 19px;
+  width: 17px;
+}
+
 .cardUltimasMetas_arrow {
   color: var(--color-tertiary);
   height: 17.5px;
@@ -74,7 +80,7 @@
   display: flex;
   align-self: center;
   height: 0.5px;
-  width: 479px;
+  width: 471px;
   background-color: rgba(0, 0, 0, 0.1);
   margin-bottom: 6px;
 }
