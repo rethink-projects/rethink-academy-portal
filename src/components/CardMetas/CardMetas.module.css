@@ -6,7 +6,7 @@
   height: 386px;
   padding: 16px 16px;
   gap: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #d4d4d4;
   border-radius: 4px;
   background-color: var(--color-base);
 }
@@ -21,7 +21,7 @@
   padding-bottom: 16px;
   padding-right: 8px;
 
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0.5px solid #d4d4d4;
 }
 
 .CardUltimasMetas_inner_info {
