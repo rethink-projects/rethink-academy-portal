@@ -7,11 +7,14 @@ import Switch from "../notes/components/Switch/Switch";
 
 import SchoolIcon from "@mui/icons-material/School";
 import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 
 import style from "./PersonalDevelopmentScreen.module.css";
-import { title } from "process";
+import { useNavigate } from "react-router-dom";
 
 const PersonalDevelopmentScreen = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={style.screenInner}>
       <div className={style.titlesContainer}>
@@ -28,7 +31,17 @@ const PersonalDevelopmentScreen = () => {
       <div className={style.cardsContainer}>
         <div className={style.topCardsContainer}>
           <div className={style.metasContainer}>
-            <h2>Anotações</h2>
+            <div className={style.notesTitles}>
+              <h2>Suas anotações</h2>
+              <button
+                onClick={() => {
+                  navigate("/notas");
+                }}
+              >
+                Ver mais <ArrowForwardOutlinedIcon />
+              </button>
+            </div>
+
             <CardNotas />
           </div>
           <div className={style.metasContainer}>

@@ -1,7 +1,7 @@
 .screenInner {
   background-color: #f4f4f4;
 
-  height: 100vh;
+  height: 200vh;
 
   padding-left: 50px;
   padding-top: 24px;
@@ -27,9 +27,43 @@
   display: flex;
   flex-wrap: wrap;
 
-  gap: 64px;
+  /* gap: 64px; */
+  row-gap: 24px;
+  justify-content: space-between;
 
   margin-top: 50px;
+}
+
+.notesTitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notesTitles button {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+
+  color: #1b1b1b;
+
+  gap: 8px;
+  padding: 0px 8px;
+
+  border: none;
+  background: none;
+
+  cursor: pointer;
+}
+
+.notesTitles svg {
+  width: 20px;
+  height: 20px;
 }
 
 .metasContainer {
