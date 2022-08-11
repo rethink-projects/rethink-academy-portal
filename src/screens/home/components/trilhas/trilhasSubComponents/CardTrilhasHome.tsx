@@ -154,7 +154,7 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
     : styles.container;
 
   return (
-    <div className={containerClass}>
+    <div style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }} className={containerClass}>
       <span className={styles.name_trilha}>{trilha.name}</span>
       <div className={styles.divisoria}></div>
       <div className={styles.state}>
