@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import styles from "./TextEditor.module.css";
 
-const TextEditor = ({ initialValue }: any) => {
+const TextEditor = ({ initialValue, noteData }: any) => {
+  console.log("teste");
+  console.log(noteData);
   const [value, setValue] = useState(initialValue ?? "");
   useEffect(() => setValue(initialValue ?? ""), [initialValue]);
   return (

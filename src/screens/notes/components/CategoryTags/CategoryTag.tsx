@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import style from "./CategoryTag.module.css";
 
-import Images from "../../../../../../assets";
+import Images from "../../../../assets";
 
 type categoryTagProps = {
   type: "Hard Skills" | "Soft Skills" | "Desenvolvimento Pessoal";

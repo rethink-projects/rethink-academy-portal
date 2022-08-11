@@ -9,137 +9,61 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import { Box } from "@mui/material";
 import { visuallyHidden } from '@mui/utils';
 
+import { useAuth } from "../../../../context/AuthContext";
+import axios from "axios";
 
 import Images from "../../../../assets/index";
 import style from "./TableContent.module.css";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
+import { useEffect, useState } from "react";
 
-function createData(title: string, date: number, categories: boolean[]) {
+import TextEditor from "../textEditor/TextEditor";
+
+  export type noteType = {
+    id: string;
+    title: string;
+    content: string;
+    createdAt: string;
+    categories: boolean[];
+    isPublic: boolean;
+  }
+
+
+  function createData({id, title, content, createdAt, categories, isPublic}: noteType) {
   return {
+    id,
     title,
-      date,
-      hard: categories[0],
-      soft: categories[1],
-      desenvolvimentoPessoal: categories[2],
+    content,
+    createdAt,
+    categories,
+    isPublic,
     };
   }
   
-  const notes = [
-    {
-      title: "Anotações",
-      date: 1659120152653,
-      categories: [true, false, true]
-    },
-    {
-      title: "Curso figma",
-      date: 237,
-      categories: [true, true, true]
-    },
-    {
-      title: "1:1 Março",
-      date: 1647802751770,
-      categories: [false, false, true]
-    },
-    {
-      title: "Soft Talk Liderança",
-      date: 305,
-      categories: [true, false, false]
-    },
-    {
-      title: "1:1 Fevereiro",
-      date: 1644951497325,
-      categories: [false, true, false]
-    },
-    {
-      title: "Anotações",
-      date: 1659120152653,
-      categories: [true, false, true]
-    },
-    {
-      title: "Curso figma",
-      date: 237,
-      categories: [true, true, true]
-    },
-    {
-      title: "1:1 Março",
-      date: 1647802751770,
-      categories: [false, false, true]
-    },
-    {
-      title: "Soft Talk Liderança",
-      date: 305,
-      categories: [true, false, false]
-    },
-    {
-      title: "1:1 Fevereiro",
-      date: 1644951497325,
-      categories: [false, true, false]
-    },
-    {
-      title: "Anotações",
-      date: 1659120152653,
-      categories: [true, false, true]
-    },
-    {
-      title: "Curso figma",
-      date: 237,
-      categories: [true, true, true]
-    },
-    {
-      title: "1:1 Março",
-      date: 1647802751770,
-      categories: [false, false, true]
-    },
-    {
-      title: "Soft Talk Liderança",
-      date: 305,
-      categories: [true, false, false]
-    },
-    {
-      title: "1:1 Fevereiro",
-      date: 1644951497325,
-      categories: [false, true, false]
-    },
-    {
-      title: "Anotações",
-      date: 1659120152653,
-      categories: [true, false, true]
-    },
-    {
-      title: "Curso figma",
-      date: 237,
-      categories: [true, true, true]
-    },
-    {
-      title: "1:1 Março",
-      date: 1647802751770,
-      categories: [false, false, true]
-    },
-    {
-      title: "Soft Talk Liderança",
-      date: 305,
-      categories: [true, false, false]
-    },
-    {
-      title: "1:1 Fevereiro",
-      date: 1644951497325,
-      categories: [false, true, false]
-    },
-  ];
+  
+  const TableContent = ({ handleClick }: { handleClick: React.Dispatch<React.SetStateAction<noteType | null | undefined>>}) => {    
+    const [notes, setNotes] = useState<noteType[]>([]);
 
-  
-  let rows = [
-    notes.map((note:any) =>
-    createData(
-      note.title,
-      note.date,
-      note.categories
-      )
-      )
-    ];
-  
-  
-  export default function TableContent() {
+    const { user } = useAuth();
+    const getNotes = async (email:string) => {
+      const notes = await axios.get(`http://localhost:4000/api/note/${email}`)
+      
+      return notes.data.notesFormated
+    }
+    
+    useEffect(() => {
+      (async () => {
+        setNotes( await getNotes("felipe.reggiane@rethink.dev"));
+      })();
+
+      return
+    }, [])
+
+    let rows = notes.map((note: noteType) =>
+      createData(
+        note
+        )
+      );
 
   return (
     <TableContainer className={style.table_container} component={Paper}>
@@ -167,12 +91,12 @@ function createData(title: string, date: number, categories: boolean[]) {
         </TableRow>
       </TableHead>
         <TableBody>
-          {rows.map((note) =>(
-            note.map((row) => (
+          {rows.map((row) =>(
               <TableRow
                 className={style.table_body}
-                key={row.title}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                onClick={() => handleClick(row)}
               >
                 <TableCell
                   className={style.table_body_nota}
@@ -182,14 +106,10 @@ function createData(title: string, date: number, categories: boolean[]) {
                   {row.title}
                 </TableCell>
                 <TableCell className={style.table_body_date} align="left">
-                  {new Intl.DateTimeFormat("pt-BR", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    }).format(row.date)}
+                  {new Date(row.createdAt).toLocaleDateString('pt-BR')}
                 </TableCell>
                 <TableCell className={style.table_body_category} align="left">
-                  {row.hard && (
+                  {row.categories[0] && (
                     <Tooltip direction="top" content="Hard Skills">
                       <div className={style.table_body_category_icon_div}>
                         <img
@@ -200,7 +120,7 @@ function createData(title: string, date: number, categories: boolean[]) {
                       </div>
                     </Tooltip>
                   )}{" "}
-                  {row.soft && (
+                  {row.categories[1] && (
                     <Tooltip direction="top" content="Soft Skills">
                       <div className={style.table_body_category_icon_div}>
                         <img
@@ -211,7 +131,7 @@ function createData(title: string, date: number, categories: boolean[]) {
                       </div>
                     </Tooltip>
                   )}{" "}
-                  {row.desenvolvimentoPessoal && (
+                  {row.categories[2] && (
                     <Tooltip
                       direction="top-left"
                       content="Desenvolvimento Pessoal"
@@ -227,10 +147,11 @@ function createData(title: string, date: number, categories: boolean[]) {
                   )}
                 </TableCell>
               </TableRow>
-            )
-          )))}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
+
+export default TableContent
