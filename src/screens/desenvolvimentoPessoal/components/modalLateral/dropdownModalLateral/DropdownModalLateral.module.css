@@ -1,0 +1,111 @@
+.dropdown_container_open,
+.dropdown_container_closed{
+    display: flex;
+    flex-direction: column;
+    max-height: 24px;
+    transition: max-height .1s ease-in-out;
+    border-bottom: 1px solid var(--color-opacity-1);
+    padding: 20px;
+    background-color: var(--color-base);
+    gap: 12px;
+}
+
+.dropdown_container_open{
+    max-height: 2000px !important;
+    background-color: var(--color-input);
+    transition: max-height .5s ease-in-out;
+}
+
+.dropdown_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown_header_title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.dropdown_header_img_toggle,
+.dropdown_header_img_toggle_closed{
+    color: var(--color-tertiary);
+    transition: all 0.3s ease;
+}
+
+.dropdown_header_img_toggle_closed{
+    transition: all 0.3s ease;
+}
+
+.dropdown_header_img_toggle:hover{
+    transition: all 0.3s ease;
+    transform: rotate(180deg);
+}
+
+.dropdown_content_open,
+.dropdown_content_closed{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 1;
+    transition: opacity .5s linear;
+    transition-delay: .25s;
+}
+
+.dropdown_content_closed{
+    opacity: 0;
+    transition: opacity .1s linear;
+    transition-delay: 0s;
+}
+
+.dropdown_content_progress{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: max-height .8s ease-in-out;
+}
+
+.dropdown_content_quantity{
+    display: flex;
+}
+
+.dropdown_content_quantity p{
+    display: flex;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-secondary);
+}
+
+.dropdown_content_quantity span{
+    display: flex;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-tertiary);
+}
+
+/* .dropdown_checkbox_open,
+.dropdown_checkbox_closed{
+    opacity: 1;
+    transition: opacity .5s linear;
+    transition-delay: 1s;
+}
+
+.dropdown_checkbox_closed{
+    opacity: 0;
+    transition: opacity .1s linear;
+    transition-delay: 1s;
+} */
+
+.dropdown_content_checkbox{
+    visibility: hidden;
+}
