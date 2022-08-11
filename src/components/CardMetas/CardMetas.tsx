@@ -122,7 +122,7 @@ const CardMetas = () => {
   return (
     <div className={styles.CardUltimasMetas_info}>
       <div className={styles.CardUltimasMetas_inner}>
-        <img src={Images.MedalUltimasMetas} alt="medalha ultimas Goals" />
+        <img src={Images.LastGoalsMedal} alt="medalha ultimas Goals" />
 
         <div className={styles.CardUltimasMetas_inner_info}>
           <h1>Avaliação de {activeGoals.month}</h1>
@@ -189,7 +189,7 @@ const CardMetas = () => {
           relativeValue={completedGoals.length}
         />
 
-        <img src={Images.MedalStarMetas} alt="Estrela metas" />
+        <img src={Images.LastGoalsStar} alt="Estrela metas" />
       </div>
     </div>
   );

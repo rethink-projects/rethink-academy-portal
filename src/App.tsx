@@ -6,6 +6,7 @@ import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import Notes from "./screens/notes/NotesScreen";
+import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route path="/notas" element={<Layout />}>
               <Route index element={<Notes />} />
+            </Route>
+            <Route path="/desenvolvimentoPessoal" element={<Layout />}>
+              <Route index element={<PersonalDevelopmentScreen />} />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
