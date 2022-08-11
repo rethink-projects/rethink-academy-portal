@@ -16,7 +16,7 @@ type Module = {
   name: string;
   blocked: boolean;
   completed: boolean;
-  classes?: Array<Class>;
+  lessons?: Array<Class>;
 };
 type Class = {
   id: string;
@@ -36,7 +36,7 @@ const Acordeon = ({
     name: "Aqui está o nome do módulo",
     blocked: false,
     completed: true,
-    classes: [
+    lessons: [
       {
         id: "xasdxcdefewr",
         name: "O nome dessa aula é esse",
@@ -51,7 +51,7 @@ const Acordeon = ({
   },
 }: AcordeonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const classes: Array<Class> = module.classes!;
+  const lessons: Array<Class> = module.lessons!;
 
   return (
     <div className={isOpen ? styles.container : ""}>
@@ -80,16 +80,20 @@ const Acordeon = ({
           <IconMore />
         </div>
       </div>
-      {isOpen && classes != null && (
+      {isOpen && lessons != null && (
         <div className={styles.acordeon_container}>
-          {classes.map((clas) => (
-            <div className={styles.acordeon_item} style={{ width: width + 2 }}>
+          {lessons.map((lesson, index) => (
+            <div
+              key={index}
+              className={styles.acordeon_item}
+              style={{ width: width + 2 }}
+            >
               <div className={styles.acordeon_left_side}>
                 <IconVideoCam />
-                {clas.name}
+                {lesson.name}
               </div>
               <div className={styles.acordeon_right_side}>
-                {clas.completed && <IconCheckedCircle />}
+                {lesson.completed && <IconCheckedCircle />}
               </div>
             </div>
           ))}
