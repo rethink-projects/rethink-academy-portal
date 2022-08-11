@@ -1,6 +1,5 @@
 import styles from "./Playground.module.css";
-import TrilhasComponent from "../home/components/trilhas/TrilhasComponent";
-import CardMetas from "../../components/CardMetas/CardMetas";
+
 function PlaygroundScreen() {
   return (
     <div className={styles.playground_container}>
@@ -9,9 +8,7 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
 
-        <div className={styles.playground_container_inner}>
-          <CardMetas />
-        </div>
+        <div className={styles.playground_container_inner}></div>
       </div>
     </div>
   );

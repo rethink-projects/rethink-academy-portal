@@ -7,6 +7,7 @@ import Checkbox from "../Checkbox/Checkbox";
 import Images from "../../assets/index";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import ModalLateral from "../../screens/desenvolvimentoPessoal/components/modalLateral/ModalLateral";
 
 type cardProps = {
   id: number;
@@ -66,6 +67,7 @@ const goalsDataSim = [
 
 const CardMetas = () => {
   const [goals, setGoals] = useState<cardProps[]>(goalsDataSim);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleClick = (props: any) => {
     setGoals(() =>
@@ -130,9 +132,10 @@ const CardMetas = () => {
         </div>
 
         <ArrowForwardIosRoundedIcon
-          onClick={() => {}}
+          onClick={() => setModalOpen(true)}
           className={styles.cardUltimasMetas_arrow}
         />
+        {isModalOpen && <ModalLateral onClose={() => setModalOpen(false)} />}
       </div>
 
       <div className={styles.Metas_Container}>
