@@ -5,7 +5,7 @@ import CardMetas from "../../components/CardMetas/CardMetas";
 import style from "./PersonalDevelopmentScreen.module.css";
 
 const PersonalDevelopmentScreen = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  // const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <div className={style.screenInner}>
