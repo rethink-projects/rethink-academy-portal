@@ -6,8 +6,10 @@ import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon
 import TableContent from "../../../notes/components/table/TableContent";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useNavigate } from "react-router-dom";
 
 const CardNotas = () => {
+  const navigate = useNavigate();
   return (
     <div className={style.cardContainer}>
       <div className={style.table}>
@@ -19,7 +21,9 @@ const CardNotas = () => {
         text="Nova Nota"
         icon={<AddOutlinedIcon />}
         width={622}
-        onClick={() => {}}
+        onClick={() => {
+          navigate("/notas");
+        }}
         position="left"
       />
     </div>
