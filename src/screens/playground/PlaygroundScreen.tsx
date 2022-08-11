@@ -9,7 +9,11 @@ function PlaygroundScreen() {
         <h2>Playground de Componentes</h2>
         <p>Insira abaixo o seu componente:</p>
         <div className={styles.playground_container_inner}>
-          <AccordionMM />
+          <AccordionMM
+            description="Lorem"
+            time="13h - 14h45"
+            tags={["Em Progresso", "Reuniões Internas"]}
+          />
         </div>
       </div>
     </div>
