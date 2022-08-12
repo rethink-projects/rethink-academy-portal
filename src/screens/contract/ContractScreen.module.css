@@ -9,7 +9,7 @@
   justify-content: space-between;
 }
 
-.contract_status{
+.contract_status {
   max-width: 65%;
 }
 
@@ -109,4 +109,37 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 16px;
+}
+
+.contract_current_status {
+  min-width: 460px;
+  display: flex;
+  height: 80px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.contract_current_status_text {
+  margin-left: 24px;
+}
+
+.contract_current_status_text h1 {
+  margin-bottom: 8px;
+}
+.contract_current_status_text p {
+  margin-bottom: 0px;
+}
+
+.contract_current_status_tag {
+  margin-right: 24px;
+}
+
+@media screen and (max-width: 1200px) {
+  .contract_inner_container {
+    flex-direction: column;
+  }
 }

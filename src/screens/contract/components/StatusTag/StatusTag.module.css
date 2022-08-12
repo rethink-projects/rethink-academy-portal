@@ -1,0 +1,34 @@
+.status_active,
+.status_inactive,
+.status_pending {
+  display: flex;
+  width: 185px;
+  height: 48px;
+  background: #f9f9f9;
+  border: 1px solid #48a135;
+  border-radius: 4px;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.status_inactive {
+  border: 1px solid #da1e28;
+}
+
+.status_pending {
+  border: 1px solid #eab308;
+}
+
+.status_active svg {
+  margin-left: 12px;
+}
+
+.status_inactive svg {
+  margin-left: 12px;
+}
+
+.status_pending svg {
+  margin-left: 12px;
+}

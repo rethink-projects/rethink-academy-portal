@@ -1,6 +1,5 @@
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import styles from "./ContractScreen.module.css";
 import {
   CorporateFare,
@@ -11,7 +10,10 @@ import {
   InfoOutlined,
 } from "@mui/icons-material";
 import NewDocumentCard from "./components/NewDocumentCard/NewDocumentCard";
-import DocumentCard, { documentsList } from "./components/DocumentCard/DocumentCard";
+import DocumentCard, {
+  documentsList,
+} from "./components/DocumentCard/DocumentCard";
+import StatusTag from "./components/StatusTag/StatusTag";
 
 const Info = {
   college: "Universidade do Estado de Minas Gerais",
@@ -42,18 +44,14 @@ const ContractScreen = () => {
       <div className={styles.contract_title}>Contrato</div>
       <div className={styles.contract_inner_container}>
         <div className={styles.contract_status}>
-          <h1>Status do Contrato</h1>
-          <p>
-            Envie todos os documentos necessários para preencher a barra e obter
-            REX's.
-          </p>
-          <div className={styles.contract_progress_bar}>
-            <ProgressBar
-              totalValue={8}
-              relativeValue={2}
-              size="large"
-              width={870}
-            />
+          <div className={styles.contract_current_status}>
+            <div className={styles.contract_current_status_text}>
+              <h1>Status do Contrato</h1>
+              <p>Envie todos os documentos necessários obter REX's.</p>
+            </div>
+            <div className={styles.contract_current_status_tag}>
+              <StatusTag type="active"/>
+            </div>
           </div>
           <h1>Documentos</h1>
           <div className={styles.cards_container}>
