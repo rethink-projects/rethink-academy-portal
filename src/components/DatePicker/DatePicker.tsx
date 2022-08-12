@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Calendar from "./Components/Calendar";
 
 // CSS
@@ -17,15 +17,11 @@ export const DatePicker = ({
   hasIcon = false,
   size = "default",
   placeholder = "Placeholder",
-}) => {
-  const [active, setActive] = useState(false);
+}: DatePickerProps) => {
+  const [active, setActive] = useState(true);
 
   return (
-    <div
-      className={styles.datePicker_container}
-      onClick={() => setActive(!active)}
-    >
-      {/* <Calendar /> */}
+    <div className={styles.datePicker_container}>
       <div className={`${styles[size]}`}>
         <div className={styles.datePicker_content}>
           {hasIcon && (
@@ -35,15 +31,16 @@ export const DatePicker = ({
           )}
           <p>{placeholder}</p>
         </div>
-
         <div className={styles.datePicker_calendarIcon}>
           <img src={Images.icons.calendarIcon} alt="A calendar icon" />
         </div>
       </div>
+      <div
+        className={styles.datePicker_calendar}
+        onClick={() => setActive(!active)}
+      >
+        <Calendar />
+      </div>
     </div>
   );
 };
-
-// hover
-
-// :DatePickerProps

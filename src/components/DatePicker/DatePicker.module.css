@@ -1,4 +1,13 @@
-.datePicker_container {}
+.datePicker_container {
+    width: 243px;
+    border-radius: 4px;
+    border: 1px solid #CFD0E2;
+}
+
+.datePicker_container:hover {
+    border: 1px solid #9496B8;
+    box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+}
 
 .datePicker_content {
     display: flex;
@@ -25,9 +34,7 @@
     justify-content: space-between;
     padding: 21px 18px;
     gap: 8px;
-    width: 243px;
     background: #FFFFFF;
-    border: 1px solid #CFD0E2;
     border-radius: 4px;
 }
 
@@ -68,3 +75,5 @@
 .datePicker_calendarIcon {
     margin-top: 4px;
 }
+
+.datePicker_calendar {}
