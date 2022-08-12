@@ -1,37 +1,49 @@
 import React, { useState } from "react";
-import "./styles.css";
-import { DateRange } from "react-date-range";
-import pt from "date-fns/locale/pt";
+import Calendar from "./Components/Calendar";
 
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
+// CSS
+import styles from "./DatePicker.module.css";
 
-const DatePicker = () => {
-  const [state, setState] = useState<
-    { startDate?: Date; endDate?: Date; key?: string }[]
-  >([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+// Assets
+import Images from "../../assets";
+
+type DatePickerProps = {
+  hasIcon?: boolean;
+  size: "large" | "default" | "small" | "micro";
+  placeholder: string;
+};
+
+export const DatePicker = ({
+  hasIcon = false,
+  size = "default",
+  placeholder = "Placeholder",
+}) => {
+  const [active, setActive] = useState(false);
 
   return (
-    <DateRange
-      className={"large"}
-      editableDateInputs={true}
-      onChange={(item) => {
-        setState([item.selection]);
-        console.log(item.selection);
-      }}
-      moveRangeOnFirstSelection={false}
-      ranges={state}
-      locale={pt}
-      showMonthAndYearPickers={false}
-      showDateDisplay={false}
-    />
+    <div
+      className={styles.datePicker_container}
+      onClick={() => setActive(!active)}
+    >
+      {/* <Calendar /> */}
+      <div className={`${styles[size]}`}>
+        <div className={styles.datePicker_content}>
+          {hasIcon && (
+            <>
+              <img src={Images.icons.eyeIcon} alt="An eye icon" />
+            </>
+          )}
+          <p>{placeholder}</p>
+        </div>
+
+        <div className={styles.datePicker_calendarIcon}>
+          <img src={Images.icons.calendarIcon} alt="A calendar icon" />
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default DatePicker;
+// hover
+
+// :DatePickerProps

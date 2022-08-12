@@ -1,0 +1,70 @@
+.datePicker_container {}
+
+.datePicker_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+}
+
+.datePicker_content>p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    color: #6C6F93;
+}
+
+.large,
+.default,
+.small,
+.micro {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 21px 18px;
+    gap: 8px;
+    width: 243px;
+    background: #FFFFFF;
+    border: 1px solid #CFD0E2;
+    border-radius: 4px;
+}
+
+.large {
+    height: 64px;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.default {
+    height: 48px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.small {
+    height: 40px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.small img {
+    width: 17px;
+    height: 17px;
+}
+
+.micro {
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.micro img {
+    width: 15px;
+    height: 15px;
+}
+
+.datePicker_calendarIcon {
+    margin-top: 4px;
+}
