@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
-import IconEye from "@mui/icons-material/VisibilityOutlined";
 import IconArrow from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 type DropdownProps = {
