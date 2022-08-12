@@ -9,7 +9,7 @@ type DropdownProps = {
   id: string;
   size?: "small" | "micro" | "default" | "large";
   initialText?: string;
-  width?: number;
+  width: number;
   disabled?: boolean;
   leftIcon?: JSX.Element;
 };
@@ -54,7 +54,7 @@ const Dropdown = ({
         ].join(" ")}
       >
         <div className={styles.inner_left}>
-          {leftIcon ?? <IconEye />}
+          {leftIcon}
           {placeholder}
         </div>
         <IconArrow />
