@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from "./Acordeon.module.css";
+import styles from "./Accordion.module.css";
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 
-type AcordeonProps = {
+type AccordionProps = {
   width?: number;
   module?: Module;
 };
@@ -29,7 +29,7 @@ type Class = {
   type: "video" | "audio" | "activity";
 };
 
-const Acordeon = ({
+const Accordion = ({
   width = 348,
   module = {
     id: 1,
@@ -49,7 +49,7 @@ const Acordeon = ({
       },
     ],
   },
-}: AcordeonProps) => {
+}: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const lessons: Array<Class> = module.lessons!;
 
@@ -82,18 +82,18 @@ const Acordeon = ({
         </div>
       </div>
       {isOpen && lessons != null && (
-        <div className={styles.acordeon_container}>
+        <div className={styles.Accordion_container}>
           {lessons.map((lesson, index) => (
             <div
               key={index}
-              className={styles.acordeon_item}
+              className={styles.Accordion_item}
               style={{ width: width + 2 }}
             >
-              <div className={styles.acordeon_left_side}>
+              <div className={styles.Accordion_left_side}>
                 <IconVideoCam />
                 {lesson.name}
               </div>
-              <div className={styles.acordeon_right_side}>
+              <div className={styles.Accordion_right_side}>
                 {lesson.completed && <IconCheckedCircle />}
               </div>
             </div>
@@ -104,4 +104,4 @@ const Acordeon = ({
   );
 };
 
-export default Acordeon;
+export default Accordion;
