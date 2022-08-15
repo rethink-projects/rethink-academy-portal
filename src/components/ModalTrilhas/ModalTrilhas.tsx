@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, RefObject, useState } from 'react'
+import React, { useState } from 'react'
 import IconButton from '../IconButton/IconButton';
 import styles from "./ModalTrilhas.module.css"
 import Checkbox from '../Checkbox/Checkbox';
@@ -7,12 +7,13 @@ import { style } from '@mui/system';
 type modalProps = {
     title: string;
     iconClose?: JSX.Element;
+    children?: React.ReactNode;
     onClose: VoidFunction;
     id?: string;
     onClickConfirm?: VoidFunction;
 }
 
-const Modal = ({ iconClose, title, onClose = () => { }, id = "outside", onClickConfirm }: modalProps) => {
+const Modal = ({ children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm }: modalProps) => {
 
     const [disabledConfirm, setDisabledConfirm] = useState(false);
     const disabledConfirmClass = disabledConfirm ? styles.modal_actions_confirm_disabled : "";
@@ -47,7 +48,7 @@ const Modal = ({ iconClose, title, onClose = () => { }, id = "outside", onClickC
 
 
                 <div className={styles.modal_content}>
-                    {/* Colocar o corpo do modal aqui */}
+                    {children}
                 </div>
 
                 <div className={styles.modal_actions}>
