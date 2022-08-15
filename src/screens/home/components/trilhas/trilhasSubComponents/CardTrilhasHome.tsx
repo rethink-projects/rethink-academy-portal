@@ -1,6 +1,8 @@
 import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type TrailType = {
   trilha: { name: string; id: number; description: string };
@@ -77,6 +79,14 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
       completed: true,
     },
   ];
+
+  const [trilhas, setTrilhas] = useState<TrailType[]>();
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/api/course")
+      .then((response) => setTrilhas(response.data.course));
+
+  }, []);
 
   const getCoursesFromTrail = (trilha: number) => {
     const allCourses = courses.filter(
