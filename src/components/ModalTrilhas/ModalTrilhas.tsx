@@ -3,6 +3,7 @@ import IconButton from '../IconButton/IconButton';
 import styles from "./ModalTrilhas.module.css"
 import Checkbox from '../Checkbox/Checkbox';
 import { style } from '@mui/system';
+import SimpleButton from '../SimpleButton/SimpleButton';
 
 type modalProps = {
     title: string;
@@ -11,26 +12,15 @@ type modalProps = {
     onClose: VoidFunction;
     id?: string;
     onClickConfirm?: VoidFunction;
+    onClickCancel?: VoidFunction;
 }
 
-const Modal = ({ children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm }: modalProps) => {
-
-    const [disabledConfirm, setDisabledConfirm] = useState(false);
-    const disabledConfirmClass = disabledConfirm ? styles.modal_actions_confirm_disabled : "";
+const Modal = ({ children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm, onClickCancel }: modalProps) => {
 
     const handleOutsideClick = (e: any) => {
         if (e.target.id === id) {
             onClose();
         }
-    }
-
-    // parte para mostrar o onClick do confirm.
-    const handleClickConfirm = () => {
-        console.log(true);
-    }
-
-    if (!onClickConfirm) {
-        onClickConfirm = handleClickConfirm;
     }
 
     return (
@@ -52,7 +42,8 @@ const Modal = ({ children, iconClose, title, onClose = () => { }, id = "outside"
                 </div>
 
                 <div className={styles.modal_actions}>
-                    Colocar os botões aqui
+                    <SimpleButton type="outline" text='Cancelar' onClick={onClickCancel!} />
+                    <SimpleButton text='Confirmar' onClick={onClickConfirm!} />
                 </div>
             </div>
         </div>
