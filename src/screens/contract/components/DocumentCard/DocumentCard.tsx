@@ -7,10 +7,10 @@ import {
 } from "@mui/icons-material";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 
-interface DocumentProps {
+type DocumentProps = {
   id: string;
   name: string;
-}
+};
 
 export const documentsList: DocumentProps[] = [
   {
