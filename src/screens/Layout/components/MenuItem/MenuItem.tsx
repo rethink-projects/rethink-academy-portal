@@ -6,19 +6,28 @@ type MenuItemProps = {
   text: string;
   customCss?: React.CSSProperties;
   icon: string;
-<<<<<<< HEAD
+  onClick?: () => void;
   link?: string;
 };
 
-function MenuItem({ link = "#", isOpen, text, icon }: MenuItemProps) {
+function MenuItem({
+  link = "#",
+  isOpen,
+  text,
+  icon,
+  onClick,
+  customCss,
+}: MenuItemProps) {
   return (
-    <Link to={link}>
+    <Link to={link} className={styles.menu_item}>
       <div
         className={
-          !isOpen ? styles.menu_body_item : styles.menu_body_item_closed
+          isOpen ? styles.menu_body_item : styles.menu_body_item_closed
         }
+        style={customCss}
+        onClick={onClick}
       >
-        <img className={styles.menu_body_item_img} src={icon} alt="Icon Home" />
+        <img src={icon} alt="Icon Home" />
         {isOpen ? (
           <span className={styles.menu_body_item_text}>{text}</span>
         ) : (
@@ -26,25 +35,6 @@ function MenuItem({ link = "#", isOpen, text, icon }: MenuItemProps) {
         )}
       </div>
     </Link>
-=======
-  onClick?: () => void;
-};
-
-function MenuItem({ isOpen, text, icon, customCss, onClick }: MenuItemProps) {
-  return (
-    <div
-      className={isOpen ? styles.menu_body_item : styles.menu_body_item_closed}
-      style={customCss}
-      onClick={onClick}
-    >
-      <img src={icon} alt="Icon Home" />
-      {isOpen ? (
-        <span className={styles.menu_body_item_text}>{text}</span>
-      ) : (
-        <div />
-      )}
-    </div>
->>>>>>> main
   );
 }
 

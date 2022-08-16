@@ -52,24 +52,81 @@ function Menu() {
           alt="RatRa"
         />
       </div>
-      <div className={styles.menu_body}>
-        <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
-        <MenuItem
-          isOpen={isOpen}
-          text="Seu Desenvolvimento"
-          icon={Images.icons.DevelopmentIcon}
-        />
-        <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
-        <MenuItem
-          isOpen={isOpen}
-          text="Registro de Horas"
-          icon={Images.icons.ClockHome}
-        />
-        <MenuItem
-          isOpen={isOpen}
-          text="Contrato"
-          icon={Images.icons.ContractIcon}
-        />
+      <div className={isOpen ? styles.menu_body_open : styles.menu_body_closed}>
+        <div
+          className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
+        >
+          <MenuItem
+            isOpen={isOpen}
+            link="/dashboard"
+            text="Home"
+            icon={Images.icons.IconHome}
+          />
+          <MenuItem
+            isOpen={isOpen}
+            link="/dashboard/registroDeHoras"
+            text="Seu Desenvolvimento"
+            icon={Images.icons.DevelopmentIcon}
+          />
+          <MenuItem
+            link="/dashboard/trilhas"
+            isOpen={isOpen}
+            text="Cursos"
+            icon={Images.icons.ratIcon}
+          />
+          <MenuItem
+            link="/dashboard/registroDeHoras"
+            isOpen={isOpen}
+            text="Registro de Horas"
+            icon={Images.icons.ClockHome}
+          />
+          <MenuItem
+            link="/dashboard/contrato"
+            isOpen={isOpen}
+            text="Contrato"
+            icon={Images.icons.ContractIcon}
+          />
+        </div>
+
+        <div
+          className={
+            isOpen ? styles.fotter_menu_open : styles.fotter_menu_closed
+          }
+        >
+          <MenuItem
+            isOpen={isOpen}
+            onClick={handleLogout}
+            text={isOpen ? "Sair" : ""}
+            icon={Images.icons.LogoutIcon}
+            customCss={
+              isOpen
+                ? {}
+                : {
+                    // padding: "0px",
+                    margin: "0px",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }
+            }
+          />
+          <div className={!isOpen ? styles.divider : styles.divider_closed} />
+          <div className={styles.avatar}>
+            <Avatar
+              size="default"
+              onClick={() => {}}
+              type={user.email ? "image" : "text"}
+            >
+              <img
+                referrerPolicy="no-referrer"
+                className={styles.avatar_img}
+                src={user.avatarUrl}
+                alt="Avatar"
+              />
+            </Avatar>
+            {isOpen && <span>{user.name}</span>}
+          </div>
+        </div>
       </div>
     </div>
   );
