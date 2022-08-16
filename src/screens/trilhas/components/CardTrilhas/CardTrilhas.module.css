@@ -236,3 +236,7 @@
 .card_progressBar_incomplete span {
   color: var(--color-secondary-hover) !important;
 }
+
+.edit {
+  margin-top: -8px;
+}

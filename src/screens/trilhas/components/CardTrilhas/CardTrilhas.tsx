@@ -2,8 +2,11 @@ import styles from "./CardTrilhas.module.css";
 import image from "../../../../assets/academyCardTrilhas.png";
 import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
+import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
+import EditIcon from '@mui/icons-material/BorderColorOutlined';
 
 type TypeCardTrilhas = {
+  user?: "student" | "teacher",
   title: string;
   description: string;
   inputTrilha?: {
@@ -17,6 +20,7 @@ type TypeCardTrilhas = {
 };
 
 const CardTrilhas = ({
+  user = "student",
   onClick,
   title,
   description,
@@ -36,19 +40,19 @@ const CardTrilhas = ({
     return blocked;
   };
   if (blocked) {
-    onClick = () => {};
+    onClick = () => { };
   }
   const { totalVideo, watched } = inputTrilha!;
   const card_progressBar = courseCompleted()
     ? styles.card_progressBar_complete
     : styles.card_progressBar_incomplete;
-  const completedCourseClass_container = courseCompleted()
+  const completedCourseClass_container = courseCompleted() && user === "student"
     ? styles.container_completed
     : styles.container;
   const completedCourseClass_effect_img = courseCompleted()
     ? styles.effect_image_completed
     : styles.effect_image_incomplete;
-  const completedCourseClass_effect_card_hover = courseCompleted()
+  const completedCourseClass_effect_card_hover = courseCompleted() && user === "student"
     ? styles.effect_card_completed
     : styles.effect_card_incomplete;
   const videoBlockedClass = videoBlocked()
@@ -66,20 +70,28 @@ const CardTrilhas = ({
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{title}</h1>
           <p className={styles.card_content_description}>{description}</p>
-          <div className={card_progressBar}>
-            <span>{`${calcPercentage()}%`}</span>
-            <ProgressBar
-              width={242}
-              relativeValue={watched}
-              totalValue={totalVideo > 0 ? totalVideo : 1}
-            />
-          </div>
-          <p className={styles.legend_progressBar}>
-            {`${watched} de ${totalVideo} curso(s) concluído(s).`}
-          </p>
+          {user === "student" ? (
+            <>
+              <div className={card_progressBar}>
+                <span>{`${calcPercentage()}%`}</span>
+                <ProgressBar
+                  width={242}
+                  relativeValue={watched}
+                  totalValue={totalVideo > 0 ? totalVideo : 1}
+                />
+              </div>
+              <p className={styles.legend_progressBar}>
+                {`${watched} de ${totalVideo} curso(s) concluído(s).`}
+              </p>
+            </>)
+            : (
+              <div className={styles.edit}>
+                <ButtonWithIcon width={100} position="left" text="Editar" icon={<EditIcon />} size="small" type="primary" />
+              </div>
+            )}
         </div>
       </div>
-      {videoBlocked() ? (
+      {videoBlocked() && user === "student" ? (
         <div className={videoBlockedClass}>
           <div className={styles.container_padlock}>
             <PadLock />
