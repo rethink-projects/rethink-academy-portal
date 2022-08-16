@@ -23,6 +23,7 @@ const ButtonWithIcon = ({
       onClick={onClick}
       className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
       style={{ width: width }}
+      disabled={type === "disabled"}
     >
       {position === "left" && icon}
       {text}

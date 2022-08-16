@@ -1,20 +1,41 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Images from "../../../../assets";
+import Avatar from "../../../../components/Avatar/Avatar";
+import { useAuth } from "../../../../context/AuthContext";
+import { useNotification } from "../../../../context/NotificationContext";
 import MenuItem from "../MenuItem/MenuItem";
 import styles from "./Menu.module.css";
 
 function Menu() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { user, signout } = useAuth();
+  const navigate = useNavigate();
+  const { notify } = useNotification();
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
   const currentClass = isOpen
-    ? styles.menu_container
+    ? styles.menu_container_open
     : styles.menu_container_closed;
+
+  const handleLogout = () => {
+    signout(() => {
+      notify({
+        title: "Você foi deslogado",
+        description: "Você foi deslogado com sucesso",
+        type: "success",
+      });
+      navigate("/");
+    });
+  };
+  if (!user?.email) {
+    return <p>Loading...</p>;
+  }
   return (
     <div className={currentClass}>
-      <div className={styles.menu_header}>
+      <div className={styles.menu_header_open}>
         <img
           onClick={handleClick}
           className={
@@ -32,23 +53,13 @@ function Menu() {
         />
       </div>
       <div className={styles.menu_body}>
-        <MenuItem
-          link="/"
-          isOpen={isOpen}
-          text="Home"
-          icon={Images.icons.IconHome}
-        />
+        <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
         <MenuItem
           isOpen={isOpen}
           text="Seu Desenvolvimento"
           icon={Images.icons.DevelopmentIcon}
         />
-        <MenuItem
-          link="/trilhas"
-          isOpen={isOpen}
-          text="Cursos"
-          icon={Images.icons.ratIcon}
-        />
+        <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
         <MenuItem
           isOpen={isOpen}
           text="Registro de Horas"
