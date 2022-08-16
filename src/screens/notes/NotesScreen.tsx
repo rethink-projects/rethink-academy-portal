@@ -55,7 +55,7 @@ const NotesScreen = () => {
       <div className={style.containerTop}>
         <div className={style.titleAndToggle}>
           <div>
-            <input type="text" placeholder="Título" defaultValue={"Título"} />
+            <input type="text" value={state?.title} placeholder="Título" defaultValue={"Título"} />
           </div>
           <PrivacyToggle />
         </div>
