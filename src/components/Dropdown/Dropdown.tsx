@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
-import IconEye from "@mui/icons-material/VisibilityOutlined";
 import IconArrow from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 type DropdownProps = {
@@ -9,7 +8,7 @@ type DropdownProps = {
   id: string;
   size?: "small" | "micro" | "default" | "large";
   initialText?: string;
-  width?: number;
+  width: number;
   disabled?: boolean;
   leftIcon?: JSX.Element;
 };
@@ -54,7 +53,7 @@ const Dropdown = ({
         ].join(" ")}
       >
         <div className={styles.inner_left}>
-          {leftIcon ?? <IconEye />}
+          {leftIcon}
           {placeholder}
         </div>
         <IconArrow />
