@@ -1,0 +1,66 @@
+.outer_border {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+  border: 1.5px solid;
+  border: 1.5px solid var(--color-primary-hover);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer_border_disabled {
+  width: 58px;
+  height: 58px;
+  border-radius: 29px;
+  border: 1.5px solid var(--color-tertiary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.white_background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 27px;
+  background-color: var(--color-base);
+}
+.emblem {
+  width: 40px;
+  height: 40px;
+}
+.emblem_background_border {
+  width: 40px;
+  height: 40px;
+
+  background: linear-gradient(
+    131deg,
+    rgba(249, 249, 249, 0) 23.04%,
+    rgba(226, 250, 133, 0.79) 44.65%,
+    rgba(249, 249, 249, 0) 62.54%
+  );
+  border-radius: 50%;
+  mix-blend-mode: normal;
+}
+.emblem_background {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(
+    140.23deg,
+    rgba(211, 250, 58, 0.15) 15.93%,
+    rgba(255, 255, 255, 0.25) 48.25%,
+    rgba(28, 28, 28, 0.15) 108.04%
+  );
+  border-radius: 50%;
+}
+
+.helper {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  background: #d3fa3a;
+}
