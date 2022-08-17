@@ -1,0 +1,81 @@
+.container {
+  width: 560px;
+  height: 64px;
+}
+
+/* titulo */
+.container_title {
+  width: 181px;
+  height: 24px;
+  padding: 24px 0px 16px 0px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* frases + img */
+.containner {
+  display: flex;
+  justify-content: space-between;
+  padding: 9.24px 0px 0px 0px;
+}
+
+.textone {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--color-addtask-font-text);
+  width: 233px;
+  height: 114px;
+  padding: 44px 15px 0px 0px;
+}
+
+.texttwo {
+  font-size: 32px;
+  font-weight: 300;
+  width: 251px;
+  padding: 120px 21.5px 0px 0px;
+}
+
+.iconImg {
+    padding: 0px 0px 20px 0px;
+}
+
+.iconImg > svg {
+  width: 46.35px;
+  height: 130.57px;
+}
+
+/* input */
+.input_form {
+  display: flex;
+  border: 1px solid var(--color-tertiary-hover);
+  padding: 0 16px;
+  width: 528px;
+  height: 64px;
+  border-radius: 4px;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.input_form > span {
+  width: 488px;
+  cursor: default;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: transparent;
+  color: var(--color-tertiary-active);
+  border: transparent;
+  outline: 0;
+}
+
+.addCircle > svg {
+    padding: 21.5px 0px 17.5px 0px;
+    cursor: pointer;
+}
+
+.addCircle > svg > path {
+  fill: var(--color-tertiary-active);
+}

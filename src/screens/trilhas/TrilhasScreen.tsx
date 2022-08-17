@@ -231,7 +231,7 @@ const TrilhasScreen = () => {
         ))}
       </>
       {modalIsOpen &&
-        <ModalEditCardTrilhas onClose={() => setModalIsOpen(false)} />}
+        <ModalEditCardTrilhas setValueNameTrail="" setValueDescriptionTrail="" onClose={() => setModalIsOpen(false)} />}
 
     </div>
   );

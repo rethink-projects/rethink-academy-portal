@@ -1,0 +1,96 @@
+.container,
+.container_completed {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 368px;
+  height: 65px;
+  background-color: var(--color-base);
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+}
+
+.container:hover {
+  border: 1px solid var(--color-tertiary-hover);
+}
+
+.container_completed {
+  border: 1px solid #bde034;
+}
+
+.container_completed:hover {
+  border: 1px solid #9dba2b;
+}
+
+.name_trilha {
+  width: 101px;
+  margin-left: 27.5px;
+  margin-right: 32px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--color-secondary-hover);
+  flex-shrink: 0;
+}
+.divisoria {
+  flex-shrink: 0;
+  width: 1px;
+  height: 40px;
+  background-color: var(--color-icon-background);
+}
+
+.state {
+  margin-left: 32px;
+  margin-right: 27.5px;
+}
+.progress_container {
+  /* display: flex; */
+  width: 148px;
+}
+
+.blocked {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+}
+
+.blocked span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-secondary-hover);
+}
+
+.padlock_border {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #9dba2b;
+  border-radius: 3px;
+}
+.padlock_border svg {
+  color: #9dba2b;
+  width: 19px;
+}
+
+.ProgressBar_small {
+  width: 10px;
+}
+.free {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.free span {
+  margin: 0;
+  width: 30px;
+  margin-right: 7px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-tertiary-active);
+}
