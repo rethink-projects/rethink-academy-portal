@@ -2,8 +2,12 @@ import styles from "./CardTrilhas.module.css";
 import image from "../../../../assets/academyCardTrilhas.png";
 import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
+import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
+import EditIcon from "@mui/icons-material/BorderColorOutlined";
+import { ModalEditCardTrilhas } from "../ModalEditCardTrilhas/ModalEditCardTrilhas";
 
 type TypeCardTrilhas = {
+  user?: "student" | "teacher";
   title: string;
   description: string;
   inputTrilha?: {
@@ -11,38 +15,57 @@ type TypeCardTrilhas = {
     watched: number;
   };
   image?: string;
+  blocked: boolean;
+  onClick: () => void;
+  previous: string;
+  setModal: VoidFunction;
 };
 
-const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
-  const { totalVideo, watched } = inputTrilha!;
+const CardTrilhas = ({
+  user = "student",
+  onClick,
+  title,
+  description,
+  inputTrilha,
+  blocked,
+  previous,
+  setModal
+}: TypeCardTrilhas) => {
 
   const calcPercentage = (): number => {
-    return Math.floor((watched / totalVideo) * 100);
+    return Math.floor((watched / (totalVideo > 0 ? totalVideo : 1)) * 100);
   };
 
   const courseCompleted = (): boolean => {
-    return false; //totalVideo === watched
+    return calcPercentage() === 100; //totalVideo === watched
   };
 
   const videoBlocked = (): boolean => {
-    return false;
+    return blocked;
   };
-
-  const completedCourseClass_container = courseCompleted()
-    ? styles.container_completed
-    : styles.container;
+  if (blocked) {
+    onClick = () => { };
+  }
+  const { totalVideo, watched } = inputTrilha!;
+  const card_progressBar = courseCompleted()
+    ? styles.card_progressBar_complete
+    : styles.card_progressBar_incomplete;
+  const completedCourseClass_container =
+    courseCompleted() && user === "student"
+      ? styles.container_completed
+      : styles.container;
   const completedCourseClass_effect_img = courseCompleted()
     ? styles.effect_image_completed
     : styles.effect_image_incomplete;
-  const completedCourseClass_effect_card_hover = courseCompleted()
-    ? styles.effect_card_completed
-    : styles.effect_card_incomplete;
+  const completedCourseClass_effect_card_hover =
+    courseCompleted() && user === "student"
+      ? styles.effect_card_completed
+      : styles.effect_card_incomplete;
   const videoBlockedClass = videoBlocked()
     ? styles.container_video_blocked
     : "";
-
   return (
-    <div className={completedCourseClass_container}>
+    <div className={completedCourseClass_container} onClick={() => onClick()}>
       <div className={styles.container_inner}>
         <div
           style={{ backgroundImage: `url(${image})` }}
@@ -53,23 +76,53 @@ const CardTrilhas = ({ title, description, inputTrilha }: TypeCardTrilhas) => {
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{title}</h1>
           <p className={styles.card_content_description}>{description}</p>
-          <div className={styles.card_progressBar}>
-            <span>{`${calcPercentage()}%`}</span>
-            <ProgressBar relativeValue={watched} totalValue={totalVideo} />
-          </div>
-          <p className={styles.legend_progressBar}>
-            20 de 20 cursos concluídos.
-          </p>
+          {user === "student" ? (
+            <>
+              <div className={card_progressBar}>
+                <span>{`${calcPercentage()}%`}</span>
+                <ProgressBar
+                  width={242}
+                  relativeValue={watched}
+                  totalValue={totalVideo > 0 ? totalVideo : 1}
+                />
+              </div>
+              <p className={styles.legend_progressBar}>
+                {`${watched} de ${totalVideo} curso(s) concluído(s).`}
+              </p>
+            </>
+          ) : (
+            <>
+              <p className={styles.quantity_courses}>
+                {totalVideo > 1 || totalVideo == 0
+                  ? `${totalVideo} Cursos`
+                  : `${totalVideo} Curso`}
+              </p>
+              <div id="edit" className={styles.edit}>
+                <ButtonWithIcon
+                  onClick={setModal}
+                  width={100}
+                  position="left"
+                  text="Editar"
+                  icon={<EditIcon />}
+                  size="small"
+                  type="primary"
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
-      {videoBlocked() ? (
+      {videoBlocked() && user === "student" ? (
         <div className={videoBlockedClass}>
           <div className={styles.container_padlock}>
             <PadLock />
           </div>
           <div className={styles.content_video_blocked}>
             <h1>Trilha Bloqueada!</h1>
-            <p>Assista pelo menos um curso da Trilha nome para desbloquear.</p>
+            <p>
+              {`Assista pelo menos um curso da Trilha ${previous} para
+              desbloquear.`}
+            </p>
           </div>
         </div>
       ) : (
