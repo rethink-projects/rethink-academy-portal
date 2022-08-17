@@ -13,7 +13,8 @@ type DropdownProps = {
   leftIcon?: JSX.Element;
 };
 
-/*  O local onde o dropdown for inserido precida de align-items: flex-start
+/*  O pai precisa de align-items: flex-start para que o dropdown aberto não 
+
     Necessário um useState no pai. O setState será passado como props no setValue
 */
 const Dropdown = ({
