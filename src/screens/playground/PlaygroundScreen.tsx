@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ModalTrilhas from "../../components/ModalTrilhas/ModalTrilhas";
-import CardCourse from "../CoursesScreen/Components/CardCourse";
 import styles from "./Playground.module.css";
 import CloseIcon from '@mui/icons-material/Close';
+import ModalTrilhas from "../../components/ModalTrilhas/ModalTrilhas";
 
 
 function PlaygroundScreen() {
