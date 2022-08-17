@@ -5,6 +5,7 @@ import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import EditIcon from '@mui/icons-material/BorderColorOutlined';
 
+
 type TypeCardTrilhas = {
   user?: "student" | "teacher",
   title: string;
@@ -28,6 +29,8 @@ const CardTrilhas = ({
   blocked,
   previous,
 }: TypeCardTrilhas) => {
+
+
   const calcPercentage = (): number => {
     return Math.floor((watched / (totalVideo > 0 ? totalVideo : 1)) * 100);
   };
@@ -85,9 +88,14 @@ const CardTrilhas = ({
               </p>
             </>)
             : (
-              <div className={styles.edit}>
-                <ButtonWithIcon width={100} position="left" text="Editar" icon={<EditIcon />} size="small" type="primary" />
-              </div>
+              <>
+                <p className={styles.quantity_courses}>
+                  {totalVideo > 1 || totalVideo == 0 ? `${totalVideo} Cursos` : `${totalVideo} Curso`}
+                </p>
+                <div className={styles.edit}>
+                  <ButtonWithIcon width={100} position="left" text="Editar" icon={<EditIcon />} size="small" type="primary" />
+                </div>
+              </>
             )}
         </div>
       </div>

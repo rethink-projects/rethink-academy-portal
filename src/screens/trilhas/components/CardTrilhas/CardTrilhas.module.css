@@ -237,6 +237,11 @@
   color: var(--color-secondary-hover) !important;
 }
 
-.edit {
+.quantity_courses {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-tertiary-active);
+  margin-bottom: 16px;
   margin-top: -8px;
 }
