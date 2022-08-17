@@ -17,9 +17,14 @@ import IconRight from "./IconRight.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+
 import deleteIcon from "./deleteIcon.svg";
 import chatIcon from "./chatIcon.svg";
 import arrowDownIcon from "./arrowDownIcon.svg";
+
+import arrowTask from "./arrowTask.svg";
+import calendarIcon from "./calendarIcon.svg";
+import eyeIcon from "./eyeIcon.svg";
 
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
@@ -37,7 +42,10 @@ export const Images = {
   raArrow,
   logoRethink,
   logoRaSecondary,
+  arrowTask,
   icons: {
+    calendarIcon,
+    eyeIcon,
     left: IconLeft,
     right: IconRight,
     search,
