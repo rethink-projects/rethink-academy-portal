@@ -2,6 +2,7 @@ import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 
 const TrilhasScreen = () => {
+
   const inputTrilha = {
     totalVideo: 30,
     watched: 30,
