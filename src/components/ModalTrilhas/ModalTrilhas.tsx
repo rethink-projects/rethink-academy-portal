@@ -45,7 +45,7 @@ const Modal = ({ oneButton = false, children, iconClose, title, onClose = () => 
                 <div className={styles.modal_actions}>
                     {!oneButton &&
                         <SimpleButton type="outline" text='Cancelar' onClick={onClickCancel!} />}
-                    <SimpleButton text='Confirmar' onClick={onClickConfirm!} />
+                    <SimpleButton size='block' text='Confirmar' onClick={onClickConfirm!} />
                 </div>
             </div>
         </div>
