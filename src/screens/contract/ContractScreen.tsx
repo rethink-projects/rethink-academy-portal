@@ -14,6 +14,7 @@ import DocumentCard, {
   documentsList,
 } from "./components/DocumentCard/DocumentCard";
 import StatusTag from "./components/StatusTag/StatusTag";
+import { useAuth } from "../../context/AuthContext";
 
 const Info = {
   college: "Universidade do Estado de Minas Gerais",
@@ -31,6 +32,9 @@ const Info = {
 };
 
 const ContractScreen = () => {
+  const { user } = useAuth();
+  console.log({user})
+  
   return (
     <div className={styles.contract_outer_container}>
       <div className={styles.breadcrumb}>
