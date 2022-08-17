@@ -4,9 +4,15 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { info, log } from "console";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 type Trilhas = { name: string; id: string; description: string };
 const TrilhasScreen = () => {
+
+  const { user: testeUser } = useAuth();
+
+  console.log(testeUser);
+
   let trails: Array<Trilhas> = [];
 
 

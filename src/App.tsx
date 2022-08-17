@@ -17,14 +17,12 @@ function App() {
           <Route path="/">
             <Route index element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/home" element={<Layout />}>
+            <Route path="/dashboard" element={<Layout />}>
               <Route index element={<HomeScreen />} />
+              <Route path="/dashboard/trilhas" element={<TrilhasScreen />} />
+              <Route path="/dashboard/trilhas/:id" element={<CursosScreen />} />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
-            <Route path="/trilhas/" element={<Layout />}>
-              <Route index element={<TrilhasScreen />} />
-              <Route path="/trilhas/:id" element={<CursosScreen />} />
-            </Route>
           </Route>
         </Routes>
       </AuthProvider>
