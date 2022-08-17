@@ -34,4 +34,5 @@
 .card_info svg {
   transform: scale(1.7);
   margin-top: 24px;
+  z-index: 0px;
 }

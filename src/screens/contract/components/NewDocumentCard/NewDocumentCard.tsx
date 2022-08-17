@@ -39,10 +39,10 @@ const NewDocumentCard = (props: any) => {
           />
         </div>
       </div>
-      <aside>
+      {/* <aside>
         <h4>Files</h4>
         <ul>{files}</ul>
-      </aside>
+      </aside> */}
     </div>
   );
 };

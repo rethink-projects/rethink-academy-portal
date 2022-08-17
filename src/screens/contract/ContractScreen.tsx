@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./ContractScreen.module.css";
 import {
@@ -13,8 +13,9 @@ import NewDocumentCard from "./components/NewDocumentCard/NewDocumentCard";
 import DocumentCard, {
   documentsList,
 } from "./components/DocumentCard/DocumentCard";
-import StatusTag from "./components/StatusTag/StatusTag";
 import { useAuth } from "../../context/AuthContext";
+import Dropdown from "./components/Dropdown/StatusDropdown";
+import StatusTag from "./components/StatusTag/StatusTag";
 
 const Info = {
   college: "Universidade do Estado de Minas Gerais",
@@ -29,9 +30,12 @@ const Info = {
     "Monitor",
     "Apoio ergonômico",
   ],
+  statusMessage: "Envie todos os documentos necessários obter REX's."
 };
 
 const ContractScreen = () => {
+
+  const [contractStatus, setContractStatus] = useState("");
   const { user } = useAuth();
   console.log({user})
   
@@ -51,10 +55,11 @@ const ContractScreen = () => {
           <div className={styles.contract_current_status}>
             <div className={styles.contract_current_status_text}>
               <h1>Status do Contrato</h1>
-              <p>Envie todos os documentos necessários obter REX's.</p>
+              <p>{Info.statusMessage}</p>
             </div>
             <div className={styles.contract_current_status_tag}>
-              <StatusTag type="active"/>
+              {/* <StatusTag type="active"/> */}
+              <Dropdown setValue={setContractStatus} value={contractStatus} id={""} width={181}/>
             </div>
           </div>
           <h1>Documentos</h1>

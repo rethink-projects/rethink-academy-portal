@@ -119,11 +119,12 @@
   border: 1px solid #d4d4d4;
   border-radius: 8px;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 48px;
 }
 
 .contract_current_status_text {
+  margin-top: 12px;
   margin-left: 24px;
 }
 
@@ -135,6 +136,7 @@
 }
 
 .contract_current_status_tag {
+  margin-top: 16px;
   margin-right: 24px;
 }
 
