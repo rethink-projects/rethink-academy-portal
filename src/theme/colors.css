@@ -68,6 +68,9 @@
   /* Progress Bar */
   --color-progressbar-external-dark: rgba(241, 241, 241, 0.5);
 
+  /* Add Task */
+  --color-addtask-font-text: #8f8f8f;
+
   /* Icons CoursesScreen */
   --color-icon-task: #5cc754;
   --color-icon-alert: #facc15;

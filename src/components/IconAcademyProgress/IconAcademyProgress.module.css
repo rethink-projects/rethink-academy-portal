@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.outer_border {
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  border: 1px solid rgba(226, 250, 132, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+}
+.outer_border_locked {
+  width: 46px;
+  height: 46px;
+  background-image: url("../../assets/dashedBorder.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  background-color: rgba(226, 250, 132, 1);
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon_locked {
+  background-color: var(--color-base);
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon_locked > svg {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  text-align: center;
+  padding: 4px 8px;
+  background: #e0ffe2;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #1b1b1b;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

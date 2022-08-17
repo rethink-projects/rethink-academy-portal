@@ -17,30 +17,56 @@ import IconRight from "./IconRight.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import one from "./lineOne.png";
+import two from "./lineTwo.png";
+import three from "./lineThree.png";
+import homeBackground from "./homeBackground.jpg";
+import deleteIcon from "./deleteIcon.svg";
+import chatIcon from "./chatIcon.svg";
+import arrowDownIcon from "./arrowDownIcon.svg";
 import weakBatery from "./bateryIcon.svg";
 import averageBatery from "./bateryIconAverage.svg";
 import fullBatery from "./bateryIconFull.svg";
 
-import LastGoalsMedal from "./LastGoalsMedal.svg";
-import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
-import LastGoalsFlag from "./LastGoalsFlag.svg";
+import arrowTask from "./arrowTask.svg";
+import calendarIcon from "./calendarIcon.svg";
+import eyeIcon from "./eyeIcon.svg";
+
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
+import level_Icon from "./level_Icon.svg";
+import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
+import LastGoalsMedal from "./LastGoalsMedal.svg";
+import LastGoalsFlag from "./LastGoalsMedal.svg";
 
+import Emblem from "./Emblem.png";
+import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
+import chat from "./chat.png";
 export const Images = {
   logo,
   checkbox,
   arrow,
+  Emblem,
+  LastGoalsMedal,
+  LastGoalsFlag,
+  chat,
+  Emblem_Disable,
+  LastGoalsAmpoule,
   info,
   google: googleIcon,
   ratRa,
   raArrow,
   logoRethink,
   logoRaSecondary,
+  arrowTask,
+  homeBackground,
   icons: {
+    calendarIcon,
+    eyeIcon,
+    level_Icon,
     left: IconLeft,
     right: IconRight,
     search,
@@ -54,13 +80,18 @@ export const Images = {
     ContractIcon,
     DevelopmentIcon,
     LogoutIcon,
+    deleteIcon,
+    chatIcon,
+    arrowDownIcon,
     weakBatery,
     averageBatery,
     fullBatery,
   },
-  LastGoalsMedal,
-  LastGoalsAmpoule,
-  LastGoalsFlag,
+  lines: {
+    one,
+    two,
+    three,
+  },
   avatar: avatarImage,
 };
 
