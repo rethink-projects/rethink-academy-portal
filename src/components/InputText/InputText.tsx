@@ -6,7 +6,7 @@ import styles from "./InputText.module.css";
 type InputTextProps = {
   type: "micro" | "default" | "small" | "large";
   placeholder: string;
-  onChange?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hasIcon: Boolean;
   iconPosition?: "left" | "both" | "right";
   label?: string;
@@ -14,6 +14,9 @@ type InputTextProps = {
   elementCaption?: string;
   left?: JSX.Element;
   right?: JSX.Element;
+  value: string;
+  onClickRight?: () => void;
+  onClickLeft?: () => void;
 };
 
 const InputText = ({
@@ -27,6 +30,9 @@ const InputText = ({
   elementCaption,
   left,
   right,
+  value,
+  onClickRight,
+  onClickLeft,
 }: InputTextProps) => {
   let container, inputLabel, input, icon, field;
 
@@ -67,7 +73,9 @@ const InputText = ({
 
       <div className={input}>
         {hasIcon && iconPosition !== "right" && (
-          <div className={icon}>{hasIcon && left}</div>
+          <div className={icon} onClick={onClickLeft}>
+            {hasIcon && left}
+          </div>
         )}
 
         <input
@@ -77,10 +85,13 @@ const InputText = ({
           required
           placeholder={placeholder}
           onChange={onChange}
+          value={value}
         />
 
         {hasIcon && iconPosition !== "left" && (
-          <div className={icon}>{hasIcon && right}</div>
+          <div className={icon} onClick={onClickRight}>
+            {hasIcon && right}
+          </div>
         )}
       </div>
       {elementCaption && (
