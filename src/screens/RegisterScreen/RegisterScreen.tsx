@@ -1,5 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import Note from "../../components/Note/Note";
 import SearchCalendar from "./Components/SearchCalendar/SearchCalendar";
 
 import styles from "./RegisterScreen.module.css";
@@ -14,16 +15,25 @@ import styles from "./RegisterScreen.module.css";
 const RegisterScreen = () => {
   return (
     <div className={styles.register_container}>
-      <div className={styles.register_breadcrumb}>
-        <Breadcrumb
-          breadcrumbItems={[
-            { title: "Home", link: "/" },
-            { title: "Registro de Horas", link: "/register" },
-          ]}
-        />
+      <div className={styles.register_content}>
+        <div className={styles.register_breadcrumb}>
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/" },
+              { title: "Registro de Horas", link: "/register" },
+            ]}
+          />
+        </div>
+        <div className={styles.register_body}>
+          <div className={styles.register_registerTasks}>
+            Registro de Tarefas
+            <input placeholder="Registro de Tarefas" type="text" />
+          </div>
+          <div className={styles.register_reminders}>
+            <Note />
+          </div>
+        </div>
       </div>
-      <div className={styles.register_registerTasks}></div>
-      <div className={styles.register_reminders}></div>
       <div className={styles.register_searchTasks}>
         <SearchCalendar />
       </div>

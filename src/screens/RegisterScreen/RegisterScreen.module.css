@@ -10,18 +10,42 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100vh;
     background: #F5F5F5;
 }
 
+.register_content {}
+
 .register_breadcrumb {
+    display: inline-block !important;
     margin-left: 8%;
     margin-top: 24px;
     margin-bottom: 24px;
 }
 
-.register_registerTasks {}
+.register_body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 8%;
+    /* ENQUANTO NAO POSSUI COMPONENT */
+    /* gap: 110px; */
+}
 
-.register_reminders {}
+/* ENQUANTO NAO POSSUI COMPONENT */
+.register_registerTasks {
+    width: 560px;
+    height: 64px;
+    /* margin-right: 7.6%; */
+}
+
+input {
+    width: 560px;
+    height: 64px;
+}
+
+.register_reminders {
+    margin-left: 7.6%;
+    margin-right: 8%;
+}
 
 .register_searchTasks {}
