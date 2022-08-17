@@ -6,24 +6,42 @@ import { useAuth } from "../../context/AuthContext";
 const IconAcademyProgress = ({
   text,
   top,
-  now = false,
-  locked = false,
+  inicialDate,
+  finalDate,
 }: {
   text: string;
   top?: number;
-  now?: boolean;
-  locked?: boolean;
+  inicialDate: Date;
+  finalDate: Date;
 }) => {
   const { user } = useAuth();
+
+  const dateNow = new Date();
+
+  let dateDefiner = () => {
+    if (inicialDate < dateNow && finalDate > dateNow) {
+      return { locked: false, now: true };
+    }
+    if (inicialDate < dateNow) {
+      return { locked: false, now: false };
+    }
+    return { locked: true, now: false };
+  };
   return (
     <div className={Styles.container} style={{ marginTop: top }}>
       <div
-        className={locked ? Styles.outer_border_locked : Styles.outer_border}
+        className={
+          dateDefiner()!.locked
+            ? Styles.outer_border_locked
+            : Styles.outer_border
+        }
       >
-        <div className={locked ? Styles.icon_locked : Styles.icon}>
-          {now ? (
+        <div
+          className={dateDefiner()!.locked ? Styles.icon_locked : Styles.icon}
+        >
+          {dateDefiner()!.now ? (
             <img className={Styles.avatar} src={user.avatarUrl} alt="img" />
-          ) : !locked ? (
+          ) : !dateDefiner()!.locked ? (
             <Flag htmlColor="rgba(72, 161, 53, 1)" />
           ) : (
             <Lock htmlColor="#9DBA2B" />

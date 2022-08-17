@@ -18,7 +18,7 @@
   bottom: 41px;
   right: 106px;
 }
-.first_stage {
+.stage1 {
   display: flex;
   align-items: flex-start;
   gap: 48px;
@@ -28,7 +28,7 @@
   left: 59px;
   top: 304px;
 }
-.second_stage {
+.stage2 {
   display: flex;
   align-items: flex-start;
   gap: 48px;
@@ -38,7 +38,7 @@
   left: 403px;
   top: 231px;
 }
-.third_stage {
+.stage3 {
   display: flex;
   align-items: flex-start;
   gap: 48px;
@@ -49,17 +49,17 @@
   top: 159px;
 }
 
-.emblem_one {
+.emblem_1 {
   position: absolute;
   top: 217px;
   left: 331px;
 }
-.emblem_two {
+.emblem_2 {
   position: absolute;
   top: 157px;
   left: 690px;
 }
-.emblem_three {
+.emblem_3 {
   position: absolute;
   top: 98px;
   left: 1047px;

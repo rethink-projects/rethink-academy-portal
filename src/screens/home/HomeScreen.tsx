@@ -1,23 +1,43 @@
 import Images from "../../assets";
 import AcademyProgress from "../../components/AcademyProgress/AcademyProgress";
+import LastGoalsCard from "../../components/LastGoalsCard/LastGoalsCard";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Register from "../../components/Register/Register";
-import StageIcon from "../../components/StageIcon/StageIcon";
 import { useAuth } from "../../context/AuthContext";
 import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import Styles from "./Home.module.css";
 
 function HomeScreen() {
   const { user } = useAuth();
-  console.log(user);
 
   if (!user) {
     return <div>Loading...</div>;
   }
+
+  const months = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+
   return (
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress />
+        <LastGoalsCard
+          quantityGoals={10}
+          mounth={months[new Date().getMonth()]}
+          quantityGoalsCompleted={10}
+        />
         <Register />
         <TrilhasComponent />
       </div>
@@ -29,7 +49,11 @@ function HomeScreen() {
         <p className={Styles.user_title}>Estagiario em design</p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>
-            <img src={Images.level_Icon} alt="Level Icon" />
+            <img
+              src={Images.level_Icon}
+              className={Styles.level_Icon}
+              alt="Level Icon"
+            />
 
             <p className={Styles.user_status_lvl}>
               lvl <strong>150</strong>
@@ -41,7 +65,7 @@ function HomeScreen() {
             </p>
           </div>
           <div className={Styles.user_progress_bar}>
-            <ProgressBar width={190} totalValue={0} relativeValue={0} />
+            <ProgressBar width={190} totalValue={100} relativeValue={100} />
           </div>
         </div>
         <div className={Styles.hr_divisor}></div>
