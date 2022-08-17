@@ -44,16 +44,18 @@ const renderCard = (
   intern: boolean
 ) => {
   let concluded = 3;
+  let emblem = false;
+
   user.trilhas.map(
     (trilhaUser) =>
       trilhaUser.trilha == trilha_id &&
-      trilhaUser.courses.map((cursoUser) =>
-        cursoUser.course_id === curso.id
-          ? cursoUser.completed
-            ? (concluded = 1)
-            : (concluded = 2)
-          : ""
-      )
+      trilhaUser.courses.map((cursoUser) => {
+        if (cursoUser.course_id === curso.id) {
+          emblem = cursoUser.emblem;
+          if (cursoUser.completed) concluded = 1;
+          else concluded = 2;
+        }
+      })
   );
 
   return (
@@ -64,7 +66,7 @@ const renderCard = (
       key={index}
       title={curso.name}
       concluded={concluded}
-      emblem={false}
+      emblem={emblem}
     />
   );
 };
@@ -93,7 +95,7 @@ const CursosScreen = () => {
             lastWatched_class_id: "iax9dhaiudshasip1",
             watched: [],
             completed: true,
-            emblem: true,
+            emblem: false,
           },
         ],
       },

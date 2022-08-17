@@ -25,6 +25,8 @@ const CardCurso = ({
   intern,
   emblem,
 }: cardCourseProp) => {
+  // console.log("Tem emblema? " + emblem + "\nCompletou o curso? " + concluded);
+
   const textConcluded =
     concluded === 1
       ? "Parabéns! Você concluiu esse curso!"
@@ -39,7 +41,11 @@ const CardCurso = ({
   if (intern) {
     icon = <IconVerified />;
     textButton = "Coletar emblema";
-    if (emblem) textButton = "Emblema obtido";
+    if (concluded != 1) disabled = true;
+    else if (emblem) {
+      textButton = "Emblema obtido";
+      disabled = true;
+    }
   }
 
   return (
@@ -83,7 +89,7 @@ const CardCurso = ({
           icon={icon}
           width={218}
           position="right"
-          type="secondary"
+          type={disabled ? "disabled" : "secondary"}
           text={textButton}
           size="medium"
         />
