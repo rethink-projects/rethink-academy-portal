@@ -13,10 +13,9 @@ type modalProps = {
     id?: string;
     onClickConfirm?: VoidFunction;
     onClickCancel?: VoidFunction;
-    oneButton?: boolean;
 }
 
-const Modal = ({ oneButton = false, children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm, onClickCancel }: modalProps) => {
+const Modal = ({ children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm, onClickCancel }: modalProps) => {
 
     const handleOutsideClick = (e: any) => {
         if (e.target.id === id) {
@@ -43,8 +42,7 @@ const Modal = ({ oneButton = false, children, iconClose, title, onClose = () => 
                 </div>
 
                 <div className={styles.modal_actions}>
-                    {!oneButton &&
-                        <SimpleButton type="outline" text='Cancelar' onClick={onClickCancel!} />}
+                    <SimpleButton type="outline" text='Cancelar' onClick={onClickCancel!} />
                     <SimpleButton text='Confirmar' onClick={onClickConfirm!} />
                 </div>
             </div>
