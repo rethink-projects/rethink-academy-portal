@@ -21,6 +21,9 @@ import weakBatery from "./bateryIcon.svg";
 import averageBatery from "./bateryIconAverage.svg";
 import fullBatery from "./bateryIconFull.svg";
 
+import LastGoalsMedal from "./LastGoalsMedal.svg";
+import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
+import LastGoalsFlag from "./LastGoalsFlag.svg";
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
@@ -55,7 +58,10 @@ export const Images = {
     averageBatery,
     fullBatery,
   },
-  avatarAverage: avatarImage,
+  LastGoalsMedal,
+  LastGoalsAmpoule,
+  LastGoalsFlag,
+  avatar: avatarImage,
 };
 
 export default Images;
