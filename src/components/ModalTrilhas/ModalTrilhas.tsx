@@ -17,7 +17,6 @@ type modalProps = {
 }
 
 const Modal = ({ oneButton = false, children, iconClose, title, onClose = () => { }, id = "outside", onClickConfirm, onClickCancel }: modalProps) => {
-
     const handleOutsideClick = (e: any) => {
         if (e.target.id === id) {
             onClose();
