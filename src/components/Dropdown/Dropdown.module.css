@@ -43,7 +43,7 @@
 }
 
 .dropdown_options_container {
-  position: absolute;
+  position: relative;
   width: inherit;
 }
 .dropdown_option {
