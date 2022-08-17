@@ -21,13 +21,15 @@
   background: #BDE034 !important;
 }
 
-.rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
+.rdrDayStartPreview,
+.rdrDayInPreview,
+.rdrDayEndPreview {
   border-color: #BDE034 !important;
   border-radius: 0px !important;
   background: rgba(189, 224, 52, 0.2) !important;
 }
 
-.rdrDayStartPreview{ 
+.rdrDayStartPreview {
   border-top-left-radius: 4px !important;
   border-bottom-left-radius: 4px !important;
 }
@@ -45,6 +47,7 @@
   color: #1B1B1B !important;
   width: 48px !important;
   height: 48px !important;
+  text-transform: capitalize !important;
 }
 
 .rdrDayNumber span {
@@ -55,12 +58,12 @@
   color: #3B3B3B !important;
 }
 
-.rdrDayNumber span::after{
+.rdrDayNumber span::after {
   background: #BDE034 !important;
   width: 10px !important;
 }
 
-.rdrDayToday .rdrDayNumber{
+.rdrDayToday .rdrDayNumber {
   background: #E2FA85 !important;
   border-radius: 50% !important;
   width: 25px !important;
@@ -72,7 +75,9 @@
   color: #B6B4B4 !important;
 }
 
-.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
   color: #1B1B1B !important;
 }
 
@@ -93,21 +98,21 @@
   font-weight: 500 !important;
   font-size: 16px !important;
   color: #1B1B1B !important;
+  text-transform: capitalize !important;
 }
 
 /* Alterar aqui para responsividade */
-.rdrDateRangeWrapper  {
+.rdrDateRangeWrapper {
   width: 308px !important;
-  height: 304px !important;
 }
 
 .rdrCalendarWrapper {
   width: 308px !important;
-  height: 304px !important;
 }
 
 .rdrMonthAndYearWrapper {
   width: 100% !important;
+  height: 52px !important;
 }
 
 .rdrMonths {
@@ -134,10 +139,10 @@
 
 .rdrDay {
   width: 40px !important;
-  height: 40px !important;  
+  height: 40px !important;
 }
 
 .rdrDayNumber {
   width: 40px !important;
-  height: 40px !important;  
+  height: 40px !important;
 }

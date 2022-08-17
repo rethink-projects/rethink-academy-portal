@@ -23,6 +23,8 @@ import AcademyIcon from "./AcademyIcon.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import calendarIcon from "./calendarIcon.svg";
+import eyeIcon from "./eyeIcon.svg";
 
 import LastGoalsMedal from "./LastGoalsMedal.svg";
 import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
@@ -72,6 +74,8 @@ export const Images = {
     ContractIcon,
     DevelopmentIcon,
     LogoutIcon,
+    calendarIcon,
+    eyeIcon,
   },
   LastGoalsMedal,
   LastGoalsAmpoule,
