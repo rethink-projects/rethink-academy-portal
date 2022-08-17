@@ -50,7 +50,7 @@ function HomeScreen() {
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>
             <img
-              src={Images.level_Icon}
+              src={Images.icons.level_Icon}
               className={Styles.level_Icon}
               alt="Level Icon"
             />
