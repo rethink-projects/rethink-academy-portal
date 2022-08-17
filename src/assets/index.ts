@@ -23,6 +23,7 @@ import AcademyIcon from "./AcademyIcon.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import arrowTask from "./arrowTask.svg";
 import calendarIcon from "./calendarIcon.svg";
 import eyeIcon from "./eyeIcon.svg";
 
@@ -60,6 +61,7 @@ export const Images = {
   raArrow,
   logoRethink,
   logoRaSecondary,
+  arrowTask,
   icons: {
     left: IconLeft,
     right: IconRight,
