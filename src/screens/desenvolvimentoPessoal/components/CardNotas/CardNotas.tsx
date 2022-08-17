@@ -13,7 +13,7 @@ const CardNotas = () => {
   return (
     <div className={style.cardContainer}>
       <div className={style.table}>
-        <TableContent handleClick={() => {}} />
+        <TableContent handleClick={() => {navigate("/notas")}} />
       </div>
       <ButtonWithIcon
         type="secondary"
