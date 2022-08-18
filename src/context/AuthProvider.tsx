@@ -15,6 +15,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     const backendUser = await getUserFromBackend(userFromFirebase.email);
     setUser({
       ...userFromFirebase,
+      name: backendUser.name,
       id: backendUser.id,
       role: backendUser.role,
       title: backendUser.title,
