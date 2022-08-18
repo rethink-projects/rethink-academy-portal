@@ -15,9 +15,11 @@ type modalProps = {
   onClickConfirm?: VoidFunction;
   onClickCancel?: VoidFunction;
   oneButton?: boolean;
+  nameButtonGreen?: string;
+  nameButtonBlack?: string;
 };
 
-const ModalTrails = ({
+const Modal = ({
   oneButton = false,
   children,
   iconClose,
@@ -26,6 +28,8 @@ const ModalTrails = ({
   id = "outside",
   onClickConfirm,
   onClickCancel,
+  nameButtonGreen = "Confirmar",
+  nameButtonBlack = "Cancelar",
 }: modalProps) => {
   const handleOutsideClick = (e: any) => {
     if (e.target.id === id) {
@@ -51,15 +55,15 @@ const ModalTrails = ({
           {!oneButton && (
             <SimpleButton
               type="outline"
-              text="Cancelar"
+              text={nameButtonBlack}
               onClick={onClickCancel!}
             />
           )}
-          <SimpleButton text="Confirmar" onClick={onClickConfirm!} />
+          <SimpleButton text={nameButtonGreen} onClick={onClickConfirm!} />
         </div>
       </div>
     </div>
   );
 };
 
-export default ModalTrails;
+export default Modal;

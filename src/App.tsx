@@ -6,8 +6,8 @@ import CursosScreen from "./screens/CoursesScreen/CursosScreen";
 import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
-import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
+import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 
 function App() {
   return (
