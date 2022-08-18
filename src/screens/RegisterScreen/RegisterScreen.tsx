@@ -1,4 +1,5 @@
 import React from "react";
+import AddTask from "../../components/AddTask/AddTask";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Note from "../../components/Note/Note";
 import SearchCalendar from "./Components/SearchCalendar/SearchCalendar";
@@ -26,8 +27,7 @@ const RegisterScreen = () => {
         </div>
         <div className={styles.register_body}>
           <div className={styles.register_registerTasks}>
-            Registro de Tarefas
-            <input placeholder="Registro de Tarefas" type="text" />
+            <AddTask />
           </div>
           <div className={styles.register_reminders}>
             <Note />

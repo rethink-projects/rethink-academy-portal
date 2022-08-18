@@ -12,7 +12,7 @@ import InputSearch from "../../../../components/InputSearch/InputSearch";
 import styles from "./SearchCalendar.module.css";
 
 // Calendar
-import CalendarComponent from "./Calendar";
+import CalendarComponent from "../../../../components/DatePicker/Components/Calendar";
 
 export default function SearchCalendar() {
   return (
