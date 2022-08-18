@@ -2,7 +2,6 @@ import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { info, log } from "console";
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 
