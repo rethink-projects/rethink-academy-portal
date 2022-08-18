@@ -140,12 +140,13 @@
   overflow: auto;
   padding-right: 6px;
 }
-
-.register_body_infos::-webkit-scrollbar {
-  width: 6px;
+/* .register_body_infos::-webkit-scrollbar {
+  width: 18px;
 }
-
 .register_body_infos::-webkit-scrollbar-thumb {
-  background: var(--color-icon-background);
-  border-radius: 50px;
+  border: 6px solid transparent;
 }
+
+.register_body_infos::-webkit-scrollbar-thumb:hover {
+  border: 5px solid transparent;
+} */

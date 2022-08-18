@@ -9,6 +9,7 @@ import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
 import { useState } from "react";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
 import CloseIcon from "@mui/icons-material/Close";
+import ClassModal from "./components/ClassModal/ClassModal";
 
 const CourseScreen = () => {
   const location = useLocation();
@@ -76,6 +77,7 @@ const CourseScreen = () => {
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -104,6 +106,7 @@ const CourseScreen = () => {
                 size={"medium"}
                 type={"primary"}
                 width={218}
+                onClick={() => setModalIsOpen(true)}
               />
             </div>
           </div>
@@ -131,14 +134,15 @@ const CourseScreen = () => {
               size={"medium"}
               type={"primary"}
               width={218}
+              onClick={() => setModalIsOpen(true)}
             />
           </div>
-          <button onClick={() => setModalIsOpen(true)}>Modal</button>
           {modalIsOpen && (
             <ModuleModal
               iconClose={<CloseIcon />}
               onClose={() => setModalIsOpen(false)}
-              title="Tem certeza que deseja excluir?"
+              title="Adicionar uma Aula"
+              children={<ClassModal />}
             />
           )}
           <div className={styles.modules}>
