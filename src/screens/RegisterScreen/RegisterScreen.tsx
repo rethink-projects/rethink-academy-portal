@@ -17,17 +17,26 @@ const RegisterScreen = () => {
   return (
     <div className={styles.register_container}>
       <div className={styles.register_content}>
-        <div className={styles.register_breadcrumb}>
-          <Breadcrumb
-            breadcrumbItems={[
-              { title: "Home", link: "/" },
-              { title: "Registro de Horas", link: "/register" },
-            ]}
-          />
+        <div className={styles.register_header}>
+          <div className={styles.register_breadcrumb}>
+            <Breadcrumb
+              breadcrumbItems={[
+                { title: "Home", link: "/" },
+                { title: "Registro de Horas", link: "/register" },
+              ]}
+            />
+          </div>
+          <div style={{ width: "450px", height: "20px" }}></div>
         </div>
         <div className={styles.register_body}>
           <div className={styles.register_registerTasks}>
+            <div className={styles.container_title}>
+              <p className={styles.title}>Registro de Tarefas</p>
+            </div>
             <AddTask />
+            {/* hasTasks ? 
+            <AddTask />
+            : */}
           </div>
           <div className={styles.register_reminders}>
             <Note />
