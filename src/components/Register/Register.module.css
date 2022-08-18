@@ -1,7 +1,7 @@
 .register_container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
   width: 368px;
   height: 426px;
   /* background-color: var(--color-base); */
@@ -139,13 +139,4 @@
   height: 170px;
   overflow: auto;
   padding-right: 6px;
-}
-
-.register_body_infos::-webkit-scrollbar {
-  width: 6px;
-}
-
-.register_body_infos::-webkit-scrollbar-thumb {
-  background: var(--color-icon-background);
-  border-radius: 50px;
 }
