@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-.menu_body_item_img {
-  /* width: 25px; */
-}
-
-a {
-  text-decoration: none;
-  color: var(--color-secondary);
-}
-
-=======
->>>>>>> main
 .menu_body_item {
   display: flex;
   justify-content: flex-start;

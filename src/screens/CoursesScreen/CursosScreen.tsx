@@ -1,14 +1,17 @@
 import { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardCourse from "./Components/CardCourse";
 import styles from "./CursosScreen.module.css";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 interface CoursesUser {
   course_id: number;
   lastWatched_class_id: string;
   watched: Array<string>;
   completed: boolean;
+  emblem: boolean;
 }
 
 type TrilhasUser = {
@@ -37,28 +40,33 @@ const renderCard = (
   index: number,
   curso: Course,
   trilha_id: number,
-  user: User
+  user: User,
+  intern: boolean
 ) => {
   let concluded = 3;
+  let emblem = false;
+
   user.trilhas.map(
     (trilhaUser) =>
       trilhaUser.trilha == trilha_id &&
-      trilhaUser.courses.map((cursoUser) =>
-        cursoUser.course_id === curso.id
-          ? cursoUser.completed
-            ? (concluded = 1)
-            : (concluded = 2)
-          : ""
-      )
+      trilhaUser.courses.map((cursoUser) => {
+        if (cursoUser.course_id === curso.id) {
+          emblem = cursoUser.emblem;
+          if (cursoUser.completed) concluded = 1;
+          else concluded = 2;
+        }
+      })
   );
 
   return (
     <CardCourse
+      intern={intern}
       onClickIrAoCurso={() => console.log("Foi para o curso")}
       onClickColetarEmblema={() => console.log("Coletou o emblema")}
       key={index}
       title={curso.name}
       concluded={concluded}
+      emblem={emblem}
     />
   );
 };
@@ -80,12 +88,14 @@ const CursosScreen = () => {
             lastWatched_class_id: "iax9dhaiudshasip1",
             watched: ["iax9dhaiudshasip1", "iax9dhaiudshasip1"],
             completed: false,
+            emblem: false,
           },
           {
             course_id: 2,
             lastWatched_class_id: "iax9dhaiudshasip1",
             watched: [],
             completed: true,
+            emblem: false,
           },
         ],
       },
@@ -135,6 +145,8 @@ const CursosScreen = () => {
   // Convertendo a primeira letra da trilha para maiúsculo
   selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
 
+  const intern = true;
+
   return (
     <div className={styles.center}>
       <div className={styles.container_cursos}>
@@ -147,12 +159,23 @@ const CursosScreen = () => {
         />
         <div className={styles.title}>
           <p>{`Programa de Cursos | ${selectedTrack}`}</p>
+          {!intern && (
+            <ButtonWithIcon
+              // onClick={onClickIrAoCurso}
+              icon={<AddCircleOutlineIcon />}
+              width={218}
+              position="right"
+              type="primary"
+              text="Ir para o curso"
+              size="medium"
+            />
+          )}
         </div>
         <div className={styles.cards}>
           {courses.map(
             (curso, index) =>
               curso.trilha == trilha_id &&
-              renderCard(index, curso, trilha_id, userTeste)
+              renderCard(index, curso, trilha_id, userTeste, intern)
           )}
         </div>
       </div>

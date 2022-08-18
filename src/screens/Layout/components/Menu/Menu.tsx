@@ -56,19 +56,32 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
           <MenuItem
             isOpen={isOpen}
+            link="/dashboard"
+            text="Home"
+            icon={Images.icons.IconHome}
+          />
+          <MenuItem
+            isOpen={isOpen}
+            link="/dashboard/registroDeHoras"
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
           <MenuItem
+            link="/dashboard/trilhas"
+            isOpen={isOpen}
+            text="Cursos"
+            icon={Images.icons.ratIcon}
+          />
+          <MenuItem
+            link="/dashboard/registroDeHoras"
             isOpen={isOpen}
             text="Registro de Horas"
             icon={Images.icons.ClockHome}
           />
           <MenuItem
+            link="/dashboard/contrato"
             isOpen={isOpen}
             text="Contrato"
             icon={Images.icons.ContractIcon}
@@ -87,9 +100,9 @@ function Menu() {
             icon={Images.icons.LogoutIcon}
             customCss={
               isOpen
-                ? { padding: "0px", margin: "0px" }
+                ? {}
                 : {
-                    padding: "0px",
+                    // padding: "0px",
                     margin: "0px",
                     width: "100%",
                     display: "flex",
