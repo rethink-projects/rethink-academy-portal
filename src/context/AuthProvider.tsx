@@ -10,9 +10,14 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(user);
   };
 
-  let signin = async (type: TypeProvider, callback: VoidFunction) => {
-    const userFromFirebase = await firebaseInstance.loginWithFirebase("google");
+  let signin = async (
+    type: TypeProvider = "google",
+    callback: VoidFunction
+  ) => {
+    const userFromFirebase = await firebaseInstance.loginWithFirebase(type);
     const backendUser = await getUserFromBackend(userFromFirebase.email);
+    console.log({ backendUser, userFromFirebase });
+
     setUser({
       ...userFromFirebase,
       name: backendUser.name,
@@ -20,7 +25,16 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       role: backendUser.role,
       title: backendUser.title,
     });
-    localStorage.setItem("@portarethinkacademy:user", JSON.stringify(user));
+    localStorage.setItem(
+      "@portarethinkacademy:user",
+      JSON.stringify({
+        ...userFromFirebase,
+        name: backendUser.name,
+        id: backendUser.id,
+        role: backendUser.role,
+        title: backendUser.title,
+      })
+    );
     callback();
   };
 
