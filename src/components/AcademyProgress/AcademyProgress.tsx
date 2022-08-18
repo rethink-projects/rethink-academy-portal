@@ -10,7 +10,7 @@ type stages = {
   dates: number[];
 };
 
-const AcademyProgress = () => {
+const AcademyProgress = ({ name }: { name: string }) => {
   const iconsInfo = [
     [
       {
@@ -128,7 +128,7 @@ const AcademyProgress = () => {
       ))}
       {dateRanges.map((stage, index) => {
         return (
-          <div className={Styles["emblem_" + (index + 1)]}>
+          <div className={Styles["emblem_" + (index + 1)]} key={index}>
             <StageIcon disabled={stage.finalDate > new Date().getTime()} />
           </div>
         );
@@ -137,7 +137,7 @@ const AcademyProgress = () => {
       <div className={Styles.chat}>
         <img src={Images.chat} alt="Hello User" />
         <div className={Styles.chat_text}>
-          E aí, Gabriel Gomes! <span>👋🏻</span>
+          E aí, {name}! <span>👋🏻</span>
         </div>
       </div>
       <div className={Styles.progress_bars}>
