@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+.rdrCalendarWrapper {
+  border: 1px solid #1B1B1B;
+  border-radius: 4px;
+}
+
+.rdrStartEdge {
+  background-color: #9DBA2B !important;
+  border-top-left-radius: 150px !important;
+  border-bottom-left-radius: 150px !important;
+}
+
+.rdrEndEdge {
+  background-color: #9DBA2B !important;
+  border-top-right-radius: 150px !important;
+  border-bottom-right-radius: 150px !important;
+}
+
+.rdrInRange {
+  background: #BDE034 !important;
+}
+
+.rdrDayStartPreview,
+.rdrDayInPreview,
+.rdrDayEndPreview {
+  border-color: #BDE034 !important;
+  border-radius: 0px !important;
+  background: rgba(189, 224, 52, 0.2) !important;
+}
+
+.rdrDayStartPreview {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.rdrDayEndPreview {
+  border-bottom-right-radius: 4px !important;
+  border-top-right-radius: 4px !important;
+}
+
+.rdrWeekDay {
+  font-family: 'Inter' !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  color: #1B1B1B !important;
+  width: 48px !important;
+  height: 48px !important;
+  text-transform: capitalize !important;
+}
+
+.rdrDayNumber span {
+  font-family: 'Inter' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  color: #3B3B3B !important;
+}
+
+.rdrDayNumber span::after {
+  background: #BDE034 !important;
+  width: 10px !important;
+}
+
+.rdrDayToday .rdrDayNumber {
+  background: #E2FA85 !important;
+  border-radius: 50% !important;
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto auto;
+}
+
+.rdrDayPassive span {
+  color: #B6B4B4 !important;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
+  color: #1B1B1B !important;
+}
+
+.rdrDayNumber {
+  width: 48px !important;
+  height: 48px !important;
+  top: 0px !important;
+  bottom: 0px !important;
+}
+
+.rdrNextPrevButton {
+  background: transparent !important;
+}
+
+.rdrMonthAndYearPickers {
+  font-family: 'Inter' !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  color: #1B1B1B !important;
+  text-transform: capitalize !important;
+}
+
+/* Alterar aqui para responsividade */
+.rdrDateRangeWrapper {
+  width: 308px !important;
+}
+
+.rdrCalendarWrapper {
+  width: 308px !important;
+}
+
+.rdrMonthAndYearWrapper {
+  width: 100% !important;
+  height: 52px !important;
+}
+
+.rdrMonths {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.rdrMonth {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.rdrWeekDays {
+  width: 92% !important;
+  margin-left: 10px !important;
+}
+
+.rdrDays {
+  width: 100% !important;
+  height: 70% !important;
+  margin-left: 10px !important;
+}
+
+.rdrDay {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.rdrDayNumber {
+  width: 40px !important;
+  height: 40px !important;
+}
