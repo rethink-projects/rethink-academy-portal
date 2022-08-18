@@ -1,45 +1,39 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { info, log } from "console";
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 
 type Trilhas = { name: string; id: string; description: string };
 const TrilhasScreen = () => {
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setStateModalOnclick = () => {
     setModalIsOpen(true);
-  }
+  };
 
   const inputTrilha = {
     totalVideo: 30,
     watched: 30,
-  }
+  };
 
   let trails: Array<Trilhas> = [];
-
 
   const [trilhas, setTrilhas] = useState<Trilhas[]>();
 
   useEffect(() => {
     const getTrails = async () => {
-      const response = (await axios.get("http://localhost:4000/api/trail")).data;
+      const response = (await axios.get("http://localhost:4000/api/trail"))
+        .data;
       if (response.trail) {
-
-
         setTrilhas(response.trail);
       }
-    }
+    };
 
     getTrails();
-
   }, []);
-
-
 
   const user = {
     id: 1,
@@ -82,7 +76,6 @@ const TrilhasScreen = () => {
       },
     ],
   };
-
 
   const courses = [
     {
@@ -134,14 +127,16 @@ const TrilhasScreen = () => {
   };
 
   const getTrailTitle = (id: string) => {
-    const title: string | undefined = trilhas?.filter((trilha: Trilhas) => trilha.id === id)[0].name;
+    const title: string | undefined = trilhas?.filter(
+      (trilha: Trilhas) => trilha.id === id
+    )[0].name;
     // console.log(title);
     // return title?[0].toUpperCase() + title.substring(1).toLowerCase();
     return "title";
   };
 
   const getTrailDescription = (id: string) => {
-    console.log(trails.filter((trail) => trail.id !== id)[0])
+    console.log(trails.filter((trail) => trail.id !== id)[0]);
     // const description = trails?.filter((trail) => trail.id === id)[0]
     //   .description;
     return "description";
@@ -208,10 +203,10 @@ const TrilhasScreen = () => {
           <div className={styles.title}>Trilhas</div>
           <div className={styles.description}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text ever
-            since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic typesetting,
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
             remaining essentially unchanged.
           </div>
         </div>
@@ -230,9 +225,9 @@ const TrilhasScreen = () => {
           ></CardTrilhas>
         ))}
       </>
-      {modalIsOpen &&
-        <ModalEditCardTrilhas setValueNameTrail="" setValueDescriptionTrail="" onClose={() => setModalIsOpen(false)} />}
-
+      {modalIsOpen && (
+        <ModalEditCardTrilhas onClose={() => setModalIsOpen(false)} />
+      )}
     </div>
   );
 };
