@@ -45,7 +45,7 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
             hasIcon={false}
             nameInput="nameTrail"
             placeholder="Exemplo: Academy"
-            type="default"
+            type="block"
             label="Nome da Trilha"
             onChange={onChangeNameTrail}
           />
@@ -53,13 +53,14 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
             placeholder={placeholder}
             label="Descrição da Trilha"
             caption="Adicione o link para utilizar a imagem que deseja utilizar"
+            type="block"
           />
           <InputText
             value={valueDescriptionTrail}
             hasIcon={false}
             nameInput="imageTrail"
             placeholder="https://Exemplo.com"
-            type="default"
+            type="block"
             label="Imagem de capa"
             onChange={onChangeDescriptionTrail}
           />
