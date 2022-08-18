@@ -19,7 +19,7 @@ type modalProps = {
   nameButtonBlack?: string;
 };
 
-const Modal = ({
+const ModalTrails = ({
   oneButton = false,
   children,
   iconClose,
@@ -54,16 +54,21 @@ const Modal = ({
         <div className={styles.modal_actions}>
           {!oneButton && (
             <SimpleButton
-              type="outline"
+              size="block"
+              type="secondary"
               text={nameButtonBlack}
               onClick={onClickCancel!}
             />
           )}
-          <SimpleButton text={nameButtonGreen} onClick={onClickConfirm!} />
+          <SimpleButton
+            size="block"
+            text={nameButtonGreen}
+            onClick={onClickConfirm!}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default ModalTrails;

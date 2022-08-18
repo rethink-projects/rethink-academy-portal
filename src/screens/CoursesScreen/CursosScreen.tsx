@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardCourse from "./Components/CardCourse/CardCourse";
@@ -69,6 +69,12 @@ const renderCard = (
       emblem={emblem}
     />
   );
+};
+
+const onClickGoToCourse = () => {
+  // const navigate = useNavigate();
+  console.log("add curso");
+  // const [modalIsOpen, setModalIsOpen] = useState(true);
 };
 
 const CursosScreen = () => {
@@ -161,7 +167,7 @@ const CursosScreen = () => {
           <p>{`Programa de Cursos | ${selectedTrack}`}</p>
           {!intern && (
             <ButtonWithIcon
-              // onClick={onClickIrAoCurso}
+              onClick={onClickGoToCourse}
               icon={<AddCircleOutlineIcon />}
               width={218}
               position="right"

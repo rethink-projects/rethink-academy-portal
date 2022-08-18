@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import ModalTrilhas from "../../components/ModalTrilhas/ModalTrilhas";
-import styles from "./Playground.module.css";
+// import styles from "./Playground.module.css";
+import styles from "../CoursesScreen/Components/CardAddCourse/CardAddCourse.module.css";
 import CloseIcon from "@mui/icons-material/Close";
+import InputText from "../../components/InputText/InputText";
+import Dropdown from "../../components/Dropdown/Dropdown";
+import Textarea from "../../components/Textarea/Textarea";
+import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
 
 function PlaygroundScreen() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
   return (
-    <div className={styles.playground_container}>
-      <div className={styles.playground_container_inner}>
-        <button onClick={() => setModalIsOpen(true)}>Modal</button>
-        {modalIsOpen && (
-          <ModalTrilhas
-            iconClose={<CloseIcon />}
-            onClose={() => setModalIsOpen(false)}
-            title="Tem certeza que deseja excluir?"
-          />
-        )}
-      </div>
+    <div>
+      <CardAddCourse title="Adicionar um Curso" />
     </div>
   );
 }
