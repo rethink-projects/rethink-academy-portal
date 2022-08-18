@@ -23,6 +23,7 @@ function LoginScreen() {
   }
 
   useEffect(() => {
+    console.log("bug aqui");
     const localStorageUser = JSON.parse(
       localStorage.getItem("@portarethinkacademy:user")!
     );

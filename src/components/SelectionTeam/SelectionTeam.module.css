@@ -1,0 +1,26 @@
+.containerSelectionTeam {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    height: 100px;
+}
+
+.containerSelectionTeam_contentIcons {
+    position: relative; 
+}
+
+.containerSelectionTeam_contentIcons_image {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.contentIcons_absolute {
+    position: absolute;
+    top: -20px;
+}
+
+.containerSelectionTeam_contentIcons_image:hover  {
+    opacity: 0.8;
+}
+
