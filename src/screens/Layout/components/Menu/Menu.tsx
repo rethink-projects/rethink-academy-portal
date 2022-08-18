@@ -71,6 +71,7 @@ function Menu() {
           <MenuItem
             isOpen={isOpen}
             text="Contrato"
+            onClick={() => {navigate("/dashboard/contrato");}}
             icon={Images.icons.ContractIcon}
           />
         </div>
