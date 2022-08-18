@@ -23,25 +23,23 @@ export const DatePicker = ({
   const [active, setActive] = useState(false);
 
   return (
-    <>
-      <div
-        className={
-          active ? styles.datePicker_active : styles.datePicker_container
-        }
-      >
-        <div>
-          <div className={`${styles[size]}`} onClick={() => setActive(!active)}>
-            <div className={styles.datePicker_content}>
-              {hasIcon && (
-                <>
-                  <img src={Images.icons.eyeIcon} alt="An eye icon" />
-                </>
-              )}
-              <p>{placeholder}</p>
-            </div>
-            <div className={styles.datePicker_calendarIcon}>
-              <img src={Images.icons.calendarIcon} alt="A calendar icon" />
-            </div>
+    <div
+      className={
+        active ? styles.datePicker_active : styles.datePicker_container
+      }
+    >
+      <div>
+        <div className={`${styles[size]}`} onClick={() => setActive(!active)}>
+          <div className={styles.datePicker_content}>
+            {hasIcon && (
+              <>
+                <img src={Images.icons.eyeIcon} alt="An eye icon" />
+              </>
+            )}
+            <p>{placeholder}</p>
+          </div>
+          <div className={styles.datePicker_calendarIcon}>
+            <img src={Images.icons.calendarIcon} alt="A calendar icon" />
           </div>
         </div>
       </div>
@@ -50,6 +48,6 @@ export const DatePicker = ({
           <Calendar />
         </div>
       )}
-    </>
+    </div>
   );
 };
