@@ -1,5 +1,4 @@
-.container_card,
-.container_card_ambassador {
+.container_card {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -11,15 +10,14 @@
   background-color: var(--color-input);
 }
 
-.container_card {
-  padding: 29px 32px;
-}
-
 .description_card {
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
   gap: 16px;
   max-height: 118px;
+  /* background-color: red; */
 }
 
 .legend_card {
@@ -69,13 +67,5 @@
 .actions_card_embassador {
   display: flex;
   gap: 10px;
-}
-
-.actions_card {
   flex-direction: column;
-}
-
-.actions_card_embassador {
-  flex-direction: row-reverse;
-  align-items: center;
 }

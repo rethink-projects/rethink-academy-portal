@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonWithIcon from "../../../components/ButtonWithIcon/ButtonWithIcon";
+import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import styles from "./CardCourse.module.css";
 import IconVerified from "@mui/icons-material/VerifiedOutlined";
 import IconTask from "@mui/icons-material/TaskAltOutlined";
@@ -34,7 +34,7 @@ const CardCurso = ({
       ? "Você ainda não terminou esse curso."
       : "Você ainda não começou esse curso.";
 
-  let textButton = "Editar Trilha";
+  let textButton = "Editar curso";
   let icon = <CreateOutlinedIcon />;
   let disabled = false;
 
@@ -49,11 +49,7 @@ const CardCurso = ({
   }
 
   return (
-    <div
-      className={
-        intern ? styles.container_card : styles.container_card_ambassador
-      }
-    >
+    <div className={styles.container_card}>
       <div className={styles.description_card}>
         <p className={styles.legend_card}>Curso | Rethink Academy</p>
         <h1 className={styles.title_card}>{title}</h1>
@@ -70,11 +66,7 @@ const CardCurso = ({
           </div>
         )}
       </div>
-      <div
-        className={
-          intern ? styles.actions_card : styles.actions_card_embassador
-        }
-      >
+      <div className={styles.actions_card_embassador}>
         <ButtonWithIcon
           onClick={onClickIrAoCurso}
           icon={<IconArrow />}

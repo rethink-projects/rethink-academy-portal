@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
-import CardCourse from "./Components/CardCourse";
+import CardCourse from "./Components/CardCourse/CardCourse";
 import styles from "./CursosScreen.module.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
@@ -145,7 +145,7 @@ const CursosScreen = () => {
   // Convertendo a primeira letra da trilha para maiúsculo
   selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
 
-  const intern = true;
+  const intern = false;
 
   return (
     <div className={styles.center}>
@@ -166,7 +166,7 @@ const CursosScreen = () => {
               width={218}
               position="right"
               type="primary"
-              text="Ir para o curso"
+              text="Adicionar curso"
               size="medium"
             />
           )}
