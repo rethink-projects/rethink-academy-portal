@@ -6,6 +6,9 @@ import CardInfoCurso from "./components/card/CardInfoCurso";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
+import { useState } from "react";
+import ModuleModal from "./components/ModuleModal/ModuleModal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const CourseScreen = () => {
   const location = useLocation();
@@ -71,6 +74,7 @@ const CourseScreen = () => {
     const linkCourse = { title: "Curso 1", link: url };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <div className={styles.box}>
@@ -129,6 +133,14 @@ const CourseScreen = () => {
               width={218}
             />
           </div>
+          <button onClick={() => setModalIsOpen(true)}>Modal</button>
+          {modalIsOpen && (
+            <ModuleModal
+              iconClose={<CloseIcon />}
+              onClose={() => setModalIsOpen(false)}
+              title="Tem certeza que deseja excluir?"
+            />
+          )}
           <div className={styles.modules}>
             {/* <Acordeon width={848} />
             <Acordeon width={848} />
