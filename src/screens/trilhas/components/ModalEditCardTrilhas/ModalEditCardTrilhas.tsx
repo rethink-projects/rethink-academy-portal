@@ -49,12 +49,12 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
             label="Nome da Trilha"
             onChange={onChangeNameTrail}
           />
-          <Textarea
-            placeholder={placeholder}
-            label="Descrição da Trilha"
-            caption="Adicione o link para utilizar a imagem que deseja utilizar"
-            type="block"
-          />
+          <div className={styles.description}>
+            <span className={styles.label_description}>
+              Descrição da Trilha
+            </span>
+            <Textarea placeholder={placeholder} type="block" />
+          </div>
           <InputText
             value={valueDescriptionTrail}
             hasIcon={false}
@@ -63,6 +63,7 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
             type="block"
             label="Imagem de capa"
             onChange={onChangeDescriptionTrail}
+            elementCaption="Adicione o link para utilizar a imagem que deseja utilizar"
           />
         </div>
       </ModalTrilhas>
