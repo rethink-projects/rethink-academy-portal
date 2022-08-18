@@ -18,7 +18,7 @@ type modalProps = {
   nameButtonBlack?: string;
 };
 
-const Modal = ({
+const ModalTrilhas = ({
   oneButton = false,
   children,
   iconClose,
@@ -70,4 +70,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default ModalTrilhas;
