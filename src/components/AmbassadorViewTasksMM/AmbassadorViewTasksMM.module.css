@@ -19,12 +19,14 @@
 
 .viewTasks_body {
     width: 620px;
-    height: 200px;
+    height: 270px;
 
     /* Background original */
-    /* background: #FFFFFF; */
+    background: #FFFFFF;
 
-    background-color: #F9F9F9;
+    /* Alterar a cor do backgroud do playgroud para visualizar o componente */
+    /* background-color: #F9F9F9; */
+
     border-radius: 0px 0px 4px 4px;
     overflow-y: scroll;
 }
