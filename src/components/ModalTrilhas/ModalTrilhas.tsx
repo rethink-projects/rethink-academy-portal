@@ -53,7 +53,7 @@ const Modal = ({
         <div className={styles.modal_actions}>
           {!oneButton && (
             <SimpleButton
-              type="outline"
+              type="secondary"
               text={nameButtonBlack}
               onClick={onClickCancel!}
               size="block"
