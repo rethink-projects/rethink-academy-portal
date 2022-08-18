@@ -13,16 +13,6 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
     main: { title: "engenharia", id: 3 },
     courses: [
       {
-        trail: 1,
-        course_id: 1,
-        completed: false,
-      },
-      {
-        trail: 2,
-        course_id: 2,
-        completed: false,
-      },
-      {
         trail: 3,
         course_id: 1,
         completed: true,
@@ -31,11 +21,6 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
         trail: 3,
         course_id: 2,
         completed: true,
-      },
-      {
-        trail: 4,
-        course_id: 4,
-        completed: false,
       },
     ],
   };
@@ -86,9 +71,11 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
   };
 
   const getCompletedUserCourses = (trilha: number) => {
-    return user.courses.filter(
-      (course: any) => course.trilha === trilha && course.completed
+    const completedCourses = user.courses.filter(
+      (course: any) => course.trail === trilha && course.completed
     ).length;
+
+    return completedCourses;
   };
 
   const unlockTrilha = (trail: string) => {
@@ -152,7 +139,6 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
   const containerClass = atLeastOneCourse()
     ? styles.container_completed
     : styles.container;
-
   return (
     <div className={containerClass}>
       <span className={styles.name_trilha}>{trilha.name}</span>

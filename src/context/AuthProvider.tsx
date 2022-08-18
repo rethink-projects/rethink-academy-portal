@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import firebaseInstance from "../services";
 import { AuthContext, ICurrentUser, TypeProvider } from "./AuthContext";
+import { getUserFromBackend } from "../services/backend/UserService";
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   let [user, setUser] = useState<ICurrentUser>(null!);
@@ -10,8 +11,15 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   let signin = async (type: TypeProvider, callback: VoidFunction) => {
-    const user = await firebaseInstance.loginWithFirebase("google");
-    setUser(user);
+    const userFromFirebase = await firebaseInstance.loginWithFirebase("google");
+    const backendUser = await getUserFromBackend(userFromFirebase.email);
+    setUser({
+      ...userFromFirebase,
+      name: backendUser.name,
+      id: backendUser.id,
+      role: backendUser.role,
+      title: backendUser.title,
+    });
     localStorage.setItem("@portarethinkacademy:user", JSON.stringify(user));
     callback();
   };
