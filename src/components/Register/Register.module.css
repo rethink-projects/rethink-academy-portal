@@ -1,7 +1,7 @@
 .register_container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
   width: 368px;
   height: 426px;
   /* background-color: var(--color-base); */
