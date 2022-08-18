@@ -1,0 +1,51 @@
+.toggleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 6px; */
+    gap: 8px;
+    flex-shrink: 1;
+    width: 22%;
+    height: 44px;
+  
+    background: #ffffff;
+    border: 1px solid rgba(27, 27, 27, 0.1);
+    border-radius: 4px;
+  }
+  
+  .toggleContainer button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 8px 32px; */
+    gap: 10px;
+
+    width: 46.6%;
+    height: 72.7%;
+  
+    border-radius: 2px;
+    border: 1px solid #ffffff;
+    background: none;
+  
+    cursor: pointer;
+  
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+  
+    color: #706e64;
+  }
+  
+  .toggleContainer button svg {
+    width: 19px;
+    height: 19px;
+  }
+  
+  .active {
+    background: #f9f9f9 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: black !important;
+  }
+  

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import { useAuth } from "../../context/AuthContext";
+import EvaluationSwitch from "./components/evaluationSwitch/EvaluationSwitch";
 import styles from "./EvaluationScreen.module.css";
 
 type evaluationUserType = {
@@ -158,7 +159,9 @@ const EvaluationScreen = () => {
       </div>
 
       <div className={styles.evaluationScreen_table_container}>
-          
+        <div className={styles.evaluationScreen_table_switch}>
+          <EvaluationSwitch />
+        </div>
       </div>
     </div>
   );
