@@ -13,16 +13,14 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path='/'>
+          <Route path="/">
             <Route index element={<LoginScreen />} />
-            <Route path='/login' element={<LoginScreen />} />
-            <Route path='/dashboard' element={<Layout />}>
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/dashboard" element={<Layout />}>
+              <Route path="/dashboard/contrato" element={<ContractScreen />} />
               <Route index element={<HomeScreen />} />
             </Route>
-            <Route path="/contrato" element={<Layout />}>
-              <Route index element={<ContractScreen />} />
-            </Route>
-            <Route path='/playground' element={<PlaygroundScreen />} />
+            <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
         </Routes>
       </AuthProvider>
