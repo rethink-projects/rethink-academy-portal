@@ -196,38 +196,40 @@ const TrilhasScreen = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <>
-        <div className={styles.text_container}>
-          <div className={styles.title}>Trilhas</div>
-          <div className={styles.description}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
+    <>
+      <div className={styles.container}>
+        <>
+          <div className={styles.text_container}>
+            <div className={styles.title}>Trilhas</div>
+            <div className={styles.description}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged.
+            </div>
           </div>
-        </div>
-        <div style={{ width: "704px" }}></div>
-        {trilhas?.map((item) => (
-          <CardTrilhas
-            key={item.id}
-            user="teacher"
-            inputTrilha={getProgressBarInputs(item.id)}
-            onClick={() => navigate("" + item.id)}
-            title={getTrailTitle(item.id)}
-            description={getTrailDescription(item.id)}
-            blocked={isBlocked(item.id)!}
-            previous={getPreviousTrailName(item.id)}
-            setModal={setStateModalOnclick}
-          ></CardTrilhas>
-        ))}
-      </>
+          <div style={{ width: "704px" }}></div>
+          {trilhas?.map((item) => (
+            <CardTrilhas
+              key={item.id}
+              user="student"
+              inputTrilha={getProgressBarInputs(item.id)}
+              onClick={() => navigate("" + item.id)}
+              title={getTrailTitle(item.id)}
+              description="Adicione aqui uma descrição da trilha de conhecimento em questão contendo os principais conteúdos abordados e objetivos gerais a serem alcançados."
+              blocked={isBlocked(item.id)!}
+              previous={getPreviousTrailName(item.id)}
+              setModal={setStateModalOnclick}
+            ></CardTrilhas>
+          ))}
+        </>
+      </div>
       {modalIsOpen && (
         <ModalEditCardTrilhas onClose={() => setModalIsOpen(false)} />
       )}
-    </div>
+    </>
   );
 };
 
