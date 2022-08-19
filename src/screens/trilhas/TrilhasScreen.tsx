@@ -214,7 +214,7 @@ const TrilhasScreen = () => {
           {trilhas?.map((item) => (
             <CardTrilhas
               key={item.id}
-              user="student"
+              user="teacher"
               inputTrilha={getProgressBarInputs(item.id)}
               onClick={() => navigate("" + item.id)}
               title={getTrailTitle(item.id)}

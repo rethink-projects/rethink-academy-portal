@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import ModalTrilhas from "../../../../components/ModalTrilhas/ModalTrilhas";
-import CloseIcon from "@mui/icons-material/Close";
+import TrailModal from "../../../../components/TrailModal/TrailModal";
 import InputText from "../../../../components/InputText/InputText";
 import styles from "./ModalEditCardTrilhas.module.css";
 import Textarea from "../../../../components/Textarea/Textarea";
@@ -31,13 +30,12 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
 
   return (
     <div>
-      <ModalTrilhas
+      <TrailModal
         title="Editar Trilha de Conhecimento"
-        iconClose={<CloseIcon />}
         onClose={onClose}
         oneButton
         onClickConfirm={handleConfirm}
-        nameButtonGreen="Salvar alterações"
+        nameButtonRight="Salvar alterações"
       >
         <div className={styles.content}>
           <InputText
@@ -66,7 +64,7 @@ export const ModalEditCardTrilhas = ({ onClose }: TypeModalEditCardTrilhas) => {
             elementCaption="Adicione o link para utilizar a imagem que deseja utilizar"
           />
         </div>
-      </ModalTrilhas>
+      </TrailModal>
     </div>
   );
 };
