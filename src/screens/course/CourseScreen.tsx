@@ -4,7 +4,6 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Acordeon from "./components/Accordion/Accordion";
 import CardInfoCurso from "./components/card/CardInfoCurso";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
-import ClassModal from "./components/ClassModal/ClassModal";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
@@ -14,16 +13,17 @@ import styles from "./CourseScreen.module.css";
 const CourseScreen = () => {
   const location = useLocation();
 
-  const courses = [
-    {
-      id: 1,
-      name: "Nothink",
-      trilha: 3,
-      lastCourse: 4,
-      completed: false,
-      description: "descrição",
-    },
-  ];
+  const course = {
+    id: 1,
+    name: "Nothink",
+    trilha: 3,
+    lastCourse: 4,
+    completed: false,
+    description: "descrição",
+    modules: [
+      // { nome: "oi" }
+    ],
+  };
 
   const classes = [
     {
@@ -58,14 +58,6 @@ const CourseScreen = () => {
     },
   ];
 
-  const getClassesByCourse = (idCourse: number) => {
-    // retornar array de todas as aulas de um determinado curso
-  };
-
-  const filterClassesByModule = (idModule: number) => {
-    // retornar array de todas as aulas de um determinado modulo
-  };
-
   const getBreadcrumbs = () => {
     const url = location.pathname;
     let path = url.split("/curso");
@@ -78,7 +70,8 @@ const CourseScreen = () => {
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
-
+  const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
+  const embassador = false;
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -91,26 +84,32 @@ const CourseScreen = () => {
               <h1 className={styles.title}>UX Design</h1>
               <h2 className={styles.about}>Sobre o Curso:</h2>
             </div>
-            <div className={styles.header_right}>
-              <ButtonWithIcon
-                icon={<IconEdit />}
-                text={"Editar curso"}
-                position={"right"}
-                size={"medium"}
-                type={"secondary"}
-                width={218}
-                // onClick={() => setClassModalIsOpen(true)}
-              />
-              <ButtonWithIcon
-                icon={<IconPlus />}
-                text={"Adicionar módulo"}
-                position={"right"}
-                size={"medium"}
-                type={"primary"}
-                width={218}
-                onClick={() => setModuleModalIsOpen(true)}
-              />
-            </div>
+            {embassador && (
+              <div className={styles.header_right}>
+                <ButtonWithIcon
+                  icon={<IconEdit />}
+                  text={"Editar curso"}
+                  position={"right"}
+                  size={"medium"}
+                  type={"secondary"}
+                  width={218}
+                  // onClick={() => setClassModalIsOpen(true)}
+                />
+                <ButtonWithIcon
+                  icon={<IconPlus />}
+                  text={"Adicionar módulo"}
+                  position={"right"}
+                  size={"medium"}
+                  type={"primary"}
+                  width={218}
+                  onClick={() => (
+                    setModuleModalType("add"),
+                    setModuleModalIsOpen(true),
+                    setModuleName("")
+                  )}
+                />
+              </div>
+            )}
           </div>
           <p className={styles.description}>
             Aprenda a executar pesquisas de UX Design, fazer testes de
@@ -124,45 +123,40 @@ const CourseScreen = () => {
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
-          <div className={styles.no_modules}>
-            <IconFolder
-              sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
-            />
-            <span>Você ainda não possui nenhum módulo.</span>
-            <ButtonWithIcon
-              icon={<IconPlus />}
-              text={"Adicionar módulo"}
-              position={"right"}
-              size={"medium"}
-              type={"primary"}
-              width={218}
-              // onClick={() => setClassModalIsOpen(true)}
-            />
-          </div>
+          {course.modules != null && course.modules.length > 0 && (
+            <div className={styles.no_modules}>
+              <IconFolder
+                sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
+              />
+              <span>Você ainda não possui nenhum módulo.</span>
+              <ButtonWithIcon
+                icon={<IconPlus />}
+                text={"Adicionar módulo"}
+                position={"right"}
+                size={"medium"}
+                type={"primary"}
+                width={218}
+                onClick={() => setModuleModalIsOpen(true)}
+              />
+            </div>
+          )}
 
           {moduleModalIsOpen && (
             <ModuleModal
               onClose={() => setModuleModalIsOpen(false)}
-              type="add"
+              type={moduleModalType}
+              moduleName={moduleName}
+              setModuleName={setModuleName}
             />
           )}
           <div className={styles.modules}>
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
-            <Acordeon width={848} />
+            <Acordeon
+              width={848}
+              openModuleModal={setModuleModalIsOpen}
+              setModuleModalType={setModuleModalType}
+              setModuleName={setModuleName}
+              embassador={embassador}
+            />
           </div>
         </div>
         <div className={styles.practical_information}>

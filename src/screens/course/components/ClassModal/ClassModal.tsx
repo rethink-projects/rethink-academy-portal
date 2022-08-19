@@ -12,7 +12,7 @@ type ClassModalProps = {
   className: string;
   embedLink: string;
   description: string;
-  setClassName: (value: string) => void;
+  setLessonName: (value: string) => void;
   setEmbedLink: (value: string) => void;
   setDescription: (value: string) => void;
 };
@@ -22,7 +22,7 @@ const ClassModal = ({
   className,
   embedLink,
   description,
-  setClassName,
+  setLessonName,
   setEmbedLink,
   setDescription,
 }: ClassModalProps) => {
@@ -46,7 +46,7 @@ const ClassModal = ({
           placeholder="Exemplo: Inovação e Design (07:50)"
           type="text"
           value={className}
-          onChange={(e) => setClassName(e.target.value)}
+          onChange={(e) => setLessonName(e.target.value)}
         />
         <label>Embed Link:</label>
         <input

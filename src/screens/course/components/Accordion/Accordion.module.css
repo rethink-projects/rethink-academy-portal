@@ -101,6 +101,19 @@
   align-items: center;
   margin-right: 11.25px;
 }
+.no_lessons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 24px;
+  gap: 16px;
+}
+.no_lessons span {
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-tertiary);
+}
 
 /*---------- ACCORDION DISABLED ----------*/
 .module_disabled {

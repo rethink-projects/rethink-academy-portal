@@ -7,10 +7,17 @@ type ModuleModalProps = {
   onClickConfirm?: VoidFunction;
   onClickCancel?: VoidFunction;
   oneButton?: boolean;
+  moduleName: string;
+  setModuleName: (value: string) => void;
   nameButtonRight?: string;
   nameButtonLeft?: string;
 };
-const ModuleModal = ({ type, onClose }: ModuleModalProps) => {
+const ModuleModal = ({
+  type,
+  onClose,
+  moduleName,
+  setModuleName,
+}: ModuleModalProps) => {
   const handleSubmit = () => {};
   let title;
   switch (type) {
@@ -34,7 +41,12 @@ const ModuleModal = ({ type, onClose }: ModuleModalProps) => {
       </span>
       <form className={styles.container} onSubmit={handleSubmit}>
         <label>Nome do Módulo:</label>
-        <input placeholder="Exemplo: Empreendedorismo e Design" type="text" />
+        <input
+          placeholder="Exemplo: Empreendedorismo e Design"
+          type="text"
+          value={moduleName}
+          onChange={(e) => setModuleName(e.target.value)}
+        />
       </form>
     </TrailModal>
   );

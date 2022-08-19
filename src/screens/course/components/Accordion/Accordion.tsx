@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Accordion.module.css";
+
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -7,12 +8,18 @@ import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconTrash from "@mui/icons-material/DeleteOutlined";
+import IconPlus from "@mui/icons-material/AddCircleOutline";
+
 import ClassModal from "../ClassModal/ClassModal";
+import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 
 type AccordionProps = {
   width?: number;
   module?: Module;
-  role?: string;
+  embassador?: boolean;
+  openModuleModal: (open: boolean) => void;
+  setModuleModalType: (value: "add" | "edit") => void;
+  setModuleName: (moduleName: string) => void;
 };
 
 type Module = {
@@ -35,7 +42,10 @@ type Lesson = {
 
 const Accordion = ({
   width = 348,
-  role,
+  openModuleModal,
+  setModuleModalType,
+  setModuleName,
+  embassador,
   module = {
     id: 1,
     name: "Aqui está o nome do módulo",
@@ -57,27 +67,36 @@ const Accordion = ({
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const lessons: Array<Lesson> = module.lessons!;
-  // const embassador = role === "EMBASSADOR";
-  const embassador = true;
-  const [editLessonModalIsOpen, setEditLessonModalIsOpen] = useState(false);
+
+  const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonEmbed, setLessonEmbed] = useState("");
-  const [modalType, setModalType] = useState<"edit" | "add">("add");
+  const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
+
+  const setAddLessonModal = () => {
+    setLessonName("");
+    setLessonDescription("");
+    setLessonEmbed("");
+    setLessonModalType("add");
+    setLessonModalIsOpen(true);
+  };
+
   return (
     <div className={isOpen ? styles.container : ""}>
-      {editLessonModalIsOpen && (
+      {lessonModalIsOpen && (
         <ClassModal
-          onClose={() => setEditLessonModalIsOpen(false)}
-          type={modalType}
+          onClose={() => setLessonModalIsOpen(false)}
+          type={lessonModalType}
           className={lessonName}
           description={lessonDescription}
           embedLink={lessonEmbed}
-          setClassName={setLessonName}
+          setLessonName={setLessonName}
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
         />
       )}
+      {/* MENU DO ACORDEON */}
       <div
         style={{ width: width }}
         className={`${
@@ -87,16 +106,25 @@ const Accordion = ({
       >
         {embassador ? (
           <>
+            {/* CONTEÚDO DO MENU PARA O EMBAIXADOR */}
             <div className={styles.left_side_embassador}>
               <IconMore />
               {`Módulo 1 - ${module.name}`}
             </div>
             <div className={styles.right_side_embassador}>
-              <IconTrash /> <IconEdit />
+              <IconTrash />{" "}
+              <IconEdit
+                onClick={() => (
+                  openModuleModal(true),
+                  setModuleModalType("edit"),
+                  setModuleName(module.name)
+                )}
+              />
             </div>
           </>
         ) : (
           <>
+            {/* CONTEÚDO DO MENU PARA O ESTAGIÁRIO */}
             <div className={styles.left_side}>
               {module.completed ? (
                 <IconCheckedCircle
@@ -115,7 +143,7 @@ const Accordion = ({
           </>
         )}
       </div>
-      {isOpen && lessons != null && (
+      {isOpen && lessons != null && lessons.length > 0 ? (
         <div className={styles.accordion_container}>
           {lessons.map((lesson) => (
             <div
@@ -134,8 +162,8 @@ const Accordion = ({
                       setLessonName(lesson.name),
                       setLessonDescription(lesson.description),
                       setLessonEmbed(lesson.url),
-                      setEditLessonModalIsOpen(true),
-                      setModalType("edit")
+                      setLessonModalIsOpen(true),
+                      setLessonModalType("edit")
                     )}
                   />
                 ) : (
@@ -144,7 +172,37 @@ const Accordion = ({
               </div>
             </div>
           ))}
+          {embassador && (
+            <div className={styles.no_lessons}>
+              <ButtonWithIcon
+                icon={<IconPlus />}
+                text={"Adicionar Aula"}
+                position={"right"}
+                size={"medium"}
+                type={"primary"}
+                width={218}
+                onClick={() => setAddLessonModal()}
+              />
+            </div>
+          )}
         </div>
+      ) : (
+        isOpen && (
+          <div className={styles.no_lessons}>
+            <span>Este módulo ainda não possui nenhuma aula.</span>
+            {embassador && (
+              <ButtonWithIcon
+                icon={<IconPlus />}
+                text={"Adicionar Aula"}
+                position={"right"}
+                size={"medium"}
+                type={"primary"}
+                width={218}
+                onClick={() => setAddLessonModal()}
+              />
+            )}
+          </div>
+        )
       )}
     </div>
   );
