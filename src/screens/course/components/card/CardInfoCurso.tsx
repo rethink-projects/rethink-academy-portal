@@ -71,8 +71,8 @@ const CardInfoCurso = ({
       <div className={styles.topicos}>
         <ul className={styles.list}>
           {!!learn.length &&
-            learn.map((title) => (
-              <li>
+            learn.map((title, index) => (
+              <li key={index}>
                 <p>{title}</p>
               </li>
             ))}
@@ -84,8 +84,8 @@ const CardInfoCurso = ({
       <div>
         <ul className={styles.list}>
           {!!skills.length &&
-            skills.map((title) => (
-              <li>
+            skills.map((title, index) => (
+              <li key={index}>
                 <p>{title}</p>
               </li>
             ))}

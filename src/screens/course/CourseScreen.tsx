@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import styles from "./CourseScreen.module.css";
-import Acordeon from "../../components/Acordeon/Acordeon";
+import Acordeon from "./components/Accordion/Accordion";
 import CardInfoCurso from "./components/card/CardInfoCurso";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import ClassModal from "./components/ClassModal/ClassModal";
+import ModuleModal from "./components/ModuleModal/ModuleModal";
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
-import { useState } from "react";
-import ModuleModal from "./components/ModuleModal/ModuleModal";
-import CloseIcon from "@mui/icons-material/Close";
-import ClassModal from "./components/ClassModal/ClassModal";
+import IconPlus from "@mui/icons-material/AddCircleOutline";
 
+import styles from "./CourseScreen.module.css";
 const CourseScreen = () => {
   const location = useLocation();
 
@@ -75,8 +75,9 @@ const CourseScreen = () => {
     const linkCourse = { title: "Curso 1", link: url };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
+  const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
+  const [moduleName, setModuleName] = useState("");
 
   return (
     <div className={styles.box}>
@@ -98,15 +99,16 @@ const CourseScreen = () => {
                 size={"medium"}
                 type={"secondary"}
                 width={218}
+                // onClick={() => setClassModalIsOpen(true)}
               />
               <ButtonWithIcon
-                icon={<IconEdit />}
+                icon={<IconPlus />}
                 text={"Adicionar módulo"}
                 position={"right"}
                 size={"medium"}
                 type={"primary"}
                 width={218}
-                onClick={() => setModalIsOpen(true)}
+                onClick={() => setModuleModalIsOpen(true)}
               />
             </div>
           </div>
@@ -128,25 +130,23 @@ const CourseScreen = () => {
             />
             <span>Você ainda não possui nenhum módulo.</span>
             <ButtonWithIcon
-              icon={<IconEdit />}
+              icon={<IconPlus />}
               text={"Adicionar módulo"}
               position={"right"}
               size={"medium"}
               type={"primary"}
               width={218}
-              onClick={() => setModalIsOpen(true)}
+              // onClick={() => setClassModalIsOpen(true)}
             />
           </div>
-          {modalIsOpen && (
+
+          {moduleModalIsOpen && (
             <ModuleModal
-              iconClose={<CloseIcon />}
-              onClose={() => setModalIsOpen(false)}
-              title="Adicionar uma Aula"
-              children={<ClassModal />}
+              onClose={() => setModuleModalIsOpen(false)}
+              type="add"
             />
           )}
           <div className={styles.modules}>
-            {/* <Acordeon width={848} />
             <Acordeon width={848} />
             <Acordeon width={848} />
             <Acordeon width={848} />
@@ -161,7 +161,8 @@ const CourseScreen = () => {
             <Acordeon width={848} />
             <Acordeon width={848} />
             <Acordeon width={848} />
-            <Acordeon width={848} /> */}
+            <Acordeon width={848} />
+            <Acordeon width={848} />
           </div>
         </div>
         <div className={styles.practical_information}>

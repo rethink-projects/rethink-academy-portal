@@ -1,65 +1,42 @@
+import TrailModal from "../../../../components/TrailModal/TrailModal";
 import styles from "./ModuleModal.module.css";
-import { style } from "@mui/system";
-import SimpleButton from "../../../../components/SimpleButton/SimpleButton";
 
-type modalProps = {
-  title: string;
-  iconClose?: JSX.Element;
-  children?: React.ReactNode;
+type ModuleModalProps = {
+  type: "add" | "edit";
   onClose: VoidFunction;
-  id?: string;
   onClickConfirm?: VoidFunction;
   onClickCancel?: VoidFunction;
   oneButton?: boolean;
+  nameButtonRight?: string;
+  nameButtonLeft?: string;
 };
-
-const ModuleModal = ({
-  oneButton = false,
-  children,
-  iconClose,
-  title,
-  onClose = () => {},
-  id = "outside",
-  onClickConfirm,
-  onClickCancel,
-}: modalProps) => {
-  const handleOutsideClick = (e: any) => {
-    if (e.target.id === id) {
-      onClose();
-    }
-  };
-
+const ModuleModal = ({ type, onClose }: ModuleModalProps) => {
+  const handleSubmit = () => {};
+  let title;
+  switch (type) {
+    case "add":
+      title = "Adicionar Módulo";
+      break;
+    default:
+      title = "Editar Módulo";
+  }
   return (
-    <div id={id} className={styles.modal_outside} onClick={handleOutsideClick}>
-      <div className={styles.modal_container}>
-        <div className={styles.modal_header}>
-          <h1 className={styles.modal_title}>{title}</h1>
-          <div onClick={onClose} className={styles.modal_header_icon}>
-            {iconClose}
-          </div>
-        </div>
-
-        <div className={styles.modal_divider}></div>
-
-        <div className={styles.modal_content}>{children}</div>
-
-        <div className={styles.modal_actions}>
-          {!oneButton && (
-            <SimpleButton
-              type="secondary"
-              text="Cancelar"
-              onClick={onClickCancel!}
-              size={"block"}
-            />
-          )}
-          <SimpleButton
-            text="Confirmar"
-            size="block"
-            onClick={onClickConfirm!}
-          />
-        </div>
-      </div>
-    </div>
+    <TrailModal
+      title={title}
+      onClose={onClose}
+      onClickConfirm={() => ""}
+      onClickCancel={() => ""}
+    >
+      <span className={styles.aux_text}>
+        {type === "add"
+          ? "Descreva aqui o nome do módulo de aulas."
+          : "Edite aqui o nome do módulo."}
+      </span>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <label>Nome do Módulo:</label>
+        <input placeholder="Exemplo: Empreendedorismo e Design" type="text" />
+      </form>
+    </TrailModal>
   );
 };
 

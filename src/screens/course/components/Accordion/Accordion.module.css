@@ -1,0 +1,123 @@
+/*---------- accordion FECHADO ----------*/
+.module_container,
+.module_container_closed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 348px;
+
+  height: 48px;
+
+  background: var(--color-input);
+
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.module_container_closed:hover {
+  border: 1px solid var(--color-tertiary-hover);
+  box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+}
+
+.module_container .right_side svg {
+  transform: rotate(90deg);
+}
+.module_container .left_side_embassador svg {
+  transform: rotate(90deg);
+}
+
+.left_side {
+  display: flex;
+  align-items: center;
+  margin-left: 13.25px;
+  gap: 9.25px;
+}
+
+.left_side svg path {
+  width: 20px;
+}
+.right_side {
+  display: flex;
+  align-items: center;
+  margin-right: 17.25px;
+}
+
+.right_side svg {
+  width: 16px;
+  height: 21px;
+}
+
+.right_side_embassador {
+  display: flex;
+  align-items: center;
+  margin-right: 13.25px;
+  gap: 9.25px;
+}
+
+.right_side_embassador svg path {
+  width: 20px;
+}
+.left_side_embassador {
+  gap: 9.25px;
+  display: flex;
+  margin-left: 13.25px;
+  align-items: center;
+}
+
+.left_side_embassador svg {
+  width: 16px;
+  height: 21px;
+}
+
+/*---------- MENU DO accordion ABERTO ----------*/
+
+.container {
+  outline: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+}
+
+.accordion_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+  min-width: 350px;
+  cursor: pointer;
+}
+
+.accordion_item:hover {
+  background-color: #e2fa85;
+}
+
+.accordion_left_side {
+  display: flex;
+  align-items: center;
+  margin-left: 12.25px;
+  gap: 9.25px;
+}
+
+.accordion_right_side {
+  display: flex;
+  align-items: center;
+  margin-right: 11.25px;
+}
+
+/*---------- ACCORDION DISABLED ----------*/
+.module_disabled {
+  pointer-events: none;
+  color: var(--color-tertiary);
+}
+
+.padlock_border {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 19.5px;
+  height: 19.5px;
+  border: 2px solid var(--color-tertiary);
+  border-radius: 3px;
+}
+.module_disabled svg {
+  width: 15px;
+}
