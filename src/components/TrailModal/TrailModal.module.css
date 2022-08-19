@@ -17,7 +17,6 @@
   flex-direction: column;
 
   min-width: 544px;
-  min-height: 189px;
   padding: 24px 24px;
   background-color: var(--color-base);
   border: 1px solid var(--color-icon-background);

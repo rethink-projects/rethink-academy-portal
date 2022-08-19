@@ -12,6 +12,7 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
+import ValidationModal from "../ValidationModal/ValidationModal";
 
 type AccordionProps = {
   width?: number;
@@ -67,7 +68,6 @@ const Accordion = ({
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const lessons: Array<Lesson> = module.lessons!;
-
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
@@ -81,9 +81,13 @@ const Accordion = ({
     setLessonModalType("add");
     setLessonModalIsOpen(true);
   };
-
+  const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
+  const [validationType, setValidationType] = useState<
+    "save" | "cancel" | "delete"
+  >("delete");
   return (
     <div className={isOpen ? styles.container : ""}>
+      {/* -------MODAIS------ */}
       {lessonModalIsOpen && (
         <ClassModal
           onClose={() => setLessonModalIsOpen(false)}
@@ -94,6 +98,12 @@ const Accordion = ({
           setLessonName={setLessonName}
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
+        />
+      )}
+      {validationModalIsOpen && (
+        <ValidationModal
+          onClose={setValidationModalIsOpen}
+          type={validationType}
         />
       )}
       {/* MENU DO ACORDEON */}
@@ -112,7 +122,11 @@ const Accordion = ({
               {`Módulo 1 - ${module.name}`}
             </div>
             <div className={styles.right_side_embassador}>
-              <IconTrash />{" "}
+              <IconTrash
+                onClick={() => (
+                  setValidationModalIsOpen(true), setValidationType("delete")
+                )}
+              />
               <IconEdit
                 onClick={() => (
                   openModuleModal(true),

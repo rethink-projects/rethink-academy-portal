@@ -1,4 +1,6 @@
+import { useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
+import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ClassModal.module.css";
 
 type ClassModalProps = {
@@ -33,13 +35,28 @@ const ClassModal = ({
   } else {
     title = "Editar Aula";
   }
+  const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
+  const [validationType, setValidationType] = useState<
+    "save" | "cancel" | "delete"
+  >("save");
   return (
     <TrailModal
       title={title}
       onClose={onClose}
-      onClickConfirm={() => ""}
-      onClickCancel={() => ""}
+      onClickConfirm={() =>
+        type === "edit"
+          ? (setValidationModalIsOpen(true), setValidationType("save"))
+          : onClose()
+      }
+      onClickCancel={onClose}
     >
+      {validationModalIsOpen && (
+        <ValidationModal
+          onClose={setValidationModalIsOpen}
+          setParentIsOpen={onClose}
+          type={validationType}
+        />
+      )}
       <form className={styles.container}>
         <label>Nome da Aula:</label>
         <input

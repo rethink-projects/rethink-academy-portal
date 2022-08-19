@@ -71,7 +71,7 @@ const CourseScreen = () => {
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
   const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
-  const embassador = false;
+  const embassador = true;
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -123,7 +123,7 @@ const CourseScreen = () => {
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
-          {course.modules != null && course.modules.length > 0 && (
+          {(course.modules == null || course.modules.length == 0) && (
             <div className={styles.no_modules}>
               <IconFolder
                 sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}

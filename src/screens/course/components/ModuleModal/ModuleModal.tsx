@@ -1,4 +1,6 @@
+import { useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
+import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ModuleModal.module.css";
 
 type ModuleModalProps = {
@@ -19,6 +21,10 @@ const ModuleModal = ({
   setModuleName,
 }: ModuleModalProps) => {
   const handleSubmit = () => {};
+  const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
+  const [validationType, setValidationType] = useState<
+    "save" | "cancel" | "delete"
+  >("save");
   let title;
   switch (type) {
     case "add":
@@ -27,13 +33,25 @@ const ModuleModal = ({
     default:
       title = "Editar Módulo";
   }
+
   return (
     <TrailModal
       title={title}
       onClose={onClose}
-      onClickConfirm={() => ""}
-      onClickCancel={() => ""}
+      onClickConfirm={() =>
+        type === "edit"
+          ? (setValidationModalIsOpen(true), setValidationType("save"))
+          : onClose()
+      }
+      onClickCancel={onClose}
     >
+      {validationModalIsOpen && (
+        <ValidationModal
+          onClose={setValidationModalIsOpen}
+          setParentIsOpen={onClose}
+          type={validationType}
+        />
+      )}
       <span className={styles.aux_text}>
         {type === "add"
           ? "Descreva aqui o nome do módulo de aulas."
