@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Accordion.module.css";
 
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
@@ -63,11 +63,22 @@ const Accordion = ({
         duration: "(mm:ss)",
         type: "video",
       },
+      {
+        id: "xasdxcdefsewr",
+        name: "O nome dessa aula é aaaaaaaaaaaaaaaaaa",
+        url: "link",
+        completed: true,
+        description: "texto de descrição",
+        order: 1,
+        duration: "(mm:ss)",
+        type: "video",
+      },
     ],
   },
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const lessons: Array<Lesson> = module.lessons!;
+  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
+  const [lesson, setLesson] = useState<Lesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
@@ -81,6 +92,10 @@ const Accordion = ({
     setLessonModalType("add");
     setLessonModalIsOpen(true);
   };
+  const confirmChanges = () => {
+    lesson!.name = lessonName;
+  };
+
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
   const [validationType, setValidationType] = useState<
     "save" | "cancel" | "delete"
@@ -98,6 +113,7 @@ const Accordion = ({
           setLessonName={setLessonName}
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
+          visualNameChange={confirmChanges}
         />
       )}
       {validationModalIsOpen && (
@@ -167,6 +183,7 @@ const Accordion = ({
             >
               <div className={styles.accordion_left_side}>
                 <IconVideoCam />
+
                 {lesson.name}
               </div>
               <div className={styles.accordion_right_side}>
@@ -174,6 +191,7 @@ const Accordion = ({
                   <IconEdit
                     onClick={() => (
                       setLessonName(lesson.name),
+                      setLesson(lesson),
                       setLessonDescription(lesson.description),
                       setLessonEmbed(lesson.url),
                       setLessonModalIsOpen(true),

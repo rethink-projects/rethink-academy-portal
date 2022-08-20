@@ -17,6 +17,7 @@ type ClassModalProps = {
   setLessonName: (value: string) => void;
   setEmbedLink: (value: string) => void;
   setDescription: (value: string) => void;
+  visualNameChange: VoidFunction;
 };
 const ClassModal = ({
   onClose,
@@ -27,6 +28,7 @@ const ClassModal = ({
   setLessonName,
   setEmbedLink,
   setDescription,
+  visualNameChange,
 }: ClassModalProps) => {
   const handleSubmit = () => {};
   let title;
@@ -48,7 +50,7 @@ const ClassModal = ({
           ? (setValidationModalIsOpen(true), setValidationType("save"))
           : onClose()
       }
-      onClickCancel={onClose}
+      onClickCancel={() => (onClose(), visualNameChange())}
     >
       {validationModalIsOpen && (
         <ValidationModal
