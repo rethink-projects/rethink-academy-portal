@@ -30,9 +30,8 @@ const Dropdown = ({
   useEffect(() => {
     document.addEventListener("click", (e: Event) => {
       if (
-        !document
-          .getElementById("dropdown" + id)!
-          .contains(e.target as HTMLInputElement)
+        !document.getElementById("dropdown" + id)!
+        // .contains(e.target as HTMLInputElement)
       ) {
         setIsActive(false);
       }

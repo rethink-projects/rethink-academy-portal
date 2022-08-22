@@ -5,6 +5,8 @@ import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardCourse from "./Components/CardCourse/CardCourse";
 import styles from "./CursosScreen.module.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
+import TrailModal from "../../components/TrailModal/TrailModal";
 
 interface CoursesUser {
   course_id: number;
@@ -41,7 +43,8 @@ const renderCard = (
   curso: Course,
   trilha_id: number,
   user: User,
-  intern: boolean
+  intern: boolean,
+  onClickEditCourse: () => void
 ) => {
   let concluded = 3;
   let emblem = false;
@@ -62,7 +65,8 @@ const renderCard = (
     <CardCourse
       intern={intern}
       onClickIrAoCurso={() => console.log("Foi para o curso")}
-      onClickColetarEmblema={() => console.log("Coletou o emblema")}
+      onClickColectEmblem={() => console.log("Coletou o emblema")}
+      onClickEditCourse={onClickEditCourse}
       key={index}
       title={curso.name}
       concluded={concluded}
@@ -71,16 +75,12 @@ const renderCard = (
   );
 };
 
-const onClickGoToCourse = () => {
-  // const navigate = useNavigate();
-  console.log("add curso");
-  // const [modalIsOpen, setModalIsOpen] = useState(true);
-};
-
 const CursosScreen = () => {
   // Declaração de variáveis
   const location = useLocation();
   let trilha_id = parseInt(location.pathname.replace("/trilhas/", ""));
+  const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
+  const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
 
   const userTeste: User = {
     name: "Fernando",
@@ -167,7 +167,7 @@ const CursosScreen = () => {
           <p>{`Programa de Cursos | ${selectedTrack}`}</p>
           {!intern && (
             <ButtonWithIcon
-              onClick={onClickGoToCourse}
+              onClick={() => setAddCourseIsOpen(true)}
               icon={<AddCircleOutlineIcon />}
               width={218}
               position="right"
@@ -176,12 +176,34 @@ const CursosScreen = () => {
               size="medium"
             />
           )}
+          {addCourseIsOpen && (
+            <CardAddCourse
+              title="Adicionar um Curso"
+              onClose={() => setAddCourseIsOpen(false)}
+              // onClose={() => {
+              //   return (
+              //     <TrailModal
+              //       title={"Tem certeza que deseja cancelar?"}
+              //       onClose={() => setAddCourseIsOpen(false)}
+              //     ></TrailModal>
+              //   );
+              // }}
+            />
+          )}
         </div>
         <div className={styles.cards}>
           {courses.map(
             (curso, index) =>
               curso.trilha == trilha_id &&
-              renderCard(index, curso, trilha_id, userTeste, intern)
+              renderCard(index, curso, trilha_id, userTeste, intern, () =>
+                setEditCourseIsOpen(true)
+              )
+          )}
+          {editCourseIsOpen && (
+            <CardAddCourse
+              title="Editar um Curso"
+              onClose={() => setEditCourseIsOpen(false)}
+            />
           )}
         </div>
       </div>

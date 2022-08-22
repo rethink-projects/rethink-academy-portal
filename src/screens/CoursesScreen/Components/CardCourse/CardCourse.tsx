@@ -12,14 +12,16 @@ type cardCourseProp = {
   //   1: concluido, 2: encaminhado, 3: não começou ainda
   concluded: number;
   onClickIrAoCurso: () => void;
-  onClickColetarEmblema: () => void;
+  onClickColectEmblem: () => void;
+  onClickEditCourse: () => void;
   intern: boolean;
   emblem: boolean;
 };
 
 const CardCurso = ({
-  onClickColetarEmblema,
+  onClickColectEmblem,
   onClickIrAoCurso,
+  onClickEditCourse,
   title,
   concluded,
   intern,
@@ -77,7 +79,7 @@ const CardCurso = ({
           size="medium"
         />
         <ButtonWithIcon
-          onClick={onClickColetarEmblema}
+          onClick={!intern ? onClickEditCourse : onClickColectEmblem}
           icon={icon}
           width={218}
           position="right"
