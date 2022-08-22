@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import Dropdown from "../../components/Dropdown/Dropdown";
 import { useAuth } from "../../context/AuthContext";
+
+// components
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import EvaluationDatePicker from "./components/evaluationDatePicker/EvaluationDatePicker";
 import EvaluationSwitch from "./components/evaluationSwitch/EvaluationSwitch";
 import EvaluationTag from "./components/tags/EvaluationTag";
+
+// style
 import styles from "./EvaluationScreen.module.css";
+import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
 
 export type evaluationUserType = {
   userName: string;
@@ -136,10 +141,8 @@ const EvaluationScreen = () => {
 
   // true == hardSkills ### false == softSkills
   const [skillType, setSkillType] = useState(true);
-  // console.log(skillType);
 
-  const [tagType, setTagType] = useState("");
-  console.log(tagType);
+  const [tagType, setTagType] = useState("design");
 
   return (
     <div className={styles.evaluationScreen_container}>
@@ -161,12 +164,7 @@ const EvaluationScreen = () => {
           </p>
         </div>
         <div className={styles.evaluationScreen_dropdown}>
-          <Dropdown
-            setValue={() => {}}
-            options={["março", "abril", "maio", "junho"]}
-            id={"1"}
-            initialText={"Mês"}
-          />
+          <EvaluationDatePicker />
         </div>
       </div>
 
@@ -181,6 +179,9 @@ const EvaluationScreen = () => {
           <div className={styles.evaluationScreen_table_tags}>
             <EvaluationTag tagType={tagType} setTagType={setTagType} />
           </div>
+        </div>
+        <div className={styles.evaluationScreen_table}>
+          <BasicEditingGrid props={tagType} skill={skillType} />
         </div>
       </div>
     </div>

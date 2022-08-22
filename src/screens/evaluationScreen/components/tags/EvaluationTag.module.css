@@ -16,6 +16,7 @@
     border-radius: 150px;
 
     padding: 4px 12px;
+    transition: ease-in-out .3s;
 }
 
 .tag_button:hover{
@@ -28,4 +29,5 @@
     background-color: var(--color-primary);
     color: var(--color-secondary-hover);
     border: 1px solid rgba(27, 27, 27, 0.3);
+    transition: ease-in-out .3s;
 }

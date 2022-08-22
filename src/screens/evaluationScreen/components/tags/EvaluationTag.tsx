@@ -20,11 +20,6 @@ const EvaluationTag = ({
     : "";
   const activeClassProduto = activeProduto ? styles.tag_button_active : "";
 
-  // estado default do retorno iniciado como "design", so é ativado quando a pagina renderiza
-  useEffect(() => {
-    setTagType("design");
-  }, []);
-
   const handleClick = (id: string) => {
     setTagType(id);
     if (id === "design") {
