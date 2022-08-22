@@ -29,7 +29,10 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
     skils: "",
   });
 
-  console.log("anterior: " + previousStep + "\natual: " + currentStep);
+  // console.log("anterior: " + previousStep + "\natual: " + currentStep);
+
+  // console.log({ nomeDoCurso: formData.name, oferecidoPor: formData.offeredBy, nomeDoInstrutor: formData.nameInstructor });
+  console.log(formData);
 
   // console.log(
   //   "nome do curso: " +
@@ -48,6 +51,7 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
 
   return (
     <TrailModal
+      // oneButton={true}
       onClose={() => setCurrentStep(4)}
       title={currentStep === 4 ? "Tem certeza que deseja cancelar?" : title}
       nameButtonRight={

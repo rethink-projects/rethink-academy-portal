@@ -17,10 +17,6 @@
   flex-direction: column;
 
   width: 544px;
-<<<<<<< HEAD
-  /* height: 189px; */
-=======
->>>>>>> feature/modal-trilhas
   padding: 24px 24px;
   background-color: var(--color-base);
   border: 1px solid var(--color-icon-background);
