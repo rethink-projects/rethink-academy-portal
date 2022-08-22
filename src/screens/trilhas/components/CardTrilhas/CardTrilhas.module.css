@@ -239,6 +239,14 @@
 
 .edit {
   z-index: 1;
+  position: relative;
+}
+
+.overlap_button {
+  position: absolute;
+  top: 0px;
+  width: 100px;
+  height: 40px;
 }
 
 .quantity_courses {

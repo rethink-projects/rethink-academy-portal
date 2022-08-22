@@ -5,7 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 
-type Trilhas = { name: string; id: string; description: string };
+type TypeTrails = { name: string; id: string; description: string };
 const TrilhasScreen = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -13,14 +13,20 @@ const TrilhasScreen = () => {
     setModalIsOpen(true);
   };
 
+  const handleClickCardTrails = (event: any, item: TypeTrails) => {
+    if (event.target.id !== "edit_action") {
+      navigate("" + item.id);
+    }
+  };
+
   const inputTrilha = {
     totalVideo: 30,
     watched: 30,
   };
 
-  let trails: Array<Trilhas> = [];
+  let trails: Array<TypeTrails> = [];
 
-  const [trilhas, setTrilhas] = useState<Trilhas[]>();
+  const [trilhas, setTrilhas] = useState<TypeTrails[]>();
 
   useEffect(() => {
     const getTrails = async () => {
@@ -127,7 +133,7 @@ const TrilhasScreen = () => {
 
   const getTrailTitle = (id: string) => {
     const title: string | undefined = trilhas?.filter(
-      (trilha: Trilhas) => trilha.id === id
+      (trilha: TypeTrails) => trilha.id === id
     )[0].name;
     // console.log(title);
     // return title?[0].toUpperCase() + title.substring(1).toLowerCase();
@@ -216,7 +222,7 @@ const TrilhasScreen = () => {
               key={item.id}
               user="teacher"
               inputTrilha={getProgressBarInputs(item.id)}
-              onClick={() => navigate("" + item.id)}
+              onClick={(event: any) => handleClickCardTrails(event, item)}
               title={getTrailTitle(item.id)}
               description="Adicione aqui uma descrição da trilha de conhecimento em questão contendo os principais conteúdos abordados e objetivos gerais a serem alcançados."
               blocked={isBlocked(item.id)!}

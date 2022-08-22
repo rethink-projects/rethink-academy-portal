@@ -4,7 +4,6 @@ import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import EditIcon from "@mui/icons-material/BorderColorOutlined";
-import { ModalEditCardTrilhas } from "../ModalEditCardTrilhas/ModalEditCardTrilhas";
 
 type TypeCardTrilhas = {
   user?: "student" | "teacher";
@@ -16,7 +15,7 @@ type TypeCardTrilhas = {
   };
   image?: string;
   blocked: boolean;
-  onClick: () => void;
+  onClick: (e: any) => void;
   previous: string;
   setModal: VoidFunction;
 };
@@ -29,9 +28,8 @@ const CardTrilhas = ({
   inputTrilha,
   blocked,
   previous,
-  setModal
+  setModal,
 }: TypeCardTrilhas) => {
-
   const calcPercentage = (): number => {
     return Math.floor((watched / (totalVideo > 0 ? totalVideo : 1)) * 100);
   };
@@ -44,7 +42,7 @@ const CardTrilhas = ({
     return blocked;
   };
   if (blocked) {
-    onClick = () => { };
+    onClick = () => {};
   }
   const { totalVideo, watched } = inputTrilha!;
   const card_progressBar = courseCompleted()
@@ -65,7 +63,11 @@ const CardTrilhas = ({
     ? styles.container_video_blocked
     : "";
   return (
-    <div className={completedCourseClass_container} onClick={() => onClick()}>
+    <div
+      className={completedCourseClass_container}
+      onClick={(e: any) => onClick(e)}
+      id="container"
+    >
       <div className={styles.container_inner}>
         <div
           style={{ backgroundImage: `url(${image})` }}
@@ -97,9 +99,8 @@ const CardTrilhas = ({
                   ? `${totalVideo} Cursos`
                   : `${totalVideo} Curso`}
               </p>
-              <div id="edit" className={styles.edit}>
+              <div id="edit" onClick={setModal} className={styles.edit}>
                 <ButtonWithIcon
-                  onClick={setModal}
                   width={100}
                   position="left"
                   text="Editar"
@@ -107,6 +108,7 @@ const CardTrilhas = ({
                   size="small"
                   type="primary"
                 />
+                <div id="edit_action" className={styles.overlap_button}></div>
               </div>
             </>
           )}
