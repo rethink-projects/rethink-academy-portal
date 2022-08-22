@@ -2,32 +2,31 @@ import { useState } from "react";
 
 import style from "./EvaluationSwitch.module.css";
 
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
+import SchoolIcon from "@mui/icons-material/School";
+import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 
-const EvaluationSwitch = () => {
-  const [isPublic, setIsPublic] = useState(true);
-  const [isPrivate, setIsPrivate] = useState(false);
-
-  const setPublic = () => {
-    setIsPublic(true);
-    setIsPrivate(false);
-  };
-
-  const setPrivate = () => {
-    setIsPublic(false);
-    setIsPrivate(true);
-  };
-
+const EvaluationSwitch = ({
+  skillType,
+  setSkillType,
+}: {
+  skillType: boolean;
+  setSkillType: (value: boolean) => void;
+}) => {
   return (
     <div className={style.toggleContainer}>
-      <button onClick={setPrivate} className={isPrivate ? style.active : ""}>
-        <LockOutlinedIcon />
-        Privado
+      <button
+        onClick={() => setSkillType(!skillType)}
+        className={skillType ? style.active : ""}
+      >
+        <SchoolIcon />
+        Hard Skills
       </button>
-      <button onClick={setPublic} className={isPublic ? style.active : ""}>
-        <PublicOutlinedIcon />
-        Público
+      <button
+        onClick={() => setSkillType(!skillType)}
+        className={!skillType ? style.active : ""}
+      >
+        <TipsAndUpdatesOutlinedIcon />
+        Soft Skills
       </button>
     </div>
   );

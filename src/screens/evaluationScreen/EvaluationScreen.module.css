@@ -68,6 +68,8 @@
     border-radius: 4px;
 }
 
-.evaluationScreen_table_switch{
-    
+.evaluationScreen_table_actions{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
