@@ -8,6 +8,7 @@ type TextareaProps = {
   caption?: string;
   label?: string;
   disabled?: boolean;
+  value?: string;
 };
 
 function Textarea({
@@ -17,6 +18,7 @@ function Textarea({
   caption,
   label,
   disabled,
+  value,
 }: TextareaProps) {
   const disabledClass = disabled ? styles.textarea_disabled : "";
 
@@ -38,6 +40,7 @@ function Textarea({
           disabledClass,
         ].join(" ")}
         onChange={onChangetext}
+        value={value}
       ></textarea>
       {caption && <p className={styles.textarea_caption}>{caption}</p>}
     </div>
