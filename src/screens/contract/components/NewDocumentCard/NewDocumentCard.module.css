@@ -1,12 +1,11 @@
 .card_container {
   width: 204px;
   height: 288px;
-  background-color: #f9f9f9;
-  border: 1px dashed #d4d4d4;
+  background-color: var(--color-input);
+  border: 1px dashed var(--color-icon-background);
   border-radius: 4px;
   margin-bottom: 16px;
 }
-
 
 .card_inner_container {
   padding: 24px 20px 16px;
@@ -22,7 +21,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  color: #1b1b1b;
+  color: var(--color);
 }
 
 .card_inner_container span {
@@ -30,7 +29,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  color: #1b1b1b;
+  color: var(--color);
 }
 
 .card_inner_container p {
@@ -38,7 +37,7 @@
   font-size: 14px;
   line-height: 21px;
   text-align: center;
-  color: #706e64;
+  color: var(--color-tertiary-active);
   margin-bottom: 40px;
 }
 

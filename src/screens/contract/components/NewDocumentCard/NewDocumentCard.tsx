@@ -3,7 +3,7 @@ import styles from "./NewDocumentCard.module.css";
 import { UploadFileOutlined, FileUploadOutlined } from "@mui/icons-material";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import { useDropzone, FileWithPath } from "react-dropzone";
-import DocumentCard from "../DocumentCard/DocumentCard";
+
 
 const NewDocumentCard = (props: any) => {
   const iconUpload = <FileUploadOutlined />;

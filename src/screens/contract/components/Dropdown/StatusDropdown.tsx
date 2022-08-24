@@ -42,7 +42,7 @@ const StatusDropdown = ({
         setIsActive(false);
       }
     });
-  }, []);
+  }, [id]);
 
   let leftIcon;
 
@@ -54,6 +54,7 @@ const StatusDropdown = ({
     ? (leftIcon = <ErrorOutline sx={{ color: yellow[700] }} />)
     : (leftIcon = "");
 
+    console.log({value})
   return (
     <div className={styles.dropdown_container} style={{ width: width }}>
       <div

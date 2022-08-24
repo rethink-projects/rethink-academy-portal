@@ -12,6 +12,10 @@ type DocumentProps = {
   name: string;
 };
 
+type CardType = {
+  type: "embassador" | "student";
+};
+
 export const documentsList: DocumentProps[] = [
   {
     id: "1",
@@ -27,10 +31,10 @@ export const documentsList: DocumentProps[] = [
   },
 ];
 
-const DocumentCard = (documentContent: DocumentProps) => {
+const DocumentCard = (documentContent: DocumentProps & CardType) => {
   const iconDownload = <FileDownloadOutlined />;
   const iconDelete = <DeleteOutline />;
-  return (
+  return documentContent.type === "student" ? (
     <div className={styles.card_container}>
       <div className={styles.card_container_inner}>
         <div className={styles.card_info}>
@@ -51,6 +55,25 @@ const DocumentCard = (documentContent: DocumentProps) => {
             size={"small"}
             text={"Excluir"}
             icon={iconDelete}
+            position={"left"}
+            width={164}
+          />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={styles.card_container_embassador}>
+      <div className={styles.card_container_inner_embassador}>
+        <div className={styles.card_info}>
+          <FileOpenOutlined fontSize="large" color="action" />
+          <p>{documentContent.name}</p>
+        </div>
+        <div className={styles.card_buttons}>
+          <ButtonWithIcon
+            type={"secondary"}
+            size={"small"}
+            text={"Download"}
+            icon={iconDownload}
             position={"left"}
             width={164}
           />
