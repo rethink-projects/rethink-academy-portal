@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./Textarea.module.css";
 
 type TextareaProps = {
-  type?: "default" | "small" | "large";
+  type?: "default" | "small" | "large" | "block";
   placeholder: string;
-  onChangetext?: (e:any) => void;
+  onChangetext?: (e: any) => void;
   caption?: string;
   label?: string;
   disabled?: boolean;
+  value?: string;
 };
 
 function Textarea({
@@ -17,8 +18,8 @@ function Textarea({
   caption,
   label,
   disabled,
+  value,
 }: TextareaProps) {
-
   const disabledClass = disabled ? styles.textarea_disabled : "";
 
   return (
@@ -39,6 +40,7 @@ function Textarea({
           disabledClass,
         ].join(" ")}
         onChange={onChangetext}
+        value={value}
       ></textarea>
       {caption && <p className={styles.textarea_caption}>{caption}</p>}
     </div>

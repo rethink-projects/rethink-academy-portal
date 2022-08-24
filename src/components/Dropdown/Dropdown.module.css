@@ -3,7 +3,7 @@
 
 .dropdown_container {
   flex-shrink: 0;
-  min-width: 242px;
+  /* min-width: 242px; */
 }
 
 .dropdown,
