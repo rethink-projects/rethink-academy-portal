@@ -11,10 +11,12 @@ type modalProps = {
   oneButton?: boolean;
   nameButtonRight?: string;
   nameButtonLeft?: string;
+  iconClose?: boolean;
 };
 
 const TrailModal = ({
   oneButton = false,
+  iconClose = true,
   children,
   title,
   onClose = () => {},
@@ -28,9 +30,11 @@ const TrailModal = ({
       <div className={styles.modal_container}>
         <div className={styles.modal_header}>
           <h1 className={styles.modal_title}>{title}</h1>
-          <div onClick={onClose} className={styles.modal_header_icon}>
-            <CloseIcon />
-          </div>
+          {iconClose && (
+            <div onClick={onClose} className={styles.modal_header_icon}>
+              <CloseIcon />
+            </div>
+          )}
         </div>
         <div className={styles.modal_divider}></div>
         <div className={styles.modal_content}>{children}</div>

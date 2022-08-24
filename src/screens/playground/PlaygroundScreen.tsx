@@ -13,6 +13,7 @@ function PlaygroundScreen() {
           <ModalTrilhas
             onClose={() => setModalIsOpen(false)}
             title="Tem certeza que deseja excluir?"
+            iconClose={false}
           />
         )}
       </div>
