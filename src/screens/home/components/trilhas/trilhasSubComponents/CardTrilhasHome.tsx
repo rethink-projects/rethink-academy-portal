@@ -128,7 +128,6 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   const containerClass = atLeastOneCourse()
     ? styles.container_completed
     : styles.container;
-
   return (
     <div
       style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}
