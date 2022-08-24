@@ -1,4 +1,5 @@
 import { useAuth } from "../../context/AuthContext";
+import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import styles from "./Home.module.css";
 
 function HomeScreen() {

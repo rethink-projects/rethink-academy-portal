@@ -3,154 +3,120 @@ import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../../../../context/AuthContext";
 
 type TrailType = {
-  trilha: { name: string; id: number; description: string };
+  trail: { name: string; id: string; description: string };
 };
 
-const CardTrilhasHome = ({ trilha }: TrailType) => {
-  const user = {
-    id: 1,
-    name: "Fernando",
-    main: { title: "engenharia", id: 3 },
-    courses: [
-      {
-        trail: 1,
-        course_id: 1,
-        completed: false,
-      },
-      {
-        trail: 2,
-        course_id: 2,
-        completed: false,
-      },
-      {
-        trail: 3,
-        course_id: 1,
-        completed: true,
-      },
-      {
-        trail: 3,
-        course_id: 2,
-        completed: true,
-      },
-      {
-        trail: 4,
-        course_id: 4,
-        completed: false,
-      },
-    ],
+type TypeLessonUser = {
+  maxLessons: Array<TypeMaxLesson>;
+  user: {
+    id: string;
+    email: string;
+    surnmae: string;
+    main: string;
+    watched: string[];
+    role: string;
   };
+};
 
-  const courses = [
-    {
-      id: 1,
-      name: "Nothink",
-      trilha: 3,
-      lastClass: 2,
-      completed: true,
-    },
-    {
-      id: 2,
-      name: "NodeJS",
-      trilha: 3,
-      lastClass: 3,
-      completed: true,
-    },
-    {
-      id: 3,
-      name: "Soft Skills",
-      trilha: 1,
-      lastClass: 4,
-      completed: true,
-    },
-    {
-      id: 4,
-      name: "Design",
-      trilha: 2,
-      lastClass: 10,
-      completed: true,
-    },
-    {
-      id: 4,
-      name: "Produto",
-      trilha: 4,
-      lastClass: 10,
-      completed: true,
-    },
-  ];
+type TypeMaxLesson = {
+  lessonsLength: number;
+  userLessonsLength: number;
+  completed: boolean;
+  name: string;
+  id: string;
+  trail: {
+    id: string;
+    name: string;
+    description: string;
+  };
+};
 
-  const [trilhas, setTrilhas] = useState<TrailType[]>();
+const CardTrilhasHome = ({ trail }: TrailType) => {
+  const { user } = useAuth();
+
+  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/course")
-      .then((response) => setTrilhas(response.data.course));
-
+    axios
+      .get("http://localhost:4000/api/user/watched/" + user.email)
+      .then((response) => {
+        if (response.data) {
+          setLessonUser(response.data);
+        }
+      });
   }, []);
 
-  const getCoursesFromTrail = (trilha: number) => {
-    const allCourses = courses.filter(
-      (course) => course.trilha === trilha
+  const getCoursesFromTrail = (trail: string) => {
+    const allCourses = lessonUser?.maxLessons?.filter(
+      (course: any) => course.trail.name === trail
     ).length;
+
     return allCourses;
   };
 
-  const getCompletedUserCourses = (trilha: number) => {
-    return user.courses.filter(
-      (course: any) => course.trilha === trilha && course.completed
+  const getCompletedUserCourses = (trail: string) => {
+    const completedCourses = lessonUser?.maxLessons?.filter(
+      (course: any) => course.trail.name === trail && course.completed
     ).length;
+
+    return completedCourses;
   };
 
   const unlockTrilha = (trail: string) => {
-    if (trail === "produto" && atLeastOneCourseCompleted(3)) {
+    if (trail === "Produto" && atLeastOneCourseCompleted("Engenharia")) {
       return true;
     }
-    if (trail === "design" && atLeastOneCourseCompleted(4)) {
+    if (trail === "Design" && atLeastOneCourseCompleted("Produto")) {
       return true;
     }
-    if (trail === "design" && atLeastOneCourseCompleted(2)) {
+    if (trail === "Engenharia" && atLeastOneCourseCompleted("Design")) {
       return true;
     }
   };
 
-  const atLeastOneCourseCompleted = (trailId: number) => {
-    return user.courses.find(
-      (course: any) => course.completed && course.trilha === trailId
+  const atLeastOneCourseCompleted = (trail: string) => {
+    return lessonUser?.maxLessons?.find(
+      (course: any) => course.completed && course.trail.name === trail
     );
   };
 
   const checkWhichTrilhaUnlock = () => {
-    if (trilha.name === user.main.title) {
+    if (trail.name === lessonUser?.user?.main) {
       return true;
     }
-    if (trilha.name === "academy") {
+    if (trail.name === "Academy") {
       return true;
     }
-    if (trilha.name === "design") {
-      return unlockTrilha("design");
+    if (trail.name === "Design") {
+      return unlockTrilha("Design");
     }
-    if (trilha.name === "engenharia") {
-      return unlockTrilha("engenharia");
+    if (trail.name === "Engenharia") {
+      return unlockTrilha("Engenharia");
     }
-    if (trilha.name === "produto") {
-      return unlockTrilha("produto");
+    if (trail.name === "Produto") {
+      return unlockTrilha("Produto");
     }
   };
 
   const calculoPorcentagem = () => {
-    const max = getCoursesFromTrail(trilha.id);
-    const completed = getCompletedUserCourses(trilha.id);
+    const max = getCoursesFromTrail(trail.name);
+    const completed = getCompletedUserCourses(trail.name);
     if (max === 0) {
       return 0;
     }
 
-    return Math.floor((completed / max) * 100);
+    return Math.floor((completed! / max!) * 100);
   };
 
   const atLeastOneCourse = () => {
-    if (getCoursesFromTrail(trilha.id) === getCompletedUserCourses(trilha.id)) {
-      const coursesVerify = courses.find(
-        (course: any) => course.trilha === trilha.id
+    if (
+      getCoursesFromTrail(trail.name) === getCompletedUserCourses(trail.name)
+    ) {
+      const coursesVerify = lessonUser?.maxLessons?.find(
+        (course: any) => course.trail.id === trail.id
       );
       if (!coursesVerify) {
         return false;
@@ -164,19 +130,26 @@ const CardTrilhasHome = ({ trilha }: TrailType) => {
     : styles.container;
 
   return (
-    <div style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }} className={containerClass}>
-      <span className={styles.name_trilha}>{trilha.name}</span>
+    <div
+      style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}
+      className={containerClass}
+    >
+      <span className={styles.name_trilha}>{trail.name}</span>
       <div className={styles.divisoria}></div>
       <div className={styles.state}>
         {checkWhichTrilhaUnlock() ? (
           <div className={styles.free}>
-            <span>{calculoPorcentagem()}%</span>
-            <ProgressBar
-              totalValue={getCoursesFromTrail(trilha.id)}
-              relativeValue={getCompletedUserCourses(trilha.id)}
-              size="small"
-              width={110}
-            />
+            {getCoursesFromTrail(trail.name) && (
+              <>
+                <span>{calculoPorcentagem()}%</span>
+                <ProgressBar
+                  totalValue={getCoursesFromTrail(trail.name)!}
+                  relativeValue={getCompletedUserCourses(trail.name)!}
+                  size="small"
+                  width={110}
+                />
+              </>
+            )}
           </div>
         ) : (
           <div className={styles.blocked}>
