@@ -4,6 +4,7 @@ import Textarea from "../../../../components/Textarea/Textarea";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import { useEffect, useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
+import Toast from "../../../../components/Toast/Toast";
 
 type addCourseProps = {
   title: string;
@@ -34,36 +35,63 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
     });
   };
 
+  const saveData = () => {
+    console.log("Concluído!!!\n");
+
+    console.log(
+      "nome do curso: " +
+        formData.name +
+        "\noferecido por: " +
+        formData.offeredBy +
+        "\ndescrição do curso: " +
+        formData.description +
+        "\nnome do instrutor: " +
+        formData.nameInstructor +
+        "\ndescrição do instrutor: " +
+        formData.descriptionInstructor +
+        "\nfoto do intrutor: " +
+        formData.avatar +
+        "\ncarga horaria: " +
+        formData.workload +
+        "\nOque vc irá aprender: " +
+        formData.learn +
+        "\nHabilidades: " +
+        formData.skills
+    );
+    return <Toast />;
+  };
+
   // console.log("anterior: " + previousStep + "\natual: " + currentStep);
 
   // console.log({ nomeDoCurso: formData.name, oferecidoPor: formData.offeredBy, nomeDoInstrutor: formData.nameInstructor });
   // console.log(formData);
 
-  console.log(
-    "nome do curso: " +
-      formData.name +
-      "\noferecido por: " +
-      formData.offeredBy +
-      "\ndescrição do curso: " +
-      formData.description +
-      "\nnome do instrutor: " +
-      formData.nameInstructor +
-      "\ndescrição do instrutor: " +
-      formData.descriptionInstructor +
-      "\nfoto do intrutor: " +
-      formData.avatar +
-      "\ncarga horaria: " +
-      formData.workload +
-      "\nOque vc irá aprender: " +
-      formData.learn +
-      "\nHabilidades: " +
-      formData.skills
-  );
+  // console.log(
+  //   "nome do curso: " +
+  //     formData.name +
+  //     "\noferecido por: " +
+  //     formData.offeredBy +
+  //     "\ndescrição do curso: " +
+  //     formData.description +
+  //     "\nnome do instrutor: " +
+  //     formData.nameInstructor +
+  //     "\ndescrição do instrutor: " +
+  //     formData.descriptionInstructor +
+  //     "\nfoto do intrutor: " +
+  //     formData.avatar +
+  //     "\ncarga horaria: " +
+  //     formData.workload +
+  //     "\nOque vc irá aprender: " +
+  //     formData.learn +
+  //     "\nHabilidades: " +
+  //     formData.skills
+  // );
 
   return (
     <TrailModal
       // oneButton={true}
       onClose={() => setCurrentStep(4)}
+      iconClose={currentStep === 4 ? false : true}
       title={currentStep === 4 ? "Tem certeza que deseja cancelar?" : title}
       nameButtonRight={
         currentStep === 3 ? "Concluir" : currentStep === 4 ? "Não" : "Avançar"
@@ -76,8 +104,8 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
           ? () => setCurrentStep(previousStep)
           : currentStep === 3
           ? () => {
+              saveData();
               onClose();
-              console.log("concluido");
             }
           : () => {
               setCurrentStep(currentStep + 1);

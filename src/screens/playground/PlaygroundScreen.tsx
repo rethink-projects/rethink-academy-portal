@@ -1,21 +1,28 @@
 import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import App from "../../App";
+import { DatePicker } from "../../components/DatePicker/DatePicker";
 // import styles from "./Playground.module.css";
-import styles from "../CoursesScreen/Components/CardAddCourse/CardAddCourse.module.css";
-import CloseIcon from "@mui/icons-material/Close";
-import InputText from "../../components/InputText/InputText";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import Textarea from "../../components/Textarea/Textarea";
-import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
-import TrailModal from "../../components/TrailModal/TrailModal";
+import Toast, { toastConfig } from "../../components/Toast/Toast";
+import NotificationProvider from "../../context/NotificationProvider";
 
 function PlaygroundScreen() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   return (
     <div>
-      <TrailModal
-        title={"Tem certeza que deseja cancelar?"}
-        onClose={() => console.log("Fechou")}
+      {/* <Toast
+        title="Parabéns! Seu curso foi adicionado com Sucesso!"
+        type="success"
+        dismissText="Dismiss"
+      /> */}
+      <ToastContainer
+        style={{ minWidth: toastConfig.minWidth }}
+        theme={toastConfig.theme}
       />
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
+      {/* <DatePicker size={"large"} calendarPosition={"left"} placeholder={""} /> */}
       {/* <CardAddCourse title="Adicionar um Curso" /> */}
     </div>
   );
