@@ -18,6 +18,9 @@ import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
 import arrowTask from "./arrowTask.svg";
+import trashIcon from "./trashIcon.svg";
+import editBlackIcon from "./editBlackIcon.svg";
+import calendarIcon from "./calendarIcon.svg";
 
 import LastGoalsMedal from "./LastGoalsMedal.svg";
 import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
@@ -53,6 +56,9 @@ export const Images = {
     ContractIcon,
     DevelopmentIcon,
     LogoutIcon,
+    trashIcon,
+    editBlackIcon,
+    calendarIcon,
   },
   LastGoalsMedal,
   LastGoalsAmpoule,
