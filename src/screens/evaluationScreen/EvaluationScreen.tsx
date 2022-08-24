@@ -11,127 +11,8 @@ import EvaluationTag from "./components/tags/EvaluationTag";
 import styles from "./EvaluationScreen.module.css";
 import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
 
-export type evaluationUserType = {
-  userName: string;
-  userSurname: string;
-  role: string;
-  month: string;
-  skills: string;
-  evaluation: evaluationType[];
-};
-
-type evaluationType = {
-  title: string;
-  grade: number;
-};
-
 const EvaluationScreen = () => {
   const { user } = useAuth();
-
-  const evaluationsData = [
-    {
-      userName: "Felipe",
-      userSurname: "Reggiane",
-      role: "Engenharia",
-      month: "março",
-      skills: "hardSkills",
-      evaluation: [
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-      ],
-    },
-    {
-      userName: "Marcela",
-      userSurname: "Monteiro",
-      role: "Produto",
-      month: "abril",
-      skills: "hardSkills",
-      evaluation: [
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-      ],
-    },
-    {
-      userName: "Pedro",
-      userSurname: "Lucas",
-      role: "Design",
-      month: "maio",
-      skills: "hardSkills",
-      evaluation: [
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-        {
-          title: "Produto",
-          grade: 5,
-        },
-      ],
-    },
-  ];
-
-  const [evaluations, setEvaluations] =
-    useState<evaluationUserType[]>(evaluationsData);
 
   //   if (user.role != embassador) {
   //     return <div>Não tem permissão para acessar esta pagina</div>;
@@ -142,7 +23,9 @@ const EvaluationScreen = () => {
   // true == hardSkills ### false == softSkills
   const [skillType, setSkillType] = useState(true);
 
-  const [tagType, setTagType] = useState("design");
+  const [tagType, setTagType] = useState<"engineering" | "design" | "product">(
+    "design"
+  );
 
   return (
     <div className={styles.evaluationScreen_container}>
@@ -181,7 +64,7 @@ const EvaluationScreen = () => {
           </div>
         </div>
         <div className={styles.evaluationScreen_table}>
-          <BasicEditingGrid props={tagType} skill={skillType} />
+          <BasicEditingGrid role={tagType} skill={skillType} />
         </div>
       </div>
     </div>

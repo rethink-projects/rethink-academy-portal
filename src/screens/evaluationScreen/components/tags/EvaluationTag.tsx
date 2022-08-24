@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { evaluationUserType } from "../../EvaluationScreen";
 import styles from "./EvaluationTag.module.css";
 
 const EvaluationTag = ({
   tagType,
   setTagType,
 }: {
-  tagType: string;
-  setTagType: (value: string) => void;
+  tagType: "engineering" | "design" | "product";
+  setTagType: (value: "engineering" | "design" | "product") => void;
 }) => {
   // variaveis para controlar estado das tags ativo e inativo
   const [activeDesign, setActiveDesign] = useState(true);
@@ -20,13 +19,13 @@ const EvaluationTag = ({
     : "";
   const activeClassProduto = activeProduto ? styles.tag_button_active : "";
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: "engineering" | "design" | "product") => {
     setTagType(id);
     if (id === "design") {
       setActiveDesign(true);
       setActiveEngenharia(false);
       setActiveProduto(false);
-    } else if (id === "engenharia") {
+    } else if (id === "engineering") {
       setActiveDesign(false);
       setActiveEngenharia(true);
       setActiveProduto(false);
@@ -47,13 +46,13 @@ const EvaluationTag = ({
       </button>
       <button
         className={[styles.tag_button, activeClassEngenharia].join(" ")}
-        onClick={() => handleClick("engenharia")}
+        onClick={() => handleClick("engineering")}
       >
         Engenharia
       </button>
       <button
         className={[styles.tag_button, activeClassProduto].join(" ")}
-        onClick={() => handleClick("produto")}
+        onClick={() => handleClick("product")}
       >
         Produto
       </button>
