@@ -14,8 +14,9 @@ type TypeCardTrilhas = {
   user?: "student" | "teacher";
   trail: TypeTrail;
   image?: string;
-  onClick: () => void;
+  onClick: (e: any) => void;
   previous: string;
+  setModal: () => void;
 };
 
 type TypeLessonUser = {
@@ -48,6 +49,7 @@ const CardTrilhas = ({
   onClick,
   trail,
   previous,
+  setModal,
 }: TypeCardTrilhas) => {
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
   const { user: userAuth } = useAuth();
@@ -160,7 +162,11 @@ const CardTrilhas = ({
     ? styles.container_video_blocked
     : "";
   return (
-    <div className={completedCourseClass_container} onClick={() => onClick()}>
+    <div
+      className={completedCourseClass_container}
+      onClick={(e: any) => onClick(e)}
+      id="container"
+    >
       <div className={styles.container_inner}>
         <div
           style={{ backgroundImage: `url(${image})` }}
@@ -203,7 +209,7 @@ const CardTrilhas = ({
                       ? `${getCoursesFromTrail(trail.name)} Cursos`
                       : `${getCoursesFromTrail(trail.name)} Curso`}
                   </p>
-                  <div className={styles.edit}>
+                  <div id="edit" onClick={setModal} className={styles.edit}>
                     <ButtonWithIcon
                       width={100}
                       position="left"
@@ -212,6 +218,10 @@ const CardTrilhas = ({
                       size="small"
                       type="primary"
                     />
+                    <div
+                      id="edit_action"
+                      className={styles.overlap_button}
+                    ></div>
                   </div>
                 </>
               )}

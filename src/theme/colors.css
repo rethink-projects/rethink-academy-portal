@@ -74,4 +74,6 @@
   /* Icons CoursesScreen */
   --color-icon-task: #5cc754;
   --color-icon-alert: #facc15;
+  /* Add Task */
+  --color-addtask-font-text: #8f8f8f;
 }

@@ -1,22 +1,25 @@
-.container_card {
-  width: 1440px;
-  height: 186px;
-  background-color: var(--color-base);
-  border: 1px solid #838383;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-.content_card {
+.container_card,
+.container_card_ambassador {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 1376px;
-  height: 122px;
-  padding: 34px 32px;
+  padding: 31px 32px;
+  border: 1px solid #838383;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background-color: var(--color-input);
+}
+
+.container_card {
+  padding: 29px 32px;
 }
 
 .description_card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 118px;
 }
 
 .legend_card {
@@ -27,8 +30,6 @@
   line-height: 150%;
   color: var(--color-tertiary);
   letter-spacing: 1px;
-
-  margin-bottom: 16px;
 }
 
 .title_card {
@@ -37,15 +38,8 @@
   font-weight: 300;
   font-size: 32px;
   line-height: 120%;
-
   color: var(--color-secondary-active);
-}
-
-.container_status_card {
-  display: flex;
-  gap: 11px;
-
-  margin-top: 19px;
+  height: 38px;
 }
 
 .IconTask {
@@ -54,6 +48,11 @@
 
 .IconAlert {
   color: var(--color-icon-alert);
+}
+
+.container_status_card {
+  display: flex;
+  gap: 11.25px;
 }
 
 .status_card {
@@ -66,8 +65,17 @@
   color: var(--color-secondary-active);
 }
 
-.actions_card {
+.actions_card,
+.actions_card_embassador {
   display: flex;
-  flex-direction: column;
   gap: 10px;
+}
+
+.actions_card {
+  flex-direction: column;
+}
+
+.actions_card_embassador {
+  flex-direction: row-reverse;
+  align-items: center;
 }
