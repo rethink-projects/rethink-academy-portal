@@ -6,7 +6,7 @@
   height: 768px;
   padding: 0px 0px 20px 0px;
   box-sizing: border-box;
-  border: 1px solid #d4d4d4;
+  border: 1px solid var(--color-icon-background);
   border-radius: 4px;
   gap: 18px;
 }
@@ -17,7 +17,7 @@
   justify-content: flex-end;
   width: 560px;
   height: 40px;
-  background-color: #d3fa3a;
+  background-color: var(--color-primary);
   border-radius: 4px 4px 0px 0px;
 }
 
@@ -30,13 +30,13 @@
   height: 28px;
   margin-right: 12px;
   border-radius: 4px;
-  background-color: #d3fa3a;
+  background-color: var(--color-primary);
   border: transparent;
   cursor: pointer;
 }
 
 .header > button:hover {
-  background-color: #A8C929;
+  background-color: var(--color-button-primary-hover);
 }
 
 .taskName,

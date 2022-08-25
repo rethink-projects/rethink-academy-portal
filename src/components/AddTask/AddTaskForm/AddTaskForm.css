@@ -18,3 +18,20 @@
     height: 40px !important;
     padding: 0px 30px !important;
 }
+
+.DatePicker_default__ozHxn {
+    width: 520px !important;
+}
+
+.DatePicker_datePicker_container__JLKZ- {
+    width: 520px !important;
+    border: 1px solid var(--color-tertiary-hover) !important;
+}
+
+.DatePicker_datePicker_content__epgpw > p {
+    color: var(--color-tertiary-active) !important;
+}
+
+.DatePicker_datePicker_active__7bwgG {
+    width: 520px !important;
+}

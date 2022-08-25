@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // css
 import styles from "./AddTaskForm.module.css";
@@ -12,6 +12,7 @@ import InputText from "../../InputText/InputText";
 import Dropdown from "../../Dropdown/Dropdown";
 import SimpleButton from "../../SimpleButton/SimpleButton";
 import Tag from "../../Tag/Tag";
+import { DatePicker } from "../../DatePicker/DatePicker";
 
 function AddTaskForm() {
   return (
@@ -29,16 +30,15 @@ function AddTaskForm() {
           hasIcon={true}
           nameInput={""}
           right={<img src={Images.icons.editBlackIcon} alt="edit icon" />}
+          value={""}
         />
       </div>
       <div className={styles.taskData}>
         <p>Data</p>
-        <InputText
-          type={"default"}
+        <DatePicker
+          size={"default"}
+          calendarPosition={"left"}
           placeholder={"Adicione uma Data"}
-          hasIcon={true}
-          nameInput={""}
-          right={<img src={Images.icons.calendarIcon} alt="calendar icon" />}
         />
       </div>
       <div className={styles.taskTime}>
@@ -259,6 +259,7 @@ function AddTaskForm() {
           placeholder={"Placeholder"}
           hasIcon={false}
           nameInput={""}
+          value={""}
         />
       </div>
       <SimpleButton
