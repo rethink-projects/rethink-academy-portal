@@ -10,7 +10,7 @@ type TypeTrails = {
   name: string;
   id: string;
   description: string;
-  weigth: number;
+  weight: number;
 };
 const TrilhasScreen = () => {
   const { user: userAuth } = useAuth();
