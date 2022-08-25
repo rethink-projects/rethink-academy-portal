@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+  <>
     <ToastContainer
       style={{ minWidth: toastConfig.minWidth }}
       theme={toastConfig.theme}
@@ -27,7 +27,7 @@ root.render(
     <NotificationProvider>
       <App />
     </NotificationProvider>
-  </React.StrictMode>
+  </>
 );
 
 reportWebVitals();

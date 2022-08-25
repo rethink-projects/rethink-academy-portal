@@ -68,6 +68,11 @@
   line-height: 20px;
 }
 
+.textarea_block {
+  /* width: 100%; */
+  height: 100%;
+}
+
 .textarea_large {
   height: 106px;
   display: flex;
@@ -82,7 +87,10 @@
 .textarea_disabled {
   pointer-events: none;
 }
-
+.textarea_container_block {
+  width: 100%;
+  height: 176px;
+}
 /* Element caption */
 
 .textarea_caption {

@@ -22,7 +22,7 @@ function RequireAuth({ children }: RequireAuthType) {
   }, []);
 
   if (!localStorageUser) {
-    return <Navigate to='/' state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
   return children;
 }
