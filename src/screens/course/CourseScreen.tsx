@@ -11,43 +11,65 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import styles from "./CourseScreen.module.css";
 
-type ModuleType = {
+type TypeCourse = {
   id: string;
   name: string;
+  description: string;
+  level: string;
+  workload: number;
+  learning: string;
+  skills: string;
+  trailId: string;
+  teacherId: string;
 };
+type TypeModule = {
+  id: string;
+  name: string;
+  lessons: TypeLesson[];
+};
+type TypeLesson = {
+  id: string;
+  name: string;
+  embedUrl: string;
+  order: number;
+  description: string;
+  moduleId: number;
+};
+
 const CourseScreen = () => {
   const location = useLocation();
-  console.log(location.pathname);
+
   const trailId = location.pathname.split("/")[2];
   const courseId = location.pathname.split("/")[4];
-  console.log(trailId);
-  console.log(courseId);
+  const userEmail = "lucas.paula@rethink.dev";
 
-  const getCourse = async () => {
-    const response = await axios.get(
-      "http://localhost:5432/api/course/" + courseId
-    );
-    // .catch((err: any) => {
-    //   console.log("api error", err);
-    // });
-    // console.log(response!.data.course);
-    return response!.data.course;
-  };
-  const getModules = async () => {
-    const response = await axios.get(
-      "http://localhost:5432/api/course/" + courseId + "/modules"
-    );
-    // .catch((err: any) => {
-    //   console.log("api error", err);
-    // })
-    if(response){
-      const temp : ModulesType[]= response!.data.modules;
-      return temp;
-    }return null
-  };
+  const [modules, setModules] = useState<TypeModule[]>([]);
+  const [courses, setCourses] = useState<TypeCourse[]>([]);
+  const [watcheds, setWatcheds] = useState<string[]>([]);
 
-  const course = getCourse();
-  const modules = getModules();
+  useEffect(() => {
+    axios
+      .get("http://localhost:5432/api/course/" + courseId)
+      .then((response) => {
+        if (response.data.modules) {
+          setModules(response.data.Modules);
+        }
+      });
+
+    axios.get("http://localhost:4000/api/trail").then((response) => {
+      if (response.data.trail) {
+        setCourses(response.data.courses);
+      }
+    });
+    axios
+      .get("http://localhost:5432/api/user/watched/list/" + userEmail)
+      .then((response) => {
+        if (response.data.user.watched) {
+          setWatcheds(response.data.user.watched);
+        }
+      });
+  }, []);
+
   // const course = {
   //   id: "1",
   //   name: "Nothink",
@@ -92,16 +114,23 @@ const CourseScreen = () => {
       module: 2,
     },
   ];
-const verifyBlock = async (moduleId : string) => {
-  //se o módulo for o primeiro 
-  if(moduleId === modules?[0].id){
-    return false;
-  }else if (){
-
-  }
-
-  //se o módulo anterior tiver sido concluído
-}
+  const verifyBlock = async (moduleId: string) => {
+    let i = 1;
+    let anteriorModule: TypeModule;
+    //se o módulo for o primeiro
+    if (moduleId === modules[0].id) {
+      return false;
+    }
+    //se o módulo anterior tiver sido concluído
+    else{
+      // anteriorModule = modules[0];
+      while (modules[i].id !== moduleId) {
+        anteriorModule = modules[i];
+        i++;
+      };
+      if(anteriorModule.lessons.forEach((lesson)=>(lesson.id))
+    }
+  };
   const getBreadcrumbs = () => {
     const url = location.pathname;
     let path = url.split("/curso");
@@ -117,19 +146,6 @@ const verifyBlock = async (moduleId : string) => {
   const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
   const embassador = true;
 
-  const setAccordions = async () => {
-    return (await modules).map((module: ModuleType) => (
-      <Acordeon
-        width={848}
-        openModuleModal={setModuleModalIsOpen}
-        setModuleModalType={setModuleModalType}
-        setModuleName={setModuleName}
-        embassador={embassador}
-        moduleId={module.id}
-        blocked={verifyBlock(module.id)}
-      />
-    ));
-  };
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -208,7 +224,18 @@ const verifyBlock = async (moduleId : string) => {
             />
           )}
           <div className={styles.modules}>
-            <>{setAccordions()}</>
+            <>
+              {modules?.map((module) => (
+                <Acordeon
+                  width={848}
+                  openModuleModal={setModuleModalIsOpen}
+                  setModuleModalType={setModuleModalType}
+                  setModuleName={setModuleName}
+                  embassador={embassador}
+                  moduleId={module.id}
+                />
+              ))}
+            </>
           </div>
         </div>
         <div className={styles.practical_information}>
