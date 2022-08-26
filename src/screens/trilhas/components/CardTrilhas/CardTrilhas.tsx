@@ -99,7 +99,16 @@ const CardTrilhas = ({
   };
 
   const checkWhichTrilhaUnlock = () => {
-    if (trail.name === lessonUser?.user?.main) {
+    let mainUser;
+    if (lessonUser?.user.main === "ENGINEERING") {
+      mainUser = "Engenharia";
+    } else if (lessonUser?.user.main === "DESIGN") {
+      mainUser = "Design";
+    } else {
+      mainUser = "Produto";
+    }
+
+    if (trail.name === mainUser) {
       return true;
     }
     if (trail.name === "Academy") {
