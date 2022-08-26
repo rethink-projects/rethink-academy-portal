@@ -225,7 +225,7 @@ AccordionProps) => {
                 size={"medium"}
                 type={"primary"}
                 width={218}
-                onClick={() => setAddLessonModal()}
+                onClick={() => (setAddLessonModal(), setLesson(undefined))}
               />
             </div>
           )}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Acordeon from "./components/Accordion/Accordion";
@@ -38,17 +39,33 @@ type TypeLesson = {
 
 const CourseScreen = () => {
   const location = useLocation();
+  const [watcheds, setWatcheds] = useState<string[]>([]);
+  const [modules, setModules] = useState<TypeModule[]>([]);
+  const [course, setCourse] = useState<TypeCourse[]>([]);
+  const [embassador, setEmbassador] = useState(false);
+
+  // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
+  const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
+  const [moduleName, setModuleName] = useState("");
+  const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
+  let userEmail = "";
+  const { user } = useAuth();
+  if (user) userEmail = user.email;
 
   const trailId = location.pathname.split("/")[2];
   const courseId = location.pathname.split("/")[4];
-  console.log(courseId);
-  const userEmail = "lucas.paula@rethink.dev";
-
-  const [modules, setModules] = useState<TypeModule[]>([]);
-  const [course, setCourse] = useState<TypeCourse[]>([]);
-  const [watcheds, setWatcheds] = useState<string[]>([]);
 
   useEffect(() => {
+    axios
+      .get("http://localhost:5432/api/user/" + userEmail)
+      .then((response) => {
+        console.log(response.data);
+        console.log(userEmail);
+        if (response.data.user) {
+          // console.log(response.data.user.role);
+          setEmbassador(response.data.user.role === "STUDENT");
+        }
+      });
     axios
       .get("http://localhost:5432/api/course/" + courseId)
       .then((response) => {
@@ -73,9 +90,13 @@ const CourseScreen = () => {
           console.log(response.data.watched);
         }
       });
-  }, []);
+  }, [userEmail]);
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   const isBlocked = (moduleId: string) => {
+    if (embassador) return false;
     let i = 1;
     //se o módulo for o primeiro
     if (moduleId === modules[0].id) {
@@ -94,6 +115,7 @@ const CourseScreen = () => {
     }
   };
   const isCompleted = (moduleId: string) => {
+    if (embassador) return true;
     let module: TypeModule = modules[0];
     let i = 0;
     if (modules.length === 1) {
@@ -122,11 +144,6 @@ const CourseScreen = () => {
     const linkCourse = { title: "Curso 1", link: url };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
-  // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
-  const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
-  const [moduleName, setModuleName] = useState("");
-  const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
-  const embassador = true;
 
   return (
     <div className={styles.box}>
