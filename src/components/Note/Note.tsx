@@ -40,22 +40,6 @@ const Note = () => {
     changeNotes();
   }, []);
 
-  const sorting = () => {
-    setNotes((prevState) => {
-      return prevState.sort((a, b) => {
-        if (a.priority < b.priority) return -1;
-        else if (a.priority > b.priority) return 1;
-        return 0;
-      });
-    });
-    console.log(notes);
-    console.log("ordenou");
-  };
-
-  useEffect(() => {
-    sorting();
-  }, [notes]);
-
   const [description, setDescription] = useState("");
 
   const handleColor = async (id: string, colorHeader: string, text: string) => {
@@ -68,8 +52,6 @@ const Note = () => {
     await updateStickerNotes(id, text, priority);
 
     changeNotes();
-
-    sorting();
   };
 
   const handleNote = async () => {
