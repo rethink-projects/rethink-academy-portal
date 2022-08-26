@@ -12,6 +12,11 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import styles from "./CourseScreen.module.css";
 const CourseScreen = () => {
   const location = useLocation();
+  console.log(location.pathname);
+  const trailId = location.pathname.split("/")[2];
+  const courseId = location.pathname.split("/")[4];
+  console.log(trailId);
+  console.log(courseId);
 
   const course = {
     id: 1,
@@ -24,6 +29,7 @@ const CourseScreen = () => {
       // { nome: "oi" }
     ],
   };
+  const course = axios.get("/course/");
 
   const classes = [
     {
