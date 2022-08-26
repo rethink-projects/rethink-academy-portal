@@ -7,66 +7,38 @@ import styles from "./Note.module.css";
 import InputText from "../InputText/InputText";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Content from "./Components/Content";
+import {
+  createStickerNotes,
+  getStickerNotesByUserEmail,
+  removeStickerNotes,
+  updateStickerNotes,
+} from "../../services/backend/StickerNotes";
+import { useAuth } from "../../context/AuthContext";
 
 const Note = () => {
-  const [notes, setNotes] = useState([
-    {
-      id: "1",
-      text: "Texto ilustrando um lembrete 1",
-      priority: 2,
-    },
-  ]);
-  const [description, setDescription] = useState("");
+  type Note = {
+    id: string;
+    description: string;
+    priority: number;
+    data: string;
+    userId?: string;
+  };
+
+  const { user } = useAuth();
+
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  const changeNotes = async () => {
+    await getStickerNotesByUserEmail("sthephany.tezza@rethink.dev")
+      .then((response) => {
+        setNotes(response.stickerNotes);
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
-    const data = [
-      {
-        id: "1",
-        text: "Ilustrando um lembrete 1",
-        priority: 2,
-      },
-      {
-        id: "2",
-        text: "Texto ilustrando um lembrete 2",
-        priority: 3,
-      },
-      {
-        id: "3",
-        text: "Texto ilustrando um lembrete 3",
-        priority: 1,
-      },
-      {
-        id: "4",
-        text: "Texto ilustrando um lembrete 4",
-        priority: 1,
-      },
-    ];
-
-    setNotes(data);
+    changeNotes();
   }, []);
-
-  const handleColor = (id: string, colorHeader: string, text: string) => {
-    setNotes(notes.filter((note) => note.id !== id));
-
-    let priority;
-
-    if (colorHeader === "red") priority = 1;
-    else if (colorHeader === "yellow") priority = 2;
-    else priority = 3;
-
-    const note = {
-      id: id,
-      text: text,
-      color: colorHeader,
-      priority: priority,
-    };
-
-    setNotes((prevState) => {
-      return [...prevState, note];
-    });
-
-    sorting();
-  };
 
   const sorting = () => {
     setNotes((prevState) => {
@@ -76,33 +48,41 @@ const Note = () => {
         return 0;
       });
     });
+    console.log(notes);
+    console.log("ordenou");
   };
 
   useEffect(() => {
     sorting();
-  }, []);
+  }, [notes]);
 
-  const handleNote = () => {
-    const note = {
-      id: Math.floor(Math.random() * 1000).toString(),
-      text: description,
-      color: "green",
-      priority: 3,
-    };
+  const [description, setDescription] = useState("");
 
-    setNotes((prevState) => {
-      return [...prevState, note];
-    });
+  const handleColor = async (id: string, colorHeader: string, text: string) => {
+    let priority;
+
+    if (colorHeader === "red") priority = 1;
+    else if (colorHeader === "yellow") priority = 2;
+    else priority = 3;
+
+    await updateStickerNotes(id, text, priority);
+
+    changeNotes();
+
+    sorting();
+  };
+
+  const handleNote = async () => {
+    await createStickerNotes(description, "sthephany.tezza@rethink.dev");
+
+    changeNotes();
 
     setDescription("");
   };
 
-  const handleDelete = (id: string) => {
-    setNotes(notes.filter((note) => note.id !== id));
-  };
-
-  const handleEdit = (id: string) => {
-    console.log("editando nota id: " + id);
+  const handleDelete = async (id: string) => {
+    await removeStickerNotes(id);
+    changeNotes();
   };
 
   return (
@@ -125,11 +105,10 @@ const Note = () => {
             <Content
               key={note.id}
               id={note.id}
-              text={note.text}
+              text={note.description}
               priority={note.priority}
               handleColor={handleColor}
               onClickDelete={handleDelete}
-              onClickEdit={handleEdit}
             />
           ))}
         </div>

@@ -4,21 +4,18 @@ import {api} from '../backend/Api';
 
 export const getStickerNotesByUserEmail  = async (email: string) => {
   try {
-
-    const { data } = await api.get(`/stickernotes/${email}`);
-    return data;
+    const response = await api.get(`/stickernotes-user/${email}`);
+    return response.data;
   } catch (error) {
     console.log(error);
     return;
   }
 };
 
-export const createStickerNotes = async (description: string, data: string, priority: string, email: string) => {
+export const createStickerNotes = async (description: string, email: string) => {
     try {
         const response  = api.post('/stickernotes', {
             description,
-            data,
-            priority,
             email,
         });
         return response;
@@ -31,20 +28,18 @@ export const createStickerNotes = async (description: string, data: string, prio
 export const removeStickerNotes = async (id: string) => {
     try {
         const response = await api.delete(`/stickernotes/${id}`);
-        return response;
+        return response.data;
     } catch (error) {
         console.log(error);
         return;
     }
 }
 
-export const updateStickerNotes = async (id: string, description: string, data: string, priority: string, email: string) => {
+export const updateStickerNotes = async (id: string, description: string, priority: number) => {
     try {
-        const response  = api.post(`/stickernotes/${id}`, {
+        const response  = api.put(`/stickernotes/${id}`, {
             description,
-            data,
             priority,
-            email,
         });
         return response;
     } catch (error) {
