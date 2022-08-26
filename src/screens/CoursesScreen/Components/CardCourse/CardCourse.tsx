@@ -49,6 +49,18 @@ const CardCurso = ({
       disabled = true;
     }
   }
+  // interface CourseResponse {
+  //   id: string;
+  //   name: string;
+  //   description: string;
+  //   level: "LOW" | "MEDIUM" | "HIGH";
+  //   workload: number;
+  //   learning: string;
+  //   skills: string;
+  //   trailId: string;
+  //   teacherId: string;
+  //   modules: Module[];
+  // }
 
   return (
     <div className={styles.container_card}>

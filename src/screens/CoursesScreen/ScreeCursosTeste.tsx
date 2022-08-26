@@ -11,6 +11,26 @@ import { api } from "../../services/api";
 import SocialButton from "../../components/SocialButton/SocialButton";
 import { useAuth } from "../../context/AuthContext";
 
+interface Profile {
+  id: string;
+  bio: string;
+  avatar: string;
+  social: JSON;
+  userId: string;
+}
+
+interface UserResponse {
+  id: string;
+  email: string;
+  name: string;
+  surname: string;
+  main: string;
+  watched: string[];
+  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
+  profile: Profile;
+  course: CourseResponse[];
+}
+
 interface Trail {
   id: string;
   name: string;
@@ -120,7 +140,17 @@ const renderCard = (
 // console.log(response.data);
 // }
 
-const CursosScreen = () => {
+const CursosScreenTeste = () => {
+  // Usuário
+  const { user } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState<UserResponse>();
+  const [courseId, setCourseId] = useState("");
+  // const [email, setEmail] = useState<string>("");
+
+  // let email = user.email;
+  // console.log(user.email);
+
   // Declaração de variáveis
   const location = useLocation();
   let trilhaId = location.pathname.replace("/trilhas/", "");
@@ -129,31 +159,40 @@ const CursosScreen = () => {
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
   // const [data, setData] = useState();
   const [title, setTitle] = useState("");
-  const [idCourse, setIdCourse] = useState("");
   const [data, setData] = useState([]);
-  const { user } = useAuth();
   // console.log(user);
-  const [getUsers, setGetUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
     const func = async () => {
+      const responseUser = await api.get(`/user/`);
+      // console.log(responseUser.data);
+      // responseUser.data.map((user: UserResponse) => console.log(user.email));
+
+      setUsers(responseUser.data);
+
       // const response = await api.get<CourseResponse[]>(`/course/`);
       const response = await api.get(`/course/`);
-      const responseUser = await api.get(`/user/`);
       const data = response.data;
       // console.log(data.courses[0].name);
       setTitle(data.courses[0].name);
       setData(data.courses);
-      setGetUsers(responseUser.data);
-      // console.log(data);
-
-      // console.log(responseUser.data[0].id);
-
-      // return data;
+      // setGetUsers(responseUser.data);
     };
     func();
   }, []);
+  // const emaili = "email";
+  useEffect(() => {
+    users.map(
+      (userMap: UserResponse) =>
+        userMap.email === user.email && setCurrentUser(userMap)
+    );
+    console.log(currentUser);
+  }, [users]);
+
+  // console.log(email);
+
+  // users.map((currentUser) => console.log(currentUser.));
+  // console.log(users);
 
   // getUsers && getUsers.map((getUser) => console.log(getUser.email));
 
@@ -283,7 +322,10 @@ const CursosScreen = () => {
                     intern={intern}
                     onClickIrAoCurso={() => console.log("Foi para o curso")}
                     onClickColectEmblem={() => console.log("Coletou o emblema")}
-                    onClickEditCourse={() => setEditCourseIsOpen(true)}
+                    onClickEditCourse={() => {
+                      setCourseId(course.id);
+                      setEditCourseIsOpen(true);
+                    }}
                     key={index}
                     title={course.name}
                     concluded={1}
@@ -304,6 +346,7 @@ const CursosScreen = () => {
           {editCourseIsOpen && (
             <CardAddCourse
               addCourse={false}
+              idCourse={courseId}
               onClose={() => setEditCourseIsOpen(false)}
             />
           )}
@@ -313,4 +356,4 @@ const CursosScreen = () => {
   );
 };
 
-export default CursosScreen;
+export default CursosScreenTeste;

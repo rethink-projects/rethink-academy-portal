@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import { ToastContainer } from "react-toastify";
-import App from "../../App";
+import ModalTrilhas from "../../components/TrailModal/TrailModal";
+import styles from "./Playground.module.css";
+import CloseIcon from "@mui/icons-material/Close";
 import { DatePicker } from "../../components/DatePicker/DatePicker";
-// import styles from "./Playground.module.css";
-import Toast, { toastConfig } from "../../components/Toast/Toast";
-import NotificationProvider from "../../context/NotificationProvider";
 
 function PlaygroundScreen() {
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
-    <div>
-      {/* <Toast
-        title="Parabéns! Seu curso foi adicionado com Sucesso!"
-        type="success"
-        dismissText="Dismiss"
-      /> */}
-      <ToastContainer
-        style={{ minWidth: toastConfig.minWidth }}
-        theme={toastConfig.theme}
-      />
-      <NotificationProvider>
-        <App />
-      </NotificationProvider>
-      {/* <DatePicker size={"large"} calendarPosition={"left"} placeholder={""} /> */}
-      {/* <CardAddCourse title="Adicionar um Curso" /> */}
+    <div className={styles.playground_container}>
+      <div className={styles.playground_container_inner}>
+        <button onClick={() => setModalIsOpen(true)}>Modal</button>
+        {modalIsOpen && (
+          <ModalTrilhas
+            onClose={() => setModalIsOpen(false)}
+            title="Tem certeza que deseja excluir?"
+          />
+        )}
+        <DatePicker size={"large"} calendarPosition={"left"} placeholder={""} />
+      </div>
     </div>
   );
 }

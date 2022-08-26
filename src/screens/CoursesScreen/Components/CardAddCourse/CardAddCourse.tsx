@@ -5,15 +5,101 @@ import Dropdown from "../../../../components/Dropdown/Dropdown";
 import { useEffect, useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
 import Toast from "../../../../components/Toast/Toast";
+import { useNotification } from "../../../../context/NotificationContext";
+import { Timestamp } from "firebase/firestore";
+import { api } from "../../../../services/api";
+import { useLocation } from "react-router-dom";
+
+interface Profile {
+  id: string;
+  bio?: string;
+  avatar?: string;
+  social?: JSON;
+  // user:   User    @relation(fields: [userId], references: [id])
+  userId: string;
+}
+
+interface UserResponse {
+  id: string;
+  email: string;
+  name?: string;
+  surname?: string;
+  main?: string;
+  watched: string[];
+  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
+  profile?: Profile;
+  course: CourseResponse[];
+}
+
+interface Module {
+  id: string;
+  name: string;
+  courseId: string;
+  lessons: Lesson[];
+}
+
+interface Lesson {
+  id: string;
+  name: string;
+  embedUrl: string;
+  order: number;
+  description: string;
+  moduleId: string;
+}
+
+interface CourseResponse {
+  id: string;
+  name: string;
+  description: string;
+  level: "LOW" | "MEDIUM" | "HIGH";
+  workload: number;
+  learning: string;
+  skills: string;
+  trailId: string;
+  teacherId: string;
+  modules: Module[];
+}
 
 type addCourseProps = {
-  title: string;
+  addCourse?: boolean;
   onClose: VoidFunction;
+  idCourse?: string;
 };
 
-const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
+const CardAddCourse = ({
+  addCourse = true,
+  idCourse = "",
+  onClose = () => {},
+}: addCourseProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
+  const [course, setCourse] = useState<CourseResponse>({
+    id: "",
+    name: "",
+    description: "",
+    level: "LOW",
+    workload: 10,
+    learning: "",
+    skills: "",
+    trailId: "",
+    teacherId: "",
+    modules: [],
+  });
+  const [teacher, setTeacher] = useState<UserResponse>({
+    id: "",
+    email: "",
+    name: "Ana",
+    surname: "",
+    main: "",
+    watched: [],
+    role: "STUDENT",
+    // profile?: Profile;
+    course: [],
+  });
+  const location = useLocation();
+  let trilhaId = location.pathname.replace("/trilhas/", "");
+  // let trilhaId = location
+  const { notify } = useNotification();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,13 +115,72 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
     skills: "",
   });
 
+  const title = addCourse ? "Adicionar um Curso" : "Editar um Curso";
+
+  async function loadCourse() {
+    const response = await api.get(`/course/${idCourse}`);
+    // const response = await api.get(`/course`);
+    // console.log(response.data.courses[0].teacher);
+    setTeacher(response.data.courses[0].teacher);
+    setCourse(response.data.courses[0]);
+  }
+  // console.log(teacher.name);
+
+  // async function loadCourse() {
+  //   const response = await api.post("/course", {
+  //     name: "Typescript",
+  //     description: "Curso bacana",
+  //     level: "LOW",
+  //     workload: 30,
+  //     learning: "Vai aprender react",
+  //     skills: "Habilidade",
+  //     trailId: "3",
+  //     teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+  //   });
+  //   console.log(response.data);
+  // }
+
+  // async function loadCourse() {
+  //   const response = await api.get("/user");
+  //   console.log(response.data);
+  // }
+
   const handlerOnChange = (event: any, key: string) => {
     setFormData((prevValue) => {
       return { ...prevValue, [key]: event.target.value };
     });
   };
+  useEffect(() => {
+    !addCourse && loadCourse();
+  }, []);
 
-  const saveData = () => {
+  useEffect(() => {
+    let atribute = teacher.name;
+    // console.log(atribute);
+
+    // !addCourse && loadCourse();
+    // const name = (e) => handlerOnChange(e, "name");
+    // handlerOnChange(course?.name, "name");
+    setFormData((prevValue) => {
+      // type: "",
+      // offeredBy: "",
+      // nameInstructor: "",
+      // descriptionInstructor: "",
+      // avatar: "",
+      return {
+        ...prevValue,
+        ["name"]: course?.name,
+        ["description"]: course?.description,
+        // ["workload"]: course?.workload,
+        ["skills"]: course?.skills,
+        ["learn"]: course?.learning,
+        ["level"]: course?.level,
+        // ["nameInstructor"]: atribute,
+      };
+    });
+  }, [course]);
+
+  const handleSubmit = async (title: string) => {
     console.log("Concluído!!!\n");
 
     console.log(
@@ -58,7 +203,47 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
         "\nHabilidades: " +
         formData.skills
     );
-    return <Toast />;
+    // return <Toast />;
+
+    notify({
+      title: title,
+      type: "success",
+    });
+    // const level = formData ===
+
+    const response = await api.post(`/course`, {
+      // name: `${formData.name}`,
+      // description: `${formData.description}`,
+      // level: "LOW",
+      // workload: "30",
+      // learning: "Vai aprender react",
+      // skills: "Habilidade",
+      // trailId: "3",
+      // teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+      name: `${formData.name}`,
+      description: "Curso pra testar",
+      level: "LOW",
+      workload: 30,
+      learning: "Vai aprender react",
+      skills: "Habilidade",
+      trailId: "3",
+      teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+    });
+    //  name: "",
+    // type: "",
+    // offeredBy: "",
+    // description: "",
+    // nameInstructor: "",
+    // descriptionInstructor: "",
+    // avatar: "",
+    // level: "",
+    // workload: "",
+    // learn: "",
+    // skills: ""
+
+    // try {
+    //   const newDocument = { ...formData, createdAt: Timestamp.now() };
+    // } catch (error) {}
   };
 
   // console.log("anterior: " + previousStep + "\natual: " + currentStep);
@@ -104,7 +289,11 @@ const CardAddCourse = ({ title, onClose = () => {} }: addCourseProps) => {
           ? () => setCurrentStep(previousStep)
           : currentStep === 3
           ? () => {
-              saveData();
+              handleSubmit(
+                title === "Adicionar um Curso"
+                  ? "Parabéns! Seu curso foi adicionado com sucesso!"
+                  : "Alterações salvas com sucesso!"
+              );
               onClose();
             }
           : () => {
