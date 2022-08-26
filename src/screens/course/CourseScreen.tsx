@@ -42,7 +42,7 @@ const CourseScreen = () => {
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [course, setCourse] = useState<TypeCourse[]>([]);
-  const [embassador, setEmbassador] = useState(false);
+  const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
@@ -54,15 +54,12 @@ const CourseScreen = () => {
 
   const trailId = location.pathname.split("/")[2];
   const courseId = location.pathname.split("/")[4];
-
   useEffect(() => {
     axios
       .get("http://localhost:5432/api/user/" + userEmail)
       .then((response) => {
-        console.log(response.data);
-        console.log(userEmail);
         if (response.data.user) {
-          // console.log(response.data.user.role);
+          console.log(response.data.user.role);
           setEmbassador(response.data.user.role === "STUDENT");
         }
       });
@@ -73,10 +70,10 @@ const CourseScreen = () => {
           setCourse(response.data.course);
         }
       });
+
     axios
       .get("http://localhost:5432/api/course/" + courseId + "/modules")
       .then((response) => {
-        console.log(response.data);
         if (response.data.modules) {
           setModules(response.data.modules);
         }
@@ -87,14 +84,15 @@ const CourseScreen = () => {
       .then((response) => {
         if (response.data.watched) {
           setWatcheds(response.data.watched);
-          console.log(response.data.watched);
         }
       });
+    console.log("guardei tudo");
   }, [userEmail]);
-  if (!user) {
+
+  console.log("rodou aqui");
+  if (!user || course === [] || userEmail === "" || embassador === undefined) {
     return <div>Loading...</div>;
   }
-
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
     let i = 1;
@@ -196,24 +194,6 @@ const CourseScreen = () => {
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
-          {modules.length === 0 && (
-            <div className={styles.no_modules}>
-              <IconFolder
-                sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
-              />
-              <span>Você ainda não possui nenhum módulo.</span>
-              <ButtonWithIcon
-                icon={<IconPlus />}
-                text={"Adicionar módulo"}
-                position={"right"}
-                size={"medium"}
-                type={"primary"}
-                width={218}
-                onClick={() => setModuleModalIsOpen(true)}
-              />
-            </div>
-          )}
-
           {moduleModalIsOpen && (
             <ModuleModal
               onClose={() => setModuleModalIsOpen(false)}
@@ -240,6 +220,23 @@ const CourseScreen = () => {
               ))}
             </>
           </div>
+          {modules.length === 0 && (
+            <div className={styles.no_modules}>
+              <IconFolder
+                sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
+              />
+              <span>Você ainda não possui nenhum módulo.</span>
+              <ButtonWithIcon
+                icon={<IconPlus />}
+                text={"Adicionar módulo"}
+                position={"right"}
+                size={"medium"}
+                type={"primary"}
+                width={218}
+                onClick={() => setModuleModalIsOpen(true)}
+              />
+            </div>
+          )}
         </div>
         <div className={styles.practical_information}>
           <div className={styles.card_info}>
