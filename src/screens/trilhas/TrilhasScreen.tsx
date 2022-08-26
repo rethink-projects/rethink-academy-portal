@@ -78,7 +78,8 @@ const TrilhasScreen = () => {
         description: valueDescriptionTrail,
       }
     );
-    console.log("foi", update);
+
+    setModalIsOpen(false);
   };
 
   return (
@@ -100,7 +101,7 @@ const TrilhasScreen = () => {
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}
-              user={user?.role === "RETHINKER" ? "teacher" : "teacher"}
+              user={user?.role === "RETHINKER" ? "teacher" : "student"}
               onClick={(event: any) => handleClickCardTrails(event, item)}
               trail={item}
               setModal={() => setStateModalOnclick(item.id)}

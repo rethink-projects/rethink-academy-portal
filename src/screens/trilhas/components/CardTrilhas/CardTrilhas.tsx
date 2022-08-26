@@ -172,7 +172,9 @@ const CardTrilhas = ({
           style={{ backgroundImage: `url(${image})` }}
           className={styles.card_image}
         >
-          <div className={completedCourseClass_effect_img}></div>
+          {user === "student" && (
+            <div className={completedCourseClass_effect_img}></div>
+          )}
         </div>
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{trail.name}</h1>
