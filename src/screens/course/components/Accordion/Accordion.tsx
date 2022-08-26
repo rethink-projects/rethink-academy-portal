@@ -13,30 +13,30 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import axios from "axios";
 
 type AccordionProps = {
   width?: number;
-  moduleId: string;
+  module: TypeModule;
   embassador?: boolean;
+  blocked?: boolean;
+  completed?: boolean;
+  watcheds: string[];
   openModuleModal: (open: boolean) => void;
   setModuleModalType: (value: "add" | "edit") => void;
   setModuleName: (moduleName: string) => void;
 };
-type ModuleType = {
+type TypeModule = {
   id: string;
   name: string;
+  lessons: TypeLesson[];
 };
-
-type Lesson = {
+type TypeLesson = {
   id: string;
   name: string;
-  url: string;
-  completed: boolean;
-  description: string;
+  embedUrl: string;
   order: number;
-  duration: string;
-  type: "video" | "audio" | "activity";
+  description: string;
+  moduleId: number;
 };
 
 const Accordion = ({
@@ -45,9 +45,12 @@ const Accordion = ({
   setModuleModalType,
   setModuleName,
   embassador,
-  moduleId,
-  modules,
-}: // module = {
+  blocked,
+  completed,
+  module,
+  watcheds,
+}: // modules,
+// module = {
 //   id: 1,
 //   name: "Aqui está o nome do módulo",
 //   blocked: false,
@@ -75,26 +78,22 @@ const Accordion = ({
 //     },
 //   ],
 // },
+
 AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
-  const [lesson, setLesson] = useState<Lesson>();
+  const [lessons, setLessons] = useState<Array<TypeLesson>>(module.lessons!);
+  const [lesson, setLesson] = useState<TypeLesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonEmbed, setLessonEmbed] = useState("");
   const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
 
-  const getModules = async () => {
-    const response = await axios.get(
-      "http://localhost:5432/api//module/" + moduleId
-    );
-    // .catch((err: any) => {
-    //   console.log("api error", err);
-    // });
-    console.log(response!.data.module);
-    return response!.data.module;
-  };
+  const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
+  const [validationType, setValidationType] = useState<
+    "save" | "cancel" | "delete"
+  >("delete");
+
   const setAddLessonModal = () => {
     setLessonName("");
     setLessonDescription("");
@@ -106,10 +105,13 @@ AccordionProps) => {
     lesson!.name = lessonName;
   };
 
-  const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<
-    "save" | "cancel" | "delete"
-  >("delete");
+  const lessonComplet = (id: string) => {
+    if (watcheds.includes(id)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className={isOpen ? styles.container : ""}>
       {/* -------MODAIS------ */}
@@ -137,7 +139,7 @@ AccordionProps) => {
         style={{ width: width }}
         className={`${
           isOpen ? styles.module_container : styles.module_container_closed
-        } ${module.blocked ? styles.module_disabled : ""}`}
+        } ${blocked ? styles.module_disabled : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {embassador ? (
@@ -166,11 +168,11 @@ AccordionProps) => {
           <>
             {/* CONTEÚDO DO MENU PARA O ESTAGIÁRIO */}
             <div className={styles.left_side}>
-              {module.completed ? (
+              {completed ? (
                 <IconCheckedCircle
                   sx={{ color: "var(--color-feedback-success)" }}
                 />
-              ) : module.blocked ? (
+              ) : blocked ? (
                 <div className={styles.padlock_border}>
                   <IconPadlock />
                 </div>
@@ -203,13 +205,13 @@ AccordionProps) => {
                       setLessonName(lesson.name),
                       setLesson(lesson),
                       setLessonDescription(lesson.description),
-                      setLessonEmbed(lesson.url),
+                      setLessonEmbed(lesson.embedUrl),
                       setLessonModalIsOpen(true),
                       setLessonModalType("edit")
                     )}
                   />
                 ) : (
-                  lesson.completed && <IconCheckedCircle />
+                  lessonComplet(lesson.id) && <IconCheckedCircle />
                 )}
               </div>
             </div>

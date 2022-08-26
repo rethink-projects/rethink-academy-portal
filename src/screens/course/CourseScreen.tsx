@@ -41,95 +41,77 @@ const CourseScreen = () => {
 
   const trailId = location.pathname.split("/")[2];
   const courseId = location.pathname.split("/")[4];
+  console.log(courseId);
   const userEmail = "lucas.paula@rethink.dev";
 
   const [modules, setModules] = useState<TypeModule[]>([]);
-  const [courses, setCourses] = useState<TypeCourse[]>([]);
+  const [course, setCourse] = useState<TypeCourse[]>([]);
   const [watcheds, setWatcheds] = useState<string[]>([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:5432/api/course/" + courseId)
       .then((response) => {
+        if (response.data.course) {
+          setCourse(response.data.course);
+        }
+      });
+    axios
+      .get("http://localhost:5432/api/course/" + courseId + "/modules")
+      .then((response) => {
+        console.log(response.data);
         if (response.data.modules) {
-          setModules(response.data.Modules);
+          setModules(response.data.modules);
         }
       });
 
-    axios.get("http://localhost:4000/api/trail").then((response) => {
-      if (response.data.trail) {
-        setCourses(response.data.courses);
-      }
-    });
     axios
       .get("http://localhost:5432/api/user/watched/list/" + userEmail)
       .then((response) => {
-        if (response.data.user.watched) {
-          setWatcheds(response.data.user.watched);
+        if (response.data.watched) {
+          setWatcheds(response.data.watched);
+          console.log(response.data.watched);
         }
       });
   }, []);
 
-  // const course = {
-  //   id: "1",
-  //   name: "Nothink",
-  //   trilha: 3,
-  //   lastCourse: 4,
-  //   completed: false,
-  //   description: "descrição",
-  //   modules: [
-  //     // { nome: "oi" }
-  //   ],
-  // };
-
-  const classes = [
-    {
-      id: "iax9dhaiudshasip1",
-      name: "class_01",
-      url: "nothink-video-01.com",
-      trilha: 3,
-      courses: 1,
-      order: 1,
-      description: "descrição",
-      module: 1,
-    },
-    {
-      id: "iax9dhaiudshasip2",
-      name: "class_02",
-      url: "nothink-video-02.com",
-      trilha: 3,
-      courses: 1,
-      order: 2,
-      description: "descrição",
-      module: 1,
-    },
-    {
-      id: "iax9dhaiudshasip3",
-      name: "class_02",
-      url: "nodeJS-video-01.com",
-      trilha: 3,
-      courses: 2,
-      order: 1,
-      description: "descrição",
-      module: 2,
-    },
-  ];
-  const verifyBlock = async (moduleId: string) => {
+  const isBlocked = (moduleId: string) => {
     let i = 1;
-    let anteriorModule: TypeModule;
     //se o módulo for o primeiro
     if (moduleId === modules[0].id) {
       return false;
     }
     //se o módulo anterior tiver sido concluído
-    else{
-      // anteriorModule = modules[0];
+    else {
+      let anteriorModule: TypeModule = modules[0];
+
       while (modules[i].id !== moduleId) {
         anteriorModule = modules[i];
         i++;
-      };
-      if(anteriorModule.lessons.forEach((lesson)=>(lesson.id))
+      }
+
+      isCompleted(anteriorModule.id);
     }
+  };
+  const isCompleted = (moduleId: string) => {
+    let module: TypeModule = modules[0];
+    let i = 0;
+    if (modules.length === 1) {
+      module = modules[0];
+    } else {
+      while (modules[i].id !== moduleId) {
+        module = modules[i];
+        i++;
+      }
+      module = modules[i];
+    }
+    module.lessons.forEach((lesson) => {
+      if (!watcheds.includes(lesson.id)) {
+        return false;
+      }
+    });
+
+    return true;
   };
   const getBreadcrumbs = () => {
     const url = location.pathname;
@@ -197,7 +179,7 @@ const CourseScreen = () => {
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
-          {modules == null && (
+          {modules.length === 0 && (
             <div className={styles.no_modules}>
               <IconFolder
                 sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
@@ -225,14 +207,18 @@ const CourseScreen = () => {
           )}
           <div className={styles.modules}>
             <>
-              {modules?.map((module) => (
+              {modules.map((module) => (
                 <Acordeon
+                  key={module.id}
                   width={848}
                   openModuleModal={setModuleModalIsOpen}
                   setModuleModalType={setModuleModalType}
                   setModuleName={setModuleName}
                   embassador={embassador}
-                  moduleId={module.id}
+                  blocked={isBlocked(module.id)}
+                  completed={isCompleted(module.id)}
+                  module={module}
+                  watcheds={watcheds}
                 />
               ))}
             </>
