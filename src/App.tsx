@@ -21,6 +21,9 @@ function App() {
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
+          <Route path="/register" element={<Layout />}>
+            <Route index element={<RegisterScreen />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
