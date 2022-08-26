@@ -13,23 +13,21 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
+import axios from "axios";
 
 type AccordionProps = {
   width?: number;
-  module?: Module;
+  moduleId: string;
   embassador?: boolean;
   openModuleModal: (open: boolean) => void;
   setModuleModalType: (value: "add" | "edit") => void;
   setModuleName: (moduleName: string) => void;
 };
-
-type Module = {
-  id: number;
+type ModuleType = {
+  id: string;
   name: string;
-  blocked: boolean;
-  completed: boolean;
-  lessons?: Array<Lesson>;
 };
+
 type Lesson = {
   id: string;
   name: string;
@@ -47,35 +45,37 @@ const Accordion = ({
   setModuleModalType,
   setModuleName,
   embassador,
-  module = {
-    id: 1,
-    name: "Aqui está o nome do módulo",
-    blocked: false,
-    completed: true,
-    lessons: [
-      {
-        id: "xasdxcdefewr",
-        name: "O nome dessa aula é esse",
-        url: "link",
-        completed: true,
-        description: "texto de descrição",
-        order: 1,
-        duration: "(mm:ss)",
-        type: "video",
-      },
-      {
-        id: "xasdxcdefsewr",
-        name: "O nome dessa aula é aaaaaaaaaaaaaaaaaa",
-        url: "link",
-        completed: true,
-        description: "texto de descrição",
-        order: 1,
-        duration: "(mm:ss)",
-        type: "video",
-      },
-    ],
-  },
-}: AccordionProps) => {
+  moduleId,
+  modules,
+}: // module = {
+//   id: 1,
+//   name: "Aqui está o nome do módulo",
+//   blocked: false,
+//   completed: true,
+//   lessons: [
+//     {
+//       id: "xasdxcdefewr",
+//       name: "O nome dessa aula é esse",
+//       url: "link",
+//       completed: true,
+//       description: "texto de descrição",
+//       order: 1,
+//       duration: "(mm:ss)",
+//       type: "video",
+//     },
+//     {
+//       id: "xasdxcdefsewr",
+//       name: "O nome dessa aula é aaaaaaaaaaaaaaaaaa",
+//       url: "link",
+//       completed: true,
+//       description: "texto de descrição",
+//       order: 1,
+//       duration: "(mm:ss)",
+//       type: "video",
+//     },
+//   ],
+// },
+AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
   const [lesson, setLesson] = useState<Lesson>();
@@ -85,6 +85,16 @@ const Accordion = ({
   const [lessonEmbed, setLessonEmbed] = useState("");
   const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
 
+  const getModules = async () => {
+    const response = await axios.get(
+      "http://localhost:5432/api//module/" + moduleId
+    );
+    // .catch((err: any) => {
+    //   console.log("api error", err);
+    // });
+    console.log(response!.data.module);
+    return response!.data.module;
+  };
   const setAddLessonModal = () => {
     setLessonName("");
     setLessonDescription("");

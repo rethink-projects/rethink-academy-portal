@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Acordeon from "./components/Accordion/Accordion";
@@ -8,8 +8,13 @@ import ModuleModal from "./components/ModuleModal/ModuleModal";
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
-
+import axios from "axios";
 import styles from "./CourseScreen.module.css";
+
+type ModuleType = {
+  id: string;
+  name: string;
+};
 const CourseScreen = () => {
   const location = useLocation();
   console.log(location.pathname);
@@ -18,18 +23,42 @@ const CourseScreen = () => {
   console.log(trailId);
   console.log(courseId);
 
-  const course = {
-    id: 1,
-    name: "Nothink",
-    trilha: 3,
-    lastCourse: 4,
-    completed: false,
-    description: "descrição",
-    modules: [
-      // { nome: "oi" }
-    ],
+  const getCourse = async () => {
+    const response = await axios.get(
+      "http://localhost:5432/api/course/" + courseId
+    );
+    // .catch((err: any) => {
+    //   console.log("api error", err);
+    // });
+    // console.log(response!.data.course);
+    return response!.data.course;
   };
-  const course = axios.get("/course/");
+  const getModules = async () => {
+    const response = await axios.get(
+      "http://localhost:5432/api/course/" + courseId + "/modules"
+    );
+    // .catch((err: any) => {
+    //   console.log("api error", err);
+    // })
+    if(response){
+      const temp : ModulesType[]= response!.data.modules;
+      return temp;
+    }return null
+  };
+
+  const course = getCourse();
+  const modules = getModules();
+  // const course = {
+  //   id: "1",
+  //   name: "Nothink",
+  //   trilha: 3,
+  //   lastCourse: 4,
+  //   completed: false,
+  //   description: "descrição",
+  //   modules: [
+  //     // { nome: "oi" }
+  //   ],
+  // };
 
   const classes = [
     {
@@ -63,7 +92,16 @@ const CourseScreen = () => {
       module: 2,
     },
   ];
+const verifyBlock = async (moduleId : string) => {
+  //se o módulo for o primeiro 
+  if(moduleId === modules?[0].id){
+    return false;
+  }else if (){
 
+  }
+
+  //se o módulo anterior tiver sido concluído
+}
   const getBreadcrumbs = () => {
     const url = location.pathname;
     let path = url.split("/curso");
@@ -78,6 +116,20 @@ const CourseScreen = () => {
   const [moduleName, setModuleName] = useState("");
   const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
   const embassador = true;
+
+  const setAccordions = async () => {
+    return (await modules).map((module: ModuleType) => (
+      <Acordeon
+        width={848}
+        openModuleModal={setModuleModalIsOpen}
+        setModuleModalType={setModuleModalType}
+        setModuleName={setModuleName}
+        embassador={embassador}
+        moduleId={module.id}
+        blocked={verifyBlock(module.id)}
+      />
+    ));
+  };
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -129,7 +181,7 @@ const CourseScreen = () => {
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
-          {(course.modules == null || course.modules.length == 0) && (
+          {modules == null && (
             <div className={styles.no_modules}>
               <IconFolder
                 sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
@@ -156,13 +208,7 @@ const CourseScreen = () => {
             />
           )}
           <div className={styles.modules}>
-            <Acordeon
-              width={848}
-              openModuleModal={setModuleModalIsOpen}
-              setModuleModalType={setModuleModalType}
-              setModuleName={setModuleName}
-              embassador={embassador}
-            />
+            <>{setAccordions()}</>
           </div>
         </div>
         <div className={styles.practical_information}>
