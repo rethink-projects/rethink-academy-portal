@@ -103,7 +103,7 @@ const ModuleModal = ({
   const deleteModuleReq = async () => {
     await axios.delete("http://localhost:5432/api/module/" + module!.id);
   };
-  console.log("moduleName na tela ModuleModal: " + moduleName);
+  // console.log("moduleName na tela ModuleModal: " + moduleName);
 
   return (
     <TrailModal

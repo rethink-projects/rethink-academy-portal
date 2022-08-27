@@ -36,13 +36,31 @@ type TypeLesson = {
   description: string;
   moduleId: string;
 };
+type TypeProfile = {
+  id: string;
+  bio: string;
+  avatar: string;
+  social: {};
+  userId: string;
+  user: TypeUser;
+};
+type TypeUser = {
+  id: string;
+  email: string;
+  name: string;
+  surname: string;
+  main: string;
+  watched: string[];
+  role: string;
+};
 
 const CourseScreen = () => {
   const location = useLocation();
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
-  const [course, setCourse] = useState<TypeCourse[]>([]);
+  const [course, setCourse] = useState<TypeCourse>();
+  const [teacher, setTeacher] = useState<TypeProfile>();
   const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
@@ -55,45 +73,76 @@ const CourseScreen = () => {
   const { user } = useAuth();
   if (user) userEmail = user.email;
 
+  const getLevel = (level: string) => {
+    if (level === "HIGH") {
+      return "Avançado";
+    } else if (level === "MEDIUM") {
+      return "Intermediário";
+    } else return "Iniciante";
+  };
+  //todo: check after routes
   const trailId = location.pathname.split("/")[2];
   const courseId = location.pathname.split("/")[4];
   useEffect(() => {
-    axios
-      .get("http://localhost:5432/api/user/" + userEmail)
-      .then((response) => {
-        if (response.data.user) {
-          console.log(response.data.user.role);
-          setEmbassador(response.data.user.role === "STUDENT");
-        }
-      });
-    axios
-      .get("http://localhost:5432/api/course/" + courseId)
-      .then((response) => {
-        if (response.data.course) {
-          setCourse(response.data.course);
-        }
-      });
+    if (userEmail !== "") {
+      axios
+        .get("http://localhost:5432/api/user/" + userEmail)
+        .then((response) => {
+          if (response.data.user) {
+            setEmbassador(response.data.user.role === "STUDENT");
+          }
+        });
 
-    axios
-      .get("http://localhost:5432/api/course/" + courseId + "/modules")
-      .then((response) => {
-        if (response.data.modules) {
-          setModules(response.data.modules);
-        }
-      });
-
-    axios
-      .get("http://localhost:5432/api/user/watched/list/" + userEmail)
-      .then((response) => {
-        if (response.data.watched) {
-          setWatcheds(response.data.watched);
-        }
-      });
-    console.log("guardei tudo");
+      axios
+        .get("http://localhost:5432/api/user/watched/list/" + userEmail)
+        .then((response) => {
+          if (response.data.watched) {
+            setWatcheds(response.data.watched);
+          }
+        });
+    }
   }, [userEmail]);
+  useEffect(() => {
+    if (course !== undefined) {
+      axios
+        .get("http://localhost:5432/api/teacher/" + course.teacherId)
+        .then((response) => {
+          if (response.data.profile) {
+            setTeacher(response.data.profile);
+            console.log(response.data.profile);
+          }
+        });
+    }
+  }, [course]);
+  useEffect(() => {
+    if (courseId !== "") {
+      axios
+        .get("http://localhost:5432/api/course/" + courseId)
+        .then((response) => {
+          if (response.data.course) {
+            setCourse(response.data.course);
+            console.log(response.data.course);
+          }
+        });
+
+      axios
+        .get("http://localhost:5432/api/course/" + courseId + "/modules")
+        .then((response) => {
+          if (response.data.modules) {
+            setModules(response.data.modules);
+          }
+        });
+    }
+  }, []);
 
   console.log("rodou aqui");
-  if (!user || course === [] || userEmail === "" || embassador === undefined) {
+  if (
+    !user ||
+    course === undefined ||
+    userEmail === "" ||
+    embassador === undefined ||
+    teacher === undefined
+  ) {
     return <div>Loading...</div>;
   }
   const isBlocked = (moduleId: string) => {
@@ -138,15 +187,12 @@ const CourseScreen = () => {
   };
 
   const getBreadcrumbs = () => {
-    const url = location.pathname;
-    let path = url.split("/curso");
     const linkHome = { title: "Home", link: "/" };
     const linkTrilhas = { title: "Trilhas", link: "/trilhas" };
-    const linkCourses = { title: "Cursos", link: path[0] };
-    const linkCourse = { title: "Curso 1", link: url };
+    const linkCourses = { title: "Cursos", link: "/trilhas/" + trailId };
+    const linkCourse = { title: course.name, link: "asdsa" };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
-  const confirmModulesChanges = () => {};
 
   const setAddModuleModal = () => {
     setModule(undefined);
@@ -160,11 +206,9 @@ const CourseScreen = () => {
       <div className={styles.container}>
         <div className={styles.content_course}>
           <Breadcrumb breadcrumbItems={getBreadcrumbs()} />
-          {/* <h1 className={styles.title}>UX Design</h1>
-              <h2 className={styles.about}>Sobre o Curso:</h2> */}
           <div className={styles.header}>
             <div className={styles.header_left}>
-              <h1 className={styles.title}>UX Design</h1>
+              <h1 className={styles.title}>{course.name}</h1>
               <h2 className={styles.about}>Sobre o Curso:</h2>
             </div>
             {embassador && (
@@ -190,15 +234,7 @@ const CourseScreen = () => {
               </div>
             )}
           </div>
-          <p className={styles.description}>
-            Aprenda a executar pesquisas de UX Design, fazer testes de
-            usabilidade e elaborar análises, além de utilizar frameworks e
-            métodos para a criação de designs de qualidade e que ofereçam uma
-            boa experiência ao usuário. Ao concluir as aulas, você estará pronto
-            para definir processos e construir frameworks baseados em estudos
-            sobre as necessidades dos usuários, seus objetivos, habilidades e
-            limitações, para alcançar os objetivos de negócios.
-          </p>
+          <p className={styles.description}>{course.description}</p>
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
@@ -220,7 +256,7 @@ const CourseScreen = () => {
                   key={module.id}
                   embassador={embassador}
                   width={848}
-                  position={index+1}
+                  position={index + 1}
                   blocked={isBlocked(module.id)}
                   completed={isCompleted(module.id)}
                   watcheds={watcheds}
@@ -254,15 +290,13 @@ const CourseScreen = () => {
         <div className={styles.practical_information}>
           <div className={styles.card_info}>
             <CardInfoCurso
-              author="Fernando Henrique"
-              authorDescription="Meu nome é Fernando Henrique. Tenho 21 anos de idade e sou desenvolverdor na Rethink Tecnologia"
-              level="Iniciante"
-              learn={["react"]}
+              author={teacher!.user.name}
+              authorDescription={teacher!.bio}
+              level={getLevel(course.level)}
+              learn={[course.learning]}
               module_class={{ module: 1, class: 1 }}
-              skills={["react"]}
-              avatar={
-                "https://lh3.googleusercontent.com/ogw/AOh-ky1Wi2_jWlZYQbYRe3xWHdnt2u9dYA2jPp9BYsij=s32-c-mo"
-              }
+              skills={[course.skills]}
+              avatar={teacher!.avatar}
             />
           </div>
         </div>
