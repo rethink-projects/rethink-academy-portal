@@ -191,18 +191,18 @@ const Accordion = ({
           <>
             {/* CONTEÚDO DO MENU PARA O ESTAGIÁRIO */}
             <div className={styles.left_side}>
-              {completed ? (
-                <IconCheckedCircle
-                  sx={{ color: "var(--color-feedback-success)" }}
-                />
-              ) : blocked ? (
+              {blocked ? (
                 <div className={styles.padlock_border}>
                   <IconPadlock />
                 </div>
+              ) : completed ? (
+                <IconCheckedCircle
+                  sx={{ color: "var(--color-feedback-success)" }}
+                />
               ) : (
                 <IconCircle />
               )}
-              {`Módulo 1 - ${module.name}`}
+              {`Módulo ${position} - ${module.name}`}
             </div>
             <div className={styles.right_side}>{<IconMore />}</div>
           </>

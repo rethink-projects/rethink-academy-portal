@@ -109,7 +109,6 @@ const CourseScreen = () => {
         .then((response) => {
           if (response.data.profile) {
             setTeacher(response.data.profile);
-            console.log(response.data.profile);
           }
         });
     }
@@ -121,7 +120,6 @@ const CourseScreen = () => {
         .then((response) => {
           if (response.data.course) {
             setCourse(response.data.course);
-            console.log(response.data.course);
           }
         });
 
@@ -147,9 +145,14 @@ const CourseScreen = () => {
   }
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
+    console.log("Não sou embaçador");
+
+    let blockedStatus = false;
+
     let i = 1;
     //se o módulo for o primeiro
     if (moduleId === modules[0].id) {
+      console.log(moduleId);
       return false;
     }
     //se o módulo anterior tiver sido concluído
@@ -161,12 +164,13 @@ const CourseScreen = () => {
         i++;
       }
 
-      isCompleted(anteriorModule.id);
+      return !isCompleted(anteriorModule.id);
     }
   };
   const isCompleted = (moduleId: string) => {
     if (embassador) return true;
-    let module: TypeModule = modules[0];
+    let completedStatus = true;
+    let module: TypeModule;
     let i = 0;
     if (modules.length === 1) {
       module = modules[0];
@@ -179,11 +183,10 @@ const CourseScreen = () => {
     }
     module.lessons.forEach((lesson) => {
       if (!watcheds.includes(lesson.id)) {
-        return false;
+        completedStatus = false;
       }
     });
-
-    return true;
+    return completedStatus;
   };
 
   const getBreadcrumbs = () => {
