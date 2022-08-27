@@ -34,20 +34,23 @@ type TypeLesson = {
   embedUrl: string;
   order: number;
   description: string;
-  moduleId: number;
+  moduleId: string;
 };
 
 const CourseScreen = () => {
   const location = useLocation();
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
+  const [modalModule, setModule] = useState<TypeModule>();
   const [course, setCourse] = useState<TypeCourse[]>([]);
   const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
-  const [moduleModalType, setModuleModalType] = useState<"add" | "edit">("add");
+  const [moduleModalType, setModuleModalType] = useState<
+    "add" | "edit" | "delete"
+  >("add");
   let userEmail = "";
   const { user } = useAuth();
   if (user) userEmail = user.email;
@@ -133,6 +136,7 @@ const CourseScreen = () => {
 
     return true;
   };
+
   const getBreadcrumbs = () => {
     const url = location.pathname;
     let path = url.split("/curso");
@@ -141,6 +145,14 @@ const CourseScreen = () => {
     const linkCourses = { title: "Cursos", link: path[0] };
     const linkCourse = { title: "Curso 1", link: url };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
+  };
+  const confirmModulesChanges = () => {};
+
+  const setAddModuleModal = () => {
+    setModule(undefined);
+    setModuleModalType("add");
+    setModuleModalIsOpen(true);
+    setModuleName("");
   };
 
   return (
@@ -173,11 +185,7 @@ const CourseScreen = () => {
                   size={"medium"}
                   type={"primary"}
                   width={218}
-                  onClick={() => (
-                    setModuleModalType("add"),
-                    setModuleModalIsOpen(true),
-                    setModuleName("")
-                  )}
+                  onClick={setAddModuleModal}
                 />
               </div>
             )}
@@ -198,24 +206,29 @@ const CourseScreen = () => {
             <ModuleModal
               onClose={() => setModuleModalIsOpen(false)}
               type={moduleModalType}
-              moduleName={moduleName}
               setModuleName={setModuleName}
+              moduleName={moduleName}
+              modules={modules}
+              module={modalModule}
+              courseId={courseId}
             />
           )}
           <div className={styles.modules}>
             <>
-              {modules.map((module) => (
+              {modules.map((module, index) => (
                 <Acordeon
                   key={module.id}
+                  embassador={embassador}
                   width={848}
+                  position={index+1}
+                  blocked={isBlocked(module.id)}
+                  completed={isCompleted(module.id)}
+                  watcheds={watcheds}
+                  module={module}
+                  setModule={setModule}
                   openModuleModal={setModuleModalIsOpen}
                   setModuleModalType={setModuleModalType}
                   setModuleName={setModuleName}
-                  embassador={embassador}
-                  blocked={isBlocked(module.id)}
-                  completed={isCompleted(module.id)}
-                  module={module}
-                  watcheds={watcheds}
                 />
               ))}
             </>

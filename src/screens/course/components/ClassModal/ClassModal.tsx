@@ -6,8 +6,6 @@ import styles from "./ClassModal.module.css";
 type ClassModalProps = {
   type: "add" | "edit";
   onClose: VoidFunction;
-  onClickConfirm?: VoidFunction;
-  onClickCancel?: VoidFunction;
   oneButton?: boolean;
   nameButtonRight?: string;
   nameButtonLeft?: string;
@@ -17,7 +15,7 @@ type ClassModalProps = {
   setLessonName: (value: string) => void;
   setEmbedLink: (value: string) => void;
   setDescription: (value: string) => void;
-  visualNameChange: VoidFunction;
+  onClickConfirm: VoidFunction;
 };
 const ClassModal = ({
   onClose,
@@ -28,35 +26,38 @@ const ClassModal = ({
   setLessonName,
   setEmbedLink,
   setDescription,
-  visualNameChange,
+  onClickConfirm,
 }: ClassModalProps) => {
-  const handleSubmit = () => {};
   let title;
+
   if (type === "add") {
     title = "Adicionar Aula";
   } else {
     title = "Editar Aula";
   }
+
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<
-    "save" | "cancel" | "delete"
-  >("save");
+  const [validationType, setValidationType] = useState<"save" | "delete">(
+    "save"
+  );
+
   return (
     <TrailModal
       title={title}
       onClose={onClose}
       onClickConfirm={() =>
-        type === "edit"
-          ? (setValidationModalIsOpen(true), setValidationType("save"))
-          : onClose()
+        type === "add"
+          ? (onClose(), onClickConfirm())
+          : (setValidationType("save"), setValidationModalIsOpen(true))
       }
-      onClickCancel={() => (onClose(), visualNameChange())}
+      onClickCancel={() => onClose()}
     >
       {validationModalIsOpen && (
         <ValidationModal
           onClose={setValidationModalIsOpen}
           setParentIsOpen={onClose}
           type={validationType}
+          onClickConfirm={onClickConfirm}
         />
       )}
       <form className={styles.container}>

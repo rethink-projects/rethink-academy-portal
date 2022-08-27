@@ -13,17 +13,20 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
+import axios from "axios";
 
 type AccordionProps = {
   width?: number;
   module: TypeModule;
   embassador?: boolean;
   blocked?: boolean;
+  position: number;
   completed?: boolean;
   watcheds: string[];
   openModuleModal: (open: boolean) => void;
-  setModuleModalType: (value: "add" | "edit") => void;
+  setModuleModalType: (value: "add" | "edit" | "delete") => void;
   setModuleName: (moduleName: string) => void;
+  setModule: (module: TypeModule) => void;
 };
 type TypeModule = {
   id: string;
@@ -36,7 +39,7 @@ type TypeLesson = {
   embedUrl: string;
   order: number;
   description: string;
-  moduleId: number;
+  moduleId: string;
 };
 
 const Accordion = ({
@@ -44,43 +47,15 @@ const Accordion = ({
   openModuleModal,
   setModuleModalType,
   setModuleName,
+  setModule,
   embassador,
   blocked,
   completed,
   module,
   watcheds,
-}: // modules,
-// module = {
-//   id: 1,
-//   name: "Aqui está o nome do módulo",
-//   blocked: false,
-//   completed: true,
-//   lessons: [
-//     {
-//       id: "xasdxcdefewr",
-//       name: "O nome dessa aula é esse",
-//       url: "link",
-//       completed: true,
-//       description: "texto de descrição",
-//       order: 1,
-//       duration: "(mm:ss)",
-//       type: "video",
-//     },
-//     {
-//       id: "xasdxcdefsewr",
-//       name: "O nome dessa aula é aaaaaaaaaaaaaaaaaa",
-//       url: "link",
-//       completed: true,
-//       description: "texto de descrição",
-//       order: 1,
-//       duration: "(mm:ss)",
-//       type: "video",
-//     },
-//   ],
-// },
-
-AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  position,
+}: AccordionProps) => {
+  const [accordionIsOpen, setAccordionIsOpen] = useState(false);
   const [lessons, setLessons] = useState<Array<TypeLesson>>(module.lessons!);
   const [lesson, setLesson] = useState<TypeLesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
@@ -90,22 +65,77 @@ AccordionProps) => {
   const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
 
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<
-    "save" | "cancel" | "delete"
-  >("delete");
+
+  const [validationType, setValidationType] = useState<"save" | "delete">(
+    "delete"
+  );
 
   const setAddLessonModal = () => {
+    setLesson(undefined);
     setLessonName("");
     setLessonDescription("");
     setLessonEmbed("");
     setLessonModalType("add");
     setLessonModalIsOpen(true);
   };
-  const confirmChanges = () => {
-    lesson!.name = lessonName;
+
+  const confirmLessonChanges = () => {
+    if (lessonModalType === "add") {
+      addLessonReq();
+      const lesson: TypeLesson = {
+        name: lessonName,
+        description: lessonDescription,
+        embedUrl: lessonEmbed,
+        order: module.lessons.length,
+        moduleId: module.id,
+        id: module.lessons.length + "id",
+      };
+      lessons.push(lesson);
+    } else {
+      editLessonReq();
+      lesson!.name = lessonName;
+      lesson!.embedUrl = lessonEmbed;
+    }
   };
 
-  const lessonComplet = (id: string) => {
+  const setDeleteModuleModal = () => {
+    setModule(module);
+    setModuleName(module.name);
+
+    openModuleModal(true);
+    setModuleModalType("delete");
+  };
+
+  const setEditModuleModal = () => {
+    setModule(module);
+    setModuleName(module.name);
+    setValidationType("save");
+    setModuleModalType("edit");
+    openModuleModal(true);
+  };
+
+  const addLessonReq = async () => {
+    await axios.post("http://localhost:5432/api/lesson", {
+      name: lessonName,
+      description: lessonDescription,
+      embedUrl: lessonEmbed,
+      order: module.lessons.length,
+      moduleId: module.id,
+    });
+  };
+
+  const editLessonReq = async () => {
+    await axios.put("http://localhost:5432/api/lesson/" + lesson!.id, {
+      id: lesson!.id,
+      name: lessonName,
+      description: lessonDescription,
+      embedUrl: lessonEmbed,
+      order: module.lessons.length,
+      moduleId: module.id,
+    });
+  };
+
+  const lessonComplete = (id: string) => {
     if (watcheds.includes(id)) {
       return true;
     }
@@ -113,7 +143,7 @@ AccordionProps) => {
   };
 
   return (
-    <div className={isOpen ? styles.container : ""}>
+    <div className={accordionIsOpen ? styles.container : ""}>
       {/* -------MODAIS------ */}
       {lessonModalIsOpen && (
         <ClassModal
@@ -125,11 +155,12 @@ AccordionProps) => {
           setLessonName={setLessonName}
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
-          visualNameChange={confirmChanges}
+          onClickConfirm={confirmLessonChanges}
         />
       )}
       {validationModalIsOpen && (
         <ValidationModal
+          onClickConfirm={confirmLessonChanges}
           onClose={setValidationModalIsOpen}
           type={validationType}
         />
@@ -138,30 +169,22 @@ AccordionProps) => {
       <div
         style={{ width: width }}
         className={`${
-          isOpen ? styles.module_container : styles.module_container_closed
+          accordionIsOpen
+            ? styles.module_container
+            : styles.module_container_closed
         } ${blocked ? styles.module_disabled : ""}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setAccordionIsOpen(!accordionIsOpen)}
       >
         {embassador ? (
           <>
             {/* CONTEÚDO DO MENU PARA O EMBAIXADOR */}
             <div className={styles.left_side_embassador}>
               <IconMore />
-              {`Módulo 1 - ${module.name}`}
+              {`Módulo ${position} - ${module.name}`}
             </div>
             <div className={styles.right_side_embassador}>
-              <IconTrash
-                onClick={() => (
-                  setValidationModalIsOpen(true), setValidationType("delete")
-                )}
-              />
-              <IconEdit
-                onClick={() => (
-                  openModuleModal(true),
-                  setModuleModalType("edit"),
-                  setModuleName(module.name)
-                )}
-              />
+              <IconTrash onClick={setDeleteModuleModal} />
+              <IconEdit onClick={() => setEditModuleModal()} />
             </div>
           </>
         ) : (
@@ -185,7 +208,7 @@ AccordionProps) => {
           </>
         )}
       </div>
-      {isOpen && lessons != null && lessons.length > 0 ? (
+      {accordionIsOpen && lessons != null && lessons.length > 0 ? (
         <div className={styles.accordion_container}>
           {lessons.map((lesson) => (
             <div
@@ -211,7 +234,7 @@ AccordionProps) => {
                     )}
                   />
                 ) : (
-                  lessonComplet(lesson.id) && <IconCheckedCircle />
+                  lessonComplete(lesson.id) && <IconCheckedCircle />
                 )}
               </div>
             </div>
@@ -225,13 +248,13 @@ AccordionProps) => {
                 size={"medium"}
                 type={"primary"}
                 width={218}
-                onClick={() => (setAddLessonModal(), setLesson(undefined))}
+                onClick={() => setAddLessonModal()}
               />
             </div>
           )}
         </div>
       ) : (
-        isOpen && (
+        accordionIsOpen && (
           <div className={styles.no_lessons}>
             <span>Este módulo ainda não possui nenhuma aula.</span>
             {embassador && (
