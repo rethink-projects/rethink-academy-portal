@@ -1,11 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
-
+const url = "INSERIR KEY AQUI";
 const options = {
   schema: "public",
   headers: {
-    Authorization:
-      // "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxeHh6eWNpZ2hkb3llaXBweGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTgyNTY5NDEsImV4cCI6MTk3MzgzMjk0MX0.ReCILrdjkf1QxJ90xMUFvhn0zNHApXpPG5Su3bIxmUI",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxeHh6eWNpZ2hkb3llaXBweGJsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY1ODI1Njk0MSwiZXhwIjoxOTczODMyOTQxfQ.4qiaGI1vQdyR9bYQxatpNOUpdT0SSb1b4hsFlr6uQZA",
+    Authorization: url,
   },
   autoRefreshToken: true,
   persistSession: true,

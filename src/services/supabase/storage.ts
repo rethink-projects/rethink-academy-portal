@@ -74,10 +74,11 @@ export function useStorage() {
       user.email
     );
     if (error) {
-      return notify({
+      notify({
         type: "error",
         title: "Esse Bucket já existe!",
       });
+      return;
     }
     return notify({
       type: "success",
