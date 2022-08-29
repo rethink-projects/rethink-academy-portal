@@ -9,7 +9,7 @@ export interface ICurrentUser {
   type?: TypeProvider;
   id?: string;
   role?: string;
-  title?: string;
+  main?: string;
 }
 
 interface AuthContextType {

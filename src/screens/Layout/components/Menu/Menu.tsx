@@ -33,6 +33,15 @@ function Menu() {
   if (!user?.email) {
     return <p>Loading...</p>;
   }
+  const titleMaker = () => {
+    if (!user.main || !user.role) throw new Error("teste");
+
+    let role = user.role.toLowerCase();
+    let main = user.main.toLowerCase();
+    role = role.replace(role[0], role[0].toUpperCase());
+    main = main.replace(main[0], main[0].toUpperCase());
+    return `${role} of ${main}`;
+  };
   return (
     <div className={currentClass}>
       <div className={styles.menu_header_open}>
@@ -82,20 +91,8 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            onClick={handleLogout}
-            text={isOpen ? "Sair" : ""}
+            text="Sair"
             icon={Images.icons.LogoutIcon}
-            customCss={
-              isOpen
-                ? { padding: "0px", margin: "0px" }
-                : {
-                    padding: "0px",
-                    margin: "0px",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }
-            }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
@@ -111,7 +108,12 @@ function Menu() {
                 alt="Avatar"
               />
             </Avatar>
-            {isOpen && <span>{user.name}</span>}
+            {isOpen && (
+              <div className={styles.avatar_desc}>
+                <span>{user.name}</span>
+                <small>{titleMaker()}</small>
+              </div>
+            )}
           </div>
         </div>
       </div>

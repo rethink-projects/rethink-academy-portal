@@ -1,0 +1,175 @@
+.max_container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.home_limited_container {
+  width: 85%;
+  margin-top: 40px;
+}
+
+.home_container {
+  width: 1059px;
+}
+
+.home_hello {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+
+  color: #1b1b1b;
+}
+
+.home_header {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home_title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  color: #1b1b1b;
+}
+
+.home_tip {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  color: #1b1b1b;
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+.home_content {
+  margin-top: 24px;
+  width: 1059px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 30px 24px 23px;
+}
+.home_content > p {
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #3b3b3b;
+}
+
+.home_content_header {
+  display: flex;
+  justify-content: space-between;
+}
+.role_selector {
+  display: flex;
+  gap: 8px;
+}
+
+.role_selector_button:hover {
+  background: var(--color-primary-hover);
+}
+.role_selector_button {
+  z-index: 1;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 4px 12px;
+  background: #fff;
+
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  border-radius: 150px;
+  color: #3b3b3b;
+}
+
+.role_selector_button_active {
+  background: var(--color-primary-active);
+}
+.cards_container {
+  display: flex;
+  margin-top: 33px;
+  flex-wrap: wrap;
+  gap: 24px;
+  /* justify-content: center; */
+}
+.student_card {
+  width: 183px;
+  height: 265px;
+  background: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.student_card_arrow {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+}
+
+.student_card_text {
+  margin-top: 10px;
+  gap: 38px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  color: #000000;
+}
+.student_card_avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.avatar_level {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  position: absolute;
+  bottom: -10px;
+  background-color: #f9f9f9;
+  width: 51px;
+  height: 22px;
+  border: 1px solid #d4d4d4;
+  border-radius: 50px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  align-items: center;
+}
+.avatar_img {
+  margin-top: 24px;
+  width: 110px;
+  height: 110px;
+  border-radius: 60px;
+}
+
+.avatar_icon {
+  width: 10.67px;
+  height: 14.22px;
+}
