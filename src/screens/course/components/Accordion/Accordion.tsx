@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Accordion.module.css";
 
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
@@ -63,9 +63,7 @@ const Accordion = ({
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonEmbed, setLessonEmbed] = useState("");
   const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
-
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-
   const [validationType, setValidationType] = useState<"save" | "delete">(
     "delete"
   );

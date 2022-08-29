@@ -53,7 +53,7 @@ type TypeUser = {
   watched: string[];
   role: string;
 };
-
+type TypeModal = "add" | "edit" | "delete";
 const CourseScreen = () => {
   const location = useLocation();
   const [watcheds, setWatcheds] = useState<string[]>([]);
@@ -66,23 +66,16 @@ const CourseScreen = () => {
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
-  const [moduleModalType, setModuleModalType] = useState<
-    "add" | "edit" | "delete"
-  >("add");
+  const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
+  const trailId = location.pathname.split("/")[2];
+  const courseId = location.pathname.split("/")[4];
+
   let userEmail = "";
   const { user } = useAuth();
   if (user) userEmail = user.email;
 
-  const getLevel = (level: string) => {
-    if (level === "HIGH") {
-      return "Avançado";
-    } else if (level === "MEDIUM") {
-      return "Intermediário";
-    } else return "Iniciante";
-  };
   //todo: check after routes
-  const trailId = location.pathname.split("/")[2];
-  const courseId = location.pathname.split("/")[4];
+
   useEffect(() => {
     if (userEmail !== "") {
       axios
@@ -102,6 +95,7 @@ const CourseScreen = () => {
         });
     }
   }, [userEmail]);
+
   useEffect(() => {
     if (course !== undefined) {
       axios
@@ -113,6 +107,7 @@ const CourseScreen = () => {
         });
     }
   }, [course]);
+
   useEffect(() => {
     if (courseId !== "") {
       axios
@@ -133,7 +128,6 @@ const CourseScreen = () => {
     }
   }, []);
 
-  console.log("rodou aqui");
   if (
     !user ||
     course === undefined ||
@@ -143,30 +137,25 @@ const CourseScreen = () => {
   ) {
     return <div>Loading...</div>;
   }
+
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
     console.log("Não sou embaçador");
 
-    let blockedStatus = false;
-
     let i = 1;
     //se o módulo for o primeiro
-    if (moduleId === modules[0].id) {
-      console.log(moduleId);
-      return false;
-    }
+    if (moduleId === modules[0].id) return false;
+
     //se o módulo anterior tiver sido concluído
-    else {
-      let anteriorModule: TypeModule = modules[0];
+    let anteriorModule: TypeModule = modules[0];
 
-      while (modules[i].id !== moduleId) {
-        anteriorModule = modules[i];
-        i++;
-      }
-
-      return !isCompleted(anteriorModule.id);
+    while (modules[i].id !== moduleId) {
+      anteriorModule = modules[i];
+      i++;
     }
+    return !isCompleted(anteriorModule.id);
   };
+
   const isCompleted = (moduleId: string) => {
     if (embassador) return true;
     let completedStatus = true;
@@ -187,6 +176,12 @@ const CourseScreen = () => {
       }
     });
     return completedStatus;
+  };
+
+  const getLevel = (level: string) => {
+    if (level === "HIGH") return "Avançado";
+    if (level === "MEDIUM") return "Intermediário";
+    return "Iniciante";
   };
 
   const getBreadcrumbs = () => {
@@ -277,7 +272,7 @@ const CourseScreen = () => {
               <IconFolder
                 sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
               />
-              <span>Você ainda não possui nenhum módulo.</span>
+              <span>Este curso ainda não possui nenhum módulo.</span>
               <ButtonWithIcon
                 icon={<IconPlus />}
                 text={"Adicionar módulo"}
