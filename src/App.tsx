@@ -8,7 +8,6 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
-import CursosScreenTeste from "./screens/CoursesScreen/ScreeCursosTeste";
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
             <Route path="/trilhas/" element={<Layout />}>
               <Route index element={<TrilhasScreen />} />
               <Route path="/trilhas/:id" element={<CursosScreen />} />
-              {/* <Route path="/trilhas/:id" element={<CursosScreenTeste />} /> */}
             </Route>
           </Route>
         </Routes>
