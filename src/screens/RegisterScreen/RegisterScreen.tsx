@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import AccordionMM from "../../components/AccordionMM/AccordionMM";
 import AddTask from "../../components/AddTask/AddTask";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import InputSearch from "../../components/InputSearch/InputSearch";
 import Note from "../../components/Note/Note";
 import { getTaskByUserEmail } from "../../services/backend/Tasks";
-import SearchCalendar from "./Components/SearchCalendar/SearchCalendar";
 
+//Components
+import CalendarComponent from "../../components/DatePicker/Components/Calendar";
+//CSS
 import styles from "./RegisterScreen.module.css";
 
 // Route
@@ -61,6 +65,7 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
+            {/* <AddTask /> */}
             {tasks != null ? <p>Componente</p> : <AddTask />}
           </div>
           <div className={styles.register_reminders}>
@@ -69,7 +74,37 @@ const RegisterScreen = () => {
         </div>
       </div>
       <div className={styles.register_searchTasks}>
-        <SearchCalendar />
+        <div className={styles.searchTasks_container}>
+          <div className={styles.searchTasks_inputSearch}>
+            <InputSearch
+              hasIcon
+              placeholder="Procurar tarefas realizadas"
+              type="default"
+            />
+          </div>
+          <div className={styles.searchTasks_CalendarTitle}>
+            <p>Calendário</p>
+          </div>
+          <div className={styles.searchTasks_Calendar}>
+            <CalendarComponent />
+          </div>
+          <div className={styles.searchTasks_TasksTitle}>
+            <p>Tasks e Reuniões</p>
+          </div>
+          <div className={styles.searchTasks_Tasks}>
+            <AccordionMM
+              date="29 de Agosto"
+              title="Daily"
+              duration="0:15"
+              description="Lorem ipsum dolor sit amet, consectetur adip"
+              tags={["Reuniões Internas", "Em progresso"]}
+              time="13h - 14:45"
+              size="small"
+              hasIcons={true}
+            />
+            {/* {tasks != null ?  <p>Você ainda não possui tarefas cadastradas!</p> : <AddTask />} */}
+          </div>
+        </div>
       </div>
     </div>
   );

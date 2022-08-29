@@ -1,11 +1,28 @@
 .accordion {
-
   border-radius: 4px;
-  background-color: black;
+  background-color: var(--color-secondary);
 }
 
 .accordion:hover {
   box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+}
+
+.accordion_date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 26px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.accordion_date>svg>path {
+  fill: var(--color-secondary);
 }
 
 .accordion_blackBar {
@@ -32,6 +49,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
+  height: 48px;
 }
 
 .accordion_label_left,

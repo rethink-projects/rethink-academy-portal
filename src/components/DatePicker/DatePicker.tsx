@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Calendar from "./Components/Calendar";
+import CalendarComponent from "./Components/Calendar";
 
 // CSS
 import styles from "./DatePicker.module.css";
@@ -47,7 +47,7 @@ export const DatePicker = ({
       </div>
       {active && (
         <div className={`${styles.datePicker_calendar} ${styles[position]}`}>
-          <Calendar />
+          <CalendarComponent />
         </div>
       )}
     </>

@@ -13,3 +13,11 @@ export const getTaskByUserEmail = async (email: string) => {
     return;
   }
 };
+
+export const createTask = async (taskData: any) => {
+  const { data } = await axios.post(
+    `http://localhost:4000/api/tasks`,
+    taskData
+  );
+  return data;
+};

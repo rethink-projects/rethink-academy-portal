@@ -6,7 +6,7 @@ import pt from "date-fns/locale/pt";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-const Calendar = () => {
+const CalendarComponent = () => {
   const [state, setState] = useState<
     { startDate?: Date; endDate?: Date; key?: string }[]
   >([
@@ -34,4 +34,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarComponent;
