@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -6,13 +6,22 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Stack from "@mui/material/Stack";
 import brLocale from "date-fns/locale/pt-BR";
 
-export default function EvaluationDatePicker() {
+export default function EvaluationDatePicker({
+  month,
+  setMonth,
+}: {
+  month: string;
+  setMonth: (value: string) => void;
+}) {
   const [value, setValue] = React.useState<Date | null>(new Date());
 
   const data = value?.toString();
   let dataSplit = data?.split(" ");
   const returnData = dataSplit ? dataSplit[1].concat(" ", dataSplit[3]) : "";
-  console.log(value);
+
+  useEffect(() => {
+    setMonth(returnData);
+  }, [value]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={brLocale}>

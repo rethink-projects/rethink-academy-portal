@@ -5,12 +5,12 @@ const EvaluationTag = ({
   tagType,
   setTagType,
 }: {
-  tagType: "engineering" | "design" | "product";
-  setTagType: (value: "engineering" | "design" | "product") => void;
+  tagType: "ENGINEERING" | "DESIGN" | "PRODUCT";
+  setTagType: (value: "ENGINEERING" | "DESIGN" | "PRODUCT") => void;
 }) => {
   // variaveis para controlar estado das tags ativo e inativo
-  const [activeDesign, setActiveDesign] = useState(true);
-  const [activeEngenharia, setActiveEngenharia] = useState(false);
+  const [activeDesign, setActiveDesign] = useState(false);
+  const [activeEngenharia, setActiveEngenharia] = useState(true);
   const [activeProduto, setActiveProduto] = useState(false);
 
   const activeClassDesign = activeDesign ? styles.tag_button_active : "";
@@ -19,13 +19,13 @@ const EvaluationTag = ({
     : "";
   const activeClassProduto = activeProduto ? styles.tag_button_active : "";
 
-  const handleClick = (id: "engineering" | "design" | "product") => {
+  const handleClick = (id: "ENGINEERING" | "DESIGN" | "PRODUCT") => {
     setTagType(id);
-    if (id === "design") {
+    if (id === "DESIGN") {
       setActiveDesign(true);
       setActiveEngenharia(false);
       setActiveProduto(false);
-    } else if (id === "engineering") {
+    } else if (id === "ENGINEERING") {
       setActiveDesign(false);
       setActiveEngenharia(true);
       setActiveProduto(false);
@@ -40,19 +40,19 @@ const EvaluationTag = ({
     <div className={styles.tag_container}>
       <button
         className={[styles.tag_button, activeClassDesign].join(" ")}
-        onClick={() => handleClick("design")}
+        onClick={() => handleClick("DESIGN")}
       >
         Design
       </button>
       <button
         className={[styles.tag_button, activeClassEngenharia].join(" ")}
-        onClick={() => handleClick("engineering")}
+        onClick={() => handleClick("ENGINEERING")}
       >
         Engenharia
       </button>
       <button
         className={[styles.tag_button, activeClassProduto].join(" ")}
-        onClick={() => handleClick("product")}
+        onClick={() => handleClick("PRODUCT")}
       >
         Produto
       </button>

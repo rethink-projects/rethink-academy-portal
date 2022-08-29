@@ -23,48 +23,56 @@ const EvaluationScreen = () => {
   // true == hardSkills ### false == softSkills
   const [skillType, setSkillType] = useState(true);
 
-  const [tagType, setTagType] = useState<"engineering" | "design" | "product">(
-    "design"
+  const [tagType, setTagType] = useState<"ENGINEERING" | "DESIGN" | "PRODUCT">(
+    "ENGINEERING"
   );
 
+  const data = new Date().toString();
+  let dataSplit = data?.split(" ");
+  const returnData = dataSplit ? dataSplit[1].concat(" ", dataSplit[3]) : "";
+
+  const [month, setMonth] = useState(returnData);
+
   return (
-    <div className={styles.evaluationScreen_container}>
-      <div className={styles.evaluationScreen_breadcrumb}>
-        <Breadcrumb
-          breadcrumbItems={[
-            { title: "Home", link: "/" },
-            { title: "Avaliações", link: "/dashboard/avaliacao" },
-          ]}
-        />
-      </div>
-
-      <div className={styles.evaluationScreen_header}>
-        <div className={styles.evaluationScreen_text}>
-          <h1>Avaliações</h1>
-          <p>
-            Aqui você consegue postar e editar as avaliações mensais de cada
-            estagiário.
-          </p>
+    <div className={styles.evaluationScreen_container_extern}>
+      <div className={styles.evaluationScreen_container}>
+        <div className={styles.evaluationScreen_breadcrumb}>
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/" },
+              { title: "Avaliações", link: "/dashboard/avaliacao" },
+            ]}
+          />
         </div>
-        <div className={styles.evaluationScreen_dropdown}>
-          <EvaluationDatePicker />
-        </div>
-      </div>
 
-      <div className={styles.evaluationScreen_table_container}>
-        <div className={styles.evaluationScreen_table_actions}>
-          <div className={styles.evaluationScreen_table_switch}>
-            <EvaluationSwitch
-              skillType={skillType}
-              setSkillType={setSkillType}
-            />
+        <div className={styles.evaluationScreen_header}>
+          <div className={styles.evaluationScreen_text}>
+            <h1>Avaliações</h1>
+            <p>
+              Aqui você consegue postar e editar as avaliações mensais de cada
+              estagiário.
+            </p>
           </div>
-          <div className={styles.evaluationScreen_table_tags}>
-            <EvaluationTag tagType={tagType} setTagType={setTagType} />
+          <div className={styles.evaluationScreen_dropdown}>
+            <EvaluationDatePicker month={month} setMonth={setMonth} />
           </div>
         </div>
-        <div className={styles.evaluationScreen_table}>
-          <BasicEditingGrid role={tagType} skill={skillType} />
+
+        <div className={styles.evaluationScreen_table_container}>
+          <div className={styles.evaluationScreen_table_actions}>
+            <div className={styles.evaluationScreen_table_switch}>
+              <EvaluationSwitch
+                skillType={skillType}
+                setSkillType={setSkillType}
+              />
+            </div>
+            <div className={styles.evaluationScreen_table_tags}>
+              <EvaluationTag tagType={tagType} setTagType={setTagType} />
+            </div>
+          </div>
+          <div className={styles.evaluationScreen_table}>
+            <BasicEditingGrid role={tagType} skill={skillType} month={month} />
+          </div>
         </div>
       </div>
     </div>
