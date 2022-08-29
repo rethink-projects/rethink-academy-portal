@@ -24,8 +24,8 @@ function App() {
             <Route path="/playground" element={<PlaygroundScreen />} />
             <Route path="/trilhas/" element={<Layout />}>
               <Route index element={<TrilhasScreen />} />
-              {/* <Route path="/trilhas/:id" element={<CursosScreen />} /> */}
-              <Route path="/trilhas/:id" element={<CursosScreenTeste />} />
+              <Route path="/trilhas/:id" element={<CursosScreen />} />
+              {/* <Route path="/trilhas/:id" element={<CursosScreenTeste />} /> */}
             </Route>
           </Route>
         </Routes>

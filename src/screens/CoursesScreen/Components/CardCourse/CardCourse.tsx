@@ -6,6 +6,7 @@ import IconTask from "@mui/icons-material/TaskAltOutlined";
 import IconArrow from "@mui/icons-material/East";
 import IconAlert from "@mui/icons-material/ErrorOutlineOutlined";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import { CourseResponse } from "../../CursosScreen";
 
 type cardCourseProp = {
   title: string;

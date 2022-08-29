@@ -9,6 +9,21 @@ import { useNotification } from "../../../../context/NotificationContext";
 import { Timestamp } from "firebase/firestore";
 import { api } from "../../../../services/api";
 import { useLocation } from "react-router-dom";
+import { CourseResponse } from "../../CursosScreen";
+
+interface FormData {
+  name: string;
+  type: string;
+  offeredBy: "Rethink Academy";
+  description: string;
+  nameInstructor: string;
+  descriptionInstructor: string;
+  avatar: string;
+  level: string;
+  workload: string;
+  learn: string;
+  skills: string;
+}
 
 interface Profile {
   id: string;
@@ -47,76 +62,40 @@ interface Lesson {
   moduleId: string;
 }
 
-interface CourseResponse {
-  id: string;
-  name: string;
-  description: string;
-  level: "LOW" | "MEDIUM" | "HIGH";
-  workload: number;
-  learning: string;
-  skills: string;
-  trailId: string;
-  teacherId: string;
-  modules: Module[];
-  teacher?: UserResponse;
-}
-
 type addCourseProps = {
   addCourse?: boolean;
   onClose: VoidFunction;
   idCourse?: string;
+  course?: CourseResponse;
 };
 
 const CardAddCourse = ({
+  course,
   addCourse = true,
   idCourse = "",
   onClose = () => {},
 }: addCourseProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
-  const [valueTypeCourse, setValueTypeCourse] =
-    useState<string>("Selecione...");
+  const [valueTypeCourse, setValueTypeCourse] = useState<string>(() => {
+    return !addCourse
+      ? course?.type === "COURSE"
+        ? "Curso"
+        : course?.type === "TRAINING"
+        ? "Treinamento"
+        : course?.type === "LECTURE"
+        ? "Palestra"
+        : "Workshop"
+      : "Selecione...";
+  });
   const [valueLevelCourse, setValueLevelCourse] =
     useState<string>("Selecione...");
-  const [course, setCourse] = useState<CourseResponse>({
-    id: "",
-    name: "",
-    description: "",
-    level: "LOW",
-    workload: 10,
-    learning: "",
-    skills: "",
-    trailId: "",
-    teacherId: "",
-    modules: [],
-    teacher: {
-      id: "",
-      email: "",
-      name: "",
-      surname: "",
-      main: "",
-      watched: [],
-      role: "EMBASSADOR",
-      // profile: Profile;
-      course: [],
-    },
-  });
-  const [teacher, setTeacher] = useState<UserResponse>({
-    id: "",
-    email: "",
-    name: "Ana",
-    surname: "",
-    main: "",
-    watched: [],
-    role: "STUDENT",
-    // profile?: Profile;
-    course: [],
-  });
+
   const location = useLocation();
   let trilhaId = location.pathname.replace("/trilhas/", "");
   const { notify } = useNotification();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     type: "",
     offeredBy: "Rethink Academy",
@@ -133,94 +112,86 @@ const CardAddCourse = ({
   const title = addCourse ? "Adicionar um Curso" : "Editar um Curso";
 
   async function loadCourse() {
-    const response = await api.get(`/course/${idCourse}`);
-    // const response = await api.get(`/course`);
-    // console.log(response.data.courses[0].teacher);
-    // setTeacher(response.data.course.teacher);
-    setCourse(response.data);
-    console.log({ response });
+    console.log(course?.teacher.profile);
+
+    if (course) {
+      const {
+        description,
+        id,
+        learning,
+        level,
+        modules,
+        name,
+        skills,
+        teacherId,
+        trailId,
+        type,
+        workload,
+        teacher,
+      } = course;
+
+      const formattedWorkload = workload.toString() + " horas";
+      const formattedInstructorName = teacher?.name + " " + teacher?.surname;
+
+      level === "LOW"
+        ? setValueLevelCourse("Iniciante")
+        : level === "MEDIUM"
+        ? setValueLevelCourse("Intermediário")
+        : setValueLevelCourse("Avançado");
+
+      // console.log(type);
+
+      type === "COURSE"
+        ? setValueTypeCourse("Curso")
+        : type === "TRAINING"
+        ? setValueTypeCourse("Treinamento")
+        : type === "LECTURE"
+        ? setValueTypeCourse("Palestra")
+        : setValueTypeCourse("Workshop");
+
+      // console.log(valueTypeCourse);
+
+      setFormData({
+        name,
+        type,
+        offeredBy: "Rethink Academy",
+        description,
+        workload: formattedWorkload,
+        skills,
+        learn: learning,
+        level: level,
+        avatar: teacher?.profile?.avatar || "",
+        nameInstructor: formattedInstructorName,
+        descriptionInstructor: teacher.profile?.bio || "",
+      });
+    }
   }
-  // console.log(teacher.name);
-
-  // async function loadCourse() {
-  //   const response = await api.post("/course", {
-  //     name: "Typescript",
-  //     description: "Curso bacana",
-  //     level: "LOW",
-  //     workload: 30,
-  //     learning: "Vai aprender react",
-  //     skills: "Habilidade",
-  //     trailId: "3",
-  //     teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
-  //   });
-  //   console.log(response.data);
-  // }
-
-  // async function loadCourse() {
-  //   const response = await api.get("/user");
-  //   console.log(response.data);
-  // }
+  // console.log(course);
 
   const handlerOnChange = (event: any, key: string) => {
     setFormData((prevValue) => {
       return { ...prevValue, [key]: event.target.value };
     });
   };
+
   useEffect(() => {
     !addCourse && loadCourse();
   }, []);
-
-  useEffect(() => {
-    const workload = !addCourse ? course.workload.toString() + " horas" : "";
-    const nameInstructor = !addCourse
-      ? course.teacher?.name + " " + course.teacher?.surname + " horas"
-      : "";
-
-    course.level === "LOW"
-      ? setValueLevelCourse("Iniciante")
-      : course.level === "MEDIUM"
-      ? setValueLevelCourse("Intermediário")
-      : setValueLevelCourse("Avançado");
-
-    setFormData((prevValue) => {
-      // type: "",
-      // offeredBy: "",
-      // descriptionInstructor: "",     foi
-      // avatar: "",                    foi
-      return {
-        ...prevValue,
-        name: course?.name,
-        description: course?.description,
-        workload: workload,
-        skills: course?.skills,
-        learn: course?.learning,
-        level: course?.level,
-        avatar: course.teacher?.profile?.avatar || "",
-        nameInstructor: nameInstructor,
-        descriptionInstructor: course.teacher?.profile?.bio || "",
-      };
-    });
-  }, [course]);
 
   useEffect(() => {
     setFormData((prevValue) => {
       return {
         ...prevValue,
         ["type"]:
-          valueTypeCourse === "COURSE"
-            ? "Curso"
-            : valueTypeCourse === "WORKSHOP"
-            ? "Workshop"
-            : valueTypeCourse === "TRAINING"
-            ? "Treinamento"
-            : "Palestra",
-        //        COURSE
-        // WORKSHOP
-        // TRAINING
-        // LECTURE
+          valueTypeCourse === "Curso"
+            ? "COURSE"
+            : valueTypeCourse === "Workshop"
+            ? "WORKSHOP"
+            : valueTypeCourse === "Treinamento"
+            ? "TRAINING"
+            : "LECTURE",
       };
     });
-    console.log("Type do form: " + formData.type);
   }, [valueTypeCourse]);
 
   useEffect(() => {
@@ -235,7 +206,6 @@ const CardAddCourse = ({
             : "HIGH",
       };
     });
-    console.log(formData.type);
   }, [valueLevelCourse]);
 
   const handleSubmit = async () => {
@@ -250,12 +220,6 @@ const CardAddCourse = ({
 
     const workload = parseInt(formData.workload.replace(/[^0-9]/g, ""));
 
-    //     type: "",                        Não está salvando
-    //     offeredBy: "",                   Não está salvando
-    //     nameInstructor: "",              Não está salvando
-    //     descriptionInstructor: "",(bio)  Não está salvando
-    //     avatar: "",                      Não está salvando
-    const nameInstructorr = formData.nameInstructor;
     if (addCourse) {
       const response = await api.post(`/course`, {
         name: `${formData.name}`,
@@ -271,7 +235,7 @@ const CardAddCourse = ({
 
       return response.data;
     } else {
-      const response = await api.put(`/course/${course.id}`, {
+      const response = await api.put(`/course/${course?.id}`, {
         name: `${formData.name}`,
         description: `${formData.description}`,
         level: `${formData.level}`,
@@ -282,41 +246,12 @@ const CardAddCourse = ({
         teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
       });
 
-      console.log("ATUALIZA:  " + course.id);
-
       return response.data;
     }
   };
 
-  // console.log("anterior: " + previousStep + "\natual: " + currentStep);
-
-  // console.log({ nomeDoCurso: formData.name, oferecidoPor: formData.offeredBy, nomeDoInstrutor: formData.nameInstructor });
-  // console.log(formData);
-
-  // console.log(
-  //   "nome do curso: " +
-  //     formData.name +
-  //     "\noferecido por: " +
-  //     formData.offeredBy +
-  //     "\ndescrição do curso: " +
-  //     formData.description +
-  //     "\nnome do instrutor: " +
-  //     formData.nameInstructor +
-  //     "\ndescrição do instrutor: " +
-  //     formData.descriptionInstructor +
-  //     "\nfoto do intrutor: " +
-  //     formData.avatar +
-  //     "\ncarga horaria: " +
-  //     formData.workload +
-  //     "\nOque vc irá aprender: " +
-  //     formData.learn +
-  //     "\nHabilidades: " +
-  //     formData.skills
-  // );
-
   return (
     <TrailModal
-      // oneButton={true}
       onClose={() => setCurrentStep(4)}
       iconClose={currentStep === 4 ? false : true}
       title={currentStep === 4 ? "Tem certeza que deseja cancelar?" : title}
@@ -378,8 +313,6 @@ const CardAddCourse = ({
                 <Dropdown
                   setValue={setValueTypeCourse}
                   value={valueTypeCourse}
-                  // value={valueTypeCourse}
-                  // setValue={setValueTypeCourse}
                   options={["Curso", "Workshop", "Treinamento", "Palestra"]}
                   id={"1"}
                   width={264}
