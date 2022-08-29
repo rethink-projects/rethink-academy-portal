@@ -58,6 +58,7 @@ interface CourseResponse {
   trailId: string;
   teacherId: string;
   modules: Module[];
+  teacher?: UserResponse;
 }
 
 type addCourseProps = {
@@ -73,6 +74,10 @@ const CardAddCourse = ({
 }: addCourseProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
+  const [valueTypeCourse, setValueTypeCourse] =
+    useState<string>("Selecione...");
+  const [valueLevelCourse, setValueLevelCourse] =
+    useState<string>("Selecione...");
   const [course, setCourse] = useState<CourseResponse>({
     id: "",
     name: "",
@@ -84,6 +89,17 @@ const CardAddCourse = ({
     trailId: "",
     teacherId: "",
     modules: [],
+    teacher: {
+      id: "",
+      email: "",
+      name: "",
+      surname: "",
+      main: "",
+      watched: [],
+      role: "EMBASSADOR",
+      // profile: Profile;
+      course: [],
+    },
   });
   const [teacher, setTeacher] = useState<UserResponse>({
     id: "",
@@ -98,13 +114,12 @@ const CardAddCourse = ({
   });
   const location = useLocation();
   let trilhaId = location.pathname.replace("/trilhas/", "");
-  // let trilhaId = location
   const { notify } = useNotification();
 
   const [formData, setFormData] = useState({
     name: "",
     type: "",
-    offeredBy: "",
+    offeredBy: "Rethink Academy",
     description: "",
     nameInstructor: "",
     descriptionInstructor: "",
@@ -121,8 +136,9 @@ const CardAddCourse = ({
     const response = await api.get(`/course/${idCourse}`);
     // const response = await api.get(`/course`);
     // console.log(response.data.courses[0].teacher);
-    setTeacher(response.data.courses[0].teacher);
-    setCourse(response.data.courses[0]);
+    // setTeacher(response.data.course.teacher);
+    setCourse(response.data);
+    console.log({ response });
   }
   // console.log(teacher.name);
 
@@ -155,95 +171,121 @@ const CardAddCourse = ({
   }, []);
 
   useEffect(() => {
-    let atribute = teacher.name;
-    // console.log(atribute);
+    const workload = !addCourse ? course.workload.toString() + " horas" : "";
+    const nameInstructor = !addCourse
+      ? course.teacher?.name + " " + course.teacher?.surname + " horas"
+      : "";
 
-    // !addCourse && loadCourse();
-    // const name = (e) => handlerOnChange(e, "name");
-    // handlerOnChange(course?.name, "name");
+    course.level === "LOW"
+      ? setValueLevelCourse("Iniciante")
+      : course.level === "MEDIUM"
+      ? setValueLevelCourse("Intermediário")
+      : setValueLevelCourse("Avançado");
+
     setFormData((prevValue) => {
       // type: "",
       // offeredBy: "",
-      // nameInstructor: "",
-      // descriptionInstructor: "",
-      // avatar: "",
+      // descriptionInstructor: "",     foi
+      // avatar: "",                    foi
       return {
         ...prevValue,
-        ["name"]: course?.name,
-        ["description"]: course?.description,
-        // ["workload"]: course?.workload,
-        ["skills"]: course?.skills,
-        ["learn"]: course?.learning,
-        ["level"]: course?.level,
-        // ["nameInstructor"]: atribute,
+        name: course?.name,
+        description: course?.description,
+        workload: workload,
+        skills: course?.skills,
+        learn: course?.learning,
+        level: course?.level,
+        avatar: course.teacher?.profile?.avatar || "",
+        nameInstructor: nameInstructor,
+        descriptionInstructor: course.teacher?.profile?.bio || "",
       };
     });
   }, [course]);
 
-  const handleSubmit = async (title: string) => {
-    console.log("Concluído!!!\n");
+  useEffect(() => {
+    setFormData((prevValue) => {
+      return {
+        ...prevValue,
+        ["type"]:
+          valueTypeCourse === "COURSE"
+            ? "Curso"
+            : valueTypeCourse === "WORKSHOP"
+            ? "Workshop"
+            : valueTypeCourse === "TRAINING"
+            ? "Treinamento"
+            : "Palestra",
+        //        COURSE
+        // WORKSHOP
+        // TRAINING
+        // LECTURE
+      };
+    });
+    console.log("Type do form: " + formData.type);
+  }, [valueTypeCourse]);
 
-    console.log(
-      "nome do curso: " +
-        formData.name +
-        "\noferecido por: " +
-        formData.offeredBy +
-        "\ndescrição do curso: " +
-        formData.description +
-        "\nnome do instrutor: " +
-        formData.nameInstructor +
-        "\ndescrição do instrutor: " +
-        formData.descriptionInstructor +
-        "\nfoto do intrutor: " +
-        formData.avatar +
-        "\ncarga horaria: " +
-        formData.workload +
-        "\nOque vc irá aprender: " +
-        formData.learn +
-        "\nHabilidades: " +
-        formData.skills
-    );
-    // return <Toast />;
+  useEffect(() => {
+    setFormData((prevValue) => {
+      return {
+        ...prevValue,
+        ["level"]:
+          valueLevelCourse === "Iniciante"
+            ? "LOW"
+            : valueLevelCourse === "Intermediário"
+            ? "MEDIUM"
+            : "HIGH",
+      };
+    });
+    console.log(formData.type);
+  }, [valueLevelCourse]);
+
+  const handleSubmit = async () => {
+    const titlePopUp = addCourse
+      ? "Parabéns! Seu curso foi adicionado com sucesso!"
+      : "Alterações salvas com sucesso!";
 
     notify({
-      title: title,
+      title: titlePopUp,
       type: "success",
     });
-    // const level = formData ===
 
-    const response = await api.post(`/course`, {
-      // name: `${formData.name}`,
-      // description: `${formData.description}`,
-      // level: "LOW",
-      // workload: "30",
-      // learning: "Vai aprender react",
-      // skills: "Habilidade",
-      // trailId: "3",
-      // teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
-      name: `${formData.name}`,
-      description: "Curso pra testar",
-      level: "LOW",
-      workload: 30,
-      learning: "Vai aprender react",
-      skills: "Habilidade",
-      trailId: "3",
-      teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
-    });
-    //  name: "",
-    // type: "",
-    // offeredBy: "",
-    // description: "",
-    // nameInstructor: "",
-    // descriptionInstructor: "",
-    // avatar: "",
-    // level: "",
-    // workload: "",
-    // learn: "",
-    // skills: ""
+    const workload = parseInt(formData.workload.replace(/[^0-9]/g, ""));
 
-    // try {
-    //   const newDocument = { ...formData, createdAt: Timestamp.now() };
-    // } catch (error) {}
+    //     type: "",                        Não está salvando
+    //     offeredBy: "",                   Não está salvando
+    //     nameInstructor: "",              Não está salvando
+    //     descriptionInstructor: "",(bio)  Não está salvando
+    //     avatar: "",                      Não está salvando
+    const nameInstructorr = formData.nameInstructor;
+    if (addCourse) {
+      const response = await api.post(`/course`, {
+        name: `${formData.name}`,
+        description: `${formData.description}`,
+        level: `${formData.level}`,
+        workload,
+        learning: `${formData.learn}`,
+        skills: `${formData.skills}`,
+        trailId: `${trilhaId}`,
+        teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+      });
+      console.log("ADICIONA");
+
+      return response.data;
+    } else {
+      const response = await api.put(`/course/${course.id}`, {
+        name: `${formData.name}`,
+        description: `${formData.description}`,
+        level: `${formData.level}`,
+        workload,
+        learning: `${formData.learn}`,
+        skills: `${formData.skills}`,
+        trailId: `${trilhaId}`,
+        teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+      });
+
+      console.log("ATUALIZA:  " + course.id);
+
+      return response.data;
+    }
   };
 
   // console.log("anterior: " + previousStep + "\natual: " + currentStep);
@@ -289,11 +331,8 @@ const CardAddCourse = ({
           ? () => setCurrentStep(previousStep)
           : currentStep === 3
           ? () => {
-              handleSubmit(
-                title === "Adicionar um Curso"
-                  ? "Parabéns! Seu curso foi adicionado com sucesso!"
-                  : "Alterações salvas com sucesso!"
-              );
+              // addCourse ? handleSubmit() : handleSubmitUpdateCourse();
+              handleSubmit();
               onClose();
             }
           : () => {
@@ -304,9 +343,8 @@ const CardAddCourse = ({
       onClickCancel={
         currentStep === 1
           ? () => {
-              // onClose();
               setCurrentStep(4);
-              console.log("cancelado");
+              // console.log("cancelado");
             }
           : currentStep === 4
           ? () => onClose()
@@ -338,9 +376,10 @@ const CardAddCourse = ({
               <div className={styles.field}>
                 <p className={styles.title_field}>Tipo de Conteúdo:</p>
                 <Dropdown
-                  setValue={function (value: string): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  setValue={setValueTypeCourse}
+                  value={valueTypeCourse}
+                  // value={valueTypeCourse}
+                  // setValue={setValueTypeCourse}
                   options={["Curso", "Workshop", "Treinamento", "Palestra"]}
                   id={"1"}
                   width={264}
@@ -353,7 +392,7 @@ const CardAddCourse = ({
                   placeholder={"Rethink Academy"}
                   hasIcon={false}
                   nameInput={""}
-                  value={formData.offeredBy}
+                  value={"Rethink Academy"}
                   onChange={(e) => handlerOnChange(e, "offeredBy")}
                 />
               </div>
@@ -420,9 +459,8 @@ const CardAddCourse = ({
               <div className={styles.field}>
                 <p className={styles.title_field}>Nível do Curso</p>
                 <Dropdown
-                  setValue={function (value: string): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  setValue={setValueLevelCourse}
+                  value={valueLevelCourse}
                   options={["Iniciante", "Intermediário", "Avançado"]}
                   id={"1"}
                   width={264}

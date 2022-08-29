@@ -102,16 +102,18 @@ const renderCard = (
   );
 
   return (
-    <CardCourse
-      intern={intern}
-      onClickIrAoCurso={() => console.log("Foi para o curso")}
-      onClickColectEmblem={() => console.log("Coletou o emblema")}
-      onClickEditCourse={onClickEditCourse}
-      key={index}
-      title={curso.name}
-      concluded={concluded}
-      emblem={emblem}
-    />
+    <p>bla</p>
+    // <CardCourse
+    //   intern={intern}
+    //   onClickIrAoCurso={() => console.log("Foi para o curso")}
+    //   onClickColectEmblem={() => console.log("Coletou o emblema")}
+    //   onClickEditCourse={onClickEditCourse}
+    //   key={index}
+    //   title={curso.name}
+    //   concluded={concluded}
+    //   emblem={emblem}
+
+    // />
   );
 };
 
@@ -275,7 +277,7 @@ const CursosScreen = () => {
           )}
         </div>
         <div className={styles.cards}>
-          {!intern &&
+          {/* {!intern &&
             data.map(
               (course: CourseResponse, index) =>
                 course.trailId === trilhaId && (
@@ -290,7 +292,7 @@ const CursosScreen = () => {
                     emblem={false}
                   />
                 )
-            )}
+            )} */}
 
           {intern &&
             courses.map(

@@ -16,6 +16,7 @@ type cardCourseProp = {
   onClickEditCourse: () => void;
   intern: boolean;
   emblem: boolean;
+  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 };
 
 const CardCurso = ({
@@ -26,8 +27,10 @@ const CardCurso = ({
   concluded,
   intern,
   emblem,
+  type,
 }: cardCourseProp) => {
   // console.log("Tem emblema? " + emblem + "\nCompletou o curso? " + concluded);
+  // console.log(type);
 
   const textConcluded =
     concluded === 1
@@ -49,23 +52,29 @@ const CardCurso = ({
       disabled = true;
     }
   }
-  // interface CourseResponse {
-  //   id: string;
-  //   name: string;
-  //   description: string;
-  //   level: "LOW" | "MEDIUM" | "HIGH";
-  //   workload: number;
-  //   learning: string;
-  //   skills: string;
-  //   trailId: string;
-  //   teacherId: string;
-  //   modules: Module[];
-  // }
-
+  // id: string;
+  // name: string;
+  // description: string;
+  // level: "LOW" | "MEDIUM" | "HIGH";
+  // workload: number;
+  // learning: string;
+  // skills: string;
+  // trailId: string;
+  // teacherId: string;
+  // modules: Module[];
   return (
     <div className={styles.container_card}>
       <div className={styles.description_card}>
-        <p className={styles.legend_card}>Curso | Rethink Academy</p>
+        <p className={styles.legend_card}>
+          {type === "COURSE"
+            ? "Curso "
+            : type === "LECTURE"
+            ? "Palestra "
+            : type === "TRAINING"
+            ? "Treinamento "
+            : "Workshop "}
+          | Rethink Academy
+        </p>
         <h1 className={styles.title_card}>{title}</h1>
         {intern && (
           <div className={styles.container_status_card}>
