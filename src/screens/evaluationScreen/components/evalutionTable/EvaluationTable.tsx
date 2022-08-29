@@ -124,7 +124,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][0],
       headerName: headers[role][0],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -133,7 +133,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][1],
       headerName: headers[role][1],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -142,7 +142,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][2],
       headerName: headers[role][2],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -151,7 +151,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][3],
       headerName: headers[role][3],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -160,7 +160,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][4],
       headerName: headers[role][4],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -169,7 +169,7 @@ export default function BasicEditingGrid({
     {
       field: headers[role][5],
       headerName: headers[role][5],
-      width: 188.5,
+      width: 186,
       type: "number",
       editable: true,
       headerAlign: "center",
@@ -185,7 +185,7 @@ export default function BasicEditingGrid({
       getEvaluations(month);
     }
     return;
-  }, [month, role, skill, rows]);
+  }, [month, role, skill]);
 
   useEffect(() => {
     // console.log({ evaluations });
@@ -322,7 +322,7 @@ export default function BasicEditingGrid({
     }
   };
 
-  const onEditStop = (row: any, value: any) => {
+  const onEditStop = async (row: any, value: any) => {
     console.log(row.id);
     const idSplit = row.id.split(" ");
     console.log(idSplit);
@@ -331,7 +331,7 @@ export default function BasicEditingGrid({
     } else {
       updateEvaluate(row, value);
     }
-    return;
+    month && (await getEvaluations(month));
   };
 
   return (
