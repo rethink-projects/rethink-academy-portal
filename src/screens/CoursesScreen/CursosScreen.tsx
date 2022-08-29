@@ -78,14 +78,6 @@ export interface CourseResponse {
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
-interface CoursesUser {
-  course_id: number;
-  lastWatched_class_id: string;
-  watched: Array<string>;
-  completed: boolean;
-  emblem: boolean;
-}
-
 const CursosScreenTeste = () => {
   // Usuário
   const { user } = useAuth();
@@ -95,8 +87,7 @@ const CursosScreenTeste = () => {
   );
 
   const [intern, setIntern] = useState(false);
-  // const intern = false;
-  // console.log();
+
   // Declaração de variáveis
   const location = useLocation();
   const [trail, setTrail] = useState<Trail>({
@@ -104,10 +95,8 @@ const CursosScreenTeste = () => {
     name: "",
     description: "",
     weight: 0,
-    // course: [],
   });
   let trilhaId = location.pathname.replace("/trilhas/", "");
-  // let selectedTrack = "Design";
 
   const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
@@ -119,10 +108,9 @@ const CursosScreenTeste = () => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
-        responseByEmail.data.user.role === "STUDENT"
-          ? setIntern(true)
-          : setIntern(false);
-        // console.log(responseByEmail.data.user.role);
+        // responseByEmail.data.user.role === "STUDENT"
+        //   ? setIntern(true)
+        //   : setIntern(false);
 
         const responseCourses = await api.get(
           `/user/watched/${user.email}?trailId=${trilhaId}`
@@ -137,10 +125,8 @@ const CursosScreenTeste = () => {
     const func = async () => {
       const response = await api.get(`/course/`);
       const responseTrail = await api.get(`/trail/${trilhaId}`);
-      // console.log(responseTrail.data);
       setTrail(responseTrail.data);
 
-      // const data = response.data;
       setData(response.data.courses);
     };
     func();

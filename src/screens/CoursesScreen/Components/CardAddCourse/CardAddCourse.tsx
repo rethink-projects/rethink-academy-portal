@@ -4,9 +4,7 @@ import Textarea from "../../../../components/Textarea/Textarea";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import { useEffect, useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
-import Toast from "../../../../components/Toast/Toast";
 import { useNotification } from "../../../../context/NotificationContext";
-import { Timestamp } from "firebase/firestore";
 import { api } from "../../../../services/api";
 import { useLocation } from "react-router-dom";
 import { CourseResponse } from "../../CursosScreen";
@@ -23,43 +21,6 @@ interface FormData {
   workload: string;
   learn: string;
   skills: string;
-}
-
-interface Profile {
-  id: string;
-  bio?: string;
-  avatar?: string;
-  social?: JSON;
-  // user:   User    @relation(fields: [userId], references: [id])
-  userId: string;
-}
-
-interface UserResponse {
-  id: string;
-  email: string;
-  name?: string;
-  surname?: string;
-  main?: string;
-  watched: string[];
-  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
-  profile?: Profile;
-  course: CourseResponse[];
-}
-
-interface Module {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: Lesson[];
-}
-
-interface Lesson {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
 }
 
 type addCourseProps = {
@@ -88,95 +49,46 @@ const CardAddCourse = ({
         : "Workshop"
       : "Selecione...";
   });
-  const [valueLevelCourse, setValueLevelCourse] =
-    useState<string>("Selecione...");
-
+  const [valueLevelCourse, setValueLevelCourse] = useState<string>(() => {
+    return !addCourse
+      ? course?.level === "LOW"
+        ? "Iniciante"
+        : course?.level === "MEDIUM"
+        ? "Intermediário"
+        : "Avançado"
+      : "Selecione...";
+  });
   const location = useLocation();
   let trilhaId = location.pathname.replace("/trilhas/", "");
   const { notify } = useNotification();
 
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    type: "",
-    offeredBy: "Rethink Academy",
-    description: "",
-    nameInstructor: "",
-    descriptionInstructor: "",
-    avatar: "",
-    level: "",
-    workload: "",
-    learn: "",
-    skills: "",
+  const [formData, setFormData] = useState<FormData>(() => {
+    const formattedWorkload = course?.workload.toString() + " horas";
+    const formattedInstructorName =
+      course?.teacher?.name + " " + course?.teacher?.surname;
+
+    return {
+      name: course?.name || "",
+      type: course?.type || "",
+      offeredBy: "Rethink Academy",
+      description: course?.description || "",
+      nameInstructor: formattedInstructorName,
+      descriptionInstructor: course?.teacher.profile?.bio || "",
+      avatar: course?.teacher.profile?.avatar || "",
+      level: "",
+      workload: formattedWorkload,
+      learn: course?.learning || "",
+      skills: course?.skills || "",
+    };
   });
 
   const title = addCourse ? "Adicionar um Curso" : "Editar um Curso";
-
-  async function loadCourse() {
-    console.log(course?.teacher.profile);
-
-    if (course) {
-      const {
-        description,
-        id,
-        learning,
-        level,
-        modules,
-        name,
-        skills,
-        teacherId,
-        trailId,
-        type,
-        workload,
-        teacher,
-      } = course;
-
-      const formattedWorkload = workload.toString() + " horas";
-      const formattedInstructorName = teacher?.name + " " + teacher?.surname;
-
-      level === "LOW"
-        ? setValueLevelCourse("Iniciante")
-        : level === "MEDIUM"
-        ? setValueLevelCourse("Intermediário")
-        : setValueLevelCourse("Avançado");
-
-      // console.log(type);
-
-      type === "COURSE"
-        ? setValueTypeCourse("Curso")
-        : type === "TRAINING"
-        ? setValueTypeCourse("Treinamento")
-        : type === "LECTURE"
-        ? setValueTypeCourse("Palestra")
-        : setValueTypeCourse("Workshop");
-
-      // console.log(valueTypeCourse);
-
-      setFormData({
-        name,
-        type,
-        offeredBy: "Rethink Academy",
-        description,
-        workload: formattedWorkload,
-        skills,
-        learn: learning,
-        level: level,
-        avatar: teacher?.profile?.avatar || "",
-        nameInstructor: formattedInstructorName,
-        descriptionInstructor: teacher.profile?.bio || "",
-      });
-    }
-  }
-  // console.log(course);
 
   const handlerOnChange = (event: any, key: string) => {
     setFormData((prevValue) => {
       return { ...prevValue, [key]: event.target.value };
     });
   };
-
-  useEffect(() => {
-    !addCourse && loadCourse();
-  }, []);
 
   useEffect(() => {
     setFormData((prevValue) => {
@@ -266,7 +178,6 @@ const CardAddCourse = ({
           ? () => setCurrentStep(previousStep)
           : currentStep === 3
           ? () => {
-              // addCourse ? handleSubmit() : handleSubmitUpdateCourse();
               handleSubmit();
               onClose();
             }
@@ -279,7 +190,6 @@ const CardAddCourse = ({
         currentStep === 1
           ? () => {
               setCurrentStep(4);
-              // console.log("cancelado");
             }
           : currentStep === 4
           ? () => onClose()

@@ -6,7 +6,6 @@ import IconTask from "@mui/icons-material/TaskAltOutlined";
 import IconArrow from "@mui/icons-material/East";
 import IconAlert from "@mui/icons-material/ErrorOutlineOutlined";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import { CourseResponse } from "../../CursosScreen";
 
 type cardCourseProp = {
   title: string;
@@ -53,16 +52,7 @@ const CardCurso = ({
       disabled = true;
     }
   }
-  // id: string;
-  // name: string;
-  // description: string;
-  // level: "LOW" | "MEDIUM" | "HIGH";
-  // workload: number;
-  // learning: string;
-  // skills: string;
-  // trailId: string;
-  // teacherId: string;
-  // modules: Module[];
+
   return (
     <div className={styles.container_card}>
       <div className={styles.description_card}>
