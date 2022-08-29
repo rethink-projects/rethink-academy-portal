@@ -94,6 +94,9 @@ const CursosScreenTeste = () => {
     {} as CourseResponse
   );
 
+  const [intern, setIntern] = useState(false);
+  // const intern = false;
+  // console.log();
   // Declaração de variáveis
   const location = useLocation();
   const [trail, setTrail] = useState<Trail>({
@@ -116,7 +119,10 @@ const CursosScreenTeste = () => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
-        // console.log(responseByEmail);
+        responseByEmail.data.user.role === "STUDENT"
+          ? setIntern(true)
+          : setIntern(false);
+        // console.log(responseByEmail.data.user.role);
 
         const responseCourses = await api.get(
           `/user/watched/${user.email}?trailId=${trilhaId}`
@@ -155,7 +161,6 @@ const CursosScreenTeste = () => {
 
   // const trail = trilha_id === 3 ? "Engenharia" : trilha_id
 
-  const intern = false;
   // const intern = currentUser.role === "STUDENT" ? true : false;
 
   return (
