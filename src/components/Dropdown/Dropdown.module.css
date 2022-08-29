@@ -4,6 +4,7 @@
 .dropdown_container {
   flex-shrink: 0;
   /* min-width: 242px; */
+  align-items: flex-start;
 }
 
 .dropdown,
@@ -45,7 +46,6 @@
 .dropdown_options_container {
   position: absolute;
   width: inherit;
-  
 }
 .dropdown_option {
   display: flex;
