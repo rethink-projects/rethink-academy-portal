@@ -44,6 +44,8 @@
 }
 
 .dropdown_options_container {
+  max-height: 300px;
+  overflow-y: auto;
   position: absolute;
   width: inherit;
 }
