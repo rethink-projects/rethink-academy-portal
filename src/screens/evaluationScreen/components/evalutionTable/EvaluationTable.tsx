@@ -37,6 +37,7 @@ export default function BasicEditingGrid({
 }: BasicEditingGridType) {
   const [evaluations, setEvaluations] = useState<evaluationUserType[]>([]);
 
+  // Headers of table, depends on switch state
   const headersSoftSkill = {
     ENGINEERING: [
       "Empatia",
@@ -79,7 +80,7 @@ export default function BasicEditingGrid({
       "Wireframe e Fluxo",
       "Design system",
       "Product Design",
-      "Padronização e ",
+      "Padronização e Documentação",
     ],
     PRODUCT: [
       "Produto",
@@ -99,13 +100,13 @@ export default function BasicEditingGrid({
     headers = headersSoftSkill;
   }
 
+  // get evaluates from datebase and save in evaluations using useState
   const getEvaluations = async (month: string) => {
     try {
       const evaluationsData = await axios.get<evaluationUserType[]>(
         `http://localhost:4000/api/evaluate/${month}?skillType=${skill}`,
         { params: { skill } }
       );
-      // console.log(evaluationsData.data);
       setEvaluations(evaluationsData.data);
       return;
     } catch (error) {
@@ -113,6 +114,7 @@ export default function BasicEditingGrid({
     }
   };
 
+  // columns of table using da headers
   const columns: GridColumns = [
     {
       field: "name",
@@ -177,9 +179,10 @@ export default function BasicEditingGrid({
     },
   ];
 
+  // useState for rows of table
   const [rows, setRows] = useState<GridRowsProp[] | any>([]);
 
-  // UseEffect para get das notas e renderizar as linhas da tabela
+  // UseEffect for call function get evaluates
   useEffect(() => {
     if (month) {
       getEvaluations(month);
@@ -187,16 +190,14 @@ export default function BasicEditingGrid({
     return;
   }, [month, role, skill]);
 
+  // useEffect for set the rows of table
   useEffect(() => {
-    // console.log({ evaluations });
     if (skill) {
       headers = headersHardSkill;
     } else {
       headers = headersSoftSkill;
     }
-    // console.log(headers);
     const evaluationsMap = evaluations.map((evaluate, index) => {
-      // console.log(evaluate);
       if (
         evaluate.main === role &&
         evaluate.skillType === skill &&
@@ -224,40 +225,13 @@ export default function BasicEditingGrid({
     setRows(evaluationsFilter);
   }, [evaluations, skill]);
 
-  const styleGrid = {
-    ".MuiDataGrid-columnSeparator": {
-      display: "none",
-    },
-    "&.MuiDataGrid-root": {
-      border: "none",
-    },
-    ".MuiDataGrid-columnHeaders": {
-      backgroundColor: "var(--color-input)",
-    },
-    ".css-f3jnds-MuiDataGrid-columnHeaders": {
-      border: "none",
-    },
-    ".MuiDataGrid-cell": {
-      border: "none",
-      fontWeight: 400,
-      fontSize: "16px",
-      lineHeight: "150%",
-      color: "var(--color-secondary)",
-    },
-    ".css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
-      fontWeight: 400,
-      fontSize: "14px",
-      lineHeight: "16px",
-    },
-  };
-
+  // methods create and update evalute
   const createNewEvaluate = async (row: any, value: string) => {
     try {
       let userEmail = row.row.name.toLowerCase();
       userEmail = userEmail.split(" ");
       userEmail = userEmail[0].concat(".", userEmail[1]) + "@rethink.dev";
       const newValue = parseInt(value);
-      console.log(row);
 
       await axios.post<evaluationUserType[]>(
         `http://localhost:4000/api/evaluate`,
@@ -299,13 +273,6 @@ export default function BasicEditingGrid({
 
   const updateEvaluate = async (row: any, value: string) => {
     try {
-      console.log({
-        value: value,
-        main: role,
-        skill: row.field,
-        skillType: skill,
-        id: row.id,
-      });
       const updateResponse = await axios.post<evaluationUserType[]>(
         `http://localhost:4000/api/evaluate/${row.id}`,
         {
@@ -315,23 +282,49 @@ export default function BasicEditingGrid({
           skillType: skill,
         }
       );
-      console.log({ updateResponse });
       return;
     } catch (error) {
       console.log(error);
     }
   };
 
+  // method for edit cells of table
   const onEditStop = async (row: any, value: any) => {
-    console.log(row.id);
     const idSplit = row.id.split(" ");
-    console.log(idSplit);
     if (idSplit[0] === "NoEvaluate") {
       createNewEvaluate(row, value);
     } else {
       updateEvaluate(row, value);
     }
     month && (await getEvaluations(month));
+  };
+
+  // styles of table
+  const styleGrid = {
+    ".MuiDataGrid-columnSeparator": {
+      display: "none",
+    },
+    "&.MuiDataGrid-root": {
+      border: "none",
+    },
+    ".MuiDataGrid-columnHeaders": {
+      backgroundColor: "var(--color-input)",
+    },
+    ".css-f3jnds-MuiDataGrid-columnHeaders": {
+      border: "none",
+    },
+    ".MuiDataGrid-cell": {
+      border: "none",
+      fontWeight: 400,
+      fontSize: "16px",
+      lineHeight: "150%",
+      color: "var(--color-secondary)",
+    },
+    ".css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
+      fontWeight: 400,
+      fontSize: "14px",
+      lineHeight: "16px",
+    },
   };
 
   return (
@@ -343,10 +336,8 @@ export default function BasicEditingGrid({
         experimentalFeatures={{ newEditingApi: true }}
         hideFooter={true}
         disableColumnMenu
-        onCellEditStop={
-          (row, value: any) => onEditStop(row, value.target.value)
-          // console.log(row, value.target.value)
-          // onEditStop(row, value:any)
+        onCellEditStop={(row, value: any) =>
+          onEditStop(row, value.target.value)
         }
         sx={styleGrid}
       />

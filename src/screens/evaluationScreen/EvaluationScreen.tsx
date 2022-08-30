@@ -10,21 +10,35 @@ import EvaluationTag from "./components/tags/EvaluationTag";
 // style
 import styles from "./EvaluationScreen.module.css";
 import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
+import axios from "axios";
+
+// type getUserType = {
+
+// }
 
 const EvaluationScreen = () => {
   const { user } = useAuth();
 
-  //   if (user.role != embassador) {
-  //     return <div>Não tem permissão para acessar esta pagina</div>;
-  //   }  //caso o usuario não for embaixador
+  const [userByEmail, setUserByEmail] = useState({});
 
-  // console.log(user);
+  // const getUser = async (email: string) => {
+  //   try {
+  //     const userData = await axios.get(
+  //       `http://localhost:4000/api/user/${email}`
+  //     );
+  //     setUserByEmail(userData.data);
+  //     return;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  // true == hardSkills ### false == softSkills
+  // if(userByEmail.role ===)
+
   const [skillType, setSkillType] = useState(true);
 
   const [tagType, setTagType] = useState<"ENGINEERING" | "DESIGN" | "PRODUCT">(
-    "ENGINEERING"
+    "DESIGN"
   );
 
   const data = new Date().toString();

@@ -9,8 +9,8 @@ const EvaluationTag = ({
   setTagType: (value: "ENGINEERING" | "DESIGN" | "PRODUCT") => void;
 }) => {
   // variaveis para controlar estado das tags ativo e inativo
-  const [activeDesign, setActiveDesign] = useState(false);
-  const [activeEngenharia, setActiveEngenharia] = useState(true);
+  const [activeDesign, setActiveDesign] = useState(true);
+  const [activeEngenharia, setActiveEngenharia] = useState(false);
   const [activeProduto, setActiveProduto] = useState(false);
 
   const activeClassDesign = activeDesign ? styles.tag_button_active : "";
