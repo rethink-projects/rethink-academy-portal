@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Styles from "./HomeScreenEmabassador.module.css";
 import Images from "../../assets";
+import { useNotification } from "../../context/NotificationContext";
 
 const HomeScreenEmabassador = ({ user }: any) => {
+  const { notify } = useNotification();
+
   const [academyClass, setAcademyClass] = useState("1/2022");
   const [roleFilter, setRoleFilter] = useState<string[]>(["ENGINEERING"]);
 
@@ -17,11 +20,19 @@ const HomeScreenEmabassador = ({ user }: any) => {
 
   const handlerOnClickRoleSelector = (role: string) => {
     const isSelected = roleFilter.findIndex((title) => title === role);
-    console.log({ isSelected });
+    if (isSelected === 0 && roleFilter.length === 1) {
+      notify({
+        title: "Você precisa de pelo menos um filtro",
+        type: "error",
+      });
+      return;
+    }
     if (isSelected >= 0) {
       setRoleFilter((prevValue) => prevValue.filter((title) => title !== role));
+      return;
     } else {
       setRoleFilter((prevValue) => [...prevValue, role]);
+      return;
     }
   };
 
@@ -78,13 +89,9 @@ const HomeScreenEmabassador = ({ user }: any) => {
             </div>
           </div>
           <div className={Styles.cards_container}>
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <div className={Styles.student_card}>
-                <img
-                  src={Images.cardArrow}
-                  className={Styles.student_card_arrow}
-                  alt="Rethink Arrow"
-                />
+            {[user, user, user, user, user].map((item, index) => (
+              <div className={Styles.student_card} key={index}>
+                <div className={Styles.student_card_arrow} />
                 <div className={Styles.student_card_avatar}>
                   <img
                     src={user.avatarUrl}
@@ -102,10 +109,11 @@ const HomeScreenEmabassador = ({ user }: any) => {
                 </div>
 
                 <div className={Styles.student_card_text}>
-                  {user.name}
-                  <button className={Styles.role_selector_button}>
-                    Engenharia
-                  </button>
+                  <div>
+                    <p>{user.name.split(" ")[0]}</p>
+                    <p>{user.name.split(" ")[1]}</p>
+                  </div>
+                  <button className={Styles.card_role}>Engenharia</button>
                 </div>
               </div>
             ))}

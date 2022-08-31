@@ -82,7 +82,6 @@
   background: var(--color-primary-hover);
 }
 .role_selector_button {
-  z-index: 1;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -94,6 +93,29 @@
   border: 1px solid rgba(27, 27, 27, 0.3);
   border-radius: 150px;
   color: #3b3b3b;
+}
+
+.card_role {
+  transition: ease-out 0.2s;
+  position: absolute;
+  bottom: 24px;
+  z-index: 1;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 4px 12px;
+  background: #fff;
+
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  border-radius: 150px;
+  color: #706e64;
+}
+
+.student_card:hover > .student_card_text > .card_role {
+  background: #000000;
+  color: #fff;
 }
 
 .role_selector_button_active {
@@ -119,10 +141,26 @@
   align-content: flex-start;
 }
 
+.student_card:hover > .student_card_arrow {
+  filter: grayscale(0);
+  width: 83.13px;
+  height: 63px;
+  left: 4px;
+}
+
 .student_card_arrow {
+  /* background-color: red; */
+  z-index: 1;
+  width: 83.13px;
+  height: 59px;
+
   position: absolute;
   bottom: 0;
   left: 5px;
+  background-image: url("../../assets/arrowCardGreen.png");
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  transition: ease-out 0.2s;
 }
 
 .student_card_text {
@@ -130,13 +168,15 @@
   gap: 38px;
   margin-bottom: 100px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-
+  flex-basis: 100%;
   color: #000000;
 }
 .student_card_avatar {

@@ -4,7 +4,8 @@ import filledInput from "./filledInput.svg";
 import logo from "./logo.png";
 import search from "./search.svg";
 
-import cardArrow from "./cardArrow.png";
+import arrowCardGreen from "./arrowCardGreen.png";
+import arrowCardGrey from "./arrowCardGrey.png";
 import arrow from "./arrowIcon.png";
 import avatarImage from "./avatarImage.svg";
 import ClockHome from "./clock.svg";
@@ -44,7 +45,8 @@ import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
 export const Images = {
-  cardArrow,
+  arrowCardGreen,
+  arrowCardGrey,
   logo,
   checkbox,
   arrow,

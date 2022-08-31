@@ -4,6 +4,7 @@ import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import { useAuth } from "../../../../context/AuthContext";
 import { useNotification } from "../../../../context/NotificationContext";
+import { titleMaker } from "../../../../helpers/titleMaker";
 import MenuItem from "../MenuItem/MenuItem";
 import styles from "./Menu.module.css";
 
@@ -33,15 +34,7 @@ function Menu() {
   if (!user?.email) {
     return <p>Loading...</p>;
   }
-  const titleMaker = () => {
-    if (!user.main || !user.role) throw new Error("teste");
 
-    let role = user.role.toLowerCase();
-    let main = user.main.toLowerCase();
-    role = role.replace(role[0], role[0].toUpperCase());
-    main = main.replace(main[0], main[0].toUpperCase());
-    return `${role} of ${main}`;
-  };
   return (
     <div className={currentClass}>
       <div className={styles.menu_header_open}>
@@ -111,7 +104,7 @@ function Menu() {
             {isOpen && (
               <div className={styles.avatar_desc}>
                 <span>{user.name}</span>
-                <small>{titleMaker()}</small>
+                <small>{titleMaker(user)}</small>
               </div>
             )}
           </div>
