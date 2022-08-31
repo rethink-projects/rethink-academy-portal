@@ -10,6 +10,8 @@ export interface ICurrentUser {
   id?: string;
   role?: string;
   main?: string;
+  level?: number;
+  exp?: number;
 }
 
 interface AuthContextType {

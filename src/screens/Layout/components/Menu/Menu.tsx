@@ -85,6 +85,7 @@ function Menu() {
           <MenuItem
             isOpen={isOpen}
             text="Sair"
+            onClick={handleLogout}
             icon={Images.icons.LogoutIcon}
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />

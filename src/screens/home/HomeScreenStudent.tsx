@@ -7,9 +7,20 @@ import Register from "../../components/Register/Register";
 import { useAuth } from "../../context/AuthContext";
 
 import TrilhasComponent from "./components/trilhas/TrilhasComponent";
+import { getUserFromBackend } from "../../services/backend/UserService";
+import { useEffect, useState } from "react";
 
 function HomeScreenStudent() {
   const { user } = useAuth();
+  const [userAtt, setUserAtt] = useState<any>({});
+  const GetUser = async () => {
+    const data = await getUserFromBackend(user.email);
+    setUserAtt(data);
+  };
+
+  useEffect(() => {
+    GetUser();
+  }, []);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -58,16 +69,20 @@ function HomeScreenStudent() {
             />
 
             <p className={Styles.user_status_lvl}>
-              lvl <strong>150</strong>
+              lvl <strong>{userAtt.level}</strong>
             </p>
             <div className={Styles.divisor}></div>
 
             <p className={Styles.user_status_exp}>
-              <strong>7270</strong>/7270 REX'S
+              <strong>{userAtt.exp!}</strong>/48 REX'S
             </p>
           </div>
           <div className={Styles.user_progress_bar}>
-            <ProgressBar width={190} totalValue={100} relativeValue={100} />
+            <ProgressBar
+              width={190}
+              totalValue={48}
+              relativeValue={user.exp!}
+            />
           </div>
         </div>
         <div className={Styles.hr_divisor}></div>

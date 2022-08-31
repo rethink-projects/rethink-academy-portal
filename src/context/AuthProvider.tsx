@@ -17,24 +17,19 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     const userFromFirebase = await firebaseInstance.loginWithFirebase(type);
     const backendUser = await getUserFromBackend(userFromFirebase.email);
 
-    setUser({
+    const newUser = {
       ...userFromFirebase,
       name: backendUser.name,
       id: backendUser.id,
       role: backendUser.role,
       main: backendUser.main,
-    });
+      level: backendUser.level,
+      exp: backendUser.exp,
+    };
 
-    localStorage.setItem(
-      "@portarethinkacademy:user",
-      JSON.stringify({
-        ...userFromFirebase,
-        name: backendUser.name + " " + backendUser.surname,
-        id: backendUser.id,
-        role: backendUser.role,
-        main: backendUser.main,
-      })
-    );
+    setUser(newUser);
+
+    localStorage.setItem("@portarethinkacademy:user", JSON.stringify(newUser));
     callback();
   };
 
