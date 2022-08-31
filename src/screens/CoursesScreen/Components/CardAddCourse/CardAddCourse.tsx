@@ -72,11 +72,11 @@ const CardAddCourse = ({
       type: course?.type || "",
       offeredBy: "Rethink Academy",
       description: course?.description || "",
-      nameInstructor: formattedInstructorName,
+      nameInstructor: addCourse ? "" : formattedInstructorName,
       descriptionInstructor: course?.teacher.profile?.bio || "",
       avatar: course?.teacher.profile?.avatar || "",
       level: "",
-      workload: formattedWorkload,
+      workload: addCourse ? "" : formattedWorkload,
       learn: course?.learning || "",
       skills: course?.skills || "",
     };
