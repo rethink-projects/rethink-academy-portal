@@ -62,24 +62,20 @@ const CardAddCourse = ({
   let trilhaId = location.pathname.replace("/trilhas/", "");
   const { notify } = useNotification();
 
-  const [formData, setFormData] = useState<FormData>(() => {
-    const formattedWorkload = course?.workload.toString() + " horas";
-    const formattedInstructorName =
-      course?.teacher?.name + " " + course?.teacher?.surname;
+  const formattedWorkload = course?.workload.toString() + " horas";
 
-    return {
-      name: course?.name || "",
-      type: course?.type || "",
-      offeredBy: "Rethink Academy",
-      description: course?.description || "",
-      nameInstructor: addCourse ? "" : formattedInstructorName,
-      descriptionInstructor: course?.teacher.profile?.bio || "",
-      avatar: course?.teacher.profile?.avatar || "",
-      level: "",
-      workload: addCourse ? "" : formattedWorkload,
-      learn: course?.learning || "",
-      skills: course?.skills || "",
-    };
+  const [formData, setFormData] = useState<FormData>({
+    name: course?.name || "",
+    type: course?.type || "",
+    offeredBy: "Rethink Academy",
+    description: course?.description || "",
+    nameInstructor: addCourse ? "" : course?.teacherName || "",
+    descriptionInstructor: course?.teacherDescription || "",
+    avatar: course?.imageTeacher || "",
+    level: "",
+    workload: addCourse ? "" : formattedWorkload,
+    learn: course?.learning || "",
+    skills: course?.skills || "",
   });
 
   const title = addCourse ? "Adicionar um Curso" : "Editar um Curso";
@@ -141,9 +137,11 @@ const CardAddCourse = ({
         learning: `${formData.learn}`,
         skills: `${formData.skills}`,
         trailId: `${trilhaId}`,
-        teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+        type: `${formData.type}`,
+        teacherName: `${formData.nameInstructor}`,
+        teacherDescription: `${formData.descriptionInstructor}`,
+        imageTeacher: `${formData.avatar}`,
       });
-      console.log("ADICIONA");
 
       return response.data;
     } else {
@@ -155,7 +153,10 @@ const CardAddCourse = ({
         learning: `${formData.learn}`,
         skills: `${formData.skills}`,
         trailId: `${trilhaId}`,
-        teacherId: "04d9b089-f0b5-4e4b-bb40-7b2fb7c636e7",
+        type: `${formData.type}`,
+        teacherName: `${formData.nameInstructor}`,
+        teacherDescription: `${formData.descriptionInstructor}`,
+        imageTeacher: `${formData.avatar}`,
       });
 
       return response.data;

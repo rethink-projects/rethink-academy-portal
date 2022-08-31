@@ -29,9 +29,6 @@ const CardCurso = ({
   emblem,
   type,
 }: cardCourseProp) => {
-  // console.log("Tem emblema? " + emblem + "\nCompletou o curso? " + concluded);
-  // console.log(type);
-
   const textConcluded =
     concluded === 1
       ? "Parabéns! Você concluiu esse curso!"

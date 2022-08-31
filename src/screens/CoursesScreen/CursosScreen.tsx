@@ -45,6 +45,7 @@ interface Trail {
   description: string;
   weight: number;
   course?: CourseResponse[];
+  imageUrl: string;
 }
 
 interface Module {
@@ -72,31 +73,35 @@ export interface CourseResponse {
   learning: string;
   skills: string;
   trailId: string;
-  teacherId: string;
   modules: Module[];
-  teacher: UserResponse;
+  // teacherId: string;
+  teacherName: string;
+  teacherDescription: string;
+  imageTeacher: string;
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
 const CursosScreenTeste = () => {
-  // Usuário
+  const [intern, setIntern] = useState(false);
+
   const { user } = useAuth();
   const [courseId, setCourseId] = useState("");
+
+  const location = useLocation();
+  let trailId = location.pathname.replace("/trilhas/", "");
+
   const [selectedCourse, setSelectedCourse] = useState<CourseResponse>(
     {} as CourseResponse
   );
 
-  const [intern, setIntern] = useState(true);
-
   // Declaração de variáveis
-  const location = useLocation();
   const [trail, setTrail] = useState<Trail>({
     id: "",
     name: "",
     description: "",
     weight: 0,
+    imageUrl: "",
   });
-  let trilhaId = location.pathname.replace("/trilhas/", "");
 
   const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
@@ -108,15 +113,16 @@ const CursosScreenTeste = () => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
-        responseByEmail.data.user.role === "STUDENT"
-          ? setIntern(true)
-          : setIntern(false);
+        // responseByEmail.data.user.role === "STUDENT"
+        //   ? setIntern(true)
+        //   : setIntern(false);
 
         const responseCourses = await api.get(
-          `/user/watched/${user.email}?trailId=${trilhaId}`
+          `/user/watched/${user.email}?trailId=${trailId}`
         );
+
+        setTrail(responseCourses.data.maxLessons[0].trail);
         setCoursesUser(responseCourses.data.maxLessons);
-        // console.log(responseCourses.data.maxLessons);
       };
       func();
     }
@@ -124,31 +130,11 @@ const CursosScreenTeste = () => {
 
   useEffect(() => {
     const func = async () => {
-      const response = await api.get(`/course/`);
-      const responseTrail = await api.get(`/trail/${trilhaId}`);
-      setTrail(responseTrail.data);
-
-      setData(response.data.courses);
+      const responseCourse = await api.get(`/course`);
+      setData(responseCourse.data.course);
     };
     func();
   }, []);
-  // console.log(trail);
-
-  // Convertendo a primeira letra da trilha para maiúsculo
-  // let trailName = trail.name;
-  // console.log(trailName);
-
-  // trailName = trailName[0].toUpperCase() + trailName.slice(1);
-  // trailName = trailName.toUpperCase();
-  // let letra = trailName[0].toUpperCase();
-  // console.log(letra);
-  // console.log(trailName);
-
-  // selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
-
-  // const trail = trilha_id === 3 ? "Engenharia" : trilha_id
-
-  // const intern = currentUser.role === "STUDENT" ? true : false;
 
   return (
     <div className={styles.center}>
@@ -181,7 +167,7 @@ const CursosScreenTeste = () => {
           {!intern
             ? data.map(
                 (course: CourseResponse, index) =>
-                  course.trailId === trilhaId && (
+                  course.trailId === trailId && (
                     <CardCourse
                       intern={intern}
                       onClickIrAoCurso={() => console.log("Foi para o curso")}
@@ -196,7 +182,7 @@ const CursosScreenTeste = () => {
                       key={index}
                       title={course.name}
                       concluded={1}
-                      emblem={false}
+                      emblem={false} //falta ver
                       type={course.type}
                     />
                   )
