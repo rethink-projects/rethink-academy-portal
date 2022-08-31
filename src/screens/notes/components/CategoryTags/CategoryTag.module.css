@@ -1,3 +1,10 @@
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .default {
   display: flex;
   justify-content: center;

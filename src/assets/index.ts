@@ -22,6 +22,7 @@ import trash from "./trashIcon.svg";
 import academyHat from "./academyHat.svg";
 import lampIcon from "./lampIcon.svg";
 import dpIcon from "./dpIcon.svg";
+import infoNotes from "./infoIcon_notesScreen.svg";
 
 import LastGoalsMedal from "./LastGoalsMedal.svg";
 import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
@@ -50,6 +51,7 @@ export const Images = {
   academyHat,
   lamp: lampIcon,
   desenvolvimentoPessoal: dpIcon,
+  infoNotes,
   icons: {
     left: IconLeft,
     right: IconRight,

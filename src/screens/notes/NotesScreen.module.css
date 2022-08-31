@@ -1,37 +1,38 @@
 .notes_container {
   display: flex;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 /* table container css */
 
-.container_extern{
+.container_extern {
   padding-left: 30px;
   padding-right: 10px;
   padding-top: 24px;
   width: 43%;
 }
 
-.breadcrumb{
+.breadcrumb {
   width: 30%;
 }
 
-.table_header{
+.table_header {
   display: flex;
   flex-direction: column;
   gap: 18px;
   margin-bottom: 24px;
 }
 
-.table_header_inner{
+.table_header_inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
 }
 
-.table_header_inner_title{
-  font-family: 'Roboto';
+.table_header_inner_title {
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -39,13 +40,41 @@
   color: var(--color-secondary);
 }
 
+/* no notes warning */
+
+.noNotes_container {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 25%;
+}
+
+.noNotes_warning {
+  width: 240px;
+  height: 106px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  row-gap: 12px;
+}
+
+.noNotes_warning p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+
+  text-align: center;
+
+  color: #706e64;
+}
 
 /* text editor container css */
 
-.textEditorContainer {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+.rightSideContainer {
   right: 0px;
   width: 57%;
   height: calc(100vh - 72px);
@@ -53,6 +82,19 @@
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
+}
+
+.textEditorContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  border-width: inherit;
+  border-style: inherit;
+  border-color: inherit;
+  background-color: inherit;
 }
 
 /* Header */
@@ -73,6 +115,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap-reverse;
+  row-gap: 15px;
 }
 
 .titleAndToggle input {
@@ -81,7 +124,7 @@
   font-family: inherit;
   font-size: inherit;
   padding: none;
-  width: 15.5vw;
+  width: 20vw;
   background: none;
   outline: none;
   font-weight: 300;
