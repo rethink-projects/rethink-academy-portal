@@ -86,7 +86,7 @@ const CursosScreenTeste = () => {
     {} as CourseResponse
   );
 
-  const [intern, setIntern] = useState(false);
+  const [intern, setIntern] = useState(true);
 
   // Declaração de variáveis
   const location = useLocation();
@@ -108,14 +108,15 @@ const CursosScreenTeste = () => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
-        // responseByEmail.data.user.role === "STUDENT"
-        //   ? setIntern(true)
-        //   : setIntern(false);
+        responseByEmail.data.user.role === "STUDENT"
+          ? setIntern(true)
+          : setIntern(false);
 
         const responseCourses = await api.get(
           `/user/watched/${user.email}?trailId=${trilhaId}`
         );
         setCoursesUser(responseCourses.data.maxLessons);
+        // console.log(responseCourses.data.maxLessons);
       };
       func();
     }
