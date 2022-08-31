@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./DropdownModalLateral.module.css";
+import styles from "./DropdownSideModal.module.css";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import { GlobalStyles } from "@mui/styled-engine";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
@@ -173,7 +173,7 @@ const goalsData = [
   },
 ];
 
-const DropdownModalLateral = () => {
+const DropdownSideModal = () => {
   const [goals, setGoals] = useState<GoalsDataType[]>(goalsData);
 
   const handleClick = (id: number) => {
@@ -246,51 +246,54 @@ const DropdownModalLateral = () => {
             />
           </div>
 
-            <div className={ goal.isOpen
-              ? styles.dropdown_content_open
-              : styles.dropdown_content_closed} key={goal.id}>
-              <div className={styles.dropdown_content_progress}>
-                <div className={styles.dropdown_content_quantity}>
-                  <p>
-                    {
-                      goal.goalsIntern.filter((item) => item.conclude === true)
-                        .length
-                    }
-                  </p>
-                  <span>/{goal.goalsIntern.length} </span>
-                </div>
-                <ProgressBar
-                  width={306}
-                  totalValue={goal.goalsIntern.length}
-                  relativeValue={
+          <div
+            className={
+              goal.isOpen
+                ? styles.dropdown_content_open
+                : styles.dropdown_content_closed
+            }
+            key={goal.id}
+          >
+            <div className={styles.dropdown_content_progress}>
+              <div className={styles.dropdown_content_quantity}>
+                <p>
+                  {
                     goal.goalsIntern.filter((item) => item.conclude === true)
                       .length
                   }
-                />
+                </p>
+                <span>/{goal.goalsIntern.length} </span>
               </div>
-              {goal.isOpen && (
-                goal.goalsIntern.map((goalsIntern) => (
-                    <Checkbox
-                    size="small"
-                      name={goalsIntern.title}
-                      isChecked={goalsIntern.conclude}
-                      setIsChecked={(props) =>
-                        handleIsChecked({
-                          id: goalsIntern.id,
-                          props,
-                          idGoal: goal.id,
-                        })
-                      }
-                      key={goalsIntern.id}
-                    />
-                ))
-              )}
+              <ProgressBar
+                width={306}
+                totalValue={goal.goalsIntern.length}
+                relativeValue={
+                  goal.goalsIntern.filter((item) => item.conclude === true)
+                    .length
+                }
+              />
             </div>
-
+            {goal.isOpen &&
+              goal.goalsIntern.map((goalsIntern) => (
+                <Checkbox
+                  size="small"
+                  name={goalsIntern.title}
+                  isChecked={goalsIntern.conclude}
+                  setIsChecked={(props) =>
+                    handleIsChecked({
+                      id: goalsIntern.id,
+                      props,
+                      idGoal: goal.id,
+                    })
+                  }
+                  key={goalsIntern.id}
+                />
+              ))}
+          </div>
         </div>
       ))}
     </div>
   );
 };
 
-export default DropdownModalLateral;
+export default DropdownSideModal;
