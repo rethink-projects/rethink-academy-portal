@@ -18,11 +18,9 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/dashboard" element={<Layout />}>
               <Route index element={<HomeScreen />} />
+              <Route path="/dashboard/register" element={<RegisterScreen />} />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
-          </Route>
-          <Route path="/register" element={<Layout />}>
-            <Route index element={<RegisterScreen />} />
           </Route>
         </Routes>
       </AuthProvider>
