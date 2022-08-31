@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from "react";
-import CardCourse from "../CoursesScreen/Components/CardCourse";
+import React, { useState } from "react";
+import ModalTrilhas from "../../components/TrailModal/TrailModal";
 import styles from "./Playground.module.css";
+import CloseIcon from "@mui/icons-material/Close";
+import { DatePicker } from "../../components/DatePicker/DatePicker";
 
 function PlaygroundScreen() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
     <div className={styles.playground_container}>
       <div className={styles.playground_container_inner}>
-        <h1>Manter essa tela Limpa, após criar o componente</h1>
+        <button onClick={() => setModalIsOpen(true)}>Modal</button>
+        {modalIsOpen && (
+          <ModalTrilhas
+            onClose={() => setModalIsOpen(false)}
+            title="Tem certeza que deseja excluir?"
+          />
+        )}
+        <DatePicker size={"large"} calendarPosition={"left"} placeholder={""} />
       </div>
     </div>
   );
