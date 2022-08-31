@@ -71,30 +71,6 @@ export interface CourseResponse {
 }
 
 ///////////////////////////////////////////////////
-type classProps = {
-  title: string;
-  description: string;
-  module?: Module;
-};
-
-type Module = {
-  id: number;
-  name: string;
-  blocked: boolean;
-  completed: boolean;
-  classes?: Array<Class>;
-  order: number;
-};
-type Class = {
-  id: string;
-  name: string;
-  url: string;
-  completed: boolean;
-  description: string;
-  order: number;
-  duration: string;
-  type: "video" | "audio" | "activity";
-};
 
 const Class = () => {
   // Buscando id's
@@ -147,98 +123,19 @@ const Class = () => {
     if (user?.email) {
       // console.log(user.email);
       const func = async () => {
-        // const responseUserByEmail = await api.get(`/user/${user.email}`);
-        // console.log(responseUserByEmail.data.user);
-        //
         const responseCourse = await api.get(`/course/${idCourse}`);
-        // console.log(responseCourse.data.course);
+
         setCourse(responseCourse.data.course);
         setModules(responseCourse.data.course.modules);
 
         const responseClass = await api.get(`/lesson/${idClass}`);
-        // console.log(responseClass);
 
         setLesson(responseClass.data.lesson);
-        // set;
-        // setModule(responseClass.data.lesson.module);
-        // setCourse(responseClass.data.lesson.module.course);
-
-        // console.log(responseClass.data.lesson);
-
-        // console.log(idClass);
-
-        // const responseCourses = await api.get(
-        //   `/user/watched/${user.email}?trailId=${idTrail}`
-        // );
-        // console.log(responseCourses);
-
-        //  const responseCourses = await api.get(
-        //    `/user/watched/${user.email}?trailId=${trilhaId}`
-        //  );
-        //  setCoursesUser(responseCourses.data.maxLessons);
       };
       func();
     }
   }, [user]);
-  // console.log(course);
-  // console.log(lesson);
-  modules.map((module) => console.log(module.lessons));
-  // console.log(modules.);
-
-  //  useEffect(() => {
-  //    const func = async () => {
-  //      const response = await api.get(`/course/`);
-  //      const responseTrail = await api.get(`/trail/${trilhaId}`);
-  //      setTrail(responseTrail.data);
-
-  //      setData(response.data.courses);
-  //    };
-  //    func();
-  //  }, []);
-
-  const courses = [
-    {
-      id: 1,
-      name: "Nothink",
-      trilha: 3,
-      lastCourse: 4,
-      completed: false,
-      description: "descrição",
-    },
-  ];
-
-  const classes = [
-    {
-      id: "iax9dhaiudshasip1",
-      name: "class_01",
-      url: "nothink-video-01.com",
-      trilha: 3,
-      courses: 1,
-      order: 1,
-      description: "descrição",
-      module: 1,
-    },
-    {
-      id: "iax9dhaiudshasip2",
-      name: "class_02",
-      url: "nothink-video-02.com",
-      trilha: 3,
-      courses: 1,
-      order: 2,
-      description: "descrição",
-      module: 1,
-    },
-    {
-      id: "iax9dhaiudshasip3",
-      name: "class_02",
-      url: "nodeJS-video-01.com",
-      trilha: 3,
-      courses: 2,
-      order: 1,
-      description: "descrição",
-      module: 2,
-    },
-  ];
+  // modules.map((module) => console.log(module.lessons));
 
   const getBreadcrumbs = () => {
     const url = location.pathname;
@@ -291,8 +188,9 @@ const Class = () => {
       <div className={styles.class_class_list}>
         <h1>{course.name.toUpperCase()}</h1>
         {modules &&
-          modules.map((module) => (
+          modules.map((module, index) => (
             <Acordeon
+              key={index}
               module={{
                 id: parseInt(module.id),
                 name: module.name,
