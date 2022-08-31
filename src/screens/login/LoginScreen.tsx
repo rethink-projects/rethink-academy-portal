@@ -23,7 +23,10 @@ function LoginScreen() {
   }
 
   useEffect(() => {
-    const localStorageUser = JSON.parse(localStorage.getItem("@nothink:user")!);
+    console.log("bug aqui");
+    const localStorageUser = JSON.parse(
+      localStorage.getItem("@portarethinkacademy:user")!
+    );
     if (localStorageUser) {
       auth.setCurrentUser(localStorageUser);
     }

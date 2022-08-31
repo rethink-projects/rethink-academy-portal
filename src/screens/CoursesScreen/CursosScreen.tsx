@@ -1,170 +1,153 @@
 import { useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import CardCourse from "./Components/CardCourse";
+import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import CardCourse from "./Components/CardCourse/CardCourse";
 import styles from "./CursosScreen.module.css";
-import axios from "axios";
-import { ConstructionOutlined } from "@mui/icons-material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
+import { api } from "../../services/api";
+import { useAuth } from "../../context/AuthContext";
 
-interface CoursesUser {
-  course_id: number;
-  lastWatched_class_id: string;
-  watched: Array<string>;
+interface UserLessons {
   completed: boolean;
+  id: string;
+  lessonsLength: number;
+  name: string;
+  trail: Trail;
+  userLessonsLength: number;
+  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
-type TrilhasUser = {
-  trilha: number;
-  courses: Array<CoursesUser>;
-};
+interface Profile {
+  id: string;
+  bio: string;
+  avatar: string;
+  social: JSON;
+  userId: string;
+}
 
-type User = {
+interface UserResponse {
+  id: string;
+  email: string;
   name: string;
+  surname: string;
   main: string;
-  trilhas: Array<TrilhasUser>;
-};
+  watched: string[];
+  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
+  profile?: Profile;
+  course: CourseResponse[];
+}
 
-type Course = {
-  id: number;
+interface Trail {
+  id: string;
   name: string;
-  trilha: number;
-  lastCourse: number;
-  completed: boolean;
   description: string;
-};
+  weight: number;
+  course?: CourseResponse[];
+}
 
-type Trilhas = { name: string; id: number; description: string };
+interface Module {
+  id: string;
+  name: string;
+  courseId: string;
+  lessons: Lesson[];
+}
 
-const renderCard = (
-  index: number,
-  curso: Course,
-  trilha_id: number,
-  user: User
-) => {
-  let concluded = 3;
-  user.trilhas.map(
-    (trilhaUser) =>
-      trilhaUser.trilha == trilha_id &&
-      trilhaUser.courses.map((cursoUser) =>
-        cursoUser.course_id === curso.id
-          ? cursoUser.completed
-            ? (concluded = 1)
-            : (concluded = 2)
-          : ""
-      )
+interface Lesson {
+  id: string;
+  name: string;
+  embedUrl: string;
+  order: number;
+  description: string;
+  moduleId: string;
+}
+
+export interface CourseResponse {
+  id: string;
+  name: string;
+  description: string;
+  level: "LOW" | "MEDIUM" | "HIGH";
+  workload: number;
+  learning: string;
+  skills: string;
+  trailId: string;
+  teacherId: string;
+  modules: Module[];
+  teacher: UserResponse;
+  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+}
+
+const CursosScreenTeste = () => {
+  // Usuário
+  const { user } = useAuth();
+  const [courseId, setCourseId] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState<CourseResponse>(
+    {} as CourseResponse
   );
 
-  return (
-    <CardCourse
-      onClickIrAoCurso={() => console.log("Foi para o curso")}
-      onClickColetarEmblema={() => console.log("Coletou o emblema")}
-      key={index}
-      title={curso.name}
-      concluded={concluded}
-    />
-  );
-};
+  const [intern, setIntern] = useState(false);
 
-const CursosScreen = () => {
   // Declaração de variáveis
   const location = useLocation();
-  let trilha_id = parseInt(location.pathname.replace("/trilhas/", ""));
+  const [trail, setTrail] = useState<Trail>({
+    id: "",
+    name: "",
+    description: "",
+    weight: 0,
+  });
+  let trilhaId = location.pathname.replace("/trilhas/", "");
 
-  const userTeste: User = {
-    name: "Fernando",
-    main: "engenharia",
-    trilhas: [
-      {
-        trilha: 3,
-        courses: [
-          {
-            course_id: 1,
-            lastWatched_class_id: "iax9dhaiudshasip1",
-            watched: ["iax9dhaiudshasip1", "iax9dhaiudshasip1"],
-            completed: false,
-          },
-          {
-            course_id: 2,
-            lastWatched_class_id: "iax9dhaiudshasip1",
-            watched: [],
-            completed: true,
-          },
-        ],
-      },
-    ],
-  };
+  const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
+  const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
+  const [data, setData] = useState([]);
 
-  const courses: Array<Course> = [
-    {
-      id: 1,
-      name: "Nothink",
-      trilha: 3,
-      lastCourse: 4,
-      completed: false,
-      description: "descrição",
-    },
-    {
-      id: 2,
-      name: "NodeJS",
-      trilha: 3,
-      lastCourse: 24,
-      completed: false,
-      description: "descrição",
-    },
-    {
-      id: 3,
-      name: "React",
-      trilha: 3,
-      lastCourse: 20,
-      completed: false,
-      description: "descrição",
-    },
-  ];
+  const [coursesUser, setCoursesUser] = useState<UserLessons[]>([]);
 
-  const trilhas: Array<Trilhas> = [
-    { name: "academy", id: 1, description: "descrição" },
-    { name: "design", id: 2, description: "descrição" },
-    { name: "engenharia", id: 3, description: "descrição" },
-    { name: "produto", id: 4, description: "descrição" },
-  ];
+  useEffect(() => {
+    if (user?.email) {
+      const func = async () => {
+        const responseByEmail = await api.get(`/user/${user.email}`);
+        // responseByEmail.data.user.role === "STUDENT"
+        //   ? setIntern(true)
+        //   : setIntern(false);
 
-  let selectedTrack = "";
+        const responseCourses = await api.get(
+          `/user/watched/${user.email}?trailId=${trilhaId}`
+        );
+        setCoursesUser(responseCourses.data.maxLessons);
+      };
+      func();
+    }
+  }, [user]);
 
-  // useEffect(() => {
-  // const getTrails = async () => {
-  //   const response = (await axios.get("http://localhost:4000/api/trail")).data;
-  //   if (response.trail) {
+  useEffect(() => {
+    const func = async () => {
+      const response = await api.get(`/course/`);
+      const responseTrail = await api.get(`/trail/${trilhaId}`);
+      setTrail(responseTrail.data);
 
-  //     console.log(response.trail);
-  //   }
-  // }
-  // getTrails();
-  // const fetch = async () => {
-  //   const response = await axios
-  //     .get("http://localhost:4000/api/trail")
-  //     .catch((err) => {
-  //       console.log("api error", err);
-  //     });
-  //   console.log(response!.data.trail);
-  // };
-  // fetch();
-  // }, []);
+      setData(response.data.courses);
+    };
+    func();
+  }, []);
+  // console.log(trail);
 
-  const getTrail = async () => {
-    const url = "http://localhost:4000/api/trail";
-    const obj = await fetch(url).then((res) => res.json());
-    const trail = obj.trail;
-    console.log(trail);
-  };
-  getTrail();
-
-  
-  // Encontrando o nome da trilha escolhida com o id = trilha_id
-  trilhas.map(
-    (trilha) => trilha.id === trilha_id && (selectedTrack = trilha.name)
-  );
   // Convertendo a primeira letra da trilha para maiúsculo
-  selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
+  // let trailName = trail.name;
+  // console.log(trailName);
+
+  // trailName = trailName[0].toUpperCase() + trailName.slice(1);
+  // trailName = trailName.toUpperCase();
+  // let letra = trailName[0].toUpperCase();
+  // console.log(letra);
+  // console.log(trailName);
+
+  // selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
+
+  // const trail = trilha_id === 3 ? "Engenharia" : trilha_id
+
+  // const intern = currentUser.role === "STUDENT" ? true : false;
 
   return (
     <div className={styles.center}>
@@ -177,13 +160,69 @@ const CursosScreen = () => {
           ]}
         />
         <div className={styles.title}>
-          <p>{`Programa de Cursos | ${selectedTrack}`}</p>
+          <p>{`Programa de Cursos | ${trail.name}`}</p>
+          {!intern && (
+            <ButtonWithIcon
+              onClick={() => setAddCourseIsOpen(true)}
+              icon={<AddCircleOutlineIcon />}
+              width={218}
+              position="right"
+              type="primary"
+              text="Adicionar curso"
+              size="medium"
+            />
+          )}
+          {addCourseIsOpen && (
+            <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />
+          )}
         </div>
         <div className={styles.cards}>
-          {courses.map(
-            (curso, index) =>
-              curso.trilha == trilha_id &&
-              renderCard(index, curso, trilha_id, userTeste)
+          {!intern
+            ? data.map(
+                (course: CourseResponse, index) =>
+                  course.trailId === trilhaId && (
+                    <CardCourse
+                      intern={intern}
+                      onClickIrAoCurso={() => console.log("Foi para o curso")}
+                      onClickColectEmblem={() =>
+                        console.log("Coletou o emblema")
+                      }
+                      onClickEditCourse={() => {
+                        setCourseId(course.id);
+                        setSelectedCourse(course);
+                        setEditCourseIsOpen(true);
+                      }}
+                      key={index}
+                      title={course.name}
+                      concluded={1}
+                      emblem={false}
+                      type={course.type}
+                    />
+                  )
+              )
+            : coursesUser.map((course, index) => (
+                <CardCourse
+                  key={index}
+                  intern={intern}
+                  onClickIrAoCurso={() => console.log("Foi para o curso")}
+                  onClickColectEmblem={() => console.log("Coletou o emblema")}
+                  onClickEditCourse={() => setEditCourseIsOpen(true)}
+                  title={course.name}
+                  concluded={
+                    course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
+                  }
+                  emblem={true} //falta ver
+                  type={course.type}
+                />
+              ))}
+
+          {editCourseIsOpen && (
+            <CardAddCourse
+              course={selectedCourse}
+              addCourse={false}
+              idCourse={courseId}
+              onClose={() => setEditCourseIsOpen(false)}
+            />
           )}
         </div>
       </div>
@@ -191,4 +230,4 @@ const CursosScreen = () => {
   );
 };
 
-export default CursosScreen;
+export default CursosScreenTeste;
