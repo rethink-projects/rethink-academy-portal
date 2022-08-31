@@ -1,7 +1,5 @@
 
 import styles from "./EmptyModal.module.css";
-import SimpleButton from "../SimpleButton/SimpleButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 type modalProps = {
   children?: React.ReactNode;
