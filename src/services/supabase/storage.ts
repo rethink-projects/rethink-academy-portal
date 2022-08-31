@@ -47,6 +47,7 @@ export function useStorage() {
       });
     }
     console.log({ data });
+
     return notify({
       type: "success",
       title: `Upload feito com sucesso`,
@@ -69,14 +70,17 @@ export function useStorage() {
       title: `Url gerada com sucesso`,
     });
   };
+
   const createBucket = async () => {
     const { data, error } = await supabaseClient.storage.createBucket(
       user.email
     );
     if (error) {
+      console.log({ error });
+
       notify({
         type: "error",
-        title: "Esse Bucket já existe!",
+        title: error.message,
       });
       return;
     }
