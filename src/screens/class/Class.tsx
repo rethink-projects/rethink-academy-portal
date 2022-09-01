@@ -6,6 +6,23 @@ import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/api";
+import { count } from "console";
+
+interface LessonResponse {
+  completed: boolean;
+  description: string;
+  embedUrl: string;
+  id: string;
+  name: string;
+  order: number;
+}
+
+interface ModuleResponse {
+  moduleId: string;
+  moduleName: string;
+  moduleCompleted: boolean;
+  lessons: LessonResponse[];
+}
 
 interface Profile {
   id: string;
@@ -35,7 +52,7 @@ interface Trail {
   course?: CourseResponse[];
 }
 
-interface ModuleResponse {
+interface Module {
   id: string;
   name: string;
   courseId: string;
@@ -64,7 +81,7 @@ export interface CourseResponse {
   learning: string;
   skills: string;
   trailId: string;
-  modules: ModuleResponse[];
+  modules: Module[];
   // teacherId: string;
   teacherName: string;
   teacherDescription: string;
@@ -87,7 +104,7 @@ const Class = () => {
 
   // replace("/trilhas/asd/curso/ads/aulas", "").split();
   // console.log(idCourse);
-  const [module, setModule] = useState<ModuleResponse>({
+  const [module, setModule] = useState<Module>({
     id: "",
     name: "",
     courseId: "",
@@ -119,16 +136,26 @@ const Class = () => {
       const func = async () => {
         // console.log(idCourse);
         const responseCourse = await api.get(`/course/${idCourse}`);
-        console.log(responseCourse);
+        // console.log(responseCourse);
         setCourse(responseCourse.data.course);
-        setModules(responseCourse.data.course.modules);
+        // console.log(responseCourse);
         const responseClass = await api.get(`/lesson/${idClass}`);
         setLesson(responseClass.data.lesson);
+
+        // const responseCourses = await api.get(
+        //   `/user/watched/${user.email}?trailId=${idTrail}`
+        // );
+        const responseModule = await api.get(
+          `/lesson/watched/${user.email}?courseId=${idCourse}`
+        );
+        setModules(responseModule.data.modules);
+        // console.log(responseCourses);
       };
       func();
     }
   }, [user]);
   // modules.map((module) => console.log(module.lessons));
+  console.log(modules);
 
   const getBreadcrumbs = () => {
     const url = location.pathname;
@@ -139,6 +166,8 @@ const Class = () => {
     const linkCourse = { title: "Curso 1", link: url };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
+
+  let countIdModule = 0;
 
   return (
     <div className={styles.class_container}>
@@ -181,81 +210,37 @@ const Class = () => {
       <div className={styles.class_class_list}>
         <h1>{course.name.toUpperCase()}</h1>
         {modules &&
-          modules.map((module, index) => (
-            <Acordeon
-              key={index}
-              module={{
-                id: parseInt(module.id),
-                name: module.name,
-                blocked: false,
-                completed: true,
-                // classes: {}
-                //  id: string;
-                // name: string;
-                // embedUrl: string;
-                // order: number;
-                // description: string;
-                // moduleId: string;
-                // module: {
-                //   order: number;
-                // };
-                classes: [
-                  {
-                    id: "xasdxcdefewr",
-                    name: "Cores",
-                    url: "link",
-                    completed: true,
-                    description: "texto de descrição",
-                    order: 1,
-                    duration: "(mm:ss)",
-                    type: "video",
-                  },
-                  {
-                    id: "birubrib",
-                    name: "Grid",
-                    url: "link",
-                    completed: true,
-                    description: "texto de descrição",
-                    order: 2,
-                    duration: "(mm:ss)",
-                    type: "video",
-                  },
-                ],
-              }}
-            />
-          ))}
-        {/* <Acordeon
-          module={{
-            id: 1,
-            name: "UI Design",
-            blocked: false,
-            completed: true,
-            classes: [
-              {
-                id: "xasdxcdefewr",
-                name: "Cores",
-                url: "link",
-                completed: true,
-                description: "texto de descrição",
-                order: 1,
+          modules.map((module, index) => {
+            let lessons: any = [];
+            countIdModule++;
+
+            module.lessons.map((lesson, index) => {
+              lessons.push({
+                id: lesson.id,
+                name: lesson.name,
+                url: lesson.embedUrl,
+                completed: lesson.completed,
+                description: lesson.description,
+                order: lesson.order,
                 duration: "(mm:ss)",
                 type: "video",
-              },
-              {
-                id: "birubrib",
-                name: "Grid",
-                url: "link",
-                completed: true,
-                description: "texto de descrição",
-                order: 2,
-                duration: "(mm:ss)",
-                type: "video",
-              },
-            ],
-          }}
-        /> */}
-        {/* <Acordeon />
-        <Acordeon /> */}
+              });
+              return <div key={index}></div>;
+            });
+
+            return (
+              <Acordeon
+                key={index}
+                module={{
+                  id: countIdModule,
+                  name: module.moduleName,
+                  blocked: false,
+                  completed: module.moduleCompleted,
+                  classes: lessons,
+                }}
+              />
+            );
+          })}
       </div>
     </div>
   );

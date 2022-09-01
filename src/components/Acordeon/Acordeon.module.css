@@ -49,6 +49,7 @@
 .container {
   outline: 1px solid var(--color-icon-background);
   border-radius: 4px;
+  width: 350px;
 }
 
 .acordeon_item {
