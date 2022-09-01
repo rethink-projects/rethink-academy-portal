@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
@@ -8,6 +8,10 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
+import CardProgress from "./Components/CardProgress/CardProgress";
+import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
+import IconPlan from "@mui/icons-material/CalendarTodayOutlined";
+import IconProgress from "@mui/icons-material/TrendingUpOutlined";
 
 interface UserLessons {
   completed: boolean;
@@ -104,6 +108,8 @@ const CursosScreenTeste = () => {
   });
 
   const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
+  const [syllabusIsOpen, setSyllabusIsOpen] = useState(false);
+  const [progressIsOpen, setProgressIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
@@ -136,6 +142,8 @@ const CursosScreenTeste = () => {
     func();
   }, []);
 
+  if (!data) return <div>loading...</div>;
+
   return (
     <div className={styles.center}>
       <div className={styles.container_cursos}>
@@ -149,15 +157,41 @@ const CursosScreenTeste = () => {
         <div className={styles.title}>
           <p>{`Programa de Cursos | ${trail.name}`}</p>
           {!intern && (
-            <ButtonWithIcon
-              onClick={() => setAddCourseIsOpen(true)}
-              icon={<AddCircleOutlineIcon />}
-              width={218}
-              position="right"
-              type="primary"
-              text="Adicionar curso"
-              size="medium"
-            />
+            <div className={styles.title_buttons}>
+              <ButtonWithIcon
+                onClick={() => setSyllabusIsOpen(true)}
+                icon={<IconPlan />}
+                width={237}
+                position="right"
+                type="outline"
+                text="Plano de Atividades"
+                size="medium"
+              />
+              <ButtonWithIcon
+                onClick={() => setProgressIsOpen(true)}
+                icon={<IconProgress />}
+                width={169}
+                position="right"
+                type="outline"
+                text="Progresso"
+                size="medium"
+              />
+              <ButtonWithIcon
+                onClick={() => setAddCourseIsOpen(true)}
+                icon={<AddCircleOutlineIcon />}
+                width={218}
+                position="right"
+                type="primary"
+                text="Adicionar curso"
+                size="medium"
+              />
+            </div>
+          )}
+          {syllabusIsOpen && (
+            <CardSyllabus onClose={() => setSyllabusIsOpen(false)} />
+          )}
+          {progressIsOpen && (
+            <CardProgress onClose={() => setProgressIsOpen(false)} />
           )}
           {addCourseIsOpen && (
             <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />
