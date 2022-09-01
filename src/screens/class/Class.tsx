@@ -24,7 +24,7 @@ interface UserResponse {
   watched: string[];
   role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
   profile?: Profile;
-  course: CourseResponse[];
+  // course: CourseResponse[];
 }
 
 interface Trail {
@@ -64,9 +64,11 @@ export interface CourseResponse {
   learning: string;
   skills: string;
   trailId: string;
-  teacherId: string;
   modules: ModuleResponse[];
-  teacher: UserResponse;
+  // teacherId: string;
+  teacherName: string;
+  teacherDescription: string;
+  imageTeacher: string;
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
@@ -103,19 +105,11 @@ const Class = () => {
     learning: "",
     skills: "",
     trailId: "",
-    teacherId: "",
+    // teacherId: "",
     modules: [],
-    teacher: {
-      id: "",
-      email: "",
-      name: "",
-      surname: "",
-      main: "",
-      watched: [],
-      role: "STUDENT",
-      // profile?: Profile,
-      course: [],
-    },
+    teacherName: "",
+    teacherDescription: "",
+    imageTeacher: "",
     type: "COURSE",
   });
 
@@ -123,13 +117,12 @@ const Class = () => {
     if (user?.email) {
       // console.log(user.email);
       const func = async () => {
+        // console.log(idCourse);
         const responseCourse = await api.get(`/course/${idCourse}`);
-
+        console.log(responseCourse);
         setCourse(responseCourse.data.course);
         setModules(responseCourse.data.course.modules);
-
         const responseClass = await api.get(`/lesson/${idClass}`);
-
         setLesson(responseClass.data.lesson);
       };
       func();
