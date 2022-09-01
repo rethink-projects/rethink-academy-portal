@@ -23,7 +23,7 @@ export const DatePicker = ({
   const [active, setActive] = useState(false);
 
   return (
-    <>
+    <div className={styles.container}>
       <div
         className={
           active ? styles.datePicker_active : styles.datePicker_container
@@ -50,6 +50,6 @@ export const DatePicker = ({
           <Calendar />
         </div>
       )}
-    </>
+    </div>
   );
 };
