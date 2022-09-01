@@ -142,7 +142,7 @@ const CursosScreenTeste = () => {
     func();
   }, []);
 
-  if (!data) return <div>loading...</div>;
+  if (data.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -214,6 +214,7 @@ const CursosScreenTeste = () => {
                         setEditCourseIsOpen(true);
                       }}
                       key={index}
+                      index={index}
                       title={course.name}
                       concluded={1}
                       emblem={false} //falta ver
@@ -224,6 +225,7 @@ const CursosScreenTeste = () => {
             : coursesUser.map((course, index) => (
                 <CardCourse
                   key={index}
+                  index={index}
                   intern={intern}
                   onClickIrAoCurso={() => console.log("Foi para o curso")}
                   onClickColectEmblem={() => console.log("Coletou o emblema")}

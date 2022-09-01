@@ -17,6 +17,7 @@ type cardCourseProp = {
   intern: boolean;
   emblem: boolean;
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  index: number;
 };
 
 const CardCurso = ({
@@ -28,6 +29,7 @@ const CardCurso = ({
   intern,
   emblem,
   type,
+  index,
 }: cardCourseProp) => {
   const textConcluded =
     concluded === 1
@@ -51,7 +53,10 @@ const CardCurso = ({
   }
 
   return (
-    <div className={styles.container_card}>
+    <div
+      className={styles.container_card}
+      style={{ animationDelay: `${index}05ms` }}
+    >
       <div className={styles.description_card}>
         <p className={styles.legend_card}>
           {type === "COURSE"
