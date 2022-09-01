@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
-import TextEditor from "./components/textEditor/TextEditor";
+import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
+
 import style from "./NotesScreen.module.css";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import TableContent, { noteType } from "./components/table/TableContent";
 
 // Components
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import TableContent, { noteType } from "./components/table/TableContent";
+import TextEditor from "./components/textEditor/TextEditor";
 import CategoryTag from "./components/CategoryTags/CategoryTag";
 import PrivacyToggle from "./components/PrivacyToggle/PrivacyToggle";
+import Modal from "../../components/Modal/Modal";
 
 // Icons
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import Images from "../../assets";
-import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
 
 const NotesScreen = () => {
   const [state, setState] = useState<noteType | null>();
@@ -30,6 +32,8 @@ const NotesScreen = () => {
   const [isPublic, setIsPublic] = useState(state?.isPublic);
   const [title, setTitle] = useState(state?.title);
   const [content, setContent] = useState(state?.content);
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   //------------ Aviso sem notas ------------------------------------
 
@@ -70,13 +74,13 @@ const NotesScreen = () => {
   };
 
   const deleteNote = () => {
-    if (window.confirm("Tem certeza que deseja excluir a nota?")) {
-      console.log("deletar");
-      if (state) {
-        axios.delete(`http://localhost:4000/api/note/${state.id}`);
-      }
-      window.location.reload();
+    // if (window.confirm("Tem certeza que deseja excluir a nota?")) {
+    console.log("deletar");
+    if (state) {
+      axios.delete(`http://localhost:4000/api/note/${state.id}`);
     }
+    window.location.reload();
+    // }
   };
 
   const saveNote = () => {
@@ -204,13 +208,23 @@ const NotesScreen = () => {
                   width={134}
                   position="left"
                   icon={<DeleteOutlineOutlinedIcon />}
-                  onClick={deleteNote}
+                  onClick={() => setModalOpen(true)}
                 />
               </div>
             </div>
           </div>
         )}
       </div>
+      {isModalOpen && (
+        <Modal
+          onClickConfirm={deleteNote}
+          title="Aviso"
+          description="Tem certeza que deseja excluir a nota?"
+          onClose={() => setModalOpen(false)}
+        >
+          {" "}
+        </Modal>
+      )}
     </div>
   );
 };
