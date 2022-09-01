@@ -79,3 +79,14 @@
 .addCircle > svg > path {
   fill: var(--color-tertiary-active);
 }
+
+.iconBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: transparent;
+  background-color: transparent;
+}

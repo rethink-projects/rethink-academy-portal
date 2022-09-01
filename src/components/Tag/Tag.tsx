@@ -7,6 +7,7 @@ import { useState } from "react";
 type TagProps = {
   color?: "dark" | "light";
   size?: "large" | "default" | "small" | "micro";
+  hasIcon?: boolean;
   text: string;
   onClickAdd: () => void;
   onClickDelete: () => void;
@@ -15,6 +16,7 @@ type TagProps = {
 const Tag = ({
   color = "light",
   size = "default",
+  hasIcon = true,
   text,
   onClickAdd,
   onClickDelete,
@@ -32,23 +34,28 @@ const Tag = ({
   };
 
   return (
-    <div
+    <div onClick={!toggle ? (handleAdd) : (handleDelete) } 
       className={`${styles[color]} ${styles[size]} ${styles.container_tag} ${
         !toggle ? "" : color === "dark" ? styles.activeDark : styles.activeLight
-      }`}
-    >
+      }`}>
       <div className={styles.divLeft}>
+        {hasIcon == true && (
         <div onClick={handleAdd} className={styles.AddIcon}>
           <AddIcon />
         </div>
-        <span>{text}</span>
+        )}
+      </div>
+
+      <div className={styles.divCenter}>
+        <p>{text}</p>
       </div>
 
       <div className={styles.divRight}>
-        <div className={styles.barra}></div>
-        <div onClick={handleDelete} className={styles.ClearIcon}>
-          <ClearIcon className="ClearIcon" />
-        </div>
+        {hasIcon == true && (
+        <><div className={styles.barra}></div><div onClick={handleDelete} className={styles.ClearIcon}>
+            <ClearIcon className="ClearIcon" />
+          </div></>
+        )}
       </div>
     </div>
   );
