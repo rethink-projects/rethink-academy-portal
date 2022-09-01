@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/api";
 import { count } from "console";
+import { cursorTo } from "readline";
 
 interface LessonResponse {
   completed: boolean;
@@ -113,49 +114,30 @@ const Class = () => {
   });
   const [modules, setModules] = useState<ModuleResponse[]>([]);
   const [lesson, setLesson] = useState<Lesson>();
-  const [course, setCourse] = useState<CourseResponse>({
-    id: "",
-    name: "",
-    description: "",
-    level: "LOW",
-    workload: 0,
-    learning: "",
-    skills: "",
-    trailId: "",
-    // teacherId: "",
-    modules: [],
-    teacherName: "",
-    teacherDescription: "",
-    imageTeacher: "",
-    type: "COURSE",
-  });
+  const [course, setCourse] = useState("");
+  const [moduleOrder, setModuleOrder] = useState(0);
+  const [lessonOrder, setLessonOrder] = useState(0);
 
   useEffect(() => {
     if (user?.email) {
-      // console.log(user.email);
       const func = async () => {
-        // console.log(idCourse);
-        const responseCourse = await api.get(`/course/${idCourse}`);
-        // console.log(responseCourse);
-        setCourse(responseCourse.data.course);
-        // console.log(responseCourse);
         const responseClass = await api.get(`/lesson/${idClass}`);
         setLesson(responseClass.data.lesson);
 
-        // const responseCourses = await api.get(
-        //   `/user/watched/${user.email}?trailId=${idTrail}`
-        // );
         const responseModule = await api.get(
-          `/lesson/watched/${user.email}?courseId=${idCourse}`
+          `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
         );
         setModules(responseModule.data.modules);
-        // console.log(responseCourses);
+        // console.log(responseModule);
+        setModuleOrder(responseModule.data.moduleOrder);
+        setLessonOrder(responseModule.data.lessonOrder);
+        setCourse(responseModule.data.nameCourse);
       };
       func();
     }
   }, [user]);
   // modules.map((module) => console.log(module.lessons));
-  console.log(modules);
+  // console.log(modules);
 
   const getBreadcrumbs = () => {
     const url = location.pathname;
@@ -167,8 +149,6 @@ const Class = () => {
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
 
-  let countIdModule = 0;
-
   return (
     <div className={styles.class_container}>
       <div className={styles.class_class}>
@@ -176,7 +156,7 @@ const Class = () => {
         <div className={styles.class_title}>
           <IconVideoCam />
           <h1>
-            Aula {lesson?.module.order}.{lesson?.order} - {lesson?.name}
+            Aula {moduleOrder}.{lessonOrder} - {lesson?.name}
           </h1>
         </div>
         <div className={styles.class_video}>
@@ -208,11 +188,12 @@ const Class = () => {
         </div>
       </div>
       <div className={styles.class_class_list}>
-        <h1>{course.name.toUpperCase()}</h1>
+        <h1>{course.toUpperCase()}</h1>
         {modules &&
           modules.map((module, index) => {
             let lessons: any = [];
-            countIdModule++;
+            // countIdModule++;
+            // moduleOrder = index + 1;
 
             module.lessons.map((lesson, index) => {
               lessons.push({
@@ -232,7 +213,7 @@ const Class = () => {
               <Acordeon
                 key={index}
                 module={{
-                  id: countIdModule,
+                  id: index + 1,
                   name: module.moduleName,
                   blocked: false,
                   completed: module.moduleCompleted,
