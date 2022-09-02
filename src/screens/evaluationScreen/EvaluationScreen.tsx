@@ -115,7 +115,6 @@ const EvaluationScreen = () => {
       return (
         <div>
           <h1>Não tem permissão para acessar esta página</h1>
-          <Navigate to={"/dashboard"} replace={true} />
         </div>
       );
     }
