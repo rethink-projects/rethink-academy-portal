@@ -6,6 +6,7 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import EvaluationDatePicker from "./components/evaluationDatePicker/EvaluationDatePicker";
 import EvaluationSwitch from "./components/evaluationSwitch/EvaluationSwitch";
 import EvaluationTag from "./components/tags/EvaluationTag";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // style
 import styles from "./EvaluationScreen.module.css";
@@ -89,15 +90,24 @@ const EvaluationScreen = () => {
             </div>
 
             <div className={styles.evaluationScreen_table_container}>
-              <div className={styles.evaluationScreen_table_actions}>
-                <div className={styles.evaluationScreen_table_switch}>
-                  <EvaluationSwitch
-                    skillType={skillType}
-                    setSkillType={setSkillType}
-                  />
+              <div className={styles.evaluationScreen_table_outside}>
+                <div className={styles.evaluationScreen_table_actions}>
+                  <div className={styles.evaluationScreen_table_switch}>
+                    <EvaluationSwitch
+                      skillType={skillType}
+                      setSkillType={setSkillType}
+                    />
+                  </div>
+                  <div className={styles.evaluationScreen_table_tags}>
+                    <EvaluationTag tagType={tagType} setTagType={setTagType} />
+                  </div>
                 </div>
-                <div className={styles.evaluationScreen_table_tags}>
-                  <EvaluationTag tagType={tagType} setTagType={setTagType} />
+                <div className={styles.evaluationScreen_table_info}>
+                  <InfoOutlinedIcon />
+                  <p>
+                    Dê dois cliques para habilitar a edição da nota e Enter para
+                    salvar
+                  </p>
                 </div>
               </div>
               <div className={styles.evaluationScreen_table}>
