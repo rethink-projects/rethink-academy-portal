@@ -11,7 +11,7 @@ import TableContent, { noteType } from "./components/table/TableContent";
 import TextEditor from "./components/textEditor/TextEditor";
 import CategoryTag from "./components/CategoryTags/CategoryTag";
 import PrivacyToggle from "./components/PrivacyToggle/PrivacyToggle";
-import Modal from "../../components/Modal/Modal";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 
 // Icons
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -55,6 +55,8 @@ const NotesScreen = () => {
 
     return;
   }, [user]);
+
+  // console.log(user);
 
   // ----------------------------------------------------------------
 
@@ -216,14 +218,12 @@ const NotesScreen = () => {
         )}
       </div>
       {isModalOpen && (
-        <Modal
+        <DeleteModal
           onClickConfirm={deleteNote}
-          title="Aviso"
-          description="Tem certeza que deseja excluir a nota?"
+          title="Tem certeza que deseja excluir a nota?"
+          description="Ao confirmar essa ação, você não poderá recuperar esses dados."
           onClose={() => setModalOpen(false)}
-        >
-          {" "}
-        </Modal>
+        />
       )}
     </div>
   );
