@@ -61,7 +61,7 @@ const NotesScreen = () => {
   // ----------------------------------------------------------------
 
   const createNote = () => {
-    console.log("nova nota");
+    // console.log("nova nota");
     const newNote = {
       email: user.email,
       title: "Sem título",
@@ -77,7 +77,7 @@ const NotesScreen = () => {
 
   const deleteNote = () => {
     // if (window.confirm("Tem certeza que deseja excluir a nota?")) {
-    console.log("deletar");
+    // console.log("deletar");
     if (state) {
       axios.delete(`http://localhost:4000/api/note/${state.id}`);
     }
@@ -86,7 +86,7 @@ const NotesScreen = () => {
   };
 
   const saveNote = () => {
-    console.log("salvando");
+    // console.log("salvando");
     const updateNote = {
       title: title,
       categories: categories,
@@ -178,7 +178,7 @@ const NotesScreen = () => {
                 <CategoryTag
                   getCategories={(categories) => {
                     setCategories(categories);
-                    console.log(categories);
+                    // console.log(categories);
                   }}
                   sendCategories={state.categories}
                 />
