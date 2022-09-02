@@ -64,7 +64,7 @@ const NotesScreen = () => {
     console.log("nova nota");
     const newNote = {
       email: user.email,
-      title: "Título",
+      title: "Sem título",
       categories: [false, false, false],
       isPublic: false,
       content: "Por favor insira seu texto aqui...",
@@ -136,7 +136,7 @@ const NotesScreen = () => {
           <div className={style.noNotes_container}>
             <div className={style.noNotes_warning}>
               <img src={Images.infoNotes} alt="Ícone de informação" />
-              <p> O estagiário não fez nenhuma anotação até o momento</p>
+              <p>Você ainda não possui nenhuma anotação.</p>
             </div>
           </div>
         )}
@@ -155,7 +155,9 @@ const NotesScreen = () => {
                 <div>
                   <input
                     type="text"
-                    value={state?.title}
+                    value={
+                      state?.title != "Sem título" ? state?.title : "Título"
+                    }
                     placeholder="Título"
                     onChange={(e) => {
                       e.preventDefault();
