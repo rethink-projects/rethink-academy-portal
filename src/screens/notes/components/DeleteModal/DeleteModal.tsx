@@ -53,13 +53,13 @@ const DeleteModal = ({
               <SimpleButton
                 type="secondary"
                 text="Sim"
-                size="small"
+                size="block"
                 onClick={onClickConfirm}
               />
               <SimpleButton
                 type="primary"
                 text="Não"
-                size="small"
+                size="block"
                 onClick={onClose}
               />
             </div>

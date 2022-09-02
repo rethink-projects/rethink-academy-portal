@@ -78,7 +78,3 @@
   align-items: center;
   gap: 16px;
 }
-
-.modal_actions_buttons > button {
-  /* flex-grow: 1; */
-}
