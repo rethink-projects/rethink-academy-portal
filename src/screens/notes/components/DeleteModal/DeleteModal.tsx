@@ -16,12 +16,6 @@ const DeleteModal = ({
   id = "outside",
   onClickConfirm,
 }: modalProps) => {
-  const [disabledConfirm, setDisabledConfirm] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const disabledConfirmClass = disabledConfirm
-    ? style.modal_actions_confirm_disabled
-    : "";
-
   const handleOutsideClick = (e: any) => {
     if (e.target.id === id) {
       onClose();
