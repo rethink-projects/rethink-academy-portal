@@ -22,6 +22,7 @@ interface ModuleResponse {
   moduleId: string;
   moduleName: string;
   moduleCompleted: boolean;
+  moduleBlocked: boolean;
   lessons: LessonResponse[];
 }
 
@@ -127,8 +128,8 @@ const Class = () => {
         const responseModule = await api.get(
           `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
         );
+        console.log(responseModule);
         setModules(responseModule.data.modules);
-        // console.log(responseModule);
         setModuleOrder(responseModule.data.moduleOrder);
         setLessonOrder(responseModule.data.lessonOrder);
         setCourse(responseModule.data.nameCourse);
@@ -215,7 +216,7 @@ const Class = () => {
                 module={{
                   id: index + 1,
                   name: module.moduleName,
-                  blocked: false,
+                  blocked: module.moduleBlocked,
                   completed: module.moduleCompleted,
                   classes: lessons,
                 }}
