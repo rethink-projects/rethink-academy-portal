@@ -19,7 +19,7 @@ type EmblemCardProps = {
     | "TimeRegister"
     | "Welcome";
   onClickCollect?: () => void;
-  id?: string;
+  id?: "outside";
 };
 
 const EmblemCard = ({
