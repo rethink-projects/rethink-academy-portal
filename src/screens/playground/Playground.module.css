@@ -9,6 +9,7 @@
 .playground_container_inner {
   display: flex;
   flex-direction: column;
+  width: 1500px;
   align-items: center;
   margin-top: 15px;
   gap: 5px;

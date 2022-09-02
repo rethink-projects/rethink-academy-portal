@@ -1,0 +1,13 @@
+.header_table {
+  display: flex;
+  margin-bottom: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_title_table {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--color-secondary);
+}
