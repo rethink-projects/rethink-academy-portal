@@ -32,7 +32,7 @@ const TextEditor = ({
         value={value.content}
         onEditorChange={(newValue, editor) => {
           setValue(newValue);
-          getContent(value);
+          getContent(newValue);
         }}
         init={{
           resize: false,
