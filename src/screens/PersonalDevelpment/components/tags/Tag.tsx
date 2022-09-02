@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { dataDois } from "../chart/BarChart";
 import styles from "./Tag.module.css";
 
 export const headers = {
@@ -39,9 +40,11 @@ export const headers = {
 const EvaluationTag = ({
   tagType,
   setTagType,
+  setGraphData
 }: {
   tagType: "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT";
   setTagType: (value: "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT") => void;
+  setGraphData: (value: any) => void;
 }) => {
   // variaveis para controlar estado das tags ativo e inativo
 
@@ -64,7 +67,7 @@ const EvaluationTag = ({
   return (
     <div className={styles.tag_container}>
       {headers[header].map((item) => (
-        <button className={handleClass(item)} onClick={() => setSkill(item)}>
+        <button className={handleClass(item)} onClick={() => {setSkill(item); setGraphData(dataDois)}}>
           {item}
         </button>
       ))}

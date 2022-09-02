@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
-import BarChart from "./components/chart/BarChart";
+import CustomBarChart, { data } from "./components/chart/BarChart";
 import Switch from "./components/switch/Switch";
 import Tag from "./components/tags/Tag";
 import styles from "./PersonalDevelopmentScreen.module.css";
 
 const PersonalDevelopmentScreen = () => {
+  const [graphData, setGraphData] = useState<
+    {
+      name: string;
+      skill: number;
+      pv: number;
+    }[]
+  >([]);
   const [skillType, setSkillType] = useState(true);
   const [tagType, setTagType] = useState<
     "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT"
   >("ENGINEERING");
+
+  useEffect(() => {
+    setGraphData(data);
+  }, []);
 
   useEffect(() => {
     console.log(skillType);
@@ -29,10 +40,12 @@ const PersonalDevelopmentScreen = () => {
       <div className={styles.graph_container}>
         <div className={styles.graph_inner_container}>
           <p>Escolha uma habilidade para visualizar a evolução</p>
-          <Tag tagType={tagType} setTagType={setTagType} />
+          <Tag tagType={tagType} setTagType={setTagType} setGraphData={setGraphData} />
           <div className={styles.card_content_line} />
         </div>
-        <BarChart />
+        <CustomBarChart
+          graphData={graphData}
+        />
       </div>
     </div>
   );
