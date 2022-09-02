@@ -1,4 +1,5 @@
 import EmptyModal from "../../../../components/EmptyModal/EmptyModal";
+import styles from "./CardProgress.module.css"
 
 type TypeCardProgress = {
   onClose: VoidFunction;
@@ -7,7 +8,7 @@ type TypeCardProgress = {
 const CardProgress = ({ onClose }: TypeCardProgress) => {
   return (
     <EmptyModal onClose={onClose} id={""}>
-      <div>SEU CONTEÚDO AQUI</div>
+      <div className={styles.progress_container}>SEU CONTEÚDO AQUI</div>
     </EmptyModal>
   );
 };
