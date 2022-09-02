@@ -24,6 +24,8 @@ import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
 
 import info from "./infoIcon.png";
+
+import noGoals from "./NoGoals.svg";
 export const Images = {
   logo,
   checkbox,
@@ -50,6 +52,7 @@ export const Images = {
     LogoutIcon,
   },
   avatar: avatarImage,
+  noGoals,
 };
 
 export default Images;

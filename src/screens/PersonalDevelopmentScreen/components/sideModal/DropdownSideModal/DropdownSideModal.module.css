@@ -109,3 +109,33 @@
 .dropdown_content_checkbox{
     visibility: hidden;
 }
+
+.dropdown_noGoals_container{
+    margin-top: 56px;
+    padding: 0px 81px ;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.dropdown_noGoals_inner{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown_noGoals_inner img{
+    width: 48px;
+    height: 48px;
+}
+
+.dropdown_noGoals_inner p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--color-tertiary-active);
+}
