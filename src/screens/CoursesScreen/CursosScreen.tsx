@@ -142,7 +142,7 @@ const CursosScreenTeste = () => {
     func();
   }, []);
 
-  if (data.length === 0) return <div>loading...</div>;
+  // if (data.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -198,46 +198,47 @@ const CursosScreenTeste = () => {
           )}
         </div>
         <div className={styles.cards}>
-          {!intern
-            ? data.map(
-                (course: CourseResponse, index) =>
-                  course.trailId === trailId && (
-                    <CardCourse
-                      intern={intern}
-                      onClickIrAoCurso={() => console.log("Foi para o curso")}
-                      onClickColectEmblem={() =>
-                        console.log("Coletou o emblema")
-                      }
-                      onClickEditCourse={() => {
-                        setCourseId(course.id);
-                        setSelectedCourse(course);
-                        setEditCourseIsOpen(true);
-                      }}
-                      key={index}
-                      index={index}
-                      title={course.name}
-                      concluded={1}
-                      emblem={false} //falta ver
-                      type={course.type}
-                    />
-                  )
-              )
-            : coursesUser.map((course, index) => (
-                <CardCourse
-                  key={index}
-                  index={index}
-                  intern={intern}
-                  onClickIrAoCurso={() => console.log("Foi para o curso")}
-                  onClickColectEmblem={() => console.log("Coletou o emblema")}
-                  onClickEditCourse={() => setEditCourseIsOpen(true)}
-                  title={course.name}
-                  concluded={
-                    course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
-                  }
-                  emblem={true} //falta ver
-                  type={course.type}
-                />
-              ))}
+          {!intern &&
+            // ? data.map(
+            //     (course: CourseResponse, index) =>
+            //       course.trailId === trailId && (
+            //         <CardCourse
+            //           intern={intern}
+            //           onClickIrAoCurso={() => console.log("Foi para o curso")}
+            //           onClickColectEmblem={() =>
+            //             console.log("Coletou o emblema")
+            //           }
+            //           onClickEditCourse={() => {
+            //             setCourseId(course.id);
+            //             setSelectedCourse(course);
+            //             setEditCourseIsOpen(true);
+            //           }}
+            //           key={index}
+            //           index={index}
+            //           title={course.name}
+            //           concluded={1}
+            //           emblem={false} //falta ver
+            //           type={course.type}
+            //         />
+            //       )
+            //   )
+            // :
+            coursesUser.map((course, index) => (
+              <CardCourse
+                key={index}
+                index={index}
+                intern={intern}
+                onClickIrAoCurso={() => console.log("Foi para o curso")}
+                onClickColectEmblem={() => console.log("Coletou o emblema")}
+                onClickEditCourse={() => setEditCourseIsOpen(true)}
+                title={course.name}
+                concluded={
+                  course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
+                }
+                emblem={true} //falta ver
+                type={course.type}
+              />
+            ))}
 
           {editCourseIsOpen && (
             <CardAddCourse
