@@ -26,6 +26,12 @@
   justify-content: space-between;
 }
 
+.title_buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
 .title > p {
   margin-top: 11px;
 }

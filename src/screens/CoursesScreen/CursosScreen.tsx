@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
@@ -8,6 +8,10 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
+import CardProgress from "./Components/CardProgress/CardProgress";
+import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
+import IconPlan from "@mui/icons-material/CalendarTodayOutlined";
+import IconProgress from "@mui/icons-material/TrendingUpOutlined";
 
 interface UserLessons {
   completed: boolean;
@@ -45,6 +49,7 @@ interface Trail {
   description: string;
   weight: number;
   course?: CourseResponse[];
+  imageUrl: string;
 }
 
 interface Module {
@@ -72,33 +77,39 @@ export interface CourseResponse {
   learning: string;
   skills: string;
   trailId: string;
-  teacherId: string;
   modules: Module[];
-  teacher: UserResponse;
+  // teacherId: string;
+  teacherName: string;
+  teacherDescription: string;
+  imageTeacher: string;
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
 const CursosScreenTeste = () => {
-  // Usuário
+  const [intern, setIntern] = useState(false);
+
   const { user } = useAuth();
   const [courseId, setCourseId] = useState("");
+
+  const location = useLocation();
+  let trailId = location.pathname.replace("/trilhas/", "");
+
   const [selectedCourse, setSelectedCourse] = useState<CourseResponse>(
     {} as CourseResponse
   );
 
-  const [intern, setIntern] = useState(false);
-
   // Declaração de variáveis
-  const location = useLocation();
   const [trail, setTrail] = useState<Trail>({
     id: "",
     name: "",
     description: "",
     weight: 0,
+    imageUrl: "",
   });
-  let trilhaId = location.pathname.replace("/trilhas/", "");
 
   const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
+  const [syllabusIsOpen, setSyllabusIsOpen] = useState(false);
+  const [progressIsOpen, setProgressIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
@@ -113,8 +124,10 @@ const CursosScreenTeste = () => {
         //   : setIntern(false);
 
         const responseCourses = await api.get(
-          `/user/watched/${user.email}?trailId=${trilhaId}`
+          `/user/watched/${user.email}?trailId=${trailId}`
         );
+
+        setTrail(responseCourses.data.maxLessons[0].trail);
         setCoursesUser(responseCourses.data.maxLessons);
       };
       func();
@@ -123,31 +136,13 @@ const CursosScreenTeste = () => {
 
   useEffect(() => {
     const func = async () => {
-      const response = await api.get(`/course/`);
-      const responseTrail = await api.get(`/trail/${trilhaId}`);
-      setTrail(responseTrail.data);
-
-      setData(response.data.courses);
+      const responseCourse = await api.get(`/course`);
+      setData(responseCourse.data.course);
     };
     func();
   }, []);
-  // console.log(trail);
 
-  // Convertendo a primeira letra da trilha para maiúsculo
-  // let trailName = trail.name;
-  // console.log(trailName);
-
-  // trailName = trailName[0].toUpperCase() + trailName.slice(1);
-  // trailName = trailName.toUpperCase();
-  // let letra = trailName[0].toUpperCase();
-  // console.log(letra);
-  // console.log(trailName);
-
-  // selectedTrack = selectedTrack[0].toUpperCase() + selectedTrack.slice(1);
-
-  // const trail = trilha_id === 3 ? "Engenharia" : trilha_id
-
-  // const intern = currentUser.role === "STUDENT" ? true : false;
+  // if (data.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -162,59 +157,88 @@ const CursosScreenTeste = () => {
         <div className={styles.title}>
           <p>{`Programa de Cursos | ${trail.name}`}</p>
           {!intern && (
-            <ButtonWithIcon
-              onClick={() => setAddCourseIsOpen(true)}
-              icon={<AddCircleOutlineIcon />}
-              width={218}
-              position="right"
-              type="primary"
-              text="Adicionar curso"
-              size="medium"
-            />
+            <div className={styles.title_buttons}>
+              <ButtonWithIcon
+                onClick={() => setSyllabusIsOpen(true)}
+                icon={<IconPlan />}
+                width={237}
+                position="right"
+                type="outline"
+                text="Plano de Atividades"
+                size="medium"
+              />
+              <ButtonWithIcon
+                onClick={() => setProgressIsOpen(true)}
+                icon={<IconProgress />}
+                width={169}
+                position="right"
+                type="outline"
+                text="Progresso"
+                size="medium"
+              />
+              <ButtonWithIcon
+                onClick={() => setAddCourseIsOpen(true)}
+                icon={<AddCircleOutlineIcon />}
+                width={218}
+                position="right"
+                type="primary"
+                text="Adicionar curso"
+                size="medium"
+              />
+            </div>
+          )}
+          {syllabusIsOpen && (
+            <CardSyllabus onClose={() => setSyllabusIsOpen(false)} />
+          )}
+          {progressIsOpen && (
+            <CardProgress onClose={() => setProgressIsOpen(false)} />
           )}
           {addCourseIsOpen && (
             <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />
           )}
         </div>
         <div className={styles.cards}>
-          {!intern
-            ? data.map(
-                (course: CourseResponse, index) =>
-                  course.trailId === trilhaId && (
-                    <CardCourse
-                      intern={intern}
-                      onClickIrAoCurso={() => console.log("Foi para o curso")}
-                      onClickColectEmblem={() =>
-                        console.log("Coletou o emblema")
-                      }
-                      onClickEditCourse={() => {
-                        setCourseId(course.id);
-                        setSelectedCourse(course);
-                        setEditCourseIsOpen(true);
-                      }}
-                      key={index}
-                      title={course.name}
-                      concluded={1}
-                      emblem={false}
-                      type={course.type}
-                    />
-                  )
-              )
-            : coursesUser.map((course, index) => (
-                <CardCourse
-                  key={index}
-                  intern={intern}
-                  onClickIrAoCurso={() => console.log("Foi para o curso")}
-                  onClickColectEmblem={() => console.log("Coletou o emblema")}
-                  onClickEditCourse={() => setEditCourseIsOpen(true)}
-                  title={course.name}
-                  concluded={
-                    course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
-                  }
-                  emblem={true} //falta ver
-                  type={course.type}
-                />
-              ))}
+          {!intern &&
+            // ? data.map(
+            //     (course: CourseResponse, index) =>
+            //       course.trailId === trailId && (
+            //         <CardCourse
+            //           intern={intern}
+            //           onClickIrAoCurso={() => console.log("Foi para o curso")}
+            //           onClickColectEmblem={() =>
+            //             console.log("Coletou o emblema")
+            //           }
+            //           onClickEditCourse={() => {
+            //             setCourseId(course.id);
+            //             setSelectedCourse(course);
+            //             setEditCourseIsOpen(true);
+            //           }}
+            //           key={index}
+            //           index={index}
+            //           title={course.name}
+            //           concluded={1}
+            //           emblem={false} //falta ver
+            //           type={course.type}
+            //         />
+            //       )
+            //   )
+            // :
+            coursesUser.map((course, index) => (
+              <CardCourse
+                key={index}
+                index={index}
+                intern={intern}
+                onClickIrAoCurso={() => console.log("Foi para o curso")}
+                onClickColectEmblem={() => console.log("Coletou o emblema")}
+                onClickEditCourse={() => setEditCourseIsOpen(true)}
+                title={course.name}
+                concluded={
+                  course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
+                }
+                emblem={true} //falta ver
+                type={course.type}
+              />
+            ))}
 
           {editCourseIsOpen && (
             <CardAddCourse
