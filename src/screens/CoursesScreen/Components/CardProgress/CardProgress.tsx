@@ -6,7 +6,7 @@ type TypeCardProgress = {
 
 const CardProgress = ({ onClose }: TypeCardProgress) => {
   return (
-    <EmptyModal onClose={onClose} id={""}>
+    <EmptyModal onClose={onClose} >
       <div>SEU CONTEÚDO AQUI</div>
     </EmptyModal>
   );
