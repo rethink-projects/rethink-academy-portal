@@ -1,9 +1,35 @@
 .individual_card_container {
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
 
+  gap: 16px;
+  width: 342px;
+  height: 48px;
+}
+
+.individual_card_container img {
   width: 48px;
   height: 48px;
 
-  background-color: red;
+  border: 1px solid var(--color-icon-background);
+  border-radius: 100%;
+}
+
+.right_side {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 16px;
+  align-items: center;
+}
+
+.right_side span {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-secondary-hover);
+}
+.right_side span:first-child {
+  width: 278px;
 }
