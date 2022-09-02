@@ -7,14 +7,15 @@ import Checkbox from "../../../../../components/Checkbox/Checkbox";
 
 // imitando banco de dados
 type GoalsDataType = {
+  id: string;
+  userId: string;
   name: string;
   isOpen: boolean;
-  id: number;
   goalsIntern: GoalsInternType[];
 };
 
 type GoalsInternType = {
-  id: number;
+  id: string;
   title: string;
   conclude: boolean;
 };
@@ -23,40 +24,41 @@ const goalsData = [
   {
     name: "Avaliação de março",
     isOpen: false,
-    id: 1,
+    userId: "1",
+    id: "1",
     goalsIntern: [
       {
-        id: 1,
+        id: "1",
         title: "Estudar Acesssibilidade",
         conclude: true,
       },
       {
-        id: 2,
+        id: "2",
         title: "Aplicar liderança",
         conclude: true,
       },
       {
-        id: 3,
+        id: "3",
         title: "Finalizar protótipo",
         conclude: false,
       },
       {
-        id: 4,
+        id: "4",
         title: "Meta 04",
         conclude: false,
       },
       {
-        id: 5,
+        id: "5",
         title: "Meta 05",
         conclude: false,
       },
       {
-        id: 6,
+        id: "6",
         title: "Meta 06",
         conclude: false,
       },
       {
-        id: 7,
+        id: "7",
         title: "Meta 07",
         conclude: false,
       },
@@ -65,65 +67,66 @@ const goalsData = [
   {
     name: "Avaliação de outro mes",
     isOpen: false,
-    id: 2,
+    userId: "2",
+    id: "2",
     goalsIntern: [
       {
-        id: 1,
+        id: "1",
         title: "Estudar Acesssibilidade",
         conclude: true,
       },
       {
-        id: 2,
+        id: "2",
         title: "Aplicar liderança",
         conclude: true,
       },
       {
-        id: 3,
+        id: "3",
         title: "Finalizar protótipo",
         conclude: false,
       },
       {
-        id: 4,
+        id: "4",
         title: "Meta 04",
         conclude: false,
       },
       {
-        id: 5,
+        id: "5",
         title: "Meta 05",
         conclude: false,
       },
       {
-        id: 6,
+        id: "6",
         title: "Meta 06",
         conclude: false,
       },
       {
-        id: 7,
+        id: "7",
         title: "Meta 07",
         conclude: false,
       },
       {
-        id: 8,
+        id: "8",
         title: "Finalizar protótipo",
         conclude: false,
       },
       {
-        id: 9,
+        id: "9",
         title: "Meta 04",
         conclude: false,
       },
       {
-        id: 10,
+        id: "10",
         title: "Meta 05",
         conclude: false,
       },
       {
-        id: 11,
+        id: "11",
         title: "Meta 06",
         conclude: false,
       },
       {
-        id: 12,
+        id: "12",
         title: "Meta 07",
         conclude: false,
       },
@@ -132,40 +135,41 @@ const goalsData = [
   {
     name: "Avaliação de outro mes ainda",
     isOpen: false,
-    id: 3,
+    userId: "3",
+    id: "3",
     goalsIntern: [
       {
-        id: 1,
+        id: "1",
         title: "Estudar Acesssibilidade",
         conclude: true,
       },
       {
-        id: 2,
+        id: "2",
         title: "Aplicar liderança",
         conclude: true,
       },
       {
-        id: 3,
+        id: "3",
         title: "Finalizar protótipo",
         conclude: false,
       },
       {
-        id: 4,
+        id: "4",
         title: "Meta 04",
         conclude: false,
       },
       {
-        id: 5,
+        id: "5",
         title: "Meta 05",
         conclude: false,
       },
       {
-        id: 6,
+        id: "6",
         title: "Meta 06",
         conclude: false,
       },
       {
-        id: 7,
+        id: "7",
         title: "Meta 07",
         conclude: false,
       },
@@ -176,7 +180,7 @@ const goalsData = [
 const DropdownSideModal = () => {
   const [goals, setGoals] = useState<GoalsDataType[]>(goalsData);
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: string) => {
     setGoals(() =>
       goals.map((goal: any) => {
         if (goal.id === id) {

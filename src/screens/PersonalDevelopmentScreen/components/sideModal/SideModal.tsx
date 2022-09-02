@@ -3,6 +3,7 @@ import styles from "./SideModal.module.css";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { style } from "@mui/system";
 import DropdownSideModal from "./DropdownSideModal/DropdownSideModal";
+import { useAuth } from "../../../../context/AuthContext";
 
 type modalProps = {
   onClose: VoidFunction;
@@ -19,6 +20,8 @@ const SideModal = ({ onClose = () => {} }: modalProps) => {
       onClose();
     }
   };
+
+  const { user } = useAuth();
 
   // parte para mostrar o onClick do confirm.
   const handleClickConfirm = () => {
