@@ -23,7 +23,7 @@ function PlaygroundScreen() {
         ></SimpleButton>
         {emblemCardOpen && (
           <EmblemCard
-            content="Você concluiu um curso da Trilha Design e merece um emblema!"
+            content="Você concluiu um curso da Trilha Desenvolvimento Pessoal e merece um emblema!"
             badge="Academy"
             onClickCollect={() => setEmblemCardOpen(false)}
           />
