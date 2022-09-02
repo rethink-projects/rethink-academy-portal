@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 // components
@@ -11,29 +11,43 @@ import EvaluationTag from "./components/tags/EvaluationTag";
 import styles from "./EvaluationScreen.module.css";
 import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-// type getUserType = {
-
-// }
+type getUserType = {
+  id: string;
+  email: string;
+  name: string;
+  surname: string;
+  role: string;
+  main: string;
+  profile: null;
+  note: any;
+  level: number;
+  exp: number;
+};
 
 const EvaluationScreen = () => {
   const { user } = useAuth();
 
-  const [userByEmail, setUserByEmail] = useState({});
+  const [userByEmail, setUserByEmail] = useState<getUserType>();
 
-  // const getUser = async (email: string) => {
-  //   try {
-  //     const userData = await axios.get(
-  //       `http://localhost:4000/api/user/${email}`
-  //     );
-  //     setUserByEmail(userData.data);
-  //     return;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getUser = async () => {
+    try {
+      const userData = await axios.get(
+        `http://localhost:4000/api/user/${user.email}`
+      );
+      setUserByEmail(userData.data);
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // if(userByEmail.role ===)
+  useEffect(() => {
+    getUser();
+  }, [user]);
+
+  console.log(userByEmail);
 
   const [skillType, setSkillType] = useState(true);
 
@@ -47,50 +61,71 @@ const EvaluationScreen = () => {
 
   const [month, setMonth] = useState(returnData);
 
-  return (
-    <div className={styles.evaluationScreen_container_extern}>
-      <div className={styles.evaluationScreen_container}>
-        <div className={styles.evaluationScreen_breadcrumb}>
-          <Breadcrumb
-            breadcrumbItems={[
-              { title: "Home", link: "/" },
-              { title: "Avaliações", link: "/dashboard/avaliacao" },
-            ]}
-          />
-        </div>
-
-        <div className={styles.evaluationScreen_header}>
-          <div className={styles.evaluationScreen_text}>
-            <h1>Avaliações</h1>
-            <p>
-              Aqui você consegue postar e editar as avaliações mensais de cada
-              estagiário.
-            </p>
-          </div>
-          <div className={styles.evaluationScreen_dropdown}>
-            <EvaluationDatePicker month={month} setMonth={setMonth} />
-          </div>
-        </div>
-
-        <div className={styles.evaluationScreen_table_container}>
-          <div className={styles.evaluationScreen_table_actions}>
-            <div className={styles.evaluationScreen_table_switch}>
-              <EvaluationSwitch
-                skillType={skillType}
-                setSkillType={setSkillType}
+  if (userByEmail) {
+    if (userByEmail!.role === "EMBASSADOR") {
+      return (
+        <div className={styles.evaluationScreen_container_extern}>
+          <div className={styles.evaluationScreen_container}>
+            <div className={styles.evaluationScreen_breadcrumb}>
+              <Breadcrumb
+                breadcrumbItems={[
+                  { title: "Home", link: "/" },
+                  { title: "Avaliações", link: "/dashboard/avaliacao" },
+                ]}
               />
             </div>
-            <div className={styles.evaluationScreen_table_tags}>
-              <EvaluationTag tagType={tagType} setTagType={setTagType} />
+
+            <div className={styles.evaluationScreen_header}>
+              <div className={styles.evaluationScreen_text}>
+                <h1>Avaliações</h1>
+                <p>
+                  Aqui você consegue postar e editar as avaliações mensais de
+                  cada estagiário.
+                </p>
+              </div>
+              <div className={styles.evaluationScreen_dropdown}>
+                <EvaluationDatePicker month={month} setMonth={setMonth} />
+              </div>
+            </div>
+
+            <div className={styles.evaluationScreen_table_container}>
+              <div className={styles.evaluationScreen_table_actions}>
+                <div className={styles.evaluationScreen_table_switch}>
+                  <EvaluationSwitch
+                    skillType={skillType}
+                    setSkillType={setSkillType}
+                  />
+                </div>
+                <div className={styles.evaluationScreen_table_tags}>
+                  <EvaluationTag tagType={tagType} setTagType={setTagType} />
+                </div>
+              </div>
+              <div className={styles.evaluationScreen_table}>
+                <BasicEditingGrid
+                  role={tagType}
+                  skill={skillType}
+                  month={month}
+                />
+              </div>
             </div>
           </div>
-          <div className={styles.evaluationScreen_table}>
-            <BasicEditingGrid role={tagType} skill={skillType} month={month} />
-          </div>
         </div>
+      );
+    } else {
+      return (
+        <div>
+          <h1>Não tem permissão para acessar esta página</h1>
+          <Navigate to={"/dashboard"} replace={true} />
+        </div>
+      );
+    }
+  } else {
+    return (
+      <div>
+        <h1>Carregando</h1>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default EvaluationScreen;
