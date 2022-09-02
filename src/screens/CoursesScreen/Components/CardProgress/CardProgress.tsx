@@ -15,7 +15,7 @@ const CardProgress = ({ onClose }: TypeCardProgress) => {
   const [course, setCourse] = useState("Nome do curso");
   const [intern, setIntern] = useState("");
   return (
-    <EmptyModal onClose={() => ""} id={""}>
+    <EmptyModal onClose={() => ""}>
       <div className={styles.progress_container}>
         <div className={styles.title}>
           Progresso
