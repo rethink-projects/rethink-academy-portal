@@ -44,6 +44,17 @@ import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
+
+import Academy from "./Academy_Badge.svg";
+import AcademyHat from "./AcademyHat_Badge.svg";
+import Design from "./Design_Badge.svg";
+import Engineering from "./Engineering_Badge.svg";
+import Goals from "./Goals_Badge.svg";
+import Product from "./Product_Badge.svg";
+import TimeRegister from "./TimeRegister_Badge.svg";
+import Welcome from "./Welcome_Badge.svg";
+import starsGif from "./starsGif.gif";
+
 export const Images = {
   logo,
   checkbox,
@@ -91,6 +102,17 @@ export const Images = {
     three,
   },
   avatar: avatarImage,
+  badge: {
+    Academy,
+    AcademyHat,
+    Design,
+    Engineering,
+    Goals,
+    Product,
+    TimeRegister,
+    Welcome,
+  },
+  starsGif,
 };
 
 export default Images;
