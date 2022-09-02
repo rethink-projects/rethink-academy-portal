@@ -194,24 +194,28 @@ const NotesScreen = () => {
 
             <div className={style.containerBottom}>
               <div className={style.saveDeleteButtons}>
-                <ButtonWithIcon
-                  type="primary"
-                  size="small"
-                  text="Salvar"
-                  width={134}
-                  position="left"
-                  icon={<SaveOutlinedIcon />}
-                  onClick={saveNote}
-                />
-                <ButtonWithIcon
-                  type="secondary"
-                  size="small"
-                  text="Excluir"
-                  width={134}
-                  position="left"
-                  icon={<DeleteOutlineOutlinedIcon />}
-                  onClick={() => setModalOpen(true)}
-                />
+                <div className={style.saveButton}>
+                  <ButtonWithIcon
+                    type="primary"
+                    size="small"
+                    text="Salvar"
+                    width={134}
+                    position="left"
+                    icon={<SaveOutlinedIcon />}
+                    onClick={saveNote}
+                  />
+                </div>
+                <div className={style.deleteButton}>
+                  <ButtonWithIcon
+                    type="secondary"
+                    size="small"
+                    text="Excluir"
+                    width={134}
+                    position="left"
+                    icon={<DeleteOutlineOutlinedIcon />}
+                    onClick={() => setModalOpen(true)}
+                  />
+                </div>
               </div>
             </div>
           </div>
