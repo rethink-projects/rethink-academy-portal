@@ -4,7 +4,7 @@ type SimpleButtonProps = {
   type?: "primary" | "secondary" | "outline";
   text: string;
   onClick: () => void;
-  size?: "big" | "small" | "medium";
+  size?: "big" | "small" | "medium" | "block";
 };
 
 const SimpleButton = ({

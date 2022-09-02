@@ -23,25 +23,48 @@ import academyHat from "./academyHat.svg";
 import lampIcon from "./lampIcon.svg";
 import dpIcon from "./dpIcon.svg";
 import infoNotes from "./infoIcon_notesScreen.svg";
+import trashIcon from "./trashIcon.svg";
+import editBlackIcon from "./editBlackIcon.svg";
+import one from "./lineOne.png";
+import two from "./lineTwo.png";
+import three from "./lineThree.png";
+import homeBackground from "./homeBackground.jpg";
+import deleteIcon from "./deleteIcon.svg";
+import chatIcon from "./chatIcon.svg";
+import arrowDownIcon from "./arrowDownIcon.svg";
 
-import LastGoalsMedal from "./LastGoalsMedal.svg";
-import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
-import LastGoalsFlag from "./LastGoalsFlag.svg";
+import arrowTask from "./arrowTask.svg";
+import calendarIcon from "./calendarIcon.svg";
+import eyeIcon from "./eyeIcon.svg";
+
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
+import level_Icon from "./level_Icon.svg";
+import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
+import LastGoalsMedal from "./LastGoalsMedal.svg";
+import LastGoalsFlag from "./LastGoalsFlag.svg";
 
+import Emblem from "./Emblem.png";
+import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 
 import HardSkillsIconNote from "./HardSkillsIconNote.svg";
 import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
 import DPIconNote from "./DPIconNote.svg";
 
+import chat from "./chat.png";
 export const Images = {
   logo,
   checkbox,
   arrow,
+  Emblem,
+  LastGoalsMedal,
+  LastGoalsFlag,
+  chat,
+  Emblem_Disable,
+  LastGoalsAmpoule,
   info,
   google: googleIcon,
   ratRa,
@@ -52,7 +75,12 @@ export const Images = {
   lamp: lampIcon,
   desenvolvimentoPessoal: dpIcon,
   infoNotes,
+  arrowTask,
+  homeBackground,
   icons: {
+    calendarIcon,
+    eyeIcon,
+    level_Icon,
     left: IconLeft,
     right: IconRight,
     search,
@@ -68,10 +96,17 @@ export const Images = {
     save,
     trash,
     LogoutIcon,
+    trashIcon,
+    editBlackIcon,
+    deleteIcon,
+    chatIcon,
+    arrowDownIcon,
   },
-  LastGoalsMedal,
-  LastGoalsAmpoule,
-  LastGoalsFlag,
+  lines: {
+    one,
+    two,
+    three,
+  },
   avatar: avatarImage,
   HardSkillsIconNote,
   SoftSkillsIconNote,

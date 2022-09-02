@@ -1,3 +1,8 @@
+.inputText_containerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .inputText_containerLarge,
 .inputText_containerDefault,
 .inputText_containerSmall,
@@ -42,6 +47,15 @@
   font-size: 14px;
 }
 
+.inputText_inputBlock {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 14px;
+  background-color: #f9f9f9;
+  border: 1px solid var(--color-tertiary-hover);
+  border-radius: 4px;
+}
 .inputText_inputLarge,
 .inputText_inputDefault,
 .inputText_inputSmall,
@@ -51,7 +65,7 @@
   box-sizing: border-box;
   gap: 14px;
   width: 329px;
-  background-color: #f9f9f9;
+  background-color: transparent;
   border: 1px solid var(--color-tertiary-hover);
   border-radius: 4px;
 }
@@ -61,6 +75,7 @@
   height: 64px;
 }
 
+.inputText_inputBlock,
 .inputText_inputDefault {
   padding: 0px 12px;
   height: 48px;
@@ -80,9 +95,11 @@
 
 .inputText_inputLarge:focus,
 .inputText_inputDefault:focus,
+.inputText_inputBlock:focus,
 .inputText_inputSmall:focus,
 .inputText_inputMicro:focus,
 .inputText_inputLarge:focus-within,
+.inputText_inputBlock:focus-within,
 .inputText_inputDefault:focus-within,
 .inputText_inputSmall:focus-within,
 .inputText_inputMicro:focus-within {
@@ -92,6 +109,7 @@
 }
 
 .inputText_inputLarge:hover,
+.inputText_inputBlock:hover,
 .inputText_inputDefault:hover,
 .inputText_inputSmall:hover,
 .inputText_inputMicro:hover {
@@ -136,7 +154,7 @@
   outline: none;
   box-sizing: border-box;
   border: none;
-  background-color: #f9f9f9;
+  background-color: transparent;
   color: var(--color-secondary);
 }
 

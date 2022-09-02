@@ -1,151 +1,142 @@
 .register_container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 368px;
-    height: 426px;
-    background-color: var(--color-base);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 368px;
+  height: 426px;
+  /* background-color: var(--color-base); */
 }
 
 .register_title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 32px;
 }
 
 .register_title_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background-color: var(--color-secondary);
-    color: white;
-    border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-secondary);
+  color: white;
+  border-radius: 4px;
 }
 
 .register_title_icon svg {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .register_title h1 {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 }
 
 .register_content {
-    border: 1px solid var(--color-opacity-1);
-    border-radius: 4px 4px 0px 0px;
-    height: 308px;
+  border: 1px solid var(--color-opacity-1);
+  border-radius: 4px 4px 0px 0px;
+  height: 308px;
 }
 
 .register_header {
-    display: flex;
-    align-items: center;
-    height: 92px;
-    padding-left: 16px;
-    padding-right: 16px;
-} 
+  display: flex;
+  align-items: center;
+  height: 92px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 
 .register_header_infos {
-    display: flex;
-    gap: 160px;
-} 
+  display: flex;
+  gap: 160px;
+}
 
 .register_header_infos_iconsHours {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .register_header_infos_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: #F8E0E1;
-    border-radius: 4px;
-    color: #DA1E28;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: #f8e0e1;
+  border-radius: 4px;
+  color: #da1e28;
 }
 
 .register_header_infos_hoursRegisters {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    width: 74px;
-    gap: 4px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 74px;
+  gap: 4px;
 }
 
 .register_header_infos_hours {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 
 .register_header_infos_hoursDone {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--color-secondary);
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-secondary);
 }
 
 .register_header_infos_hoursTotal {
-    font-weight: bold;
-    color: var(--color-tertiary-active);
+  font-weight: bold;
+  color: var(--color-tertiary-active);
 }
 
 .register_header_infos_register {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    color: var(--color-tertiary-active);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-tertiary-active);
 }
 
 .register_header_infos_arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 .register_header_infos_arrow svg {
-    color: var(--color-tertiary-active);
+  color: var(--color-tertiary-active);
 }
 
 .register_body {
-    padding: 16px 4px 16px 16px;
-} 
+  padding: 16px 4px 16px 16px;
+}
 
 .register_body_title {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .register_body_title p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    color: var(--color-tertiary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--color-tertiary);
 }
 
 .register_body_title_time {
-    margin-right: 6px;
+  margin-right: 6px;
 }
 
 .register_body_infos {
-    height: 170px;
-    overflow: auto;
-    padding-right: 6px;
-}
-
-.register_body_infos::-webkit-scrollbar {
-    width: 6px;
-}
-  
-.register_body_infos::-webkit-scrollbar-thumb {
-    background: var(--color-icon-background);
-    border-radius: 50px;  
+  height: 170px;
+  overflow: auto;
+  padding-right: 6px;
 }
