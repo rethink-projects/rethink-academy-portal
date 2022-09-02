@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./DropdownSideModal.module.css";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
-import { GlobalStyles } from "@mui/styled-engine";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import Checkbox from "../../../../../components/Checkbox/Checkbox";
 import axios from "axios";
 import { useAuth } from "../../../../../context/AuthContext";
 import Images from "../../../../../assets";
 
-// imitando banco de dados
-type GoalsDataType = {
-  id: string;
-  userId: string;
-  name: string;
-  goalsIntern: GoalsInternType[];
-};
-
 type GoalsType = {
   id: string;
   userId: string;
   name: string;
-  isOpen: boolean;
-  goalsIntern: GoalsInternType[];
+  isOpen?: boolean;
+  goal: GoalsInternType[];
 };
 
 type GoalsInternType = {
@@ -43,31 +34,10 @@ type GetUserType = {
   exp: number;
 };
 
-// const goalsData = [
-//   {
-//     name: "Avaliação de março",
-//     isOpen: false,
-//     userId: "1",
-//     id: "1",
-//     goalsIntern: [
-//       {
-//         id: "1",
-//         title: "Estudar Acesssibilidade",
-//         conclude: true,
-//       },
-//       {
-//         id: "2",
-//         title: "Aplicar liderança",
-//         conclude: true,
-//       },
-//     ],
-//   },
-// ];
-
 const DropdownSideModal = () => {
   const { user } = useAuth();
-
   const [userByEmail, setUserByEmail] = useState<GetUserType>();
+  const [goals, setGoals] = useState<GoalsType[]>([]);
 
   const getUser = async () => {
     try {
@@ -91,16 +61,26 @@ const DropdownSideModal = () => {
         const goalsGet = await axios.get(
           `http://localhost:4000/api/goalList/${userByEmail.email}`
         );
-        setGoalsData(goalsGet.data);
-        console.log(goalsGet.data);
-        console.log({ goalsData });
+        if (goalsGet.data) {
+          const goalsData = goalsGet.data.map((goal: GoalsType) => ({
+            ...goal,
+            isOpen: false,
+          }));
+          setGoals(goalsData);
+        }
       }
-      // console.log({ goalsData });
-      // goalsData &&
-      //   goalsData.map((goalData) => {
-      //     setGoals([{ ...goalData, isOpen: false }]);
-      //   });
-      // console.log({ goals });
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateGoal = async (id: string, conclude?: boolean, title?: string) => {
+    try {
+      const goalsGet = await axios.patch(
+        `http://localhost:4000/api/goal/${id!}`,
+        { title, conclude }
+      );
       return;
     } catch (error) {
       console.log(error);
@@ -110,18 +90,6 @@ const DropdownSideModal = () => {
   useEffect(() => {
     userByEmail && getGoals();
   }, [userByEmail]);
-
-  const [goalsData, setGoalsData] = useState<GoalsDataType[]>();
-
-  // useEffect(() => {
-  //   goalsData &&
-  //     goalsData.map((goalData) => {
-  //       setGoals([{ ...goalData, isOpen: false }]);
-  //     });
-  // }, [goalsData]);
-
-  const [goals, setGoals] = useState<GoalsType[]>();
-  // console.log({ goals });
 
   const handleClick = (id: string) => {
     goals &&
@@ -150,8 +118,9 @@ const DropdownSideModal = () => {
             let toogleIsOpen = goal.isOpen;
             return {
               ...goal,
-              goalsIntern: goal.goalsIntern.map((goalsIntern: any) => {
+              goal: goal.goal.map((goalsIntern: any) => {
                 if (goalsIntern.id === props.id) {
+                  updateGoal(goalsIntern.id, props.props, goalsIntern.title);
                   return {
                     ...goalsIntern,
                     conclude: props.props,
@@ -172,7 +141,7 @@ const DropdownSideModal = () => {
       );
   };
 
-  if (goals) {
+  if (goals.length > 0) {
     return (
       <div>
         {goals.map((goal: GoalsType) => (
@@ -207,24 +176,20 @@ const DropdownSideModal = () => {
               <div className={styles.dropdown_content_progress}>
                 <div className={styles.dropdown_content_quantity}>
                   <p>
-                    {
-                      goal.goalsIntern.filter((item) => item.conclude === true)
-                        .length
-                    }
+                    {goal.goal.filter((item) => item.conclude === true).length}
                   </p>
-                  <span>/{goal.goalsIntern.length} </span>
+                  <span>/{goal.goal.length} </span>
                 </div>
                 <ProgressBar
                   width={306}
-                  totalValue={goal.goalsIntern.length}
+                  totalValue={goal.goal.length}
                   relativeValue={
-                    goal.goalsIntern.filter((item) => item.conclude === true)
-                      .length
+                    goal.goal.filter((item) => item.conclude === true).length
                   }
                 />
               </div>
               {goal.isOpen &&
-                goal.goalsIntern.map((goalsIntern) => (
+                goal.goal.map((goalsIntern) => (
                   <Checkbox
                     size="small"
                     name={goalsIntern.title}
