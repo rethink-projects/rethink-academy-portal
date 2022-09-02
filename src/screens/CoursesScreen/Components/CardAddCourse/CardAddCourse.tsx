@@ -291,7 +291,7 @@ const CardAddCourse = ({
                 onChange={(e) => handlerOnChange(e, "avatar")}
               />
               <p className={styles.obs}>
-                Adicione o link para utilizar a imagem que deseja utilizar
+                Adicione o link para inserir a imagem que deseja utilizar
               </p>
             </div>
           </>
