@@ -187,3 +187,7 @@
   cursor: pointer;
   margin-left: 16px;
 }
+
+.btnHours:hover {
+  background: var(--color-secondary-hover);
+}
