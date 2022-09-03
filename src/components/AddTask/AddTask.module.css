@@ -66,7 +66,6 @@
 
 .addCircle>svg>path {
   fill: var(--color-tertiary-active);
-  <<<<<<< HEAD
 }
 
 .iconBtn {

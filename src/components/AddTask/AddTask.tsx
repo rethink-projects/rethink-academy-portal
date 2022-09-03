@@ -22,9 +22,6 @@ function AddTask() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.container_title}>
-        <p className={styles.title}>Registro de Tarefas</p>
-      </div>
       <div className={styles.container_noactive}>
         {!active && (
           <>
