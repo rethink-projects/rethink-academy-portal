@@ -112,6 +112,7 @@ const CursosScreenTeste = () => {
   const [progressIsOpen, setProgressIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [userByEmail, setUserByEMail] = useState<any>();
 
   const [coursesUser, setCoursesUser] = useState<UserLessons[]>([]);
 
@@ -119,6 +120,7 @@ const CursosScreenTeste = () => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
+
         // responseByEmail.data.user.role === "STUDENT"
         //   ? setIntern(true)
         //   : setIntern(false);
@@ -129,6 +131,7 @@ const CursosScreenTeste = () => {
 
         setTrail(responseCourses.data.maxLessons[0].trail);
         setCoursesUser(responseCourses.data.maxLessons);
+        setUserByEMail(responseByEmail.data.user);
       };
       func();
     }
@@ -188,7 +191,10 @@ const CursosScreenTeste = () => {
             </div>
           )}
           {syllabusIsOpen && (
-            <CardSyllabus onClose={() => setSyllabusIsOpen(false)} />
+            <CardSyllabus
+              user={userByEmail?.role.toLowerCase()}
+              onClose={() => setSyllabusIsOpen(false)}
+            />
           )}
           {progressIsOpen && (
             <CardProgress onClose={() => setProgressIsOpen(false)} />

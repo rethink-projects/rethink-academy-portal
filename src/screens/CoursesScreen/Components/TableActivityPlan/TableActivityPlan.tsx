@@ -29,70 +29,12 @@ import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Stack } from "@mui/material";
 
-// const TimeLine = () => {
-//   return <div></div>;
-// };
-
-// export default TimeLine;
-
-type StageType = {
-  id: string;
-  stage: string;
-  start: Date;
-  finish: Date;
-  content: string;
-  status: string;
-  isNew: boolean;
+type TableActivityPlanType = {
+  user?: string;
+  onClose?: VoidFunction;
 };
-
-const initialRows: GridRowsProp = [
-  {
-    id: randomId(),
-    stage: randomTraderName(),
-    period: 25,
-    content: 20,
-    status: "Finalizado",
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    stage: randomTraderName(),
-    period: 36,
-    content: 20,
-    status: "Finalizado",
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    stage: randomTraderName(),
-    period: 19,
-    content: 20,
-    status: "Finalizado",
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    stage: randomTraderName(),
-    period: 28,
-    content: 20,
-    status: "Finalizado",
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    stage: randomTraderName(),
-    period: 23,
-    content: 20,
-    status: "Finalizado",
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-];
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -119,38 +61,55 @@ function EditToolbar(props: EditToolbarProps) {
   return (
     <div className={styles.header_table}>
       <h1 className={styles.header_title_table}>Plano de Atividades</h1>
-      <ButtonWithIcon
-        onClick={handleClick}
-        position="left"
-        width={238}
-        size="small"
-        type="primary"
-        text="Adicionar etapa"
-        icon={<AddCircleOutlineIcon />}
-      />
+      <div className={styles.header_add}>
+        <ButtonWithIcon
+          onClick={handleClick}
+          position="left"
+          width={238}
+          size="small"
+          type="primary"
+          text="Adicionar etapa"
+          icon={<AddCircleOutlineIcon />}
+        />
+      </div>
     </div>
   );
 }
 
-export default function TableActivityPlan() {
-  const { id: courseId } = useParams();
+export default function TableActivityPlan({
+  user = "student",
+}: TableActivityPlanType) {
+  const { id: trailId } = useParams();
+
+  const calculateStatus = (start: string, finish: string) => {
+    const today = new Date();
+    const startDate = new Date(start);
+    const finishDate = new Date(finish);
+
+    let status;
+    if (today > startDate && today < finishDate) {
+      status = "Em andamento";
+    } else if (today < startDate) {
+      status = "Não iniciado";
+    } else if (today > finishDate) {
+      status = "Finalizado";
+    }
+
+    return status;
+  };
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/stage").then((response) => {
+    axios.get("http://localhost:4000/api/stage/" + trailId).then((response) => {
       if (response.data) {
-        const stage: GridRowsProp = response.data.stageLine.map(
-          (stage: any) => {
-            //   return (stage.start = new Date(stage.start)
-            //     .toLocaleDateString()
-            //     .toString());
-            console.log(stage.id);
-            return (stage.content = "Eita nóis");
-          }
-        );
-
-        // const date = new Date(response.data.stageLine[0].start);
-        // console.log(date.toLocaleDateString());
-        setRows(stage);
+        const data = response.data.map((data: any) => {
+          return {
+            ...data,
+            start: new Date(data.start).toLocaleDateString(),
+            finish: new Date(data.finish).toLocaleDateString(),
+            status: calculateStatus(data.start, data.finish),
+          };
+        });
+        setRows(data);
       }
     });
   }, []);
@@ -243,124 +202,156 @@ export default function TableActivityPlan() {
     const updatedRow = { ...newRow, isNew: false };
     setRows(rows?.map((row) => (row.id === newRow.id ? updatedRow : row)));
 
-    const today = new Date();
-
-    let status = "CLOSED";
-    if (today > updatedRow.start && today < updatedRow.finish) {
-      status = "PROGRESS";
-    } else if (today < updatedRow.start) {
-      status = "FINISHED";
-    } else if (today > updatedRow.finish) {
-      status = "CLOSED";
-    }
-
     axios.post("http://localhost:4000/api/stage/" + updatedRow.id, {
       stage: updatedRow.stage,
       start: updatedRow.start,
       finish: updatedRow.finish,
       content: updatedRow.content,
-      status: status,
-      courseId: "1",
+      trailId: trailId,
     });
 
     return updatedRow;
   };
 
-  const columns: GridColumns = [
-    {
-      field: "stage",
-      headerName: "Etapa",
-      width: 140,
-      editable: true,
-      sortable: false,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "start",
-      headerName: "Início",
-      type: "date",
-      width: 160,
-      editable: true,
-      sortable: false,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "finish",
-      headerName: "Conclusão",
-      type: "date",
-      width: 160,
-      editable: true,
-      sortable: false,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "content",
-      headerName: "Conteúdo",
-      editable: true,
-      sortable: false,
-      headerAlign: "center",
-      align: "center",
-      width: 696,
-    },
-    // {
-    //   field: "status",
-    //   headerName: "Status",
-    //   type: "number",
-    //   editable: true,
-    //   sortable: false,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   width: 220,
-    // },
-    {
-      field: "actions",
-      type: "actions",
-      headerName: "Ações",
-      width: 100,
-      cellClassName: "actions",
-      sortable: false,
-      headerAlign: "center",
-      align: "center",
-      getActions: ({ id, row }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-        if (isInEditMode) {
+  let columns: GridColumns;
+  if (user === "student") {
+    columns = [
+      {
+        field: "stage",
+        headerName: "Etapa",
+        width: 140,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "start",
+        headerName: "Início",
+        type: "date",
+        width: 160,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "finish",
+        headerName: "Conclusão",
+        type: "date",
+        width: 160,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "content",
+        headerName: "Conteúdo",
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+        width: 696,
+      },
+      {
+        field: "status",
+        headerName: "Status",
+        type: "number",
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+        width: 220,
+      },
+    ];
+  } else {
+    columns = [
+      {
+        field: "stage",
+        headerName: "Etapa",
+        width: 140,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "start",
+        headerName: "Início",
+        type: "date",
+        width: 160,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "finish",
+        headerName: "Conclusão",
+        type: "date",
+        width: 160,
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        field: "content",
+        headerName: "Conteúdo",
+        editable: true,
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+        width: 696,
+      },
+      {
+        field: "actions",
+        type: "actions",
+        headerName: "Ações",
+        width: 100,
+        cellClassName: "actions",
+        sortable: false,
+        headerAlign: "center",
+        align: "center",
+        getActions: ({ id, row }) => {
+          const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+          if (isInEditMode) {
+            return [
+              <GridActionsCellItem
+                icon={<SaveIcon />}
+                label="Save"
+                onClick={handleSaveClick(id, row)}
+              />,
+              <GridActionsCellItem
+                icon={<CancelIcon />}
+                label="Cancel"
+                className="textPrimary"
+                onClick={handleCancelClick(id)}
+                color="inherit"
+              />,
+            ];
+          }
+
           return [
             <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              onClick={handleSaveClick(id, row)}
+              icon={<EditIcon />}
+              label="Edit"
+              className="textPrimary"
+              onClick={handleEditClick(id)}
+              color="inherit"
             />,
             <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={handleDeleteClick(id)}
               color="inherit"
             />,
           ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(id)}
-            color="inherit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-          />,
-        ];
+        },
       },
-    },
-  ];
+    ];
+  }
 
   return (
     <Box
@@ -380,7 +371,9 @@ export default function TableActivityPlan() {
           sx={styleGrid}
           rows={rows}
           columns={columns}
+          rowHeight={56}
           headerHeight={36}
+          autoHeight={false}
           editMode="row"
           rowModesModel={rowModesModel}
           onRowEditStart={handleRowEditStart}
@@ -388,6 +381,19 @@ export default function TableActivityPlan() {
           processRowUpdate={processRowUpdate}
           components={{
             Toolbar: EditToolbar,
+            NoRowsOverlay: () => (
+              <Stack
+                height="100%"
+                alignItems="center"
+                justifyContent="center"
+                fontFamily="roboto"
+                fontStyle="normal"
+                fontWeight={400}
+                fontSize="16"
+              >
+                Nenhum conteúdo adicionado
+              </Stack>
+            ),
           }}
           componentsProps={{
             toolbar: { setRows, setRowModesModel },
