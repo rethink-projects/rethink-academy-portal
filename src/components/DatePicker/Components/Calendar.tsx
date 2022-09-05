@@ -34,7 +34,7 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
     { startDate?: Date; endDate?: Date; key?: string }[]
   >([
     {
-      startDate: new Date(),
+      startDate: new Date(), // PEGAR DATA ATUAL
       endDate: new Date(),
       key: "selection",
     },
@@ -45,6 +45,10 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
       changeTasks();
     }
   }, [state]);
+
+  // useEffect(() => {
+  //   changeTasks();
+  // }, [user]);
 
   const changeTasks = async () => {
     if (user) {
@@ -63,7 +67,6 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
   };
 
   const getFullDate = (data: Date) => {
-    // console.log(data.toISOString());
     return data.toISOString();
   };
 
@@ -73,6 +76,7 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
       editableDateInputs={true}
       onChange={(item) => {
         setState([item.selection]);
+        console.log(item.selection);
       }}
       moveRangeOnFirstSelection={false}
       ranges={state}

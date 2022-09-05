@@ -84,7 +84,7 @@ const RegisterScreen = () => {
                 {tasks.length > 0 &&
                   tasks.map((day: any[], index) => (
                     <div key={index}>
-                      <div className={styles.accordion_date}>
+                      <div className={styles.searchTasks_Date}>
                         <svg
                           width="20"
                           height="21"
@@ -102,7 +102,7 @@ const RegisterScreen = () => {
                         <p> {day[0].taskDate}</p>
                       </div>
                       <div className={styles.searchTasks_Tasks}>
-                        {day.map((task, index) => {
+                        {day.map((task) => {
                           return (
                             <AccordionMM
                               title={task.name}
