@@ -26,7 +26,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
   );
   const [modulesQnt, setModulesQnt] = useState();
   const [courses, setCourses] = useState<CourseProgressResponse[]>([]);
-  const [courseName, setCourseName] = useState("");
+  const [courseName, setCourseName] = useState("Todos cursos");
   const [intern, setIntern] = useState("Todos estagiários");
 
   useEffect(() => {
@@ -62,15 +62,24 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
   };
 
   const getModulesQnt = () => {
-    if (courseName === "") return modulesQnt!;
+    if (courseName === "Todos cursos") return modulesQnt!;
     return getCourse()!.modules.length;
   };
 
   const getCourse = () => {
-    if (courseName !== "")
+    if (courseName !== "Todos cursos")
       return courses.filter(
         (courseComparing) => courseComparing.name === courseName
       )[0];
+  };
+
+  const setDropdownCourse = (value: string) => {
+    setCourseName(value);
+    setIntern("Todos estagiários");
+  };
+  const setDropdownIntern = (value: string) => {
+    setIntern(value);
+    setCourseName("Todos cursos");
   };
 
   if (usersProgress.length === 0 || modulesQnt === 0)
@@ -84,22 +93,23 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
           <div className={styles.fields}>
             <div className={styles.dropdown_container}>
               <Dropdown
-                setValue={setCourseName}
+                value={courseName}
+                setValue={setDropdownCourse}
                 options={getCoursesList()}
                 id={"1"}
                 width={360}
-                initialText={"Selecionar curso"}
                 leftIcon={<IconCourse />}
               />
               <span>Selecione um curso</span>
             </div>
             <div className={styles.dropdown_container}>
               <Dropdown
-                setValue={setIntern}
+                value={intern}
+                setValue={setDropdownIntern}
                 options={getInternsList()}
                 id={"2"}
                 width={243}
-                initialText={"Selecionar estagiário"}
+                // initialText={"Selecionar estagiário"}
                 leftIcon={<IconAvatar />}
               />
               <span>Selecione um estagiário</span>
