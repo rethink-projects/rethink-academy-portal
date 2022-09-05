@@ -25,6 +25,9 @@
   gap: 29px;
 }
 
+.fields svg {
+  cursor: pointer;
+}
 .dropdown_container {
   display: flex;
   flex-direction: column;

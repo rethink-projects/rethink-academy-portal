@@ -27,7 +27,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
   const [modulesQnt, setModulesQnt] = useState();
   const [courses, setCourses] = useState<CourseProgressResponse[]>([]);
   const [courseName, setCourseName] = useState("");
-  const [intern, setIntern] = useState("");
+  const [intern, setIntern] = useState("Todos estagiários");
 
   useEffect(() => {
     func();
@@ -44,18 +44,21 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
 
   const filteredProgress = () => {
     let progress = usersProgress;
-    if (intern !== "")
+    if (intern !== "Todos estagiários")
       progress = progress.filter((user) => user.userName === intern);
 
     return progress;
   };
 
   const getInternsList = () => {
-    return usersProgress.map((user) => user.userName);
+    const list = usersProgress.map((user) => user.userName);
+    list.sort().unshift("Todos estagiários");
+    return list;
   };
 
   const getCoursesList = () => {
-    return courses.map((course) => course.name);
+    const list = courses.map((course) => course.name);
+    return list.sort();
   };
 
   const getModulesQnt = () => {
