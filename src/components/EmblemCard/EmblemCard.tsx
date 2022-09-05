@@ -17,7 +17,8 @@ type EmblemCardProps = {
     | "Goals"
     | "Product"
     | "TimeRegister"
-    | "Welcome";
+    | "Welcome"
+    | "Troll";
   onClickCollect?: () => void;
   id?: "outside";
 };

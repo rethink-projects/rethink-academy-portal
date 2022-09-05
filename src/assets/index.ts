@@ -53,6 +53,7 @@ import Goals from "./Goals_Badge.svg";
 import Product from "./Product_Badge.svg";
 import TimeRegister from "./TimeRegister_Badge.svg";
 import Welcome from "./Welcome_Badge.svg";
+import Troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
 export const Images = {
@@ -111,6 +112,7 @@ export const Images = {
     Product,
     TimeRegister,
     Welcome,
+    Troll,
   },
   starsGif,
 };
