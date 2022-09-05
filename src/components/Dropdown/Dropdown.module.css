@@ -2,12 +2,8 @@
 /* ------- COM TAMANHOS DEFAULT -------*/
 
 .dropdown_container {
-  display: flex;
   flex-shrink: 0;
-  /* min-width: 242px; */
-  align-items: flex-start;
   max-height: 72px;
-  flex-direction: column;
 }
 
 .dropdown,
@@ -26,7 +22,7 @@
 }
 
 .dropdown {
-  display: flex;
+  display: flex;  
   align-items: center;
   justify-content: space-between;
 
