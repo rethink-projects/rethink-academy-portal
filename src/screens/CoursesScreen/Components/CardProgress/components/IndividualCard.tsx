@@ -1,10 +1,15 @@
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import styles from "./IndividualCard.module.css";
+import { UserProgressResponse } from "../../../../types/CourseTypes";
 
-const IndividualCard = () => {
+type IndividualCard = {
+  user: UserProgressResponse;
+};
+
+const IndividualCard = ({ user }: IndividualCard) => {
   return (
     <div className={styles.individual_card_container}>
-      <img src="https://ui-avatars.com/api/?name=John+Doe" alt="" />
+      <img src={user.userImage} alt="" />
       <div className={styles.right_side}>
         <span>Um Nome Aqui</span>
         <ProgressBar totalValue={5} relativeValue={3} width={162} />

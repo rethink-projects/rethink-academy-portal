@@ -27,7 +27,6 @@ import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 
-
 const CursosScreenTeste = () => {
   const [intern, setIntern] = useState(false);
 
@@ -134,7 +133,10 @@ const CursosScreenTeste = () => {
             <CardSyllabus onClose={() => setSyllabusIsOpen(false)} />
           )}
           {progressIsOpen && (
-            <CardProgress onClose={() => setProgressIsOpen(false)} />
+            <CardProgress
+              trailId={trailId}
+              onClose={() => setProgressIsOpen(false)}
+            />
           )}
           {addCourseIsOpen && (
             <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />

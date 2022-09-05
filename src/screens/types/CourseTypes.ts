@@ -69,6 +69,13 @@ interface CourseResponse {
   imageTeacher: string;
   type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
+
+interface UserProgressResponse {
+  userName: string;
+  userImage: string;
+  completedModules: string[]
+}
+
 export type {
   UserLessons,
   Profile,
@@ -77,4 +84,5 @@ export type {
   Module,
   Lesson,
   CourseResponse,
+  UserProgressResponse,
 };

@@ -8,32 +8,31 @@ import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
 import { api } from "../../../../services/api";
+import { UserProgressResponse } from "../../../types/CourseTypes";
 
 type TypeCardProgress = {
   onClose: (value: boolean) => void;
+  trailId: string;
 };
 // http://localhost:4000/api/progress/idDoAcademy
 
-const [usersProgress, setUsersProgress] = useState()
-const [modulesQnt, setModulesQnt] = useState()
+const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
+  const [usersProgress, setUsersProgress] =
+    useState<Array<UserProgressResponse>>();
+  const [modulesQnt, setModulesQnt] = useState();
+  const [courses, setCourses] = useState();
 
-useEffect(() => {
-  // if (user?.email) {
-    const func = async () => {
-      const responseCourses = await api.get(`/progress/idDoAcademy`);
-      // responseByEmail.data.user.role === "STUDENT"
-      //   ? setIntern(true)
-      //   : setIntern(false);
-
-
-      setUsersProgress(responseCourses.data.usersProgress);
-      setModulesQnt(responseCourses.data.modulesQnt);
-    };
+  useEffect(() => {
     func();
-  // }
-}, []);
+  }, []);
 
-const CardProgress = ({ onClose }: TypeCardProgress) => {
+  const func = async () => {
+    const responseCourses = await api.get(`/progress/idDoAcademy`);
+    // const responseCourses = await api.get(`/progress/${trailId}`);
+    setUsersProgress(responseCourses.data.usersProgress);
+    setModulesQnt(responseCourses.data.modulesQnt);
+    setCourses(responseCourses.data.courses);
+  };
   const [course, setCourse] = useState("Nome do curso");
   const [intern, setIntern] = useState("");
   return (
@@ -70,11 +69,14 @@ const CardProgress = ({ onClose }: TypeCardProgress) => {
 
         <span className={styles.course_name}>{course}</span>
         <div className={styles.cards_container}>
-          <IndividualCard />
-          <IndividualCard />
-          <IndividualCard />
-          <IndividualCard />
-          <IndividualCard />
+          <>
+            {usersProgress
+              ? usersProgress.map((user, index) => {
+                  <IndividualCard key={index} user={user} />;
+                  console.log(user);
+                })
+              : ""}
+          </>
         </div>
       </div>
     </EmptyModal>
