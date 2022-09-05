@@ -63,11 +63,13 @@ const PersonalDevelopmentScreen = () => {
     <div className={styles.container}>
       <div className={styles.graph_header}>
         <h1>Evolução de Habilidades</h1>
-        <Switch skillType={skillType} setSkillType={setSkillType} />
       </div>
       <div className={styles.graph_container}>
         <div className={styles.graph_inner_container}>
-          <p>Escolha uma habilidade para visualizar a evolução</p>
+          <div className={styles.switch_skill}>
+            <p>Escolha uma habilidade para visualizar a evolução</p>
+            <Switch skillType={skillType} setSkillType={setSkillType} />
+          </div>
           <Tag tagType={tagType} skill={skill} setSkill={setSkill} />
           <div className={styles.card_content_line} />
         </div>
