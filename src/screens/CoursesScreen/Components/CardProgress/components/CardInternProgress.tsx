@@ -1,17 +1,17 @@
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
-import styles from "./IndividualCard.module.css";
+import styles from "./CardInternProgress.module.css";
 import {
   UserProgressResponse,
   CourseProgressResponse,
 } from "../../../../types/CourseTypes";
 
-type IndividualCard = {
+type CardInternProgress = {
   user: UserProgressResponse;
   modulesQnt: number;
   course?: CourseProgressResponse;
 };
 
-const IndividualCard = ({ user, modulesQnt, course }: IndividualCard) => {
+const CardInternProgress = ({ user, modulesQnt, course }: CardInternProgress) => {
   const getCompletedModules = () => {
     if (!course) return user.completedModules.length;
     let modulesQnt = 0;
@@ -37,4 +37,4 @@ const IndividualCard = ({ user, modulesQnt, course }: IndividualCard) => {
   );
 };
 
-export default IndividualCard;
+export default CardInternProgress;
