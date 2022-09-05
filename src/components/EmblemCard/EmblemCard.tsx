@@ -10,15 +10,15 @@ type EmblemCardProps = {
   title?: string;
   content: string;
   badge:
-    | "Academy"
-    | "AcademyHat"
-    | "Design"
-    | "Engineering"
-    | "Goals"
-    | "Product"
-    | "TimeRegister"
-    | "Welcome"
-    | "Troll";
+    | "academy"
+    | "studies"
+    | "design"
+    | "engineering"
+    | "goals"
+    | "product"
+    | "timeRecord"
+    | "welcome"
+    | "troll";
   onClickCollect?: () => void;
   id?: "outside";
 };
