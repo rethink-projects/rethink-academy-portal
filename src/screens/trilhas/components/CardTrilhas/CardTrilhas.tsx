@@ -66,7 +66,7 @@ const CardTrilhas = ({
 
   const getCoursesFromTrail = (trail: string) => {
     const allCourses = lessonUser?.maxLessons?.filter(
-      (course: any) => course.trail.name === trail
+      (course: any) => course.trail.id === trail
     ).length;
 
     return allCourses;
@@ -126,7 +126,7 @@ const CardTrilhas = ({
   };
 
   const calculoPorcentagem = () => {
-    const max = getCoursesFromTrail(trail.name);
+    const max = getCoursesFromTrail(trail.id);
     const completed = getCompletedUserCourses(trail.name);
     if (max === 0) {
       return 0;
@@ -136,9 +136,7 @@ const CardTrilhas = ({
   };
 
   const atLeastOneCourse = () => {
-    if (
-      getCoursesFromTrail(trail.name) === getCompletedUserCourses(trail.name)
-    ) {
+    if (getCoursesFromTrail(trail.id) === getCompletedUserCourses(trail.name)) {
       const coursesVerify = lessonUser?.maxLessons?.find(
         (course: any) => course.trail.id === trail.id
       );
@@ -189,7 +187,7 @@ const CardTrilhas = ({
           <h1 className={styles.card_content_title}>{trail.name}</h1>
           <p className={styles.card_content_description}>{trail.description}</p>
           {user === "student"
-            ? getCoursesFromTrail(trail.name) && (
+            ? getCoursesFromTrail(trail.id) && (
                 <>
                   <div className={card_progressBar}>
                     <span>{`${calculoPorcentagem()}%`}</span>
@@ -197,8 +195,8 @@ const CardTrilhas = ({
                       width={242}
                       relativeValue={getCompletedUserCourses(trail.name)!}
                       totalValue={
-                        getCoursesFromTrail(trail.name)! > 0
-                          ? getCoursesFromTrail(trail.name)!
+                        getCoursesFromTrail(trail.id)! > 0
+                          ? getCoursesFromTrail(trail.id)!
                           : 1
                       }
                     />
@@ -207,18 +205,18 @@ const CardTrilhas = ({
                     {`${getCompletedUserCourses(
                       trail.name
                     )} de ${getCoursesFromTrail(
-                      trail.name
+                      trail.id
                     )} curso(s) concluído(s).`}
                   </p>
                 </>
               )
-            : getCoursesFromTrail(trail.name) && (
+            : getCoursesFromTrail(trail.id) && (
                 <>
                   <p className={styles.quantity_courses}>
-                    {getCoursesFromTrail(trail.name)! > 1 ||
-                    getCoursesFromTrail(trail.name) == 0
-                      ? `${getCoursesFromTrail(trail.name)} Cursos`
-                      : `${getCoursesFromTrail(trail.name)} Curso`}
+                    {getCoursesFromTrail(trail.id)! > 1 ||
+                    getCoursesFromTrail(trail.id) == 0
+                      ? `${getCoursesFromTrail(trail.id)} Cursos`
+                      : `${getCoursesFromTrail(trail.id)} Curso`}
                   </p>
                   <div id="edit" onClick={setModal} className={styles.edit}>
                     <ButtonWithIcon

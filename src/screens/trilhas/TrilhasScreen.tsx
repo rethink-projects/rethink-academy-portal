@@ -16,6 +16,15 @@ const TrilhasScreen = () => {
   const { user: userAuth } = useAuth();
   const navigate = useNavigate();
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [trails, setTrails] = useState<TypeTrails[]>();
+  const [user, setUser] = useState<any>();
+  const [valueNameTrail, setValueNameTrail] = useState("");
+  const [valueImageTrail, setValueImageTrail] = useState("");
+  const [valueDescriptionTrail, setValueDescriptionTrail] = useState("");
+
+  const [trailUpdated, setTrailUpdated] = useState<TypeTrails>();
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/user/" + userAuth?.email)
@@ -30,16 +39,7 @@ const TrilhasScreen = () => {
         setTrails(response.data.trail);
       }
     });
-  }, []);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [trails, setTrails] = useState<TypeTrails[]>();
-  const [user, setUser] = useState<any>();
-  const [valueNameTrail, setValueNameTrail] = useState("");
-  const [valueImageTrail, setValueImageTrail] = useState("");
-  const [valueDescriptionTrail, setValueDescriptionTrail] = useState("");
-
-  const [trailUpdated, setTrailUpdated] = useState<TypeTrails>();
+  }, [modalIsOpen]);
 
   const setStateModalOnclick = (trailId: string) => {
     const searchTrailUpdated = trails?.find((trail) => trail.id === trailId);
