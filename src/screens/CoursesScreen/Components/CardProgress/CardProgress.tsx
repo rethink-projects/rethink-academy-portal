@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import EmptyModal from "../../../../components/EmptyModal/EmptyModal";
 import styles from "./CardProgress.module.css";
@@ -6,10 +7,31 @@ import IndividualCard from "./components/IndividualCard";
 import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
+import { api } from "../../../../services/api";
 
 type TypeCardProgress = {
   onClose: (value: boolean) => void;
 };
+// http://localhost:4000/api/progress/idDoAcademy
+
+const [usersProgress, setUsersProgress] = useState()
+const [modulesQnt, setModulesQnt] = useState()
+
+useEffect(() => {
+  // if (user?.email) {
+    const func = async () => {
+      const responseCourses = await api.get(`/progress/idDoAcademy`);
+      // responseByEmail.data.user.role === "STUDENT"
+      //   ? setIntern(true)
+      //   : setIntern(false);
+
+
+      setUsersProgress(responseCourses.data.usersProgress);
+      setModulesQnt(responseCourses.data.modulesQnt);
+    };
+    func();
+  // }
+}, []);
 
 const CardProgress = ({ onClose }: TypeCardProgress) => {
   const [course, setCourse] = useState("Nome do curso");
