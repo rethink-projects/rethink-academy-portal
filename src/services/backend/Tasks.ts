@@ -25,7 +25,6 @@ export const getDateFilter = async (
   startDate: string,
   endDate: string
 ) => {
-  console.log(email, startDate, endDate);
   try {
     const { data } = await axios.post(
       `http://localhost:4000/api/tasks/${email}`,
@@ -43,3 +42,15 @@ export const getDateFilter = async (
     return;
   }
 };
+
+export const getGroupTaskByTag = async(email: string) => {
+  try{
+    const { data } = await axios.get(
+      `http://localhost:4000/api/tasks/tag/${email}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}
