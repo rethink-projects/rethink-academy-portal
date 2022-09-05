@@ -75,6 +75,21 @@ interface UserProgressResponse {
   userImage: string;
   completedModules: string[]
 }
+type CourseProgressResponse = {
+  id: string;
+  name: string;
+  modules: ModuleProgressResponse[];
+};
+type ModuleProgressResponse = {
+  id: string;
+  courseId: string;
+  lessons: [
+    {
+      id: string;
+      moduleId: string;
+    }
+  ];
+};
 
 export type {
   UserLessons,
@@ -85,4 +100,5 @@ export type {
   Lesson,
   CourseResponse,
   UserProgressResponse,
+  CourseProgressResponse,
 };

@@ -8,23 +8,31 @@ import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
 import { api } from "../../../../services/api";
-import { UserProgressResponse } from "../../../types/CourseTypes";
+import {
+  UserProgressResponse,
+  CourseProgressResponse,
+} from "../../../types/CourseTypes";
 
 type TypeCardProgress = {
   onClose: (value: boolean) => void;
   trailId: string;
 };
+
 // http://localhost:4000/api/progress/idDoAcademy
 
 const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
-  const [usersProgress, setUsersProgress] =
-    useState<Array<UserProgressResponse>>();
+  const [usersProgress, setUsersProgress] = useState<UserProgressResponse[]>(
+    []
+  );
   const [modulesQnt, setModulesQnt] = useState();
-  const [courses, setCourses] = useState();
+  const [courses, setCourses] = useState<CourseProgressResponse[]>([]);
+  const [courseName, setCourseName] = useState("");
+  const [intern, setIntern] = useState("");
 
   useEffect(() => {
     func();
   }, []);
+  useEffect(() => {}, [usersProgress]);
 
   const func = async () => {
     const responseCourses = await api.get(`/progress/idDoAcademy`);
@@ -33,8 +41,38 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
     setModulesQnt(responseCourses.data.modulesQnt);
     setCourses(responseCourses.data.courses);
   };
-  const [course, setCourse] = useState("Nome do curso");
-  const [intern, setIntern] = useState("");
+
+  const filteredProgress = () => {
+    let progress = usersProgress;
+    if (intern !== "")
+      progress = progress.filter((user) => user.userName === intern);
+
+    return progress;
+  };
+
+  const getInternsList = () => {
+    return usersProgress.map((user) => user.userName);
+  };
+
+  const getCoursesList = () => {
+    return courses.map((course) => course.name);
+  };
+
+  const getModulesQnt = () => {
+    if (courseName === "") return modulesQnt!;
+    return getCourse()!.modules.length;
+  };
+
+  const getCourse = () => {
+    if (courseName !== "")
+      return courses.filter(
+        (courseComparing) => courseComparing.name === courseName
+      )[0];
+  };
+
+  if (usersProgress.length === 0 || modulesQnt === 0)
+    return <div>loading...</div>;
+
   return (
     <EmptyModal onClose={() => ""}>
       <div className={styles.progress_container}>
@@ -43,8 +81,8 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
           <div className={styles.fields}>
             <div className={styles.dropdown_container}>
               <Dropdown
-                setValue={setCourse}
-                options={["Curso 1", "curso 2"]}
+                setValue={setCourseName}
+                options={getCoursesList()}
                 id={"1"}
                 width={360}
                 initialText={"Selecionar curso"}
@@ -55,7 +93,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
             <div className={styles.dropdown_container}>
               <Dropdown
                 setValue={setIntern}
-                options={["Estagiário 1", "Estagiário 1"]}
+                options={getInternsList()}
                 id={"2"}
                 width={243}
                 initialText={"Selecionar estagiário"}
@@ -67,16 +105,16 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
           </div>
         </div>
 
-        <span className={styles.course_name}>{course}</span>
+        <span className={styles.course_name}>{courseName}</span>
         <div className={styles.cards_container}>
-          <>
-            {usersProgress
-              ? usersProgress.map((user, index) => {
-                  <IndividualCard key={index} user={user} />;
-                  console.log(user);
-                })
-              : ""}
-          </>
+          {filteredProgress()!.map((user, index) => (
+            <IndividualCard
+              key={index}
+              user={user}
+              modulesQnt={getModulesQnt()}
+              course={getCourse()}
+            />
+          ))}
         </div>
       </div>
     </EmptyModal>
