@@ -45,15 +45,15 @@ import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
 
-import Academy from "./Academy_Badge.svg";
-import AcademyHat from "./AcademyHat_Badge.svg";
-import Design from "./Design_Badge.svg";
-import Engineering from "./Engineering_Badge.svg";
-import Goals from "./Goals_Badge.svg";
-import Product from "./Product_Badge.svg";
-import TimeRegister from "./TimeRegister_Badge.svg";
-import Welcome from "./Welcome_Badge.svg";
-import Troll from "./Troll_Badge.svg";
+import studies from "./Academy_Badge.svg";
+import academy from "./AcademyHat_Badge.svg";
+import design from "./Design_Badge.svg";
+import engineering from "./Engineering_Badge.svg";
+import goals from "./Goals_Badge.svg";
+import product from "./Product_Badge.svg";
+import timeRecord from "./TimeRegister_Badge.svg";
+import welcome from "./Welcome_Badge.svg";
+import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
 export const Images = {
@@ -104,15 +104,15 @@ export const Images = {
   },
   avatar: avatarImage,
   badge: {
-    Academy,
-    AcademyHat,
-    Design,
-    Engineering,
-    Goals,
-    Product,
-    TimeRegister,
-    Welcome,
-    Troll,
+    academy,
+    studies,
+    design,
+    engineering,
+    goals,
+    product,
+    timeRecord,
+    welcome,
+    troll,
   },
   starsGif,
 };
