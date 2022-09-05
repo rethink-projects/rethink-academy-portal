@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { dataDois } from "../chart/BarChart";
 import styles from "./Tag.module.css";
@@ -39,16 +40,15 @@ export const headers = {
 
 const EvaluationTag = ({
   tagType,
-  setTagType,
-  setGraphData
+  setSkill,
+  skill,
 }: {
   tagType: "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT";
-  setTagType: (value: "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT") => void;
-  setGraphData: (value: any) => void;
+  setSkill: (value: string) => void;
+  skill: string;
 }) => {
   // variaveis para controlar estado das tags ativo e inativo
 
-  const [skill, setSkill] = useState("");
   const [header, setHeader] = useState<
     "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT"
   >(tagType);
@@ -67,7 +67,13 @@ const EvaluationTag = ({
   return (
     <div className={styles.tag_container}>
       {headers[header].map((item) => (
-        <button className={handleClass(item)} onClick={() => {setSkill(item); setGraphData(dataDois)}}>
+        <button
+          className={handleClass(item)}
+          onClick={() => {
+            setSkill(item);
+            // setGraphData(getData);
+          }}
+        >
           {item}
         </button>
       ))}

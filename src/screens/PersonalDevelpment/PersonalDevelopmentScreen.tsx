@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CustomBarChart, { data } from "./components/chart/BarChart";
 import Switch from "./components/switch/Switch";
@@ -16,18 +17,45 @@ const PersonalDevelopmentScreen = () => {
   const [tagType, setTagType] = useState<
     "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT"
   >("ENGINEERING");
+  const [skill, setSkill] = useState("BackEnd");
+
+  const getData = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:4000/api/evaluate/chartData",
+        { params: { skill, header: tagType } }
+      );
+      console.log(data);
+
+      return await data.chartData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    setGraphData(data);
+    const fetchData = async () => {
+      setGraphData(await getData());
+    };
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setGraphData(await getData());
+    };
+    fetchData();
+  }, [skill]);
 
   useEffect(() => {
     console.log(skillType);
     if (skillType === false) {
       setTagType("SOFT");
       console.log(tagType);
+      setSkill("Empatia");
     } else {
       setTagType("ENGINEERING");
+      setSkill("BackEnd");
     }
   }, [skillType]);
 
@@ -40,12 +68,10 @@ const PersonalDevelopmentScreen = () => {
       <div className={styles.graph_container}>
         <div className={styles.graph_inner_container}>
           <p>Escolha uma habilidade para visualizar a evolução</p>
-          <Tag tagType={tagType} setTagType={setTagType} setGraphData={setGraphData} />
+          <Tag tagType={tagType} skill={skill} setSkill={setSkill} />
           <div className={styles.card_content_line} />
         </div>
-        <CustomBarChart
-          graphData={graphData}
-        />
+        <CustomBarChart graphData={graphData} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { PureComponent, useState } from "react";
+import React, { PureComponent, useEffect, useState } from "react";
 import styles from "./BarChart.module.css";
 import {
   BarChart,
@@ -138,8 +138,6 @@ export const dataDois = [
   },
 ];
 
-/* const {data} = axios.get("url")
-const {data} = axios.get("url", {query: {skill: "skill1"} }) */
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
