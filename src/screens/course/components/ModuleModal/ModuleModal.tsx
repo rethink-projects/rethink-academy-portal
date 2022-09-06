@@ -88,20 +88,20 @@ const ModuleModal = ({
   };
 
   const addModuleReq = async () => {
-    await axios.post("http://localhost:5432/api/module", {
+    await axios.post("http://localhost:4000/api/module", {
       name: moduleName,
       courseId,
     });
   };
 
   const editModuleReq = async () => {
-    await axios.put("http://localhost:5432/api/module/" + module!.id, {
+    await axios.put("http://localhost:4000/api/module/" + module!.id, {
       name: moduleName,
     });
   };
 
   const deleteModuleReq = async () => {
-    await axios.delete("http://localhost:5432/api/module/" + module!.id);
+    await axios.delete("http://localhost:4000/api/module/" + module!.id);
   };
   // console.log("moduleName na tela ModuleModal: " + moduleName);
 

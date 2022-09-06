@@ -113,7 +113,7 @@ const Accordion = ({
   };
 
   const addLessonReq = async () => {
-    await axios.post("http://localhost:5432/api/lesson", {
+    await axios.post("http://localhost:4000/api/lesson", {
       name: lessonName,
       description: lessonDescription,
       embedUrl: lessonEmbed,
@@ -123,7 +123,7 @@ const Accordion = ({
   };
 
   const editLessonReq = async () => {
-    await axios.put("http://localhost:5432/api/lesson/" + lesson!.id, {
+    await axios.put("http://localhost:4000/api/lesson/" + lesson!.id, {
       id: lesson!.id,
       name: lessonName,
       description: lessonDescription,

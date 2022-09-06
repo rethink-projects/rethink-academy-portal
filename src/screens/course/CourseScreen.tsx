@@ -79,7 +79,7 @@ const CourseScreen = () => {
   useEffect(() => {
     if (userEmail !== "") {
       axios
-        .get("http://localhost:5432/api/user/" + userEmail)
+        .get("http://localhost:4000/api/user/" + userEmail)
         .then((response) => {
           if (response.data.user) {
             setEmbassador(response.data.user.role === "STUDENT");
@@ -87,7 +87,7 @@ const CourseScreen = () => {
         });
 
       axios
-        .get("http://localhost:5432/api/user/watched/list/" + userEmail)
+        .get("http://localhost:4000/api/user/watched/list/" + userEmail)
         .then((response) => {
           if (response.data.watched) {
             setWatcheds(response.data.watched);
@@ -99,7 +99,7 @@ const CourseScreen = () => {
   useEffect(() => {
     if (course !== undefined) {
       axios
-        .get("http://localhost:5432/api/teacher/" + course.teacherId)
+        .get("http://localhost:4000/api/teacher/" + course.teacherId)
         .then((response) => {
           if (response.data.profile) {
             setTeacher(response.data.profile);
@@ -111,7 +111,7 @@ const CourseScreen = () => {
   useEffect(() => {
     if (courseId !== "") {
       axios
-        .get("http://localhost:5432/api/course/" + courseId)
+        .get("http://localhost:4000/api/course/" + courseId)
         .then((response) => {
           if (response.data.course) {
             setCourse(response.data.course);
@@ -119,7 +119,7 @@ const CourseScreen = () => {
         });
 
       axios
-        .get("http://localhost:5432/api/course/" + courseId + "/modules")
+        .get("http://localhost:4000/api/course/" + courseId + "/modules")
         .then((response) => {
           if (response.data.modules) {
             setModules(response.data.modules);
