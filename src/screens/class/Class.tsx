@@ -6,8 +6,6 @@ import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/api";
-import { count } from "console";
-import { cursorTo } from "readline";
 
 interface LessonResponse {
   completed: boolean;
@@ -93,42 +91,58 @@ export interface CourseResponse {
 
 ///////////////////////////////////////////////////
 
+// function iframeclick() {
+//   var iframe = document.getElementById("iframe_id");
+//   console.log(iframe);
+// }
+
 const Class = () => {
   // Buscando id's
   const { user } = useAuth();
   const location = useLocation();
   let id = location.pathname.split("/");
 
-  const idTrail = id[2];
   const idCourse = id[4];
   const idClass = id[6];
-  // console.log(id);
+  const [indexDiv, setIndexDiv] = useState(1);
+  const [urlLesson, setUrlLesson] = useState("");
 
-  // replace("/trilhas/asd/curso/ads/aulas", "").split();
-  // console.log(idCourse);
-  const [module, setModule] = useState<Module>({
-    id: "",
-    name: "",
-    courseId: "",
-    lessons: [],
-    order: 1,
-  });
   const [modules, setModules] = useState<ModuleResponse[]>([]);
   const [lesson, setLesson] = useState<Lesson>();
   const [course, setCourse] = useState("");
   const [moduleOrder, setModuleOrder] = useState(0);
   const [lessonOrder, setLessonOrder] = useState(0);
+  const [lessonsWatched, setLessonsWatched] = useState<string[]>([]);
+
+  const playVideo = async () => {
+    setIndexDiv(-1);
+    setUrlLesson(urlLesson + "?autoplay=1");
+
+    !lessonsWatched.includes(idClass) && lessonsWatched.push(idClass);
+    console.log(lessonsWatched);
+
+    const response = await api.put(`/user/${user.email}`, {
+      watched: lessonsWatched,
+    });
+  };
+
+  useEffect(() => {
+    lesson?.embedUrl && setUrlLesson(lesson?.embedUrl);
+  }, [lesson]);
 
   useEffect(() => {
     if (user?.email) {
       const func = async () => {
+        const responseUser = await api.get(`/user/${user.email}`);
+        setLessonsWatched(responseUser.data.user.watched);
+
         const responseClass = await api.get(`/lesson/${idClass}`);
+
         setLesson(responseClass.data.lesson);
 
         const responseModule = await api.get(
           `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
         );
-        console.log(responseModule);
         setModules(responseModule.data.modules);
         setModuleOrder(responseModule.data.moduleOrder);
         setLessonOrder(responseModule.data.lessonOrder);
@@ -137,8 +151,6 @@ const Class = () => {
       func();
     }
   }, [user]);
-  // modules.map((module) => console.log(module.lessons));
-  // console.log(modules);
 
   const getBreadcrumbs = () => {
     const url = location.pathname;
@@ -161,31 +173,24 @@ const Class = () => {
           </h1>
         </div>
         <div className={styles.class_video}>
+          <div
+            onClick={() => playVideo()}
+            style={{ zIndex: indexDiv }}
+            className={styles.container_firstClick}
+          ></div>
           <iframe
-            className="video"
-            src={lesson?.embedUrl}
+            id="iframe_id"
+            className={styles.video_teste}
+            src={urlLesson}
             title="Loom 01"
+            frameBorder="0"
             width={1040}
             height={585}
           ></iframe>
-          {/* <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1mE2KYOPtcCi8_PQf8QPYrG0k14Cd0Fux6w&usqp=CAU"
-            width={1040}
-            height={585}
-          /> */}
         </div>
         <div className={styles.class_description}>
           <h1>Sobre a aula:</h1>
-          <p>
-            {lesson?.description}
-            {/* Aprenda a executar pesquisas de UX Design, fazer testes de
-            usabilidade e elaborar análises, além de utilizar frameworks e
-            métodos para a criação de designs de qualidade e que ofereçam uma
-            boa experiência ao usuário. Ao concluir as aulas, você estará pronto
-            para definir processos e construir frameworks baseados em estudos
-            sobre as necessidades dos usuários, seus objetivos, habilidades e
-            limitações, para alcançar os objetivos de negócios. */}
-          </p>
+          <p>{lesson?.description}</p>
         </div>
       </div>
       <div className={styles.class_class_list}>
@@ -199,7 +204,7 @@ const Class = () => {
             module.lessons.map((lesson, index) => {
               lessons.push({
                 id: lesson.id,
-                name: lesson.name,
+                name: ` Aula ${moduleOrder}.${lessonOrder} - ${lesson.name}`,
                 url: lesson.embedUrl,
                 completed: lesson.completed,
                 description: lesson.description,
