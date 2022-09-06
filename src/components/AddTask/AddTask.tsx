@@ -30,7 +30,7 @@ type AddTaskProps = {
   setFormData: (value: any) => void;
 };
 
-function AddTask({ formData, setFormData }: AddTaskProps) {
+function AddTask({}: AddTaskProps) {
   let iconImg = Images.arrowTask;
   const [active, setActive] = useState(false);
   const [formData, setFormData] = useState({
