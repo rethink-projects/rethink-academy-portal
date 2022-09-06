@@ -21,7 +21,7 @@ const Breadcrumb = ({ breadcrumbItems }: BreadcrumbProps) => {
       {breadcrumbItems.map((value, index) => {
         if (index != currentPageIndex) {
           return (
-            <div className={style.breadcrumbContainer} key={index}>
+            <div key={index} className={style.breadcrumbContainer}>
               <span
                 key={index}
                 className={style.previousPages}

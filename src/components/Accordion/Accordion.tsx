@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from "./Acordeon.module.css";
+import styles from "./Accordion.module.css";
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 
-type AcordeonProps = {
+type AccordionProps = {
   width?: number;
   module?: Module;
 };
@@ -16,7 +16,7 @@ type Module = {
   name: string;
   blocked: boolean;
   completed: boolean;
-  classes?: Array<Class>;
+  lessons?: Array<Class>;
 };
 type Class = {
   id: string;
@@ -29,14 +29,14 @@ type Class = {
   type: "video" | "audio" | "activity";
 };
 
-const Acordeon = ({
+const Accordion = ({
   width = 348,
   module = {
     id: 1,
     name: "Aqui está o nome do módulo",
     blocked: false,
     completed: true,
-    classes: [
+    lessons: [
       {
         id: "xasdxcdefewr",
         name: "O nome dessa aula é esse",
@@ -49,9 +49,9 @@ const Acordeon = ({
       },
     ],
   },
-}: AcordeonProps) => {
+}: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const classes: Array<Class> = module.classes!;
+  const lessons: Array<Class> = module.lessons!;
 
   return (
     <div className={isOpen ? styles.container : ""}>
@@ -80,16 +80,20 @@ const Acordeon = ({
           <IconMore />
         </div>
       </div>
-      {isOpen && classes != null && (
-        <div className={styles.acordeon_container}>
-          {classes.map((clas) => (
-            <div className={styles.acordeon_item} style={{ width: width + 2 }}>
-              <div className={styles.acordeon_left_side}>
+      {isOpen && lessons != null && (
+        <div className={styles.Accordion_container}>
+          {lessons.map((lesson, index) => (
+            <div
+              key={index}
+              className={styles.Accordion_item}
+              style={{ width: width + 2 }}
+            >
+              <div className={styles.Accordion_left_side}>
                 <IconVideoCam />
-                {clas.name}
+                {lesson.name}
               </div>
-              <div className={styles.acordeon_right_side}>
-                {clas.completed && <IconCheckedCircle />}
+              <div className={styles.Accordion_right_side}>
+                {lesson.completed && <IconCheckedCircle />}
               </div>
             </div>
           ))}
@@ -99,4 +103,4 @@ const Acordeon = ({
   );
 };
 
-export default Acordeon;
+export default Accordion;

@@ -7,6 +7,7 @@ import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
+import RequireAuth from "./services/auth";
 
 function App() {
   return (
