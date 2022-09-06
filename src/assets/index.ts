@@ -46,7 +46,13 @@ import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
+import ProgressBack from "./ProgressBack.png";
+import ProgressIcon from "./ProgressIcon.png";
+import ProgressEndIcon from "./ProgressEndIcon.png";
 export const Images = {
+  ProgressBack,
+  ProgressIcon,
+  ProgressEndIcon,
   arrowCardGreen,
   arrowCardGrey,
   logo,
