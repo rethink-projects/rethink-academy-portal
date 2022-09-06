@@ -91,14 +91,9 @@ export interface CourseResponse {
 
 ///////////////////////////////////////////////////
 
-// function iframeclick() {
-//   var iframe = document.getElementById("iframe_id");
-//   console.log(iframe);
-// }
-
 const Class = () => {
-  // Buscando id's
   const { user } = useAuth();
+
   const location = useLocation();
   let id = location.pathname.split("/");
   const idCourse = id[4];
@@ -163,45 +158,48 @@ const Class = () => {
 
   return (
     <div className={styles.class_container}>
-      <div className={styles.class_class}>
-        <Breadcrumb breadcrumbItems={getBreadcrumbs()} />
-        <div className={styles.class_title}>
-          <IconVideoCam />
-          <h1>
-            Aula {moduleOrder}.{lessonOrder} - {lesson?.name}
-          </h1>
-        </div>
-        <div className={styles.class_video}>
-          <div
-            onClick={() => playVideo()}
-            style={{ zIndex: indexDiv }}
-            className={styles.container_firstClick}
-          ></div>
-          <iframe
-            id="iframe_id"
-            className={styles.video_teste}
-            src={urlLesson}
-            title="Loom 01"
-            frameBorder="0"
-            width={1040}
-            height={585}
-          ></iframe>
-        </div>
-        <div className={styles.class_description}>
-          <h1>Sobre a aula:</h1>
-          <p>{lesson?.description}</p>
+      <div className={styles.left_container}>
+        <div className={styles.class_class}>
+          <Breadcrumb breadcrumbItems={getBreadcrumbs()} />
+          <div className={styles.class_title}>
+            <IconVideoCam />
+            <h1>
+              Aula {moduleOrder}.{lessonOrder} - {lesson?.name}
+            </h1>
+          </div>
+          <div className={styles.class_video}>
+            <div
+              onClick={() => playVideo()}
+              style={{ zIndex: indexDiv }}
+              className={styles.container_firstClick}
+            ></div>
+            <iframe
+              id="iframe_id"
+              className={styles.video_teste}
+              src={urlLesson}
+              title="Loom 01"
+              frameBorder="0"
+              width={1040}
+              height={585}
+            ></iframe>
+          </div>
+          <div className={styles.class_description}>
+            <h1>Sobre a aula:</h1>
+            <p>{lesson?.description}</p>
+          </div>
         </div>
       </div>
       <div className={styles.class_class_list}>
         <h1>{course.toUpperCase()}</h1>
         {modules &&
           modules.map((module, index) => {
-            let lessons: any = [];
+            let lessonsArray: any = [];
+            let indexMod = index + 1;
 
             module.lessons.map((lesson, index) => {
-              lessons.push({
+              lessonsArray.push({
                 id: lesson.id,
-                name: ` Aula ${moduleOrder}.${lessonOrder} - ${lesson.name}`,
+                name: ` Aula ${indexMod}.${index + 1} - ${lesson.name}`,
                 url: lesson.embedUrl,
                 completed: lesson.completed,
                 description: lesson.description,
@@ -220,7 +218,7 @@ const Class = () => {
                   name: module.moduleName,
                   blocked: module.moduleBlocked,
                   completed: module.moduleCompleted,
-                  classes: lessons,
+                  classes: lessonsArray,
                 }}
               />
             );
