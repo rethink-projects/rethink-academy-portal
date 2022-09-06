@@ -62,7 +62,9 @@ const CardAddCourse = ({
   let trilhaId = location.pathname.replace("/trilhas/", "");
   const { notify } = useNotification();
 
-  const formattedWorkload = course?.workload.toString() + " horas";
+  const formattedWorkload = course?.workload
+    ? course?.workload.toString() + " horas"
+    : "";
 
   const [formData, setFormData] = useState<FormData>({
     name: course?.name || "",
