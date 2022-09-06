@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAuth } from "../../context/AuthContext";
+import { useNotification } from "../../context/NotificationContext";
 import { useStorage } from "../../services/supabase/storage";
 
 import styles from "./Playground.module.css";
@@ -12,22 +13,33 @@ function PlaygroundScreen() {
   const { user } = useAuth();
   const { initStorage, uploadFile, generateUrlToDownload, url } = useStorage();
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
+  const { notify } = useNotification();
 
   const handleInitStorage = useCallback(async () => {
     await initStorage();
   }, [initStorage]);
 
   useEffect(() => {
+    console.log("TESTE");
+  }, [acceptedFiles]);
+  useEffect(() => {
     handleInitStorage();
   }, [handleInitStorage]);
 
   const handleUploadFile = async () => {
     const file = acceptedFiles[0];
-    await uploadFile(`/pasta-2/${file.name}`, acceptedFiles[0]);
+    if (file) {
+      await uploadFile(file.name, acceptedFiles[0], "contrato");
+    } else {
+      notify({
+        type: "error",
+        title: "Você ainda não selecionou um arquivo",
+      });
+    }
   };
 
   const handleDownloadUrl = async () => {
-    await generateUrlToDownload(`/pasta-2/contrato-rethink-academy.pdf`);
+    await generateUrlToDownload("contrato");
   };
   if (!user) {
     return <div>Loading...</div>;
@@ -75,11 +87,11 @@ function PlaygroundScreen() {
         <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            <Button variant='outlined' type='button'>
-              Selecione um arquivo
+            <Button variant="outlined" type="button" onClick={handleUploadFile}>
+              {acceptedFiles[0] ? "Confirmar" : "Selecione um arquivo"}
             </Button>
           </div>
-          <Button variant='contained' onClick={handleUploadFile} type='button'>
+          <Button variant="contained" onClick={handleUploadFile} type="button">
             Fazer upload do arquivo
           </Button>
         </div>
@@ -105,13 +117,13 @@ function PlaygroundScreen() {
           <br />
           <strong>generateUrlToDownload("contratos/nome-do-arquivo")</strong>
           <br />
-          <Button variant='contained' onClick={handleDownloadUrl} type='button'>
+          <Button variant="contained" onClick={handleDownloadUrl} type="button">
             Generate URL
           </Button>
         </p>
         {url && (
           <iframe
-            title='Unique'
+            title="Unique"
             src={`${url}&embedded=true`}
             style={{ width: "800px", height: "500px", marginTop: "30px" }}
           ></iframe>

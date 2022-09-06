@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
+import { getOneBucket, upsertBucket } from "../backend/BucketService";
 import { supabaseClient } from "./client";
 
 const bucket = "rethink-academy-storage";
@@ -12,13 +13,6 @@ export const uploadContractByName = async (avatarFile: File, name: string) => {
     });
   return { data, error };
 };
-
-// const formatedName = name.replace(
-//   /[~`!@#$%^&*()+={}\\[\];:\\'\\"<>.,\\/\\\\?-_]/g,
-//   ""
-// );
-
-// let file: File;
 
 export function useStorage() {
   const { user } = useAuth();
@@ -34,10 +28,10 @@ export function useStorage() {
     }
   };
 
-  const uploadFile = async (path: string, file: File) => {
+  const uploadFile = async (fileName: string, file: File, title: string) => {
     const { data, error } = await supabaseClient.storage
       .from(user.email)
-      .upload(path, file, {
+      .upload(title + "/" + fileName, file, {
         upsert: true,
       });
     if (error) {
@@ -46,18 +40,26 @@ export function useStorage() {
         title: "Erro ao fazer upload desse arquivo!",
       });
     }
-    console.log({ data });
+    if (title) {
+      let helper: any = data!.Key.split("/");
+      console.log(helper, "antes do shift");
+      helper.shift();
+      console.log(helper, "depois do shift");
+      helper = helper.join("/");
 
+      upsertBucket(helper, title, user.email);
+    }
     return notify({
       type: "success",
       title: `Upload feito com sucesso`,
     });
   };
 
-  const generateUrlToDownload = async (path: string) => {
+  const generateUrlToDownload = async (title: string) => {
+    const bucket = await getOneBucket(title, user.email);
     const { data, error } = await supabaseClient.storage
       .from(user.email)
-      .createSignedUrl(path, 5000);
+      .createSignedUrl(bucket.url, 5000);
     if (error) {
       return notify({
         type: "error",
