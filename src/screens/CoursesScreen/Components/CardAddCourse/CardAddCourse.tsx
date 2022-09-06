@@ -7,7 +7,7 @@ import TrailModal from "../../../../components/TrailModal/TrailModal";
 import { useNotification } from "../../../../context/NotificationContext";
 import { api } from "../../../../services/api";
 import { useLocation } from "react-router-dom";
-import { CourseResponse } from "../../CursosScreen";
+import { CourseResponse } from "../../../types/CourseTypes";
 
 interface FormData {
   name: string;

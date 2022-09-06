@@ -1,89 +1,31 @@
+// React
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
-import CardCourse from "./Components/CardCourse/CardCourse";
-import styles from "./CursosScreen.module.css";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
+
+// API
 import { api } from "../../services/api";
+
+// Styles
+import styles from "./CursosScreen.module.css";
+
+// Context
 import { useAuth } from "../../context/AuthContext";
-import CardProgress from "./Components/CardProgress/CardProgress";
-import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
+
+// Types
+import { UserLessons, Trail, CourseResponse } from "../types/CourseTypes";
+
+// Icons
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import IconPlan from "@mui/icons-material/CalendarTodayOutlined";
 import IconProgress from "@mui/icons-material/TrendingUpOutlined";
 
-interface UserLessons {
-  completed: boolean;
-  id: string;
-  lessonsLength: number;
-  name: string;
-  trail: Trail;
-  userLessonsLength: number;
-  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
-}
-
-interface Profile {
-  id: string;
-  bio: string;
-  avatar: string;
-  social: JSON;
-  userId: string;
-}
-
-interface UserResponse {
-  id: string;
-  email: string;
-  name: string;
-  surname: string;
-  main: string;
-  watched: string[];
-  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
-  profile?: Profile;
-  course: CourseResponse[];
-}
-
-interface Trail {
-  id: string;
-  name: string;
-  description: string;
-  weight: number;
-  course?: CourseResponse[];
-  imageUrl: string;
-}
-
-interface Module {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: Lesson[];
-}
-
-interface Lesson {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-}
-
-export interface CourseResponse {
-  id: string;
-  name: string;
-  description: string;
-  level: "LOW" | "MEDIUM" | "HIGH";
-  workload: number;
-  learning: string;
-  skills: string;
-  trailId: string;
-  modules: Module[];
-  // teacherId: string;
-  teacherName: string;
-  teacherDescription: string;
-  imageTeacher: string;
-  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
-}
+// Components
+import CardProgress from "./Components/CardProgress/CardProgress";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import CardCourse from "./Components/CardCourse/CardCourse";
+import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
+import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 
 const CursosScreenTeste = () => {
   const [intern, setIntern] = useState(false);
@@ -145,7 +87,7 @@ const CursosScreenTeste = () => {
     func();
   }, []);
 
-  // if (data.length === 0) return <div>loading...</div>;
+  if (data.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -197,54 +139,56 @@ const CursosScreenTeste = () => {
             />
           )}
           {progressIsOpen && (
-            <CardProgress onClose={() => setProgressIsOpen(false)} />
+            <CardProgress
+              trailId={trailId}
+              onClose={() => setProgressIsOpen(false)}
+            />
           )}
           {addCourseIsOpen && (
             <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />
           )}
         </div>
         <div className={styles.cards}>
-          {!intern &&
-            // ? data.map(
-            //     (course: CourseResponse, index) =>
-            //       course.trailId === trailId && (
-            //         <CardCourse
-            //           intern={intern}
-            //           onClickIrAoCurso={() => console.log("Foi para o curso")}
-            //           onClickColectEmblem={() =>
-            //             console.log("Coletou o emblema")
-            //           }
-            //           onClickEditCourse={() => {
-            //             setCourseId(course.id);
-            //             setSelectedCourse(course);
-            //             setEditCourseIsOpen(true);
-            //           }}
-            //           key={index}
-            //           index={index}
-            //           title={course.name}
-            //           concluded={1}
-            //           emblem={false} //falta ver
-            //           type={course.type}
-            //         />
-            //       )
-            //   )
-            // :
-            coursesUser.map((course, index) => (
-              <CardCourse
-                key={index}
-                index={index}
-                intern={intern}
-                onClickIrAoCurso={() => console.log("Foi para o curso")}
-                onClickColectEmblem={() => console.log("Coletou o emblema")}
-                onClickEditCourse={() => setEditCourseIsOpen(true)}
-                title={course.name}
-                concluded={
-                  course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
-                }
-                emblem={true} //falta ver
-                type={course.type}
-              />
-            ))}
+          {!intern
+            ? data.map(
+                (course: CourseResponse, index) =>
+                  course.trailId === trailId && (
+                    <CardCourse
+                      intern={intern}
+                      onClickIrAoCurso={() => console.log("Foi para o curso")}
+                      onClickColectEmblem={() =>
+                        console.log("Coletou o emblema")
+                      }
+                      onClickEditCourse={() => {
+                        setCourseId(course.id);
+                        setSelectedCourse(course);
+                        setEditCourseIsOpen(true);
+                      }}
+                      key={index}
+                      index={index}
+                      title={course.name}
+                      concluded={1}
+                      emblem={false} //falta ver
+                      type={course.type}
+                    />
+                  )
+              )
+            : coursesUser.map((course, index) => (
+                <CardCourse
+                  key={index}
+                  index={index}
+                  intern={intern}
+                  onClickIrAoCurso={() => console.log("Foi para o curso")}
+                  onClickColectEmblem={() => console.log("Coletou o emblema")}
+                  onClickEditCourse={() => setEditCourseIsOpen(true)}
+                  title={course.name}
+                  concluded={
+                    course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
+                  }
+                  emblem={true} //falta ver
+                  type={course.courseStyle}
+                />
+              ))}
 
           {editCourseIsOpen && (
             <CardAddCourse
