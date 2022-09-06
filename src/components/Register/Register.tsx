@@ -41,34 +41,37 @@ const Register = ({ type = "home" }: RegisterProps) => {
   const [records, setRecords] = useState<Record[]>([]);
 
   const [time, setTime] = useState(0);
-  const [controler, setControler] = useState(false);
 
   const changeData = async () => {
     if (type === "home") {
       await getRecordOfDay("fabiana.kamo@rethink.dev")
         .then((response) => {
           setRecords(response);
+          let helper = 0;
+          response.map((record: any) => {
+            helper += record.time;
+          });
+          helper = helper / 60;
+          setTime(Math.trunc(helper));
         })
         .catch((err) => console.error(err));
     } else {
       await getGroupTaskByTag("fabiana.kamo@rethink.dev")
         .then((response) => {
           setTags(response);
+          let helper = 0;
+          response.map((tag: any) => {
+            helper += tag.realTime;
+          });
+          helper = helper / 60;
+          setTime(Math.trunc(helper));
         })
         .catch((err) => console.error(err));
     }
   };
 
-  const changeHours = async () => {
-    tags.map((tag) => {
-      return setTime(time + tag.realTime);
-    });
-    setTime(time / 60);
-  };
-
   useEffect(() => {
     changeData();
-    changeHours();
   }, []);
 
   let colorIcon = "";
@@ -115,7 +118,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
               <div className={styles.register_header_infos_hoursRegisters}>
                 <div className={styles.register_header_infos_hours}>
                   <p className={styles.register_header_infos_hoursDone}>
-                    {type === "home" ? "*h" : time}
+                    {time}
                   </p>
                   <p className={styles.register_header_infos_hoursTotal}>
                     /{type === "home" ? "6h" : "120h"}
