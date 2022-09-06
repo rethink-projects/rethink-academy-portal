@@ -101,9 +101,9 @@ const Class = () => {
   const { user } = useAuth();
   const location = useLocation();
   let id = location.pathname.split("/");
-
   const idCourse = id[4];
   const idClass = id[6];
+
   const [indexDiv, setIndexDiv] = useState(1);
   const [urlLesson, setUrlLesson] = useState("");
 
@@ -119,11 +119,11 @@ const Class = () => {
     setUrlLesson(urlLesson + "?autoplay=1");
 
     !lessonsWatched.includes(idClass) && lessonsWatched.push(idClass);
-    console.log(lessonsWatched);
-
     const response = await api.put(`/user/${user.email}`, {
       watched: lessonsWatched,
     });
+
+    return response;
   };
 
   useEffect(() => {
@@ -137,7 +137,6 @@ const Class = () => {
         setLessonsWatched(responseUser.data.user.watched);
 
         const responseClass = await api.get(`/lesson/${idClass}`);
-
         setLesson(responseClass.data.lesson);
 
         const responseModule = await api.get(
@@ -198,8 +197,6 @@ const Class = () => {
         {modules &&
           modules.map((module, index) => {
             let lessons: any = [];
-            // countIdModule++;
-            // moduleOrder = index + 1;
 
             module.lessons.map((lesson, index) => {
               lessons.push({
