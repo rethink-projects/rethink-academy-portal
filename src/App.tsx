@@ -6,6 +6,7 @@ import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
+import RequireAuth from "./services/auth";
 
 function App() {
   return (
@@ -18,7 +19,14 @@ function App() {
             <Route path='/dashboard' element={<Layout />}>
               <Route index element={<HomeScreen />} />
             </Route>
-            <Route path='/playground' element={<PlaygroundScreen />} />
+            <Route
+              path='/playground'
+              element={
+                <RequireAuth>
+                  <PlaygroundScreen />
+                </RequireAuth>
+              }
+            />
           </Route>
         </Routes>
       </AuthProvider>
