@@ -54,3 +54,15 @@ export const getGroupTaskByTag = async(email: string) => {
     return;
   }
 }
+
+export const getRecordOfDay = async (email: string) => {
+  try{
+    const { data } = await axios.get(
+      `http://localhost:4000/api/tasks/day/${email}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}

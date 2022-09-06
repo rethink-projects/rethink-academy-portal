@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Styles
 import styles from "./Register.module.css";
@@ -11,36 +11,89 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+import {
+  getGroupTaskByTag,
+  getRecordOfDay,
+} from "../../services/backend/Tasks";
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
 };
 
 const Register = ({ type = "home" }: RegisterProps) => {
-  const tasks = [
-    {
-      title: "Protótipo - Portal Rethink",
-      status: "Em progresso" as const,
-      time: "--",
-    },
-    {
-      title: "Alinhamento com a Squad",
-      status: "Concluído" as const,
-      time: "1h",
-    },
-    {
-      title: "Redesign Uber - Curso UX...",
-      status: "Concluído" as const,
-      time: "45min",
-    },
-    { title: "Daily Engenharia", status: "Concluído" as const, time: "15min" },
-  ];
+  type Tag = {
+    title: string;
+    realTime: number;
+    hours: number;
+    minutes: number;
+  };
+
+  type Record = {
+    id: string;
+    name: string;
+    status: "Concluído" | "Em progresso" | "Validação" | "Prioridade";
+    hours: number;
+    minutes: number;
+    time: number;
+  };
+
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
+
+  const [time, setTime] = useState(0);
+
+  const changeData = async () => {
+    if (type === "home") {
+      await getRecordOfDay("fabiana.kamo@rethink.dev")
+        .then((response) => {
+          setRecords(response);
+          let helper = 0;
+          response.map((record: any) => {
+            helper += record.time;
+          });
+          helper = helper / 60;
+          setTime(Math.trunc(helper));
+        })
+        .catch((err) => console.error(err));
+    } else {
+      await getGroupTaskByTag("fabiana.kamo@rethink.dev")
+        .then((response) => {
+          setTags(response);
+          let helper = 0;
+          response.map((tag: any) => {
+            helper += tag.realTime;
+          });
+          helper = helper / 60;
+          setTime(Math.trunc(helper));
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  useEffect(() => {
+    changeData();
+  }, []);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");
 
   let heightContainer = "";
   type === "intern" ? (heightContainer = "small") : (heightContainer = "large");
+
+  const formatDate = (hours: number, minutes: number) => {
+    if (minutes === 0) {
+      return `${hours}h`;
+    } else if (minutes < 10) {
+      if (hours === 0) {
+        return `0${minutes}min`;
+      }
+      return `${hours}h0${minutes}min`;
+    }
+
+    if (hours === 0) return `${minutes}min`;
+
+    return `${hours}h${minutes}min`;
+  };
 
   return (
     <div className={styles.register_container}>
@@ -64,7 +117,9 @@ const Register = ({ type = "home" }: RegisterProps) => {
               </div>
               <div className={styles.register_header_infos_hoursRegisters}>
                 <div className={styles.register_header_infos_hours}>
-                  <p className={styles.register_header_infos_hoursDone}>3h</p>
+                  <p className={styles.register_header_infos_hoursDone}>
+                    {time}
+                  </p>
                   <p className={styles.register_header_infos_hoursTotal}>
                     /{type === "home" ? "6h" : "120h"}
                   </p>
@@ -100,22 +155,21 @@ const Register = ({ type = "home" }: RegisterProps) => {
             }
           >
             <>
-              {tasks && type === "home"
-                ? tasks.map((task) => (
+              {type === "home"
+                ? records.map((record) => (
                     <Tasks
-                      key={task.title}
-                      title={task.title}
-                      status={task.status}
-                      time={task.time}
+                      key={record.id}
+                      title={record.name}
+                      status={record.status}
+                      time={formatDate(record.hours, record.minutes)}
                     />
                   ))
-                : tasks.map((task) => {
+                : tags.map((tag) => {
                     return (
                       <Tasks
-                        key={task.title}
-                        title={task.title}
-                        status={task.status}
-                        time={task.time}
+                        key={tag.title}
+                        title={tag.title}
+                        time={formatDate(tag.hours, tag.minutes)}
                         type={type}
                       />
                     );

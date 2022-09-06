@@ -10,7 +10,7 @@ import SpeakerNotesOutlinedIcon from "@mui/icons-material/SpeakerNotesOutlined";
 
 type TasksProps = {
   title: string;
-  status: "Concluído" | "Em progresso" | "Validação" | "Prioridade";
+  status?: "Concluído" | "Em progresso" | "Validação" | "Prioridade";
   time: string;
   type?: "ambassador" | "intern" | "home";
 };
