@@ -20,19 +20,19 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setUser({
       ...userFromFirebase,
-      name: backendUser.name,
+      /* name: backendUser.name,
       id: backendUser.id,
       role: backendUser.role,
-      title: backendUser.title,
+      title: backendUser.title, */
     });
     localStorage.setItem(
       "@portarethinkacademy:user",
       JSON.stringify({
         ...userFromFirebase,
-        name: backendUser.name,
+        /*  name: backendUser.name,
         id: backendUser.id,
         role: backendUser.role,
-        title: backendUser.title,
+        title: backendUser.title, */
       })
     );
     callback();
