@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import CustomBarChart, { data } from "./components/chart/BarChart";
 import Switch from "./components/switch/Switch";
 import Tag from "./components/tags/Tag";
-import styles from "./PersonalDevelopmentScreen.module.css";
+import styles from "./PersonalDevelopmentChart.module.css";
+import { useAuth } from "../../context/AuthContext";
 
-const PersonalDevelopmentScreen = () => {
+const PersonalDevelopmentChart = () => {
   const [graphData, setGraphData] = useState<
     {
       name: string;
@@ -14,6 +15,7 @@ const PersonalDevelopmentScreen = () => {
     }[]
   >([]);
   const [skillType, setSkillType] = useState(true);
+
   const [tagType, setTagType] = useState<
     "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT"
   >("ENGINEERING");
@@ -79,4 +81,4 @@ const PersonalDevelopmentScreen = () => {
   );
 };
 
-export default PersonalDevelopmentScreen;
+export default PersonalDevelopmentChart;
