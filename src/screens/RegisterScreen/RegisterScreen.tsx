@@ -29,7 +29,7 @@ const RegisterScreen = () => {
     time: string;
   };
 
-  const [tasks, setTasks2] = useState<task[]>([]);
+  const [tasks, setTasks2] = useState<any[]>([]);
 
   return (
     <div className={styles.register_container}>
@@ -82,7 +82,7 @@ const RegisterScreen = () => {
             ) : (
               <>
                 {tasks.length > 0 &&
-                  tasks.map((task, index) => (
+                  tasks.map((day: any[], index) => (
                     <div key={index}>
                       <div className={styles.accordion_date}>
                         <svg
@@ -99,19 +99,24 @@ const RegisterScreen = () => {
                             fill="#6C6F93"
                           />
                         </svg>
-                        {/* <p> {`${task.day} de ${task.month}`}</p> */}
-                        <p> {`${new Date(task.taskDate)}`}</p>
+                        <p> {day[0].taskDate}</p>
                       </div>
-                      <AccordionMM
-                        title={task.name}
-                        duration={task.duration}
-                        description={task.description}
-                        tags={[task.tags]}
-                        status={[task.status]}
-                        time={`${task.startTime} às ${task.endTime}`}
-                        size="small"
-                        hasIcons={true}
-                      />
+                      <div className={styles.searchTasks_Tasks}>
+                        {day.map((task, index) => {
+                          return (
+                            <AccordionMM
+                              title={task.name}
+                              duration={task.duration}
+                              description={task.description}
+                              tags={[task.tags]}
+                              status={[task.status]}
+                              time={`${task.startTime} às ${task.endTime}`}
+                              size="small"
+                              hasIcons={true}
+                            />
+                          );
+                        })}
+                      </div>
                     </div>
                   ))}
               </>
