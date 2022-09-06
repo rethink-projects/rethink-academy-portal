@@ -113,12 +113,17 @@ const Class = () => {
     setIndexDiv(-1);
     setUrlLesson(urlLesson + "?autoplay=1");
 
-    !lessonsWatched.includes(idClass) && lessonsWatched.push(idClass);
-    const response = await api.put(`/user/${user.email}`, {
-      watched: lessonsWatched,
-    });
+    if (!lessonsWatched.includes(idClass)) {
+      lessonsWatched.push(idClass);
+      const response = await api.put(`/user/${user.email}`, {
+        watched: lessonsWatched,
+      });
 
-    return response;
+      const responseModule = await api.get(
+        `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
+      );
+      setModules(responseModule.data.modules);
+    }
   };
 
   useEffect(() => {
