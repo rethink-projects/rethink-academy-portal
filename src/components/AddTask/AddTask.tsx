@@ -89,7 +89,7 @@ function AddTask({}: AddTaskProps) {
             <div className={styled.taskName}>
               <p>Nome da atividade</p>
               <InputText
-                type={"default"}
+                type={"extraLarge"}
                 placeholder={"Placeholder"}
                 hasIcon={true}
                 nameInput={""}

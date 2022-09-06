@@ -12,6 +12,10 @@
   width: 329px;
 }
 
+.inputText_containerExtraLarge {
+  width: 520px;
+}
+
 .inputText_containerLarge {
   gap: 12px;
 }
@@ -57,6 +61,7 @@
   border-radius: 4px;
 }
 .inputText_inputLarge,
+.inputText_inputExtraLarge,
 .inputText_inputDefault,
 .inputText_inputSmall,
 .inputText_inputMicro {
@@ -81,6 +86,12 @@
   height: 48px;
 }
 
+.inputText_inputExtraLarge {
+  padding: 0px 12px;
+  height: 48px;
+  width: 520px;
+}
+
 .inputText_inputSmall {
   padding: 0px 8px;
   gap: 10px;
@@ -94,11 +105,13 @@
 }
 
 .inputText_inputLarge:focus,
+.inputText_inputExtraLarge:focus,
 .inputText_inputDefault:focus,
 .inputText_inputBlock:focus,
 .inputText_inputSmall:focus,
 .inputText_inputMicro:focus,
 .inputText_inputLarge:focus-within,
+.inputText_inputExtraLarge:focus-within,
 .inputText_inputBlock:focus-within,
 .inputText_inputDefault:focus-within,
 .inputText_inputSmall:focus-within,
@@ -109,6 +122,7 @@
 }
 
 .inputText_inputLarge:hover,
+.inputText_inputExtraLarge:hover,
 .inputText_inputBlock:hover,
 .inputText_inputDefault:hover,
 .inputText_inputSmall:hover,
