@@ -50,7 +50,7 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
-            <AddTask />
+            {/* <AddTask /> */}
           </div>
           <div className={styles.register_reminders}>
             <Note />
@@ -105,6 +105,7 @@ const RegisterScreen = () => {
                         {day.map((task) => {
                           return (
                             <AccordionMM
+                              key={task.id}
                               title={task.name}
                               duration={task.duration}
                               description={task.description}
