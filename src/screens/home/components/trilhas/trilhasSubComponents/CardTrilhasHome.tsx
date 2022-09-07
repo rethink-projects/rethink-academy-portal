@@ -68,20 +68,21 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   };
 
   const unlockTrilha = (trail: string) => {
-    if (trail === "Produto" && atLeastOneCourseCompleted("Engenharia")) {
+    if (trail === "produto" && atLeastOneCourseCompleted("engenharia")) {
       return true;
     }
-    if (trail === "Design" && atLeastOneCourseCompleted("Produto")) {
+    if (trail === "design" && atLeastOneCourseCompleted("produto")) {
       return true;
     }
-    if (trail === "Engenharia" && atLeastOneCourseCompleted("Design")) {
+    if (trail === "engenharia" && atLeastOneCourseCompleted("design")) {
       return true;
     }
   };
 
   const atLeastOneCourseCompleted = (trail: string) => {
     return lessonUser?.maxLessons?.find(
-      (course: any) => course.completed && course.trail.name === trail
+      (course: any) =>
+        course.completed && course.trail.name.toLowerCase() === trail
     );
   };
 
@@ -95,20 +96,20 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
       mainUser = "Produto";
     }
 
-    if (trail.name === mainUser) {
+    if (trail.name.toLowerCase() === mainUser.toLowerCase()) {
       return true;
     }
-    if (trail.name === "Academy") {
+    if (trail.name.toLowerCase() === "academy") {
       return true;
     }
-    if (trail.name === "Design") {
-      return unlockTrilha("Design");
+    if (trail.name.toLowerCase() === "design") {
+      return unlockTrilha("design");
     }
-    if (trail.name === "Engenharia") {
-      return unlockTrilha("Engenharia");
+    if (trail.name.toLowerCase() === "engenharia") {
+      return unlockTrilha("engenharia");
     }
-    if (trail.name === "Produto") {
-      return unlockTrilha("Produto");
+    if (trail.name.toLowerCase() === "produto") {
+      return unlockTrilha("produto");
     }
   };
 
@@ -152,17 +153,15 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
       <div className={styles.state}>
         {checkWhichTrilhaUnlock() ? (
           <div className={styles.free}>
-            {getCoursesFromTrail(trail.id) && (
-              <>
-                <span>{calculoPorcentagem()}%</span>
-                <ProgressBar
-                  totalValue={getCoursesFromTrail(trail.id)!}
-                  relativeValue={getCompletedUserCourses(trail.id)!}
-                  size="small"
-                  width={110}
-                />
-              </>
-            )}
+            <>
+              <span>{calculoPorcentagem()}%</span>
+              <ProgressBar
+                totalValue={getCoursesFromTrail(trail.id)!}
+                relativeValue={getCompletedUserCourses(trail.id)!}
+                size="small"
+                width={110}
+              />
+            </>
           </div>
         ) : (
           <div className={styles.blocked}>
