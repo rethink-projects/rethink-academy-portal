@@ -4,6 +4,7 @@ import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
@@ -36,6 +37,7 @@ type TypeMaxLesson = {
 
 const CardTrilhasHome = ({ trail }: TrailType) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
@@ -134,6 +136,10 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
     }
   };
 
+  const handleClickTrail = () => {
+    navigate(`trilhas/${trail.id}`);
+  };
+
   const containerClass = atLeastOneCourse()
     ? styles.container_completed
     : styles.container;
@@ -141,6 +147,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
     <div
       style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}
       className={containerClass}
+      onClick={handleClickTrail}
     >
       <span className={styles.name_trilha}>{trail.name}</span>
       <div className={styles.divisoria}></div>
