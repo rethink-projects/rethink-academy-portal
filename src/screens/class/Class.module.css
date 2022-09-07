@@ -8,7 +8,7 @@
 .left_container {
   display: flex;
 
-  margin-left: 112px;
+  /* margin-left: 112px; */
   /* padding-right: 10px; */
   justify-content: center;
   width: 100%;
@@ -16,9 +16,9 @@
 }
 
 .class_class {
-  margin-right: 112px;
+  /* margin-right: 112px; */
   padding-top: 24px;
-  width: 1152px;
+  /* width: 1152px; */
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -94,6 +94,7 @@
 }
 
 .class_class_list {
+  /* background-color: aqua; */
   padding-top: 20px;
   min-width: 376px;
   height: 992px;

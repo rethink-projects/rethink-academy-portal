@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
-import Acordeon from "../../components/Acordeon/Acordeon";
+// import Acordeon from "../../components/Acordeon/Acordeon";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./Class.module.css";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/api";
+import Acordeon from "../../components/Acordeon/Acordeon";
 
 interface LessonResponse {
   completed: boolean;
