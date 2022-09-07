@@ -53,7 +53,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
 
   const getCoursesFromTrail = (trail: string) => {
     const allCourses = lessonUser?.maxLessons?.filter(
-      (course: any) => course.trail.name === trail
+      (course: any) => course.trail.id === trail
     ).length;
 
     return allCourses;
@@ -61,7 +61,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
 
   const getCompletedUserCourses = (trail: string) => {
     const completedCourses = lessonUser?.maxLessons?.filter(
-      (course: any) => course.trail.name === trail && course.completed
+      (course: any) => course.trail.id === trail && course.completed
     ).length;
 
     return completedCourses;
@@ -113,8 +113,8 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   };
 
   const calculoPorcentagem = () => {
-    const max = getCoursesFromTrail(trail.name);
-    const completed = getCompletedUserCourses(trail.name);
+    const max = getCoursesFromTrail(trail.id);
+    const completed = getCompletedUserCourses(trail.id);
     if (max === 0) {
       return 0;
     }
@@ -123,9 +123,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   };
 
   const atLeastOneCourse = () => {
-    if (
-      getCoursesFromTrail(trail.name) === getCompletedUserCourses(trail.name)
-    ) {
+    if (getCoursesFromTrail(trail.id) === getCompletedUserCourses(trail.id)) {
       const coursesVerify = lessonUser?.maxLessons?.find(
         (course: any) => course.trail.id === trail.id
       );
@@ -154,12 +152,12 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
       <div className={styles.state}>
         {checkWhichTrilhaUnlock() ? (
           <div className={styles.free}>
-            {getCoursesFromTrail(trail.name) && (
+            {getCoursesFromTrail(trail.id) && (
               <>
                 <span>{calculoPorcentagem()}%</span>
                 <ProgressBar
-                  totalValue={getCoursesFromTrail(trail.name)!}
-                  relativeValue={getCompletedUserCourses(trail.name)!}
+                  totalValue={getCoursesFromTrail(trail.id)!}
+                  relativeValue={getCompletedUserCourses(trail.id)!}
                   size="small"
                   width={110}
                 />
