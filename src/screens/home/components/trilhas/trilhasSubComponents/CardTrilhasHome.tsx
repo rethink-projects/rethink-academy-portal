@@ -153,15 +153,17 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
       <div className={styles.state}>
         {checkWhichTrilhaUnlock() ? (
           <div className={styles.free}>
-            <>
-              <span>{calculoPorcentagem()}%</span>
-              <ProgressBar
-                totalValue={getCoursesFromTrail(trail.id)!}
-                relativeValue={getCompletedUserCourses(trail.id)!}
-                size="small"
-                width={110}
-              />
-            </>
+            {lessonUser && (
+              <>
+                <span>{calculoPorcentagem()}%</span>
+                <ProgressBar
+                  totalValue={getCoursesFromTrail(trail.id)!}
+                  relativeValue={getCompletedUserCourses(trail.id)!}
+                  size="small"
+                  width={110}
+                />
+              </>
+            )}
           </div>
         ) : (
           <div className={styles.blocked}>

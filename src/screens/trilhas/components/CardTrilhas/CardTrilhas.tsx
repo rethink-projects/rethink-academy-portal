@@ -187,47 +187,54 @@ const CardTrilhas = ({
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{trail.name}</h1>
           <p className={styles.card_content_description}>{trail.description}</p>
-          {user === "student" ? (
-            <>
-              <div className={card_progressBar}>
-                <span>{`${calculoPorcentagem()}%`}</span>
-                <ProgressBar
-                  width={242}
-                  relativeValue={getCompletedUserCourses(trail.id)!}
-                  totalValue={
-                    getCoursesFromTrail(trail.id)! > 0
-                      ? getCoursesFromTrail(trail.id)!
-                      : 1
-                  }
-                />
-              </div>
-              <p className={styles.legend_progressBar}>
-                {`${getCompletedUserCourses(trail.id)} de ${getCoursesFromTrail(
-                  trail.id
-                )} curso(s) concluído(s).`}
-              </p>
-            </>
-          ) : (
-            <>
-              <p className={styles.quantity_courses}>
-                {getCoursesFromTrail(trail.id)! > 1 ||
-                getCoursesFromTrail(trail.id) == 0
-                  ? `${getCoursesFromTrail(trail.id)} Cursos`
-                  : `${getCoursesFromTrail(trail.id)} Curso`}
-              </p>
-              <div id="edit" onClick={setModal} className={styles.edit}>
-                <ButtonWithIcon
-                  width={100}
-                  position="left"
-                  text="Editar"
-                  icon={<EditIcon />}
-                  size="small"
-                  type="primary"
-                />
-                <div id="edit_action" className={styles.overlap_button}></div>
-              </div>
-            </>
-          )}
+          {user === "student"
+            ? lessonUser && (
+                <>
+                  <div className={card_progressBar}>
+                    <span>{`${calculoPorcentagem()}%`}</span>
+                    <ProgressBar
+                      width={242}
+                      relativeValue={getCompletedUserCourses(trail.id)!}
+                      totalValue={
+                        getCoursesFromTrail(trail.id)! > 0
+                          ? getCoursesFromTrail(trail.id)!
+                          : 1
+                      }
+                    />
+                  </div>
+                  <p className={styles.legend_progressBar}>
+                    {`${getCompletedUserCourses(
+                      trail.id
+                    )} de ${getCoursesFromTrail(
+                      trail.id
+                    )} curso(s) concluído(s).`}
+                  </p>
+                </>
+              )
+            : lessonUser && (
+                <>
+                  <p className={styles.quantity_courses}>
+                    {getCoursesFromTrail(trail.id)! > 1 ||
+                    getCoursesFromTrail(trail.id) == 0
+                      ? `${getCoursesFromTrail(trail.id)} Cursos`
+                      : `${getCoursesFromTrail(trail.id)} Curso`}
+                  </p>
+                  <div id="edit" onClick={setModal} className={styles.edit}>
+                    <ButtonWithIcon
+                      width={100}
+                      position="left"
+                      text="Editar"
+                      icon={<EditIcon />}
+                      size="small"
+                      type="primary"
+                    />
+                    <div
+                      id="edit_action"
+                      className={styles.overlap_button}
+                    ></div>
+                  </div>
+                </>
+              )}
         </div>
       </div>
       {!checkWhichTrilhaUnlock() && user === "student" ? (
