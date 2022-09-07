@@ -74,7 +74,7 @@ const CardTrilhas = ({
 
   const getCompletedUserCourses = (trail: string) => {
     const completedCourses = lessonUser?.maxLessons?.filter(
-      (course: any) => course.trail.name === trail && course.completed
+      (course: any) => course.trail.id === trail && course.completed
     ).length;
 
     return completedCourses;
@@ -127,7 +127,7 @@ const CardTrilhas = ({
 
   const calculoPorcentagem = () => {
     const max = getCoursesFromTrail(trail.id);
-    const completed = getCompletedUserCourses(trail.name);
+    const completed = getCompletedUserCourses(trail.id);
     if (max === 0) {
       return 0;
     }
@@ -136,7 +136,7 @@ const CardTrilhas = ({
   };
 
   const atLeastOneCourse = () => {
-    if (getCoursesFromTrail(trail.id) === getCompletedUserCourses(trail.name)) {
+    if (getCoursesFromTrail(trail.id) === getCompletedUserCourses(trail.id)) {
       const coursesVerify = lessonUser?.maxLessons?.find(
         (course: any) => course.trail.id === trail.id
       );
@@ -193,7 +193,7 @@ const CardTrilhas = ({
                     <span>{`${calculoPorcentagem()}%`}</span>
                     <ProgressBar
                       width={242}
-                      relativeValue={getCompletedUserCourses(trail.name)!}
+                      relativeValue={getCompletedUserCourses(trail.id)!}
                       totalValue={
                         getCoursesFromTrail(trail.id)! > 0
                           ? getCoursesFromTrail(trail.id)!
@@ -203,7 +203,7 @@ const CardTrilhas = ({
                   </div>
                   <p className={styles.legend_progressBar}>
                     {`${getCompletedUserCourses(
-                      trail.name
+                      trail.id
                     )} de ${getCoursesFromTrail(
                       trail.id
                     )} curso(s) concluído(s).`}
