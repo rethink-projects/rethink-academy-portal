@@ -82,7 +82,7 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            onClick={handleLogout}
+            // onClick={handleLogout}
             text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
             customCss={

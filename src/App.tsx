@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
-import CursosScreen from "./screens/CoursesScreen/CursosScreen";
+import CourseScreen from "./screens/course/CourseScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
@@ -8,6 +8,7 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
+import CursosScreen from "./screens/CoursesScreen/CursosScreen";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
               <Route index element={<HomeScreen />} />
               <Route path="/dashboard/trilhas" element={<TrilhasScreen />} />
               <Route path="/dashboard/trilhas/:id" element={<CursosScreen />} />
+              <Route
+                path="/dashboard/trilhas/:id/curso/:id"
+                element={<CourseScreen />}
+              />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
