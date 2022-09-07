@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-// import Acordeon from "../../components/Acordeon/Acordeon";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import styles from "./Class.module.css";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
@@ -97,8 +96,8 @@ const Class = () => {
 
   const location = useLocation();
   let id = location.pathname.split("/");
-  const idCourse = id[4];
-  const idClass = id[6];
+  const courseId = id[4];
+  const lessonId = id[6];
 
   const [indexDiv, setIndexDiv] = useState(1);
   const [urlLesson, setUrlLesson] = useState("");
@@ -114,14 +113,14 @@ const Class = () => {
     setIndexDiv(-1);
     setUrlLesson(urlLesson + "?autoplay=1");
 
-    if (!lessonsWatched.includes(idClass)) {
-      lessonsWatched.push(idClass);
+    if (!lessonsWatched.includes(lessonId)) {
+      lessonsWatched.push(lessonId);
       const response = await api.put(`/user/${user.email}`, {
         watched: lessonsWatched,
       });
 
       const responseModule = await api.get(
-        `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
+        `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
       );
       setModules(responseModule.data.modules);
     }
@@ -137,11 +136,11 @@ const Class = () => {
         const responseUser = await api.get(`/user/${user.email}`);
         setLessonsWatched(responseUser.data.user.watched);
 
-        const responseClass = await api.get(`/lesson/${idClass}`);
+        const responseClass = await api.get(`/lesson/${lessonId}`);
         setLesson(responseClass.data.lesson);
 
         const responseModule = await api.get(
-          `/lesson/watched/${user.email}/${idClass}?courseId=${idCourse}`
+          `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
         );
         setModules(responseModule.data.modules);
         setModuleOrder(responseModule.data.moduleOrder);
