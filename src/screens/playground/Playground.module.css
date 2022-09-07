@@ -14,3 +14,13 @@
   margin-top: 15px;
   gap: 5px;
 }
+
+.main_content {
+  display: inline-block;
+  position: relative;
+}
+
+.main_content > iframe {
+  vertical-align: top;
+  pointer-events: none;
+}

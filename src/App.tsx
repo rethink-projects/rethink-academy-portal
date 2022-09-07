@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
 import CourseScreen from "./screens/course/CourseScreen";
+import Class from "./screens/class/Class";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
@@ -25,6 +26,10 @@ function App() {
               <Route
                 path="/dashboard/trilhas/:id/curso/:id"
                 element={<CourseScreen />}
+              />
+              <Route
+                path="/dashboard/trilhas/:id/curso/:id/aulas/:id"
+                element={<Class />}
               />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
