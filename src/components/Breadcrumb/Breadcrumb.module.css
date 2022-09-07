@@ -1,5 +1,6 @@
 .breadcrumbContainer {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 6px;
 }
@@ -25,5 +26,6 @@
   width: 16px;
 
   fill: var(--color-tertiary);
+
   margin-top: 2px;
 }

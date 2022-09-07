@@ -11,11 +11,12 @@
 }
 
 .divRight,
-.divLeft {
+.divLeft, .divCenter {
   display: flex;
 }
 
-.divLeft > span {
+.divCenter > p {
+  cursor: pointer;
   align-self: center;
 }
 
@@ -32,8 +33,11 @@
 /* Temas */
 
 .dark {
-  background-color: var(--color-tag-dark);
-  color: var(--color-base);
+  /* background-color: var(--color-tag-dark);
+  color: var(--color-base); */
+  background-color: #F9F9F9;
+  color: #706E64;
+  border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
 .dark .barra {
@@ -41,23 +45,41 @@
 }
 
 .dark:hover {
-  background-color: var(--color-tag-hover-dark);
-  color: var(--color-base);
+  /* background-color: var(--color-tag-hover-dark);
+  color: var(--color-base); */
+  background-color: #9DBA2B;
+  color: #1B1B1B;
+  border: 1px solid rgba(27, 27, 27, 0.3);
+}
+
+.dark:hover .barra {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .activeDark {
-  background-color: var(--color-base);
+  /* background-color: var(--color-base);
   border: 1px solid var(--color-tag-dark);
-  color: var(--color-tag-dark);
+  color: var(--color-tag-dark); */
+  background-color: #BDE034;
+  color: #3B3B3B;
+  border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
 .activeDark .barra {
-  background-color: var(--color-opacity-2);
+  /* background-color: var(--color-opacity-2); */
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .dark:active {
-  background-color: var(--color-tag-font-light);
-  color: var(--color-base);
+  /* background-color: var(--color-tag-font-light);
+  color: var(--color-base); */
+  background-color: #9DBA2B;
+  color: #1B1B1B;
+  border: 1px solid rgba(27, 27, 27, 0.3);
+}
+
+.dark:active .barra {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .light {

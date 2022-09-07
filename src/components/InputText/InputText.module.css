@@ -52,6 +52,7 @@
   align-items: center;
   box-sizing: border-box;
   gap: 14px;
+  font-size: 16px;
   background-color: #f9f9f9;
   border: 1px solid var(--color-tertiary-hover);
   border-radius: 4px;
@@ -65,7 +66,7 @@
   box-sizing: border-box;
   gap: 14px;
   width: 329px;
-  background-color: #f9f9f9;
+  background-color: transparent;
   border: 1px solid var(--color-tertiary-hover);
   border-radius: 4px;
 }
@@ -154,7 +155,7 @@
   outline: none;
   box-sizing: border-box;
   border: none;
-  background-color: #f9f9f9;
+  background-color: transparent;
   color: var(--color-secondary);
 }
 

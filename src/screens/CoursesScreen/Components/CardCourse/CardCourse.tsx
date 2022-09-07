@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonWithIcon from "../../../components/ButtonWithIcon/ButtonWithIcon";
+import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import styles from "./CardCourse.module.css";
 import IconVerified from "@mui/icons-material/VerifiedOutlined";
 import IconTask from "@mui/icons-material/TaskAltOutlined";
@@ -12,21 +12,25 @@ type cardCourseProp = {
   //   1: concluido, 2: encaminhado, 3: não começou ainda
   concluded: number;
   onClickIrAoCurso: () => void;
-  onClickColetarEmblema: () => void;
+  onClickColectEmblem: () => void;
+  onClickEditCourse: () => void;
   intern: boolean;
   emblem: boolean;
+  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  index: number;
 };
 
 const CardCurso = ({
-  onClickColetarEmblema,
+  onClickColectEmblem,
   onClickIrAoCurso,
+  onClickEditCourse,
   title,
   concluded,
   intern,
   emblem,
+  type,
+  index,
 }: cardCourseProp) => {
-  // console.log("Tem emblema? " + emblem + "\nCompletou o curso? " + concluded);
-
   const textConcluded =
     concluded === 1
       ? "Parabéns! Você concluiu esse curso!"
@@ -34,7 +38,7 @@ const CardCurso = ({
       ? "Você ainda não terminou esse curso."
       : "Você ainda não começou esse curso.";
 
-  let textButton = "Editar Trilha";
+  let textButton = "Editar curso";
   let icon = <CreateOutlinedIcon />;
   let disabled = false;
 
@@ -50,12 +54,20 @@ const CardCurso = ({
 
   return (
     <div
-      className={
-        intern ? styles.container_card : styles.container_card_ambassador
-      }
+      className={styles.container_card}
+      style={{ animationDelay: `${index}05ms` }}
     >
       <div className={styles.description_card}>
-        <p className={styles.legend_card}>Curso | Rethink Academy</p>
+        <p className={styles.legend_card}>
+          {type === "COURSE"
+            ? "Curso "
+            : type === "LECTURE"
+            ? "Palestra "
+            : type === "TRAINING"
+            ? "Treinamento "
+            : "Workshop "}
+          | Rethink Academy
+        </p>
         <h1 className={styles.title_card}>{title}</h1>
         {intern && (
           <div className={styles.container_status_card}>
@@ -70,11 +82,7 @@ const CardCurso = ({
           </div>
         )}
       </div>
-      <div
-        className={
-          intern ? styles.actions_card : styles.actions_card_embassador
-        }
-      >
+      <div className={styles.actions_card_embassador}>
         <ButtonWithIcon
           onClick={onClickIrAoCurso}
           icon={<IconArrow />}
@@ -85,7 +93,7 @@ const CardCurso = ({
           size="medium"
         />
         <ButtonWithIcon
-          onClick={onClickColetarEmblema}
+          onClick={!intern ? onClickEditCourse : onClickColectEmblem}
           icon={icon}
           width={218}
           position="right"

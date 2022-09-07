@@ -1,5 +1,4 @@
-.container_card,
-.container_card_ambassador {
+.container_card {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -9,15 +8,16 @@
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   background-color: var(--color-input);
-}
-
-.container_card {
-  padding: 29px 32px;
+  transition: all 0.3s ease;
+  transform: translateY(150px);
+  /* /////////////////////////////// */
+  animation: slowY 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
 }
 
 .description_card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 16px;
   max-height: 118px;
 }
@@ -69,13 +69,19 @@
 .actions_card_embassador {
   display: flex;
   gap: 10px;
-}
-
-.actions_card {
   flex-direction: column;
 }
 
-.actions_card_embassador {
-  flex-direction: row-reverse;
-  align-items: center;
+@keyframes slowY {
+  0% {
+    /* background-color: rebeccapurple; */
+    background-color: var(--color-primary-hover);
+    opacity: 0.9;
+    /* display: none; */
+    transform: translateY(150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }

@@ -44,8 +44,10 @@
 }
 
 .dropdown_options_container {
-  position: relative;
-  /* width: inherit; */
+  max-height: 300px;
+  overflow-y: auto;
+  position: absolute;
+  width: inherit;
 }
 .dropdown_option {
   display: flex;
@@ -54,6 +56,7 @@
   background-color: var(--color-base);
 
   padding: 0 12px;
+  
 }
 .dropdown_option:hover {
   background-color: #e2fa85;

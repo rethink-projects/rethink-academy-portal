@@ -1,0 +1,37 @@
+.InputText_inputText_inputDefault__YTpTz {
+    width: 520px !important;
+}
+
+.InputText_inputText_inputLarge__5Huwp {
+    width: 520px !important;
+    height: 186px !important;
+    padding-bottom: 150px !important;
+    padding-top: 16px !important;
+}
+.InputText_inputText_inputLarge__5Huwp > input {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+
+.SimpleButton_small__dSZMs {
+    width: 174px !important;
+    height: 40px !important;
+    padding: 0px 30px !important;
+}
+
+.DatePicker_default__ozHxn {
+    width: 520px !important;
+}
+
+.DatePicker_datePicker_container__JLKZ- {
+    width: 520px !important;
+    border: 1px solid var(--color-tertiary-hover) !important;
+}
+
+.DatePicker_datePicker_content__epgpw > p {
+    color: var(--color-tertiary-active) !important;
+}
+
+.DatePicker_datePicker_active__7bwgG {
+    width: 520px !important;
+}
