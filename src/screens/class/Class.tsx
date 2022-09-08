@@ -184,7 +184,24 @@ const Class = () => {
     <div className={styles.class_container}>
       <div className={styles.left_container}>
         <div className={styles.class_class}>
-          <Breadcrumb breadcrumbItems={getBreadcrumbs()} />
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/dashboard" },
+              { title: "Cursos", link: "/dashboard/trilhas" },
+              {
+                title: `${trailName}`,
+                link: `/dashboard/trilhas/${trailId}`,
+              },
+              {
+                title: `${courseName}`,
+                link: `/dashboard/trilhas/${trailId}/curso/${courseId}`,
+              },
+              {
+                title: `Aula ${moduleOrder}.${lessonOrder}`,
+                link: "#",
+              },
+            ]}
+          />
           <div className={styles.class_title}>
             <IconVideoCam />
             <h1>

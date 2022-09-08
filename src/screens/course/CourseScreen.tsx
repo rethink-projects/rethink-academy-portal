@@ -61,6 +61,7 @@ const CourseScreen = () => {
   const [modalModule, setModule] = useState<TypeModule>();
   // const [course, setCourse] = useState<TypeCourse>();
   const [course, setCourse] = useState<any>();
+  const [nameTrail, setNameTrail] = useState("");
   const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
@@ -103,6 +104,7 @@ const CourseScreen = () => {
         .then((response) => {
           if (response.data.course) {
             setCourse(response.data.course);
+            setNameTrail(response.data.course.trail.name);
           }
         });
 
@@ -130,7 +132,7 @@ const CourseScreen = () => {
 
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
-    console.log("Não sou embaçador");
+    // console.log("Não sou embaçador");
 
     let i = 1;
     //se o módulo for o primeiro
@@ -174,25 +176,6 @@ const CourseScreen = () => {
     return "Iniciante";
   };
 
-  const getBreadcrumbs = () => {
-    const linkHome = { title: "Home", link: "/" };
-    const linkTrilhas = { title: "Trilhas", link: "/trilhas" };
-    const linkCourses = { title: "Cursos", link: "/trilhas/" + trailId };
-    const linkCourse = { title: course.name, link: "asdsa" };
-    return [linkHome, linkTrilhas, linkCourses, linkCourse];
-    // const linkHome = { title: "Home", link: "/dashboard" };
-    // const linkTrail = { title: "Cursos", link: "/dashboard/trilhas" };
-    // const linkTrailSelected = {
-    //   title: `${course.name}`,
-    //   link: `/dashboard/trilhas/${course.id}`,
-    // };
-    // const linkCourse = {
-    //   title: `${course.name}`,
-    //   link: "#",
-    // };
-    // return [linkHome, linkTrail, linkTrailSelected, linkCourse];
-  };
-
   const setAddModuleModal = () => {
     setModule(undefined);
     setModuleModalType("add");
@@ -204,7 +187,21 @@ const CourseScreen = () => {
     <div className={styles.box}>
       <div className={styles.container}>
         <div className={styles.content_course}>
-          <Breadcrumb breadcrumbItems={getBreadcrumbs()} />
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/dashboard" },
+              { title: "Cursos", link: "/dashboard/trilhas" },
+              {
+                title: `${nameTrail}`,
+                // title: `nome da trilha`,
+                link: `/dashboard/trilhas/${trailId}`,
+              },
+              {
+                title: `${course.name}`,
+                link: "#",
+              },
+            ]}
+          />
           <div className={styles.header}>
             <div className={styles.header_left}>
               <h1 className={styles.title}>{course.name}</h1>
