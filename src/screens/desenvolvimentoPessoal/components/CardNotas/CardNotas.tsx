@@ -13,7 +13,11 @@ const CardNotas = () => {
   return (
     <div className={style.cardContainer}>
       <div className={style.table}>
-        <TableContent handleClick={() => {navigate("/notas")}} />
+        <TableContent
+          handleClick={() => {
+            navigate("/dashboard/notas");
+          }}
+        />
       </div>
       <ButtonWithIcon
         type="secondary"
@@ -22,7 +26,7 @@ const CardNotas = () => {
         icon={<AddOutlinedIcon />}
         width={622}
         onClick={() => {
-          navigate("/notas");
+          navigate("/dashboard/notas");
         }}
         position="left"
       />
