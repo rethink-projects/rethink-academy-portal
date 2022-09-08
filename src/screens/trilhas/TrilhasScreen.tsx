@@ -86,7 +86,7 @@ const TrilhasScreen = () => {
   };
 
   return (
-    <>
+    <div className={styles.body}>
       <div className={styles.container}>
         <>
           <Breadcrumb
@@ -137,7 +137,7 @@ const TrilhasScreen = () => {
           onClose={() => setModalIsOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 
