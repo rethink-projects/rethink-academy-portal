@@ -95,9 +95,9 @@ const CursosScreenTeste = () => {
       <div className={styles.container_cursos}>
         <Breadcrumb
           breadcrumbItems={[
-            { title: "Home", link: "/home" },
-            { title: "Trilhas", link: "/trilhas" },
-            { title: "Cursos", link: "#" },
+            { title: "Home", link: "/dashboard" },
+            { title: "Cursos", link: "/dashboard/trilhas" },
+            { title: `${trail?.name}`, link: "#" },
           ]}
         />
         <div className={styles.title}>

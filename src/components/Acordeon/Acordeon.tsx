@@ -8,7 +8,7 @@ import IconPadlock from "@mui/icons-material/LockOutlined";
 
 type AcordeonProps = {
   width?: number;
-  module?: Module;
+  module: Module;
 };
 
 type Module = {
@@ -27,29 +27,10 @@ type Class = {
   order: number;
   duration: string;
   type: "video" | "audio" | "activity";
+  onClickItem: () => void;
 };
 
-const Acordeon = ({
-  width = 348,
-  module = {
-    id: 1,
-    name: "Aqui está o nome do módulo",
-    blocked: false,
-    completed: true,
-    classes: [
-      {
-        id: "xasdxcdefewr",
-        name: "O nome dessa aula é esse",
-        url: "link",
-        completed: true,
-        description: "texto de descrição",
-        order: 1,
-        duration: "(mm:ss)",
-        type: "video",
-      },
-    ],
-  },
-}: AcordeonProps) => {
+const Acordeon = ({ width = 348, module }: AcordeonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const classes: Array<Class> = module.classes!;
 
@@ -82,8 +63,13 @@ const Acordeon = ({
       </div>
       {isOpen && classes != null && (
         <div className={styles.acordeon_container}>
-          {classes.map((clas) => (
-            <div className={styles.acordeon_item} style={{ width: width + 2 }}>
+          {classes.map((clas, index) => (
+            <div
+              key={index}
+              onClick={clas.onClickItem}
+              className={styles.acordeon_item}
+              style={{ width: width + 2 }}
+            >
               <div className={styles.acordeon_left_side}>
                 <IconVideoCam />
                 {clas.name}

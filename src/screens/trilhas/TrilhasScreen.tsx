@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 import { useAuth } from "../../context/AuthContext";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
 type TypeTrails = {
   name: string;
@@ -88,8 +89,14 @@ const TrilhasScreen = () => {
     <>
       <div className={styles.container}>
         <>
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/dashboard" },
+              { title: "Cursos", link: "#" },
+            ]}
+          />
           <div className={styles.text_container}>
-            <div className={styles.title}>Trilhas</div>
+            <div className={styles.title}>Cursos</div>
             <div className={styles.description}>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text

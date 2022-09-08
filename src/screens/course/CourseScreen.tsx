@@ -190,6 +190,17 @@ const CourseScreen = () => {
     const linkCourses = { title: "Cursos", link: "/trilhas/" + trailId };
     const linkCourse = { title: course.name, link: "asdsa" };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
+    // const linkHome = { title: "Home", link: "/dashboard" };
+    // const linkTrail = { title: "Cursos", link: "/dashboard/trilhas" };
+    // const linkTrailSelected = {
+    //   title: `${course.name}`,
+    //   link: `/dashboard/trilhas/${course.id}`,
+    // };
+    // const linkCourse = {
+    //   title: `${course.name}`,
+    //   link: "#",
+    // };
+    // return [linkHome, linkTrail, linkTrailSelected, linkCourse];
   };
 
   const setAddModuleModal = () => {
