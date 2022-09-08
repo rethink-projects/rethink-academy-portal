@@ -36,8 +36,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
   useEffect(() => {}, [usersProgress]);
 
   const func = async () => {
-    const responseCourses = await api.get(`/progress/idDoAcademy`);
-    // const responseCourses = await api.get(`/progress/${trailId}`);
+    const responseCourses = await api.get(`/progress/${trailId}`);
     setUsersProgress(responseCourses.data.usersProgress);
     setModulesQnt(responseCourses.data.modulesQnt);
     setCourses(responseCourses.data.courses);
