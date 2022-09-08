@@ -1,7 +1,7 @@
 .screenInner {
   background-color: #f4f4f4;
 
-  height: inherit;
+  height: auto;
 
   padding: 24px 0px 53px 50px;
 }
