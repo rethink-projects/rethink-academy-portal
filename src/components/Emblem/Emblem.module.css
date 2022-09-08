@@ -1,0 +1,72 @@
+/* Sizes */
+
+.big {
+  position: relative;
+  width: 94px;
+  height: 94px;
+
+  font-size: 20px;
+}
+
+.default {
+  position: relative;
+  width: 50px;
+  height: 50px;
+
+  font-size: 10px;
+}
+
+.small {
+  position: relative;
+  width: 32px;
+  height: 32px;
+
+  font-size: 6px;
+}
+
+/* img */
+
+img {
+  width: inherit;
+  height: inherit;
+}
+
+/* Number */
+.numberContainer {
+  box-sizing: border-box;
+
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+
+  height: 44%;
+  width: 44%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--color-secondary);
+  border: 2px solid var(--color-base);
+  border-color: var(--color-base);
+  border-radius: 50%;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: inherit;
+  line-height: 120%;
+  color: var(--color-base);
+}
+
+.big div {
+  border-width: 3px;
+}
+
+.default div {
+  border-width: 2px;
+}
+
+.small div {
+  border-width: 1.6px;
+}
