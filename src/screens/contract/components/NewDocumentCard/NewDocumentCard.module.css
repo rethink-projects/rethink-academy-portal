@@ -5,6 +5,8 @@
   border: 1px dashed var(--color-icon-background);
   border-radius: 4px;
   margin-bottom: 16px;
+  word-break: break-word;
+  position: relative;
 }
 
 .card_inner_container {
@@ -14,6 +16,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 8px;
+  max-height: 245.39px;
 }
 
 .card_inner_container span {
@@ -34,15 +37,22 @@
 
 .card_inner_container p {
   font-weight: 400;
+  width: 164px;
   font-size: 14px;
   line-height: 21px;
   text-align: center;
   color: var(--color-tertiary-active);
-  margin-bottom: 40px;
+  position: absolute;
+  margin-top: 190px;
 }
 
 .inner_container svg {
   transform: scale(1.8);
   margin-top: 24px;
   margin-bottom: 12px;
+}
+
+.container_button {
+  position: absolute;
+  margin-top: 340px;
 }

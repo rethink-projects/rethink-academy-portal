@@ -31,6 +31,12 @@ import { TextField } from "@mui/material";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 
+type fileType = {
+  title: string;
+  url: string;
+  id: string;
+};
+
 export type infoType = {
   email: string;
   college: string;
@@ -54,6 +60,12 @@ const ContractScreen = () => {
     const info = await axios.get(`http://localhost:4000/api/info/${email}`);
     return info.data.info;
   };
+
+  const getFiles = async () => {
+    const files = await axios.get(`http://localhost:4000/api/bucket`);
+    return files;
+  };
+  console.log({ getFiles });
 
   const handlerContractStatus = (value: any) => {
     setContractStatus(value);

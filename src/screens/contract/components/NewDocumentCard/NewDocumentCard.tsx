@@ -28,7 +28,7 @@ const NewDocumentCard = (props: any) => {
   const handleUploadFile = async () => {
     const file = acceptedFiles[0];
     if (file) {
-      await uploadFile(file.name, acceptedFiles[0], "contrato");
+      await uploadFile(file.name, acceptedFiles[0], file.name);
     } else {
       notify({
         type: "error",
@@ -40,17 +40,33 @@ const NewDocumentCard = (props: any) => {
 
   return (
     <div className={styles.card_container}>
-      {/* <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} /> */}
       <div className={styles.card_inner_container}>
         <div className={styles.inner_container}>
           <UploadFileOutlined fontSize="large" />
         </div>
         <span>Novo documento</span>
-        <p>Selecione ou arraste e solte o seu arquivo</p>
         {!acceptedFiles[0] ? (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
+          <p>Selecione ou arraste e solte o seu arquivo</p>
+        ) : (
+          acceptedFiles.map((file: FileWithPath) => (
+            <p key={file.path}>{file.path}</p>
+          ))
+        )}
+        <div className={styles.container_button}>
+          {!acceptedFiles[0] ? (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <ButtonWithIcon
+                onClick={acceptedFiles[0] ? handleUploadFile : () => {}}
+                type={"primary"}
+                size={"small"}
+                text={acceptedFiles[0] ? "Confirmar" : "Adicionar"}
+                icon={iconUpload}
+                position={"left"}
+                width={164}
+              />
+            </div>
+          ) : (
             <ButtonWithIcon
               onClick={acceptedFiles[0] ? handleUploadFile : () => {}}
               type={"primary"}
@@ -60,24 +76,10 @@ const NewDocumentCard = (props: any) => {
               position={"left"}
               width={164}
             />
-            {/* <Button variant="outlined" type="button" onClick={handleUploadFile}>
-              {acceptedFiles[0] ? "Confirmar" : "Selecione um arquivo"}
-            </Button> */}
-          </div>
-        ) : (
-          <ButtonWithIcon
-            onClick={acceptedFiles[0] ? handleUploadFile : () => {}}
-            type={"primary"}
-            size={"small"}
-            text={acceptedFiles[0] ? "Confirmar" : "Adicionar"}
-            icon={iconUpload}
-            position={"left"}
-            width={164}
-          />
-        )}
+          )}
+        </div>
       </div>
     </div>
-    /* </div> */
   );
 };
 
