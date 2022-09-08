@@ -82,11 +82,10 @@ export interface CourseResponse {
   skills: string;
   trailId: string;
   modules: Module[];
-  // teacherId: string;
   teacherName: string;
   teacherDescription: string;
   imageTeacher: string;
-  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
 ///////////////////////////////////////////////////
@@ -96,8 +95,9 @@ const Class = () => {
 
   const location = useLocation();
   let id = location.pathname.split("/");
-  const courseId = id[4];
-  const lessonId = id[6];
+  const courseId = id[5];
+
+  const lessonId = id[7];
 
   const [indexDiv, setIndexDiv] = useState(1);
   const [urlLesson, setUrlLesson] = useState("");
@@ -122,6 +122,7 @@ const Class = () => {
       const responseModule = await api.get(
         `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
       );
+
       setModules(responseModule.data.modules);
     }
   };
@@ -142,6 +143,8 @@ const Class = () => {
         const responseModule = await api.get(
           `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
         );
+        console.log(responseModule);
+
         setModules(responseModule.data.modules);
         setModuleOrder(responseModule.data.moduleOrder);
         setLessonOrder(responseModule.data.lessonOrder);
