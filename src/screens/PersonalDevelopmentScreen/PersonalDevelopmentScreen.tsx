@@ -7,7 +7,12 @@ const PersonalDevelopmentScreen = () => {
   return (
     <div>
       <button onClick={() => setModalOpen(true)}>Open Modal</button>
-      {isModalOpen && <SideModal onClose={() => setModalOpen(false)} />}
+      {isModalOpen && (
+        <SideModal
+          onClose={() => setModalOpen(false)}
+          stundentEmail={"felipe.reggiane@rethink.dev"}
+        />
+      )}
     </div>
   );
 };
