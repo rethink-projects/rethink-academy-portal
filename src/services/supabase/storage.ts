@@ -56,7 +56,12 @@ export function useStorage() {
   };
 
   const generateUrlToDownload = async (title: string) => {
-    const bucket = await getOneBucket(title, user.email);
+    const bucket = await getOneBucket(
+      window.btoa(title),
+      //Buffer.from(title).toString("base64"),
+      user.email
+    );
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     const { data, error } = await supabaseClient.storage
       .from(user.email)
       .createSignedUrl(bucket.url, 5000);

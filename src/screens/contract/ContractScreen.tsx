@@ -39,14 +39,21 @@ export type infoType = {
   status: string;
 };
 
+/* type fileTypeArray = {
+  fileArray: Array<fileType>
+} */
+
 const ContractScreen = () => {
   const [contractStatus, setContractStatus] = useState("");
   const [isShown, setIsShown] = useState(true);
+  const [files, setFiles] = useState<fileType[] | any>();
   const { notify } = useNotification();
   const [info, setInfo] = useState<infoType>();
   const { user } = useAuth();
   const editIcon = <ModeEditOutlined />;
   const saveIcon = <SaveOutlined />;
+
+  console.log("USER: ", user);
 
   const getInfo = async (email: string) => {
     const info = await axios.get(`http://localhost:4000/api/info/${email}`);
@@ -60,9 +67,11 @@ const ContractScreen = () => {
         params: { email: "gabriel.melo@rethink.dev" },
       }
     );
-    console.log({ fileData });
+    setFiles(fileData.data);
     return fileData.data;
   };
+
+  console.log("Files: ", files);
 
   useEffect(() => {
     getFiles();
@@ -154,24 +163,32 @@ const ContractScreen = () => {
           </div>
           <h1>Documentos</h1>
           <div className={styles.cards_container}>
-            {/* {getFiles.map((content) =>
-              user.role === "EMBASSADOR" ? (
-                <DocumentCard
-                  key={content.id}
-                  id={content.id}
-                  title={content.title}
-                  type={"embassador"}
-                />
-              ) : (
-                <DocumentCard
-                  key={content.id}
-                  id={content.id}
-                  title={content.title}
-                  type={"student"}
-                />
-              )
-            )} */}
-            {user.role === "EMBASSADOR" ? "" : <NewDocumentCard />}
+            {files &&
+              files.map((content: any) =>
+                user.role === "EMBASSADOR" ? (
+                  <DocumentCard
+                    key={content.id}
+                    id={content.id}
+                    title={content.title}
+                    type={"embassador"}
+                    url={content.url}
+                  />
+                ) : (
+                  <DocumentCard
+                    key={content.id}
+                    id={content.id}
+                    title={content.title}
+                    type={"student"}
+                    url={content.url}
+                  />
+                )
+              )}
+
+            {user.role === "EMBASSADOR" ? (
+              ""
+            ) : (
+              <NewDocumentCard setFiles={setFiles} />
+            )}
           </div>
         </div>
         <div className={styles.contract_info}>

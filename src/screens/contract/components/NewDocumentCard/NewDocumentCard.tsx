@@ -5,8 +5,9 @@ import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { useStorage } from "../../../../services/supabase/storage";
 import { useNotification } from "../../../../context/NotificationContext";
+import { fileType } from "../DocumentCard/DocumentCard";
 
-const NewDocumentCard = (props: any) => {
+const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
   const iconUpload = <FileUploadOutlined />;
   const { initStorage, uploadFile, generateUrlToDownload, url } = useStorage();
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
@@ -27,6 +28,20 @@ const NewDocumentCard = (props: any) => {
 
   const handleUploadFile = async () => {
     const file = acceptedFiles[0];
+    setFiles((prevValue: any[]) =>
+      //prevValue.push({ title: file.name, id: file.name, url: file.name })
+
+      {
+        console.log("PREV VALUE", prevValue);
+        prevValue.push({
+          title: file.name,
+          id: file.name,
+          url: file.name,
+          userId: "d5c75974-403b-461e-9cab-03faec0f3a86",
+        });
+        return prevValue;
+      }
+    );
     if (file) {
       await uploadFile(file.name, acceptedFiles[0], file.name);
     } else {
@@ -57,10 +72,10 @@ const NewDocumentCard = (props: any) => {
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               <ButtonWithIcon
-                onClick={acceptedFiles[0] ? handleUploadFile : () => {}}
+                onClick={() => {}}
                 type={"primary"}
                 size={"small"}
-                text={acceptedFiles[0] ? "Confirmar" : "Adicionar"}
+                text={"Adicionar"}
                 icon={iconUpload}
                 position={"left"}
                 width={164}
@@ -68,10 +83,10 @@ const NewDocumentCard = (props: any) => {
             </div>
           ) : (
             <ButtonWithIcon
-              onClick={acceptedFiles[0] ? handleUploadFile : () => {}}
+              onClick={handleUploadFile}
               type={"primary"}
               size={"small"}
-              text={acceptedFiles[0] ? "Confirmar" : "Adicionar"}
+              text={"Confirmar"}
               icon={iconUpload}
               position={"left"}
               width={164}
