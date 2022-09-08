@@ -12,9 +12,7 @@ import NewDocumentCard from "./components/NewDocumentCard/NewDocumentCard";
 import Dropdown from "./components/Dropdown/StatusDropdown";
 import StatusTag from "./components/StatusTag/StatusTag";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
-import DocumentCard, {
-  documentsList,
-} from "./components/DocumentCard/DocumentCard";
+import DocumentCard, { fileType } from "./components/DocumentCard/DocumentCard";
 
 //libs
 import {
@@ -30,12 +28,6 @@ import {
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
-
-type fileType = {
-  title: string;
-  url: string;
-  id: string;
-};
 
 export type infoType = {
   email: string;
@@ -62,10 +54,19 @@ const ContractScreen = () => {
   };
 
   const getFiles = async () => {
-    const files = await axios.get(`http://localhost:4000/api/bucket`);
-    return files;
+    const fileData = await axios.get<fileType>(
+      `http://localhost:4000/api/bucket`,
+      {
+        params: { email: "gabriel.melo@rethink.dev" },
+      }
+    );
+    console.log({ fileData });
+    return fileData.data;
   };
-  console.log({ getFiles });
+
+  useEffect(() => {
+    getFiles();
+  }, []);
 
   const handlerContractStatus = (value: any) => {
     setContractStatus(value);
@@ -153,23 +154,23 @@ const ContractScreen = () => {
           </div>
           <h1>Documentos</h1>
           <div className={styles.cards_container}>
-            {documentsList.map((content) =>
+            {/* {getFiles.map((content) =>
               user.role === "EMBASSADOR" ? (
                 <DocumentCard
                   key={content.id}
                   id={content.id}
-                  name={content.name}
+                  title={content.title}
                   type={"embassador"}
                 />
               ) : (
                 <DocumentCard
                   key={content.id}
                   id={content.id}
-                  name={content.name}
+                  title={content.title}
                   type={"student"}
                 />
               )
-            )}
+            )} */}
             {user.role === "EMBASSADOR" ? "" : <NewDocumentCard />}
           </div>
         </div>
