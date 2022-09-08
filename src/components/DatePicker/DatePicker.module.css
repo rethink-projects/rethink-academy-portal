@@ -6,6 +6,10 @@
     box-shadow: 0px 0px 0px 4px rgba(71, 80, 213, 0.15);
 }
 
+.container {
+    position: relative;
+}
+
 .datePicker_container {
     position: relative;
     width: 243px;
@@ -83,6 +87,7 @@
 }
 
 .datePicker_calendar {
+    top: 40px;
     position: absolute;
     margin-top: 12px;
 }

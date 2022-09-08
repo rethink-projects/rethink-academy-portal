@@ -1,0 +1,86 @@
+.comment_box {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 366px;
+    height: 186px;
+    border: 1px solid rgba(27, 27, 27, 0.3);
+    border-radius: 4px;
+    background: #F9F9F9;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 368px;
+    height: 68.77px;
+    /* background-color: #FFFFFF; */
+    border-bottom: 1px solid rgba(27, 27, 27, 0.3);
+    border-radius: 4px;
+    gap: 6px;
+}
+
+.userImage {
+    padding: 0px 0px 0px 6px;
+}
+
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-bottom: 4px;
+    padding: 0px 112px 0px 0px;
+}
+
+.description > p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.03em;
+}
+
+.description > span {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.03em;
+    opacity: 0.5;
+}
+
+.trashIcon {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.textArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 331px;
+    height: 91px;
+    padding: 11px 18.5px 16px 18.5px;
+}
+
+.textArea > p {
+    width: 311px;
+    height: fit-content;
+}
+
+.line {
+    width: 368px;
+    opacity: 0.1;
+    border: 1px solid #000000;
+    background-color: #000000;
+}

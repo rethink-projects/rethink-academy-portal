@@ -17,6 +17,8 @@ import IconRight from "./IconRight.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import trashIcon from "./trashIcon.svg";
+import editBlackIcon from "./editBlackIcon.svg";
 import one from "./lineOne.png";
 import two from "./lineTwo.png";
 import three from "./lineThree.png";
@@ -36,7 +38,7 @@ import ratRa from "./ra-hat.svg";
 import level_Icon from "./level_Icon.svg";
 import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
 import LastGoalsMedal from "./LastGoalsMedal.svg";
-import LastGoalsFlag from "./LastGoalsMedal.svg";
+import LastGoalsFlag from "./LastGoalsFlag.svg";
 
 import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
@@ -77,6 +79,8 @@ export const Images = {
     ContractIcon,
     DevelopmentIcon,
     LogoutIcon,
+    trashIcon,
+    editBlackIcon,
     deleteIcon,
     chatIcon,
     arrowDownIcon,
