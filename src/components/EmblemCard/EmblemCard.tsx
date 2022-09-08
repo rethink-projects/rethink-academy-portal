@@ -3,6 +3,7 @@ import style from "./EmblemCard.module.css";
 import Images from "../../assets";
 
 import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon";
+import Emblem from "../Emblem/Emblem";
 
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
@@ -55,7 +56,7 @@ const EmblemCard = ({
         <div className={style.inner_card}>
           <div className={style.content_box}>
             <div className={style.badge}>
-              <img src={Images.badge[badge]} alt={`Emblema de ${badge}`} />
+              <Emblem badge={badge} size="big" number={1} />
             </div>
             <div className={style.title_content}>
               <h1>{title}</h1>
