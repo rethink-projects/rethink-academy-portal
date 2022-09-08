@@ -33,8 +33,9 @@ function App() {
                 </RequireAuth>
               }
             />
-            <Route path="/dashboard/notas" element={<Notes />} />
-            <Route index element={<HomeScreen />} />
+            <Route path="/dashboard/notas" element={<Layout />}>
+              <Route index element={<Notes />} />
+            </Route>
           </Route>
         </Routes>
       </AuthProvider>
