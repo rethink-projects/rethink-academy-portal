@@ -119,3 +119,33 @@
 
   color: var(--color-tertiary);
 }
+
+.noGoals {
+  height: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noGoalsWarning {
+  width: 240px;
+  height: 106px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  row-gap: 12px;
+}
+
+.noGoalsWarning p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+
+  text-align: center;
+
+  color: #706e64;
+}
