@@ -17,6 +17,12 @@ import IconRight from "./IconRight.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import save from "./saveIcon.svg";
+import trash from "./trashIcon.svg";
+import academyHat from "./academyHat.svg";
+import lampIcon from "./lampIcon.svg";
+import dpIcon from "./dpIcon.svg";
+import infoNotes from "./infoIcon_notesScreen.svg";
 import trashIcon from "./trashIcon.svg";
 import editBlackIcon from "./editBlackIcon.svg";
 import one from "./lineOne.png";
@@ -47,6 +53,11 @@ import LastGoalsFlag from "./LastGoalsFlag.svg";
 import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
+
+import HardSkillsIconNote from "./HardSkillsIconNote.svg";
+import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
+import DPIconNote from "./DPIconNote.svg";
+
 import chat from "./chat.png";
 export const Images = {
   logo,
@@ -64,6 +75,10 @@ export const Images = {
   raArrow,
   logoRethink,
   logoRaSecondary,
+  academyHat,
+  lamp: lampIcon,
+  desenvolvimentoPessoal: dpIcon,
+  infoNotes,
   arrowTask,
   homeBackground,
   icons: {
@@ -82,6 +97,8 @@ export const Images = {
     ratIcon,
     ContractIcon,
     DevelopmentIcon,
+    save,
+    trash,
     LogoutIcon,
     trashIcon,
     editBlackIcon,
@@ -99,6 +116,9 @@ export const Images = {
   MedalStarMetas,
   FlagUltimasMetas,
   avatar: avatarImage,
+  HardSkillsIconNote,
+  SoftSkillsIconNote,
+  DPIconNote,
 };
 
 export default Images;

@@ -18,7 +18,7 @@
   border-radius: 4px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 16px;
+  padding: 8px;
   color: var(--color-base);
   background: var(--tooltip-background-color);
   font-size: 16px;
@@ -42,7 +42,7 @@
 
 /* Absolute positioning */
 .tooltip_tip_top {
-  top: calc(var(--tooltip-margin) * -2.4);
+  top: calc(var(--tooltip-margin) * -1.6);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -20px;
 }
@@ -50,25 +50,25 @@
 .tooltip_tip_top-right::before {
   top: 100%;
   border-top-color: var(--tooltip-border-color);;
-  transform: translateX(-530%);
+  transform: translateX(-90%);
 }
 
 .tooltip_tip_top-right {
-  top: calc(var(--tooltip-margin) * -2.2);
+  top: calc(var(--tooltip-margin) * -1.2);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -30px;
   left: 100%;
-  transform: translateX(-10%);
+  transform: translateX(-45%);
 }
 
 .tooltip_tip_top-left::before {
   top: 100%;
   border-top-color: var(--tooltip-border-color);;
-  transform: translateX(530%);
+  transform: translateX(250%);
 }
 
 .tooltip_tip_top-left {
-  top: calc(var(--tooltip-margin) * -2.2);
+  top: calc(var(--tooltip-margin) * -1.2);
   border-bottom: 8px solid var(--tooltip-border-color);;
   margin-top: -30px;
   left: 100%;
@@ -97,7 +97,7 @@
 
 /* Absolute positioning */
 .tooltip_tip_bottom {
-  bottom: calc(var(--tooltip-margin) * -2.9);
+  bottom: calc(var(--tooltip-margin) * -2.2);
   border-top: 8px solid var(--tooltip-border-color);;
 }
 /* CSS border triangles */
@@ -108,28 +108,28 @@
 
 /* Absolute positioning */
 .tooltip_tip_bottom-right {
-  bottom: calc(var(--tooltip-margin) * -2.9);
+  bottom: calc(var(--tooltip-margin) * -2.2);
   border-top: 8px solid var(--tooltip-border-color);;
-  transform: translateX(-5%);
+  transform: translateX(-20%);
 }
 /* CSS border triangles */
 .tooltip_tip_bottom-right::before {
   bottom: 100%;
   border-bottom-color: var(--tooltip-border-color);;
-  transform: translateX(-530%);
+  transform: translateX(-90%);
 }
 
 /* Absolute positioning */
 .tooltip_tip_bottom-left {
-  bottom: calc(var(--tooltip-margin) * -2.9);
+  bottom: calc(var(--tooltip-margin) * -2.2);
   border-top: 8px solid var(--tooltip-border-color);;
-  transform: translateX(-95%);
+  transform: translateX(-80%);
 }
 /* CSS border triangles */
 .tooltip_tip_bottom-left::before {
   bottom: 100%;
   border-bottom-color: var(--tooltip-border-color);;
-  transform: translateX(530%);
+  transform: translateX(90%);
 }
 
 /* Absolute positioning */

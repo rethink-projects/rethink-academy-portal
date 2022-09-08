@@ -6,6 +6,7 @@ import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/Personal
 import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
+import Notes from "./screens/notes/NotesScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RequireAuth from "./services/auth";
 
@@ -32,6 +33,8 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route path="/dashboard/notas" element={<Notes />} />
+            <Route index element={<HomeScreen />} />
           </Route>
         </Routes>
       </AuthProvider>
