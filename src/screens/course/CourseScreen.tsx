@@ -59,8 +59,8 @@ const CourseScreen = () => {
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
-  const [course, setCourse] = useState<TypeCourse>();
-  const [teacher, setTeacher] = useState<TypeProfile>();
+  // const [course, setCourse] = useState<TypeCourse>();
+  const [course, setCourse] = useState<any>();
   const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
@@ -97,18 +97,6 @@ const CourseScreen = () => {
   }, [userEmail]);
 
   useEffect(() => {
-    if (course !== undefined) {
-      axios
-        .get("http://localhost:4000/api/teacher/" + course.teacherId)
-        .then((response) => {
-          if (response.data.profile) {
-            setTeacher(response.data.profile);
-          }
-        });
-    }
-  }, [course]);
-
-  useEffect(() => {
     if (courseId !== "") {
       axios
         .get("http://localhost:4000/api/course/" + courseId)
@@ -132,9 +120,11 @@ const CourseScreen = () => {
     !user ||
     course === undefined ||
     userEmail === "" ||
-    embassador === undefined ||
-    teacher === undefined
+    embassador === undefined
   ) {
+    console.log(user);
+    console.log(course);
+    console.log(embassador);
     return <div>Loading...</div>;
   }
 
@@ -299,13 +289,13 @@ const CourseScreen = () => {
         <div className={styles.practical_information}>
           <div className={styles.card_info}>
             <CardInfoCurso
-              author={teacher!.user.name}
-              authorDescription={teacher!.bio}
+              author={course.teacherName}
+              authorDescription={course.teacherDescription}
               level={getLevel(course.level)}
               learn={[course.learning]}
               module_class={{ module: 1, class: 1 }}
               skills={[course.skills]}
-              avatar={teacher!.avatar}
+              avatar={course.imageTeacher}
             />
           </div>
         </div>
