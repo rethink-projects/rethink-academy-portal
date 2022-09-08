@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 40px;
-  margin-bottom: 53px;
+  justify-content: space-between;
+  width: 1448px;
+  margin: 40px auto;
+
   gap: 30px 0px;
 }
 
@@ -21,7 +21,7 @@
   margin-bottom: 14px;
 }
 .description {
-  width: 539px;
+  width: 488px;
   font-size: 16px;
   line-height: 150%;
 }

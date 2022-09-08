@@ -88,7 +88,7 @@ const TrilhasScreen = () => {
     <>
       <div className={styles.container}>
         <>
-          <div className={styles.text_container}>
+          <div className={styles.text_container} style={{ width: "100%" }}>
             <div className={styles.title}>Trilhas</div>
             <div className={styles.description}>
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -99,7 +99,7 @@ const TrilhasScreen = () => {
               electronic typesetting, remaining essentially unchanged.
             </div>
           </div>
-          <div style={{ width: "704px" }}></div>
+          {/* <div style={{ width: "100%" }}></div> */}
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}

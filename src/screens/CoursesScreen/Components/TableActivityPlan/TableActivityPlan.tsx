@@ -15,15 +15,11 @@ import {
   GridActionsCellItem,
   GridEventListener,
   GridRowId,
-  GridRowModel,
 } from "@mui/x-data-grid";
 import {
-  randomCreatedDate,
-  randomTraderName,
-  randomUpdatedDate,
   randomId,
 } from "@mui/x-data-grid-generator";
-
+// npm i @mui/x-data-grid-generator
 import styles from "./TableActivityPlan.module.css";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
