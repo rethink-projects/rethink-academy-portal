@@ -35,7 +35,7 @@ const PersonalDevelopmentScreen = () => {
               <h2>Suas anotações</h2>
               <button
                 onClick={() => {
-                  navigate("/notas");
+                  navigate("/dashboard/notas");
                 }}
               >
                 Ver mais <ArrowForwardOutlinedIcon />
@@ -46,21 +46,12 @@ const PersonalDevelopmentScreen = () => {
           </div>
           <div className={style.metasContainer}>
             <h2>Metas</h2>
-            <CardMetas />
+            <CardMetas studentEmail="amanda.duarte@rethink.dev" />
           </div>
         </div>
         <div className={style.bottomCardContainer}>
           <div className={style.bottomCardTitles}>
             <h2>Evolução de Habilidades</h2>
-            <div className={style.switch}>
-              <Switch
-                itemLeft={{ title: "Hard Skills", icon: <SchoolIcon /> }}
-                itemRight={{
-                  title: "Soft Skills",
-                  icon: <EmojiObjectsOutlinedIcon />,
-                }}
-              />
-            </div>
           </div>
           <div className={style.bottomCard_PLACEHOLDER}></div>
         </div>
