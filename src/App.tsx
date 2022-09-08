@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
-import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import Notes from "./screens/notes/NotesScreen";
+import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RequireAuth from "./services/auth";
 

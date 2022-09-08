@@ -109,7 +109,10 @@ const NotesScreen = () => {
             <Breadcrumb
               breadcrumbItems={[
                 { title: "Home", link: "/" },
-                { title: "Playground", link: "/playground" },
+                {
+                  title: "Seu Desenvolvimento",
+                  link: "/desenvolvimentoPessoal",
+                },
                 { title: "Notas", link: "/notas" },
               ]}
             />

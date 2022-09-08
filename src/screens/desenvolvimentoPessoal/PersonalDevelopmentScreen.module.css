@@ -1,14 +1,68 @@
 .screenInner {
   background-color: #f4f4f4;
+
+  height: auto;
+
+  padding: 24px 0px 53px 50px;
 }
 
-.centralizando {
-  display: flex;
-  justify-content: flex-end;
+.cardsContainer {
+  max-width: 1200px;
+}
 
-  height: 100vh;
-  padding-right: 20vw;
-  padding-top: 10vh;
+.breadcrumbs {
+  width: 231px;
+}
+
+.titlesContainer h1 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+
+  margin-top: 24px;
+}
+
+.topCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+
+  /* gap: 64px; */
+  row-gap: 24px;
+  justify-content: space-between;
+
+  margin-top: 50px;
+}
+
+.notesTitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notesTitles button {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+
+  color: #1b1b1b;
+
+  gap: 8px;
+  padding: 0px 8px;
+
+  border: none;
+  background: none;
+
+  cursor: pointer;
+}
+
+.notesTitles svg {
+  width: 20px;
+  height: 20px;
 }
 
 .metasContainer {
@@ -17,7 +71,7 @@
   gap: 28px;
 }
 
-.metasContainer h2 {
+.cardsContainer h2 {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
@@ -25,4 +79,29 @@
   line-height: 120%;
 
   color: #1b1b1b;
+}
+
+.bottomCardContainer {
+  margin-top: 62px;
+}
+
+.bottomCardTitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.switch {
+  width: 365px;
+}
+
+.bottomCard_PLACEHOLDER {
+  width: 1200px;
+  height: 447px;
+
+  margin-top: 14px;
+
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;
 }

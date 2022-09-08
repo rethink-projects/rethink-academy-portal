@@ -37,18 +37,15 @@ import arrowTask from "./arrowTask.svg";
 import calendarIcon from "./calendarIcon.svg";
 import eyeIcon from "./eyeIcon.svg";
 
-import MedalUltimasMetas from "./MedalUltimasMetas.svg";
-import MedalStarMetas from "./MedalStarMetas.svg";
-import AmpulhetaUltimasMetas from "./AmpulhetaUltimasMetas.svg";
-import FlagUltimasMetas from "./FlagUltimasMetas.svg";
+import LastGoalsMedal from "./LastGoalsMedal.svg";
+import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
+import LastGoalsFlag from "./LastGoalsFlag.svg";
+import LastGoalsStar from "./MedalStarMetas.svg";
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
 import level_Icon from "./level_Icon.svg";
-import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
-import LastGoalsMedal from "./LastGoalsMedal.svg";
-import LastGoalsFlag from "./LastGoalsFlag.svg";
 
 import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
@@ -111,10 +108,8 @@ export const Images = {
     two,
     three,
   },
-  MedalUltimasMetas,
-  AmpulhetaUltimasMetas,
-  MedalStarMetas,
-  FlagUltimasMetas,
+
+  LastGoalsStar,
   avatar: avatarImage,
   HardSkillsIconNote,
   SoftSkillsIconNote,
