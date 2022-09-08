@@ -27,7 +27,7 @@ const TrilhasScreen = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/user/" + userAuth?.email)
+      .get("http://localhost:4000/api/user/" + userAuth?.email)
       .then((response) => {
         if (response.data.user) {
           setUser(response.data.user);
