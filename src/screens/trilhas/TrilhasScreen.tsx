@@ -99,7 +99,7 @@ const TrilhasScreen = () => {
               electronic typesetting, remaining essentially unchanged.
             </div>
           </div>
-          <div style={{ width: "704px" }}></div>
+          {/* <div style={{ width: "100%" }}></div> */}
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}

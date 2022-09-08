@@ -4,7 +4,6 @@ import LastGoalsCard from "../../components/LastGoalsCard/LastGoalsCard";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Register from "../../components/Register/Register";
 import { useAuth } from "../../context/AuthContext";
-
 import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import Styles from "./Home.module.css";
 
