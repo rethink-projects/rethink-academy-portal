@@ -38,7 +38,7 @@ const SideModal = ({ onClose = () => {}, stundentEmail }: modalProps) => {
   const getUser = async () => {
     try {
       const userData = await axios.get(
-        `http://localhost:4000/api/user/${stundentEmail}`
+        `http://localhost:4000/api/user/${user.email}`
       );
       setUserByEmail(userData.data);
       return;
