@@ -13,10 +13,6 @@
   width: 43%;
 }
 
-.breadcrumb {
-  width: 30%;
-}
-
 .table_header {
   display: flex;
   flex-direction: column;
@@ -163,4 +159,26 @@
   flex-wrap: wrap;
 
   padding: 2.2vh 20px 5px 0vw;
+}
+
+.privateBtn:disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 32px;
+  gap: 10px;
+
+  border-radius: 2px;
+  border: 1px solid rgba(27, 27, 27, 0.1);
+  border-radius: 4px;
+
+  background: var(--color-base);
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #706e64;
 }
