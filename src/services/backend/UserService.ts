@@ -23,3 +23,14 @@ export const getAllUsers = async () => {
     return;
   }
 };
+export const getAllStudent = async () => {
+  try {
+    const { data } = await axios.get(
+      "http://localhost:4000/api/user?role=STUDENT"
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

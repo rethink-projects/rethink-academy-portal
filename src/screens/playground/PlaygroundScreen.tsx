@@ -1,25 +1,133 @@
-import { useEffect, useState } from "react";
-import Modal from "../../components/Modal/Modal";
+/* eslint-disable no-sequences */
+/* eslint-disable react/jsx-no-comment-textnodes */
+import { Button } from "@mui/material";
+import { useCallback, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { useAuth } from "../../context/AuthContext";
+import { useNotification } from "../../context/NotificationContext";
+import { useStorage } from "../../services/supabase/storage";
+
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
-  const [onClose, setOnClose] = useState(false);
-  const [timeOut, setTimeOut] = useState(false);
-  useEffect(() => {
-    if (onClose === true) {
-      const timer = setTimeout(() => {
-        setTimeOut(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [onClose]);
+  const { user } = useAuth();
+  const { initStorage, uploadFile, generateUrlToDownload, url } = useStorage();
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
+  const { notify } = useNotification();
 
+  const handleInitStorage = useCallback(async () => {
+    await initStorage();
+  }, [initStorage]);
+
+  useEffect(() => {
+    console.log("TESTE");
+  }, [acceptedFiles]);
+  useEffect(() => {
+    handleInitStorage();
+  }, [handleInitStorage]);
+
+  const handleUploadFile = async () => {
+    const file = acceptedFiles[0];
+    if (file) {
+      await uploadFile(file.name, acceptedFiles[0], "contrato");
+    } else {
+      notify({
+        type: "error",
+        title: "Você ainda não selecionou um arquivo",
+      });
+    }
+  };
+
+  const handleDownloadUrl = async () => {
+    await generateUrlToDownload("contrato");
+  };
+  if (!user) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.playground_container}>
       <div className={styles.main_content}>
-        <h1>Manter essa tela Limpa, após criar o componente</h1>
-        <button onClick={() => setOnClose(true)}>Gabriel</button>
-        {timeOut ? (onClose ? `onClose${onClose}` : "teste") : "calma"}
+        <h1>Como usar o Storage do Supabase</h1>
+        <br></br>
+        <p></p>
+        <p style={{ maxWidth: "600px", lineHeight: 1.5 }}>
+          Ao acessar a tela <strong>PlaygroundScreen</strong> automaticamente
+          será validado ou criado um bucket para
+          <strong> {user.email}</strong> esse email será a referência no
+          supabase.
+        </p>
+        <br></br>
+        <p style={{ maxWidth: "600px", lineHeight: 1.5 }}>
+          A Função <strong>initStorage()</strong> do hook
+          <strong> useStorage()</strong> inicializa o storage do supabase
+          validando se já existe algum bucket com o email do usuario logado.
+        </p>
+        <br />
+        <br />
+        <br />
+        <h2>Upload</h2>
+        <p style={{ maxWidth: "600px", lineHeight: 1.5 }}>
+          Para fazer <strong>Upload</strong> de algum arquivo basta chamar a
+          função <strong>uploadFile()</strong> <br />
+          passando o caminho onde você quer salvar o arquivo. <br />
+          <br />
+          <span>
+            Lembrando que supabase funciona de forma upInsert, ele verifica se
+            já existe um folder <strong>contratos</strong> e o file com o nome
+            passado, caso exista um arquivo com o mesmo nome ele apenas
+            substitui.
+          </span>
+          <br />
+          exemplo:
+          <strong> "/{user.email}/contratos/nome-do-arquivo.pdf"</strong>
+        </p>
+        <br />
+        <br />
+        <pre>await uploadFile("/contratos/file.name", file);</pre>
+        <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            <Button variant="outlined" type="button" onClick={handleUploadFile}>
+              {acceptedFiles[0] ? "Confirmar" : "Selecione um arquivo"}
+            </Button>
+          </div>
+          <Button variant="contained" onClick={handleUploadFile} type="button">
+            Fazer upload do arquivo
+          </Button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <span>Arquivo Selecionado:</span>
+          {acceptedFiles.map((file) => (
+            <strong key={file.name}>{file.name}</strong>
+          ))}
+        </div>
+        <br />
+
+        <h2>Download de Arquivos</h2>
+        <p style={{ maxWidth: "550px", lineHeight: 1.5 }}>
+          Para fazer dispobilizar uma url para download, chame a função passando
+          o caminho para o arquivo: <br />
+          <br />
+          <strong>generateUrlToDownload("contratos/nome-do-arquivo")</strong>
+          <br />
+          <Button variant="contained" onClick={handleDownloadUrl} type="button">
+            Generate URL
+          </Button>
+        </p>
+        {url && (
+          <iframe
+            title="Unique"
+            src={`${url}&embedded=true`}
+            style={{ width: "800px", height: "500px", marginTop: "30px" }}
+          ></iframe>
+        )}
       </div>
     </div>
   );

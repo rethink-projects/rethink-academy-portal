@@ -10,17 +10,23 @@ import Tooltip from "../Tooltip/Tooltip";
 type AccordionMMProps = {
   hasIcons?: boolean;
   size?: string;
+  title: string;
+  duration: string;
   description: string;
   time: string;
   tags: string[];
+  status: string[];
 };
 
 const AccordionMM = ({
   hasIcons = false,
   size = "small",
+  title = "Daily",
+  duration = "0:15",
   description,
-  time,
+  time = "13h - 14:45",
   tags,
+  status,
 }: AccordionMMProps) => {
   const [active, setActive] = useState(false);
 
@@ -46,11 +52,10 @@ const AccordionMM = ({
         >
           <div className={styles.accordion_label_left}>
             <img src={Images.icons.chatIcon} alt="Chat Icon" />
-            <p>Atividades do Estagiário</p>
+            <p>{title}</p>
           </div>
           <div className={styles.accordion_label_right}>
-            <p>1h45</p>
-
+            <p>{duration}</p>
             <img
               src={Images.icons.arrowDownIcon}
               alt="Chat Icon"
@@ -68,6 +73,10 @@ const AccordionMM = ({
               <div className={styles.accordion_tags}>
                 {tags.map((tag, index) => (
                   <span key={index}> {tag} </span>
+                ))}
+
+                {status.map((status, index) => (
+                  <span key={index}> {status} </span>
                 ))}
               </div>
               <div className={styles.accordion_footer}>{time}</div>

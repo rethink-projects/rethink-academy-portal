@@ -39,6 +39,12 @@
     background-color: #EAB308;
 }
 
+.default svg {
+    color: black;
+    width: 24px;
+    height: 24px;
+}
+
 .task_title {
     font-style: normal;
     font-weight: 400;

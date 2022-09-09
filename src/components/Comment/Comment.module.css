@@ -1,0 +1,35 @@
+.container {
+    width: 366px;
+    height: 970px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 19px;
+    background: #FFFFFF;
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.container_comments {
+    width: 408px;
+    height: 907px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.line {
+    width: 368px;
+    opacity: 0.1;
+    border: 1px solid #000000;
+    background-color: #000000;
+}
+
+.make_comment {
+    width: 368px;
+    height: 46px;
+    display: flex;
+    gap: 8px;
+}
