@@ -56,7 +56,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag("fabiana.kamo@rethink.dev")
+      await getGroupTaskByTag("fabiana.kamo@rethink.dev") // ALTERAR
         .then((response) => {
           setTags(response);
           let helper = 0;

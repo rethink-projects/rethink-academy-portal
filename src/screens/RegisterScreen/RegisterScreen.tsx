@@ -7,35 +7,42 @@ import AddTask from "../../components/AddTask/AddTask";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import InputSearch from "../../components/InputSearch/InputSearch";
 import Note from "../../components/Note/Note";
-
-//CSS
-import styles from "./RegisterScreen.module.css";
 import Toast from "../../components/Toast/Toast";
 import Gamification from "./Gamification/Gamification";
 
-// Assets
-import Images from "../../assets";
-import { removeTask } from "../../services/backend/Tasks";
+//CSS
+import styles from "./RegisterScreen.module.css";
+
+// Backend
+import {
+  getRecordOfDay,
+  removeTask,
+  getHoursLastDay,
+} from "../../services/backend/Tasks";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);
+  const [time, setTime] = useState(0);
+  const [controller, setController] = useState(false);
+  const [prevHours, setPrevHours] = useState(0);
+  const [controllerPrevHours, setControllerPrevHours] = useState(false);
 
-  type task = {
-    name: string;
-    description: string;
-    taskDate: string;
-    startDate: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    tags: string;
-    status: string;
-    userEmail: string;
-    duration: string;
-    time: string;
-  };
+  // type task = {
+  //   name: string;
+  //   description: string;
+  //   taskDate: string;
+  //   startDate: string;
+  //   endDate: string;
+  //   startTime: string;
+  //   endTime: string;
+  //   tags: string;
+  //   status: string;
+  //   userEmail: string;
+  //   duration: string;
+  //   time: string;
+  // };
 
   const changeData = () => {
     setThereTask(true);
@@ -77,11 +84,57 @@ const RegisterScreen = () => {
     setUpdate(true);
   };
 
+  const getTime = async () => {
+    await getRecordOfDay("fabiana.kamo@rethink.dev") // ALTERAR
+      .then((response) => {
+        let helper = 0;
+        response.map((record: any) => {
+          helper += record.time;
+        });
+        helper = helper / 60;
+        setTime(Math.trunc(helper));
+        if (Math.trunc(helper) >= 6) {
+          setController(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getPrevHours = async () => {
+    await getHoursLastDay("fabiana.kamo@rethink.dev") // ALTERAR
+      .then((response) => {
+        setPrevHours(response);
+        if (response < 6) {
+          setControllerPrevHours(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    getTime();
+    getPrevHours();
+  }, []);
+
+  console.log(prevHours);
+
   return (
     <div className={styles.register_container}>
       <div className={styles.modal_container}>
-        {/* <img src={Images.hatDelivery} alt="A GIF of a mage delivering a hat" /> */}
-        <Gamification onClose={() => {}} id="outside" />
+        {controller && (
+          <Gamification
+            setActive={() => setController(false)}
+            id="outside"
+            type="Losing"
+          />
+        )}
+        {controllerPrevHours && (
+          <Gamification
+            setActive={() => setControllerPrevHours(false)}
+            id="outside"
+            type="Degrading"
+          />
+        )}
       </div>
       <div className={styles.register_content}>
         <div className={styles.register_header}>

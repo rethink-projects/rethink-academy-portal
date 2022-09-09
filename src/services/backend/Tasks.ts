@@ -43,8 +43,8 @@ export const getDateFilter = async (
   }
 };
 
-export const getGroupTaskByTag = async(email: string) => {
-  try{
+export const getGroupTaskByTag = async (email: string) => {
+  try {
     const { data } = await axios.get(
       `http://localhost:4000/api/tasks/tag/${email}`
     );
@@ -53,10 +53,10 @@ export const getGroupTaskByTag = async(email: string) => {
     console.log(error);
     return;
   }
-}
+};
 
 export const getRecordOfDay = async (email: string) => {
-  try{
+  try {
     const { data } = await axios.get(
       `http://localhost:4000/api/tasks/day/${email}`
     );
@@ -65,10 +65,10 @@ export const getRecordOfDay = async (email: string) => {
     console.log(error);
     return;
   }
-}
+};
 
 export const removeTask = async (id: string) => {
-  try{
+  try {
     const { data } = await axios.delete(
       `http://localhost:4000/api/tasks/${id}`
     );
@@ -77,4 +77,16 @@ export const removeTask = async (id: string) => {
     console.log(error);
     return;
   }
-}
+};
+
+export const getHoursLastDay = async (email: string) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:4000/api/tasks/hours/${email}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
