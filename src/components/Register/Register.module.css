@@ -4,7 +4,7 @@
   gap: 24px;
   width: 368px;
   height: 426px;
-  /* background-color: var(--color-base); */
+  background-color: var(--color-base);
 }
 
 .register_title {

@@ -102,7 +102,7 @@ export const DatePicker = ({
   const changeTasks = async () => {
     // if (user) {
     await getDateFilter(
-      "sthephany.tezza@rethink.dev",
+      "carolina.valeriano@rethink.dev",
       getFullDate(state[0].startDate!),
       getFullDate(state[0].endDate!)
     )

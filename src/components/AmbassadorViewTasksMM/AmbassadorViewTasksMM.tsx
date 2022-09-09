@@ -54,6 +54,7 @@ const AmbassadorViewTasksMM = () => {
     setUpdate(true);
   };
 
+  console.log(tasks);
   return (
     <div className={styles.viewTasks_container}>
       <div className={styles.viewTasks_header}>
@@ -84,7 +85,8 @@ const AmbassadorViewTasksMM = () => {
               />
             </div>
           )}
-          {tasks.length > 0 &&
+          {tasks &&
+            tasks.length > 0 &&
             tasks.map(
               (day: any[], index) =>
                 day[0] && (

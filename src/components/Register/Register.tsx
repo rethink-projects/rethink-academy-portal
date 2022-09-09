@@ -44,7 +44,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
   const changeData = async () => {
     if (type === "home") {
-      await getRecordOfDay("sthephany.tezza@rethink.dev")
+      await getRecordOfDay("carolina.valeriano@rethink.dev")
         .then((response) => {
           setRecords(response);
           let helper = 0;
@@ -58,7 +58,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag("sthephany.tezza@rethink.dev") // ALTERAR
+      await getGroupTaskByTag("carolina.valeriano@rethink.dev") // ALTERAR
         .then((response) => {
           setTags(response);
           let helper = 0;

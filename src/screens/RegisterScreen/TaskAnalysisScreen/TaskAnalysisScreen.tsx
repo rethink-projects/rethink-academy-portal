@@ -26,7 +26,7 @@ const TaskAnalysisScreen = () => {
             <AmbassadorViewTasksMM />
           </div>
           <div className={styles.quick_view}>
-            <Register />
+            <Register type="intern" />
           </div>
         </div>
       </div>
