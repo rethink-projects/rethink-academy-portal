@@ -1,6 +1,8 @@
 import React from "react";
+import AmbassadorViewTasksMM from "../../../components/AmbassadorViewTasksMM/AmbassadorViewTasksMM";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import Comment from "../../../components/Comment/Comment";
+import Register from "../../../components/Register/Register";
 
 // css
 import styles from "./TaskAnalysisScreen.module.css";
@@ -20,8 +22,12 @@ const TaskAnalysisScreen = () => {
         </div>
         <div className={styles.graphic}></div>
         <div className={styles.bottom_container}>
-          <div className={styles.task_history}></div>
-          <div className={styles.quick_view}></div>
+          <div className={styles.task_history}>
+            <AmbassadorViewTasksMM />
+          </div>
+          <div className={styles.quick_view}>
+            <Register />
+          </div>
         </div>
       </div>
       <div className={styles.leftScreen}>
