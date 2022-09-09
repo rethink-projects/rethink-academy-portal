@@ -102,37 +102,39 @@ const CursosScreenTeste = () => {
         />
         <div className={styles.title}>
           <p>{`Programa de Cursos | ${trail?.name}`}</p>
-          {!intern && (
-            <div className={styles.title_buttons}>
-              <ButtonWithIcon
-                onClick={() => setSyllabusIsOpen(true)}
-                icon={<IconPlan />}
-                width={237}
-                position="right"
-                type="outline"
-                text="Plano de Atividades"
-                size="medium"
-              />
-              <ButtonWithIcon
-                onClick={() => setProgressIsOpen(true)}
-                icon={<IconProgress />}
-                width={169}
-                position="right"
-                type="outline"
-                text="Progresso"
-                size="medium"
-              />
-              <ButtonWithIcon
-                onClick={() => setAddCourseIsOpen(true)}
-                icon={<AddCircleOutlineIcon />}
-                width={218}
-                position="right"
-                type="primary"
-                text="Adicionar curso"
-                size="medium"
-              />
-            </div>
-          )}
+          <div className={styles.title_buttons}>
+            <ButtonWithIcon
+              onClick={() => setSyllabusIsOpen(true)}
+              icon={<IconPlan />}
+              width={237}
+              position="right"
+              type="outline"
+              text="Plano de Atividades"
+              size="medium"
+            />
+            {!intern && (
+              <>
+                <ButtonWithIcon
+                  onClick={() => setProgressIsOpen(true)}
+                  icon={<IconProgress />}
+                  width={169}
+                  position="right"
+                  type="outline"
+                  text="Progresso"
+                  size="medium"
+                />
+                <ButtonWithIcon
+                  onClick={() => setAddCourseIsOpen(true)}
+                  icon={<AddCircleOutlineIcon />}
+                  width={218}
+                  position="right"
+                  type="primary"
+                  text="Adicionar curso"
+                  size="medium"
+                />
+              </>
+            )}
+          </div>
           {syllabusIsOpen && (
             <CardSyllabus
               user={userByEmail?.role.toLowerCase()}
