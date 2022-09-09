@@ -44,7 +44,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
   const changeData = async () => {
     if (type === "home") {
-      await getRecordOfDay("carolina.valeriano@rethink.dev")
+      await getRecordOfDay("sthephany.tezza@rethink.dev")
         .then((response) => {
           setRecords(response);
           let helper = 0;
@@ -58,7 +58,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag("carolina.valeriano@rethink.dev") // ALTERAR
+      await getGroupTaskByTag("sthephany.tezza@rethink.dev") // ALTERAR
         .then((response) => {
           setTags(response);
           let helper = 0;
@@ -159,25 +159,29 @@ const Register = ({ type = "home" }: RegisterProps) => {
             }
           >
             <>
-              {type === "home" && tags.length > 0
-                ? records.map((record) => (
+              {type !== "home" &&
+                tags &&
+                tags.map((tag) => {
+                  return (
                     <Tasks
-                      key={record.id}
-                      title={record.name}
-                      status={record.status}
-                      time={formatDate(record.hours, record.minutes)}
+                      key={tag.title}
+                      title={tag.title}
+                      time={formatDate(tag.hours, tag.minutes)}
+                      type={type}
                     />
-                  ))
-                : tags.map((tag) => {
-                    return (
-                      <Tasks
-                        key={tag.title}
-                        title={tag.title}
-                        time={formatDate(tag.hours, tag.minutes)}
-                        type={type}
-                      />
-                    );
-                  })}
+                  );
+                })}
+
+              {type === "home" &&
+                records.length > 0 &&
+                records.map((record) => (
+                  <Tasks
+                    key={record.id}
+                    title={record.name}
+                    status={record.status}
+                    time={formatDate(record.hours, record.minutes)}
+                  />
+                ))}
             </>
           </div>
         </div>
