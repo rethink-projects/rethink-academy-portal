@@ -9,7 +9,7 @@ import Images from "../../assets";
 
 type DatePickerProps = {
   hasIcon?: boolean;
-  size: "large" | "default" | "small" | "micro";
+  size: "large" | "default" | "small" | "micro" | "block";
   calendarPosition: "left" | "right";
   placeholder: string;
 };
