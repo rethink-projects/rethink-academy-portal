@@ -66,3 +66,15 @@ export const getRecordOfDay = async (email: string) => {
     return;
   }
 }
+
+export const removeTask = async (id: string) => {
+  try{
+    const { data } = await axios.delete(
+      `http://localhost:4000/api/tasks/${id}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}

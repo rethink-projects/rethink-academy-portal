@@ -107,3 +107,8 @@ img {
   margin-top: 10px;
   margin-bottom: 12px;
 }
+
+button {
+  border-style: none;
+  background-color: transparent;
+}

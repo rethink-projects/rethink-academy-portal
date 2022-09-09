@@ -13,6 +13,7 @@ import styles from "./RegisterScreen.module.css";
 import Toast from "../../components/Toast/Toast";
 
 // Backend
+import { removeTask } from "../../services/backend/Tasks";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
@@ -67,6 +68,11 @@ const RegisterScreen = () => {
     } else {
       setThereTask(false);
     }
+  };
+
+  const handleDelete = (id: string) => {
+    removeTask(id);
+    setUpdate(true);
   };
 
   return (
@@ -151,6 +157,7 @@ const RegisterScreen = () => {
                             <div className={styles.viewTasks_accordion}>
                               <AccordionMM
                                 key={task.id}
+                                id={task.id}
                                 title={task.name}
                                 duration={task.duration}
                                 description={task.description}
@@ -159,6 +166,7 @@ const RegisterScreen = () => {
                                 time={`${task.startTime} às ${task.endTime}`}
                                 size="small"
                                 hasIcons={true}
+                                onClickDelete={handleDelete}
                               />
                             </div>
                           );
