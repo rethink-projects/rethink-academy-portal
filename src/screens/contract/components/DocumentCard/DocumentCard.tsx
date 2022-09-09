@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DocumentCard.module.css";
 import {
   FileOpenOutlined,
@@ -7,6 +7,7 @@ import {
 } from "@mui/icons-material";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import { useStorage } from "../../../../services/supabase/storage";
+import axios from "axios";
 
 type CardType = {
   type: "embassador" | "student";
@@ -16,6 +17,8 @@ export type fileType = {
   title: string;
   url: string;
   id: string;
+  isDeleted: string;
+  setIsDeleted: (value: string) => void;
 };
 
 const DocumentCard = (documentContent: fileType & CardType) => {
@@ -25,6 +28,11 @@ const DocumentCard = (documentContent: fileType & CardType) => {
 
   const handleDownloadUrl = async (url: string) => {
     await generateUrlToDownload(documentContent.url);
+  };
+
+  const deleteFile = async (id: string) => {
+    await axios.delete(`http://localhost:4000/api/bucket/${id}`);
+    documentContent.setIsDeleted(id);
   };
 
   return documentContent.type === "student" ? (
@@ -49,6 +57,7 @@ const DocumentCard = (documentContent: fileType & CardType) => {
             width={164}
           />
           <ButtonWithIcon
+            onClick={() => deleteFile(documentContent.id)}
             type={"outline"}
             size={"small"}
             text={"Excluir"}

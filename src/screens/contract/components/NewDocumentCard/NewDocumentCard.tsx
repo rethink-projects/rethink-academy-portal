@@ -51,6 +51,7 @@ const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
       });
     }
     acceptedFiles.pop();
+    window.location.reload();
   };
 
   return (

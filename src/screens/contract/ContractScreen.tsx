@@ -39,12 +39,9 @@ export type infoType = {
   status: string;
 };
 
-/* type fileTypeArray = {
-  fileArray: Array<fileType>
-} */
-
 const ContractScreen = () => {
   const [contractStatus, setContractStatus] = useState("");
+  const [isDeleted, setIsDeleted] = useState("");
   const [isShown, setIsShown] = useState(true);
   const [files, setFiles] = useState<fileType[] | any>();
   const { notify } = useNotification();
@@ -75,7 +72,7 @@ const ContractScreen = () => {
     if (user) {
       getFiles();
     }
-  }, [user]);
+  }, [user, isDeleted]);
 
   const handlerContractStatus = (value: any) => {
     setContractStatus(value);
@@ -124,255 +121,262 @@ const ContractScreen = () => {
     setIsShown((current) => !current);
   };
 
-  return (
-    <div className={styles.contract_outer_container}>
-      <div className={styles.breadcrumb}>
-        <Breadcrumb
-          breadcrumbItems={[
-            { title: "Home", link: "/" },
-            { title: "Contrato", link: "/contrato" },
-          ]}
-        />
-      </div>
-      <div className={styles.contract_title}>Contrato</div>
-      <div className={styles.contract_inner_container}>
-        <div className={styles.contract_status}>
-          <div className={styles.contract_current_status}>
-            <div className={styles.contract_current_status_text}>
-              <h1>Status do Contrato</h1>
-              <p>Envie todos os documentos necessários obter REX's.</p>
-            </div>
-            <div className={styles.contract_current_status_tag}>
-              {user.role === "EMBASSADOR" ? (
-                <Dropdown
-                  setValue={handlerContractStatus}
-                  value={contractStatus}
-                  id={""}
-                  width={181}
-                />
-              ) : info?.status === "Pendente" ? (
-                <StatusTag type={"pending"} />
-              ) : info?.status === "Ativo" ? (
-                <StatusTag type={"active"} />
-              ) : info?.status === "Encerrado" ? (
-                <StatusTag type={"inactive"} />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-          <h1>Documentos</h1>
-          <div className={styles.cards_container}>
-            {files &&
-              files.map((content: any) =>
-                user.role === "EMBASSADOR" ? (
-                  <DocumentCard
-                    key={content.id}
-                    id={content.id}
-                    title={content.title}
-                    type={"embassador"}
-                    url={content.url}
-                  />
-                ) : (
-                  <DocumentCard
-                    key={content.id}
-                    id={content.id}
-                    title={content.title}
-                    type={"student"}
-                    url={content.url}
-                  />
-                )
-              )}
-
-            {user.role === "EMBASSADOR" ? (
-              ""
-            ) : (
-              <NewDocumentCard setFiles={setFiles} />
-            )}
-          </div>
+  if (files && files.length > 0) {
+    return (
+      <div className={styles.contract_outer_container}>
+        <div className={styles.breadcrumb}>
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/" },
+              { title: "Contrato", link: "/contrato" },
+            ]}
+          />
         </div>
-        <div className={styles.contract_info}>
-          <h1>Suas Informações</h1>
-          {isShown && (
-            <div className={styles.contract_info_card}>
-              <div className={styles.contract_info_card_content}>
-                <p>
-                  {" "}
-                  <CorporateFare /> Faculdade
-                </p>
-                <span>{info?.college}</span>
-                <p>
-                  {" "}
-                  <Schedule /> Período
-                </p>
-                <span>{info?.semester}</span>
-                <p>
-                  {" "}
-                  <BusinessCenter /> Horário de trabalho
-                </p>
-                <span>{info?.workTime}</span>
-                <p>
-                  {" "}
-                  <DirectionsBus /> Média de gasto com Vale Transporte
-                </p>
-                <span>{info?.transportationVoucher}</span>
-                <p>
-                  {" "}
-                  <LaptopMac /> Materiais Fornecidos
-                </p>
-                <span>{info?.providedEquipment}</span>
+        <div className={styles.contract_title}>Contrato</div>
+        <div className={styles.contract_inner_container}>
+          <div className={styles.contract_status}>
+            <div className={styles.contract_current_status}>
+              <div className={styles.contract_current_status_text}>
+                <h1>Status do Contrato</h1>
+                <p>Envie todos os documentos necessários obter REX's.</p>
+              </div>
+              <div className={styles.contract_current_status_tag}>
                 {user.role === "EMBASSADOR" ? (
-                  <ButtonWithIcon
-                    type={"secondary"}
-                    size={"block"}
-                    text={"Editar"}
-                    icon={editIcon}
-                    position={"left"}
-                    onClick={() => {
-                      handleClick();
-                    }}
+                  <Dropdown
+                    setValue={handlerContractStatus}
+                    value={contractStatus}
+                    id={""}
+                    width={181}
                   />
+                ) : info?.status === "Pendente" ? (
+                  <StatusTag type={"pending"} />
+                ) : info?.status === "Ativo" ? (
+                  <StatusTag type={"active"} />
+                ) : info?.status === "Encerrado" ? (
+                  <StatusTag type={"inactive"} />
                 ) : (
-                  <>
-                    <div className={styles.card_content_line} />
-                    <small>
-                      <InfoOutlined color="disabled" /> Caso haja algum erro ou
-                      algo precise ser atualizado, entre em contato com o
-                      RH/Embaixador.
-                    </small>
-                  </>
+                  ""
                 )}
               </div>
             </div>
-          )}
-          {!isShown && (
-            <div className={styles.contract_info_card}>
-              <form
-                className={styles.contract_info_card_content}
-                style={{ gap: "5px" }}
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <p>
-                  {" "}
-                  <CorporateFare /> Faculdade
-                </p>
-                <Controller
-                  name="college"
-                  control={control}
-                  defaultValue={info?.college}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      size="small"
-                      value={value}
-                      onChange={onChange}
-                      variant="standard"
-                      sx={{ mb: 1.8 }}
+            <h1>Documentos</h1>
+            <div className={styles.cards_container}>
+              {files &&
+                files.map((content: any) =>
+                  user.role === "EMBASSADOR" ? (
+                    <DocumentCard
+                      isDeleted={isDeleted}
+                      setIsDeleted={setIsDeleted}
+                      key={content.id}
+                      id={content.id}
+                      title={content.title}
+                      type={"embassador"}
+                      url={content.url}
                     />
-                  )}
-                />
-                <p>
-                  {" "}
-                  <Schedule /> Período
-                </p>
-                <Controller
-                  name="semester"
-                  control={control}
-                  defaultValue={info?.semester}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      value={value}
-                      onChange={onChange}
-                      size="small"
-                      variant="standard"
-                      sx={{ mb: 1.8 }}
+                  ) : (
+                    <DocumentCard
+                      isDeleted={isDeleted}
+                      setIsDeleted={setIsDeleted}
+                      key={content.id}
+                      id={content.id}
+                      title={content.title}
+                      type={"student"}
+                      url={content.url}
                     />
-                  )}
-                />
-                <p>
-                  {" "}
-                  <BusinessCenter /> Horário de trabalho
-                </p>
-                <Controller
-                  name="workTime"
-                  control={control}
-                  defaultValue={info?.workTime}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      value={value}
-                      onChange={onChange}
-                      size="small"
-                      variant="standard"
-                      sx={{ mb: 1.8 }}
-                    />
-                  )}
-                />
+                  )
+                )}
 
-                <p>
-                  {" "}
-                  <DirectionsBus /> Média de gasto com Vale Transporte
-                </p>
-                <Controller
-                  name="transportationVoucher"
-                  control={control}
-                  defaultValue={info?.transportationVoucher}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      value={value}
-                      onChange={onChange}
-                      size="small"
-                      variant="standard"
-                      sx={{ mb: 1.8 }}
-                    />
-                  )}
-                />
-
-                <p>
-                  {" "}
-                  <LaptopMac /> Materiais Fornecidos
-                </p>
-                <Controller
-                  name="providedEquipment"
-                  control={control}
-                  defaultValue={info?.providedEquipment}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      value={value}
-                      onChange={onChange}
-                      size="small"
-                      variant="standard"
-                      sx={{ mb: 2.6 }}
-                    />
-                  )}
-                />
-                <div className={styles.edit_buttons}>
-                  <ButtonWithIcon
-                    type={"primary"}
-                    size={"small"}
-                    width={500}
-                    text={"Salvar"}
-                    icon={saveIcon}
-                    position={"left"}
-                    onClick={() => {}}
-                  />
-                  <ButtonWithIcon
-                    type={"outline"}
-                    size={"small"}
-                    width={500}
-                    text={"Cancelar"}
-                    icon={<p></p>}
-                    position={"left"}
-                    onClick={() => {
-                      handleClick();
-                    }}
-                  />
-                </div>
-              </form>
+              {user.role === "EMBASSADOR" ? (
+                ""
+              ) : (
+                <NewDocumentCard setFiles={setFiles} />
+              )}
             </div>
-          )}
+          </div>
+          <div className={styles.contract_info}>
+            <h1>Suas Informações</h1>
+            {isShown && (
+              <div className={styles.contract_info_card}>
+                <div className={styles.contract_info_card_content}>
+                  <p>
+                    {" "}
+                    <CorporateFare /> Faculdade
+                  </p>
+                  <span>{info?.college}</span>
+                  <p>
+                    {" "}
+                    <Schedule /> Período
+                  </p>
+                  <span>{info?.semester}</span>
+                  <p>
+                    {" "}
+                    <BusinessCenter /> Horário de trabalho
+                  </p>
+                  <span>{info?.workTime}</span>
+                  <p>
+                    {" "}
+                    <DirectionsBus /> Média de gasto com Vale Transporte
+                  </p>
+                  <span>{info?.transportationVoucher}</span>
+                  <p>
+                    {" "}
+                    <LaptopMac /> Materiais Fornecidos
+                  </p>
+                  <span>{info?.providedEquipment}</span>
+                  {user.role === "EMBASSADOR" ? (
+                    <ButtonWithIcon
+                      type={"secondary"}
+                      size={"block"}
+                      text={"Editar"}
+                      icon={editIcon}
+                      position={"left"}
+                      onClick={() => {
+                        handleClick();
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <div className={styles.card_content_line} />
+                      <small>
+                        <InfoOutlined color="disabled" /> Caso haja algum erro
+                        ou algo precise ser atualizado, entre em contato com o
+                        RH/Embaixador.
+                      </small>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+            {!isShown && (
+              <div className={styles.contract_info_card}>
+                <form
+                  className={styles.contract_info_card_content}
+                  style={{ gap: "5px" }}
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <p>
+                    {" "}
+                    <CorporateFare /> Faculdade
+                  </p>
+                  <Controller
+                    name="college"
+                    control={control}
+                    defaultValue={info?.college}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        size="small"
+                        value={value}
+                        onChange={onChange}
+                        variant="standard"
+                        sx={{ mb: 1.8 }}
+                      />
+                    )}
+                  />
+                  <p>
+                    {" "}
+                    <Schedule /> Período
+                  </p>
+                  <Controller
+                    name="semester"
+                    control={control}
+                    defaultValue={info?.semester}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        value={value}
+                        onChange={onChange}
+                        size="small"
+                        variant="standard"
+                        sx={{ mb: 1.8 }}
+                      />
+                    )}
+                  />
+                  <p>
+                    {" "}
+                    <BusinessCenter /> Horário de trabalho
+                  </p>
+                  <Controller
+                    name="workTime"
+                    control={control}
+                    defaultValue={info?.workTime}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        value={value}
+                        onChange={onChange}
+                        size="small"
+                        variant="standard"
+                        sx={{ mb: 1.8 }}
+                      />
+                    )}
+                  />
+
+                  <p>
+                    {" "}
+                    <DirectionsBus /> Média de gasto com Vale Transporte
+                  </p>
+                  <Controller
+                    name="transportationVoucher"
+                    control={control}
+                    defaultValue={info?.transportationVoucher}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        value={value}
+                        onChange={onChange}
+                        size="small"
+                        variant="standard"
+                        sx={{ mb: 1.8 }}
+                      />
+                    )}
+                  />
+
+                  <p>
+                    {" "}
+                    <LaptopMac /> Materiais Fornecidos
+                  </p>
+                  <Controller
+                    name="providedEquipment"
+                    control={control}
+                    defaultValue={info?.providedEquipment}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        value={value}
+                        onChange={onChange}
+                        size="small"
+                        variant="standard"
+                        sx={{ mb: 2.6 }}
+                      />
+                    )}
+                  />
+                  <div className={styles.edit_buttons}>
+                    <ButtonWithIcon
+                      type={"primary"}
+                      size={"small"}
+                      width={500}
+                      text={"Salvar"}
+                      icon={saveIcon}
+                      position={"left"}
+                      onClick={() => {}}
+                    />
+                    <ButtonWithIcon
+                      type={"outline"}
+                      size={"small"}
+                      width={500}
+                      text={"Cancelar"}
+                      icon={<p></p>}
+                      position={"left"}
+                      onClick={() => {
+                        handleClick();
+                      }}
+                    />
+                  </div>
+                </form>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div>Loading...</div>;
 };
 
 export default ContractScreen;
