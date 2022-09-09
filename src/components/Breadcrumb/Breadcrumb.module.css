@@ -5,7 +5,7 @@
   gap: 6px;
 }
 
-.breadcrumbContainer > span {
+.breadcrumbContainer>span {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

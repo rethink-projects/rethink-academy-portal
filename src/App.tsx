@@ -8,6 +8,8 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
+import RequireAuth from "./services/auth";
+import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 
 function App() {
   return (
@@ -24,7 +26,14 @@ function App() {
                 element={<PersonalDevelopmentChart />}
               />
             </Route>
-            <Route path="/playground" element={<PlaygroundScreen />} />
+            <Route
+              path="/playground"
+              element={
+                <RequireAuth>
+                  <PlaygroundScreen />
+                </RequireAuth>
+              }
+            />
           </Route>
         </Routes>
       </AuthProvider>
