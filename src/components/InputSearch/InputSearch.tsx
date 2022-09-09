@@ -6,7 +6,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 type TypeInput = {
   label?: string;
   type?: "micro" | "default" | "small" | "large";
-  onChange?: (value: string) => string;
+  onChange?: (value: string) => void;
+  changeData?: () => void;
   placeholder?: string;
   caption?: string;
   hasIcon: boolean;
@@ -18,6 +19,7 @@ const InputSearch = ({
   type = "default",
   placeholder = "Search",
   onChange,
+  changeData,
   hasIcon,
   caption,
   disable,
@@ -29,6 +31,9 @@ const InputSearch = ({
 
   const handleClick = () => {
     setcontentInput("");
+    if (changeData) {
+      changeData!();
+    }
   };
 
   const handleChangeInput = (valueInput: string) => {

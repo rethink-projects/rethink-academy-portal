@@ -25,30 +25,33 @@ type task = {
 
 type CalendarProps = {
   setTasks?: (value: task[]) => void;
+  update?: boolean;
 };
 
-const CalendarComponent = ({ setTasks }: CalendarProps) => {
+const CalendarComponent = ({ setTasks, update }: CalendarProps) => {
   const { user } = useAuth();
+
+  const date = new Date();
 
   const [state, setState] = useState<
     { startDate?: Date; endDate?: Date; key?: string }[]
   >([
     {
-      startDate: new Date(), // PEGAR DATA ATUAL
-      endDate: new Date(),
+      startDate: new Date(date.valueOf() - date.getTimezoneOffset() * 60000), // PEGAR DATA ATUAL
+      endDate: new Date(date.valueOf() - date.getTimezoneOffset() * 60000),
       key: "selection",
     },
   ]);
 
   useEffect(() => {
-    if (state && setTasks) {
+    if (state) {
       changeTasks();
     }
-  }, [state]);
+  }, [state, user]);
 
-  // useEffect(() => {
-  //   changeTasks();
-  // }, [user]);
+  useEffect(() => {
+    if (update) changeTasks();
+  }, [update]);
 
   const changeTasks = async () => {
     if (user) {
@@ -67,7 +70,18 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
   };
 
   const getFullDate = (data: Date) => {
-    return data.toISOString();
+    let month = (data.getMonth() + 1).toString();
+    let day = data.getDate().toString();
+    let year = data.getFullYear().toString();
+
+    if (parseInt(month, 10) < 10) {
+      month = "0" + month;
+    }
+    if (parseInt(day, 10) < 10) {
+      day = "0" + day;
+    }
+
+    return [year, month, day].join("-") + "T00:00:00.000Z";
   };
 
   return (

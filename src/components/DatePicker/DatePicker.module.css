@@ -1,4 +1,5 @@
 .datePicker_active {
+    position: relative;
     width: 243px;
     border-radius: 4px;
     border: 1px solid #D3FA3A;
@@ -10,6 +11,7 @@
 }
 
 .datePicker_container {
+    position: relative;
     width: 243px;
     border-radius: 4px;
     border: 1px solid #CFD0E2;
@@ -82,10 +84,6 @@
 .micro img {
     width: 15px;
     height: 15px;
-}
-
-.datePicker_calendarIcon {
-    margin-top: 4px;
 }
 
 .datePicker_calendar {
