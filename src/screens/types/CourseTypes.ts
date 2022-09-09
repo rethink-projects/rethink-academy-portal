@@ -64,17 +64,16 @@ interface CourseResponse {
   skills: string;
   trailId: string;
   modules: Module[];
-  // teacherId: string;
   teacherName: string;
   teacherDescription: string;
   imageTeacher: string;
-  type: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
 interface UserProgressResponse {
   userName: string;
   userImage: string;
-  completedModules: string[]
+  completedModules: string[];
 }
 type CourseProgressResponse = {
   id: string;

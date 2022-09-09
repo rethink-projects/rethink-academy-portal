@@ -25,6 +25,7 @@ type TypeCourse = {
   teacherName: string;
   teacherDescription: string;
   imageTeacher: string;
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 };
 type TypeModule = {
   id: string;
@@ -88,7 +89,7 @@ const CourseScreen = () => {
     let lessons = 0;
     course &&
       course?.modules.map((module: TypeModule) => {
-        console.log("um modulo");
+        // console.log("um modulo");
         lessons += module.lessons.length;
       });
     setTotalLessons(lessons);
@@ -99,8 +100,8 @@ const CourseScreen = () => {
       axios
         .get("http://localhost:4000/api/user/" + userEmail)
         .then((response) => {
-          if (response.data.user) {
-            setEmbassador(response.data.user.role === "STUDENT");
+          if (response.data.userWithLevel) {
+            setEmbassador(response.data.userWithLevel.role === "STUDENT");
           }
         });
 
@@ -124,7 +125,6 @@ const CourseScreen = () => {
             setNameTrail(response.data.course.trail.name);
           }
         });
-
       axios
         .get("http://localhost:4000/api/course/" + courseId + "/modules")
         .then((response) => {
@@ -141,9 +141,9 @@ const CourseScreen = () => {
     userEmail === "" ||
     embassador === undefined
   ) {
-    console.log(user);
-    console.log(course);
-    console.log(embassador);
+    // console.log(user);
+    // console.log(course);
+    // console.log(embassador);
     return <div>Loading...</div>;
   }
 

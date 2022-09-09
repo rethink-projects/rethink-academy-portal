@@ -11,7 +11,7 @@ import { CourseResponse } from "../../../types/CourseTypes";
 
 interface FormData {
   name: string;
-  type: string;
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
   offeredBy: "Rethink Academy";
   description: string;
   nameInstructor: string;
@@ -26,25 +26,23 @@ interface FormData {
 type addCourseProps = {
   addCourse?: boolean;
   onClose: VoidFunction;
-  idCourse?: string;
   course?: CourseResponse;
 };
 
 const CardAddCourse = ({
   course,
   addCourse = true,
-  idCourse = "",
   onClose = () => {},
 }: addCourseProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
   const [valueTypeCourse, setValueTypeCourse] = useState<string>(() => {
     return !addCourse
-      ? course?.type === "COURSE"
+      ? course?.courseStyle === "COURSE"
         ? "Curso"
-        : course?.type === "TRAINING"
+        : course?.courseStyle === "TRAINING"
         ? "Treinamento"
-        : course?.type === "LECTURE"
+        : course?.courseStyle === "LECTURE"
         ? "Palestra"
         : "Workshop"
       : "Selecione...";
@@ -59,7 +57,7 @@ const CardAddCourse = ({
       : "Selecione...";
   });
   const location = useLocation();
-  let trilhaId = location.pathname.replace("/trilhas/", "");
+  let trailId = location.pathname.replace("/dashboard/trilhas/", "");
   const { notify } = useNotification();
 
   const formattedWorkload = course?.workload
@@ -68,7 +66,7 @@ const CardAddCourse = ({
 
   const [formData, setFormData] = useState<FormData>({
     name: course?.name || "",
-    type: course?.type || "",
+    courseStyle: course?.courseStyle || "COURSE",
     offeredBy: "Rethink Academy",
     description: course?.description || "",
     nameInstructor: addCourse ? "" : course?.teacherName || "",
@@ -131,6 +129,12 @@ const CardAddCourse = ({
     const workload = parseInt(formData.workload.replace(/[^0-9]/g, ""));
 
     if (addCourse) {
+      console.log("Dentro if() vc criou um novo curso");
+      console.log(formData);
+      console.log(
+        `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
+      );
+
       const response = await api.post(`/course`, {
         name: `${formData.name}`,
         description: `${formData.description}`,
@@ -138,8 +142,8 @@ const CardAddCourse = ({
         workload,
         learning: `${formData.learn}`,
         skills: `${formData.skills}`,
-        trailId: `${trilhaId}`,
-        type: `${formData.type}`,
+        trailId: `${trailId}`,
+        courseStyle: `${formData.courseStyle}`,
         teacherName: `${formData.nameInstructor}`,
         teacherDescription: `${formData.descriptionInstructor}`,
         imageTeacher: `${formData.avatar}`,
@@ -154,8 +158,8 @@ const CardAddCourse = ({
         workload,
         learning: `${formData.learn}`,
         skills: `${formData.skills}`,
-        trailId: `${trilhaId}`,
-        type: `${formData.type}`,
+        trailId: `${trailId}`,
+        courseStyle: `${formData.courseStyle}`,
         teacherName: `${formData.nameInstructor}`,
         teacherDescription: `${formData.descriptionInstructor}`,
         imageTeacher: `${formData.avatar}`,

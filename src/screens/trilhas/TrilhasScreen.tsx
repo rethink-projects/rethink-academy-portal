@@ -14,7 +14,11 @@ type TypeTrails = {
   weight: number;
 };
 const TrilhasScreen = () => {
+  let userEmail = "";
   const { user: userAuth } = useAuth();
+
+  if (userAuth) userEmail = userAuth.email;
+
   const navigate = useNavigate();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -34,13 +38,12 @@ const TrilhasScreen = () => {
           setUser(response.data.user);
         }
       });
-
     axios.get("http://localhost:4000/api/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);
       }
     });
-  }, [modalIsOpen]);
+  }, [modalIsOpen, userEmail]);
 
   const setStateModalOnclick = (trailId: string) => {
     const searchTrailUpdated = trails?.find((trail) => trail.id === trailId);
