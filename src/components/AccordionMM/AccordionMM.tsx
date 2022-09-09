@@ -16,6 +16,8 @@ type AccordionMMProps = {
   time: string;
   tags: string[];
   status: string[];
+  id: string;
+  onClickDelete: (id: string) => void;
 };
 
 const AccordionMM = ({
@@ -27,8 +29,14 @@ const AccordionMM = ({
   time = "13h - 14:45",
   tags,
   status,
+  id,
+  onClickDelete,
 }: AccordionMMProps) => {
   const [active, setActive] = useState(false);
+
+  const handleDelete = () => {
+    onClickDelete(id);
+  };
 
   return (
     <div className={[styles.accordion, styles[size]].join(" ")}>
@@ -38,9 +46,11 @@ const AccordionMM = ({
             <Tooltip content="Editar" direction="top">
               <img src={Images.icons.IconEdit} alt="A Edit Icon"></img>
             </Tooltip>
-            <Tooltip content="Deletar" direction="top">
-              <img src={Images.icons.deleteIcon} alt=""></img>
-            </Tooltip>
+            <button onClick={() => handleDelete()}>
+              <Tooltip content="Deletar" direction="top">
+                <img src={Images.icons.deleteIcon} alt=""></img>
+              </Tooltip>
+            </button>
           </>
         )}
       </div>

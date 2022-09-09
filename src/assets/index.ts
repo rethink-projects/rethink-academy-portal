@@ -56,6 +56,10 @@ import welcome from "./Welcome_Badge.svg";
 import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
+import hatDelivery from "./hatDelivery.gif";
+import hatDegrading from "./hatDegrading.gif";
+import hatStolen from "./hatStolen.gif";
+
 export const Images = {
   logo,
   checkbox,
@@ -74,6 +78,9 @@ export const Images = {
   logoRaSecondary,
   arrowTask,
   homeBackground,
+  hatDelivery,
+  hatDegrading,
+  hatStolen,
   icons: {
     calendarIcon,
     eyeIcon,

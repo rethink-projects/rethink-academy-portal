@@ -7,32 +7,135 @@ import AddTask from "../../components/AddTask/AddTask";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import InputSearch from "../../components/InputSearch/InputSearch";
 import Note from "../../components/Note/Note";
+import Toast from "../../components/Toast/Toast";
+import Gamification from "./Gamification/Gamification";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
 
 // Backend
+import {
+  getRecordOfDay,
+  removeTask,
+  getHoursLastDay,
+} from "../../services/backend/Tasks";
 
 const RegisterScreen = () => {
-  type task = {
-    name: string;
-    description: string;
-    taskDate: string;
-    startDate: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    tags: string;
-    status: string;
-    userEmail: string;
-    duration: string;
-    time: string;
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [update, setUpdate] = useState(false);
+  const [thereTask, setThereTask] = useState(true);
+  const [time, setTime] = useState(0);
+  const [controller, setController] = useState(false);
+  const [prevHours, setPrevHours] = useState(0);
+  const [controllerPrevHours, setControllerPrevHours] = useState(false);
+
+  // type task = {
+  //   name: string;
+  //   description: string;
+  //   taskDate: string;
+  //   startDate: string;
+  //   endDate: string;
+  //   startTime: string;
+  //   endTime: string;
+  //   tags: string;
+  //   status: string;
+  //   userEmail: string;
+  //   duration: string;
+  //   time: string;
+  // };
+
+  const changeData = () => {
+    setThereTask(true);
+    setUpdate(true);
   };
 
-  const [tasks, setTasks2] = useState<any[]>([]);
+  const thereIsTask = (filter: any[]) => {
+    let exist = false;
+
+    if (filter.length > 0) {
+      filter.map((task) => {
+        if (task[0]) {
+          exist = true;
+        }
+      });
+    }
+    return exist;
+  };
+
+  const filterWord = (contentInput: string) => {
+    const filter = tasks.map((day: any[]) =>
+      day!.filter((task) =>
+        task.name.toLowerCase().includes(contentInput.toLowerCase())
+      )
+    );
+
+    setUpdate(false);
+    setTasks(filter);
+
+    if (thereIsTask(filter)) {
+      setThereTask(true);
+    } else {
+      setThereTask(false);
+    }
+  };
+
+  const handleDelete = (id: string) => {
+    removeTask(id);
+    setUpdate(true);
+  };
+
+  const getTime = async () => {
+    await getRecordOfDay("fabiana.kamo@rethink.dev") // ALTERAR
+      .then((response) => {
+        let helper = 0;
+        response.map((record: any) => {
+          helper += record.time;
+        });
+        helper = helper / 60;
+        setTime(Math.trunc(helper));
+        if (Math.trunc(helper) >= 6) {
+          setController(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getPrevHours = async () => {
+    await getHoursLastDay("fabiana.kamo@rethink.dev") // ALTERAR
+      .then((response) => {
+        setPrevHours(response);
+        if (response < 6) {
+          setControllerPrevHours(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    getTime();
+    getPrevHours();
+  }, []);
+
+  console.log(prevHours);
 
   return (
     <div className={styles.register_container}>
+      <div className={styles.modal_container}>
+        {controller && (
+          <Gamification
+            setActive={() => setController(false)}
+            id="outside"
+            type="Losing"
+          />
+        )}
+        {controllerPrevHours && (
+          <Gamification
+            setActive={() => setControllerPrevHours(false)}
+            id="outside"
+            type="Degrading"
+          />
+        )}
+      </div>
       <div className={styles.register_content}>
         <div className={styles.register_header}>
           <div className={styles.register_breadcrumb}>
@@ -75,27 +178,33 @@ const RegisterScreen = () => {
           <div className={styles.searchTasks_inputSearch}>
             <InputSearch
               hasIcon
-              placeholder="Procurar tarefas realizadas"
               type="default"
+              placeholder="Procurar tarefas realizadas"
+              onChange={filterWord}
+              changeData={changeData}
             />
           </div>
           <div className={styles.searchTasks_CalendarTitle}>
             <p>Calendário</p>
           </div>
           <div className={styles.searchTasks_Calendar}>
-            <CalendarComponent setTasks={setTasks2} />
+            <CalendarComponent setTasks={setTasks} update={update} />
           </div>
           <div className={styles.searchTasks_TasksTitle}>
             <p>Tasks e Reuniões</p>
           </div>
 
           <div className={styles.searchTasks_Tasks}>
-            {tasks.length === 0 ? (
-              <p>Você ainda não possui tarefas cadastradas!</p>
-            ) : (
-              <>
-                {tasks.length > 0 &&
-                  tasks.map((day: any[], index) => (
+            {!thereTask && (
+              <Toast
+                title=" Não existem tarefas cadastradas com esse nome!"
+                type="error"
+              />
+            )}
+            {tasks.length > 0 &&
+              tasks.map(
+                (day: any[], index) =>
+                  day[0] && (
                     <div key={index}>
                       <div className={styles.searchTasks_Date}>
                         <svg
@@ -117,24 +226,27 @@ const RegisterScreen = () => {
                       <div className={styles.searchTasks_Tasks}>
                         {day.map((task) => {
                           return (
-                            <AccordionMM
-                              key={task.id}
-                              title={task.name}
-                              duration={task.duration}
-                              description={task.description}
-                              tags={[task.tags]}
-                              status={[task.status]}
-                              time={`${task.startTime} às ${task.endTime}`}
-                              size="small"
-                              hasIcons={true}
-                            />
+                            <div className={styles.viewTasks_accordion}>
+                              <AccordionMM
+                                key={task.id}
+                                id={task.id}
+                                title={task.name}
+                                duration={task.duration}
+                                description={task.description}
+                                tags={[task.tags]}
+                                status={[task.status]}
+                                time={`${task.startTime} às ${task.endTime}`}
+                                size="small"
+                                hasIcons={true}
+                                onClickDelete={handleDelete}
+                              />
+                            </div>
                           );
                         })}
                       </div>
                     </div>
-                  ))}
-              </>
-            )}
+                  )
+              )}
           </div>
         </div>
       </div>
