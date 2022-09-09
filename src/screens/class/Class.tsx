@@ -122,11 +122,9 @@ const Class = () => {
       const response = await api.put(`/user/${user.email}`, {
         watched: lessonsWatched,
       });
-
       const responseModule = await api.get(
         `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
       );
-
       setModules(responseModule.data.modules);
     }
   };
@@ -138,12 +136,10 @@ const Class = () => {
   const getInfoLesson = async () => {
     const responseClass = await api.get(`/lesson/${lessonId}`);
     setLesson(responseClass.data.lesson);
-
     const responseModule = await api.get(
       `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
     );
     console.log(responseModule);
-
     setModules(responseModule.data.modules);
     setModuleOrder(responseModule.data.moduleOrder);
     setLessonOrder(responseModule.data.lessonOrder);
@@ -155,7 +151,7 @@ const Class = () => {
     if (user?.email) {
       const func = async () => {
         const responseUser = await api.get(`/user/${user.email}`);
-        setLessonsWatched(responseUser.data.user.watched);
+        setLessonsWatched(responseUser.data.userWithLevel.watched);
         getInfoLesson();
       };
       func();

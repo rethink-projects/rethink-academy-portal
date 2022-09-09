@@ -31,6 +31,8 @@ const CardCurso = ({
   type,
   index,
 }: cardCourseProp) => {
+  console.log(type);
+
   const textConcluded =
     concluded === 1
       ? "Parabéns! Você concluiu esse curso!"

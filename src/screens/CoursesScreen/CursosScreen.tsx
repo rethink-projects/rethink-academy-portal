@@ -29,9 +29,9 @@ import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 
 const CursosScreenTeste = () => {
   const [intern, setIntern] = useState(false);
+  const navigate = useNavigate();
 
   const { user } = useAuth();
-  const [courseId, setCourseId] = useState("");
 
   const location = useLocation();
   let trailId = location.pathname.replace("/dashboard/trilhas/", "");
@@ -56,13 +56,13 @@ const CursosScreenTeste = () => {
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const [userByEmail, setUserByEMail] = useState<any>();
-
   const [coursesUser, setCoursesUser] = useState<UserLessons[]>([]);
 
   useEffect(() => {
     if (user?.email) {
       const func = async () => {
         const responseByEmail = await api.get(`/user/${user.email}`);
+        // console.log(responseByEmail);
 
         // responseByEmail.data.user.role === "STUDENT"
         //   ? setIntern(true)
@@ -74,15 +74,24 @@ const CursosScreenTeste = () => {
 
         setTrail(responseCourses.data.maxLessons[0]?.trail);
         setCoursesUser(responseCourses.data.maxLessons);
-        setUserByEMail(responseByEmail.data.user);
+        // console.log(responseCourses.data);
+
+        setUserByEMail(responseByEmail.data.userWithLevel);
       };
       func();
     }
   }, [user]);
 
+  const onSubmitCourse = () => {
+    setAddCourseIsOpen(false);
+
+    // if (!addCourseIsOpen)
+    window.location.reload();
+  };
+
   useEffect(() => {
     const func = async () => {
-      const responseCourse = await api.get(`/course`);
+      const responseCourse = await api.get(`/trail/course/${trailId}`);
       setData(responseCourse.data.course);
     };
     func();
@@ -101,7 +110,7 @@ const CursosScreenTeste = () => {
           ]}
         />
         <div className={styles.title}>
-          <p>{`Programa de Cursos | ${trail?.name}`}</p>
+          <p>{`${trail?.name}`}</p>
           {!intern && (
             <div className={styles.title_buttons}>
               <ButtonWithIcon
@@ -146,40 +155,38 @@ const CursosScreenTeste = () => {
             />
           )}
           {addCourseIsOpen && (
-            <CardAddCourse onClose={() => setAddCourseIsOpen(false)} />
+            <CardAddCourse onClose={() => onSubmitCourse()} />
           )}
         </div>
         <div className={styles.cards}>
           {!intern
-            ? data.map(
-                (course: CourseResponse, index) =>
-                  course.trailId === trailId && (
-                    <CardCourse
-                      intern={intern}
-                      onClickIrAoCurso={() => console.log("Foi para o curso")}
-                      onClickColectEmblem={() =>
-                        console.log("Coletou o emblema")
-                      }
-                      onClickEditCourse={() => {
-                        setCourseId(course.id);
-                        setSelectedCourse(course);
-                        setEditCourseIsOpen(true);
-                      }}
-                      key={index}
-                      index={index}
-                      title={course.name}
-                      concluded={1}
-                      emblem={false} //falta ver
-                      type={course.type}
-                    />
-                  )
-              )
+            ? data.map((course: CourseResponse, index) => (
+                <CardCourse
+                  intern={intern}
+                  onClickIrAoCurso={() =>
+                    navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
+                  }
+                  onClickColectEmblem={() => console.log("Coletou o emblema")}
+                  onClickEditCourse={() => {
+                    setSelectedCourse(course);
+                    setEditCourseIsOpen(true);
+                  }}
+                  key={index}
+                  index={index}
+                  title={course.name}
+                  concluded={1}
+                  emblem={false} //falta ver
+                  type={course.courseStyle}
+                />
+              ))
             : coursesUser.map((course, index) => (
                 <CardCourse
                   key={index}
                   index={index}
                   intern={intern}
-                  onClickIrAoCurso={() => console.log("Foi para o curso")}
+                  onClickIrAoCurso={() =>
+                    navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
+                  }
                   onClickColectEmblem={() => console.log("Coletou o emblema")}
                   onClickEditCourse={() => setEditCourseIsOpen(true)}
                   title={course.name}
@@ -195,7 +202,6 @@ const CursosScreenTeste = () => {
             <CardAddCourse
               course={selectedCourse}
               addCourse={false}
-              idCourse={courseId}
               onClose={() => setEditCourseIsOpen(false)}
             />
           )}
