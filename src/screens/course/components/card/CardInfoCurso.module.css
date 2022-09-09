@@ -19,7 +19,7 @@ p {
 
 .card_container {
   width: 464px;
-
+  /* background-color: red; */
   box-sizing: border-box;
 
   display: flex;

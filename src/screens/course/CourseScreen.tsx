@@ -98,6 +98,7 @@ const CourseScreen = () => {
         // console.log("um modulo");
         lessons += module.lessons.length;
       });
+    setTotalLessons(lessons);
   }, [course]);
 
   useEffect(() => {
@@ -126,6 +127,8 @@ const CourseScreen = () => {
         .get("http://localhost:4000/api/course/" + courseId)
         .then((response) => {
           if (response.data.course) {
+            console.log(response);
+
             setCourse(response.data.course);
             setNameTrail(response.data.course.trail.name);
           }
