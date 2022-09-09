@@ -18,6 +18,7 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/dashboard" element={<Layout />}>
               <Route path="/dashboard/notas" element={<Notes />} />
+              <Route path="/dashboard/notas/:email" element={<Notes />} />
               <Route index element={<HomeScreen />} />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />

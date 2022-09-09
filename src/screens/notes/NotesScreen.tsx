@@ -19,6 +19,7 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Images from "../../assets";
+import { useNavigate } from "react-router-dom";
 
 const NotesScreen = () => {
   const [state, setState] = useState<noteType | null>();
@@ -35,40 +36,82 @@ const NotesScreen = () => {
   const [content, setContent] = useState(state?.content);
 
   const [update, setUpdate] = useState(false);
+  const [updateReturn, setUpdateReturn] = useState("");
+  const [handleCreate, setHandleCreate] = useState(false);
 
   const [isModalOpen, setModalOpen] = useState(false);
-
-  //------------ Aviso sem notas ------------------------------------
 
   const [notes, setNotes] = useState<noteType[]>([]);
 
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
+  const navigate = useNavigate();
+
+  const [studentEmail, setStudentEmail] = useState<any>(null);
+
+  const validateRoute = () => {
+    let link = window.location.pathname.split("/");
+    // console.log(link);
+    if (link.length === 4) {
+      if (user.role === "EMBASSADOR" && studentEmail === null) {
+        console.log("***");
+        setStudentEmail(link[link.length - 1]);
+
+        setUpdate((current) => !current);
+        return true;
+      } else if (user.role === "STUDENT") {
+        navigate("/dashboard/notas");
+        setUpdate((current) => !current);
+        return false;
+      }
+    }
+    return true;
+  };
 
   const getNotes = async () => {
-    const notes = await axios.get(
-      `http://localhost:4000/api/note/${user.email}`
-    );
-    setNotes(notes.data.notesFormated);
-    return notes.data.notesFormated;
+    if (studentEmail === null) {
+      const notes = await axios.get(
+        `http://localhost:4000/api/note/${user.email}`
+      );
+      setNotes(notes.data.notesFormated);
+      return notes.data.notesFormated;
+    } else {
+      console.log("**");
+
+      const notes = await axios.get(
+        `http://localhost:4000/api/note/${studentEmail}`
+      );
+
+      console.log(
+        notes.data.notesFormated.filter((note: any) => note.isPublic === true)
+      );
+
+      setNotes(
+        notes.data.notesFormated.filter((note: any) => note.isPublic === true)
+      );
+      setUpdateReturn("*");
+
+      return notes.data.notesFormated;
+    }
   };
 
   useEffect(() => {
     if (user) {
-      getNotes();
+      if (validateRoute()) {
+        getNotes();
 
-      if (user.role === "EMBASSADOR") {
-        setIsPublic(false);
+        setState(undefined);
+        setCategories(undefined);
+        setIsPublic(undefined);
+        setTitle(undefined);
+        setContent(undefined);
       }
     }
-  }, [user, update]);
-
-  // console.log(user);
-
-  // ----------------------------------------------------------------
+  }, [user, update, studentEmail, updateReturn, handleCreate]);
 
   const createNote = () => {
-    // console.log("nova nota");
+    console.log("create");
+
     const newNote = {
       email: user.email,
       title: "Sem título",
@@ -79,34 +122,39 @@ const NotesScreen = () => {
 
     axios.post(`http://localhost:4000/api/note`, newNote);
 
-    setUpdate((current) => !current);
-    window.location.reload();
+    setHandleCreate((current) => !current);
+    // setUpdate((current) => !current);
   };
 
   const deleteNote = () => {
-    // if (window.confirm("Tem certeza que deseja excluir a nota?")) {
-    // console.log("deletar");
     if (state) {
       axios.delete(`http://localhost:4000/api/note/${state.id}`);
     }
     setUpdate((current) => !current);
-    window.location.reload();
-    // }
+    setModalOpen(false);
   };
 
   const saveNote = () => {
-    // console.log("salvando");
     const updateNote = {
       title: title,
       categories: categories,
       isPublic: isPublic,
       content: content,
     };
+    if (!updateNote.title) {
+      updateNote.title = "Sem título";
+    }
+    if (user.role === "EMBASSADOR") {
+      if (studentEmail != null) {
+        updateNote.isPublic = true;
+      } else {
+        updateNote.isPublic = false;
+      }
+    }
     if (state) {
       axios.post(`http://localhost:4000/api/note/${state.id}`, updateNote);
     }
     setUpdate((current) => !current);
-    window.location.reload();
   };
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,7 +195,11 @@ const NotesScreen = () => {
           {/* --------------------Aviso sem notas---------------------- */}
           {notes.length > 0 ? (
             <div className={style.table}>
-              <TableContent handleClick={setState} />
+              <TableContent
+                handleClick={setState}
+                notes={notes}
+                setNotes={setNotes}
+              />
             </div>
           ) : (
             <div className={style.noNotes_container}>
@@ -158,10 +210,6 @@ const NotesScreen = () => {
             </div>
           )}
           {/* --------------------------------------------------------- */}
-
-          {/* <div className={style.table}>
-            <TableContent handleClick={setState} />
-          </div> */}
         </div>
 
         <div className={style.rightSideContainer}>
@@ -202,7 +250,6 @@ const NotesScreen = () => {
                   <CategoryTag
                     getCategories={(categories) => {
                       setCategories(categories);
-                      // console.log(categories);
                     }}
                     sendCategories={state.categories}
                   />
@@ -231,17 +278,19 @@ const NotesScreen = () => {
                       onClick={saveNote}
                     />
                   </div>
-                  <div className={style.deleteButton}>
-                    <ButtonWithIcon
-                      type="secondary"
-                      size="small"
-                      text="Excluir"
-                      width={134}
-                      position="left"
-                      icon={<DeleteOutlineOutlinedIcon />}
-                      onClick={() => setModalOpen(true)}
-                    />
-                  </div>
+                  {studentEmail === null && (
+                    <div className={style.deleteButton}>
+                      <ButtonWithIcon
+                        type="secondary"
+                        size="small"
+                        text="Excluir"
+                        width={134}
+                        position="left"
+                        icon={<DeleteOutlineOutlinedIcon />}
+                        onClick={() => setModalOpen(true)}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

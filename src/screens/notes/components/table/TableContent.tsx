@@ -48,12 +48,16 @@ function createData({
 
 const TableContent = ({
   handleClick,
+  notes,
+  setNotes,
 }: {
+  notes: noteType[];
+  setNotes: (value: any) => void;
   handleClick: React.Dispatch<
     React.SetStateAction<noteType | null | undefined>
   >;
 }) => {
-  const [notes, setNotes] = useState<noteType[]>([]);
+  // const [notes, setNotes] = useState<noteType[]>([]);
 
   const { user } = useAuth();
 
