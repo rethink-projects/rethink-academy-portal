@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 
 import styles from "./Comment.module.css";
 import Images from "../../assets";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Avatar from "../Avatar/Avatar";
 import Textarea from "../Textarea/Textarea";
 import "./Comment.css";
@@ -10,6 +11,7 @@ import CommentBox from "./components/CommentBox";
 import SimpleButton from "../SimpleButton/SimpleButton";
 
 const Comment = () => {
+  const [active, setActive] = useState(false);
   const [comments, setComments] = useState([
     {
       id: "1",
@@ -52,15 +54,25 @@ const Comment = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.container_comments}>
-        {comments.map((comment) => (
-          <CommentBox
-            id={comment.id}
-            text={comment.text}
-            onClickDelete={handleDelete}
-          />
-        ))}
-      </div>
+      {!active && (
+        <div className={styles.no_comments}>
+          <div className={styles.error_outline}>
+            <ErrorOutlineIcon />
+          </div>
+          <p>Você ainda não possui comentários! Vamos começar?</p>
+        </div>
+      )}
+      {active && (
+        <div className={styles.container_comments}>
+          {comments.map((comment) => (
+            <CommentBox
+              id={comment.id}
+              text={comment.text}
+              onClickDelete={handleDelete}
+            />
+          ))}
+        </div>
+      )}
       <div className={styles.make_comment}>
         <Textarea
           type={"small"}
