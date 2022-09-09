@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // API
@@ -27,7 +27,24 @@ import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 
-const CursosScreenTeste = () => {
+interface CoursesWatched {
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  coursecompleted: 1 | 2 | 3;
+  cratedAt: string;
+  description: string;
+  id: string;
+  imageTeacher: string;
+  learning: string;
+  level: "LOW" | "MEDIUM" | "HIGH";
+  name: string;
+  skills: string;
+  teacherDescription: string;
+  teacherName: string;
+  trailId: string;
+  workload: number;
+}
+
+const CursosScreen = () => {
   const [intern, setIntern] = useState(false);
   const navigate = useNavigate();
 
@@ -40,64 +57,49 @@ const CursosScreenTeste = () => {
     {} as CourseResponse
   );
 
-  // Declaração de variáveis
-  const [trail, setTrail] = useState<Trail>({
-    id: "",
-    name: "",
-    description: "",
-    weight: 0,
-    imageUrl: "",
-    main: "",
-  });
-
   const [addCourseIsOpen, setAddCourseIsOpen] = useState(false);
   const [syllabusIsOpen, setSyllabusIsOpen] = useState(false);
   const [progressIsOpen, setProgressIsOpen] = useState(false);
   const [editCourseIsOpen, setEditCourseIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+
+  const [courses, setCourses] = useState([]);
+  const [trailName, setTrailName] = useState("");
+
   const [userByEmail, setUserByEMail] = useState<any>();
-  const [coursesUser, setCoursesUser] = useState<UserLessons[]>([]);
+  const [coursesUser, setCoursesUser] = useState<CoursesWatched[]>([]);
+
+  const getUserCourses = async () => {
+    const responseCourses = await api.get(
+      `/user/watched/course/${user.email}/${trailId}`
+    );
+    setCoursesUser(responseCourses.data.data);
+    setUserByEMail(responseCourses.data.user);
+  };
+
+  const getCourseInformations = async () => {
+    const responseCourse = await api.get(`/trail/course/${trailId}`);
+    setTrailName(responseCourse.data.trailName.name);
+    setCourses(responseCourse.data.course);
+  };
 
   useEffect(() => {
     if (user?.email) {
-      const func = async () => {
-        const responseByEmail = await api.get(`/user/${user.email}`);
-        // console.log(responseByEmail);
-
-        // responseByEmail.data.user.role === "STUDENT"
-        //   ? setIntern(true)
-        //   : setIntern(false);
-
-        const responseCourses = await api.get(
-          `/user/watched/${user.email}?trailId=${trailId}`
-        );
-
-        setTrail(responseCourses.data.maxLessons[0]?.trail);
-        setCoursesUser(responseCourses.data.maxLessons);
-        // console.log(responseCourses.data);
-
-        setUserByEMail(responseByEmail.data.userWithLevel);
-      };
-      func();
+      getUserCourses();
     }
   }, [user]);
 
   const onSubmitCourse = () => {
-    setAddCourseIsOpen(false);
-
-    // if (!addCourseIsOpen)
-    window.location.reload();
+    if (addCourseIsOpen) {
+      setAddCourseIsOpen(false);
+      getCourseInformations();
+    }
   };
 
   useEffect(() => {
-    const func = async () => {
-      const responseCourse = await api.get(`/trail/course/${trailId}`);
-      setData(responseCourse.data.course);
-    };
-    func();
+    getCourseInformations();
   }, []);
 
-  if (data.length === 0) return <div>loading...</div>;
+  if (courses.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -106,11 +108,11 @@ const CursosScreenTeste = () => {
           breadcrumbItems={[
             { title: "Home", link: "/dashboard" },
             { title: "Cursos", link: "/dashboard/trilhas" },
-            { title: `${trail?.name}`, link: "#" },
+            { title: `${trailName}`, link: "#" },
           ]}
         />
         <div className={styles.title}>
-          <p>{`Programa de Cursos | ${trail?.name}`}</p>
+          <p>{`${trailName}`}</p>
           <div className={styles.title_buttons}>
             <ButtonWithIcon
               onClick={() => setSyllabusIsOpen(true)}
@@ -160,15 +162,15 @@ const CursosScreenTeste = () => {
             <CardAddCourse onClose={() => onSubmitCourse()} />
           )}
         </div>
-        <div className={styles.cards}>
+        <div id="cards" className={styles.cards}>
           {!intern
-            ? data.map((course: CourseResponse, index) => (
+            ? courses.map((course: CourseResponse, index) => (
                 <CardCourse
                   intern={intern}
                   onClickIrAoCurso={() =>
                     navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
                   }
-                  onClickColectEmblem={() => console.log("Coletou o emblema")}
+                  onClickColectEmblem={() => {}}
                   onClickEditCourse={() => {
                     setSelectedCourse(course);
                     setEditCourseIsOpen(true);
@@ -189,12 +191,15 @@ const CursosScreenTeste = () => {
                   onClickIrAoCurso={() =>
                     navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
                   }
-                  onClickColectEmblem={() => console.log("Coletou o emblema")}
+                  onClickColectEmblem={async () => {
+                    await api.post("/badge/", {
+                      badge: "engineering",
+                      email: `${user.email}`,
+                    });
+                  }}
                   onClickEditCourse={() => setEditCourseIsOpen(true)}
                   title={course.name}
-                  concluded={
-                    course.completed ? 1 : course.userLessonsLength > 0 ? 2 : 3
-                  }
+                  concluded={course.coursecompleted}
                   emblem={true} //falta ver
                   type={course.courseStyle}
                 />
@@ -213,4 +218,4 @@ const CursosScreenTeste = () => {
   );
 };
 
-export default CursosScreenTeste;
+export default CursosScreen;

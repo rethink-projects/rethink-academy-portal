@@ -139,7 +139,7 @@ const Class = () => {
     const responseModule = await api.get(
       `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
     );
-    console.log(responseModule);
+    // console.log(responseModule);
     setModules(responseModule.data.modules);
     setModuleOrder(responseModule.data.moduleOrder);
     setLessonOrder(responseModule.data.lessonOrder);

@@ -129,11 +129,11 @@ const CardAddCourse = ({
     const workload = parseInt(formData.workload.replace(/[^0-9]/g, ""));
 
     if (addCourse) {
-      console.log("Dentro if() vc criou um novo curso");
-      console.log(formData);
-      console.log(
-        `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
-      );
+      // console.log("Dentro if() vc criou um novo curso");
+      // console.log(formData);
+      // console.log(
+      //   `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
+      // );
 
       const response = await api.post(`/course`, {
         name: `${formData.name}`,
@@ -148,7 +148,7 @@ const CardAddCourse = ({
         teacherDescription: `${formData.descriptionInstructor}`,
         imageTeacher: `${formData.avatar}`,
       });
-
+      onClose();
       return response.data;
     } else {
       const response = await api.put(`/course/${course?.id}`, {
@@ -164,7 +164,7 @@ const CardAddCourse = ({
         teacherDescription: `${formData.descriptionInstructor}`,
         imageTeacher: `${formData.avatar}`,
       });
-
+      onClose();
       return response.data;
     }
   };
@@ -186,7 +186,6 @@ const CardAddCourse = ({
           : currentStep === 3
           ? () => {
               handleSubmit();
-              onClose();
             }
           : () => {
               setCurrentStep(currentStep + 1);
