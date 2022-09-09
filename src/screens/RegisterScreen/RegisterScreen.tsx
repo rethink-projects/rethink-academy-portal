@@ -10,10 +10,15 @@ import Note from "../../components/Note/Note";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
+import Toast from "../../components/Toast/Toast";
 
 // Backend
 
 const RegisterScreen = () => {
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [update, setUpdate] = useState(false);
+  const [thereTask, setThereTask] = useState(true);
+
   type task = {
     name: string;
     description: string;
@@ -29,7 +34,40 @@ const RegisterScreen = () => {
     time: string;
   };
 
-  const [tasks, setTasks2] = useState<any[]>([]);
+  const changeData = () => {
+    setThereTask(true);
+    setUpdate(true);
+  };
+
+  const thereIsTask = (filter: any[]) => {
+    let exist = false;
+
+    if (filter.length > 0) {
+      filter.map((task) => {
+        if (task[0]) {
+          exist = true;
+        }
+      });
+    }
+    return exist;
+  };
+
+  const filterWord = (contentInput: string) => {
+    const filter = tasks.map((day: any[]) =>
+      day!.filter((task) =>
+        task.name.toLowerCase().includes(contentInput.toLowerCase())
+      )
+    );
+
+    setUpdate(false);
+    setTasks(filter);
+
+    if (thereIsTask(filter)) {
+      setThereTask(true);
+    } else {
+      setThereTask(false);
+    }
+  };
 
   return (
     <div className={styles.register_container}>
@@ -62,27 +100,33 @@ const RegisterScreen = () => {
           <div className={styles.searchTasks_inputSearch}>
             <InputSearch
               hasIcon
-              placeholder="Procurar tarefas realizadas"
               type="default"
+              placeholder="Procurar tarefas realizadas"
+              onChange={filterWord}
+              changeData={changeData}
             />
           </div>
           <div className={styles.searchTasks_CalendarTitle}>
             <p>Calendário</p>
           </div>
           <div className={styles.searchTasks_Calendar}>
-            <CalendarComponent setTasks={setTasks2} />
+            <CalendarComponent setTasks={setTasks} update={update} />
           </div>
           <div className={styles.searchTasks_TasksTitle}>
             <p>Tasks e Reuniões</p>
           </div>
 
           <div className={styles.searchTasks_Tasks}>
-            {tasks.length === 0 ? (
-              <p>Você ainda não possui tarefas cadastradas!</p>
-            ) : (
-              <>
-                {tasks.length > 0 &&
-                  tasks.map((day: any[], index) => (
+            {!thereTask && (
+              <Toast
+                title=" Não existem tarefas cadastradas com esse nome!"
+                type="error"
+              />
+            )}
+            {tasks.length > 0 &&
+              tasks.map(
+                (day: any[], index) =>
+                  day[0] && (
                     <div key={index}>
                       <div className={styles.searchTasks_Date}>
                         <svg
@@ -104,24 +148,25 @@ const RegisterScreen = () => {
                       <div className={styles.searchTasks_Tasks}>
                         {day.map((task) => {
                           return (
-                            <AccordionMM
-                              key={task.id}
-                              title={task.name}
-                              duration={task.duration}
-                              description={task.description}
-                              tags={[task.tags]}
-                              status={[task.status]}
-                              time={`${task.startTime} às ${task.endTime}`}
-                              size="small"
-                              hasIcons={true}
-                            />
+                            <div className={styles.viewTasks_accordion}>
+                              <AccordionMM
+                                key={task.id}
+                                title={task.name}
+                                duration={task.duration}
+                                description={task.description}
+                                tags={[task.tags]}
+                                status={[task.status]}
+                                time={`${task.startTime} às ${task.endTime}`}
+                                size="small"
+                                hasIcons={true}
+                              />
+                            </div>
                           );
                         })}
                       </div>
                     </div>
-                  ))}
-              </>
-            )}
+                  )
+              )}
           </div>
         </div>
       </div>
