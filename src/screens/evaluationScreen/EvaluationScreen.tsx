@@ -48,8 +48,6 @@ const EvaluationScreen = () => {
     getUser();
   }, [user]);
 
-  console.log(userByEmail);
-
   const [skillType, setSkillType] = useState(true);
 
   const [tagType, setTagType] = useState<"ENGINEERING" | "DESIGN" | "PRODUCT">(
