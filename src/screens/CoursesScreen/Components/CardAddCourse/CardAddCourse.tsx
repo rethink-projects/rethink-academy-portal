@@ -34,6 +34,8 @@ const CardAddCourse = ({
   addCourse = true,
   onClose = () => {},
 }: addCourseProps) => {
+  console.log(course);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
   const [valueTypeCourse, setValueTypeCourse] = useState<string>(() => {
@@ -57,7 +59,10 @@ const CardAddCourse = ({
       : "Selecione...";
   });
   const location = useLocation();
-  let trailId = location.pathname.replace("/dashboard/trilhas/", "");
+  // let trailId = location.pathname.replace("/dashboard/trilhas/", "");
+  let id = location.pathname.split("/");
+  const trailId = id[3];
+
   const { notify } = useNotification();
 
   const formattedWorkload = course?.workload
@@ -90,7 +95,7 @@ const CardAddCourse = ({
     setFormData((prevValue) => {
       return {
         ...prevValue,
-        ["type"]:
+        ["courseStyle"]:
           valueTypeCourse === "Curso"
             ? "COURSE"
             : valueTypeCourse === "Workshop"
@@ -151,6 +156,15 @@ const CardAddCourse = ({
       onClose();
       return response.data;
     } else {
+      // console.log("Dentro if() vc criou um novo curso");
+      // console.log(formData);
+      console.log(
+        `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
+      );
+      // console.log(formData.courseStyle);
+
+      // console.log("editar curso");
+
       const response = await api.put(`/course/${course?.id}`, {
         name: `${formData.name}`,
         description: `${formData.description}`,

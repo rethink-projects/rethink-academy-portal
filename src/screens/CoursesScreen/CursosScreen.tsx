@@ -89,10 +89,13 @@ const CursosScreen = () => {
   }, [user]);
 
   const onSubmitCourse = () => {
+    if (editCourseIsOpen) {
+      setEditCourseIsOpen(false);
+    }
     if (addCourseIsOpen) {
       setAddCourseIsOpen(false);
-      getCourseInformations();
     }
+    getCourseInformations();
   };
 
   useEffect(() => {
@@ -209,7 +212,7 @@ const CursosScreen = () => {
             <CardAddCourse
               course={selectedCourse}
               addCourse={false}
-              onClose={() => setEditCourseIsOpen(false)}
+              onClose={() => onSubmitCourse()}
             />
           )}
         </div>

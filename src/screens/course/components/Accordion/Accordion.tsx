@@ -31,6 +31,7 @@ type AccordionProps = {
 type TypeModule = {
   id: string;
   name: string;
+  courseId: string;
   lessons: TypeLesson[];
 };
 type TypeLesson = {

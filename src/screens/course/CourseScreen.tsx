@@ -11,12 +11,14 @@ import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import styles from "./CourseScreen.module.css";
+import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
+import { CourseResponse } from "../types/CourseTypes";
 
 type TypeCourse = {
   id: string;
   name: string;
   description: string;
-  level: string;
+  level: "LOW" | "MEDIUM" | "HIGH";
   workload: number;
   learning: string;
   skills: string;
@@ -27,9 +29,11 @@ type TypeCourse = {
   imageTeacher: string;
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 };
+
 type TypeModule = {
   id: string;
   name: string;
+  courseId: string;
   lessons: TypeLesson[];
 };
 type TypeLesson = {
@@ -67,10 +71,11 @@ const CourseScreen = () => {
   const [modalModule, setModule] = useState<TypeModule>();
   // const [course, setCourse] = useState<TypeCourse>();
   const [course, setCourse] = useState<TypeCourse>();
+
   const [nameTrail, setNameTrail] = useState("");
   const [embassador, setEmbassador] = useState<boolean>();
 
-  // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
+  const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
   const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
@@ -83,6 +88,7 @@ const CourseScreen = () => {
 
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
+  console.log(course);
 
   useEffect(() => {
     course && setTotalModules(course.modules.length);
@@ -92,7 +98,6 @@ const CourseScreen = () => {
         // console.log("um modulo");
         lessons += module.lessons.length;
       });
-    setTotalLessons(lessons);
   }, [course]);
 
   useEffect(() => {
@@ -233,7 +238,7 @@ const CourseScreen = () => {
                   size={"medium"}
                   type={"secondary"}
                   width={218}
-                  // onClick={() => setClassModalIsOpen(true)}
+                  onClick={() => setClassModalIsOpen(true)}
                 />
                 <ButtonWithIcon
                   icon={<IconPlus />}
@@ -248,6 +253,14 @@ const CourseScreen = () => {
             )}
           </div>
           <p className={styles.description}>{course.description}</p>
+
+          {classModalIsOpen && (
+            <CardAddCourse
+              course={course}
+              addCourse={false}
+              onClose={() => setClassModalIsOpen(false)}
+            />
+          )}
 
           <h2 className={styles.title_modules}>Lista de Conteúdos:</h2>
 
