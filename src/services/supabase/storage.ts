@@ -72,6 +72,7 @@ export function useStorage() {
       });
     }
     setUrl(data?.signedURL!);
+    window.open(data?.signedURL, "_blank");
     return notify({
       type: "success",
       title: `Url gerada com sucesso`,

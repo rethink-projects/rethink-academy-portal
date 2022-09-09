@@ -64,18 +64,18 @@ const ContractScreen = () => {
     const fileData = await axios.get<fileType>(
       `http://localhost:4000/api/bucket`,
       {
-        params: { email: "gabriel.melo@rethink.dev" },
+        params: { email: user.email },
       }
     );
     setFiles(fileData.data);
     return fileData.data;
   };
 
-  console.log("Files: ", files);
-
   useEffect(() => {
-    getFiles();
-  }, []);
+    if (user) {
+      getFiles();
+    }
+  }, [user]);
 
   const handlerContractStatus = (value: any) => {
     setContractStatus(value);
