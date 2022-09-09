@@ -23,7 +23,7 @@ export const getAllUsers = async () => {
     return;
   }
 };
-export const getAllStudent = async () => {
+export const getAllStudents = async () => {
   try {
     const { data } = await axios.get(
       "http://localhost:4000/api/user?role=STUDENT"

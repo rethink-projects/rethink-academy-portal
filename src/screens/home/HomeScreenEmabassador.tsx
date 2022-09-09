@@ -4,10 +4,21 @@ import Styles from "./HomeScreenEmabassador.module.css";
 import Images from "../../assets";
 import { useNotification } from "../../context/NotificationContext";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
-
+import { getAllStudents } from "../../services/backend/UserService";
+type userFromBackend = {
+  id: string;
+  email: string;
+  name: string;
+  surname: string;
+  role: string;
+  main: string;
+  avatar: string;
+};
 const HomeScreenEmabassador = ({ user }: any) => {
   const { notify } = useNotification();
   const [end, setEnd] = useState(false);
+  const [users, setUsers] = useState<userFromBackend[]>([]);
+  const [usersFilterd, setUsersFiltered] = useState<userFromBackend[]>([]);
 
   const [academyClass, setAcademyClass] = useState("1/2022");
   const [roleFilter, setRoleFilter] = useState<string[]>(["ENGINEERING"]);
@@ -38,9 +49,28 @@ const HomeScreenEmabassador = ({ user }: any) => {
     }
   };
 
+  const getAllUsersWithRoleStudent = async () => {
+    const data = await getAllStudents();
+    setUsers(data);
+    setUsersFiltered(
+      data.filter((user: userFromBackend) =>
+        roleFilter.find((role) => role === user.main)
+      )
+    );
+  };
+
   useEffect(() => {
-    console.log(roleFilter);
+    getAllUsersWithRoleStudent();
+  }, []);
+
+  useEffect(() => {
+    setUsersFiltered(
+      users.filter((user: userFromBackend) =>
+        roleFilter.find((role) => role === user.main)
+      )
+    );
   }, [roleFilter]);
+
   const progressInfo = [
     {
       totalValue: 100,
@@ -61,6 +91,7 @@ const HomeScreenEmabassador = ({ user }: any) => {
       desc: "Colocar em ação todo o conhecimento aprendido em um projeto real",
     },
   ];
+
   return (
     <div className={Styles.home_limited_container}>
       <div className={Styles.home_container}>
@@ -109,33 +140,31 @@ const HomeScreenEmabassador = ({ user }: any) => {
             </div>
           </div>
           <div className={Styles.cards_container}>
-            {[user, user, user, user, user, user, user, user, user, user].map(
-              (item, index) => (
-                <div className={Styles.student_card} key={index}>
-                  <div className={Styles.student_card_arrow} />
-                  <div className={Styles.student_card_avatar}>
+            {usersFilterd.map((intern, index) => (
+              <div className={Styles.student_card} key={index}>
+                <div className={Styles.student_card_arrow} />
+                <div className={Styles.student_card_avatar}>
+                  <img
+                    src={intern.avatar}
+                    className={Styles.avatar_img}
+                    alt="Student Avatar Arrow"
+                  />
+                  <div className={Styles.avatar_level}>
                     <img
-                      src={user.avatarUrl}
-                      className={Styles.avatar_img}
-                      alt="Student Avatar Arrow"
+                      src={Images.icons.level_Icon}
+                      className={Styles.avatar_icon}
+                      alt="Rethink Arrow"
                     />
-                    <div className={Styles.avatar_level}>
-                      <img
-                        src={Images.icons.level_Icon}
-                        className={Styles.avatar_icon}
-                        alt="Rethink Arrow"
-                      />
-                      {user.level}
-                    </div>
-                  </div>
-
-                  <div className={Styles.student_card_text}>
-                    <div>{user.name}</div>
-                    <button className={Styles.card_role}>Engenharia</button>
+                    {user.level}
                   </div>
                 </div>
-              )
-            )}
+
+                <div className={Styles.student_card_text}>
+                  <div>{intern.name + " " + intern.surname}</div>
+                  <button className={Styles.card_role}>Engenharia</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className={Styles.progress_container}>
@@ -145,28 +174,30 @@ const HomeScreenEmabassador = ({ user }: any) => {
           </p>
         </div>
         <div className={Styles.progress_content}>
-          {progressInfo.map(({ totalValue, relativeValue, desc, title }) => (
-            <div className={Styles.progress_item}>
-              <ProgressBar
-                color="dark"
-                size="large"
-                width={326}
-                totalValue={totalValue}
-                relativeValue={relativeValue}
-              />
-              <div className={Styles.progress_description}>
-                <img
-                  src={Images.Emblem}
-                  alt=""
-                  style={{ width: "32px", height: "32px" }}
+          {progressInfo.map(
+            ({ totalValue, relativeValue, desc, title }, index) => (
+              <div className={Styles.progress_item} key={index}>
+                <ProgressBar
+                  color="dark"
+                  size="large"
+                  width={326}
+                  totalValue={totalValue}
+                  relativeValue={relativeValue}
                 />
-                <div>
-                  <h1>{title}</h1>
-                  <p>{desc}</p>
+                <div className={Styles.progress_description}>
+                  <img
+                    src={Images.Emblem}
+                    alt=""
+                    style={{ width: "32px", height: "32px" }}
+                  />
+                  <div>
+                    <h1>{title}</h1>
+                    <p>{desc}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
           <div className={Styles.progress_status}>
             <img src={Images.ProgressBack} alt="Background" />
             <img
