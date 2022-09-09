@@ -47,12 +47,15 @@ export function useStorage() {
       console.log(helper, "depois do shift");
       helper = helper.join("/");
 
-      upsertBucket(helper, title, user.email);
+      const bucket = await upsertBucket(helper, title, user.email);
+
+      notify({
+        type: "success",
+        title: `Upload feito com sucesso`,
+      });
+      //console.log({ bucket });
+      return bucket;
     }
-    return notify({
-      type: "success",
-      title: `Upload feito com sucesso`,
-    });
   };
 
   const generateUrlToDownload = async (title: string) => {
