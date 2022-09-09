@@ -44,6 +44,11 @@ import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
+
+import hatDelivery from "./hatDelivery.gif";
+import hatDegrading from "./hatDegrading.gif";
+import hatStolen from "./hatStolen.gif";
+
 export const Images = {
   logo,
   checkbox,
@@ -62,6 +67,9 @@ export const Images = {
   logoRaSecondary,
   arrowTask,
   homeBackground,
+  hatDelivery,
+  hatDegrading,
+  hatStolen,
   icons: {
     calendarIcon,
     eyeIcon,

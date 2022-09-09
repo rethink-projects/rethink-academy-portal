@@ -10,8 +10,10 @@ import Note from "../../components/Note/Note";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
+import Gamification from "./Gamification/Gamification";
 
-// Backend
+// Assets
+import Images from "../../assets";
 
 const RegisterScreen = () => {
   type task = {
@@ -33,6 +35,10 @@ const RegisterScreen = () => {
 
   return (
     <div className={styles.register_container}>
+      <div className={styles.modal_container}>
+        {/* <img src={Images.hatDelivery} alt="A GIF of a mage delivering a hat" /> */}
+        <Gamification onClose={() => {}} id="outside" />
+      </div>
       <div className={styles.register_content}>
         <div className={styles.register_header}>
           <div className={styles.register_breadcrumb}>
@@ -50,7 +56,20 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
-            <AddTask />
+            <AddTask
+              formData={{
+                taskName: "",
+                date: "",
+                startTime: "",
+                endTime: "",
+                tag: "",
+                status: "",
+                description: "",
+              }}
+              setFormData={function (value: any): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
           </div>
           <div className={styles.register_reminders}>
             <Note />
