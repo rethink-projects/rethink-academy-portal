@@ -4,6 +4,8 @@ import filledInput from "./filledInput.svg";
 import logo from "./logo.png";
 import search from "./search.svg";
 
+import arrowCardGreen from "./arrowCardGreen.png";
+import arrowCardGrey from "./arrowCardGrey.png";
 import arrow from "./arrowIcon.png";
 import avatarImage from "./avatarImage.svg";
 import ClockHome from "./clock.svg";
@@ -44,6 +46,9 @@ import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
+import ProgressBack from "./ProgressBack.png";
+import ProgressIcon from "./ProgressIcon.png";
+import ProgressEndIcon from "./ProgressEndIcon.png";
 
 import studies from "./Academy_Badge.svg";
 import academy from "./AcademyHat_Badge.svg";
@@ -57,6 +62,11 @@ import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
 export const Images = {
+  ProgressBack,
+  ProgressIcon,
+  ProgressEndIcon,
+  arrowCardGreen,
+  arrowCardGrey,
   logo,
   checkbox,
   arrow,

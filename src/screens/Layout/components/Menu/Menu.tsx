@@ -4,6 +4,7 @@ import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import { useAuth } from "../../../../context/AuthContext";
 import { useNotification } from "../../../../context/NotificationContext";
+import { titleMaker } from "../../../../helpers/titleMaker";
 import MenuItem from "../MenuItem/MenuItem";
 import styles from "./Menu.module.css";
 
@@ -33,6 +34,7 @@ function Menu() {
   if (!user?.email) {
     return <p>Loading...</p>;
   }
+
   return (
     <div className={currentClass}>
       <div className={styles.menu_header_open}>
@@ -82,20 +84,9 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
+            text="Sair"
             onClick={handleLogout}
-            text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
-            customCss={
-              isOpen
-                ? { padding: "0px", margin: "0px" }
-                : {
-                    padding: "0px",
-                    margin: "0px",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }
-            }
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />
           <div className={styles.avatar}>
@@ -111,7 +102,12 @@ function Menu() {
                 alt="Avatar"
               />
             </Avatar>
-            {isOpen && <span>{user.name}</span>}
+            {isOpen && (
+              <div className={styles.avatar_desc}>
+                <span>{user.name}</span>
+                <small>{titleMaker(user)}</small>
+              </div>
+            )}
           </div>
         </div>
       </div>
