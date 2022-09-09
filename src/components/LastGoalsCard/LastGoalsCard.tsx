@@ -7,18 +7,10 @@ import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
 type cardProps = {
-  quantityGoals: number;
-  mounth: string;
-  quantityGoalsCompleted: number;
   studentEmail?: string;
 };
 
-const LastGoalsCard = ({
-  quantityGoals,
-  mounth,
-  quantityGoalsCompleted,
-  studentEmail,
-}: cardProps) => {
+const LastGoalsCard = ({ studentEmail }: cardProps) => {
   const { user } = useAuth();
   const [goalList, setGoalList] = useState<any>();
   const [goals, setGoals] = useState<any>();

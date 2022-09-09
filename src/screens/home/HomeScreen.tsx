@@ -34,11 +34,7 @@ function HomeScreen() {
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name} />
-        <LastGoalsCard
-          quantityGoals={10}
-          mounth={months[new Date().getMonth()]}
-          quantityGoalsCompleted={10}
-        />
+        <LastGoalsCard />
         <Register />
         <TrilhasComponent />
       </div>
