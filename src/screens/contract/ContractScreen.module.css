@@ -149,8 +149,8 @@
   gap: 10px;
 }
 
-@media screen and (max-width: 1395px) {
-  .contract_inner_container {
-    flex-direction: column;
+@media screen and (max-width: 1420px) {
+  .contract_info {
+    transform: translateY(130px);
   }
 }
