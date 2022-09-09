@@ -1,6 +1,7 @@
 .viewTasks_container {}
 
 .viewTasks_header {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,4 +59,32 @@
     align-items: center;
     margin-top: 23.3px;
     gap: 11px;
+    padding-left: 16px;
+}
+
+.searchTasks_Tasks {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchTasks_Tasks p {
+    font-size: 16px;
+}
+
+.searchTasks_Date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding-left: 16px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.error {
+    margin-top: 26px;
+    margin-left: 16px;
 }
