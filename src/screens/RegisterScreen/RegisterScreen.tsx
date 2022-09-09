@@ -50,7 +50,20 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
-            <AddTask />
+            <AddTask
+              formData={{
+                taskName: "",
+                date: "",
+                startTime: "",
+                endTime: "",
+                tag: "",
+                status: "",
+                description: "",
+              }}
+              setFormData={function (value: any): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
           </div>
           <div className={styles.register_reminders}>
             <Note />

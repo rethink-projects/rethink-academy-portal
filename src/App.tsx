@@ -7,6 +7,7 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
+import TaskAnalysisScreen from "./screens/RegisterScreen/TaskAnalysisScreen/TaskAnalysisScreen";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
             <Route path="/dashboard" element={<Layout />}>
               <Route index element={<HomeScreen />} />
               <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route
+                path="/dashboard/register/analysis"
+                element={<TaskAnalysisScreen />}
+              />
             </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
