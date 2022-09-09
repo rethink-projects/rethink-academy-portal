@@ -10,6 +10,8 @@ import LoginScreen from "./screens/login/LoginScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import CursosScreen from "./screens/CoursesScreen/CursosScreen";
+import RequireAuth from "./services/auth";
+import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 
 function App() {
   return (
@@ -31,9 +33,17 @@ function App() {
                 path="/dashboard/trilhas/:id/curso/:id/aulas/:id"
                 element={<Class />}
               />
+              <Route path="/dashboard/register" element={<RegisterScreen />} />
             </Route>
-            <Route path="/playground" element={<PlaygroundScreen />} />
           </Route>
+          <Route
+            path="/playground"
+            element={
+              <RequireAuth>
+                <PlaygroundScreen />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

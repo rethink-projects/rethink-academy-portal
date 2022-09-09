@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Styles
 import styles from "./Register.module.css";
@@ -10,9 +10,10 @@ import Tasks from "./Components/Tasks";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import { getGroupTaskByTag } from "../../services/backend/Tasks";
 
 const Register = () => {
-  const tasks = [
+  const tasks2 = [
     { title: "Protótipo - Portal Rethink", status: "progress", time: "--" },
     { title: "Alinhamento com a Squad", status: "completed", time: "1h" },
     {
@@ -22,6 +23,23 @@ const Register = () => {
     },
     { title: "Daily Engenharia", status: "completed", time: "15min" },
   ];
+
+  const [tags, setTags] = useState([]);
+
+  const changeGroupTags = async () => {
+    await getGroupTaskByTag("fabiana.kamo@rethink.dev")
+      .then((response) => {
+        console.log(response);
+        setTags(response);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    changeGroupTags();
+  }, []);
+
+  console.log(tags);
 
   return (
     <div className={styles.register_container}>
@@ -59,8 +77,8 @@ const Register = () => {
             <p className={styles.register_body_title_time}>Tempo</p>
           </div>
           <div className={styles.register_body_infos}>
-            {tasks &&
-              tasks.map((task) => (
+            {tasks2 &&
+              tasks2.map((task) => (
                 <Tasks
                   key={task.title}
                   title={task.title}
