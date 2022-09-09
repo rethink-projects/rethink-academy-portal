@@ -112,7 +112,7 @@
 }
 
 .contract_current_status {
-  min-width: 640px;
+  width: 90vh;
   display: flex;
   height: 80px;
   background: var(--color-base);
