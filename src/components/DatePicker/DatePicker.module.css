@@ -1,5 +1,6 @@
 .datePicker_active {
     width: 100%;
+    position: relative;
     border-radius: 4px;
     border: 1px solid #D3FA3A;
     box-shadow: 0px 0px 0px 4px rgba(71, 80, 213, 0.15);
@@ -17,6 +18,7 @@
 
 .datePicker_container {
     width: 100%;
+    position: relative;
     border-radius: 4px;
     border: 1px solid #CFD0E2;
 }
