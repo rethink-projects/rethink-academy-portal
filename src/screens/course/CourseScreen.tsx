@@ -21,7 +21,10 @@ type TypeCourse = {
   learning: string;
   skills: string;
   trailId: string;
-  teacherId: string;
+  modules: TypeModule[];
+  teacherName: string;
+  teacherDescription: string;
+  imageTeacher: string;
 };
 type TypeModule = {
   id: string;
@@ -53,14 +56,16 @@ type TypeUser = {
   watched: string[];
   role: string;
 };
+
 type TypeModal = "add" | "edit" | "delete";
+
 const CourseScreen = () => {
   const location = useLocation();
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
   // const [course, setCourse] = useState<TypeCourse>();
-  const [course, setCourse] = useState<any>();
+  const [course, setCourse] = useState<TypeCourse>();
   const [nameTrail, setNameTrail] = useState("");
   const [embassador, setEmbassador] = useState<boolean>();
 
@@ -75,7 +80,19 @@ const CourseScreen = () => {
   const { user } = useAuth();
   if (user) userEmail = user.email;
 
-  //todo: check after routes
+  const [totalModules, setTotalModules] = useState(0);
+  const [totalLessons, setTotalLessons] = useState(0);
+
+  useEffect(() => {
+    course && setTotalModules(course.modules.length);
+    let lessons = 0;
+    course &&
+      course?.modules.map((module: TypeModule) => {
+        console.log("um modulo");
+        lessons += module.lessons.length;
+      });
+    setTotalLessons(lessons);
+  }, [course]);
 
   useEffect(() => {
     if (userEmail !== "") {
@@ -289,10 +306,14 @@ const CourseScreen = () => {
               author={course.teacherName}
               authorDescription={course.teacherDescription}
               level={getLevel(course.level)}
-              learn={[course.learning]}
-              module_class={{ module: 1, class: 1 }}
-              skills={[course.skills]}
+              learn={course.learning}
+              module_class={{
+                module: totalModules,
+                class: totalLessons,
+              }}
+              skills={course.skills}
               avatar={course.imageTeacher}
+              workload={course.workload}
             />
           </div>
         </div>

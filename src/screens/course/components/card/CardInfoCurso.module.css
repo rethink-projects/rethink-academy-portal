@@ -19,7 +19,6 @@ p {
 
 .card_container {
   width: 464px;
-  min-height: 808px;
 
   box-sizing: border-box;
 
@@ -47,26 +46,13 @@ p {
 
 .info_description {
   width: 208px;
-}
-
-.title_space {
-  margin-bottom: 8px;
-}
-
-.list {
-  margin-left: 9px;
-  list-style-type: none;
-}
-
-li {
-  color: #706e64;
   display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-li:before {
-  content: "\2022";
+.learning_skills_container {
   display: flex;
-  margin-top: 3px;
-  margin-right: 10px;
-  color: #706e64;
+  flex-direction: column;
+  gap: 16px;
 }
