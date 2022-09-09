@@ -44,27 +44,31 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
   const changeData = async () => {
     if (type === "home") {
-      await getRecordOfDay("fabiana.kamo@rethink.dev")
+      await getRecordOfDay("carolina.valeriano@rethink.dev")
         .then((response) => {
           setRecords(response);
           let helper = 0;
-          response.map((record: any) => {
-            helper += record.time;
-          });
-          helper = helper / 60;
-          setTime(Math.trunc(helper));
+          if (response) {
+            response.map((record: any) => {
+              helper += record.time;
+            });
+            helper = helper / 60;
+            setTime(Math.trunc(helper));
+          }
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag("fabiana.kamo@rethink.dev") // ALTERAR
+      await getGroupTaskByTag("carolina.valeriano@rethink.dev") // ALTERAR
         .then((response) => {
           setTags(response);
           let helper = 0;
-          response.map((tag: any) => {
-            helper += tag.realTime;
-          });
-          helper = helper / 60;
-          setTime(Math.trunc(helper));
+          if (response) {
+            response.map((tag: any) => {
+              helper += tag.realTime;
+            });
+            helper = helper / 60;
+            setTime(Math.trunc(helper));
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -155,7 +159,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
             }
           >
             <>
-              {type === "home"
+              {type === "home" && tags.length > 0
                 ? records.map((record) => (
                     <Tasks
                       key={record.id}
