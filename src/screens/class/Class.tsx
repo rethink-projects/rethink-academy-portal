@@ -99,7 +99,6 @@ const Class = () => {
   const trailId = id[3];
   const courseId = id[5];
   const lessonId = id[7];
-  // console.log(lessonId);
 
   const [indexDiv, setIndexDiv] = useState(1);
   const [urlLesson, setUrlLesson] = useState("");
@@ -156,25 +155,7 @@ const Class = () => {
       };
       func();
     }
-  }, [user]);
-
-  const getBreadcrumbs = () => {
-    const linkHome = { title: "Home", link: "/dashboard" };
-    const linkTrails = { title: "Cursos", link: "/dashboard/trilhas" };
-    const linkCourses = {
-      title: `${trailName}`,
-      link: `/dashboard/trilhas/${trailId}`,
-    };
-    const linkCourse = {
-      title: `${courseName}`,
-      link: `/dashboard/trilhas/${trailId}/curso/${courseId}`,
-    };
-    const linkLesson = {
-      title: `Aula ${moduleOrder}.${lessonOrder}`,
-      link: "#",
-    };
-    return [linkHome, linkTrails, linkCourses, linkCourse, linkLesson];
-  };
+  }, [user, location.pathname]);
 
   return (
     <div className={styles.class_container}>
@@ -248,7 +229,7 @@ const Class = () => {
                   navigate(
                     `/dashboard/trilhas/${trailId}/curso/${courseId}/aulas/${lesson.id}`
                   );
-                  window.location.reload();
+                  // getInfoLesson();
                 },
               });
               return <div key={index}></div>;
