@@ -12,12 +12,14 @@ import TextEditor from "./components/textEditor/TextEditor";
 import CategoryTag from "./components/CategoryTags/CategoryTag";
 import PrivacyToggle from "./components/PrivacyToggle/PrivacyToggle";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
+import Spinner from "../../components/Spinner/Spinner";
 
 // Icons
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import Images from "../../assets";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +39,7 @@ const NotesScreen = () => {
 
   const [update, setUpdate] = useState(false);
   const [updateReturn, setUpdateReturn] = useState("");
-  const [handleCreate, setHandleCreate] = useState(false);
+  const [allowRender, setAllowRender] = useState(false);
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -52,19 +54,22 @@ const NotesScreen = () => {
   const validateRoute = () => {
     let link = window.location.pathname.split("/");
     // console.log(link);
-    if (link.length === 4) {
+    if (link.length === 4 && link[link.length - 1]) {
       if (user.role === "EMBASSADOR" && studentEmail === null) {
         console.log("***");
         setStudentEmail(link[link.length - 1]);
 
         setUpdate((current) => !current);
+        setAllowRender(false);
         return true;
       } else if (user.role === "STUDENT") {
         navigate("/dashboard/notas");
         setUpdate((current) => !current);
+        setAllowRender(false);
         return false;
       }
     }
+    setAllowRender(true);
     return true;
   };
 
@@ -90,6 +95,7 @@ const NotesScreen = () => {
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)
       );
       setUpdateReturn("*");
+      setAllowRender(true);
 
       return notes.data.notesFormated;
     }
@@ -107,12 +113,12 @@ const NotesScreen = () => {
         setContent(undefined);
       }
     }
-  }, [user, update, studentEmail, updateReturn, handleCreate]);
+  }, [user, update, studentEmail, updateReturn]);
 
   const createNote = () => {
     console.log("create");
 
-    const newNote = {
+    let newNote = {
       email: user.email,
       title: "Sem título",
       categories: [false, false, false],
@@ -120,10 +126,15 @@ const NotesScreen = () => {
       content: "Por favor insira seu texto aqui...",
     };
 
+    if (user.role === "EMBASSADOR" && studentEmail) {
+      newNote.isPublic = true;
+      newNote.email = studentEmail;
+    }
+
     axios.post(`http://localhost:4000/api/note`, newNote);
 
-    setHandleCreate((current) => !current);
-    // setUpdate((current) => !current);
+    setUpdateReturn("***");
+    setUpdate((current) => !current);
   };
 
   const deleteNote = () => {
@@ -141,7 +152,7 @@ const NotesScreen = () => {
       isPublic: isPublic,
       content: content,
     };
-    if (!updateNote.title) {
+    if (updateNote.title === "") {
       updateNote.title = "Sem título";
     }
     if (user.role === "EMBASSADOR") {
@@ -159,7 +170,7 @@ const NotesScreen = () => {
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  if (user) {
+  if (user && allowRender) {
     return (
       <div className={style.notes_container}>
         <div className={style.container_extern}>
@@ -238,10 +249,15 @@ const NotesScreen = () => {
                       }}
                       setVisibility={state.isPublic}
                     />
-                  ) : (
+                  ) : studentEmail === null ? (
                     <button disabled className={style.privateBtn}>
                       <LockOutlinedIcon />
                       Privado
+                    </button>
+                  ) : (
+                    <button disabled className={style.privateBtn}>
+                      <PublicOutlinedIcon />
+                      Público
                     </button>
                   )}
                 </div>
@@ -307,7 +323,11 @@ const NotesScreen = () => {
       </div>
     );
   }
-  return <div></div>;
+  return (
+    <div className={style.loadingPage}>
+      <Spinner type="light" size="big" isLoading={true} />
+    </div>
+  );
 };
 
 export default NotesScreen;
