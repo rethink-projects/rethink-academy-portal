@@ -216,7 +216,11 @@ const NotesScreen = () => {
             <div className={style.noNotes_container}>
               <div className={style.noNotes_warning}>
                 <img src={Images.infoNotes} alt="Ícone de informação" />
-                <p>Você ainda não possui nenhuma anotação.</p>
+                {studentEmail ? (
+                  <p>O estagiário ainda não possui nenhuma anotação.</p>
+                ) : (
+                  <p>Você ainda não possui nenhuma anotação.</p>
+                )}
               </div>
             </div>
           )}
