@@ -82,6 +82,7 @@ const CourseScreen = () => {
         .get("http://localhost:4000/api/user/" + userEmail)
         .then((response) => {
           if (response.data.user) {
+            console.log("user: " + response.data);
             setEmbassador(response.data.user.role === "STUDENT");
           }
         });
@@ -130,7 +131,6 @@ const CourseScreen = () => {
 
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
-    console.log("Não sou embaçador");
 
     let i = 1;
     //se o módulo for o primeiro
