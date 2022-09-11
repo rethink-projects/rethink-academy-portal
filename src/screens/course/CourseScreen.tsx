@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+// API & CONTEXTS
+import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { useEffect, useState } from "react";
+
+// COMPONENTS
 import Acordeon from "./components/Accordion/Accordion";
-import CardInfoCurso from "./components/card/CardInfoCurso";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import CardInfoCurso from "./components/card/CardInfoCurso";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
+
+// ICONS
 import IconEdit from "@mui/icons-material/EditOutlined";
 import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
-import axios from "axios";
+
+// STYLES
 import styles from "./CourseScreen.module.css";
 
 type TypeCourse = {
@@ -20,13 +27,17 @@ type TypeCourse = {
   workload: number;
   learning: string;
   skills: string;
-  trailId: string;
+  teacherName: string;
+  teacherDescription: string;
+  imageTeacher: string;
   teacherId: string;
 };
+
 type TypeModule = {
   id: string;
   name: string;
   lessons: TypeLesson[];
+  blocked: boolean;
 };
 type TypeLesson = {
   id: string;
@@ -36,14 +47,7 @@ type TypeLesson = {
   description: string;
   moduleId: string;
 };
-type TypeProfile = {
-  id: string;
-  bio: string;
-  avatar: string;
-  social: {};
-  userId: string;
-  user: TypeUser;
-};
+
 type TypeUser = {
   id: string;
   email: string;
@@ -53,14 +57,14 @@ type TypeUser = {
   watched: string[];
   role: string;
 };
+
 type TypeModal = "add" | "edit" | "delete";
 const CourseScreen = () => {
   const location = useLocation();
   const [watcheds, setWatcheds] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
-  // const [course, setCourse] = useState<TypeCourse>();
-  const [course, setCourse] = useState<any>();
+  const [course, setCourse] = useState<TypeCourse>();
   const [embassador, setEmbassador] = useState<boolean>();
 
   // const [classModalIsOpen, setClassModalIsOpen] = useState(false);
@@ -69,53 +73,70 @@ const CourseScreen = () => {
   const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
   const trailId = location.pathname.split("/")[3];
   const courseId = location.pathname.split("/")[5];
+  console.log(courseId);
 
   let userEmail = "";
   const { user } = useAuth();
   if (user) userEmail = user.email;
 
+  console.log(userEmail);
   //todo: check after routes
 
-  useEffect(() => {
-    if (userEmail !== "") {
-      axios
-        .get("http://localhost:4000/api/user/" + userEmail)
-        .then((response) => {
-          if (response.data.user) {
-            console.log("user: " + response.data);
-            setEmbassador(response.data.user.role === "STUDENT");
-          }
-        });
+  // useEffect(() => {
+  //   if (userEmail !== "") {
+  //     axios
+  //       .get("http://localhost:4000/api/user/" + userEmail)
+  //       .then((response) => {
+  //         if (response.data) {
+  //           // console.log("user: " + response.data);
+  //           setEmbassador(response.data.userWithLevel.role === "STUDENT");
+  //         }
+  //       });
 
-      axios
-        .get("http://localhost:4000/api/user/watched/list/" + userEmail)
-        .then((response) => {
-          if (response.data.watched) {
-            setWatcheds(response.data.watched);
-          }
-        });
+  //     axios
+  //       .get("http://localhost:4000/api/user/watched/list/" + userEmail)
+  //       .then((response) => {
+  //         if (response.data.watched) {
+  //           console.log("watched: " + response.data.watched);
+  //           setWatcheds(response.data.watched);
+  //         }
+  //       });
+  //   }
+  // }, [userEmail]);
+
+  // useEffect(() => {
+  //   if (courseId !== "") {
+  //     axios
+  //       .get("http://localhost:4000/api/course/" + courseId)
+  //       .then((response) => {
+  //         if (response.data.course) {
+  //           setCourse(response.data.course);
+  //         }
+  //       });
+
+  //     axios
+  //       .get("http://localhost:4000/api/course/" + courseId + "/modules")
+  //       .then((response) => {
+  //         if (response.data.modules) {
+  //           setModules(response.data.modules);
+  //         }
+  //       });
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (courseId !== "" && userEmail !== "") {
+      const getCourse = async () => {
+        console.log(`/course/${courseId}/${userEmail}`);
+        const response = await api.get(`/course/${courseId}/${userEmail}`);
+        console.log(response.data);
+        setCourse(response.data.course);
+        setEmbassador(response.data.role === "STUDENT");
+        setModules(response.data.modules);
+      };
+      getCourse();
     }
   }, [userEmail]);
-
-  useEffect(() => {
-    if (courseId !== "") {
-      axios
-        .get("http://localhost:4000/api/course/" + courseId)
-        .then((response) => {
-          if (response.data.course) {
-            setCourse(response.data.course);
-          }
-        });
-
-      axios
-        .get("http://localhost:4000/api/course/" + courseId + "/modules")
-        .then((response) => {
-          if (response.data.modules) {
-            setModules(response.data.modules);
-          }
-        });
-    }
-  }, []);
 
   if (
     !user ||
@@ -178,7 +199,7 @@ const CourseScreen = () => {
     const linkHome = { title: "Home", link: "/" };
     const linkTrilhas = { title: "Trilhas", link: "/trilhas" };
     const linkCourses = { title: "Cursos", link: "/trilhas/" + trailId };
-    const linkCourse = { title: course.name, link: "asdsa" };
+    const linkCourse = { title: course!.name, link: "asdsa" };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
 
@@ -245,7 +266,8 @@ const CourseScreen = () => {
                   embassador={embassador}
                   width={848}
                   position={index + 1}
-                  blocked={isBlocked(module.id)}
+                  // blocked={isBlocked(module.id)}
+                  blocked={module.blocked}
                   completed={isCompleted(module.id)}
                   watcheds={watcheds}
                   module={module}

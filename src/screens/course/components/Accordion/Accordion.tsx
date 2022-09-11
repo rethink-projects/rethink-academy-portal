@@ -32,6 +32,7 @@ type TypeModule = {
   id: string;
   name: string;
   lessons: TypeLesson[];
+  blocked: boolean;
 };
 type TypeLesson = {
   id: string;
