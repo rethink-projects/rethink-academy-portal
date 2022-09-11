@@ -14,6 +14,8 @@ import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
 import axios from "axios";
+import { api } from "../../../../services/api";
+import { useNavigate } from "react-router-dom";
 
 type AccordionProps = {
   width?: number;
@@ -22,7 +24,7 @@ type AccordionProps = {
   blocked?: boolean;
   position: number;
   completed?: boolean;
-  watcheds: string[];
+  watched: string[];
   openModuleModal: (open: boolean) => void;
   setModuleModalType: (value: "add" | "edit" | "delete") => void;
   setModuleName: (moduleName: string) => void;
@@ -33,6 +35,7 @@ type TypeModule = {
   name: string;
   lessons: TypeLesson[];
   blocked: boolean;
+  completed: boolean;
 };
 type TypeLesson = {
   id: string;
@@ -53,7 +56,7 @@ const Accordion = ({
   blocked,
   completed,
   module,
-  watcheds,
+  watched,
   position,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
@@ -68,6 +71,7 @@ const Accordion = ({
   const [validationType, setValidationType] = useState<"save" | "delete">(
     "delete"
   );
+  const navigate = useNavigate();
 
   const setAddLessonModal = () => {
     setLesson(undefined);
@@ -114,7 +118,7 @@ const Accordion = ({
   };
 
   const addLessonReq = async () => {
-    await axios.post("http://localhost:4000/api/lesson", {
+    api.post("/lesson", {
       name: lessonName,
       description: lessonDescription,
       embedUrl: lessonEmbed,
@@ -124,7 +128,7 @@ const Accordion = ({
   };
 
   const editLessonReq = async () => {
-    await axios.put("http://localhost:4000/api/lesson/" + lesson!.id, {
+    api.put("/lesson/" + lesson!.id, {
       id: lesson!.id,
       name: lessonName,
       description: lessonDescription,
@@ -135,7 +139,7 @@ const Accordion = ({
   };
 
   const lessonComplete = (id: string) => {
-    if (watcheds.includes(id)) {
+    if (watched.includes(id)) {
       return true;
     }
     return false;
@@ -172,12 +176,14 @@ const Accordion = ({
             ? styles.module_container
             : styles.module_container_closed
         } ${blocked ? styles.module_disabled : ""}`}
-        onClick={() => setAccordionIsOpen(!accordionIsOpen)}
       >
         {embassador ? (
           <>
             {/* CONTEÚDO DO MENU PARA O EMBAIXADOR */}
-            <div className={styles.left_side_embassador}>
+            <div
+              className={styles.left_side_embassador}
+              onClick={() => setAccordionIsOpen(!accordionIsOpen)}
+            >
               <IconMore />
               {`Módulo ${position} - ${module.name}`}
             </div>
@@ -189,7 +195,10 @@ const Accordion = ({
         ) : (
           <>
             {/* CONTEÚDO DO MENU PARA O ESTAGIÁRIO */}
-            <div className={styles.left_side}>
+            <div
+              className={styles.left_side}
+              onClick={() => setAccordionIsOpen(!accordionIsOpen)}
+            >
               {blocked ? (
                 <div className={styles.padlock_border}>
                   <IconPadlock />
@@ -215,7 +224,10 @@ const Accordion = ({
               key={lesson.id}
               style={{ width: width + 2 }}
             >
-              <div className={styles.accordion_left_side}>
+              <div
+                className={styles.accordion_left_side}
+                onClick={() => navigate("aulas/" + lesson.id)}
+              >
                 <IconVideoCam />
 
                 {lesson.name}

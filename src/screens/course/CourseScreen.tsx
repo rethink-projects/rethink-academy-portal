@@ -13,11 +13,12 @@ import ModuleModal from "./components/ModuleModal/ModuleModal";
 
 // ICONS
 import IconEdit from "@mui/icons-material/EditOutlined";
-import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
+import IconInfo from "@mui/icons-material/InfoOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
 
 // STYLES
 import styles from "./CourseScreen.module.css";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 type TypeCourse = {
   id: string;
@@ -38,6 +39,7 @@ type TypeModule = {
   name: string;
   lessons: TypeLesson[];
   blocked: boolean;
+  completed: boolean;
 };
 type TypeLesson = {
   id: string;
@@ -61,7 +63,7 @@ type TypeUser = {
 type TypeModal = "add" | "edit" | "delete";
 const CourseScreen = () => {
   const location = useLocation();
-  const [watcheds, setWatcheds] = useState<string[]>([]);
+  const [watched, setWatched] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
   const [course, setCourse] = useState<TypeCourse>();
@@ -73,66 +75,21 @@ const CourseScreen = () => {
   const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
   const trailId = location.pathname.split("/")[3];
   const courseId = location.pathname.split("/")[5];
-  console.log(courseId);
 
   let userEmail = "";
   const { user } = useAuth();
   if (user) userEmail = user.email;
 
-  console.log(userEmail);
   //todo: check after routes
-
-  // useEffect(() => {
-  //   if (userEmail !== "") {
-  //     axios
-  //       .get("http://localhost:4000/api/user/" + userEmail)
-  //       .then((response) => {
-  //         if (response.data) {
-  //           // console.log("user: " + response.data);
-  //           setEmbassador(response.data.userWithLevel.role === "STUDENT");
-  //         }
-  //       });
-
-  //     axios
-  //       .get("http://localhost:4000/api/user/watched/list/" + userEmail)
-  //       .then((response) => {
-  //         if (response.data.watched) {
-  //           console.log("watched: " + response.data.watched);
-  //           setWatcheds(response.data.watched);
-  //         }
-  //       });
-  //   }
-  // }, [userEmail]);
-
-  // useEffect(() => {
-  //   if (courseId !== "") {
-  //     axios
-  //       .get("http://localhost:4000/api/course/" + courseId)
-  //       .then((response) => {
-  //         if (response.data.course) {
-  //           setCourse(response.data.course);
-  //         }
-  //       });
-
-  //     axios
-  //       .get("http://localhost:4000/api/course/" + courseId + "/modules")
-  //       .then((response) => {
-  //         if (response.data.modules) {
-  //           setModules(response.data.modules);
-  //         }
-  //       });
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (courseId !== "" && userEmail !== "") {
       const getCourse = async () => {
-        console.log(`/course/${courseId}/${userEmail}`);
         const response = await api.get(`/course/${courseId}/${userEmail}`);
-        console.log(response.data);
         setCourse(response.data.course);
-        setEmbassador(response.data.role === "STUDENT");
+        setEmbassador(response.data.role === "EMBASSADOR");
         setModules(response.data.modules);
+        setWatched(response.data.watched);
       };
       getCourse();
     }
@@ -144,9 +101,6 @@ const CourseScreen = () => {
     userEmail === "" ||
     embassador === undefined
   ) {
-    console.log(user);
-    console.log(course);
-    console.log(embassador);
     return <div>Loading...</div>;
   }
 
@@ -173,6 +127,9 @@ const CourseScreen = () => {
     let module: TypeModule;
     let i = 0;
     if (modules.length === 1) {
+      return false;
+    }
+    if (modules.length === 1) {
       module = modules[0];
     } else {
       while (modules[i].id !== moduleId) {
@@ -182,7 +139,7 @@ const CourseScreen = () => {
       module = modules[i];
     }
     module.lessons.forEach((lesson) => {
-      if (!watcheds.includes(lesson.id)) {
+      if (!watched.includes(lesson.id)) {
         completedStatus = false;
       }
     });
@@ -196,9 +153,12 @@ const CourseScreen = () => {
   };
 
   const getBreadcrumbs = () => {
-    const linkHome = { title: "Home", link: "/" };
-    const linkTrilhas = { title: "Trilhas", link: "/trilhas" };
-    const linkCourses = { title: "Cursos", link: "/trilhas/" + trailId };
+    const linkHome = { title: "Home", link: "/dashboard" };
+    const linkTrilhas = { title: "Trilhas", link: "/dashboard/trilhas" };
+    const linkCourses = {
+      title: "Cursos",
+      link: "/dashboard/trilhas/" + trailId,
+    };
     const linkCourse = { title: course!.name, link: "asdsa" };
     return [linkHome, linkTrilhas, linkCourses, linkCourse];
   };
@@ -258,42 +218,70 @@ const CourseScreen = () => {
               courseId={courseId}
             />
           )}
-          <div className={styles.modules}>
-            <>
-              {modules.map((module, index) => (
-                <Acordeon
-                  key={module.id}
-                  embassador={embassador}
-                  width={848}
-                  position={index + 1}
-                  // blocked={isBlocked(module.id)}
-                  blocked={module.blocked}
-                  completed={isCompleted(module.id)}
-                  watcheds={watcheds}
-                  module={module}
-                  setModule={setModule}
-                  openModuleModal={setModuleModalIsOpen}
-                  setModuleModalType={setModuleModalType}
-                  setModuleName={setModuleName}
-                />
-              ))}
-            </>
-          </div>
-          {modules.length === 0 && (
+          {modules.length > 0 ? (
+            <div className={styles.modules}>
+              <>
+                {modules.map((module, index) =>
+                  module.blocked ? (
+                    <Tooltip
+                      content="Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
+                      direction="bottom-right"
+                    >
+                      <Acordeon
+                        key={module.id}
+                        embassador={embassador}
+                        width={848}
+                        position={index + 1}
+                        // blocked={isBlocked(module.id)}
+                        blocked={module.blocked}
+                        completed={isCompleted(module.id)}
+                        watched={watched}
+                        module={module}
+                        setModule={setModule}
+                        openModuleModal={setModuleModalIsOpen}
+                        setModuleModalType={setModuleModalType}
+                        setModuleName={setModuleName}
+                      />
+                    </Tooltip>
+                  ) : (
+                    <Acordeon
+                      key={module.id}
+                      embassador={embassador}
+                      width={848}
+                      position={index + 1}
+                      // blocked={isBlocked(module.id)}
+                      blocked={module.blocked}
+                      // completed={isCompleted(module.id)}
+                      completed={module.completed}
+                      watched={watched}
+                      module={module}
+                      setModule={setModule}
+                      openModuleModal={setModuleModalIsOpen}
+                      setModuleModalType={setModuleModalType}
+                      setModuleName={setModuleName}
+                    />
+                  )
+                )}
+              </>
+            </div>
+          ) : (
             <div className={styles.no_modules}>
-              <IconFolder
-                sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
+              <IconInfo
+                // sx={{ fontSize: 65, color: "var(--color-tertiary-hover)" }}
+                sx={{ fontSize: 60, color: "#EAB308" }}
               />
               <span>Este curso ainda não possui nenhum módulo.</span>
-              <ButtonWithIcon
-                icon={<IconPlus />}
-                text={"Adicionar módulo"}
-                position={"right"}
-                size={"medium"}
-                type={"primary"}
-                width={218}
-                onClick={() => setModuleModalIsOpen(true)}
-              />
+              {embassador && (
+                <ButtonWithIcon
+                  icon={<IconPlus />}
+                  text={"Adicionar módulo"}
+                  position={"right"}
+                  size={"medium"}
+                  type={"primary"}
+                  width={218}
+                  onClick={() => setModuleModalIsOpen(true)}
+                />
+              )}
             </div>
           )}
         </div>

@@ -34,6 +34,7 @@ const CursosScreenTeste = () => {
   const [courseId, setCourseId] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate();
   let trailId = location.pathname.replace("/dashboard/trilhas/", "");
 
   const [selectedCourse, setSelectedCourse] = useState<CourseResponse>(
@@ -95,8 +96,8 @@ const CursosScreenTeste = () => {
       <div className={styles.container_cursos}>
         <Breadcrumb
           breadcrumbItems={[
-            { title: "Home", link: "/home" },
-            { title: "Trilhas", link: "/trilhas" },
+            { title: "Home", link: "/dashboard" },
+            { title: "Trilhas", link: "/dashboard/trilhas" },
             { title: "Cursos", link: "#" },
           ]}
         />
@@ -156,7 +157,7 @@ const CursosScreenTeste = () => {
                   course.trailId === trailId && (
                     <CardCourse
                       intern={intern}
-                      onClickIrAoCurso={() => console.log("Foi para o curso")}
+                      onClickIrAoCurso={() => navigate("curso/" + course.id)}
                       onClickColectEmblem={() =>
                         console.log("Coletou o emblema")
                       }
