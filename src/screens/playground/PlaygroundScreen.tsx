@@ -20,9 +20,7 @@ function PlaygroundScreen() {
     await initStorage();
   }, [initStorage]);
 
-  useEffect(() => {
-    console.log("TESTE");
-  }, [acceptedFiles]);
+  useEffect(() => {}, [acceptedFiles]);
   useEffect(() => {
     handleInitStorage();
   }, [handleInitStorage]);
