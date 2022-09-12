@@ -1,4 +1,5 @@
 import { AccessTime } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import Badge from "../../../../components/Badge/Badge";
@@ -26,6 +27,38 @@ const CardInfoCurso = ({
   avatar,
   workload,
 }: CardInfoProps) => {
+  const makeImg = () => {
+    const formatedAuthor = author.split(" ");
+    console.log(formatedAuthor);
+    if (formatedAuthor.length >= 2) {
+      return `${formatedAuthor[0]}+${formatedAuthor[1]}`;
+    }
+    return formatedAuthor[0];
+  };
+
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>();
+  const urlCreatedImage = `https://ui-avatars.com/api/?name=${makeImg()}&rounded=true`;
+
+  function checkImage(url: string) {
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+      setIsImageLoaded(true);
+    } else {
+      img.onload = () => {
+        setIsImageLoaded(true);
+      };
+      img.onerror = () => {
+        setIsImageLoaded(false);
+      };
+    }
+  }
+
+  useEffect(() => {
+    checkImage(avatar);
+  }, []);
+
   return (
     <div className={styles.card_container}>
       <h1 className={styles.title}>Informações Práticas</h1>
@@ -53,12 +86,18 @@ const CardInfoCurso = ({
               {`Carga horária: ${workload}h`}
             </h1>
             <p>
-              {module_class.module} Módulos e {module_class.class} Aulas
+              {module_class.module}{" "}
+              {module_class.module === 1 ? "Módulo" : "Módulos"} e{" "}
+              {module_class.class} {module_class.class === 1 ? "Aula" : "Aulas"}
             </p>
           </div>
         </div>
         <div className={styles.info_nivel}>
-          <Avatar type="image" children={<img src={avatar} />} size="large" />
+          <Avatar
+            type="image"
+            children={<img src={isImageLoaded ? avatar : urlCreatedImage} />}
+            size="large"
+          />
           <div className={styles.info_description}>
             <h1 className={`${styles.title} ${styles.title_space}`}>
               {author}
