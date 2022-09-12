@@ -231,8 +231,12 @@ const CourseScreen = () => {
                 {modules.map((module, index) =>
                   module.blocked ? (
                     <Tooltip
-                      content="Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
-                      direction="bottom-right"
+                      content={
+                        embassador
+                          ? "Atualize a página para editar"
+                          : "Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
+                      }
+                      direction={embassador ? "top" : "bottom-right"}
                       key={"tooltip" + index}
                       // style={{ zIndex: 1 }}
                     >
