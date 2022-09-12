@@ -18,6 +18,8 @@ import { UserLessons, Trail, CourseResponse } from "../types/CourseTypes";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import IconPlan from "@mui/icons-material/CalendarTodayOutlined";
 import IconProgress from "@mui/icons-material/TrendingUpOutlined";
+import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // Components
 import CardProgress from "./Components/CardProgress/CardProgress";
@@ -102,7 +104,13 @@ const CursosScreen = () => {
     getCourseInformations();
   }, []);
 
-  if (courses.length === 0) return <div>loading...</div>;
+  // Tornar maiuscula a primeira letra do trailName
+  const trailNameUppercase = trailName.replace(
+    /(^\w{1})|(\s+\w{1})/g,
+    (letra) => letra.toUpperCase()
+  );
+
+  // if (courses.length === 0) return <div>loading...</div>;
 
   return (
     <div className={styles.center}>
@@ -111,11 +119,11 @@ const CursosScreen = () => {
           breadcrumbItems={[
             { title: "Home", link: "/dashboard" },
             { title: "Cursos", link: "/dashboard/trilhas" },
-            { title: `${trailName}`, link: "#" },
+            { title: `${trailNameUppercase}`, link: "#" },
           ]}
         />
         <div className={styles.title}>
-          <p>{`${trailName}`}</p>
+          <p>{`${trailNameUppercase}`}</p>
           <div className={styles.title_buttons}>
             <ButtonWithIcon
               onClick={() => setSyllabusIsOpen(true)}
@@ -165,9 +173,13 @@ const CursosScreen = () => {
             <CardAddCourse onClose={() => onSubmitCourse()} />
           )}
         </div>
-        <div id="cards" className={styles.cards}>
-          {!intern
-            ? courses.map((course: CourseResponse, index) => (
+        <div
+          id="cards"
+          className={courses.length != 0 ? styles.cards : styles.noCards}
+        >
+          {courses.length != 0 ? (
+            !intern ? (
+              courses.map((course: CourseResponse, index) => (
                 <CardCourse
                   intern={intern}
                   onClickIrAoCurso={() =>
@@ -186,7 +198,8 @@ const CursosScreen = () => {
                   type={course.courseStyle}
                 />
               ))
-            : coursesUser.map((course, index) => (
+            ) : (
+              coursesUser.map((course, index) => (
                 <CardCourse
                   key={index}
                   index={index}
@@ -206,7 +219,14 @@ const CursosScreen = () => {
                   emblem={true} //falta ver
                   type={course.courseStyle}
                 />
-              ))}
+              ))
+            )
+          ) : (
+            <div className={styles.no_courses}>
+              <InfoOutlinedIcon sx={{ fontSize: 43, color: "#eab308" }} />
+              <span>Você ainda não possui nenhum curso.</span>
+            </div>
+          )}
 
           {editCourseIsOpen && (
             <CardAddCourse
