@@ -13,9 +13,9 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import axios from "axios";
 import { api } from "../../../../services/api";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 type AccordionProps = {
   width?: number;
@@ -45,6 +45,7 @@ type TypeLesson = {
   order: number;
   description: string;
   moduleId: string;
+  blocked?: boolean;
 };
 
 const Accordion = ({
@@ -93,6 +94,7 @@ const Accordion = ({
         order: module.lessons.length,
         moduleId: module.id,
         id: module.lessons.length + "id",
+        blocked: true,
       };
       lessons.push(lesson);
     } else {
@@ -235,16 +237,25 @@ const Accordion = ({
               </div>
               <div className={styles.accordion_right_side}>
                 {embassador ? (
-                  <IconEdit
-                    onClick={() => (
-                      setLessonName(lesson.name),
-                      setLesson(lesson),
-                      setLessonDescription(lesson.description),
-                      setLessonEmbed(lesson.embedUrl),
-                      setLessonModalIsOpen(true),
-                      setLessonModalType("edit")
-                    )}
-                  />
+                  lesson.blocked ? (
+                    <Tooltip
+                      content="Atualize a página para editar"
+                      direction="top"
+                    >
+                      <IconEdit />
+                    </Tooltip>
+                  ) : (
+                    <IconEdit
+                      onClick={() => (
+                        setLessonName(lesson.name),
+                        setLesson(lesson),
+                        setLessonDescription(lesson.description),
+                        setLessonEmbed(lesson.embedUrl),
+                        setLessonModalIsOpen(true),
+                        setLessonModalType("edit")
+                      )}
+                    />
+                  )
                 ) : (
                   lessonComplete(lesson.id) && <IconCheckedCircle />
                 )}

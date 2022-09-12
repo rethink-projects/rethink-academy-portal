@@ -7,6 +7,7 @@ type TypeModule = {
   id: string;
   name: string;
   lessons?: TypeLesson[];
+  blocked?: boolean;
 };
 type TypeLesson = {
   id: string;
@@ -76,6 +77,7 @@ const ModuleModal = ({
       const moduleTemp: TypeModule = {
         id: "aleatório" + Math.random(),
         name: moduleName!,
+        blocked: true,
       };
       modules.push(moduleTemp!);
     } else if (type === "edit") {
@@ -83,7 +85,7 @@ const ModuleModal = ({
       module!.name = moduleName!;
     } else if (type === "delete") {
       deleteModuleReq();
-      modules.pop();
+      modules.splice(modules.indexOf(module!), 1);
     }
   };
 
