@@ -40,6 +40,8 @@ const NotesScreen = () => {
   const [update, setUpdate] = useState(false);
   const [updateReturn, setUpdateReturn] = useState("");
   const [allowRender, setAllowRender] = useState(false);
+  const [allowGetNotes, setAllowGetNotes] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -54,9 +56,13 @@ const NotesScreen = () => {
   const validateRoute = () => {
     let link = window.location.pathname.split("/");
     // console.log(link);
-    if (link.length === 4 && link[link.length - 1]) {
+    if (
+      link.length === 4 &&
+      link[link.length - 1] &&
+      link[link.length - 1] != ""
+    ) {
       if (user.role === "EMBASSADOR" && studentEmail === null) {
-        console.log("***");
+        // console.log("***");
         setStudentEmail(link[link.length - 1]);
 
         setUpdate((current) => !current);
@@ -64,32 +70,38 @@ const NotesScreen = () => {
         return true;
       } else if (user.role === "STUDENT") {
         navigate("/dashboard/notas");
-        setUpdate((current) => !current);
-        setAllowRender(false);
-        return false;
+        window.location.reload();
+        // setUpdate((current) => !current);
+        // setAllowRender(false);
+        // return false;
       }
+    } else {
+      setAllowRender(true);
+      return true;
     }
-    setAllowRender(true);
-    return true;
   };
 
   const getNotes = async () => {
+    // console.log("chamou get notes");
+
     if (studentEmail === null) {
+      // console.log("-------------------------");
+
       const notes = await axios.get(
         `http://localhost:4000/api/note/${user.email}`
       );
       setNotes(notes.data.notesFormated);
       return notes.data.notesFormated;
     } else {
-      console.log("**");
+      // console.log("**");
 
       const notes = await axios.get(
         `http://localhost:4000/api/note/${studentEmail}`
       );
 
-      console.log(
-        notes.data.notesFormated.filter((note: any) => note.isPublic === true)
-      );
+      // console.log(
+      //   notes.data.notesFormated.filter((note: any) => note.isPublic === true)
+      // );
 
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)
@@ -102,23 +114,40 @@ const NotesScreen = () => {
   };
 
   useEffect(() => {
+    // Loading
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    // console.log("user -> " + user?.name);
+
+    // Validate Route
     if (user) {
       if (validateRoute()) {
-        getNotes();
-
-        setState(undefined);
-        setCategories(undefined);
-        setIsPublic(undefined);
-        setTitle(undefined);
-        setContent(undefined);
+        setAllowGetNotes(true);
+      } else {
+        setAllowGetNotes(false);
       }
     }
-  }, [user, update, studentEmail, updateReturn]);
+  }, [user]);
+
+  useEffect(() => {
+    if (user && allowGetNotes) {
+      getNotes();
+
+      setState(undefined);
+      setCategories(undefined);
+      setIsPublic(undefined);
+      setTitle(undefined);
+      setContent(undefined);
+    }
+  }, [user, update, updateReturn, allowGetNotes]);
 
   const createNote = () => {
-    console.log("create");
+    // console.log("create");
 
-    let newNote = {
+    const newNote = {
       email: user.email,
       title: "Sem título",
       categories: [false, false, false],
@@ -170,7 +199,7 @@ const NotesScreen = () => {
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  if (user && allowRender) {
+  if (user && allowRender && !isLoading) {
     return (
       <div className={style.notes_container}>
         <div className={style.container_extern}>
@@ -216,11 +245,8 @@ const NotesScreen = () => {
             <div className={style.noNotes_container}>
               <div className={style.noNotes_warning}>
                 <img src={Images.infoNotes} alt="Ícone de informação" />
-                {studentEmail ? (
-                  <p>O estagiário ainda não possui nenhuma anotação.</p>
-                ) : (
-                  <p>Você ainda não possui nenhuma anotação.</p>
-                )}
+
+                <p>Você ainda não possui nenhuma anotação.</p>
               </div>
             </div>
           )}

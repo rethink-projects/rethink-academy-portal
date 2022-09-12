@@ -70,7 +70,8 @@ const TableContent = ({
   useEffect(() => {
     (async () => {
       if (user) {
-        setNotes(await getNotes(user.email));
+        // setNotes(await getNotes(user.email));
+        setNotes(notes);
       }
     })();
 
