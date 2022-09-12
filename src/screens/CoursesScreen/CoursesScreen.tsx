@@ -69,23 +69,20 @@ const CursosScreen = () => {
   const [userByEmail, setUserByEMail] = useState<any>();
   const [coursesUser, setCoursesUser] = useState<CoursesWatched[]>([]);
 
-  const getUserCourses = async () => {
-    const responseCourses = await api.get(
-      `/user/watched/course/${user.email}/${trailId}`
-    );
-    setCoursesUser(responseCourses.data.data);
-    setUserByEMail(responseCourses.data.user);
-  };
-
   const getCourseInformations = async () => {
-    const responseCourse = await api.get(`/trail/course/${trailId}`);
-    setTrailName(responseCourse.data.trailName.name);
-    setCourses(responseCourse.data.course);
+    const responseCourse = await api.get(
+      `/trail/course/${trailId}/${user.email}`
+    );
+
+    setUserByEMail(responseCourse.data.user);
+    setCoursesUser(responseCourse.data.data);
+    setTrailName(responseCourse.data.trailName);
+    setCourses(responseCourse.data.data);
   };
 
   useEffect(() => {
     if (user?.email) {
-      getUserCourses();
+      getCourseInformations();
     }
   }, [user]);
 
@@ -98,10 +95,6 @@ const CursosScreen = () => {
     }
     getCourseInformations();
   };
-
-  useEffect(() => {
-    getCourseInformations();
-  }, []);
 
   // Tornar maiuscula a primeira letra do trailName
   const trailNameUppercase = trailName.replace(
