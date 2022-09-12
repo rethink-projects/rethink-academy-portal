@@ -82,7 +82,7 @@ const CardCurso = ({
           </div>
         )}
       </div>
-      <div className={styles.actions_card_embassador}>
+      <div className={styles.actions_card_ambassador}>
         <ButtonWithIcon
           onClick={onClickIrAoCurso}
           icon={<IconArrow />}

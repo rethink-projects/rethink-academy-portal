@@ -49,7 +49,7 @@ const CourseScreen = () => {
   const [course, setCourse] = useState<CourseResponse>();
 
   const [trailName, setTrailName] = useState("");
-  const [embassador, setEmbassador] = useState<boolean>();
+  const [ambassador, setambassador] = useState<boolean>();
 
   const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
@@ -81,7 +81,7 @@ const CourseScreen = () => {
         const response = await api.get(`/course/${courseId}/${userEmail}`);
         setCourse(response.data.course);
         setTrailName(response.data.course.trail.name);
-        setEmbassador(response.data.role === "AMBASSADOR");
+        setambassador(response.data.role === "AMBASSADOR");
         setModules(response.data.modules);
         setWatched(response.data.watched);
       };
@@ -93,13 +93,13 @@ const CourseScreen = () => {
     !user ||
     course === undefined ||
     userEmail === "" ||
-    embassador === undefined
+    ambassador === undefined
   ) {
     return <div>Loading...</div>;
   }
 
   const isCompleted = (moduleId: string) => {
-    if (embassador) return true;
+    if (ambassador) return true;
     let completedStatus = true;
     let module: TypeModule;
     let i = 0;
@@ -161,7 +161,7 @@ const CourseScreen = () => {
               <h1 className={styles.title}>{course.name}</h1>
               <h2 className={styles.about}>Sobre o Curso:</h2>
             </div>
-            {embassador && (
+            {ambassador && (
               <div className={styles.header_right}>
                 <ButtonWithIcon
                   icon={<IconEdit />}
@@ -214,16 +214,16 @@ const CourseScreen = () => {
                   module.blocked ? (
                     <Tooltip
                       content={
-                        embassador
+                        ambassador
                           ? "Atualize a página para editar este módulo"
                           : "Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
                       }
-                      direction={embassador ? "top" : "bottom-right"}
+                      direction={ambassador ? "top" : "bottom-right"}
                       key={"tooltip" + index}
                     >
                       <Acordeon
                         key={module.id}
-                        embassador={embassador}
+                        ambassador={ambassador}
                         width={848}
                         position={index + 1}
                         blocked={module.blocked}
@@ -239,7 +239,7 @@ const CourseScreen = () => {
                   ) : (
                     <Acordeon
                       key={module.id}
-                      embassador={embassador}
+                      ambassador={ambassador}
                       width={848}
                       position={index + 1}
                       blocked={module.blocked}
@@ -259,7 +259,7 @@ const CourseScreen = () => {
             <div className={styles.no_modules}>
               <IconInfo sx={{ fontSize: 60, color: "#EAB308" }} />
               <span>Este curso ainda não possui nenhum módulo.</span>
-              {embassador && (
+              {ambassador && (
                 <ButtonWithIcon
                   icon={<IconPlus />}
                   text={"Adicionar módulo"}

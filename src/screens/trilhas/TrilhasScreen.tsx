@@ -113,7 +113,7 @@ const TrilhasScreen = () => {
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}
-              user={user?.role === "EMBASSADOR" ? "teacher" : "student"}
+              user={user?.role === "AMBASSADOR" ? "teacher" : "student"}
               onClick={(event: any) => handleClickCardTrails(event, item)}
               trail={item}
               setModal={() => setStateModalOnclick(item.id)}

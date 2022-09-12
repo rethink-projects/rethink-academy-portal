@@ -20,7 +20,7 @@ import Tooltip from "../../../../components/Tooltip/Tooltip";
 type AccordionProps = {
   width?: number;
   module: TypeModule;
-  embassador?: boolean;
+  ambassador?: boolean;
   blocked?: boolean;
   position: number;
   completed?: boolean;
@@ -54,7 +54,7 @@ const Accordion = ({
   setModuleModalType,
   setModuleName,
   setModule,
-  embassador,
+  ambassador,
   blocked,
   completed,
   module,
@@ -180,17 +180,17 @@ const Accordion = ({
             : styles.module_container_closed
         } ${blocked ? styles.module_disabled : ""}`}
       >
-        {embassador ? (
+        {ambassador ? (
           <>
             {/* CONTEÚDO DO MENU PARA O EMBAIXADOR */}
             <div
-              className={styles.left_side_embassador}
+              className={styles.left_side_ambassador}
               onClick={() => setAccordionIsOpen(!accordionIsOpen)}
             >
               <IconMore />
               {`Módulo ${position} - ${module.name}`}
             </div>
-            <div className={styles.right_side_embassador}>
+            <div className={styles.right_side_ambassador}>
               <IconTrash onClick={setDeleteModuleModal} />
               <IconEdit onClick={() => setEditModuleModal()} />
             </div>
@@ -221,30 +221,46 @@ const Accordion = ({
       </div>
       {accordionIsOpen && lessons != null && lessons.length > 0 ? (
         <div className={styles.accordion_container}>
-          {lessons.map((lesson) => (
-            <div
-              className={styles.accordion_item}
-              key={lesson.id}
-              style={{ width: width + 2 }}
-            >
-              <div
-                className={styles.accordion_left_side}
-                onClick={() => navigate("aulas/" + lesson.id)}
+          {lessons.map((lesson) =>
+            ambassador && lesson.blocked ? (
+              <Tooltip
+                content="Atualize a página para interagir com essa aula"
+                direction="top"
+                key={lesson.id}
               >
-                <IconVideoCam />
+                <div
+                  className={styles.accordion_item}
+                  key={lesson.id}
+                  style={{ width: width + 2 }}
+                >
+                  <div className={styles.accordion_left_side}>
+                    <IconVideoCam />
 
-                {lesson.name}
-              </div>
-              <div className={styles.accordion_right_side}>
-                {embassador ? (
-                  lesson.blocked ? (
-                    <Tooltip
-                      content="Atualize a página para editar essa aula"
-                      direction="top"
-                    >
-                      <IconEdit />
-                    </Tooltip>
-                  ) : (
+                    {lesson.name}
+                  </div>
+                  <div className={styles.accordion_right_side}>
+                    <IconEdit />
+                  </div>
+                </div>
+              </Tooltip>
+            ) : (
+              <div
+                className={styles.accordion_item}
+                key={lesson.id}
+                style={{ width: width + 2 }}
+              >
+                <div
+                  className={styles.accordion_left_side}
+                  onClick={() =>
+                    lesson.blocked ?? navigate("aulas/" + lesson.id)
+                  }
+                >
+                  <IconVideoCam />
+
+                  {lesson.name}
+                </div>
+                <div className={styles.accordion_right_side}>
+                  {ambassador ? (
                     <IconEdit
                       onClick={() => (
                         setLessonName(lesson.name),
@@ -255,14 +271,14 @@ const Accordion = ({
                         setLessonModalType("edit")
                       )}
                     />
-                  )
-                ) : (
-                  lessonComplete(lesson.id) && <IconCheckedCircle />
-                )}
+                  ) : (
+                    lessonComplete(lesson.id) && <IconCheckedCircle />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-          {embassador && (
+            )
+          )}
+          {ambassador && (
             <div className={styles.no_lessons}>
               <ButtonWithIcon
                 icon={<IconPlus />}
@@ -280,7 +296,7 @@ const Accordion = ({
         accordionIsOpen && (
           <div className={styles.no_lessons}>
             <span>Este módulo ainda não possui nenhuma aula.</span>
-            {embassador && (
+            {ambassador && (
               <ButtonWithIcon
                 icon={<IconPlus />}
                 text={"Adicionar Aula"}
