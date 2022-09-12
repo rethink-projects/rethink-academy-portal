@@ -36,7 +36,7 @@ import Tooltip from "../../components/Tooltip/Tooltip";
 //   teacherDescription: string;
 //   imageTeacher: string;
 //   teacherId: string;
-  
+
 // };
 
 type TypeModule = {
@@ -76,7 +76,7 @@ const CourseScreen = () => {
   // const [course, setCourse] = useState<TypeCourse>();
   const [course, setCourse] = useState<CourseResponse>();
 
-  const [nameTrail, setNameTrail] = useState("");
+  const [trailName, setTrailName] = useState("");
   const [embassador, setEmbassador] = useState<boolean>();
 
   const [classModalIsOpen, setClassModalIsOpen] = useState(false);
@@ -110,6 +110,7 @@ const CourseScreen = () => {
       const getCourse = async () => {
         const response = await api.get(`/course/${courseId}/${userEmail}`);
         setCourse(response.data.course);
+        setTrailName(response.data.course.trail.name);
         setEmbassador(response.data.role === "EMBASSADOR");
         setModules(response.data.modules);
         setWatched(response.data.watched);
@@ -191,7 +192,7 @@ const CourseScreen = () => {
               { title: "Home", link: "/dashboard" },
               { title: "Cursos", link: "/dashboard/trilhas" },
               {
-                title: `${nameTrail}`,
+                title: `${trailName}`,
                 // title: `nome da trilha`,
                 link: `/dashboard/trilhas/${trailId}`,
               },

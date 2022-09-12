@@ -58,16 +58,16 @@ interface CourseResponse {
   id: string;
   name: string;
   description: string;
-  level: "LOW" | "MEDIUM" | "HIGH";
   workload: number;
   learning: string;
   skills: string;
   trailId: string;
-  modules: Module[];
+  level: "LOW" | "MEDIUM" | "HIGH";
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+  modules?: Module[];
   teacherName: string;
   teacherDescription: string;
   imageTeacher: string;
-  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
 interface UserProgressResponse {

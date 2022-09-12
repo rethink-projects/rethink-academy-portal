@@ -11,7 +11,6 @@ import { CourseResponse } from "../../../types/CourseTypes";
 
 interface FormData {
   name: string;
-  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
   offeredBy: "Rethink Academy";
   description: string;
   nameInstructor: string;
@@ -21,7 +20,9 @@ interface FormData {
   workload: string;
   learn: string;
   skills: string;
+  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
+
 
 type addCourseProps = {
   addCourse?: boolean;
