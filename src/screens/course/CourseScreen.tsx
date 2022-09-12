@@ -81,7 +81,7 @@ const CourseScreen = () => {
         const response = await api.get(`/course/${courseId}/${userEmail}`);
         setCourse(response.data.course);
         setTrailName(response.data.course.trail.name);
-        setEmbassador(response.data.role === "EMBASSADOR");
+        setEmbassador(response.data.role === "AMBASSADOR");
         setModules(response.data.modules);
         setWatched(response.data.watched);
       };
@@ -97,23 +97,6 @@ const CourseScreen = () => {
   ) {
     return <div>Loading...</div>;
   }
-
-  // const isBlocked = (moduleId: string) => {
-  //   if (embassador) return false;
-
-  //   let i = 1;
-  //   //se o módulo for o primeiro
-  //   if (moduleId === modules[0].id) return false;
-
-  //   //se o módulo anterior tiver sido concluído
-  //   let anteriorModule: TypeModule = modules[0];
-
-  //   while (modules[i].id !== moduleId) {
-  //     anteriorModule = modules[i];
-  //     i++;
-  //   }
-  //   return !isCompleted(anteriorModule.id);
-  // };
 
   const isCompleted = (moduleId: string) => {
     if (embassador) return true;
@@ -237,14 +220,12 @@ const CourseScreen = () => {
                       }
                       direction={embassador ? "top" : "bottom-right"}
                       key={"tooltip" + index}
-                      // style={{ zIndex: 1 }}
                     >
                       <Acordeon
                         key={module.id}
                         embassador={embassador}
                         width={848}
                         position={index + 1}
-                        // blocked={isBlocked(module.id)}
                         blocked={module.blocked}
                         completed={isCompleted(module.id)}
                         watched={watched}
@@ -261,9 +242,7 @@ const CourseScreen = () => {
                       embassador={embassador}
                       width={848}
                       position={index + 1}
-                      // blocked={isBlocked(module.id)}
                       blocked={module.blocked}
-                      // completed={isCompleted(module.id)}
                       completed={module.completed}
                       watched={watched}
                       module={module}
@@ -278,10 +257,7 @@ const CourseScreen = () => {
             </div>
           ) : (
             <div className={styles.no_modules}>
-              <IconInfo
-                // sx={{ fontSize: 65, color: "var(--color-tertiary-hover)" }}
-                sx={{ fontSize: 60, color: "#EAB308" }}
-              />
+              <IconInfo sx={{ fontSize: 60, color: "#EAB308" }} />
               <span>Este curso ainda não possui nenhum módulo.</span>
               {embassador && (
                 <ButtonWithIcon

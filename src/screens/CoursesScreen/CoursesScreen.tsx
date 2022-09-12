@@ -60,7 +60,7 @@ type Main =
   | "troll";
 
 const CursosScreen = () => {
-  const [intern, setIntern] = useState(true);
+  const [intern, setIntern] = useState<boolean>();
 
   const { user } = useAuth();
 
@@ -83,10 +83,11 @@ const CursosScreen = () => {
 
   const [userByEmail, setUserByEMail] = useState<any>();
   const [coursesUser, setCoursesUser] = useState<CoursesWatched[]>([]);
+  const [activeCardEmblem, setActiveCardEmblem] = useState(false);
 
   const getCourseInformations = async () => {
     const responseCourse = await api.get(
-      `/trail/course/${trailId}?email=${user.email}`
+      `/trail/${trailId}?email=${user.email}`
     );
     console.log(responseCourse);
 
@@ -105,6 +106,10 @@ const CursosScreen = () => {
     }
   }, [user]);
 
+  // if (!user || trailName === "" || intern === undefined) {
+  //   return <div>Loading...</div>;
+  // }
+
   const onSubmitCourse = () => {
     if (editCourseIsOpen) {
       setEditCourseIsOpen(false);
@@ -121,7 +126,6 @@ const CursosScreen = () => {
     (letra) => letra.toUpperCase()
   );
 
-  const [activeCardEmblem, setActiveCardEmblem] = useState(false);
   const handleClickColect = () => {
     console.log(trailMain);
 
@@ -209,7 +213,7 @@ const CursosScreen = () => {
             !intern ? (
               courses.map((course: CourseResponse, index) => (
                 <CardCourse
-                  intern={intern}
+                  intern={intern!}
                   onClickIrAoCurso={() =>
                     navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
                   }
