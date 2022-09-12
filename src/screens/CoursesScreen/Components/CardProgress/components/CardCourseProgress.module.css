@@ -1,0 +1,32 @@
+.course_card_container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 336px;
+  height: 53px;
+}
+
+.course_card_container img {
+  width: 48px;
+  height: 48px;
+
+  border: 1px solid var(--color-icon-background);
+  border-radius: 100%;
+}
+.course_card_container span {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+.stats_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.stats_container span {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}

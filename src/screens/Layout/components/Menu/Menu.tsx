@@ -64,7 +64,12 @@ function Menu() {
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
+          <MenuItem
+            isOpen={isOpen}
+            text="Cursos"
+            onClick={() => navigate("trilhas")}
+            icon={Images.icons.ratIcon}
+          />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"
@@ -84,8 +89,8 @@ function Menu() {
         >
           <MenuItem
             isOpen={isOpen}
-            text="Sair"
             onClick={handleLogout}
+            text={isOpen ? "Sair" : ""}
             icon={Images.icons.LogoutIcon}
           />
           <div className={!isOpen ? styles.divider : styles.divider_closed} />

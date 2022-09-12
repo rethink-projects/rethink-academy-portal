@@ -1,15 +1,24 @@
 import styles from "./TrilhasComponent.module.css";
 import IconMap from "@mui/icons-material/MapOutlined";
 import CardTrilhasHome from "./trilhasSubComponents/CardTrilhasHome";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+type TrailType = {
+  trail: { name: string; id: string; description: string };
+};
 
 //Componente a ser usado na HOME
 const TrilhasComponent = () => {
-  const trilhas = [
-    { name: "academy", id: 1, description: "descrição" },
-    { name: "design", id: 2, description: "descrição" },
-    { name: "engenharia", id: 3, description: "descrição" },
-    { name: "produto", id: 4, description: "descrição" },
-  ];
+  const [trails, setTrails] = useState<TrailType[]>();
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/api/trail").then((response) => {
+      if (response.data.trail) {
+        setTrails(response.data.trail);
+      }
+    });
+  }, []);
 
   return (
     <div className={styles.trilhas_container}>
@@ -20,8 +29,8 @@ const TrilhasComponent = () => {
         <span>Trilhas</span>
       </div>
       <div className={styles.cards_container}>
-        {trilhas.map((trilha) => (
-          <CardTrilhasHome key={trilha.id} trilha={trilha} />
+        {trails?.map((trail: any) => (
+          <CardTrilhasHome key={trail.id} trail={trail} />
         ))}
       </div>
     </div>
