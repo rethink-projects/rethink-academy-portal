@@ -255,7 +255,7 @@ const CursosScreen = () => {
           )}
           {activeCardEmblem && (
             <EmblemCard
-              content={"Você ganhou um emblema"}
+              content={`Você concluiu um curso da Trilha de ${trailNameUppercase} e merece um emblema!`}
               badge={trailMain}
               onClickCollect={() => handleClickColect()}
             />
