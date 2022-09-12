@@ -42,7 +42,7 @@ const PersonalDevelopmentScreen = () => {
               </button>
             </div>
 
-            <CardNotas studentEmail="pedro.lucas@rethink.dev" />
+            <CardNotas />
           </div>
           <div className={style.metasContainer}>
             <h2>Metas</h2>
