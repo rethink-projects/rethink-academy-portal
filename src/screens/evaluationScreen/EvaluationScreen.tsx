@@ -61,7 +61,7 @@ const EvaluationScreen = () => {
   const [month, setMonth] = useState(returnData);
 
   if (userByEmail) {
-    if (userByEmail!.role === "EMBASSADOR") {
+    if (userByEmail!.role === "AMBASSADOR") {
       return (
         <div className={styles.evaluationScreen_container_extern}>
           <div className={styles.evaluationScreen_container}>
