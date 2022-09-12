@@ -1,7 +1,8 @@
 .LastGoalsCard_container {
   display: flex;
   flex-direction: column;
-  width: 368px;
+  max-width: 368px;
+  min-width: 357px;
   /* height: 198px; */
   gap: 24px;
 }
@@ -24,7 +25,8 @@
 .LastGoalsCard_info {
   display: flex;
   flex-direction: column;
-  width: 328px;
+  max-width: 328px;
+  min-width: 309px;
   /* height: 110px; */
   padding: 16px 20px;
   gap: 10px;
@@ -71,7 +73,8 @@
 }
 
 .LastGoalsCard_line {
-  width: 328px;
+  max-width: 328px;
+  min-width: 309px;
   height: 0px;
   opacity: 0.1;
   border: 0.5px solid var(--color-secondary);

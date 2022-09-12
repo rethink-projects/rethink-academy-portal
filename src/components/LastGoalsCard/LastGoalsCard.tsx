@@ -101,7 +101,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
                   size="small"
                   text="Ver detalhes"
                   type="secondary"
-                  width={328}
+                  width={309}
                 />
               </div>
             )}
