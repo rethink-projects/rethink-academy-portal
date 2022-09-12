@@ -9,7 +9,6 @@ import LoginScreen from "./screens/login/LoginScreen";
 
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RequireAuth from "./services/auth";
-import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 
 function App() {
   return (
@@ -23,7 +22,11 @@ function App() {
               <Route index element={<HomeScreen />} />
               <Route
                 path="/dashboard/yourDevelopment"
-                element={<PersonalDevelopmentChart />}
+                element={
+                  <PersonalDevelopmentChart
+                    email={"felipe.reggiane@rethink.dev"}
+                  />
+                }
               />
             </Route>
             <Route
