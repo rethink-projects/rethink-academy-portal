@@ -9,6 +9,8 @@ import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
 import { api } from "../../../../services/api";
+import IconInfo from "@mui/icons-material/InfoOutlined";
+
 import {
   UserProgressResponse,
   CourseProgressResponse,
@@ -90,16 +92,16 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
       .userImage;
   };
 
-  if (usersProgress.length === 0 || modulesQnt === 0)
+  if (courses.length === 0 || modulesQnt === 0)
     return (
       <EmptyModal>
+        <div className={styles.fields}>
+          <div style={{ width: "100%" }}></div>
+          <IconClose onClick={() => onClose(false)} />
+        </div>
         <div className={styles.progress_empty}>
-          <div className={styles.title}>
-            Nenhuma atividade realizada até o momento.
-            <div className={styles.fields}>
-              <IconClose onClick={() => onClose(false)} />
-            </div>
-          </div>
+          <IconInfo sx={{ fontSize: 43, color: "#eab308" }} />
+          <span>Nenhum curso foi adicionado até o momento.</span>
         </div>
       </EmptyModal>
     );
