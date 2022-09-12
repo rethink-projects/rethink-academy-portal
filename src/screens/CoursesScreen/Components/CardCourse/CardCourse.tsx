@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import styles from "./CardCourse.module.css";
 import IconVerified from "@mui/icons-material/VerifiedOutlined";
@@ -93,7 +93,13 @@ const CardCurso = ({
           size="medium"
         />
         <ButtonWithIcon
-          onClick={!intern ? onClickEditCourse : onClickColectEmblem}
+          onClick={
+            !intern
+              ? onClickEditCourse
+              : () => {
+                  onClickColectEmblem();
+                }
+          }
           icon={icon}
           width={218}
           position="right"

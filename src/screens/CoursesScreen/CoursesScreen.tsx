@@ -27,10 +27,13 @@ import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
+import EmblemCard from "../../components/EmblemCard/EmblemCard";
+import { type } from "@testing-library/user-event/dist/type";
 
 interface CoursesWatched {
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
   coursecompleted: 1 | 2 | 3;
+  badgeCompleted: boolean;
   cratedAt: string;
   description: string;
   id: string;
@@ -44,6 +47,17 @@ interface CoursesWatched {
   trailId: string;
   workload: number;
 }
+
+type Main =
+  | "academy"
+  | "studies"
+  | "design"
+  | "engineering"
+  | "goals"
+  | "product"
+  | "timeRecord"
+  | "welcome"
+  | "troll";
 
 const CursosScreen = () => {
   const [intern, setIntern] = useState(true);
@@ -65,18 +79,21 @@ const CursosScreen = () => {
 
   const [courses, setCourses] = useState([]);
   const [trailName, setTrailName] = useState("");
+  const [trailMain, setTrailMain] = useState<Main>("academy");
 
   const [userByEmail, setUserByEMail] = useState<any>();
   const [coursesUser, setCoursesUser] = useState<CoursesWatched[]>([]);
 
   const getCourseInformations = async () => {
     const responseCourse = await api.get(
-      `/trail/course/${trailId}/${user.email}`
+      `/trail/course/${trailId}?email=${user.email}`
     );
+    console.log(responseCourse);
 
     setUserByEMail(responseCourse.data.user);
     setCoursesUser(responseCourse.data.data);
     setTrailName(responseCourse.data.trailName);
+    setTrailMain(responseCourse.data.trailMain.toLowerCase());
     setCourses(responseCourse.data.data);
 
     if (responseCourse.data.user.role != "STUDENT") setIntern(false);
@@ -104,7 +121,24 @@ const CursosScreen = () => {
     (letra) => letra.toUpperCase()
   );
 
-  // if (courses.length === 0) return <div>loading...</div>;
+  const [activeCardEmblem, setActiveCardEmblem] = useState(false);
+  const handleClickColect = () => {
+    console.log(trailMain);
+
+    api.post(`/badge`, {
+      badge: trailMain,
+      email: user.email,
+      description: selectedCourse.id,
+    });
+    setActiveCardEmblem(false);
+    setCoursesUser((prevCourses: CoursesWatched[]) =>
+      prevCourses.map((course: any) => {
+        if (course.id === selectedCourse.id) {
+          return { ...course, badgeCompleted: true };
+        } else return course;
+      })
+    );
+  };
 
   return (
     <div className={styles.center}>
@@ -188,7 +222,7 @@ const CursosScreen = () => {
                   index={index}
                   title={course.name}
                   concluded={1}
-                  emblem={false} //falta ver
+                  emblem={false}
                   type={course.courseStyle}
                 />
               ))
@@ -201,16 +235,14 @@ const CursosScreen = () => {
                   onClickIrAoCurso={() =>
                     navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
                   }
-                  onClickColectEmblem={async () => {
-                    await api.post("/badge/", {
-                      badge: "engineering",
-                      email: `${user.email}`,
-                    });
+                  onClickColectEmblem={() => {
+                    setSelectedCourse(course);
+                    setActiveCardEmblem(true);
                   }}
                   onClickEditCourse={() => setEditCourseIsOpen(true)}
                   title={course.name}
                   concluded={course.coursecompleted}
-                  emblem={true} //falta ver
+                  emblem={course.badgeCompleted}
                   type={course.courseStyle}
                 />
               ))
@@ -221,7 +253,13 @@ const CursosScreen = () => {
               <span>Você ainda não possui nenhum curso.</span>
             </div>
           )}
-
+          {activeCardEmblem && (
+            <EmblemCard
+              content={"Você ganhou um emblema"}
+              badge={trailMain}
+              onClickCollect={() => handleClickColect()}
+            />
+          )}
           {editCourseIsOpen && (
             <CardAddCourse
               course={selectedCourse}
