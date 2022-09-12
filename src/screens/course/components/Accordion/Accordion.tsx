@@ -10,7 +10,7 @@ import IconEdit from "@mui/icons-material/EditOutlined";
 import IconTrash from "@mui/icons-material/DeleteOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
 
-import ClassModal from "../ClassModal/ClassModal";
+import ClassModal from "../LessonModal/LessonModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
 import axios from "axios";

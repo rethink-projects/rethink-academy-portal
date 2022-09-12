@@ -1,9 +1,9 @@
 import { useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import styles from "./ClassModal.module.css";
+import styles from "./LessonModal.module.css";
 
-type ClassModalProps = {
+type LessonModalProps = {
   type: "add" | "edit";
   onClose: VoidFunction;
   oneButton?: boolean;
@@ -17,7 +17,7 @@ type ClassModalProps = {
   setDescription: (value: string) => void;
   onClickConfirm: VoidFunction;
 };
-const ClassModal = ({
+const LessonModal = ({
   onClose,
   type,
   className,
@@ -27,7 +27,7 @@ const ClassModal = ({
   setEmbedLink,
   setDescription,
   onClickConfirm,
-}: ClassModalProps) => {
+}: LessonModalProps) => {
   let title;
 
   if (type === "add") {
@@ -86,4 +86,4 @@ const ClassModal = ({
   );
 };
 
-export default ClassModal;
+export default LessonModal;

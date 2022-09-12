@@ -1,8 +1,12 @@
 import { useState } from "react";
-import TrailModal from "../../../../components/TrailModal/TrailModal";
 import { api } from "../../../../services/api";
+
+import TrailModal from "../../../../components/TrailModal/TrailModal";
 import ValidationModal from "../ValidationModal/ValidationModal";
+
 import styles from "./ModuleModal.module.css";
+
+
 type TypeModule = {
   id: string;
   name: string;
@@ -104,7 +108,6 @@ const ModuleModal = ({
   const deleteModuleReq = async () => {
     await api.delete("/module/" + module!.id);
   };
-  // console.log("moduleName na tela ModuleModal: " + moduleName);
 
   return (
     <TrailModal
