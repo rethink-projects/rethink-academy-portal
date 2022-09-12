@@ -1,11 +1,11 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import styles from "./Class.module.css";
+import styles from "./Lesson.module.css";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/api";
-import Acordeon from "../../components/Acordeon/Acordeon";
+import Acordeon from "../../components/Acordeon/Accordion";
 
 interface LessonResponse {
   completed: boolean;
@@ -90,7 +90,7 @@ export interface CourseResponse {
 
 ///////////////////////////////////////////////////
 
-const Class = () => {
+const Lesson = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -243,7 +243,7 @@ const Class = () => {
                   name: module.moduleName,
                   blocked: module.moduleBlocked,
                   completed: module.moduleCompleted,
-                  classes: lessonsArray,
+                  lessons: lessonsArray,
                 }}
               />
             );
@@ -253,4 +253,4 @@ const Class = () => {
   );
 };
 
-export default Class;
+export default Lesson;

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
+import { api } from "../../../../services/api";
 import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ModuleModal.module.css";
 type TypeModule = {
@@ -31,6 +31,7 @@ type ModuleModalProps = {
   modules: TypeModule[];
   courseId?: string;
 };
+
 const ModuleModal = ({
   type,
   onClose,
@@ -83,25 +84,25 @@ const ModuleModal = ({
       module!.name = moduleName!;
     } else if (type === "delete") {
       deleteModuleReq();
-      modules.pop();
+      modules.splice(modules.indexOf(module!), 1);
     }
   };
 
   const addModuleReq = async () => {
-    await axios.post("http://localhost:4000/api/module", {
+    await api.post("/module", {
       name: moduleName,
       courseId,
     });
   };
 
   const editModuleReq = async () => {
-    await axios.put("http://localhost:4000/api/module/" + module!.id, {
+    await api.put("/module/" + module!.id, {
       name: moduleName,
     });
   };
 
   const deleteModuleReq = async () => {
-    await axios.delete("http://localhost:4000/api/module/" + module!.id);
+    await api.delete("/module/" + module!.id);
   };
   // console.log("moduleName na tela ModuleModal: " + moduleName);
 

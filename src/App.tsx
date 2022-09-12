@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
 import CourseScreen from "./screens/course/CourseScreen";
-import Class from "./screens/class/Class";
+import Class from "./screens/class/Lesson";
 
 // Screens
 import HomeScreen from "./screens/home/HomeScreen";

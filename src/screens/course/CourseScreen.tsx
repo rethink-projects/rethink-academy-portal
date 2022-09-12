@@ -64,7 +64,6 @@ const CourseScreen = () => {
 
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
-  console.log(course);
 
   useEffect(() => {
     course && setTotalModules(modules.length);
@@ -98,23 +97,6 @@ const CourseScreen = () => {
   ) {
     return <div>Loading...</div>;
   }
-
-  // const isBlocked = (moduleId: string) => {
-  //   if (embassador) return false;
-
-  //   let i = 1;
-  //   //se o módulo for o primeiro
-  //   if (moduleId === modules[0].id) return false;
-
-  //   //se o módulo anterior tiver sido concluído
-  //   let anteriorModule: TypeModule = modules[0];
-
-  //   while (modules[i].id !== moduleId) {
-  //     anteriorModule = modules[i];
-  //     i++;
-  //   }
-  //   return !isCompleted(anteriorModule.id);
-  // };
 
   const isCompleted = (moduleId: string) => {
     if (embassador) return true;
