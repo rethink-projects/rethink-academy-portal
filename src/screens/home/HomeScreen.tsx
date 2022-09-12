@@ -7,8 +7,7 @@ function HomeScreen() {
   if (!user) {
     return <> Carregando...</>;
   }
-  console.log({ user });
-  if (user.role !== "STUDENT") {
+  if (user.role === "STUDENT") {
     return <HomeScreenEmabassador user={user} />;
   } else return <HomeScreenStudent />;
 }

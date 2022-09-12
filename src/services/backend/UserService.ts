@@ -1,9 +1,8 @@
-import axios from "axios";
+import { api } from "./Api";
 
 export const getUserFromBackend = async (email: string) => {
   try {
-    const { data } = await axios.get(`http://localhost:4000/api/user/${email}`);
-    console.log({ user: data.name });
+    const { data } = await api.get(`/user/${email}`);
 
     return data;
   } catch (error) {
@@ -14,8 +13,7 @@ export const getUserFromBackend = async (email: string) => {
 
 export const getAllUsers = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:4000/api/user`);
-    console.log({ user: data.name });
+    const { data } = await api.get(`/user`);
 
     return data;
   } catch (error) {
@@ -25,9 +23,7 @@ export const getAllUsers = async () => {
 };
 export const getAllStudents = async () => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:4000/api/user?role=STUDENT"
-    );
+    const { data } = await api.get("/user?role=STUDENT");
     return data;
   } catch (error) {
     console.log(error);
