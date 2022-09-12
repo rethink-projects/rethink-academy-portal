@@ -64,7 +64,6 @@ const CourseScreen = () => {
 
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
-  console.log(course);
 
   useEffect(() => {
     course && setTotalModules(modules.length);

@@ -46,7 +46,7 @@ interface CoursesWatched {
 }
 
 const CursosScreen = () => {
-  const [intern, setIntern] = useState(false);
+  const [intern, setIntern] = useState(true);
 
   const { user } = useAuth();
 
@@ -78,6 +78,8 @@ const CursosScreen = () => {
     setCoursesUser(responseCourse.data.data);
     setTrailName(responseCourse.data.trailName);
     setCourses(responseCourse.data.data);
+
+    if (responseCourse.data.user.role != "STUDENT") setIntern(false);
   };
 
   useEffect(() => {
