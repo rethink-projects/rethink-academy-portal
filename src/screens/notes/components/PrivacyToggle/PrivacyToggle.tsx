@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import style from "./PrivacyToggle.module.css";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 
-const PrivacyToggle = () => {
-  const [isPublic, setIsPublic] = useState(true);
-  const [isPrivate, setIsPrivate] = useState(false);
+type setVisibility = {
+  getVisibility: (params: any) => any;
+  setVisibility: boolean | undefined;
+};
+
+const PrivacyToggle = (props: setVisibility) => {
+  const [isPublic, setIsPublic] = useState(props.setVisibility);
+
+  useEffect(() => {
+    setIsPublic(props.setVisibility);
+  }, [props.setVisibility]);
 
   const setPublic = () => {
-    setIsPublic(true);
-    setIsPrivate(false);
-  };
-
-  const setPrivate = () => {
-    setIsPublic(false);
-    setIsPrivate(true);
+    setIsPublic((current) => !current);
+    props.getVisibility(!isPublic);
   };
 
   return (
     <div className={style.toggleContainer}>
-      <button onClick={setPrivate} className={isPrivate ? style.active : ""}>
+      <button onClick={setPublic} className={!isPublic ? style.active : ""}>
         <LockOutlinedIcon />
         Privado
       </button>

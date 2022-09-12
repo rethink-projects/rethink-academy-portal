@@ -1,6 +1,7 @@
 .notes_container {
   display: flex;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 /* table container css */
@@ -10,10 +11,6 @@
   padding-right: 10px;
   padding-top: 24px;
   width: 43%;
-}
-
-.breadcrumb {
-  width: 35%;
 }
 
 .table_header {
@@ -39,12 +36,41 @@
   color: var(--color-secondary);
 }
 
-/* text editor container css */
+/* no notes warning */
 
-.textEditorContainer {
+.noNotes_container {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 25%;
+}
+
+.noNotes_warning {
+  width: 240px;
+  height: 106px;
+
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
+  align-items: center;
+
+  row-gap: 12px;
+}
+
+.noNotes_warning p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+
+  text-align: center;
+
+  color: #706e64;
+}
+
+/* text editor container css */
+
+.rightSideContainer {
   right: 0px;
   width: 57%;
   height: calc(100vh - 72px);
@@ -52,6 +78,19 @@
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
+}
+
+.textEditorContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  border-width: inherit;
+  border-style: inherit;
+  border-color: inherit;
+  background-color: inherit;
 }
 
 /* Header */
@@ -72,6 +111,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap-reverse;
+  row-gap: 15px;
 }
 
 .titleAndToggle input {
@@ -80,7 +120,7 @@
   font-family: inherit;
   font-size: inherit;
   padding: none;
-  width: 15.5vw;
+  width: 20vw;
   background: none;
   outline: none;
   font-weight: 300;
@@ -119,4 +159,35 @@
   flex-wrap: wrap;
 
   padding: 2.2vh 20px 5px 0vw;
+}
+
+.privateBtn:disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 32px;
+  gap: 10px;
+
+  border-radius: 2px;
+  border: 1px solid rgba(27, 27, 27, 0.1);
+  border-radius: 4px;
+
+  background: var(--color-base);
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #706e64;
+}
+
+.loadingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
 }

@@ -4,7 +4,7 @@ type SimpleButtonProps = {
   type?: "primary" | "secondary" | "outline";
   text: string;
   onClick: () => void;
-  size?: "big" | "small" | "medium";
+  size?: "big" | "small" | "medium" | "block";
 };
 
 const SimpleButton = ({
@@ -18,7 +18,7 @@ const SimpleButton = ({
       className={`${styles[type]} ${styles[size]} ${styles.btn_default}`}
       onClick={onClick}
     >
-      <span>{text}</span>
+      {text}
     </button>
   );
 };
