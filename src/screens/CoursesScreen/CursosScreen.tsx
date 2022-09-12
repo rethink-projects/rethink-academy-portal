@@ -46,11 +46,11 @@ interface CoursesWatched {
 
 const CursosScreen = () => {
   const [intern, setIntern] = useState(false);
-  const navigate = useNavigate();
 
   const { user } = useAuth();
 
   const location = useLocation();
+  const navigate = useNavigate();
   let trailId = location.pathname.replace("/dashboard/trilhas/", "");
 
   const [selectedCourse, setSelectedCourse] = useState<CourseResponse>(

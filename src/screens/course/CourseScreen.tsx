@@ -1,40 +1,51 @@
-import { useEffect, useState } from "react";
+// API & CONTEXTS
+import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { useEffect, useState } from "react";
+
+// COMPONENTS
 import Acordeon from "./components/Accordion/Accordion";
-import CardInfoCurso from "./components/card/CardInfoCurso";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
+import CardInfoCurso from "./components/card/CardInfoCurso";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
+
+// ICONS
 import IconEdit from "@mui/icons-material/EditOutlined";
-import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
+import IconInfo from "@mui/icons-material/InfoOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
-import axios from "axios";
+
+// STYLES
 import styles from "./CourseScreen.module.css";
 import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
 import { CourseResponse } from "../types/CourseTypes";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
-type TypeCourse = {
-  id: string;
-  name: string;
-  description: string;
-  level: "LOW" | "MEDIUM" | "HIGH";
-  workload: number;
-  learning: string;
-  skills: string;
-  trailId: string;
-  modules: TypeModule[];
-  teacherName: string;
-  teacherDescription: string;
-  imageTeacher: string;
-  courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
-};
+// type TypeCourse = {
+//   id: string;
+//   name: string;
+//   description: string;
+//   level: "LOW" | "MEDIUM" | "HIGH";
+//   trailId: string;
+//   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
+//   workload: number;
+//   learning: string;
+//   skills: string;
+//   teacherName: string;
+//   teacherDescription: string;
+//   imageTeacher: string;
+//   teacherId: string;
+  
+// };
 
 type TypeModule = {
   id: string;
   name: string;
   courseId: string;
   lessons: TypeLesson[];
+  blocked: boolean;
+  completed: boolean;
 };
 type TypeLesson = {
   id: string;
@@ -44,14 +55,7 @@ type TypeLesson = {
   description: string;
   moduleId: string;
 };
-type TypeProfile = {
-  id: string;
-  bio: string;
-  avatar: string;
-  social: {};
-  userId: string;
-  user: TypeUser;
-};
+
 type TypeUser = {
   id: string;
   email: string;
@@ -66,11 +70,11 @@ type TypeModal = "add" | "edit" | "delete";
 
 const CourseScreen = () => {
   const location = useLocation();
-  const [watcheds, setWatcheds] = useState<string[]>([]);
+  const [watched, setWatched] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
   // const [course, setCourse] = useState<TypeCourse>();
-  const [course, setCourse] = useState<TypeCourse>();
+  const [course, setCourse] = useState<CourseResponse>();
 
   const [nameTrail, setNameTrail] = useState("");
   const [embassador, setEmbassador] = useState<boolean>();
@@ -91,10 +95,10 @@ const CourseScreen = () => {
   console.log(course);
 
   useEffect(() => {
-    course && setTotalModules(course.modules.length);
+    course && setTotalModules(modules.length);
     let lessons = 0;
     course &&
-      course?.modules.map((module: TypeModule) => {
+      modules.map((module: TypeModule) => {
         // console.log("um modulo");
         lessons += module.lessons.length;
       });
@@ -102,46 +106,17 @@ const CourseScreen = () => {
   }, [course]);
 
   useEffect(() => {
-    if (userEmail !== "") {
-      axios
-        .get("http://localhost:4000/api/user/" + userEmail)
-        .then((response) => {
-          if (response.data.userWithLevel) {
-            setEmbassador(response.data.userWithLevel.role === "STUDENT");
-          }
-        });
-
-      axios
-        .get("http://localhost:4000/api/user/watched/list/" + userEmail)
-        .then((response) => {
-          if (response.data.watched) {
-            setWatcheds(response.data.watched);
-          }
-        });
+    if (courseId !== "" && userEmail !== "") {
+      const getCourse = async () => {
+        const response = await api.get(`/course/${courseId}/${userEmail}`);
+        setCourse(response.data.course);
+        setEmbassador(response.data.role === "EMBASSADOR");
+        setModules(response.data.modules);
+        setWatched(response.data.watched);
+      };
+      getCourse();
     }
   }, [userEmail]);
-
-  useEffect(() => {
-    if (courseId !== "") {
-      axios
-        .get("http://localhost:4000/api/course/" + courseId)
-        .then((response) => {
-          if (response.data.course) {
-            console.log(response);
-
-            setCourse(response.data.course);
-            setNameTrail(response.data.course.trail.name);
-          }
-        });
-      axios
-        .get("http://localhost:4000/api/course/" + courseId + "/modules")
-        .then((response) => {
-          if (response.data.modules) {
-            setModules(response.data.modules);
-          }
-        });
-    }
-  }, []);
 
   if (
     !user ||
@@ -149,15 +124,11 @@ const CourseScreen = () => {
     userEmail === "" ||
     embassador === undefined
   ) {
-    // console.log(user);
-    // console.log(course);
-    // console.log(embassador);
     return <div>Loading...</div>;
   }
 
   const isBlocked = (moduleId: string) => {
     if (embassador) return false;
-    // console.log("Não sou embaçador");
 
     let i = 1;
     //se o módulo for o primeiro
@@ -179,6 +150,9 @@ const CourseScreen = () => {
     let module: TypeModule;
     let i = 0;
     if (modules.length === 1) {
+      return false;
+    }
+    if (modules.length === 1) {
       module = modules[0];
     } else {
       while (modules[i].id !== moduleId) {
@@ -188,7 +162,7 @@ const CourseScreen = () => {
       module = modules[i];
     }
     module.lessons.forEach((lesson) => {
-      if (!watcheds.includes(lesson.id)) {
+      if (!watched.includes(lesson.id)) {
         completedStatus = false;
       }
     });
@@ -278,41 +252,70 @@ const CourseScreen = () => {
               courseId={courseId}
             />
           )}
-          <div className={styles.modules}>
-            <>
-              {modules.map((module, index) => (
-                <Acordeon
-                  key={module.id}
-                  embassador={embassador}
-                  width={848}
-                  position={index + 1}
-                  blocked={isBlocked(module.id)}
-                  completed={isCompleted(module.id)}
-                  watcheds={watcheds}
-                  module={module}
-                  setModule={setModule}
-                  openModuleModal={setModuleModalIsOpen}
-                  setModuleModalType={setModuleModalType}
-                  setModuleName={setModuleName}
-                />
-              ))}
-            </>
-          </div>
-          {modules.length === 0 && (
+          {modules.length > 0 ? (
+            <div className={styles.modules}>
+              <>
+                {modules.map((module, index) =>
+                  module.blocked ? (
+                    <Tooltip
+                      content="Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
+                      direction="bottom-right"
+                    >
+                      <Acordeon
+                        key={module.id}
+                        embassador={embassador}
+                        width={848}
+                        position={index + 1}
+                        // blocked={isBlocked(module.id)}
+                        blocked={module.blocked}
+                        completed={isCompleted(module.id)}
+                        watched={watched}
+                        module={module}
+                        setModule={setModule}
+                        openModuleModal={setModuleModalIsOpen}
+                        setModuleModalType={setModuleModalType}
+                        setModuleName={setModuleName}
+                      />
+                    </Tooltip>
+                  ) : (
+                    <Acordeon
+                      key={module.id}
+                      embassador={embassador}
+                      width={848}
+                      position={index + 1}
+                      // blocked={isBlocked(module.id)}
+                      blocked={module.blocked}
+                      // completed={isCompleted(module.id)}
+                      completed={module.completed}
+                      watched={watched}
+                      module={module}
+                      setModule={setModule}
+                      openModuleModal={setModuleModalIsOpen}
+                      setModuleModalType={setModuleModalType}
+                      setModuleName={setModuleName}
+                    />
+                  )
+                )}
+              </>
+            </div>
+          ) : (
             <div className={styles.no_modules}>
-              <IconFolder
-                sx={{ fontSize: 80, color: "var(--color-tertiary-hover)" }}
+              <IconInfo
+                // sx={{ fontSize: 65, color: "var(--color-tertiary-hover)" }}
+                sx={{ fontSize: 60, color: "#EAB308" }}
               />
               <span>Este curso ainda não possui nenhum módulo.</span>
-              <ButtonWithIcon
-                icon={<IconPlus />}
-                text={"Adicionar módulo"}
-                position={"right"}
-                size={"medium"}
-                type={"primary"}
-                width={218}
-                onClick={() => setModuleModalIsOpen(true)}
-              />
+              {embassador && (
+                <ButtonWithIcon
+                  icon={<IconPlus />}
+                  text={"Adicionar módulo"}
+                  position={"right"}
+                  size={"medium"}
+                  type={"primary"}
+                  width={218}
+                  onClick={() => setModuleModalIsOpen(true)}
+                />
+              )}
             </div>
           )}
         </div>

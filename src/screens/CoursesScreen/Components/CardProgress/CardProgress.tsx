@@ -91,10 +91,21 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
   };
 
   if (usersProgress.length === 0 || modulesQnt === 0)
-    return <div>loading...</div>;
+    return (
+      <EmptyModal>
+        <div className={styles.progress_empty}>
+          <div className={styles.title}>
+            Nenhuma atividade realizada até o momento.
+            <div className={styles.fields}>
+              <IconClose onClick={() => onClose(false)} />
+            </div>
+          </div>
+        </div>
+      </EmptyModal>
+    );
 
   return (
-    <EmptyModal onClose={() => ""}>
+    <EmptyModal>
       <div className={styles.progress_container}>
         <div className={styles.title}>
           Progresso

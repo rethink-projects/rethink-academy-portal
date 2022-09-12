@@ -12,7 +12,7 @@ const CardSyllabus = ({ onClose, user = "student" }: TypeCardSyllabus) => {
   const sizeTable = user === "student" ? 1376 : 1256;
 
   return (
-    <EmptyModal onClose={onClose}>
+    <EmptyModal>
       <div style={{ width: sizeTable }} className={styles.content}>
         <TableActivityPlan user={user} onClose={onClose} />
         {user === "student" && <div className={styles.modal_overlap_add}></div>}
