@@ -183,7 +183,7 @@ const CourseScreen = () => {
                 <ButtonWithIcon
                   icon={<IconEdit />}
                   text={"Editar curso"}
-                  position={"right"}
+                  position={"left"}
                   size={"medium"}
                   type={"secondary"}
                   width={218}
@@ -192,7 +192,7 @@ const CourseScreen = () => {
                 <ButtonWithIcon
                   icon={<IconPlus />}
                   text={"Adicionar módulo"}
-                  position={"right"}
+                  position={"left"}
                   size={"medium"}
                   type={"primary"}
                   width={218}
@@ -287,7 +287,7 @@ const CourseScreen = () => {
                 <ButtonWithIcon
                   icon={<IconPlus />}
                   text={"Adicionar módulo"}
-                  position={"right"}
+                  position={"left"}
                   size={"medium"}
                   type={"primary"}
                   width={218}

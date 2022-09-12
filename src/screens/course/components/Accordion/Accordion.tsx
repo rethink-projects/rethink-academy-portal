@@ -267,7 +267,7 @@ const Accordion = ({
               <ButtonWithIcon
                 icon={<IconPlus />}
                 text={"Adicionar Aula"}
-                position={"right"}
+                position={"left"}
                 size={"medium"}
                 type={"primary"}
                 width={218}
@@ -284,7 +284,7 @@ const Accordion = ({
               <ButtonWithIcon
                 icon={<IconPlus />}
                 text={"Adicionar Aula"}
-                position={"right"}
+                position={"left"}
                 size={"medium"}
                 type={"primary"}
                 width={218}

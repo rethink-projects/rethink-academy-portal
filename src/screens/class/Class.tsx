@@ -224,8 +224,6 @@ const Class = () => {
                 duration: "(mm:ss)",
                 type: "video",
                 onClickItem: () => {
-                  console.log("click");
-
                   navigate(
                     `/dashboard/trilhas/${trailId}/curso/${courseId}/aulas/${lesson.id}`
                   );

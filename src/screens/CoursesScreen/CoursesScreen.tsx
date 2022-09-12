@@ -157,7 +157,7 @@ const CursosScreen = () => {
               onClick={() => setSyllabusIsOpen(true)}
               icon={<IconPlan />}
               width={237}
-              position="right"
+              position="left"
               type="outline"
               text="Plano de Atividades"
               size="medium"
@@ -168,7 +168,7 @@ const CursosScreen = () => {
                   onClick={() => setProgressIsOpen(true)}
                   icon={<IconProgress />}
                   width={169}
-                  position="right"
+                  position="left"
                   type="outline"
                   text="Progresso"
                   size="medium"
@@ -177,7 +177,7 @@ const CursosScreen = () => {
                   onClick={() => setAddCourseIsOpen(true)}
                   icon={<AddCircleOutlineIcon />}
                   width={218}
-                  position="right"
+                  position="left"
                   type="primary"
                   text="Adicionar curso"
                   size="medium"

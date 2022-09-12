@@ -102,7 +102,7 @@ const CardCurso = ({
           }
           icon={icon}
           width={218}
-          position="right"
+          position="left"
           type={disabled ? "disabled" : "secondary"}
           text={textButton}
           size="medium"
