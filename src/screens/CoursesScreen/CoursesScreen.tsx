@@ -88,7 +88,6 @@ const CursosScreen = () => {
   const getCourseInformations = async () => {
     const responseCourse = await api.get(
       `/trail/course/${trailId}?email=${user.email}`
-      // `/trail/course/${trailId}?email=${user.email}`
     );
     console.log(responseCourse);
 

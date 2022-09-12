@@ -239,7 +239,7 @@ const Accordion = ({
                 {embassador ? (
                   lesson.blocked ? (
                     <Tooltip
-                      content="Atualize a página para editar"
+                      content="Atualize a página para editar essa aula"
                       direction="top"
                     >
                       <IconEdit />

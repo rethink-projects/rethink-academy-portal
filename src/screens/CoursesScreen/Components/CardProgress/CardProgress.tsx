@@ -39,6 +39,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
 
   const func = async () => {
     const responseCourses = await api.get(`/progress/${trailId}`);
+    console.log(responseCourses.data);
     setUsersProgress(responseCourses.data.usersProgress);
     setModulesQnt(responseCourses.data.modulesQnt);
     setCourses(responseCourses.data.courses);
@@ -92,20 +93,51 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
       .userImage;
   };
 
-  if (courses.length === 0 || modulesQnt === 0)
+  if (courses.length === 0 || usersProgress.length === 0) {
     return (
       <EmptyModal>
-        <div className={styles.fields}>
-          <div style={{ width: "100%" }}></div>
-          <IconClose onClick={() => onClose(false)} />
-        </div>
-        <div className={styles.progress_empty}>
-          <IconInfo sx={{ fontSize: 43, color: "#eab308" }} />
-          <span>Nenhum curso foi adicionado até o momento.</span>
+        <div className={styles.progress_container}>
+          <div className={styles.title}>
+            Progresso
+            <div className={styles.fields}>
+              <div className={styles.dropdown_container}>
+                <Dropdown
+                  value={courseName}
+                  setValue={setCourseName}
+                  options={getCoursesList()}
+                  id={"1"}
+                  width={360}
+                  leftIcon={<IconCourse />}
+                />
+                <span>Selecione um curso</span>
+              </div>
+              <div className={styles.dropdown_container}>
+                <Dropdown
+                  value={intern}
+                  setValue={setIntern}
+                  options={getInternsList()}
+                  id={"2"}
+                  width={243}
+                  leftIcon={<IconAvatar />}
+                />
+                <span>Selecione um estagiário</span>
+              </div>
+              <IconClose onClick={() => onClose(false)} />
+            </div>
+          </div>{" "}
+          <div className={styles.progress_empty}>
+            <IconInfo sx={{ fontSize: 43, color: "#eab308" }} />
+            <span>
+              {courses.length === 0
+                ? "Crie pelo menos um curso "
+                : "É necessário ao menos um estagiário cadastrado "}{" "}
+              para ver o progresso.
+            </span>
+          </div>
         </div>
       </EmptyModal>
     );
-
+  }
   return (
     <EmptyModal>
       <div className={styles.progress_container}>

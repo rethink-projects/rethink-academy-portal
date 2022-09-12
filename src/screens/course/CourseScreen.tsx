@@ -215,7 +215,7 @@ const CourseScreen = () => {
                     <Tooltip
                       content={
                         embassador
-                          ? "Atualize a página para editar"
+                          ? "Atualize a página para editar este módulo"
                           : "Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
                       }
                       direction={embassador ? "top" : "bottom-right"}
