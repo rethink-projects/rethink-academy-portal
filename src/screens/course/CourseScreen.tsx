@@ -22,7 +22,6 @@ import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCour
 import { CourseResponse } from "../types/CourseTypes";
 import Tooltip from "../../components/Tooltip/Tooltip";
 
-
 type TypeModule = {
   id: string;
   name: string;
@@ -39,7 +38,6 @@ type TypeLesson = {
   description: string;
   moduleId: string;
 };
-
 
 type TypeModal = "add" | "edit" | "delete";
 
@@ -235,6 +233,8 @@ const CourseScreen = () => {
                     <Tooltip
                       content="Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
                       direction="bottom-right"
+                      key={"tooltip" + index}
+                      // style={{ zIndex: 1 }}
                     >
                       <Acordeon
                         key={module.id}
