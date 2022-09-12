@@ -43,7 +43,7 @@ type prospType = {
 const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
   const { user } = useAuth();
   const [userByEmail, setUserByEmail] = useState<GetUserType>();
-  const [checkIsEmbassador, setCheckIsEmbassador] = useState<GetUserType>();
+  const [checkIsAMBASSADOR, setCheckIsAMBASSADOR] = useState<GetUserType>();
   const [goals, setGoals] = useState<GoalsType[]>([]);
 
   const [deleteGoalList, setDeleteGoalList] = useState<string>();
@@ -61,7 +61,7 @@ const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
   const getUser = async () => {
     try {
       if (userRole) {
-        if (userRole === "EMBASSADOR") {
+        if (userRole === "AMBASSADOR") {
           const userData = await axios.get(
             `http://localhost:4000/api/user/${stundentEmail}`
           );
@@ -434,7 +434,7 @@ const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
   if (goals.length > 0) {
     return (
       <div>
-        {userRole === "EMBASSADOR" && (
+        {userRole === "AMBASSADOR" && (
           <div>
             <div
               className={styles.modal_newGoal}
@@ -477,7 +477,7 @@ const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
               <div className={styles.dropdown_header}>
                 <h1 className={styles.dropdown_header_title}>{goal.name}</h1>
                 <div className={styles.dropdown_header_icons}>
-                  {goal.isOpen && userRole === "EMBASSADOR" && (
+                  {goal.isOpen && userRole === "AMBASSADOR" && (
                     <div className={styles.dropdown_header_icons_open}>
                       <div className={styles.dropdown_header_icons_open_svg}>
                         <svg
@@ -612,7 +612,7 @@ const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
                             key={goalsIntern.id}
                           />
                         </div>
-                        {userRole === "EMBASSADOR" && (
+                        {userRole === "AMBASSADOR" && (
                           <div>
                             <div
                               className={
@@ -719,7 +719,7 @@ const DropdownSideModal = ({ stundentEmail, userRole }: prospType) => {
                         )}
                       </div>
                     ))}
-                    {userRole === "EMBASSADOR" && (
+                    {userRole === "AMBASSADOR" && (
                       <div>
                         {goal.isAddMode ? (
                           <div className={styles.dropdown_content_goals_create}>
