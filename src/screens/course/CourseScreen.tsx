@@ -22,22 +22,6 @@ import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCour
 import { CourseResponse } from "../types/CourseTypes";
 import Tooltip from "../../components/Tooltip/Tooltip";
 
-// type TypeCourse = {
-//   id: string;
-//   name: string;
-//   description: string;
-//   level: "LOW" | "MEDIUM" | "HIGH";
-//   trailId: string;
-//   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
-//   workload: number;
-//   learning: string;
-//   skills: string;
-//   teacherName: string;
-//   teacherDescription: string;
-//   imageTeacher: string;
-//   teacherId: string;
-
-// };
 
 type TypeModule = {
   id: string;
@@ -56,15 +40,6 @@ type TypeLesson = {
   moduleId: string;
 };
 
-type TypeUser = {
-  id: string;
-  email: string;
-  name: string;
-  surname: string;
-  main: string;
-  watched: string[];
-  role: string;
-};
 
 type TypeModal = "add" | "edit" | "delete";
 
@@ -73,7 +48,6 @@ const CourseScreen = () => {
   const [watched, setWatched] = useState<string[]>([]);
   const [modules, setModules] = useState<TypeModule[]>([]);
   const [modalModule, setModule] = useState<TypeModule>();
-  // const [course, setCourse] = useState<TypeCourse>();
   const [course, setCourse] = useState<CourseResponse>();
 
   const [trailName, setTrailName] = useState("");
@@ -99,7 +73,6 @@ const CourseScreen = () => {
     let lessons = 0;
     course &&
       modules.map((module: TypeModule) => {
-        // console.log("um modulo");
         lessons += module.lessons.length;
       });
     setTotalLessons(lessons);
@@ -128,22 +101,22 @@ const CourseScreen = () => {
     return <div>Loading...</div>;
   }
 
-  const isBlocked = (moduleId: string) => {
-    if (embassador) return false;
+  // const isBlocked = (moduleId: string) => {
+  //   if (embassador) return false;
 
-    let i = 1;
-    //se o módulo for o primeiro
-    if (moduleId === modules[0].id) return false;
+  //   let i = 1;
+  //   //se o módulo for o primeiro
+  //   if (moduleId === modules[0].id) return false;
 
-    //se o módulo anterior tiver sido concluído
-    let anteriorModule: TypeModule = modules[0];
+  //   //se o módulo anterior tiver sido concluído
+  //   let anteriorModule: TypeModule = modules[0];
 
-    while (modules[i].id !== moduleId) {
-      anteriorModule = modules[i];
-      i++;
-    }
-    return !isCompleted(anteriorModule.id);
-  };
+  //   while (modules[i].id !== moduleId) {
+  //     anteriorModule = modules[i];
+  //     i++;
+  //   }
+  //   return !isCompleted(anteriorModule.id);
+  // };
 
   const isCompleted = (moduleId: string) => {
     if (embassador) return true;
@@ -192,7 +165,7 @@ const CourseScreen = () => {
               { title: "Home", link: "/dashboard" },
               { title: "Cursos", link: "/dashboard/trilhas" },
               {
-                title: `${nameTrail.replace(/(^\w{1})|(\s+\w{1})/g, (letra) =>
+                title: `${trailName.replace(/(^\w{1})|(\s+\w{1})/g, (letra) =>
                   letra.toUpperCase()
                 )}`,
                 link: `/dashboard/trilhas/${trailId}`,

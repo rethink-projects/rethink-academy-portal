@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 // Styles
-import styles from "./CursosScreen.module.css";
+import styles from "./CoursesScreen.module.css";
 
 // Context
 import { useAuth } from "../../context/AuthContext";
@@ -18,7 +18,6 @@ import { UserLessons, Trail, CourseResponse } from "../types/CourseTypes";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import IconPlan from "@mui/icons-material/CalendarTodayOutlined";
 import IconProgress from "@mui/icons-material/TrendingUpOutlined";
-import IconFolder from "@mui/icons-material/CreateNewFolderOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // Components
