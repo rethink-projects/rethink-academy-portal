@@ -63,20 +63,21 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
         <div className={styles.LastGoalsCard_info}>
           {studentEmail && <div className={styles.cardTitle}>Metas</div>}
           <div className={styles.LastGoalsCard_inner}>
-            <img src={Images.LastGoalsMedal} alt="medalha ultimas Goals" />
-            <div className={styles.LastGoalsCard_inner_info}>
-              <h1>{goalList.name}</h1>
-              <p>
-                {goals.length < 10 ? `0${goals.length}` : goals.length} Metas
-              </p>
+            <div className={styles.LastGoalsCard_inner_title_badge}>
+              <img src={Images.LastGoalsMedal} alt="medalha ultimas Goals" />
+              <div className={styles.LastGoalsCard_inner_info}>
+                <h1>{goalList.name}</h1>
+                <p>
+                  {goals.length < 10 ? `0${goals.length}` : goals.length} Metas
+                </p>
+              </div>
             </div>
-            {!studentEmail ? (
+
+            {!studentEmail && (
               <ArrowForwardIosRoundedIcon
                 onClick={() => {}}
                 className={styles.LastGoalsCard_arrow}
               />
-            ) : (
-              <div className={styles.placeholder}> </div>
             )}
           </div>
           <div className={styles.LastGoalsCard_line}></div>
@@ -109,8 +110,75 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
         </div>
       </div>
     );
+  } else {
+    const month = new Date().getMonth();
+
+    const allMonths = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+
+    return (
+      <div className={styles.LastGoalsCard_container}>
+        {!studentEmail && (
+          <div className={styles.LastGoalsCard_title}>
+            <img src={Images.LastGoalsFlag} alt="bandeira" />
+            <h1>Últimas Metas</h1>
+          </div>
+        )}
+
+        <div className={styles.LastGoalsCard_info}>
+          {studentEmail && <div className={styles.cardTitle}>Metas</div>}
+          <div className={styles.LastGoalsCard_inner}>
+            <img src={Images.LastGoalsMedal} alt="medalha ultimas Goals" />
+            <div className={styles.LastGoalsCard_inner_info}>
+              <h1>Avaliação de {allMonths[month]}</h1>
+              <p>00 Metas</p>
+            </div>
+            {!studentEmail && (
+              <ArrowForwardIosRoundedIcon
+                onClick={() => {}}
+                className={styles.LastGoalsCard_arrow}
+              />
+            )}
+          </div>
+          <div className={styles.LastGoalsCard_line}></div>
+          <div className={styles.LastGoalsCard_progress}>
+            <div className={styles.progress_Goals}>
+              <p>0 </p>
+              <span>/0 </span>
+            </div>
+            <ProgressBar width={256} totalValue={0} relativeValue={0} />
+            <img src={Images.LastGoalsAmpoule} alt="ampulheta" />
+          </div>
+          <div>
+            {studentEmail && (
+              <div className={styles.seeDetailsButton}>
+                <ButtonWithIcon
+                  icon={<ArrowForwardIosRoundedIcon />}
+                  position="right"
+                  size="small"
+                  text="Ver detalhes"
+                  type="secondary"
+                  width={309}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   }
-  return <div></div>;
 };
 
 export default LastGoalsCard;

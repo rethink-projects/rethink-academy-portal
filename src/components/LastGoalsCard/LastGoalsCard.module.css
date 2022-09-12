@@ -40,6 +40,10 @@
   justify-content: space-between;
 }
 
+.LastGoalsCard_inner_title_badge {
+  display: flex;
+}
+
 .LastGoalsCard_inner_info {
   display: flex;
   flex-direction: column;
@@ -112,11 +116,6 @@
   font-size: 12px;
   line-height: 150%;
   color: var(--color-tertiary);
-}
-
-.placeholder {
-  height: 24px;
-  width: 24px;
 }
 
 .seeDetailsButton {
