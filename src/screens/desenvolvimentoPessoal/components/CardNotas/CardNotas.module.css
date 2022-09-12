@@ -16,7 +16,7 @@
 .table {
   max-height: 338px;
 
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .noNotes_container {
