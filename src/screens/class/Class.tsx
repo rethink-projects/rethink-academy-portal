@@ -114,7 +114,6 @@ const Class = () => {
   const playVideo = async () => {
     setIndexDiv(-1);
     setUrlLesson(urlLesson + "?autoplay=1");
-    // console.log("check: " + lessonId);
 
     if (!lessonsWatched.includes(lessonId)) {
       lessonsWatched.push(lessonId);
@@ -138,7 +137,6 @@ const Class = () => {
     const responseModule = await api.get(
       `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
     );
-    // console.log(responseModule);
     setModules(responseModule.data.modules);
     setModuleOrder(responseModule.data.moduleOrder);
     setLessonOrder(responseModule.data.lessonOrder);
@@ -199,6 +197,7 @@ const Class = () => {
               frameBorder="0"
               width={1040}
               height={585}
+              allowFullScreen
             ></iframe>
           </div>
           <div className={styles.class_description}>
@@ -215,7 +214,6 @@ const Class = () => {
             let indexMod = index + 1;
 
             module.lessons.map((lesson, index) => {
-              // console.log(lesson.completed);
               lessonsArray.push({
                 id: lesson.id,
                 name: ` Aula ${indexMod}.${index + 1} - ${lesson.name}`,
@@ -226,10 +224,12 @@ const Class = () => {
                 duration: "(mm:ss)",
                 type: "video",
                 onClickItem: () => {
+                  console.log("click");
+
                   navigate(
                     `/dashboard/trilhas/${trailId}/curso/${courseId}/aulas/${lesson.id}`
                   );
-                  // getInfoLesson();
+                  setIndexDiv(1);
                 },
               });
               return <div key={index}></div>;
