@@ -217,8 +217,9 @@ const CourseScreen = () => {
               { title: "Home", link: "/dashboard" },
               { title: "Cursos", link: "/dashboard/trilhas" },
               {
-                title: `${nameTrail}`,
-                // title: `nome da trilha`,
+                title: `${nameTrail.replace(/(^\w{1})|(\s+\w{1})/g, (letra) =>
+                  letra.toUpperCase()
+                )}`,
                 link: `/dashboard/trilhas/${trailId}`,
               },
               {

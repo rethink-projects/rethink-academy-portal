@@ -102,6 +102,12 @@ const CursosScreen = () => {
     getCourseInformations();
   }, []);
 
+  // Tornar maiuscula a primeira letra do trailName
+  const trailNameUppercase = trailName.replace(
+    /(^\w{1})|(\s+\w{1})/g,
+    (letra) => letra.toUpperCase()
+  );
+
   if (courses.length === 0) return <div>loading...</div>;
 
   return (
@@ -111,11 +117,11 @@ const CursosScreen = () => {
           breadcrumbItems={[
             { title: "Home", link: "/dashboard" },
             { title: "Cursos", link: "/dashboard/trilhas" },
-            { title: `${trailName}`, link: "#" },
+            { title: `${trailNameUppercase}`, link: "#" },
           ]}
         />
         <div className={styles.title}>
-          <p>{`${trailName}`}</p>
+          <p>{`${trailNameUppercase}`}</p>
           <div className={styles.title_buttons}>
             <ButtonWithIcon
               onClick={() => setSyllabusIsOpen(true)}
