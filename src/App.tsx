@@ -22,9 +22,6 @@ function App() {
               <Route path="/dashboard/notas/:email" element={<Notes />} />
               <Route index element={<HomeScreen />} />
             </Route>
-            <Route path="/notas" element={<Layout />}>
-              <Route index element={<Notes />} />
-            </Route>
             <Route path="/desenvolvimentoPessoal" element={<Layout />}>
               <Route index element={<PersonalDevelopmentScreen />} />
             </Route>

@@ -7,17 +7,25 @@ import TableContent from "../../../notes/components/table/TableContent";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext";
 
-const CardNotas = () => {
+type notesCardProps = {
+  studentEmail?: string;
+};
+
+const CardNotas = (studentEmail: notesCardProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  console.log(user);
+
   return (
     <div className={style.cardContainer}>
       <div className={style.table}>
-        <TableContent
+        {/* <TableContent
           handleClick={() => {
             navigate("/dashboard/notas");
           }}
-        />
+        /> */}
       </div>
       <ButtonWithIcon
         type="secondary"
