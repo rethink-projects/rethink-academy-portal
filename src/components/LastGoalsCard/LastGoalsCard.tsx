@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./LastGoalsCard.module.css";
 import Images from "../../assets/index";
+import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { useAuth } from "../../context/AuthContext";
@@ -52,11 +53,15 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
 
     return (
       <div className={styles.LastGoalsCard_container}>
-        <div className={styles.LastGoalsCard_title}>
-          <img src={Images.LastGoalsFlag} alt="bandeira" />
-          <h1>Últimas Metas</h1>
-        </div>
+        {!studentEmail && (
+          <div className={styles.LastGoalsCard_title}>
+            <img src={Images.LastGoalsFlag} alt="bandeira" />
+            <h1>Últimas Metas</h1>
+          </div>
+        )}
+
         <div className={styles.LastGoalsCard_info}>
+          {studentEmail && <div className={styles.cardTitle}>Metas</div>}
           <div className={styles.LastGoalsCard_inner}>
             <img src={Images.LastGoalsMedal} alt="medalha ultimas Goals" />
             <div className={styles.LastGoalsCard_inner_info}>
@@ -65,10 +70,14 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
                 {goals.length < 10 ? `0${goals.length}` : goals.length} Metas
               </p>
             </div>
-            <ArrowForwardIosRoundedIcon
-              onClick={() => {}}
-              className={styles.LastGoalsCard_arrow}
-            />
+            {!studentEmail ? (
+              <ArrowForwardIosRoundedIcon
+                onClick={() => {}}
+                className={styles.LastGoalsCard_arrow}
+              />
+            ) : (
+              <div className={styles.placeholder}> </div>
+            )}
           </div>
           <div className={styles.LastGoalsCard_line}></div>
           <div className={styles.LastGoalsCard_progress}>
@@ -82,6 +91,20 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
               relativeValue={completedGoals.length}
             />
             <img src={Images.LastGoalsAmpoule} alt="ampulheta" />
+          </div>
+          <div>
+            {studentEmail && (
+              <div className={styles.seeDetailsButton}>
+                <ButtonWithIcon
+                  icon={<ArrowForwardIosRoundedIcon />}
+                  position="right"
+                  size="small"
+                  text="Ver detalhes"
+                  type="secondary"
+                  width={328}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
