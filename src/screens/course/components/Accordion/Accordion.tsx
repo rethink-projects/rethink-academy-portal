@@ -23,6 +23,7 @@ import styles from "./Accordion.module.css";
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
+import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 const Accordion = ({
   width = 348,
@@ -168,8 +169,12 @@ const Accordion = ({
               {`Módulo ${position} - ${module.name}`}
             </div>
             <div className={styles.right_side_ambassador}>
-              <IconTrash onClick={setDeleteModuleModal} />
-              <IconEdit onClick={() => setEditModuleModal()} />
+              <Tooltip content="Deletar" direction="top">
+                <IconTrash onClick={setDeleteModuleModal} />
+              </Tooltip>
+              <Tooltip content="Editar" direction="top">
+                <IconEdit onClick={() => setEditModuleModal()} />
+              </Tooltip>
             </div>
           </>
         ) : (
