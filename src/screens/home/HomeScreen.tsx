@@ -1,18 +1,15 @@
 import { useAuth } from "../../context/AuthContext";
-import styles from "./Home.module.css";
+import HomeScreenEmabassador from "./HomeScreenEmabassador";
+import HomeScreenStudent from "./HomeScreenStudent";
 
 function HomeScreen() {
   const { user } = useAuth();
-
   if (!user) {
-    return <div>Loading...</div>;
+    return <> Carregando...</>;
   }
-  return (
-    <div className={styles.home_container}>
-      <h4>Olá {user.email}</h4>
-      <p>Bem-vindo, essa é a tela Principal</p>
-    </div>
-  );
+  if (user.role !== "STUDENT") {
+    return <HomeScreenEmabassador user={user} />;
+  } else return <HomeScreenStudent />;
 }
 
 export default HomeScreen;

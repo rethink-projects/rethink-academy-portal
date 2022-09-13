@@ -1,0 +1,98 @@
+.datePicker_active {
+    position: relative;
+    width: 243px;
+    border-radius: 4px;
+    border: 1px solid #D3FA3A;
+    box-shadow: 0px 0px 0px 4px rgba(71, 80, 213, 0.15);
+}
+
+.container {
+    position: relative;
+}
+
+.datePicker_container {
+    position: relative;
+    width: 243px;
+    border-radius: 4px;
+    border: 1px solid #CFD0E2;
+}
+
+.datePicker_container:hover {
+    border: 1px solid #9496B8;
+    box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+}
+
+.datePicker_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+}
+
+.datePicker_content>p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    color: #6C6F93;
+}
+
+.large,
+.default,
+.small,
+.micro {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 21px 18px;
+    gap: 8px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.large {
+    height: 64px;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.default {
+    height: 48px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.small {
+    height: 40px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.small img {
+    width: 17px;
+    height: 17px;
+}
+
+.micro {
+    height: 32px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 15px 18px !important;
+}
+
+.micro img {
+    width: 15px;
+    height: 15px;
+}
+
+.datePicker_calendar {
+    top: 40px;
+    position: absolute;
+    margin-top: 12px;
+}
+
+/* alinhamento a direita = 306 - 243 = 63 */
+.right {
+    margin-left: -63px;
+}

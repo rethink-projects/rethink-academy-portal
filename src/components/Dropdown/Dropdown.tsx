@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
-import IconEye from "@mui/icons-material/VisibilityOutlined";
 import IconArrow from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 type DropdownProps = {
+  value?: string;
   setValue: (value: string) => void;
   options: string[];
   id: string;
   size?: "small" | "micro" | "default" | "large";
   initialText?: string;
-  width?: number;
+  width: number;
   disabled?: boolean;
   leftIcon?: JSX.Element;
 };
 
+/*  Necessário um useState no pai. O setState será passado como props no setValue e o value no value
+ * exemplo:   const [value, setValue] = useState<string>();
+ */
 const Dropdown = ({
+  initialText,
   setValue,
   options,
   id,
-  initialText = "Escolha uma opção",
+  value,
   disabled,
   size = "default",
   width,
   leftIcon,
 }: DropdownProps) => {
-  const [isActive, setIsActive] = useState(false);
-  const [placeholder, setPlaceholder] = useState(initialText);
+  const [placeholder, setPlaceholder] = useState(initialText ?? value);
   const [isFilled, setIsFilled] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     document.addEventListener("click", (e: Event) => {
@@ -54,7 +58,7 @@ const Dropdown = ({
         ].join(" ")}
       >
         <div className={styles.inner_left}>
-          {leftIcon ?? <IconEye />}
+          {leftIcon}
           {placeholder}
         </div>
         <IconArrow />

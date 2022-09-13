@@ -13,6 +13,7 @@ import styles from "./EvaluationScreen.module.css";
 import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner";
 
 type getUserType = {
   id: string;
@@ -45,7 +46,9 @@ const EvaluationScreen = () => {
   };
 
   useEffect(() => {
-    getUser();
+    if (user) {
+      getUser();
+    }
   }, [user]);
 
   const [skillType, setSkillType] = useState(true);
@@ -121,15 +124,15 @@ const EvaluationScreen = () => {
       );
     } else {
       return (
-        <div>
+        <div className={styles.evaluationScreen_container_other}>
           <h1>Não tem permissão para acessar esta página</h1>
         </div>
       );
     }
   } else {
     return (
-      <div>
-        <h1>Carregando</h1>
+      <div className={styles.evaluationScreen_container_other}>
+        <Spinner type="light" size="big" isLoading={true} />
       </div>
     );
   }

@@ -1,11 +1,11 @@
 .breadcrumbContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 6px;
 }
 
-span {
+.breadcrumbContainer>span {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

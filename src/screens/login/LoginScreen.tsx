@@ -19,7 +19,6 @@ function LoginScreen() {
       });
       navigate("/dashboard");
     });
-    // Google login with supabase client
   }
 
   useEffect(() => {
@@ -33,29 +32,28 @@ function LoginScreen() {
       navigate("/dashboard", { replace: true });
     }
   }, [auth, navigate]);
-
   return (
     <div className={styles.login_container}>
       <div className={styles.login_inner}>
         <img
           className={styles.login_inner_logo}
           src={Images.logoRethink}
-          alt=''
+          alt=""
         />
         <h1 className={styles.login_inner_title}>
           Portal <span>Rethink</span> Academy
         </h1>
-        <img className={styles.login_inner_arrow} src={Images.raArrow} alt='' />
+        <img className={styles.login_inner_arrow} src={Images.raArrow} alt="" />
       </div>
       <div className={styles.login_main}>
         <div className={styles.login_main_inner}>
           <img
             className={styles.login_main_img}
             src={Images.ratRa}
-            alt='RA RAT'
+            alt="RA RAT"
           />
           <h3 className={styles.login_main_headline}>Faça seu login</h3>
-          <SocialButton onClick={handleGoogleLogin} type='secundary' />
+          <SocialButton onClick={handleGoogleLogin} type="secundary" />
         </div>
       </div>
     </div>

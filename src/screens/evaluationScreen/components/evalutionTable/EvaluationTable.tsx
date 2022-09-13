@@ -19,6 +19,7 @@ export type evaluationUserType = {
   id: string;
   month: string;
   userId: string;
+  email: string;
   skillType: boolean;
   skill1: number;
   skill2: number;
@@ -205,6 +206,7 @@ export default function BasicEditingGrid({
       ) {
         return {
           id: evaluate.id ? evaluate.id : "NoEvaluate " + evaluate.userId,
+          email: evaluate.email,
           name: evaluate.name,
           [headers[role][0]]: evaluate.skill1,
           [headers[role][1]]: evaluate.skill2,
@@ -226,45 +228,44 @@ export default function BasicEditingGrid({
   }, [evaluations, skill]);
 
   // methods create and update evalute
-  const createNewEvaluate = async (row: any, value: string) => {
+  const createNewEvaluate = async (tableData: any, value: string) => {
     try {
-      let userEmail = row.row.name.toLowerCase();
-      userEmail = userEmail.split(" ");
-      userEmail = userEmail[0].concat(".", userEmail[1]) + "@rethink.dev";
       const newValue = parseInt(value);
-
       await axios.post<evaluationUserType[]>(
         `http://localhost:4000/api/evaluate`,
         {
           month: month,
-          userEmail: userEmail,
+          userEmail: tableData.row.email,
           skillType: skill,
           skill1:
-            row.field === headers[role][0]
+            tableData.field === headers[role][0]
               ? newValue
-              : row.row[headers[role][0]],
+              : tableData.row[headers[role][0]],
           skill2:
-            row.field === headers[role][1]
+            tableData.field === headers[role][1]
               ? newValue
-              : row.row[headers[role][1]],
+              : tableData.row[headers[role][1]],
           skill3:
-            row.field === headers[role][2]
+            tableData.field === headers[role][2]
               ? newValue
-              : row.row[headers[role][2]],
+              : tableData.row[headers[role][2]],
           skill4:
-            row.field === headers[role][3]
+            tableData.field === headers[role][3]
               ? newValue
-              : row.row[headers[role][3]],
+              : tableData.row[headers[role][3]],
           skill5:
-            row.field === headers[role][4]
+            tableData.field === headers[role][4]
               ? newValue
-              : row.row[headers[role][4]],
+              : tableData.row[headers[role][4]],
           skill6:
-            row.field === headers[role][5]
+            tableData.field === headers[role][5]
               ? newValue
-              : row.row[headers[role][5]],
+              : tableData.row[headers[role][5]],
         }
       );
+      if (month) {
+        await getEvaluations(month);
+      }
       return;
     } catch (error) {
       console.log(error);
@@ -273,7 +274,7 @@ export default function BasicEditingGrid({
 
   const updateEvaluate = async (row: any, value: string) => {
     try {
-      const updateResponse = await axios.post<evaluationUserType[]>(
+      const updateResponse = await axios.patch<evaluationUserType[]>(
         `http://localhost:4000/api/evaluate/${row.id}`,
         {
           value: value,
@@ -282,6 +283,9 @@ export default function BasicEditingGrid({
           skillType: skill,
         }
       );
+      if (month) {
+        await getEvaluations(month);
+      }
       return;
     } catch (error) {
       console.log(error);
