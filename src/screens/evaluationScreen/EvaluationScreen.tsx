@@ -31,26 +31,6 @@ type getUserType = {
 const EvaluationScreen = () => {
   const { user } = useAuth();
 
-  const [userByEmail, setUserByEmail] = useState<getUserType>();
-
-  const getUser = async () => {
-    try {
-      const userData = await axios.get(
-        `http://localhost:4000/api/user/${user.email}`
-      );
-      setUserByEmail(userData.data);
-      return;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      getUser();
-    }
-  }, [user]);
-
   const [skillType, setSkillType] = useState(true);
 
   const [tagType, setTagType] = useState<"ENGINEERING" | "DESIGN" | "PRODUCT">(
@@ -63,8 +43,8 @@ const EvaluationScreen = () => {
 
   const [month, setMonth] = useState(returnData);
 
-  if (userByEmail) {
-    if (userByEmail!.role === "AMBASSADOR") {
+  if (user) {
+    if (user.role === "AMBASSADOR") {
       return (
         <div className={styles.evaluationScreen_container_extern}>
           <div className={styles.evaluationScreen_container}>

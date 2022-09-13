@@ -340,7 +340,7 @@ export default function BasicEditingGrid({
         experimentalFeatures={{ newEditingApi: true }}
         hideFooter={true}
         disableColumnMenu
-        onCellEditStop={(row, value: any) =>
+        onCellEditStop={(row: any, value: any) =>
           onEditStop(row, value.target.value)
         }
         sx={styleGrid}

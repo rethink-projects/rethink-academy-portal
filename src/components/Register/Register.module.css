@@ -191,3 +191,13 @@
 .btnHours:hover {
   background: var(--color-secondary-hover);
 }
+/* .register_body_infos::-webkit-scrollbar {
+  width: 18px;
+}
+.register_body_infos::-webkit-scrollbar-thumb {
+  border: 6px solid transparent;
+}
+
+.register_body_infos::-webkit-scrollbar-thumb:hover {
+  border: 5px solid transparent;
+} */
