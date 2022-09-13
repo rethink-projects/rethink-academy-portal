@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Assets
 import Images from "../../../assets";
@@ -16,7 +16,19 @@ const Modal = ({
   id = "outside",
   type = "Win",
 }: modalProps) => {
+  const [loadingGif, setLoadingGif] = useState(true);
+
+  useEffect(() => {
+    setLoadingGif(true);
+    setTimeout(() => {
+      setLoadingGif(false);
+    }, 3400);
+  }, []);
+
   const handleOutsideClick = (e: any) => {
+    if (e.target.id === id && loadingGif === false) {
+      onClose();
+    }
     if (e.target.id === id) {
       onClose();
     }
@@ -26,12 +38,15 @@ const Modal = ({
     <div id={id} className={styles.modal_outside} onClick={handleOutsideClick}>
       <div className={styles.modal_container} onClick={onClose}>
         <div className={styles.modal_content} onClick={onClose}>
-          {type === "Win" && (
+          {loadingGif && type === "Win" ? (
             <img
               src={Images.hatDelivery}
               alt="A GIF of a mage delivering a hat"
             />
+          ) : (
+            <img src={Images.hatWin} alt="A hat with a text message" />
           )}
+
           {type === "Degrading" && (
             <img
               src={Images.hatDegrading}

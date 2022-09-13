@@ -90,3 +90,15 @@ export const getHoursLastDay = async (email: string) => {
     return;
   }
 };
+
+export const getHoursOfMonth = async (email: string) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:4000/api/tasks/hours/${email}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
