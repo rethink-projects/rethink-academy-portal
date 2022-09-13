@@ -19,23 +19,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const newUser = {
       ...userFromFirebase,
-<<<<<<< HEAD
-      /* name: backendUser.name,
-      id: backendUser.id,
-      role: backendUser.role,
-      title: backendUser.title, */
-    });
-    localStorage.setItem(
-      "@portarethinkacademy:user",
-      JSON.stringify({
-        ...userFromFirebase,
-        /*  name: backendUser.name,
-        id: backendUser.id,
-        role: backendUser.role,
-        title: backendUser.title, */
-      })
-    );
-=======
       name: backendUser.name + " " + backendUser.surname,
       id: backendUser.id,
       role: backendUser.role,
@@ -47,7 +30,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(newUser);
 
     localStorage.setItem("@portarethinkacademy:user", JSON.stringify(newUser));
->>>>>>> 575e65e7acfb83322d20043742fc00d9c013e943
     callback();
   };
 

@@ -8,7 +8,6 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RequireAuth from "./services/auth";
-import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 
 function App() {
   return (
@@ -19,12 +18,12 @@ function App() {
             <Route index element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/dashboard" element={<Layout />}>
-<<<<<<< HEAD
-              <Route path="/dashboard/contrato" element={<ContractScreen />} />
-=======
->>>>>>> 575e65e7acfb83322d20043742fc00d9c013e943
               <Route index element={<HomeScreen />} />
-              <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route path="/dashboard/contrato" element={<ContractScreen />} />
+              <Route
+                path="/dashboard/contrato/:email"
+                element={<ContractScreen />}
+              />
             </Route>
             <Route
               path="/playground"

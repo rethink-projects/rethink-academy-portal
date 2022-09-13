@@ -35,10 +35,7 @@ export const upsertBucket = async (
       title,
       email,
     });
-<<<<<<< HEAD
     console.log({ data });
-=======
->>>>>>> 575e65e7acfb83322d20043742fc00d9c013e943
     return data;
   } catch (error) {
     console.log(error);
