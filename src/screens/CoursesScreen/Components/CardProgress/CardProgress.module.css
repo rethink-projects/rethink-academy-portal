@@ -1,0 +1,90 @@
+.progress_container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 1581px;
+  min-height: 652px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 120%;
+
+  width: 1581px;
+  height: 72px;
+}
+.fields {
+  display: flex;
+  flex-direction: row;
+  gap: 29px;
+}
+
+.fields svg {
+  cursor: pointer;
+}
+.dropdown_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdown_container span {
+  font-size: 12px;
+  line-height: 16px;
+
+  color: var(--color-tertiary-active);
+}
+
+.selected_options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.selected_options img {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-icon-background);
+  border-radius: 100%;
+}
+
+.selected_options span {
+  width: 100%;
+  margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  margin: auto;
+}
+.cards_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px 60px;
+}
+
+.progress_empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14.5px;
+  margin-top: 200px;
+  /* background-color: var(--color-base); */
+}
+
+.progress_empty > span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #706e64;
+}

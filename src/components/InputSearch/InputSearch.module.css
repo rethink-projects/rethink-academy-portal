@@ -138,15 +138,14 @@
   max-width: 295px;
   padding: 0px 93px 0 12px;
   gap: 12px;
-
   height: 48px;
-
   font-size: 16px;
   line-height: 24px;
+  -webkit-box-sizing: unset !important;
+  box-sizing: unset !important;
 }
 
 .input_search_default::placeholder {
-  width: 50px;
   height: 24px;
   color: var(--color-tertiary);
 }
@@ -230,10 +229,10 @@
   color: var(--color-tertiary);
 }
 
-.filled_input_large > svg > path,
-.filled_input_default > svg > path,
-.filled_input_small > svg > path,
-.filled_input_micro > svg > path {
+.filled_input_large>svg>path,
+.filled_input_default>svg>path,
+.filled_input_small>svg>path,
+.filled_input_micro>svg>path {
   fill: var(--color-tertiary);
 }
 

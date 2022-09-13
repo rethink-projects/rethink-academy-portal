@@ -7,42 +7,34 @@ import { useState } from "react";
 type TagProps = {
   color?: "dark" | "light";
   size?: "large" | "default" | "small" | "micro";
+  type?: string;
   hasIcon?: boolean;
   text: string;
-  onClickAdd: () => void;
-  onClickDelete: () => void;
+  active: boolean;
+  setActive: (data: string, value: string) => void;
 };
 
 const Tag = ({
   color = "light",
   size = "default",
+  type = "tag",
   hasIcon = true,
   text,
-  onClickAdd,
-  onClickDelete,
+  active = false,
+  setActive,
 }: TagProps) => {
-  const [toggle, setToggle] = useState(false);
-
-  const handleAdd = () => {
-    setToggle(true);
-    onClickAdd();
-  };
-
-  const handleDelete = () => {
-    setToggle(false);
-    onClickDelete();
-  };
-
   return (
-    <div onClick={!toggle ? (handleAdd) : (handleDelete) } 
+    <div
+      onClick={() => setActive(type, text)}
       className={`${styles[color]} ${styles[size]} ${styles.container_tag} ${
-        !toggle ? "" : color === "dark" ? styles.activeDark : styles.activeLight
-      }`}>
+        !active ? "" : color === "dark" ? styles.activeDark : styles.activeLight
+      }`}
+    >
       <div className={styles.divLeft}>
         {hasIcon == true && (
-        <div onClick={handleAdd} className={styles.AddIcon}>
-          <AddIcon />
-        </div>
+          <div onClick={() => setActive(type, text)} className={styles.AddIcon}>
+            <AddIcon />
+          </div>
         )}
       </div>
 
@@ -52,9 +44,15 @@ const Tag = ({
 
       <div className={styles.divRight}>
         {hasIcon == true && (
-        <><div className={styles.barra}></div><div onClick={handleDelete} className={styles.ClearIcon}>
-            <ClearIcon className="ClearIcon" />
-          </div></>
+          <>
+            <div className={styles.barra}></div>
+            <div
+              onClick={() => setActive(type, "")}
+              className={styles.ClearIcon}
+            >
+              <ClearIcon className="ClearIcon" />
+            </div>
+          </>
         )}
       </div>
     </div>

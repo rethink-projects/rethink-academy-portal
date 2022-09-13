@@ -25,6 +25,7 @@
   line-height: 24px;
   width: max-content;
   max-width: 384px;
+  z-index: 1;
 }
 
 /* CSS border triangles */

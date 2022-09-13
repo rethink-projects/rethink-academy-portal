@@ -4,6 +4,8 @@ import filledInput from "./filledInput.svg";
 import logo from "./logo.png";
 import search from "./search.svg";
 
+import arrowCardGreen from "./arrowCardGreen.png";
+import arrowCardGrey from "./arrowCardGrey.png";
 import arrow from "./arrowIcon.png";
 import avatarImage from "./avatarImage.svg";
 import ClockHome from "./clock.svg";
@@ -32,6 +34,9 @@ import homeBackground from "./homeBackground.jpg";
 import deleteIcon from "./deleteIcon.svg";
 import chatIcon from "./chatIcon.svg";
 import arrowDownIcon from "./arrowDownIcon.svg";
+import weakBatery from "./bateryIcon.svg";
+import averageBatery from "./bateryIconAverage.svg";
+import fullBatery from "./bateryIconFull.svg";
 
 import arrowTask from "./arrowTask.svg";
 import calendarIcon from "./calendarIcon.svg";
@@ -55,7 +60,27 @@ import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
 import DPIconNote from "./DPIconNote.svg";
 
 import chat from "./chat.png";
+import ProgressBack from "./ProgressBack.png";
+import ProgressIcon from "./ProgressIcon.png";
+import ProgressEndIcon from "./ProgressEndIcon.png";
+
+import studies from "./Academy_Badge.svg";
+import academy from "./AcademyHat_Badge.svg";
+import design from "./Design_Badge.svg";
+import engineering from "./Engineering_Badge.svg";
+import goals from "./Goals_Badge.svg";
+import product from "./Product_Badge.svg";
+import timeRecord from "./TimeRegister_Badge.svg";
+import welcome from "./Welcome_Badge.svg";
+import troll from "./Troll_Badge.svg";
+import starsGif from "./starsGif.gif";
+
 export const Images = {
+  ProgressBack,
+  ProgressIcon,
+  ProgressEndIcon,
+  arrowCardGreen,
+  arrowCardGrey,
   logo,
   checkbox,
   arrow,
@@ -101,6 +126,9 @@ export const Images = {
     deleteIcon,
     chatIcon,
     arrowDownIcon,
+    weakBatery,
+    averageBatery,
+    fullBatery,
   },
   lines: {
     one,
@@ -111,6 +139,18 @@ export const Images = {
   HardSkillsIconNote,
   SoftSkillsIconNote,
   DPIconNote,
+  badge: {
+    academy,
+    studies,
+    design,
+    engineering,
+    goals,
+    product,
+    timeRecord,
+    welcome,
+    troll,
+  },
+  starsGif,
 };
 
 export default Images;

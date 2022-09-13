@@ -1,5 +1,6 @@
 .playground_container {
   display: flex;
+  flex-direction: column;
   padding: 2%;
   height: 100vh;
   gap: 10px;
@@ -9,6 +10,18 @@
 .playground_container_inner {
   display: flex;
   flex-direction: column;
+  width: 1500px;
   align-items: center;
+  margin-top: 15px;
   gap: 5px;
+}
+
+.main_content {
+  display: inline-block;
+  position: relative;
+}
+
+.main_content > iframe {
+  vertical-align: top;
+  pointer-events: none;
 }
