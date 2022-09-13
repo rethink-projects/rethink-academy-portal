@@ -5,11 +5,13 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // COMPONENTS
-import Acordeon from "./components/Accordion/Accordion";
+import Accordion from "./components/Accordion/Accordion";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardInfoCurso from "./components/card/CardInfoCurso";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
+import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 // ICONS
 import IconEdit from "@mui/icons-material/EditOutlined";
@@ -18,34 +20,18 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 
 // STYLES
 import styles from "./CourseScreen.module.css";
-import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
-import { CourseResponse } from "../types/CourseTypes";
-import Tooltip from "../../components/Tooltip/Tooltip";
 
-type TypeModule = {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: TypeLesson[];
-  blocked: boolean;
-  completed: boolean;
-};
-type TypeLesson = {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-};
-
-type TypeModal = "add" | "edit" | "delete";
+// TYPES
+import { CourseResponse, Module, Modal } from "../types/CourseTypes";
 
 const CourseScreen = () => {
+  let userEmail = "";
+  const { user } = useAuth();
+  if (user) userEmail = user.email;
   const location = useLocation();
   const [watched, setWatched] = useState<string[]>([]);
-  const [modules, setModules] = useState<TypeModule[]>([]);
-  const [modalModule, setModule] = useState<TypeModule>();
+  const [modules, setModules] = useState<Module[]>([]);
+  const [modalModule, setModule] = useState<Module>();
   const [course, setCourse] = useState<CourseResponse>();
 
   const [trailName, setTrailName] = useState("");
@@ -54,26 +40,12 @@ const CourseScreen = () => {
   const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
-  const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
+  const [moduleModalType, setModuleModalType] = useState<Modal>("ADD");
   const trailId = location.pathname.split("/")[3];
   const courseId = location.pathname.split("/")[5];
 
-  let userEmail = "";
-  const { user } = useAuth();
-  if (user) userEmail = user.email;
-
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
-
-  // useEffect(() => {
-  //   course && setTotalModules(modules.length);
-  //   let lessons = 0;
-  //   course &&
-  //     modules.map((module: TypeModule) => {
-  //       lessons += module.lessons.length;
-  //     });
-  //   setTotalLessons(lessons);
-  // }, [course]);
 
   const getCourse = async () => {
     const response = await api.get(`/course/${courseId}/${userEmail}`);
@@ -91,15 +63,6 @@ const CourseScreen = () => {
     }
   }, [userEmail]);
 
-  if (
-    !user ||
-    course === undefined ||
-    userEmail === "" ||
-    ambassador === undefined
-  ) {
-    return <div>Loading...</div>;
-  }
-
   const getLevel = (level: string) => {
     if (level === "HIGH") return "Avançado";
     if (level === "MEDIUM") return "Intermediário";
@@ -108,11 +71,19 @@ const CourseScreen = () => {
 
   const setAddModuleModal = () => {
     setModule(undefined);
-    setModuleModalType("add");
+    setModuleModalType("ADD");
     setModuleModalIsOpen(true);
     setModuleName("");
   };
 
+  if (
+    !user ||
+    course === undefined ||
+    userEmail === "" ||
+    ambassador === undefined
+  ) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -199,7 +170,7 @@ const CourseScreen = () => {
                       direction={ambassador ? "top" : "bottom-right"}
                       key={"tooltip" + index}
                     >
-                      <Acordeon
+                      <Accordion
                         key={module.id}
                         ambassador={ambassador}
                         width={848}
@@ -217,7 +188,7 @@ const CourseScreen = () => {
                       />
                     </Tooltip>
                   ) : (
-                    <Acordeon
+                    <Accordion
                       key={module.id}
                       ambassador={ambassador}
                       width={848}

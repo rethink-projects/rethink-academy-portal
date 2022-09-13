@@ -1,6 +1,12 @@
+import { api } from "../../../../services/api";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import styles from "./Accordion.module.css";
 
+// TYPES
+import { Lesson, Validation } from "../../../types/CourseTypes";
+import { AccordionProps } from "../../../types/PropTypes";
+
+// ICONS
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -10,42 +16,13 @@ import IconEdit from "@mui/icons-material/EditOutlined";
 import IconTrash from "@mui/icons-material/DeleteOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
 
+//STYLES
+import styles from "./Accordion.module.css";
+
+// COMPONENTS
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import { api } from "../../../../services/api";
-import { useNavigate } from "react-router-dom";
-
-type AccordionProps = {
-  width?: number;
-  module: TypeModule;
-  ambassador?: boolean;
-  blocked?: boolean;
-  position: number;
-  completed?: boolean;
-  watched: string[];
-  openModuleModal: (open: boolean) => void;
-  setModuleModalType: (value: "add" | "edit" | "delete") => void;
-  setModuleName: (moduleName: string) => void;
-  setModule: (module: TypeModule) => void;
-  reRender: VoidFunction;
-};
-type TypeModule = {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: TypeLesson[];
-  blocked: boolean;
-  completed: boolean;
-};
-type TypeLesson = {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-};
 
 const Accordion = ({
   width = 348,
@@ -62,33 +39,32 @@ const Accordion = ({
   reRender,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
-  const [lessons, setLessons] = useState<Array<TypeLesson>>(module.lessons!);
-  const [lesson, setLesson] = useState<TypeLesson>();
+  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
+  const [lesson, setLesson] = useState<Lesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonEmbed, setLessonEmbed] = useState("");
-  const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
+  const [lessonModalType, setLessonModalType] = useState<"EDIT" | "ADD">("ADD");
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<"save" | "delete">(
-    "delete"
-  );
+  const [validationType, setValidationType] = useState<Validation>("DELETE");
   const navigate = useNavigate();
+
   const setAddLessonModal = () => {
     setLesson(undefined);
     setLessonName("");
     setLessonDescription("");
     setLessonEmbed("");
-    setLessonModalType("add");
+    setLessonModalType("ADD");
     setLessonModalIsOpen(true);
   };
 
   const confirmLessonChanges = () => {
-    if (lessonModalType === "add") {
+    if (lessonModalType === "ADD") {
       addLessonReq();
-
-      reRender();
-      // window.location.reload();
+      setTimeout(function () {
+        reRender();
+      }, 200);
       console.log("pass");
     } else {
       editLessonReq();
@@ -102,14 +78,14 @@ const Accordion = ({
     setModuleName(module.name);
 
     openModuleModal(true);
-    setModuleModalType("delete");
+    setModuleModalType("DELETE");
   };
 
   const setEditModuleModal = () => {
     setModule(module);
     setModuleName(module.name);
-    setValidationType("save");
-    setModuleModalType("edit");
+    setValidationType("SAVE");
+    setModuleModalType("EDIT");
     openModuleModal(true);
   };
 
@@ -122,15 +98,13 @@ const Accordion = ({
         moduleId: module.id,
       })
       .then((response) =>
-        // lessons.push({
-        //   name: lessonName,
-        //   description: lessonDescription,
-        //   embedUrl: lessonEmbed,
-        //   order: module.lessons.length,
-        //   moduleId: module.id,
-        //   id: response.data.lesson.id,
-        // })
-        console.log(response)
+        lessons.push({
+          name: lessonName,
+          description: lessonDescription,
+          embedUrl: lessonEmbed,
+          moduleId: module.id,
+          id: response.data.lesson.id,
+        })
       );
   };
 
@@ -225,7 +199,6 @@ const Accordion = ({
       {accordionIsOpen && lessons != null && lessons.length > 0 ? (
         <div className={styles.accordion_container}>
           {lessons.map((lesson) => (
-            // </Tooltip>
             <div
               className={styles.accordion_item}
               key={lesson.id}
@@ -248,7 +221,7 @@ const Accordion = ({
                       setLessonDescription(lesson.description),
                       setLessonEmbed(lesson.embedUrl),
                       setLessonModalIsOpen(true),
-                      setLessonModalType("edit")
+                      setLessonModalType("EDIT")
                     )}
                   />
                 ) : (

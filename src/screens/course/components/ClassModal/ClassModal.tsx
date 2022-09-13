@@ -1,22 +1,10 @@
 import { useState } from "react";
+import { ClassModalProps } from "../../../types/PropTypes";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
 import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ClassModal.module.css";
+import { Validation } from "../../../types/CourseTypes";
 
-type ClassModalProps = {
-  type: "add" | "edit";
-  onClose: VoidFunction;
-  oneButton?: boolean;
-  nameButtonRight?: string;
-  nameButtonLeft?: string;
-  className: string;
-  embedLink: string;
-  description: string;
-  setLessonName: (value: string) => void;
-  setEmbedLink: (value: string) => void;
-  setDescription: (value: string) => void;
-  onClickConfirm: VoidFunction;
-};
 const ClassModal = ({
   onClose,
   type,
@@ -30,15 +18,11 @@ const ClassModal = ({
 }: ClassModalProps) => {
   let title;
 
-  if (type === "add") {
-    title = "Adicionar Aula";
-  } else {
-    title = "Editar Aula";
-  }
+  type === "ADD" ? title = ("Adicionar Aula") : title = ("Editar Aula");
 
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<"save" | "delete">(
-    "save"
+  const [validationType, setValidationType] = useState<Validation>(
+    "SAVE"
   );
 
   return (
@@ -46,9 +30,9 @@ const ClassModal = ({
       title={title}
       onClose={onClose}
       onClickConfirm={() =>
-        type === "add"
+        type === "ADD"
           ? (onClose(), onClickConfirm())
-          : (setValidationType("save"), setValidationModalIsOpen(true))
+          : (setValidationType("SAVE"), setValidationModalIsOpen(true))
       }
       onClickCancel={() => onClose()}
     >
