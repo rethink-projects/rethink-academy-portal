@@ -16,10 +16,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   ) => {
     const userFromFirebase = await firebaseInstance.loginWithFirebase(type);
     const backendUser = await getUserFromBackend(userFromFirebase.email);
-    console.log({ backendUser, userFromFirebase });
 
-    setUser({
+    const newUser = {
       ...userFromFirebase,
+<<<<<<< HEAD
       /* name: backendUser.name,
       id: backendUser.id,
       role: backendUser.role,
@@ -35,6 +35,19 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         title: backendUser.title, */
       })
     );
+=======
+      name: backendUser.name + " " + backendUser.surname,
+      id: backendUser.id,
+      role: backendUser.role,
+      main: backendUser.main,
+      level: backendUser.level,
+      exp: backendUser.exp,
+    };
+
+    setUser(newUser);
+
+    localStorage.setItem("@portarethinkacademy:user", JSON.stringify(newUser));
+>>>>>>> 575e65e7acfb83322d20043742fc00d9c013e943
     callback();
   };
 

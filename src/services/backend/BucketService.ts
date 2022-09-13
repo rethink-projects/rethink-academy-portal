@@ -1,8 +1,8 @@
-import axios from "axios";
+import { api } from "./Api";
 
 export const getUserBucket = async (email: string) => {
   try {
-    const { data } = await axios.get("http://localhost:4000/api/bucket", {
+    const { data } = await api.get("/bucket", {
       params: { email },
     });
     return data;
@@ -14,12 +14,9 @@ export const getUserBucket = async (email: string) => {
 
 export const getOneBucket = async (title: string, email: string) => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:4000/api/bucket/" + title,
-      {
-        params: { email },
-      }
-    );
+    const { data } = await api.get("/bucket/" + title, {
+      params: { email },
+    });
     return data;
   } catch (error) {
     console.log(error);
@@ -33,13 +30,15 @@ export const upsertBucket = async (
   email: string
 ) => {
   try {
-    console.log({ url, title, email });
-    const { data } = await axios.post("http://localhost:4000/api/bucket/", {
+    const { data } = await api.post("/bucket/", {
       url,
       title,
       email,
     });
+<<<<<<< HEAD
     console.log({ data });
+=======
+>>>>>>> 575e65e7acfb83322d20043742fc00d9c013e943
     return data;
   } catch (error) {
     console.log(error);

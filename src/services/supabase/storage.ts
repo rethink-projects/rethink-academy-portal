@@ -42,9 +42,7 @@ export function useStorage() {
     }
     if (title) {
       let helper: any = data!.Key.split("/");
-      console.log(helper, "antes do shift");
       helper.shift();
-      console.log(helper, "depois do shift");
       helper = helper.join("/");
 
       const bucket = await upsertBucket(helper, title, user.email);

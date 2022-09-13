@@ -160,11 +160,11 @@ const AcademyProgress = ({ name }: { name: string }) => {
           width={342}
         />
         <ProgressBar
-          totalValue={dateRanges[2].dates.length}
-          relativeValue={
+          totalValue={Math.trunc(dateRanges[2].dates.length / 1.14)}
+          relativeValue={Math.trunc(
             dateRanges[2].dates.filter((date) => date <= new Date().getTime())
-              .length
-          }
+              .length / 1.14
+          )}
           size="large"
           width={342}
         />
