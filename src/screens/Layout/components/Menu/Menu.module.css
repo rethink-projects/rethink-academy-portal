@@ -91,6 +91,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 0 15px;
 }
 
 .avatar > span {

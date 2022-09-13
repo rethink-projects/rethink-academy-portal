@@ -28,6 +28,9 @@ import homeBackground from "./homeBackground.jpg";
 import deleteIcon from "./deleteIcon.svg";
 import chatIcon from "./chatIcon.svg";
 import arrowDownIcon from "./arrowDownIcon.svg";
+import weakBatery from "./bateryIcon.svg";
+import averageBatery from "./bateryIconAverage.svg";
+import fullBatery from "./bateryIconFull.svg";
 
 import arrowTask from "./arrowTask.svg";
 import calendarIcon from "./calendarIcon.svg";
@@ -106,6 +109,9 @@ export const Images = {
     deleteIcon,
     chatIcon,
     arrowDownIcon,
+    weakBatery,
+    averageBatery,
+    fullBatery,
   },
   lines: {
     one,
