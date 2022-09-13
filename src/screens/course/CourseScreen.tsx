@@ -81,7 +81,7 @@ const CourseScreen = () => {
         const response = await api.get(`/course/${courseId}/${userEmail}`);
         setCourse(response.data.course);
         setTrailName(response.data.course.trail.name);
-        setEmbassador(response.data.role === "EMBASSADOR");
+        setEmbassador(response.data.role === "AMBASSADOR");
         setModules(response.data.modules);
         setWatched(response.data.watched);
       };

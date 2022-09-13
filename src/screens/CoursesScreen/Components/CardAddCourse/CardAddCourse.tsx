@@ -23,7 +23,6 @@ interface FormData {
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
 }
 
-
 type addCourseProps = {
   addCourse?: boolean;
   onClose: VoidFunction;
@@ -135,12 +134,6 @@ const CardAddCourse = ({
     const workload = parseInt(formData.workload.replace(/[^0-9]/g, ""));
 
     if (addCourse) {
-      // console.log("Dentro if() vc criou um novo curso");
-      // console.log(formData);
-      // console.log(
-      //   `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
-      // );
-
       const response = await api.post(`/course`, {
         name: `${formData.name}`,
         description: `${formData.description}`,
@@ -157,15 +150,6 @@ const CardAddCourse = ({
       onClose();
       return response.data;
     } else {
-      // console.log("Dentro if() vc criou um novo curso");
-      // console.log(formData);
-      console.log(
-        `name: ${formData.name}\ndescription: ${formData.description}\nlevel: ${formData.level}\nworkload: ${workload}\nlearning: ${formData.learn}\nskills: ${formData.skills}\ntrailId: ${trailId}\ncourseStyle: ${formData.courseStyle}\nteacherName: ${formData.nameInstructor}\nteacherDescription: ${formData.descriptionInstructor}\nimageTeacher: ${formData.avatar}`
-      );
-      // console.log(formData.courseStyle);
-
-      // console.log("editar curso");
-
       const response = await api.put(`/course/${course?.id}`, {
         name: `${formData.name}`,
         description: `${formData.description}`,

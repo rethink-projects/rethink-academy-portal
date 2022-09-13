@@ -62,6 +62,16 @@
   cursor: pointer;
 }
 
+.acordeon_item_ambassador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+  width: 340px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
 .acordeon_item:hover {
   background-color: #e2fa85;
 }

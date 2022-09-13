@@ -88,7 +88,6 @@ const CursosScreen = () => {
     const responseCourse = await api.get(
       `/trail/course/${trailId}?email=${user.email}`
     );
-    console.log(responseCourse);
 
     setUserByEMail(responseCourse.data.user);
     setCoursesUser(responseCourse.data.data);
@@ -96,7 +95,7 @@ const CursosScreen = () => {
     setTrailMain(responseCourse.data.trailMain.toLowerCase());
     setCourses(responseCourse.data.data);
 
-    if (responseCourse.data.user.role != "STUDENT") setIntern(false);
+    if (responseCourse.data.user.role === "AMBASSADOR") setIntern(false);
   };
 
   useEffect(() => {
