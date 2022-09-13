@@ -28,6 +28,7 @@ import {
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export type infoType = {
   email: string;
@@ -40,6 +41,9 @@ export type infoType = {
 };
 
 const ContractScreen = () => {
+  const navigate = useNavigate();
+  const [allowGet, setAllowGet] = useState(false);
+  const [studentEmail, setStudentEmail] = useState<any>(null);
   const [contractStatus, setContractStatus] = useState("");
   const [isDeleted, setIsDeleted] = useState("");
   const [isShown, setIsShown] = useState(true);
@@ -52,66 +56,121 @@ const ContractScreen = () => {
 
   console.log("USER: ", user);
 
+  const validateRoute = () => {
+    let link = window.location.pathname.split("/");
+    //console.log(link);
+    if (link.length < 4 && user.role === "AMBASSADOR") {
+      navigate("/dashboard");
+      window.location.reload();
+      return false;
+    }
+    if (
+      link.length === 4 &&
+      link[link.length - 1] &&
+      link[link.length - 1] != ""
+    ) {
+      if (user.role === "AMBASSADOR" && studentEmail === null) {
+        console.log("***");
+        setStudentEmail(link[link.length - 1]);
+        return true;
+      } else if (user.role === "STUDENT") {
+        navigate("/dashboard/contrato");
+        window.location.reload();
+      }
+    } else {
+      return true;
+    }
+  };
+
   const getInfo = async (email: string) => {
     const info = await axios.get(`http://localhost:4000/api/info/${email}`);
     return info.data.info;
   };
 
   const getFiles = async () => {
-    const fileData = await axios.get<fileType>(
-      `http://localhost:4000/api/bucket`,
-      {
-        params: { email: user.email },
-      }
-    );
-    setFiles(fileData.data);
-    return fileData.data;
+    if (user.role === "AMBASSADOR" && studentEmail) {
+      const fileData = await axios.get<fileType>(
+        `http://localhost:4000/api/bucket`,
+        {
+          params: { email: studentEmail },
+        }
+      );
+      setFiles(fileData.data);
+      return fileData.data;
+    } else {
+      const fileData = await axios.get<fileType>(
+        `http://localhost:4000/api/bucket`,
+        {
+          params: { email: user.email },
+        }
+      );
+      setFiles(fileData.data);
+      return fileData.data;
+    }
   };
 
   useEffect(() => {
     if (user) {
+      if (validateRoute()) {
+        setAllowGet(true);
+      } else {
+        setAllowGet(false);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user && allowGet) {
       getFiles();
     }
-  }, [user, isDeleted]);
+  }, [user, isDeleted, allowGet]);
 
   const handlerContractStatus = (value: any) => {
-    setContractStatus(value);
-    axios.post(`http://localhost:4000/api/info/${user.email}`, {
-      status: value,
-    });
-    notify({
-      title: "Status do Contrato atualizado!",
-      type: "success",
-    });
+    if (studentEmail) {
+      setContractStatus(value);
+      axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+        status: value,
+      });
+      notify({
+        title: "Status do Contrato atualizado!",
+        type: "success",
+      });
+    }
   };
 
   const { handleSubmit, control } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(data);
-    axios.post(`http://localhost:4000/api/info/${user.email}`, {
-      college: data.college,
-      semester: data.semester,
-      workTime: data.workTime,
-      transportationVoucher: data.transportationVoucher,
-      providedEquipment: data.providedEquipment,
-    });
-    notify({
-      title: "Informações atualizadas!",
-      type: "success",
-    });
-    handleClick();
-    setInfo(data);
+    if (studentEmail) {
+      axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+        college: data.college,
+        semester: data.semester,
+        workTime: data.workTime,
+        transportationVoucher: data.transportationVoucher,
+        providedEquipment: data.providedEquipment,
+      });
+      notify({
+        title: "Informações atualizadas!",
+        type: "success",
+      });
+      handleClick();
+      setInfo(data);
+    }
   };
 
   useEffect(() => {
     (async () => {
-      if (user) {
-        setInfo(await getInfo(user.email));
+      if (user && allowGet) {
+        if (user.role === "AMBASSADOR" && studentEmail) {
+          setInfo(await getInfo(studentEmail));
+        } else {
+          setInfo(await getInfo(user.email));
+        }
       }
     })();
     return;
-  }, [user]);
+  }, [user, studentEmail, allowGet]);
 
   if (!user) {
     return <div>Loading...</div>;
