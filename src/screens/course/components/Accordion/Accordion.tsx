@@ -1,6 +1,12 @@
+import { api } from "../../../../services/api";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import styles from "./Accordion.module.css";
 
+// TYPES
+import { Lesson, Validation } from "../../../types/CourseTypes";
+import { AccordionProps } from "../../../types/PropTypes";
+
+// ICONS
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -10,43 +16,14 @@ import IconEdit from "@mui/icons-material/EditOutlined";
 import IconTrash from "@mui/icons-material/DeleteOutlined";
 import IconPlus from "@mui/icons-material/AddCircleOutline";
 
+//STYLES
+import styles from "./Accordion.module.css";
+
+// COMPONENTS
 import ClassModal from "../ClassModal/ClassModal";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import { api } from "../../../../services/api";
-import { useNavigate } from "react-router-dom";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
-
-type AccordionProps = {
-  width?: number;
-  module: TypeModule;
-  embassador?: boolean;
-  blocked?: boolean;
-  position: number;
-  completed?: boolean;
-  watched: string[];
-  openModuleModal: (open: boolean) => void;
-  setModuleModalType: (value: "add" | "edit" | "delete") => void;
-  setModuleName: (moduleName: string) => void;
-  setModule: (module: TypeModule) => void;
-};
-type TypeModule = {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: TypeLesson[];
-  blocked: boolean;
-  completed: boolean;
-};
-type TypeLesson = {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-  blocked?: boolean;
-};
 
 const Accordion = ({
   width = 348,
@@ -54,25 +31,24 @@ const Accordion = ({
   setModuleModalType,
   setModuleName,
   setModule,
-  embassador,
+  ambassador,
   blocked,
   completed,
   module,
   watched,
   position,
+  reRender,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
-  const [lessons, setLessons] = useState<Array<TypeLesson>>(module.lessons!);
-  const [lesson, setLesson] = useState<TypeLesson>();
+  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
+  const [lesson, setLesson] = useState<Lesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
   const [lessonEmbed, setLessonEmbed] = useState("");
-  const [lessonModalType, setLessonModalType] = useState<"edit" | "add">("add");
+  const [lessonModalType, setLessonModalType] = useState<"EDIT" | "ADD">("ADD");
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<"save" | "delete">(
-    "delete"
-  );
+  const [validationType, setValidationType] = useState<Validation>("DELETE");
   const navigate = useNavigate();
 
   const setAddLessonModal = () => {
@@ -80,23 +56,17 @@ const Accordion = ({
     setLessonName("");
     setLessonDescription("");
     setLessonEmbed("");
-    setLessonModalType("add");
+    setLessonModalType("ADD");
     setLessonModalIsOpen(true);
   };
 
   const confirmLessonChanges = () => {
-    if (lessonModalType === "add") {
+    if (lessonModalType === "ADD") {
       addLessonReq();
-      const lesson: TypeLesson = {
-        name: lessonName,
-        description: lessonDescription,
-        embedUrl: lessonEmbed,
-        order: module.lessons.length,
-        moduleId: module.id,
-        id: module.lessons.length + "id",
-        blocked: true,
-      };
-      lessons.push(lesson);
+      setTimeout(function () {
+        reRender();
+      }, 100);
+      console.log("pass");
     } else {
       editLessonReq();
       lesson!.name = lessonName;
@@ -109,25 +79,34 @@ const Accordion = ({
     setModuleName(module.name);
 
     openModuleModal(true);
-    setModuleModalType("delete");
+    setModuleModalType("DELETE");
   };
 
   const setEditModuleModal = () => {
     setModule(module);
     setModuleName(module.name);
-    setValidationType("save");
-    setModuleModalType("edit");
+    setValidationType("SAVE");
+    setModuleModalType("EDIT");
     openModuleModal(true);
   };
 
   const addLessonReq = async () => {
-    api.post("/lesson", {
-      name: lessonName,
-      description: lessonDescription,
-      embedUrl: lessonEmbed,
-      order: module.lessons.length,
-      moduleId: module.id,
-    });
+    api
+      .post("/lesson", {
+        name: lessonName,
+        description: lessonDescription,
+        embedUrl: lessonEmbed,
+        moduleId: module.id,
+      })
+      .then((response) =>
+        lessons.push({
+          name: lessonName,
+          description: lessonDescription,
+          embedUrl: lessonEmbed,
+          moduleId: module.id,
+          id: response.data.lesson.id,
+        })
+      );
   };
 
   const editLessonReq = async () => {
@@ -136,7 +115,6 @@ const Accordion = ({
       name: lessonName,
       description: lessonDescription,
       embedUrl: lessonEmbed,
-      order: module.lessons.length,
       moduleId: module.id,
     });
   };
@@ -180,19 +158,23 @@ const Accordion = ({
             : styles.module_container_closed
         } ${blocked ? styles.module_disabled : ""}`}
       >
-        {embassador ? (
+        {ambassador ? (
           <>
             {/* CONTEÚDO DO MENU PARA O EMBAIXADOR */}
             <div
-              className={styles.left_side_embassador}
+              className={styles.left_side_ambassador}
               onClick={() => setAccordionIsOpen(!accordionIsOpen)}
             >
               <IconMore />
               {`Módulo ${position} - ${module.name}`}
             </div>
-            <div className={styles.right_side_embassador}>
-              <IconTrash onClick={setDeleteModuleModal} />
-              <IconEdit onClick={() => setEditModuleModal()} />
+            <div className={styles.right_side_ambassador}>
+              <Tooltip content="Deletar" direction="top">
+                <IconTrash onClick={setDeleteModuleModal} />
+              </Tooltip>
+              <Tooltip content="Editar" direction="top">
+                <IconEdit onClick={() => setEditModuleModal()} />
+              </Tooltip>
             </div>
           </>
         ) : (
@@ -236,33 +218,24 @@ const Accordion = ({
                 {lesson.name}
               </div>
               <div className={styles.accordion_right_side}>
-                {embassador ? (
-                  lesson.blocked ? (
-                    <Tooltip
-                      content="Atualize a página para editar"
-                      direction="top"
-                    >
-                      <IconEdit />
-                    </Tooltip>
-                  ) : (
-                    <IconEdit
-                      onClick={() => (
-                        setLessonName(lesson.name),
-                        setLesson(lesson),
-                        setLessonDescription(lesson.description),
-                        setLessonEmbed(lesson.embedUrl),
-                        setLessonModalIsOpen(true),
-                        setLessonModalType("edit")
-                      )}
-                    />
-                  )
+                {ambassador ? (
+                  <IconEdit
+                    onClick={() => (
+                      setLessonName(lesson.name),
+                      setLesson(lesson),
+                      setLessonDescription(lesson.description),
+                      setLessonEmbed(lesson.embedUrl),
+                      setLessonModalIsOpen(true),
+                      setLessonModalType("EDIT")
+                    )}
+                  />
                 ) : (
                   lessonComplete(lesson.id) && <IconCheckedCircle />
                 )}
               </div>
             </div>
           ))}
-          {embassador && (
+          {ambassador && (
             <div className={styles.no_lessons}>
               <ButtonWithIcon
                 icon={<IconPlus />}
@@ -280,7 +253,7 @@ const Accordion = ({
         accordionIsOpen && (
           <div className={styles.no_lessons}>
             <span>Este módulo ainda não possui nenhuma aula.</span>
-            {embassador && (
+            {ambassador && (
               <ButtonWithIcon
                 icon={<IconPlus />}
                 text={"Adicionar Aula"}

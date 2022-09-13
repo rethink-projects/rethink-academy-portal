@@ -34,7 +34,7 @@ const CardAddCourse = ({
   addCourse = true,
   onClose = () => {},
 }: addCourseProps) => {
-  console.log(course);
+  // console.log(course);
 
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
@@ -60,7 +60,7 @@ const CardAddCourse = ({
   });
   const location = useLocation();
   // let trailId = location.pathname.replace("/dashboard/trilhas/", "");
-  let id = location.pathname.split("/");
+  const id = location.pathname.split("/");
   const trailId = id[3];
 
   const { notify } = useNotification();

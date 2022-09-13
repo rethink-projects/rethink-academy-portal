@@ -28,7 +28,6 @@ import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
-import { type } from "@testing-library/user-event/dist/type";
 
 interface CoursesWatched {
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
@@ -60,7 +59,7 @@ type Main =
   | "troll";
 
 const CursosScreen = () => {
-  const [intern, setIntern] = useState(true);
+  const [intern, setIntern] = useState<boolean>();
 
   const { user } = useAuth();
 
@@ -83,6 +82,7 @@ const CursosScreen = () => {
 
   const [userByEmail, setUserByEMail] = useState<any>();
   const [coursesUser, setCoursesUser] = useState<CoursesWatched[]>([]);
+  const [activeCardEmblem, setActiveCardEmblem] = useState(false);
 
   const getCourseInformations = async () => {
     const responseCourse = await api.get(
@@ -104,6 +104,10 @@ const CursosScreen = () => {
     }
   }, [user]);
 
+  // if (!user || trailName === "" || intern === undefined) {
+  //   return <div>Loading...</div>;
+  // }
+
   const onSubmitCourse = () => {
     if (editCourseIsOpen) {
       setEditCourseIsOpen(false);
@@ -120,9 +124,8 @@ const CursosScreen = () => {
     (letra) => letra.toUpperCase()
   );
 
-  const [activeCardEmblem, setActiveCardEmblem] = useState(false);
   const handleClickColect = () => {
-    console.log(trailMain);
+    // console.log(trailMain);
 
     api.post(`/badge`, {
       badge: trailMain,
@@ -208,7 +211,7 @@ const CursosScreen = () => {
             !intern ? (
               courses.map((course: CourseResponse, index) => (
                 <CardCourse
-                  intern={intern}
+                  intern={intern!}
                   onClickIrAoCurso={() =>
                     navigate(`/dashboard/trilhas/${trailId}/curso/${course.id}`)
                   }

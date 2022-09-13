@@ -1,5 +1,4 @@
 import styles from "./Playground.module.css";
-import axios from "axios";
 
 function PlaygroundScreen() {
   return (

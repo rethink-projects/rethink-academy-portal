@@ -9,6 +9,8 @@ import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
 import { api } from "../../../../services/api";
+import IconInfo from "@mui/icons-material/InfoOutlined";
+
 import {
   UserProgressResponse,
   CourseProgressResponse,
@@ -37,6 +39,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
 
   const func = async () => {
     const responseCourses = await api.get(`/progress/${trailId}`);
+    console.log(responseCourses.data);
     setUsersProgress(responseCourses.data.usersProgress);
     setModulesQnt(responseCourses.data.modulesQnt);
     setCourses(responseCourses.data.courses);
@@ -90,20 +93,51 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
       .userImage;
   };
 
-  if (usersProgress.length === 0 || modulesQnt === 0)
+  if (courses.length === 0 || usersProgress.length === 0) {
     return (
       <EmptyModal>
-        <div className={styles.progress_empty}>
+        <div className={styles.progress_container}>
           <div className={styles.title}>
-            Nenhuma atividade realizada até o momento.
+            Progresso
             <div className={styles.fields}>
+              <div className={styles.dropdown_container}>
+                <Dropdown
+                  value={courseName}
+                  setValue={setCourseName}
+                  options={getCoursesList()}
+                  id={"1"}
+                  width={360}
+                  leftIcon={<IconCourse />}
+                />
+                <span>Selecione um curso</span>
+              </div>
+              <div className={styles.dropdown_container}>
+                <Dropdown
+                  value={intern}
+                  setValue={setIntern}
+                  options={getInternsList()}
+                  id={"2"}
+                  width={243}
+                  leftIcon={<IconAvatar />}
+                />
+                <span>Selecione um estagiário</span>
+              </div>
               <IconClose onClick={() => onClose(false)} />
             </div>
+          </div>{" "}
+          <div className={styles.progress_empty}>
+            <IconInfo sx={{ fontSize: 43, color: "#eab308" }} />
+            <span>
+              {courses.length === 0
+                ? "Crie pelo menos um curso "
+                : "É necessário ao menos um estagiário cadastrado "}{" "}
+              para ver o progresso.
+            </span>
           </div>
         </div>
       </EmptyModal>
     );
-
+  }
   return (
     <EmptyModal>
       <div className={styles.progress_container}>

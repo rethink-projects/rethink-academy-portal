@@ -16,9 +16,7 @@ import {
   GridEventListener,
   GridRowId,
 } from "@mui/x-data-grid";
-import {
-  randomId,
-} from "@mui/x-data-grid-generator";
+import { randomId } from "@mui/x-data-grid-generator";
 // npm i @mui/x-data-grid-generator
 import styles from "./TableActivityPlan.module.css";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
@@ -197,11 +195,24 @@ export default function TableActivityPlan({
   const processRowUpdate = (newRow: any) => {
     const updatedRow = { ...newRow, isNew: false };
     setRows(rows?.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    let verify = true;
+    let start;
+    let finish;
+
+    try {
+      start = updatedRow.start.split("/");
+      finish = updatedRow.finish.split("/");
+      start = new Date(start[2], start[1], start[0]);
+      finish = new Date(finish[2], finish[1], finish[0]);
+    } catch (error) {
+      verify = false;
+      console.error("algo deu errado");
+    }
 
     axios.post("http://localhost:4000/api/stage/" + updatedRow.id, {
       stage: updatedRow.stage,
-      start: updatedRow.start,
-      finish: updatedRow.finish,
+      start: verify ? start : new Date(updatedRow.start),
+      finish: verify ? finish : new Date(updatedRow.finish),
       content: updatedRow.content,
       trailId: trailId,
     });

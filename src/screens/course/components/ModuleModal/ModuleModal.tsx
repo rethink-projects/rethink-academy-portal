@@ -1,37 +1,19 @@
-import axios from "axios";
 import { useState } from "react";
+
+// API
+import { api } from "../../../../services/api";
+
+// TYPES
+import { ModuleModalProps } from "../../../types/PropTypes";
+import { Validation } from "../../../types/CourseTypes";
+
+// STYLES
+import styles from "./ModuleModal.module.css";
+
+// COMPONENTS
 import TrailModal from "../../../../components/TrailModal/TrailModal";
 import ValidationModal from "../ValidationModal/ValidationModal";
-import styles from "./ModuleModal.module.css";
-type TypeModule = {
-  id: string;
-  name: string;
-  lessons?: TypeLesson[];
-  blocked?: boolean;
-};
-type TypeLesson = {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-};
 
-type ModuleModalProps = {
-  type: "add" | "edit" | "delete";
-  onClose: VoidFunction;
-  onClickConfirm?: VoidFunction;
-  onClickCancel?: VoidFunction;
-  oneButton?: boolean;
-  module?: TypeModule;
-  moduleName?: string;
-  setModuleName: (value: string) => void;
-  nameButtonRight?: string;
-  nameButtonLeft?: string;
-  modules: TypeModule[];
-  courseId?: string;
-};
 const ModuleModal = ({
   type,
   onClose,
@@ -40,30 +22,29 @@ const ModuleModal = ({
   setModuleName,
   courseId,
   modules,
+  reRender,
 }: ModuleModalProps) => {
   const handleSubmit = () => {};
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<"save" | "delete">(
-    "delete"
-  );
+  const [validationType, setValidationType] = useState<Validation>("DELETE");
 
   let title: string, description: string;
 
-  if (type === "add") {
+  if (type === "ADD") {
     title = "Adicionar Módulo";
     description = "Descreva aqui o nome do módulo de aulas.";
-  } else if (type === "delete") {
+  } else if (type === "DELETE") {
     title = "Tem certeza que deseja excluir";
     description =
       "Ao confirmar essa ação você não poderá recuperar esses dados.";
-  } else if (type === "edit") {
+  } else if (type === "EDIT") {
     title = "Editar Módulo";
     description = "Edite aqui o nome do módulo.";
   }
 
   const setValidationModal = () => {
-    if (type === "edit") {
-      setValidationType("save");
+    if (type === "EDIT") {
+      setValidationType("SAVE");
       setValidationModalIsOpen(true);
     } else {
       onConfirm();
@@ -72,40 +53,43 @@ const ModuleModal = ({
   };
 
   const onConfirm = () => {
-    if (type === "add") {
+    if (type === "ADD") {
       addModuleReq();
-      const moduleTemp: TypeModule = {
-        id: "aleatório" + Math.random(),
-        name: moduleName!,
-        blocked: true,
-      };
-      modules.push(moduleTemp!);
-    } else if (type === "edit") {
+      setTimeout(function () {
+        reRender();
+      }, 100);
+    } else if (type === "EDIT") {
       editModuleReq();
       module!.name = moduleName!;
-    } else if (type === "delete") {
+    } else if (type === "DELETE") {
       deleteModuleReq();
       modules.splice(modules.indexOf(module!), 1);
     }
   };
 
   const addModuleReq = async () => {
-    await axios.post("http://localhost:4000/api/module", {
-      name: moduleName,
-      courseId,
-    });
+    await api
+      .post("/module", {
+        name: moduleName,
+        courseId,
+      })
+      .then((response) => {
+        modules.push({
+          id: response.data.module.id,
+          name: moduleName!,
+        });
+      });
   };
 
   const editModuleReq = async () => {
-    await axios.put("http://localhost:4000/api/module/" + module!.id, {
+    await api.put("/module/" + module!.id, {
       name: moduleName,
     });
   };
 
   const deleteModuleReq = async () => {
-    await axios.delete("http://localhost:4000/api/module/" + module!.id);
+    await api.delete("/module/" + module!.id);
   };
-  // console.log("moduleName na tela ModuleModal: " + moduleName);
 
   return (
     <TrailModal

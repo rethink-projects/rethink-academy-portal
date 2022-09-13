@@ -2,9 +2,9 @@ import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useAuth } from "../../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../../../../services/api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
@@ -42,13 +42,10 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/user/watched/" + user.email)
-      .then((response) => {
-        if (response.data) {
-          setLessonUser(response.data);
-        }
-      });
+    const response = api.get("/user/watched/" + user.email).then((response) => {
+        setLessonUser(response.data);
+
+    });
   }, []);
 
   const getCoursesFromTrail = (trail: string) => {

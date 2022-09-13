@@ -39,7 +39,7 @@ interface UserResponse {
   surname: string;
   main: string;
   watched: string[];
-  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
+  role: "STUDENT" | "AMBASSADOR" | "RETHINKER";
   profile?: Profile;
 }
 

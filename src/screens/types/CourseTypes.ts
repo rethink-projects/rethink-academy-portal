@@ -23,7 +23,7 @@ interface UserResponse {
   surname: string;
   main: string;
   watched: string[];
-  role: "STUDENT" | "EMBASSADOR" | "RETHINKER";
+  role: "STUDENT" | "AMBASSADOR" | "RETHINKER";
   profile?: Profile;
   course: CourseResponse[];
 }
@@ -41,15 +41,16 @@ interface Trail {
 interface Module {
   id: string;
   name: string;
-  courseId: string;
-  lessons: Lesson[];
+  courseId?: string;
+  lessons?: Lesson[];
+  blocked?: boolean;
+  completed?: boolean;
 }
 
 interface Lesson {
   id: string;
   name: string;
   embedUrl: string;
-  order: number;
   description: string;
   moduleId: string;
 }
@@ -75,12 +76,12 @@ interface UserProgressResponse {
   userImage: string;
   completedModules: string[];
 }
-type CourseProgressResponse = {
+interface CourseProgressResponse {
   id: string;
   name: string;
   modules: ModuleProgressResponse[];
-};
-type ModuleProgressResponse = {
+}
+interface ModuleProgressResponse {
   id: string;
   courseId: string;
   lessons: [
@@ -89,10 +90,15 @@ type ModuleProgressResponse = {
       moduleId: string;
     }
   ];
-};
+}
+
+type Modal = "ADD" | "EDIT" | "DELETE";
+type Validation = "SAVE" | "DELETE";
 
 export type {
   UserLessons,
+  Modal,
+  Validation,
   Profile,
   UserResponse,
   Trail,

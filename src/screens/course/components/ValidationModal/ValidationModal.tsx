@@ -1,11 +1,7 @@
 import TrailModal from "../../../../components/TrailModal/TrailModal";
+import { ValidationModalProps } from "../../../types/PropTypes";
 
-type ValidationModalProps = {
-  type: "save" | "delete";
-  onClose: (value: boolean) => void;
-  onClickConfirm: VoidFunction;
-  setParentIsOpen?: (value: boolean) => void;
-};
+
 const ValidationModal = ({
   type,
   onClose,
@@ -25,14 +21,14 @@ const ValidationModal = ({
   };
 
   switch (type) {
-    case "save":
+    case "SAVE":
       title = "Deseja salvar as alterações?";
       text =
         "Ao confirmar essa ação, você não poderá recuperar dados anteriores.";
       rightButtonText = "Salvar";
       leftButtonText = "Não salvar";
       break;
-    case "delete":
+    case "DELETE":
       title = "Tem certeza que deseja excluir?";
       text = "Ao confirmar essa ação, você não poderá recuperar esses dados.";
       break;

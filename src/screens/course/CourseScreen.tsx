@@ -5,11 +5,13 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // COMPONENTS
-import Acordeon from "./components/Accordion/Accordion";
+import Accordion from "./components/Accordion/Accordion";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import CardInfoCurso from "./components/card/CardInfoCurso";
 import ModuleModal from "./components/ModuleModal/ModuleModal";
+import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 // ICONS
 import IconEdit from "@mui/icons-material/EditOutlined";
@@ -18,127 +20,48 @@ import IconPlus from "@mui/icons-material/AddCircleOutline";
 
 // STYLES
 import styles from "./CourseScreen.module.css";
-import CardAddCourse from "../CoursesScreen/Components/CardAddCourse/CardAddCourse";
-import { CourseResponse } from "../types/CourseTypes";
-import Tooltip from "../../components/Tooltip/Tooltip";
 
-type TypeModule = {
-  id: string;
-  name: string;
-  courseId: string;
-  lessons: TypeLesson[];
-  blocked: boolean;
-  completed: boolean;
-};
-type TypeLesson = {
-  id: string;
-  name: string;
-  embedUrl: string;
-  order: number;
-  description: string;
-  moduleId: string;
-};
-
-type TypeModal = "add" | "edit" | "delete";
+// TYPES
+import { CourseResponse, Module, Modal } from "../types/CourseTypes";
 
 const CourseScreen = () => {
+  let userEmail = "";
+  const { user } = useAuth();
+  if (user) userEmail = user.email;
   const location = useLocation();
   const [watched, setWatched] = useState<string[]>([]);
-  const [modules, setModules] = useState<TypeModule[]>([]);
-  const [modalModule, setModule] = useState<TypeModule>();
+  const [modules, setModules] = useState<Module[]>([]);
+  const [modalModule, setModule] = useState<Module>();
   const [course, setCourse] = useState<CourseResponse>();
 
   const [trailName, setTrailName] = useState("");
-  const [embassador, setEmbassador] = useState<boolean>();
+  const [ambassador, setambassador] = useState<boolean>();
 
   const [classModalIsOpen, setClassModalIsOpen] = useState(false);
   const [moduleModalIsOpen, setModuleModalIsOpen] = useState(false);
   const [moduleName, setModuleName] = useState("");
-  const [moduleModalType, setModuleModalType] = useState<TypeModal>("add");
+  const [moduleModalType, setModuleModalType] = useState<Modal>("ADD");
   const trailId = location.pathname.split("/")[3];
   const courseId = location.pathname.split("/")[5];
-
-  let userEmail = "";
-  const { user } = useAuth();
-  if (user) userEmail = user.email;
 
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
 
-  useEffect(() => {
-    course && setTotalModules(modules.length);
-    let lessons = 0;
-    course &&
-      modules.map((module: TypeModule) => {
-        lessons += module.lessons.length;
-      });
-    setTotalLessons(lessons);
-  }, [course]);
+  const getCourse = async () => {
+    const response = await api.get(`/course/${courseId}/${userEmail}`);
+    setCourse(response.data.course);
+    setTrailName(response.data.course.trail.name);
+    setambassador(response.data.role === "AMBASSADOR");
+    setModules(response.data.modules);
+    setWatched(response.data.watched);
+    console.log("sei");
+  };
 
   useEffect(() => {
     if (courseId !== "" && userEmail !== "") {
-      const getCourse = async () => {
-        const response = await api.get(`/course/${courseId}/${userEmail}`);
-        setCourse(response.data.course);
-        setTrailName(response.data.course.trail.name);
-        setEmbassador(response.data.role === "AMBASSADOR");
-        setModules(response.data.modules);
-        setWatched(response.data.watched);
-      };
       getCourse();
     }
   }, [userEmail]);
-
-  if (
-    !user ||
-    course === undefined ||
-    userEmail === "" ||
-    embassador === undefined
-  ) {
-    return <div>Loading...</div>;
-  }
-
-  // const isBlocked = (moduleId: string) => {
-  //   if (embassador) return false;
-
-  //   let i = 1;
-  //   //se o módulo for o primeiro
-  //   if (moduleId === modules[0].id) return false;
-
-  //   //se o módulo anterior tiver sido concluído
-  //   let anteriorModule: TypeModule = modules[0];
-
-  //   while (modules[i].id !== moduleId) {
-  //     anteriorModule = modules[i];
-  //     i++;
-  //   }
-  //   return !isCompleted(anteriorModule.id);
-  // };
-
-  const isCompleted = (moduleId: string) => {
-    if (embassador) return true;
-    let completedStatus = true;
-    let module: TypeModule;
-    let i = 0;
-    if (modules.length === 1) {
-      return false;
-    }
-    if (modules.length === 1) {
-      module = modules[0];
-    } else {
-      while (modules[i].id !== moduleId) {
-        module = modules[i];
-        i++;
-      }
-      module = modules[i];
-    }
-    module.lessons.forEach((lesson) => {
-      if (!watched.includes(lesson.id)) {
-        completedStatus = false;
-      }
-    });
-    return completedStatus;
-  };
 
   const getLevel = (level: string) => {
     if (level === "HIGH") return "Avançado";
@@ -148,11 +71,19 @@ const CourseScreen = () => {
 
   const setAddModuleModal = () => {
     setModule(undefined);
-    setModuleModalType("add");
+    setModuleModalType("ADD");
     setModuleModalIsOpen(true);
     setModuleName("");
   };
 
+  if (
+    !user ||
+    course === undefined ||
+    userEmail === "" ||
+    ambassador === undefined
+  ) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.box}>
       <div className={styles.container}>
@@ -178,7 +109,7 @@ const CourseScreen = () => {
               <h1 className={styles.title}>{course.name}</h1>
               <h2 className={styles.about}>Sobre o Curso:</h2>
             </div>
-            {embassador && (
+            {ambassador && (
               <div className={styles.header_right}>
                 <ButtonWithIcon
                   icon={<IconEdit />}
@@ -222,6 +153,7 @@ const CourseScreen = () => {
               modules={modules}
               module={modalModule}
               courseId={courseId}
+              reRender={() => getCourse()}
             />
           )}
           {modules.length > 0 ? (
@@ -231,39 +163,37 @@ const CourseScreen = () => {
                   module.blocked ? (
                     <Tooltip
                       content={
-                        embassador
-                          ? "Atualize a página para editar"
+                        ambassador
+                          ? "Atualize a página para editar este módulo"
                           : "Módulo bloqueado! Para destravá-lo e ter acesso a este conteúdo, conclua o módulo anterior."
                       }
-                      direction={embassador ? "top" : "bottom-right"}
+                      direction={ambassador ? "top" : "bottom-right"}
                       key={"tooltip" + index}
-                      // style={{ zIndex: 1 }}
                     >
-                      <Acordeon
+                      <Accordion
                         key={module.id}
-                        embassador={embassador}
+                        ambassador={ambassador}
                         width={848}
                         position={index + 1}
-                        // blocked={isBlocked(module.id)}
                         blocked={module.blocked}
-                        completed={isCompleted(module.id)}
+                        completed={module.completed}
+                        // completed={isCompleted(module.id)}
                         watched={watched}
                         module={module}
                         setModule={setModule}
                         openModuleModal={setModuleModalIsOpen}
                         setModuleModalType={setModuleModalType}
                         setModuleName={setModuleName}
+                        reRender={() => getCourse()}
                       />
                     </Tooltip>
                   ) : (
-                    <Acordeon
+                    <Accordion
                       key={module.id}
-                      embassador={embassador}
+                      ambassador={ambassador}
                       width={848}
                       position={index + 1}
-                      // blocked={isBlocked(module.id)}
                       blocked={module.blocked}
-                      // completed={isCompleted(module.id)}
                       completed={module.completed}
                       watched={watched}
                       module={module}
@@ -271,6 +201,7 @@ const CourseScreen = () => {
                       openModuleModal={setModuleModalIsOpen}
                       setModuleModalType={setModuleModalType}
                       setModuleName={setModuleName}
+                      reRender={() => getCourse()}
                     />
                   )
                 )}
@@ -278,12 +209,9 @@ const CourseScreen = () => {
             </div>
           ) : (
             <div className={styles.no_modules}>
-              <IconInfo
-                // sx={{ fontSize: 65, color: "var(--color-tertiary-hover)" }}
-                sx={{ fontSize: 60, color: "#EAB308" }}
-              />
+              <IconInfo sx={{ fontSize: 60, color: "#EAB308" }} />
               <span>Este curso ainda não possui nenhum módulo.</span>
-              {embassador && (
+              {ambassador && (
                 <ButtonWithIcon
                   icon={<IconPlus />}
                   text={"Adicionar módulo"}

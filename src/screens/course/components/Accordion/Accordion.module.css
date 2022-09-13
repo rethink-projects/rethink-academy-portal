@@ -22,7 +22,7 @@
 .module_container .right_side svg {
   transform: rotate(90deg);
 }
-.module_container .left_side_embassador svg {
+.module_container .left_side_ambassador svg {
   transform: rotate(90deg);
 }
 
@@ -49,17 +49,17 @@
   height: 21px;
 }
 
-.right_side_embassador {
+.right_side_ambassador {
   display: flex;
   align-items: center;
   margin-right: 13.25px;
   gap: 9.25px;
 }
 
-.right_side_embassador svg path {
+.right_side_ambassador svg path {
   width: 20px;
 }
-.left_side_embassador {
+.left_side_ambassador {
   gap: 9.25px;
   display: flex;
   margin-left: 13.25px;
@@ -68,7 +68,7 @@
   height: 100%;
 }
 
-.left_side_embassador svg {
+.left_side_ambassador svg {
   width: 16px;
   height: 21px;
 }

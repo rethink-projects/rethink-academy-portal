@@ -29,7 +29,6 @@ const CardInfoCurso = ({
 }: CardInfoProps) => {
   const makeImg = () => {
     const formatedAuthor = author.split(" ");
-    console.log(formatedAuthor);
     if (formatedAuthor.length >= 2) {
       return `${formatedAuthor[0]}+${formatedAuthor[1]}`;
     }
