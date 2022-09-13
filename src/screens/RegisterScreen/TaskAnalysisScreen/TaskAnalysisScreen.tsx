@@ -23,7 +23,10 @@ const TaskAnalysisScreen = () => {
         <div className={styles.graphic}></div>
         <div className={styles.bottom_container}>
           <div className={styles.task_history}>
-            <AmbassadorViewTasksMM />
+            <AmbassadorViewTasksMM
+              view="intern"
+              email={"sthephany.tezza@rethink.dev"}
+            />
           </div>
           <div className={styles.quick_view}>
             <Register />

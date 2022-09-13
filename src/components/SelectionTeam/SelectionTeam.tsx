@@ -9,19 +9,24 @@ import Dropdown from "../Dropdown/Dropdown";
 // Styles
 import styles from "./SelectionTeam.module.css";
 
-const SelectionTeam = () => {
+type TypeSelection = {
+  internSelected?: (value: string) => void;
+};
+
+const SelectionTeam = ({ internSelected }: TypeSelection) => {
   type Intern = {
     id: string;
     name: string;
     main: string;
     avatar: string;
+    email: string;
     postion?: number;
     left?: number;
   };
 
   let linearGradient =
     "linear-gradient(0deg, rgba(218, 218, 218, 0.65), rgba(218, 218, 218, 0.65))";
-  const [idSelected, setIdSelected] = useState("");
+  const [emailSelected, setEmailSelected] = useState("");
 
   const [usersData, setUserData] = useState<Intern[]>([]);
 
@@ -51,8 +56,9 @@ const SelectionTeam = () => {
     }
   };
 
-  const handleIdSelected = (id: string) => {
-    setIdSelected(id);
+  const handleEmailSelected = (email: string) => {
+    setEmailSelected(email);
+    if (internSelected) internSelected(email);
   };
 
   const [team, setTeam] = useState("");
@@ -65,7 +71,7 @@ const SelectionTeam = () => {
   }, []);
 
   useEffect(() => {
-    handleIdSelected("");
+    handleEmailSelected("");
     if (team !== "ALL") {
       setInterns(usersData.filter((Intern) => Intern.main === team));
       setInterns((prevState) => internsDataForMap(prevState));
@@ -92,12 +98,12 @@ const SelectionTeam = () => {
             interns.map((intern) => {
               return (
                 <div
-                  onClick={() => handleIdSelected(intern.id)}
+                  onClick={() => handleEmailSelected(intern.email)}
                   key={intern.id}
                   className={`${styles.containerSelectionTeam_contentIcons_image} ${styles.contentIcons_absolute}`}
                   style={{
                     backgroundImage:
-                      idSelected === intern.id
+                      emailSelected === intern.email
                         ? `url(${intern.avatar})`
                         : `${linearGradient}, url(${intern.avatar}) `,
                     backgroundSize: "cover",

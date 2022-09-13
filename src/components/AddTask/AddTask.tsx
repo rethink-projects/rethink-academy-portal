@@ -14,7 +14,7 @@ import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import SimpleButton from "../SimpleButton/SimpleButton";
 import Tag from "../Tag/Tag";
-import { DatePicker } from "../DatePicker/DatePicker";
+import DatePicker from "../DatePicker/DatePicker";
 import { Times } from "./Times";
 import Textarea from "../Textarea/Textarea";
 

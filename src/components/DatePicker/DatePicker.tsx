@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import pt from "date-fns/locale/pt";
 
@@ -36,15 +36,17 @@ type DatePickerProps = {
   placeholder: string;
   setTasks?: (value: task[]) => void;
   update?: boolean;
+  email?: string;
 };
 
-export const DatePicker = ({
+const DatePicker = ({
   hasIcon = false,
   size = "default",
   calendarPosition: position = "left",
   placeholder = "Placeholder",
   setTasks,
   update,
+  email,
 }: DatePickerProps) => {
   const { user } = useAuth();
 
@@ -97,12 +99,18 @@ export const DatePicker = ({
 
   useEffect(() => {
     if (update) changeTasks();
-  }, [update]);
+  }, [update, email]);
 
   const changeTasks = async () => {
-    // if (user) {
+    let emailSearch = "";
+    if (email) {
+      emailSearch = email;
+    } else {
+      emailSearch = user.email;
+    }
+
     await getDateFilter(
-      "sthephany.tezza@rethink.dev",
+      emailSearch,
       getFullDate(state[0].startDate!),
       getFullDate(state[0].endDate!)
     )
@@ -170,3 +178,5 @@ export const DatePicker = ({
     </div>
   );
 };
+
+export default React.memo(DatePicker);

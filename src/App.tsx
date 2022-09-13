@@ -9,6 +9,7 @@ import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import RequireAuth from "./services/auth";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import TaskAnalysisScreen from "./screens/RegisterScreen/TaskAnalysisScreen/TaskAnalysisScreen";
+import AmbassadorAnalisysScreen from "./screens/AmbassadorAnalisysScreen/AmbassadorAnalisysScreen";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
               <Route
                 path="/dashboard/register/analysis"
                 element={<TaskAnalysisScreen />}
+              />
+              <Route
+                path="/dashboard/register/analysis/ambassador"
+                element={<AmbassadorAnalisysScreen />}
               />
             </Route>
             <Route
