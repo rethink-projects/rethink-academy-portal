@@ -1,0 +1,69 @@
+.avatarContainer {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  width: 132px;
+  height: 132px;
+
+  box-sizing: border-box;
+
+  background-color: #9dba2b;
+}
+
+.avatar {
+  border-radius: 50%;
+
+  width: 126px;
+  height: 126px;
+
+  box-sizing: border-box;
+
+  border: 9px solid var(--color-base);
+
+  background-color: var(--color-base);
+}
+
+.levelBadge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 6px;
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 65px;
+  height: 28px;
+  bottom: -8px;
+
+  background-color: var(--color-base);
+  border: 1px solid #d4d4d4;
+  border-radius: 50px;
+}
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.level img {
+  width: 11px;
+  height: 14px;
+}
+
+.level span {
+  margin-top: 2px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+}
