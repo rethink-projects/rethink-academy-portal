@@ -47,6 +47,7 @@ const Dropdown = ({
   return (
     <div className={styles.dropdown_container} style={{ width: width }}>
       <div
+        style={{ width: width }}
         id={`dropdown${id}`}
         onClick={() => setIsActive(!isActive)}
         className={[
@@ -78,6 +79,7 @@ const Dropdown = ({
                 setValue(option),
                 setIsFilled(true)
               )}
+              style={{ width: width }}
             >
               {option}
             </div>

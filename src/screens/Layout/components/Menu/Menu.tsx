@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import { useAuth } from "../../../../context/AuthContext";
@@ -58,13 +58,24 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
+          <Link to={"/dashboard"}>
+            <MenuItem
+              isOpen={isOpen}
+              text="Home"
+              icon={Images.icons.IconHome}
+            />
+          </Link>
           <MenuItem
             isOpen={isOpen}
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem isOpen={isOpen} text="Cursos" icon={Images.icons.ratIcon} />
+          <MenuItem
+            isOpen={isOpen}
+            text="Cursos"
+            onClick={() => navigate("trilhas")}
+            icon={Images.icons.ratIcon}
+          />
           <MenuItem
             isOpen={isOpen}
             text="Registro de Horas"

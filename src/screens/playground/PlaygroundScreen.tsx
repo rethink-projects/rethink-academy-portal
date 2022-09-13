@@ -10,7 +10,6 @@ import { useStorage } from "../../services/supabase/storage";
 import styles from "./Playground.module.css";
 
 function PlaygroundScreen() {
-  const [emblemCardOpen, setEmblemCardOpen] = useState(false);
   const { user } = useAuth();
   const { initStorage, uploadFile, generateUrlToDownload, url } = useStorage();
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
