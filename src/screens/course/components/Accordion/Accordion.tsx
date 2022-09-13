@@ -15,7 +15,6 @@ import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon
 import ValidationModal from "../ValidationModal/ValidationModal";
 import { api } from "../../../../services/api";
 import { useNavigate } from "react-router-dom";
-import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 type AccordionProps = {
   width?: number;
@@ -29,6 +28,7 @@ type AccordionProps = {
   setModuleModalType: (value: "add" | "edit" | "delete") => void;
   setModuleName: (moduleName: string) => void;
   setModule: (module: TypeModule) => void;
+  reRender: VoidFunction;
 };
 type TypeModule = {
   id: string;
@@ -45,7 +45,6 @@ type TypeLesson = {
   order: number;
   description: string;
   moduleId: string;
-  blocked?: boolean;
 };
 
 const Accordion = ({
@@ -60,6 +59,7 @@ const Accordion = ({
   module,
   watched,
   position,
+  reRender,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
   const [lessons, setLessons] = useState<Array<TypeLesson>>(module.lessons!);
@@ -74,7 +74,6 @@ const Accordion = ({
     "delete"
   );
   const navigate = useNavigate();
-
   const setAddLessonModal = () => {
     setLesson(undefined);
     setLessonName("");
@@ -87,16 +86,10 @@ const Accordion = ({
   const confirmLessonChanges = () => {
     if (lessonModalType === "add") {
       addLessonReq();
-      const lesson: TypeLesson = {
-        name: lessonName,
-        description: lessonDescription,
-        embedUrl: lessonEmbed,
-        order: module.lessons.length,
-        moduleId: module.id,
-        id: module.lessons.length + "id",
-        blocked: true,
-      };
-      lessons.push(lesson);
+
+      reRender();
+      // window.location.reload();
+      console.log("pass");
     } else {
       editLessonReq();
       lesson!.name = lessonName;
@@ -121,13 +114,24 @@ const Accordion = ({
   };
 
   const addLessonReq = async () => {
-    api.post("/lesson", {
-      name: lessonName,
-      description: lessonDescription,
-      embedUrl: lessonEmbed,
-      order: module.lessons.length,
-      moduleId: module.id,
-    });
+    api
+      .post("/lesson", {
+        name: lessonName,
+        description: lessonDescription,
+        embedUrl: lessonEmbed,
+        moduleId: module.id,
+      })
+      .then((response) =>
+        // lessons.push({
+        //   name: lessonName,
+        //   description: lessonDescription,
+        //   embedUrl: lessonEmbed,
+        //   order: module.lessons.length,
+        //   moduleId: module.id,
+        //   id: response.data.lesson.id,
+        // })
+        console.log(response)
+      );
   };
 
   const editLessonReq = async () => {
@@ -136,7 +140,6 @@ const Accordion = ({
       name: lessonName,
       description: lessonDescription,
       embedUrl: lessonEmbed,
-      order: module.lessons.length,
       moduleId: module.id,
     });
   };
@@ -221,63 +224,39 @@ const Accordion = ({
       </div>
       {accordionIsOpen && lessons != null && lessons.length > 0 ? (
         <div className={styles.accordion_container}>
-          {lessons.map((lesson) =>
-            ambassador && lesson.blocked ? (
-              <Tooltip
-                content="Atualize a página para interagir com essa aula"
-                direction="top"
-                key={lesson.id}
-              >
-                <div
-                  className={styles.accordion_item}
-                  key={lesson.id}
-                  style={{ width: width + 2 }}
-                >
-                  <div className={styles.accordion_left_side}>
-                    <IconVideoCam />
-
-                    {lesson.name}
-                  </div>
-                  <div className={styles.accordion_right_side}>
-                    <IconEdit />
-                  </div>
-                </div>
-              </Tooltip>
-            ) : (
+          {lessons.map((lesson) => (
+            // </Tooltip>
+            <div
+              className={styles.accordion_item}
+              key={lesson.id}
+              style={{ width: width + 2 }}
+            >
               <div
-                className={styles.accordion_item}
-                key={lesson.id}
-                style={{ width: width + 2 }}
+                className={styles.accordion_left_side}
+                onClick={() => navigate("aulas/" + lesson.id)}
               >
-                <div
-                  className={styles.accordion_left_side}
-                  onClick={() =>
-                    lesson.blocked ?? navigate("aulas/" + lesson.id)
-                  }
-                >
-                  <IconVideoCam />
+                <IconVideoCam />
 
-                  {lesson.name}
-                </div>
-                <div className={styles.accordion_right_side}>
-                  {ambassador ? (
-                    <IconEdit
-                      onClick={() => (
-                        setLessonName(lesson.name),
-                        setLesson(lesson),
-                        setLessonDescription(lesson.description),
-                        setLessonEmbed(lesson.embedUrl),
-                        setLessonModalIsOpen(true),
-                        setLessonModalType("edit")
-                      )}
-                    />
-                  ) : (
-                    lessonComplete(lesson.id) && <IconCheckedCircle />
-                  )}
-                </div>
+                {lesson.name}
               </div>
-            )
-          )}
+              <div className={styles.accordion_right_side}>
+                {ambassador ? (
+                  <IconEdit
+                    onClick={() => (
+                      setLessonName(lesson.name),
+                      setLesson(lesson),
+                      setLessonDescription(lesson.description),
+                      setLessonEmbed(lesson.embedUrl),
+                      setLessonModalIsOpen(true),
+                      setLessonModalType("edit")
+                    )}
+                  />
+                ) : (
+                  lessonComplete(lesson.id) && <IconCheckedCircle />
+                )}
+              </div>
+            </div>
+          ))}
           {ambassador && (
             <div className={styles.no_lessons}>
               <ButtonWithIcon

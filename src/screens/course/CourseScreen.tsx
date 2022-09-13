@@ -65,26 +65,28 @@ const CourseScreen = () => {
   const [totalModules, setTotalModules] = useState(0);
   const [totalLessons, setTotalLessons] = useState(0);
 
-  useEffect(() => {
-    course && setTotalModules(modules.length);
-    let lessons = 0;
-    course &&
-      modules.map((module: TypeModule) => {
-        lessons += module.lessons.length;
-      });
-    setTotalLessons(lessons);
-  }, [course]);
+  // useEffect(() => {
+  //   course && setTotalModules(modules.length);
+  //   let lessons = 0;
+  //   course &&
+  //     modules.map((module: TypeModule) => {
+  //       lessons += module.lessons.length;
+  //     });
+  //   setTotalLessons(lessons);
+  // }, [course]);
+
+  const getCourse = async () => {
+    const response = await api.get(`/course/${courseId}/${userEmail}`);
+    setCourse(response.data.course);
+    setTrailName(response.data.course.trail.name);
+    setambassador(response.data.role === "AMBASSADOR");
+    setModules(response.data.modules);
+    setWatched(response.data.watched);
+    console.log("sei");
+  };
 
   useEffect(() => {
     if (courseId !== "" && userEmail !== "") {
-      const getCourse = async () => {
-        const response = await api.get(`/course/${courseId}/${userEmail}`);
-        setCourse(response.data.course);
-        setTrailName(response.data.course.trail.name);
-        setambassador(response.data.role === "AMBASSADOR");
-        setModules(response.data.modules);
-        setWatched(response.data.watched);
-      };
       getCourse();
     }
   }, [userEmail]);
@@ -97,31 +99,6 @@ const CourseScreen = () => {
   ) {
     return <div>Loading...</div>;
   }
-
-  const isCompleted = (moduleId: string) => {
-    if (ambassador) return true;
-    let completedStatus = true;
-    let module: TypeModule;
-    let i = 0;
-    if (modules.length === 1) {
-      return false;
-    }
-    if (modules.length === 1) {
-      module = modules[0];
-    } else {
-      while (modules[i].id !== moduleId) {
-        module = modules[i];
-        i++;
-      }
-      module = modules[i];
-    }
-    module.lessons.forEach((lesson) => {
-      if (!watched.includes(lesson.id)) {
-        completedStatus = false;
-      }
-    });
-    return completedStatus;
-  };
 
   const getLevel = (level: string) => {
     if (level === "HIGH") return "Avançado";
@@ -205,6 +182,7 @@ const CourseScreen = () => {
               modules={modules}
               module={modalModule}
               courseId={courseId}
+              reRender={() => getCourse()}
             />
           )}
           {modules.length > 0 ? (
@@ -227,13 +205,15 @@ const CourseScreen = () => {
                         width={848}
                         position={index + 1}
                         blocked={module.blocked}
-                        completed={isCompleted(module.id)}
+                        completed={module.completed}
+                        // completed={isCompleted(module.id)}
                         watched={watched}
                         module={module}
                         setModule={setModule}
                         openModuleModal={setModuleModalIsOpen}
                         setModuleModalType={setModuleModalType}
                         setModuleName={setModuleName}
+                        reRender={() => getCourse()}
                       />
                     </Tooltip>
                   ) : (
@@ -250,6 +230,7 @@ const CourseScreen = () => {
                       openModuleModal={setModuleModalIsOpen}
                       setModuleModalType={setModuleModalType}
                       setModuleName={setModuleName}
+                      reRender={() => getCourse()}
                     />
                   )
                 )}

@@ -28,7 +28,6 @@ import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
-import { type } from "@testing-library/user-event/dist/type";
 
 interface CoursesWatched {
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";

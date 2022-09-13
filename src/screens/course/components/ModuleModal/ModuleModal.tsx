@@ -31,6 +31,7 @@ type ModuleModalProps = {
   nameButtonLeft?: string;
   modules: TypeModule[];
   courseId?: string;
+  reRender: VoidFunction;
 };
 const ModuleModal = ({
   type,
@@ -40,6 +41,7 @@ const ModuleModal = ({
   setModuleName,
   courseId,
   modules,
+  reRender,
 }: ModuleModalProps) => {
   const handleSubmit = () => {};
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
@@ -74,12 +76,7 @@ const ModuleModal = ({
   const onConfirm = () => {
     if (type === "add") {
       addModuleReq();
-      const moduleTemp: TypeModule = {
-        id: "aleatório" + Math.random(),
-        name: moduleName!,
-        blocked: true,
-      };
-      modules.push(moduleTemp!);
+      reRender();
     } else if (type === "edit") {
       editModuleReq();
       module!.name = moduleName!;
@@ -90,10 +87,18 @@ const ModuleModal = ({
   };
 
   const addModuleReq = async () => {
-    await axios.post("http://localhost:4000/api/module", {
-      name: moduleName,
-      courseId,
-    });
+    await axios
+      .post("http://localhost:4000/api/module", {
+        name: moduleName,
+        courseId,
+      })
+      .then((response) => {
+        console.log(response.data.module.id);
+        modules.push({
+          id: response.data.module.id,
+          name: moduleName!,
+        });
+      });
   };
 
   const editModuleReq = async () => {
