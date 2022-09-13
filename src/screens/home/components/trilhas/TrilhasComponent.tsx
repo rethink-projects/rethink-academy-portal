@@ -2,7 +2,7 @@ import styles from "./TrilhasComponent.module.css";
 import IconMap from "@mui/icons-material/MapOutlined";
 import CardTrilhasHome from "./trilhasSubComponents/CardTrilhasHome";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../../../../services/api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
@@ -13,7 +13,7 @@ const TrilhasComponent = () => {
   const [trails, setTrails] = useState<TrailType[]>();
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/trail").then((response) => {
+    api.get("/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);
       }

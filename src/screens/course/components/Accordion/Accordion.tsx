@@ -64,7 +64,7 @@ const Accordion = ({
       addLessonReq();
       setTimeout(function () {
         reRender();
-      }, 200);
+      }, 100);
       console.log("pass");
     } else {
       editLessonReq();

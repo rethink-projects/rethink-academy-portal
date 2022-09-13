@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 import { useAuth } from "../../context/AuthContext";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { api } from "../../services/api";
 
 type TypeTrails = {
   name: string;
@@ -31,14 +32,12 @@ const TrilhasScreen = () => {
   const [trailUpdated, setTrailUpdated] = useState<TypeTrails>();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/user/" + userAuth?.email)
-      .then((response) => {
-        if (response.data.user) {
-          setUser(response.data.user);
-        }
-      });
-    axios.get("http://localhost:4000/api/trail").then((response) => {
+    api.get("/user/" + userAuth?.email).then((response) => {
+      if (response.data.user) {
+        setUser(response.data.user);
+      }
+    });
+    api.get("/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);
       }

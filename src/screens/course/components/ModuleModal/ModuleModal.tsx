@@ -57,7 +57,7 @@ const ModuleModal = ({
       addModuleReq();
       setTimeout(function () {
         reRender();
-      }, 200);
+      }, 100);
     } else if (type === "EDIT") {
       editModuleReq();
       module!.name = moduleName!;

@@ -88,7 +88,7 @@ const CursosScreen = () => {
     const responseCourse = await api.get(
       `/trail/course/${trailId}?email=${user.email}`
     );
-    console.log(responseCourse);
+    // console.log(responseCourse);
 
     setUserByEMail(responseCourse.data.user);
     setCoursesUser(responseCourse.data.data);
@@ -126,7 +126,7 @@ const CursosScreen = () => {
   );
 
   const handleClickColect = () => {
-    console.log(trailMain);
+    // console.log(trailMain);
 
     api.post(`/badge`, {
       badge: trailMain,
