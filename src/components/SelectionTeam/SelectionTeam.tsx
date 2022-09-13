@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { isArray } from "util";
 import { getAllStudents } from "../../services/backend/UserService";
-// import { getAllStudents } from "../../services/backend/UserService";
 
 // Components
 import Dropdown from "../Dropdown/Dropdown";

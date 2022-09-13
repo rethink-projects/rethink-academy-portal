@@ -1,8 +1,7 @@
 import { ICurrentUser } from "../context/AuthContext";
 
 export const titleMaker = (user: ICurrentUser) => {
-  // if (!user.main || !user.role) throw new Error("teste");
-  console.log(user);
+  if (!user.main || !user.role) throw new Error("User data is unavailable");
   if (!user) return "";
   else {
     let role = user.role.toLowerCase();

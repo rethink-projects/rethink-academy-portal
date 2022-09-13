@@ -48,7 +48,6 @@ const Register = ({ type = "home" }: RegisterProps) => {
     if (type === "home") {
       await getRecordOfDay(user.email)
         .then((response) => {
-          console.log(response);
           setRecords(response);
           let helper = 0;
           if (response) {

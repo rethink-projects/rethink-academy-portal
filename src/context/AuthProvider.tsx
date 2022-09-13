@@ -16,7 +16,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   ) => {
     const userFromFirebase = await firebaseInstance.loginWithFirebase(type);
     const backendUser = await getUserFromBackend(userFromFirebase.email);
-    console.log({ backendUser });
 
     const newUser: ICurrentUser = {
       avatarUrl: userFromFirebase.avatarUrl,

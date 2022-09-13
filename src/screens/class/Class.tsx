@@ -148,13 +148,16 @@ const Class = () => {
     if (user?.email) {
       const func = async () => {
         const responseUser = await api.get(`/user/${user.email}`);
-        setLessonsWatched(responseUser.data.userWithLevel.watched);
+        setLessonsWatched(responseUser.data.watched);
         getInfoLesson();
       };
       func();
     }
   }, [user, location.pathname]);
 
+  if (!urlLesson) {
+    return <>Carregando</>;
+  }
   return (
     <div className={styles.class_container}>
       <div className={styles.left_container}>

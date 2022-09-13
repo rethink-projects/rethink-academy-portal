@@ -16,9 +16,7 @@ import {
   GridEventListener,
   GridRowId,
 } from "@mui/x-data-grid";
-import {
-  randomId,
-} from "@mui/x-data-grid-generator";
+import { randomId } from "@mui/x-data-grid-generator";
 // npm i @mui/x-data-grid-generator
 import styles from "./TableActivityPlan.module.css";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
@@ -205,7 +203,14 @@ export default function TableActivityPlan({
       content: updatedRow.content,
       trailId: trailId,
     });
-
+    console.log({
+      url: "http://localhost:4000/api/stage/" + updatedRow.id,
+      stage: updatedRow.stage,
+      start: updatedRow.start,
+      finish: updatedRow.finish,
+      content: updatedRow.content,
+      trailId: trailId,
+    });
     return updatedRow;
   };
 
