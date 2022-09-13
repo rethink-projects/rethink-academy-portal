@@ -52,12 +52,30 @@ const DatePicker = ({
 
   const [active, setActive] = useState(false);
 
+  const date = new Date();
+  const modifiedDate = new Date(
+    date.valueOf() - date.getTimezoneOffset() * 60000
+  );
+
+  let month = modifiedDate.getMonth().toString();
+  let day = modifiedDate.getDate().toString();
+  let year = modifiedDate.getFullYear().toString();
+
+  if (parseInt(month, 10) < 10) {
+    month = "0" + month;
+  }
+  if (parseInt(day, 10) < 10) {
+    day = "0" + day;
+  }
+
+  const dateBase = new Date(parseInt(year), parseInt(month), parseInt(day));
+
   const [state, setState] = useState<
     { startDate?: Date; endDate?: Date; key?: string }[]
   >([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: dateBase,
+      endDate: dateBase,
       key: "selection",
     },
   ]);
@@ -152,7 +170,11 @@ const DatePicker = ({
                 <img src={Images.icons.eyeIcon} alt="An eye icon" />
               </>
             )}
-            <p>{`${dateInitial} à ${dateFinal}`}</p>
+            <p>
+              {dateInitial !== dateFinal
+                ? `${dateInitial} à ${dateFinal}`
+                : `${dateInitial}/${year}`}
+            </p>
           </div>
           <div className={styles.datePicker_calendarIcon}>
             <img src={Images.icons.calendarIcon} alt="A calendar icon" />
