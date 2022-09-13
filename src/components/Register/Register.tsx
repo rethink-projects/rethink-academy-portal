@@ -18,9 +18,10 @@ import {
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
+  email: string;
 };
 
-const Register = ({ type = "home" }: RegisterProps) => {
+const Register = ({ type = "home", email }: RegisterProps) => {
   type Tag = {
     title: string;
     realTime: number;
@@ -44,7 +45,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
   const changeData = async () => {
     if (type === "home") {
-      await getRecordOfDay("sthephany.tezza@rethink.dev")
+      await getRecordOfDay(email)
         .then((response) => {
           setRecords(response);
           let helper = 0;
@@ -58,7 +59,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag("sthephany.tezza@rethink.dev") // ALTERAR
+      await getGroupTaskByTag(email)
         .then((response) => {
           setTags(response);
           let helper = 0;
@@ -77,6 +78,10 @@ const Register = ({ type = "home" }: RegisterProps) => {
   useEffect(() => {
     changeData();
   }, []);
+
+  useEffect(() => {
+    changeData();
+  }, [email]);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");
@@ -195,4 +200,4 @@ const Register = ({ type = "home" }: RegisterProps) => {
   );
 };
 
-export default Register;
+export default React.memo(Register);

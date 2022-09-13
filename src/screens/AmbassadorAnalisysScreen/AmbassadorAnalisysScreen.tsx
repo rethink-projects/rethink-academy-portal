@@ -71,7 +71,7 @@ const InternAnalisysScreen = () => {
           <div className={styles.intern_data_historic}>
             <h1>Histórico de atividades</h1>
             {intern ? (
-              <AmbassadorViewTasksMM email={intern.email} view="ambassador" />
+              <AmbassadorViewTasksMM email={intern.email} />
             ) : (
               <div className={styles.error}>
                 <Toast
@@ -83,7 +83,16 @@ const InternAnalisysScreen = () => {
           </div>
           <div className={styles.intern_data_viewFast}>
             <h1>Visualização Rápida</h1>
-            <Register type="intern" />
+            {intern ? (
+              <Register type="intern" email={intern.email} />
+            ) : (
+              <div className={styles.fastView}>
+                <Toast
+                  title="Selecione um estagiário para visualizar suas atividades"
+                  type="info"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

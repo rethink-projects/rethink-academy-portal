@@ -12,12 +12,9 @@ import styles from "./AmbassadorViewTasksMM.module.css";
 
 type TypeAmbassadorViewTasksMM = {
   email: string;
-  view: "ambassador" | "intern";
 };
 
-const AmbassadorViewTasksMM = ({ email, view }: TypeAmbassadorViewTasksMM) => {
-  const { user } = useAuth();
-
+const AmbassadorViewTasksMM = ({ email }: TypeAmbassadorViewTasksMM) => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);

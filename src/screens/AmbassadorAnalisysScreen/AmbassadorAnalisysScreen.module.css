@@ -45,6 +45,10 @@
     width: 620px;
 }
 
+.fastView {
+    width: 357px;
+}
+
 .intern_data_viewFast {
     display: flex;
     flex-direction: column;
