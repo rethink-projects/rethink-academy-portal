@@ -19,11 +19,9 @@ function LoginScreen() {
       });
       navigate("/home");
     });
-    // Google login with supabase client
   }
 
   useEffect(() => {
-    console.log("bug aqui");
     const localStorageUser = JSON.parse(
       localStorage.getItem("@portarethinkacademy:user")!
     );
@@ -34,7 +32,6 @@ function LoginScreen() {
       navigate("/home", { replace: true });
     }
   }, [auth, navigate]);
-
   return (
     <div className={styles.login_container}>
       <div className={styles.login_inner}>

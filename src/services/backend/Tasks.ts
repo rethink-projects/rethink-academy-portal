@@ -1,10 +1,8 @@
-import axios from "axios";
+import { api } from "./Api";
 
 export const getTaskByUserEmail = async (email: string) => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/${email}`
-    );
+    const { data } = await api.get(`/tasks/${email}`);
     return data.studentTasks;
   } catch (error) {
     console.log(error);
@@ -13,10 +11,7 @@ export const getTaskByUserEmail = async (email: string) => {
 };
 
 export const createTask = async (taskData: any) => {
-  const { data } = await axios.post(
-    `http://localhost:4000/api/tasks`,
-    taskData
-  );
+  const { data } = await api.post(`/tasks`, taskData);
   return data;
 };
 
@@ -26,16 +21,7 @@ export const getDateFilter = async (
   endDate: string
 ) => {
   try {
-    const { data } = await axios.post(
-      `http://localhost:4000/api/tasks/${email}`,
-      { startDate, endDate },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const { data } = await api.post(`/tasks/${email}`, { startDate, endDate });
     return data;
   } catch (error) {
     console.log(error);
@@ -43,26 +29,22 @@ export const getDateFilter = async (
   }
 };
 
-export const getGroupTaskByTag = async(email: string) => {
-  try{
-    const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/tag/${email}`
-    );
+export const getGroupTaskByTag = async (email: string) => {
+  try {
+    const { data } = await api.get(`/tasks/tag/${email}`);
     return data;
   } catch (error) {
     console.log(error);
     return;
   }
-}
+};
 
 export const getRecordOfDay = async (email: string) => {
-  try{
-    const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/day/${email}`
-    );
+  try {
+    const { data } = await api.get(`/tasks/day/${email}`);
     return data;
   } catch (error) {
     console.log(error);
     return;
   }
-}
+};

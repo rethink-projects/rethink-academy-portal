@@ -1,0 +1,349 @@
+.max_container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.home_limited_container {
+  width: 85%;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+.home_hello {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+
+  color: #1b1b1b;
+}
+
+.home_header {
+  width: 1060px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  color: #1b1b1b;
+}
+
+.tip {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  color: #1b1b1b;
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+.home_content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  width: 1011px;
+  padding: 30px 24px 23px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+}
+.home_content > p {
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #3b3b3b;
+}
+
+.home_content_header {
+  display: flex;
+  justify-content: space-between;
+}
+.role_selector {
+  display: flex;
+  gap: 8px;
+}
+
+.role_selector_button:hover {
+  background: var(--color-primary-hover);
+}
+.role_selector_button {
+  transition: ease-in-out 0.2s;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 4px 12px;
+  background: #fff;
+
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  border-radius: 150px;
+  color: #3b3b3b;
+}
+
+.card_role {
+  transition: ease-out 0.2s;
+  position: absolute;
+  bottom: 24px;
+  z-index: 1;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 4px 12px;
+  background: #fff;
+
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  border-radius: 150px;
+  color: #706e64;
+}
+
+.student_card:hover > .student_card_text > .card_role {
+  background: #000000;
+  color: #fff;
+}
+
+.role_selector_button_active {
+  background: var(--color-primary-active);
+}
+
+.cards_container {
+  align-self: center;
+  padding-top: 6px;
+  display: flex;
+  margin-top: 33px;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.student_card {
+  width: 181px;
+  height: 265px;
+  background: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.student_card:hover {
+  transform: translateY(-6px);
+  transition: ease-out 0.2s;
+}
+.student_card:hover > .student_card_arrow {
+  filter: grayscale(0);
+  width: 83.13px;
+  height: 63px;
+  left: 4px;
+}
+
+.student_card_arrow {
+  /* background-color: red; */
+  z-index: 1;
+  width: 83.13px;
+  height: 59px;
+
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  background-image: url("../../assets/arrowCardGreen.png");
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  transition: ease-out 0.2s;
+}
+
+.student_card_text {
+  margin-top: 12px;
+  gap: 38px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  flex-basis: 100%;
+  color: #000000;
+}
+.student_card_avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.avatar_level {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  position: absolute;
+  bottom: -10px;
+  background-color: #f9f9f9;
+  width: 51px;
+  height: 22px;
+  border: 1px solid #d4d4d4;
+  border-radius: 50px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  align-items: center;
+}
+.avatar_img {
+  margin-top: 24px;
+  width: 110px;
+  height: 110px;
+  border-radius: 60px;
+}
+
+.avatar_icon {
+  width: 10.67px;
+  height: 14.22px;
+}
+
+.progress_container {
+  width: 1059px;
+  /* background-color: red; */
+  margin-top: 48px;
+}
+.progress_title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.progress_content {
+  height: 296px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  margin-top: 24px;
+  margin-bottom: 98px;
+  display: flex;
+  gap: 16px;
+  width: 1011px;
+  padding: 30px 24px 23px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.progress_item {
+  width: 326px;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress_description > div > h1 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.progress_description > div > p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  opacity: 0.7;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.progress_description {
+  display: flex;
+  margin-top: 16px;
+  gap: 12px;
+}
+
+.progress_status {
+  height: 110px;
+  width: 1011px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+}
+
+.ProgressIcon {
+  position: absolute;
+  left: 55.17px;
+  top: 19px;
+}
+.status_description {
+  margin-top: 27px;
+  margin-left: 27px;
+  width: 100%;
+}
+.status_description > .title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+}
+.status_description > .tip {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.progress_emoji {
+  width: 100%;
+  font-size: 33px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 24px;
+}
+
+@media (max-width: 1400px) {
+  .home_header {
+    width: 1028px;
+  }
+  .home_content {
+    width: 980px;
+  }
+  .cards_container {
+    gap: 13px;
+  }
+}
