@@ -17,7 +17,7 @@ function LoginScreen() {
         title: "Login Successful",
         type: "success",
       });
-      navigate("/home");
+      navigate("/dashboard");
     });
   }
 
@@ -29,7 +29,7 @@ function LoginScreen() {
       auth.setCurrentUser(localStorageUser);
     }
     if (auth.user) {
-      navigate("/home", { replace: true });
+      navigate("/dashboard", { replace: true });
     }
   }, [auth, navigate]);
   return (
