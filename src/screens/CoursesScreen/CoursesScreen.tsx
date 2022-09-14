@@ -59,7 +59,7 @@ type Main =
   | "troll";
 
 const CursosScreen = () => {
-  const [intern, setIntern] = useState<boolean>();
+  const [intern, setIntern] = useState<boolean>(true);
 
   const { user } = useAuth();
 
