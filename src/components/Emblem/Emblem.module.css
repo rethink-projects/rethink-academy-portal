@@ -26,7 +26,9 @@
 
 /* img */
 
-img {
+.big,
+.default,
+.small>img {
   width: inherit;
   height: inherit;
 }
