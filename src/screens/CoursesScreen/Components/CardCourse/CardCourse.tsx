@@ -106,6 +106,7 @@ const CardCurso = ({
           type={disabled ? "disabled" : "secondary"}
           text={textButton}
           size="medium"
+          typeEmblemCheck={emblem}
         />
       </div>
     </div>
