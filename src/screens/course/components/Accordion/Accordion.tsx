@@ -63,13 +63,18 @@ const Accordion = ({
   const confirmLessonChanges = () => {
     if (lessonModalType === "ADD") {
       addLessonReq();
-      setTimeout(function () {
-        reRender();
-      }, 100);
-    } else {
+      // setTimeout(function () {
+      reRender();
+      // }, 100);
+    } else if (validationType === "SAVE") {
       editLessonReq();
       lesson!.name = lessonName;
       lesson!.embedUrl = lessonEmbed;
+    } else {
+      deleteLessonReq();
+      lessons.splice(lessons.indexOf(lesson!), 1);
+
+      // lessons.remove(lesson!.indexOf, 1);
     }
   };
 
@@ -117,6 +122,9 @@ const Accordion = ({
       moduleId: module.id,
     });
   };
+  const deleteLessonReq = async () => {
+    api.delete("/lesson/" + lesson!.id);
+  };
 
   const lessonComplete = (id: string) => {
     if (watched.includes(id)) {
@@ -131,7 +139,7 @@ const Accordion = ({
       {lessonModalIsOpen && (
         <ClassModal
           onClose={() => setLessonModalIsOpen(false)}
-          type={lessonModalType}
+          modalType={lessonModalType}
           className={lessonName}
           description={lessonDescription}
           embedLink={lessonEmbed}
@@ -139,6 +147,8 @@ const Accordion = ({
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
           onClickConfirm={confirmLessonChanges}
+          setValidationType={setValidationType}
+          validationType={validationType}
         />
       )}
       {validationModalIsOpen && (
