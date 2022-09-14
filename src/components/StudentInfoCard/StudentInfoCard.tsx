@@ -56,7 +56,7 @@ const StudentInfoCard = ({ studentEmail }: StudentInfoCardProps) => {
           <div className={style.avatarAndLevel}>
             <AvatarWithLevel
               studentLevel={student.level}
-              avatarSource={`https://ui-avatars.com/api/?name=${student.name}+${student.surname}`}
+              avatarSource={student.avatar}
             />
           </div>
           <h1>{`${student.name} ${student.surname}`}</h1>
