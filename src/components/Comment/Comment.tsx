@@ -25,20 +25,11 @@ const Comment = () => {
 
   const { user } = useAuth();
 
-  const getComments = async () => {
-    const data = await getCommentsFromUser("gabriel.gomes@rethink.dev");
-    console.log({ data });
-    setComments(data);
-  };
-
-  useEffect(() => {
-    getComments();
-  }, []);
-
   const handleComment = async () => {
     const response = await createComment({
       text: description,
       userEmail: user.email,
+      commentAuthor: user.email,
     });
 
     setComments((prevState) => {
@@ -53,6 +44,18 @@ const Comment = () => {
 
     removeComment(id);
   };
+
+  const getComments = async () => {
+    if (user) {
+      const data = await getCommentsFromUser(user.email);
+      console.log({ getCommentsFromUser: data });
+      setComments(data);
+    }
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   if (!user) return <div> carregando...</div>;
 

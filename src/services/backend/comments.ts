@@ -10,6 +10,7 @@ export const getCommentsFromUser = async (email: string) => {
 export const createComment = async (commentData: {
   text: string;
   userEmail: string;
+  commentAuthor: string;
 }) => {
   const { data } = await axios.post(
     `http://localhost:4000/api/comments`,
