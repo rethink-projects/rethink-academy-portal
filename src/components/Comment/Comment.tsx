@@ -26,36 +26,38 @@ const Comment = () => {
   const { user } = useAuth();
 
   const handleComment = async () => {
-    const response = await createComment({
-      text: description,
-      userEmail: user.email,
-      commentAuthor: user.email,
-    });
+    if (user) {
+      const response = await createComment({
+        text: description,
+        userEmail: user.email,
+        commentAuthor: user.email,
+      });
 
-    setComments((prevState) => {
-      return [...prevState, response.comment];
-    });
+      setComments((prevState) => {
+        return [...prevState, response.comment];
+      });
 
-    setDescription("");
+      setDescription("");
+    }
   };
 
   const handleDelete = (id: string) => {
     setComments(comments.filter((comment) => comment.id !== id));
-
     removeComment(id);
   };
 
   const getComments = async () => {
     if (user) {
       const data = await getCommentsFromUser(user.email);
-      console.log({ getCommentsFromUser: data });
       setComments(data);
     }
   };
 
   useEffect(() => {
-    getComments();
-  }, []);
+    if (user) {
+      getComments();
+    }
+  }, [user]);
 
   if (!user) return <div> carregando...</div>;
 
@@ -74,6 +76,7 @@ const Comment = () => {
           {comments.length > 0 &&
             comments.map((comment) => (
               <CommentBox
+                key={comment.id}
                 id={comment.id}
                 text={comment.text}
                 onClickDelete={handleDelete}

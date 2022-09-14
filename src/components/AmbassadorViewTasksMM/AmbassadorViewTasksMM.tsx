@@ -54,7 +54,6 @@ const AmbassadorViewTasksMM = () => {
     setUpdate(true);
   };
 
-  console.log(tasks);
   return (
     <div className={styles.viewTasks_container}>
       <div className={styles.viewTasks_header}>
