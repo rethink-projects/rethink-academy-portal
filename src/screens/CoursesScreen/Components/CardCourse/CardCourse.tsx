@@ -6,6 +6,7 @@ import IconTask from "@mui/icons-material/TaskAltOutlined";
 import IconArrow from "@mui/icons-material/East";
 import IconAlert from "@mui/icons-material/ErrorOutlineOutlined";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import { color } from "@mui/system";
 
 type cardCourseProp = {
   title: string;
@@ -49,6 +50,7 @@ const CardCurso = ({
     else if (emblem) {
       textButton = "Emblema obtido";
       disabled = true;
+      icon = <IconVerified style={{ color: "#9DBA2B" }} />;
     }
   }
 
@@ -106,6 +108,7 @@ const CardCurso = ({
           type={disabled ? "disabled" : "secondary"}
           text={textButton}
           size="medium"
+          typeEmblemCheck={emblem}
         />
       </div>
     </div>

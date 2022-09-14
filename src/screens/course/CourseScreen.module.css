@@ -2,7 +2,7 @@
   width: 100%;
   height: calc(100vh - 68px);
   overflow-y: auto;
-  background-color: #f9f9f9;
+  background-color: var(--color-input);
 }
 
 .container {

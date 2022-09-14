@@ -5,13 +5,13 @@
   /* background-color: #d3fa3a; */
   height: 318px;
   border-radius: 4px;
-  border: 1px solid #bde034;
+  border: 1px solid var(--color-primary-active);
 
   position: relative;
 }
 
 .container_completed:hover {
-  border: 1px solid #9dba2b;
+  border: 1px solid var(--color-primary-2);
 
   cursor: pointer;
 }
@@ -33,16 +33,16 @@
 .container {
   width: 706px;
   height: 318px;
-  border: 1px solid #b6b4b4;
+  border: 1px solid var(--color-tertiary-hover);
   border-radius: 4px;
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--color-base);
 
   cursor: pointer;
 }
 
 .container:hover {
-  border: 1px solid #706e64;
+  border: 1px solid var(--color-tertiary-active);
 }
 
 .container_inner {
@@ -143,7 +143,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #f9f9f9;
+  color: var(--color-input);
   width: 300px;
 }
 
@@ -151,7 +151,7 @@
   width: 154px;
   height: 154px;
   border-radius: 19px;
-  border: 12px solid #d3fa3a;
+  border: 12px solid var(--color-primary);
 
   display: flex;
   justify-content: center;
@@ -163,7 +163,7 @@
 .container_padlock svg {
   width: 90px;
   height: 90px;
-  color: #d3fa3a;
+  color: var(--color-primary);
 }
 
 /* --------------------------------- */

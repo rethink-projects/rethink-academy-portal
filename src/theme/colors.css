@@ -7,6 +7,7 @@
   --color-input-outline: #82a8f8;
   /* Primary */
   --color-primary: #d3fa3a;
+  --color-primary-2: #9dba2b;
 
   --color-primary-hover: #e2fa84;
   --color-primary-active: #bde034;
@@ -15,6 +16,7 @@
   --color-secondary: #1b1b1b;
   --color-secondary-hover: #3b3b3b;
   --color-secondary-active: #1b1b1b;
+  --color-secondary-dark: #000000;
 
   /* tertiary */
   --color-tertiary: #838383;
@@ -77,4 +79,7 @@
   /* Add Task */
   --color-addtask-font-text: #8f8f8f;
   --color-button-primary-hover: #a8c929;
+
+  /* Acordeon */
+  --color-acordeon-hover: rgba(108, 111, 147, 0.1);
 }

@@ -4,7 +4,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 120%;
-  color: #3b3b3b;
+  color: var(--color-secondary-hover);
 }
 
 p {
@@ -14,7 +14,7 @@ p {
   font-size: 16px;
   line-height: 150%;
 
-  color: #706e64;
+  color: var(--color-tertiary-active);
 }
 
 .card_container {
@@ -27,7 +27,7 @@ p {
   padding: 48px;
   gap: 32px;
 
-  border: 1px solid #000000;
+  border: 1px solid var(--color-secondary-dark);
   border-radius: 4px;
 }
 
