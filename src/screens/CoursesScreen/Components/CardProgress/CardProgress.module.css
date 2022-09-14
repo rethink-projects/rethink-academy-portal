@@ -76,7 +76,6 @@
   align-items: center;
   gap: 14.5px;
   margin-top: 200px;
-  /* background-color: var(--color-base); */
 }
 
 .progress_empty > span {
@@ -86,5 +85,5 @@
   font-size: 16px;
   line-height: 150%;
   text-align: center;
-  color: #706e64;
+  color: var(--color-tertiary-active);
 }

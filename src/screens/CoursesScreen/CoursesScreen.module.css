@@ -2,18 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f9f9f9;
-  /* background-color: blue; */
+  background-color: var(--color-input);
   height: 100%;
 }
 
 .container_cursos {
   margin: 24px 104px 31px 96px;
   width: 1442px;
-  /* background-color: aqua; */
   overflow: hidden;
   height: 100%;
-  /* height: 100vh; */
 }
 
 .title {
@@ -31,8 +28,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 120%;
-
-  color: #1b1b1b;
+  color: var(--color-secondary);
 }
 
 .title_buttons {
@@ -52,11 +48,8 @@
 }
 
 .noCards {
-  /* background-color: red; */
-  /* height: 1080px; */
   height: 100%;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 
@@ -71,7 +64,6 @@
   flex-direction: column;
   align-items: center;
   gap: 14.5px;
-  /* background-color: var(--color-base); */
 }
 
 .no_courses > span {
@@ -81,5 +73,5 @@
   font-size: 16px;
   line-height: 150%;
   text-align: center;
-  color: #706e64;
+  color: var(--color-tertiary-active);
 }

@@ -63,7 +63,7 @@
 .disabled {
   cursor: default;
 
-  background-color: #f9f9f9;
+  background-color: var(--color-input);
   color: var(--color-tertiary);
 
   pointer-events: none;
@@ -87,6 +87,5 @@
 }
 
 .emblemCheck {
-  border-color: #9dba2b;
-  color: #9dba2b;
+  border-color: var(--color-primary-2);
 }
