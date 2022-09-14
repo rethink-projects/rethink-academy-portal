@@ -16,6 +16,7 @@ import SimpleButton from "../SimpleButton/SimpleButton";
 import Tag from "../Tag/Tag";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { Times } from "./Times";
+import Textarea from "../Textarea/Textarea";
 
 type AddTaskProps = {
   formData: {
@@ -48,9 +49,6 @@ function AddTask({}: AddTaskProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.container_title}>
-        <p className={styles.title}>Registro de Tarefas</p>
-      </div>
       <div className={styles.container_noactive}>
         {!active && (
           <>
@@ -89,7 +87,7 @@ function AddTask({}: AddTaskProps) {
             <div className={styled.taskName}>
               <p>Nome da atividade</p>
               <InputText
-                type={"extraLarge"}
+                type={"block"}
                 placeholder={"Placeholder"}
                 hasIcon={true}
                 nameInput={""}
@@ -103,7 +101,7 @@ function AddTask({}: AddTaskProps) {
             <div className={styled.taskData}>
               <p>Data</p>
               <DatePicker
-                size={"default"}
+                size={"block"}
                 calendarPosition={"left"}
                 placeholder={"Adicione uma Data"}
               />
@@ -179,24 +177,24 @@ function AddTask({}: AddTaskProps) {
             </div>
             <div className={styled.taskDescription}>
               <p>Descrição</p>
-              <InputText
-                type={"large"}
-                placeholder={"Placeholder"}
-                hasIcon={false}
-                nameInput={""}
+              <Textarea
+                type={"block"}
                 value={formData.description}
-                onChange={(e) =>
+                onChangetext={(e) =>
                   handlerFormDataValues("description", e.target.value)
                 }
+                placeholder={"Adicione uma descrição"}
               />
             </div>
-            <SimpleButton
-              size={"small"}
-              text={"Finalizar Tarefa"}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
+            <div className={styled.simpleBtn}>
+              <SimpleButton
+                size={"block"}
+                text={"Finalizar Tarefa"}
+                onClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            </div>
           </div>
         )}
       </div>

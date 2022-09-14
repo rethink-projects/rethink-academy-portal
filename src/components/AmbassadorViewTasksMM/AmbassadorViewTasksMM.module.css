@@ -1,0 +1,90 @@
+.viewTasks_container {}
+
+.viewTasks_header {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    gap: 24px;
+    width: 620px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 1px solid #D4D4D4;
+    border-radius: 4px 4px 0px 0px;
+}
+
+.viewTasks_input {}
+
+.viewTasks_calendar {}
+
+.viewTasks_body {
+    width: 620px;
+    height: 270px;
+
+    /* Background original */
+    background: #FFFFFF;
+
+    /* Alterar a cor do backgroud do playgroud para visualizar o componente */
+    /* background-color: #F9F9F9; */
+
+    border-radius: 0px 0px 4px 4px;
+    overflow-y: scroll;
+}
+
+.viewTasks_date {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12.3px;
+    padding-left: 18.3px;
+    padding-top: 27.3px;
+}
+
+.viewTasks_date>svg>path {
+    fill: var(--color-secondary) !important;
+}
+
+.viewTasks_date>p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3B3B3B;
+}
+
+.viewTasks_accordion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 23.3px;
+    gap: 11px;
+    padding-left: 16px;
+}
+
+.searchTasks_Tasks {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchTasks_Tasks p {
+    font-size: 16px;
+}
+
+.searchTasks_Date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding-left: 16px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.error {
+    margin-top: 26px;
+    margin-left: 16px;
+}

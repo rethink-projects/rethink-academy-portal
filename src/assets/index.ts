@@ -44,6 +44,23 @@ import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
 import chat from "./chat.png";
+
+import studies from "./Academy_Badge.svg";
+import academy from "./AcademyHat_Badge.svg";
+import design from "./Design_Badge.svg";
+import engineering from "./Engineering_Badge.svg";
+import goals from "./Goals_Badge.svg";
+import product from "./Product_Badge.svg";
+import timeRecord from "./TimeRegister_Badge.svg";
+import welcome from "./Welcome_Badge.svg";
+import troll from "./Troll_Badge.svg";
+import starsGif from "./starsGif.gif";
+
+import hatDelivery from "./hatDelivery.gif";
+import hatDegrading from "./hatDegrading.gif";
+import hatStolen from "./hatStolen.gif";
+import hatWin from "./hatWin.svg";
+
 export const Images = {
   logo,
   checkbox,
@@ -62,6 +79,10 @@ export const Images = {
   logoRaSecondary,
   arrowTask,
   homeBackground,
+  hatDelivery,
+  hatDegrading,
+  hatStolen,
+  hatWin,
   icons: {
     calendarIcon,
     eyeIcon,
@@ -91,6 +112,18 @@ export const Images = {
     three,
   },
   avatar: avatarImage,
+  badge: {
+    academy,
+    studies,
+    design,
+    engineering,
+    goals,
+    product,
+    timeRecord,
+    welcome,
+    troll,
+  },
+  starsGif,
 };
 
 export default Images;

@@ -14,7 +14,6 @@ type ContentProps = {
   priority: number;
   handleColor: (id: string, color: string, text: string) => void;
   onClickDelete: (id: string) => void;
-  onClickEdit: (id: string) => void;
 };
 
 const Content = ({
@@ -23,7 +22,6 @@ const Content = ({
   priority = 3,
   handleColor,
   onClickDelete,
-  onClickEdit,
 }: ContentProps) => {
   const [textDescription, setTextDescription] = useState(text);
   const [editable, setEditable] = useState(false);
@@ -65,13 +63,13 @@ const Content = ({
   };
 
   const edit = () => {
-    onClickEdit(id);
     setEditable(true);
   };
 
   const verify = (e: { key: string; preventDefault(): void }) => {
     if (e.key === "Enter") {
       e.preventDefault();
+      handleColor(id, color, textDescription);
       setEditable(false);
     }
   };

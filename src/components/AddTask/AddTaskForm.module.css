@@ -49,7 +49,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.taskName,
+.taskData,
+.taskTime {
+  gap: 6px;
+}
+
+.taskDescription {
   gap: 8px;
+}
+
+.taskTags,
+.taskStatus {
+  gap: 18px;
 }
 
 
@@ -58,4 +72,8 @@
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+.simpleBtn {
+  width: 174px;
 }

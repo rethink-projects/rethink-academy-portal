@@ -10,19 +10,33 @@ import Tooltip from "../Tooltip/Tooltip";
 type AccordionMMProps = {
   hasIcons?: boolean;
   size?: string;
+  title: string;
+  duration: string;
   description: string;
   time: string;
   tags: string[];
+  status: string[];
+  id: string;
+  onClickDelete: (id: string) => void;
 };
 
 const AccordionMM = ({
   hasIcons = false,
   size = "small",
+  title = "Daily",
+  duration = "0:15",
   description,
-  time,
+  time = "13h - 14:45",
   tags,
+  status,
+  id,
+  onClickDelete,
 }: AccordionMMProps) => {
   const [active, setActive] = useState(false);
+
+  const handleDelete = () => {
+    onClickDelete(id);
+  };
 
   return (
     <div className={[styles.accordion, styles[size]].join(" ")}>
@@ -32,9 +46,11 @@ const AccordionMM = ({
             <Tooltip content="Editar" direction="top">
               <img src={Images.icons.IconEdit} alt="A Edit Icon"></img>
             </Tooltip>
-            <Tooltip content="Deletar" direction="top">
-              <img src={Images.icons.deleteIcon} alt=""></img>
-            </Tooltip>
+            <button onClick={() => handleDelete()}>
+              <Tooltip content="Deletar" direction="top">
+                <img src={Images.icons.deleteIcon} alt=""></img>
+              </Tooltip>
+            </button>
           </>
         )}
       </div>
@@ -46,11 +62,10 @@ const AccordionMM = ({
         >
           <div className={styles.accordion_label_left}>
             <img src={Images.icons.chatIcon} alt="Chat Icon" />
-            <p>Atividades do Estagiário</p>
+            <p>{title}</p>
           </div>
           <div className={styles.accordion_label_right}>
-            <p>1h45</p>
-
+            <p>{duration}</p>
             <img
               src={Images.icons.arrowDownIcon}
               alt="Chat Icon"
@@ -68,6 +83,10 @@ const AccordionMM = ({
               <div className={styles.accordion_tags}>
                 {tags.map((tag, index) => (
                   <span key={index}> {tag} </span>
+                ))}
+
+                {status.map((status, index) => (
+                  <span key={index}> {status} </span>
                 ))}
               </div>
               <div className={styles.accordion_footer}>{time}</div>
