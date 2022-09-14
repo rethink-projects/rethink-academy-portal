@@ -95,7 +95,7 @@ const CursosScreen = () => {
     setTrailMain(responseCourse.data.trailMain.toLowerCase());
     setCourses(responseCourse.data.data);
 
-    if (userByEmail.role === "AMBASSADOR") setIntern(false);
+    if (responseCourse.data.user.role === "AMBASSADOR") setIntern(false);
   };
 
   useEffect(() => {
