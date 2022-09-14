@@ -64,6 +64,7 @@ import welcome from "./Welcome_Badge.svg";
 import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
+import noGoals from "./NoGoals.svg";
 export const Images = {
   ProgressBack,
   ProgressIcon,
@@ -131,6 +132,7 @@ export const Images = {
     troll,
   },
   starsGif,
+  noGoals,
 };
 
 export default Images;

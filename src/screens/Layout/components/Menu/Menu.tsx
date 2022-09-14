@@ -110,7 +110,7 @@ function Menu() {
             {isOpen && (
               <div className={styles.avatar_desc}>
                 <span>{user.name}</span>
-                {/* <small>{titleMaker(user)}</small> */}
+                <small>{titleMaker(user)}</small>
               </div>
             )}
           </div>
