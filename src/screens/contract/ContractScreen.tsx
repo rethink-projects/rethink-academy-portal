@@ -13,6 +13,7 @@ import Dropdown from "./components/Dropdown/StatusDropdown";
 import StatusTag from "./components/StatusTag/StatusTag";
 import ButtonWithIcon from "../../components/ButtonWithIcon/ButtonWithIcon";
 import DocumentCard, { fileType } from "./components/DocumentCard/DocumentCard";
+import SelectionTeam from "../../components/SelectionTeam/SelectionTeam";
 
 //libs
 import {
@@ -164,6 +165,8 @@ const ContractScreen = () => {
       if (user && allowGet) {
         if (user.role === "AMBASSADOR" && studentEmail) {
           setInfo(await getInfo(studentEmail));
+          navigate("/dashboard/contrato/" + studentEmail);
+          getFiles();
         } else {
           setInfo(await getInfo(user.email));
         }
@@ -183,14 +186,37 @@ const ContractScreen = () => {
   return (
     <div className={styles.contract_outer_container}>
       <div className={styles.breadcrumb}>
-        <Breadcrumb
-          breadcrumbItems={[
-            { title: "Home", link: "/" },
-            { title: "Contrato", link: "/contrato" },
-          ]}
-        />
+        {studentEmail && user.role === "AMBASSADOR" ? (
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/" },
+              {
+                title: `${
+                  studentEmail.split(".")[0].charAt(0).toUpperCase() +
+                  studentEmail.split(".")[0].slice(1)
+                }`,
+                link: "/contrato",
+              },
+            ]}
+          />
+        ) : (
+          <Breadcrumb
+            breadcrumbItems={[
+              { title: "Home", link: "/" },
+              { title: "Contrato", link: "/contrato" },
+            ]}
+          />
+        )}
       </div>
-      <div className={styles.contract_title}>Contrato</div>
+      {user.role === "AMBASSADOR" ? (
+        <div className={styles.contract_title_ambassador}>
+          Contrato
+          <SelectionTeam setUserEmail={setStudentEmail} />
+        </div>
+      ) : (
+        <div className={styles.contract_title}>Contrato</div>
+      )}
+
       <div className={styles.contract_inner_container}>
         <div className={styles.contract_status}>
           <div className={styles.contract_current_status}>
@@ -252,7 +278,11 @@ const ContractScreen = () => {
           </div>
         </div>
         <div className={styles.contract_info}>
-          <h1>Suas Informações</h1>
+          {user.role === "AMBASSADOR" ? (
+            <h1>Sobre o Estagiário </h1>
+          ) : (
+            <h1>Suas Informações</h1>
+          )}
           {isShown && (
             <div className={styles.contract_info_card}>
               <div className={styles.contract_info_card_content}>

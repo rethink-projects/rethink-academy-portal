@@ -12,6 +12,7 @@ import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import CursosScreen from "./screens/CoursesScreen/CoursesScreen";
 import RequireAuth from "./services/auth";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
+import ContractScreen from "./screens/contract/ContractScreen";
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
               <Route index element={<HomeScreen />} />
               <Route path="/dashboard/trilhas" element={<TrilhasScreen />} />
               <Route path="/dashboard/trilhas/:id" element={<CursosScreen />} />
+              <Route path="/dashboard/contrato" element={<ContractScreen />} />
+              <Route
+                path="/dashboard/contrato/:email"
+                element={<ContractScreen />}
+              />
               <Route
                 path="/dashboard/trilhas/:id/curso/:id"
                 element={<CourseScreen />}

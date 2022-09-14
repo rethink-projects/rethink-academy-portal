@@ -26,6 +26,17 @@
   margin-bottom: 40px;
 }
 
+.contract_title_ambassador {
+  display: flex;
+  width: 45.6vw;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .contract_status h1 {
   font-family: "Roboto";
   font-style: normal;
