@@ -8,11 +8,25 @@ import styles from "./CommentBox.module.css";
 type CommentBoxProps = {
   id: string;
   text: string;
+  avatar?: string;
+  name?: string;
+  title?: string;
+  email?: string;
+  CommenterEmail?: string;
   onClickDelete: (id: string) => void;
 };
 
-const CommentBox = ({ id, text, onClickDelete }: CommentBoxProps) => {
-  const [textDescription, setTextDescription] = useState(text);
+const CommentBox = ({
+  id,
+  text,
+  onClickDelete,
+  avatar,
+  name,
+  title,
+  email,
+  CommenterEmail,
+}: CommentBoxProps) => {
+  const { user } = useAuth();
 
   return (
     <div className={styles.comment_box}>
@@ -22,22 +36,28 @@ const CommentBox = ({ id, text, onClickDelete }: CommentBoxProps) => {
             <Avatar
               type={"image"}
               size={"large"}
-              children={<img src={Images.avatar} alt="avatar image" />}
+              children={
+                <img src={avatar ? avatar : Images.avatar} alt="avatar image" />
+              }
             />
           </div>
           <div className={styles.description}>
-            <p>Leticia Lange</p>
-            <span>Embaixadora de Design</span>
+            <p>{name}</p>
+            <span>{title}</span>
           </div>
-          <button
-            className={styles.trashIcon}
-            onClick={() => onClickDelete(id)}
-          >
-            <img src={Images.icons.trashIcon} alt="trash icon" />
-          </button>
+          {user.email === CommenterEmail ? (
+            <button
+              className={styles.trashIcon}
+              onClick={() => onClickDelete(id)}
+            >
+              <img src={Images.icons.trashIcon} alt="trash icon" />
+            </button>
+          ) : (
+            <div></div>
+          )}
         </div>
         <div className={styles.textArea}>
-          <p>{textDescription}</p>
+          <p>{text}</p>
         </div>
       </div>
       <div className={styles.line}></div>

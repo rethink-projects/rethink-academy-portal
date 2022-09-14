@@ -9,40 +9,40 @@ import Textarea from "../Textarea/Textarea";
 import "./Comment.css";
 import CommentBox from "./components/CommentBox";
 import SimpleButton from "../SimpleButton/SimpleButton";
+import {
+  createComment,
+  getCommentsFromUser,
+  removeComment,
+} from "../../services/backend/comments";
+import { CommitOutlined } from "@mui/icons-material";
 
 const Comment = () => {
-  const [active, setActive] = useState(false);
-  const [comments, setComments] = useState([
-    {
-      id: "1",
-      text: "Ameeeei a sua apresentação em nosso primeiro encontro Lu, não vejo a hora da próxima!",
-    },
-  ]);
+  const [active, setActive] = useState(true);
+  const [comments, setComments] = useState<
+    { id: string; text: string; CommmentAuthor: any }[]
+  >([]);
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    const data = [
-      {
-        id: "1",
-        text: "Ameeeei a sua apresentação em nosso primeiro encontro Lu, não vejo a hora da próxima!",
-      },
-      {
-        id: "2",
-        text: "Ameeeei a sua apresentação em nosso primeiro encontro Lu, não vejo a hora da próxima!",
-      },
-    ];
+  const { user } = useAuth();
 
+  const getComments = async () => {
+    const data = await getCommentsFromUser("gabriel.gomes@rethink.dev");
+    console.log({ data });
     setComments(data);
+  };
+
+  useEffect(() => {
+    getComments();
   }, []);
 
-  const handleComment = () => {
-    const comment = {
-      id: Math.floor(Math.random() * 1000).toString(),
+  const handleComment = async () => {
+    const response = await createComment({
       text: description,
-    };
+      userEmail: user.email,
+    });
 
     setComments((prevState) => {
-      return [...prevState, comment];
+      return [...prevState, response.comment];
     });
 
     setDescription("");
@@ -50,7 +50,11 @@ const Comment = () => {
 
   const handleDelete = (id: string) => {
     setComments(comments.filter((comment) => comment.id !== id));
+
+    removeComment(id);
   };
+
+  if (!user) return <div> carregando...</div>;
 
   return (
     <div className={styles.container}>
@@ -69,6 +73,14 @@ const Comment = () => {
               id={comment.id}
               text={comment.text}
               onClickDelete={handleDelete}
+              name={
+                comment.CommmentAuthor.name +
+                " " +
+                comment.CommmentAuthor.surname
+              }
+              title={`${comment.CommmentAuthor.role} of ${comment.CommmentAuthor.main}`}
+              avatar={comment.CommmentAuthor.avatar}
+              CommenterEmail={comment.CommmentAuthor.email}
             />
           ))}
         </div>
