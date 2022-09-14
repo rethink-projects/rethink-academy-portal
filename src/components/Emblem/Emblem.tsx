@@ -20,7 +20,7 @@ type EmblemProps = {
 const Emblem = ({ badge, number = 1, size = "default" }: EmblemProps) => {
   if (number > 0) {
     return (
-      <div className={style[size]}>
+      <div className={`${style[size]} ${style.image}`}>
         <img src={Images.badge[badge]} alt={`Emblema de ${badge}`} />
         {number > 1 && (
           <div className={style.numberContainer}>

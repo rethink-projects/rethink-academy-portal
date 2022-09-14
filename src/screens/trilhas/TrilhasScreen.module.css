@@ -1,0 +1,32 @@
+.body {
+  background-color: #f9f9f9;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1448px;
+  margin: 40px auto;
+
+  gap: 30px 0px;
+}
+
+.text_container {
+  width: 100%;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  width: 539px;
+  margin-bottom: 14px;
+}
+.description {
+  width: 488px;
+  font-size: 16px;
+  line-height: 150%;
+}
