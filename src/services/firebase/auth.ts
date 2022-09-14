@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { TypeProvider } from "../../context/AuthContext";
+import { ICurrentUser, TypeProvider } from "../../context/AuthContext";
 
 const getProvider = (
   type: TypeProvider
@@ -15,19 +15,13 @@ const getProvider = (
     : new GithubAuthProvider();
 };
 
-type firebaseUser = {
-  avatarUrl: string;
-  name: string;
-  email: string;
-};
-
 const signinWithProvider = async (
   auth: Auth,
   provider: GoogleAuthProvider | GithubAuthProvider
-): Promise<firebaseUser> => {
+): Promise<ICurrentUser> => {
   try {
     const response = await signInWithPopup(auth, provider);
-    const currentUser: firebaseUser = {
+    const currentUser: ICurrentUser = {
       avatarUrl: response.user.photoURL!,
       name: response.user.displayName!,
       email: response.user.email!,

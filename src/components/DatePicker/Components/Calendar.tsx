@@ -85,6 +85,7 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
       editableDateInputs={true}
       onChange={(item) => {
         setState([item.selection]);
+        console.log(item.selection);
       }}
       moveRangeOnFirstSelection={false}
       ranges={state}

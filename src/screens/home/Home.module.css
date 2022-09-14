@@ -48,8 +48,6 @@
   border-radius: 60px;
 }
 .user_name {
-  flex-basis: 100%;
-  text-align: center;
   margin-top: 24px;
   font-family: "Roboto";
   font-style: normal;
@@ -61,8 +59,6 @@
 }
 
 .user_title {
-  text-align: center;
-  flex-basis: 100%;
   margin-top: 8px;
   font-family: "Roboto";
   font-style: normal;

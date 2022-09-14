@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // API & CONTEXTS
 import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
@@ -55,6 +54,7 @@ const CourseScreen = () => {
     setambassador(response.data.role === "AMBASSADOR");
     setModules(response.data.modules);
     setWatched(response.data.watched);
+    console.log("sei");
   };
 
   useEffect(() => {

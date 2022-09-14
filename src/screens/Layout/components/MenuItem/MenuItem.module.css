@@ -15,7 +15,6 @@ a {
   gap: 10px;
   transition: all 0.2s ease-in;
   height: 50px;
-  /* min-width: 300px; */
 }
 
 .menu_body_item_closed {
@@ -33,6 +32,7 @@ a {
   background-color: var(--color-progressbar-external-dark);
 }
 .menu_body_item_text {
+  min-width: 300px;
   font-size: 15px;
   font-weight: 300;
 }

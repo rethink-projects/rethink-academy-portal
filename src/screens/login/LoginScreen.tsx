@@ -17,11 +17,13 @@ function LoginScreen() {
         title: "Login Successful",
         type: "success",
       });
-      navigate("/dashboard");
+      navigate("/home");
     });
+    // Google login with supabase client
   }
 
   useEffect(() => {
+    console.log("bug aqui");
     const localStorageUser = JSON.parse(
       localStorage.getItem("@portarethinkacademy:user")!
     );
@@ -29,9 +31,10 @@ function LoginScreen() {
       auth.setCurrentUser(localStorageUser);
     }
     if (auth.user) {
-      navigate("/dashboard", { replace: true });
+      navigate("/home", { replace: true });
     }
   }, [auth, navigate]);
+
   return (
     <div className={styles.login_container}>
       <div className={styles.login_inner}>

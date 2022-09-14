@@ -111,6 +111,7 @@ function AddTask({}: AddTaskProps) {
                 <Dropdown
                   setValue={(e) => {
                     handlerFormDataValues("startTime", e);
+                    console.log({ formData });
                   }}
                   value={formData.startTime}
                   width={252}
@@ -122,6 +123,7 @@ function AddTask({}: AddTaskProps) {
                 <Dropdown
                   setValue={(e) => {
                     handlerFormDataValues("endTime", e);
+                    console.log({ formData });
                   }}
                   value={formData.endTime}
                   width={252}

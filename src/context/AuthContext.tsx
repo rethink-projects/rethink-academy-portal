@@ -7,11 +7,9 @@ export interface ICurrentUser {
   avatarUrl: string;
   email: string;
   type?: TypeProvider;
-  id: string;
-  role: string;
-  main: string;
-  level: number;
-  exp: number;
+  id?: string;
+  role?: string;
+  title?: string;
 }
 
 interface AuthContextType {

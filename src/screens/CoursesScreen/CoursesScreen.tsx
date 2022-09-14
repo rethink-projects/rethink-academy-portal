@@ -125,6 +125,8 @@ const CursosScreen = () => {
   );
 
   const handleClickColect = () => {
+    // console.log(trailMain);
+
     api.post(`/badge`, {
       badge: trailMain,
       email: user.email,

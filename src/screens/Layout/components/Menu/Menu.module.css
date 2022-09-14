@@ -71,13 +71,16 @@
 .fotter_menu_closed {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-/* .fotter_menu_closed {
+.fotter_menu_closed {
   align-items: center;
   gap: 20px;
-} */
+}
 .divider,
 .divider_closed {
   width: 100%;
@@ -86,8 +89,7 @@
 }
 
 .avatar {
-  margin-top: 22px;
-  margin-left: 13px;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -96,20 +98,4 @@
 
 .avatar > span {
   font-size: 14px;
-}
-.avatar_desc > small {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 150%;
-  /* identical to box height, or 18px */
-
-  color: #000000;
-
-  opacity: 0.5;
-}
-.avatar_desc {
-  display: flex;
-  flex-direction: column;
 }

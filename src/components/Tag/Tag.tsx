@@ -23,18 +23,17 @@ const Tag = ({
   active = false,
   setActive,
 }: TagProps) => {
+
   return (
-    <div
-      onClick={() => setActive(type, text)}
+    <div onClick={() => setActive(type, text)} 
       className={`${styles[color]} ${styles[size]} ${styles.container_tag} ${
         !active ? "" : color === "dark" ? styles.activeDark : styles.activeLight
-      }`}
-    >
+      }`}>
       <div className={styles.divLeft}>
         {hasIcon == true && (
-          <div onClick={() => setActive(type, text)} className={styles.AddIcon}>
-            <AddIcon />
-          </div>
+        <div onClick={() => setActive(type, text)} className={styles.AddIcon}>
+          <AddIcon />
+        </div>
         )}
       </div>
 
@@ -44,15 +43,9 @@ const Tag = ({
 
       <div className={styles.divRight}>
         {hasIcon == true && (
-          <>
-            <div className={styles.barra}></div>
-            <div
-              onClick={() => setActive(type, "")}
-              className={styles.ClearIcon}
-            >
-              <ClearIcon className="ClearIcon" />
-            </div>
-          </>
+        <><div className={styles.barra}></div><div onClick={() => setActive(type, "")} className={styles.ClearIcon}>
+            <ClearIcon className="ClearIcon" />
+          </div></>
         )}
       </div>
     </div>
