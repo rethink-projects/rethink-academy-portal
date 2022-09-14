@@ -138,8 +138,10 @@ const Class = () => {
       `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
     );
     const responseUser = await api.get(`/user/${user.email}`);
-    setAmbassador(responseUser.data.userWithLevel.role === "AMBASSADOR");
-    setLessonsWatched(responseUser.data.userWithLevel.watched);
+    console.log(responseUser);
+
+    setAmbassador(responseUser.data.role === "AMBASSADOR");
+    setLessonsWatched(responseUser.data.watched);
 
     setModules(responseModule.data.modules);
     setModuleOrder(responseModule.data.moduleOrder);
