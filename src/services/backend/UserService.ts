@@ -1,5 +1,15 @@
 import { api } from "./Api";
 
+export const changeUserAvatar = async (avatar: string, email: string) => {
+  try {
+    const { data } = await api.post(`/user/${email}`, { avatar });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
+
 export const getUserFromBackend = async (email: string) => {
   try {
     const { data } = await api.get(`/user/${email}`);

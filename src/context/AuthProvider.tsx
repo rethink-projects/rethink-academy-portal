@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import firebaseInstance from "../services";
 import { AuthContext, ICurrentUser, TypeProvider } from "./AuthContext";
-import { getUserFromBackend } from "../services/backend/UserService";
+import {
+  changeUserAvatar,
+  getUserFromBackend,
+} from "../services/backend/UserService";
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   let [user, setUser] = useState<ICurrentUser>(null!);
@@ -27,7 +30,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       level: backendUser.level,
       exp: backendUser.exp,
     };
-
+    changeUserAvatar(newUser.avatarUrl, newUser.email);
     setUser(newUser);
 
     localStorage.setItem("@portarethinkacademy:user", JSON.stringify(newUser));
