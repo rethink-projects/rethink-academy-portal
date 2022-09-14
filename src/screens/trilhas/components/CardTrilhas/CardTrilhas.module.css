@@ -61,16 +61,27 @@
 
 .card_content {
   width: 392px;
-  height: 234px;
+  height: 270px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 42px 24px;
+  padding: 24px 24px;
   word-wrap: break-word;
 
   color: var(--color-base);
 
   opacity: 1;
+  position: relative;
+}
+
+.container_progressbar {
+  position: absolute;
+  bottom: 24px;
+}
+
+.container_edit {
+  position: absolute;
+  bottom: 24px;
 }
 
 .card_content_title {
@@ -257,6 +268,6 @@
   font-size: 16px;
   line-height: 150%;
   color: var(--color-tertiary-active);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   margin-top: -8px;
 }
