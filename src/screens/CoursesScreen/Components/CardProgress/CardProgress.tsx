@@ -39,7 +39,6 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
 
   const func = async () => {
     const responseCourses = await api.get(`/progress/${trailId}`);
-    console.log(responseCourses.data);
     setUsersProgress(responseCourses.data.usersProgress);
     setModulesQnt(responseCourses.data.modulesQnt);
     setCourses(responseCourses.data.courses);

@@ -73,8 +73,6 @@ const TrilhasScreen = () => {
     setValueDescriptionTrail("");
     setValueNameTrail("");
     setValueImageTrail("");
-    // console.log({ trailUpdated });
-    // console.log({ valueDescriptionTrail, valueNameTrail });
 
     const update = await axios.put(
       "http://localhost:4000/api/trail/" + trailUpdated?.id,
