@@ -100,19 +100,19 @@ export const DatePicker = ({
   }, [update]);
 
   const changeTasks = async () => {
-    // if (user) {
-    await getDateFilter(
-      "carolina.valeriano@rethink.dev",
-      getFullDate(state[0].startDate!),
-      getFullDate(state[0].endDate!)
-    )
-      .then((response) => {
-        if (setTasks) {
-          setTasks(response!);
-        }
-      })
-      .catch((err) => console.error(err));
-    // }
+    if (user) {
+      await getDateFilter(
+        user.email,
+        getFullDate(state[0].startDate!),
+        getFullDate(state[0].endDate!)
+      )
+        .then((response) => {
+          if (setTasks) {
+            setTasks(response!);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const getFullDate = (data: Date) => {

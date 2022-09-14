@@ -47,7 +47,7 @@ const Dropdown = ({
   return (
     <div className={styles.dropdown_container} style={{ width: width }}>
       <div
-        style={{ width: width }}
+        style={{ width: width, gap: leftIcon ? "14px" : "" }}
         id={`dropdown${id}`}
         onClick={() => setIsActive(!isActive)}
         className={[

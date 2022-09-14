@@ -14,9 +14,10 @@ import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import SimpleButton from "../SimpleButton/SimpleButton";
 import Tag from "../Tag/Tag";
-import { DatePicker } from "../DatePicker/DatePicker";
 import { Times } from "./Times";
 import Textarea from "../Textarea/Textarea";
+import SingleDatePicker from "../DatePicker/SingleDatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 type AddTaskProps = {
   formData: {
@@ -31,19 +32,13 @@ type AddTaskProps = {
   setFormData: (value: any) => void;
 };
 
-function AddTask({}: AddTaskProps) {
+function AddTask({ formData, setFormData }: AddTaskProps) {
   let iconImg = Images.arrowTask;
   const [active, setActive] = useState(false);
-  const [formData, setFormData] = useState({
-    taskName: "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    tag: "",
-    status: "",
-    description: "",
-  });
-  const handlerFormDataValues = (data: string, value: string) => {
+  const handlerFormDataValues = (
+    data: string,
+    value: string | Dayjs | null
+  ) => {
     setFormData((prevValue: any) => ({ ...prevValue, [data]: value }));
   };
 
@@ -68,7 +63,7 @@ function AddTask({}: AddTaskProps) {
                 Você ainda não possui tarefas cadastradas!
               </p>
               <p className={styles.texttwo}>Comece por aqui</p>
-              <img className={styles.iconImg} src={iconImg} alt="arrow image" />
+              <img className={styles.iconImg} src={iconImg} alt="arrow " />
             </div>
           </>
         )}
@@ -100,10 +95,9 @@ function AddTask({}: AddTaskProps) {
             </div>
             <div className={styled.taskData}>
               <p>Data</p>
-              <DatePicker
-                size={"block"}
-                calendarPosition={"left"}
-                placeholder={"Adicione uma Data"}
+              <SingleDatePicker
+                formDataValue={formData.date}
+                setFormDataValue={(date) => handlerFormDataValues("date", date)}
               />
             </div>
             <div className={styled.taskTime}>
@@ -142,8 +136,9 @@ function AddTask({}: AddTaskProps) {
                   "Fup",
                   "1:1",
                   "Daily",
-                ].map((tag) => (
+                ].map((tag, index) => (
                   <Tag
+                    key={index}
                     size={"micro"}
                     color={"dark"}
                     type={"tag"}
@@ -159,8 +154,9 @@ function AddTask({}: AddTaskProps) {
               <p>Status</p>
               <div className={styled.label}>
                 {["Prioridade", "Em Progresso", "Validação", "Concluído"].map(
-                  (status) => (
+                  (status, index) => (
                     <Tag
+                      key={index}
                       size={"micro"}
                       color={"dark"}
                       type={"status"}
@@ -188,11 +184,10 @@ function AddTask({}: AddTaskProps) {
               <SimpleButton
                 size={"block"}
                 text={"Finalizar Tarefa"}
-                onClick={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onClick={() => console.log(formData)}
               />
             </div>
+            <br />
           </div>
         )}
       </div>

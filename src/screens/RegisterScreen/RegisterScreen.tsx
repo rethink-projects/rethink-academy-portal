@@ -10,6 +10,7 @@ import Note from "../../components/Note/Note";
 import Toast from "../../components/Toast/Toast";
 import Gamification from "./Gamification/Gamification";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
+import { Dayjs } from "dayjs";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
@@ -21,6 +22,7 @@ import {
   getHoursLastDay,
   getHoursOfMonth,
 } from "../../services/backend/Tasks";
+import dayjs from "dayjs";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
@@ -31,6 +33,23 @@ const RegisterScreen = () => {
   const [prevHours, setPrevHours] = useState(0);
   const [controllerPrevHours, setControllerPrevHours] = useState(false);
   const [controllerEmblem, setControllerEmblem] = useState(false);
+  const [formData, setFormData] = useState<{
+    taskName: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    tag: string;
+    status: string;
+    description: string;
+  }>({
+    taskName: "",
+    date: new Date().toISOString(),
+    startTime: "",
+    endTime: "",
+    tag: "",
+    status: "",
+    description: "",
+  });
 
   // type task = {
   //   name: string;
@@ -185,20 +204,7 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
-            <AddTask
-              formData={{
-                taskName: "",
-                date: "",
-                startTime: "",
-                endTime: "",
-                tag: "",
-                status: "",
-                description: "",
-              }}
-              setFormData={function (value: any): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
+            <AddTask formData={formData} setFormData={setFormData} />
           </div>
           <div className={styles.register_reminders}>
             <Note />
