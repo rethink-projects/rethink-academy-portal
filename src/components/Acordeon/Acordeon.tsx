@@ -179,7 +179,7 @@ const Acordeon = ({
           onClose={() => {
             setIsModalLessonOpen(false);
           }}
-          type={"edit"}
+          type={"EDIT"}
           className={selectedLesson.name}
           description={selectedLesson.description}
           embedLink={selectedLesson.embedUrl}
