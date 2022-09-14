@@ -71,21 +71,22 @@ const Comment = () => {
       )}
       {active && (
         <div className={styles.container_comments}>
-          {comments.map((comment) => (
-            <CommentBox
-              id={comment.id}
-              text={comment.text}
-              onClickDelete={handleDelete}
-              name={
-                comment.CommmentAuthor.name +
-                " " +
-                comment.CommmentAuthor.surname
-              }
-              title={`${comment.CommmentAuthor.role} of ${comment.CommmentAuthor.main}`}
-              avatar={comment.CommmentAuthor.avatar}
-              CommenterEmail={comment.CommmentAuthor.email}
-            />
-          ))}
+          {comments.length > 0 &&
+            comments.map((comment) => (
+              <CommentBox
+                id={comment.id}
+                text={comment.text}
+                onClickDelete={handleDelete}
+                name={
+                  comment.CommmentAuthor.name +
+                  " " +
+                  comment.CommmentAuthor.surname
+                }
+                title={`${comment.CommmentAuthor.role} of ${comment.CommmentAuthor.main}`}
+                avatar={comment.CommmentAuthor.avatar}
+                CommenterEmail={comment.CommmentAuthor.email}
+              />
+            ))}
         </div>
       )}
       <div className={styles.make_comment}>
