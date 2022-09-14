@@ -44,7 +44,7 @@ function HomeScreenStudent() {
   return (
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
-        <AcademyProgress name={user.name} />
+        <AcademyProgress name={user.name.split(" ")[0]} />
         <LastGoalsCard
           quantityGoals={10}
           mounth={months[new Date().getMonth()]}
@@ -58,7 +58,7 @@ function HomeScreenStudent() {
           <img className={Styles.avatar} src={user.avatarUrl} alt="img" />
         </div>
 
-        <p className={Styles.user_name}>Gabriel</p>
+        <p className={Styles.user_name}>{user.name}</p>
         <p className={Styles.user_title}>{"Estagiário em Engenharia"}</p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>

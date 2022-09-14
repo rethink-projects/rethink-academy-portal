@@ -7,7 +7,11 @@ import Dropdown from "../Dropdown/Dropdown";
 // Styles
 import styles from "./SelectionTeam.module.css";
 
-const SelectionTeam = () => {
+const SelectionTeam = ({
+  setUserEmail,
+}: {
+  setUserEmail?: (value: string) => void;
+}) => {
   type Intern = {
     id: string;
     name: string;
@@ -15,6 +19,7 @@ const SelectionTeam = () => {
     avatar: string;
     postion?: number;
     left?: number;
+    email: string;
   };
 
   let linearGradient =
@@ -49,8 +54,9 @@ const SelectionTeam = () => {
     }
   };
 
-  const handleIdSelected = (id: string) => {
+  const handleIdSelected = (id: string, userEmail?: string) => {
     setIdSelected(id);
+    setUserEmail && setUserEmail(userEmail!);
   };
 
   const [team, setTeam] = useState("");
@@ -90,7 +96,7 @@ const SelectionTeam = () => {
             interns.map((intern) => {
               return (
                 <div
-                  onClick={() => handleIdSelected(intern.id)}
+                  onClick={() => handleIdSelected(intern.id, intern.email)}
                   key={intern.id}
                   className={`${styles.containerSelectionTeam_contentIcons_image} ${styles.contentIcons_absolute}`}
                   style={{
