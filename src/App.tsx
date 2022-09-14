@@ -7,8 +7,9 @@ import Class from "./screens/class/Class";
 import HomeScreen from "./screens/home/HomeScreen";
 import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
-import Notes from "./screens/notes/NotesScreen";
+import NotesScreen from "./screens/notes/NotesScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
+import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import CursosScreen from "./screens/CoursesScreen/CoursesScreen";
 import RequireAuth from "./services/auth";
@@ -23,8 +24,8 @@ function App() {
             <Route index element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/dashboard" element={<Layout />}>
-              <Route path="/dashboard/notas" element={<Notes />} />
-              <Route path="/dashboard/notas/:email" element={<Notes />} />
+              <Route path="/dashboard/notas" element={<NotesScreen />} />
+              <Route path="/dashboard/notas/:email" element={<NotesScreen />} />
               <Route index element={<HomeScreen />} />
               <Route path="/dashboard/trilhas" element={<TrilhasScreen />} />
               <Route path="/dashboard/trilhas/:id" element={<CursosScreen />} />
@@ -38,7 +39,21 @@ function App() {
               />
               <Route path="/dashboard/register" element={<RegisterScreen />} />
             </Route>
+            <Route path="/desenvolvimentoPessoal" element={<Layout />}>
+              <Route index element={<PersonalDevelopmentScreen />} />
+            </Route>
             <Route path="/playground" element={<PlaygroundScreen />} />
+            <Route
+              path="/playground"
+              element={
+                <RequireAuth>
+                  <PlaygroundScreen />
+                </RequireAuth>
+              }
+            />
+            <Route path="/dashboard/notas" element={<Layout />}>
+              <Route index element={<NotesScreen />} />
+            </Route>
           </Route>
           <Route
             path="/playground"

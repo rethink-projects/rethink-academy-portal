@@ -1,0 +1,20 @@
+.cardContainer {
+  width: 620px;
+  height: 386px;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.table {
+  max-height: 338px;
+
+  overflow-y: hidden;
+}
