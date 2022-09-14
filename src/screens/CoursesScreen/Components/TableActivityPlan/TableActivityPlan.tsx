@@ -216,7 +216,14 @@ export default function TableActivityPlan({
       content: updatedRow.content,
       trailId: trailId,
     });
-
+    console.log({
+      url: "http://localhost:4000/api/stage/" + updatedRow.id,
+      stage: updatedRow.stage,
+      start: updatedRow.start,
+      finish: updatedRow.finish,
+      content: updatedRow.content,
+      trailId: trailId,
+    });
     return updatedRow;
   };
 

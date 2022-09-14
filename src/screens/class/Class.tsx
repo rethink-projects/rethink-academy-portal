@@ -163,6 +163,9 @@ const Class = () => {
     getInfoLesson();
   };
 
+  if (!urlLesson) {
+    return <>Carregando</>;
+  }
   return (
     <div className={styles.class_container}>
       <div className={styles.left_container}>

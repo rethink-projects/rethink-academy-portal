@@ -34,8 +34,6 @@ const CardAddCourse = ({
   addCourse = true,
   onClose = () => {},
 }: addCourseProps) => {
-  // console.log(course);
-
   const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
   const [valueTypeCourse, setValueTypeCourse] = useState<string>(() => {

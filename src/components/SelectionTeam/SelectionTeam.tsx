@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { isArray } from "util";
-import { getAllStudent } from "../../services/backend/UserService";
-// import { getAllStudents } from "../../services/backend/UserService";
+import { getAllStudents } from "../../services/backend/UserService";
 
 // Components
 import Dropdown from "../Dropdown/Dropdown";
@@ -9,7 +7,11 @@ import Dropdown from "../Dropdown/Dropdown";
 // Styles
 import styles from "./SelectionTeam.module.css";
 
-const SelectionTeam = () => {
+const SelectionTeam = ({
+  setUserEmail,
+}: {
+  setUserEmail?: (value: string) => void;
+}) => {
   type Intern = {
     id: string;
     name: string;
@@ -17,6 +19,7 @@ const SelectionTeam = () => {
     avatar: string;
     postion?: number;
     left?: number;
+    email: string;
   };
 
   let linearGradient =
@@ -40,7 +43,7 @@ const SelectionTeam = () => {
   };
 
   const getUserData = async () => {
-    const data = await getAllStudent();
+    const data = await getAllStudents();
     setUserData(data);
     setInterns(internsDataForMap(data));
   };
@@ -51,8 +54,9 @@ const SelectionTeam = () => {
     }
   };
 
-  const handleIdSelected = (id: string) => {
+  const handleIdSelected = (id: string, userEmail?: string) => {
     setIdSelected(id);
+    setUserEmail && setUserEmail(userEmail!);
   };
 
   const [team, setTeam] = useState("");
@@ -92,7 +96,7 @@ const SelectionTeam = () => {
             interns.map((intern) => {
               return (
                 <div
-                  onClick={() => handleIdSelected(intern.id)}
+                  onClick={() => handleIdSelected(intern.id, intern.email)}
                   key={intern.id}
                   className={`${styles.containerSelectionTeam_contentIcons_image} ${styles.contentIcons_absolute}`}
                   style={{

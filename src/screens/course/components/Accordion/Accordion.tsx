@@ -66,7 +66,6 @@ const Accordion = ({
       setTimeout(function () {
         reRender();
       }, 100);
-      console.log("pass");
     } else {
       editLessonReq();
       lesson!.name = lessonName;
