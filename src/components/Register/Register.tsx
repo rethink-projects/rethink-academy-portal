@@ -104,6 +104,8 @@ const Register = ({ type = "home", email }: RegisterProps) => {
     return `${hours}h${minutes}min`;
   };
 
+  console.log(tags);
+
   return (
     <div className={styles.register_container}>
       {type === "home" && (
@@ -177,7 +179,7 @@ const Register = ({ type = "home", email }: RegisterProps) => {
                 ) : (
                   <div>Você ainda não possui tasks hoje</div>
                 )
-              ) : (
+              ) : tags && tags.length > 0 ? (
                 tags.map((tag) => {
                   return (
                     <Tasks
@@ -188,6 +190,8 @@ const Register = ({ type = "home", email }: RegisterProps) => {
                     />
                   );
                 })
+              ) : (
+                <div>Estagiário não possui tarefas cadastradas.</div>
               )}
             </>
           </div>

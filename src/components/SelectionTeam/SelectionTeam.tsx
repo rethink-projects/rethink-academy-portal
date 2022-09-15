@@ -20,7 +20,6 @@ const SelectionTeam = ({ internSelected }: TypeSelection) => {
     email: string;
     postion?: number;
     left?: number;
-    email: string;
   };
 
   let linearGradient =

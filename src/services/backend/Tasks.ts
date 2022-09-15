@@ -51,7 +51,7 @@ export const getRecordOfDay = async (email: string) => {
 
 export const removeTask = async (id: string) => {
   try {
-    const { data } = await axios.delete(
+    const { data } = await api.delete(
       `http://localhost:4000/api/tasks/${id}`
     );
     return data;
@@ -63,7 +63,7 @@ export const removeTask = async (id: string) => {
 
 export const getHoursLastDay = async (email: string) => {
   try {
-    const { data } = await axios.get(
+    const { data } = await api.get(
       `http://localhost:4000/api/tasks/hours/${email}`
     );
     return data;
