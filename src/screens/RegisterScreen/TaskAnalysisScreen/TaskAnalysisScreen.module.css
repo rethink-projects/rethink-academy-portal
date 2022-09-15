@@ -7,7 +7,7 @@
 }
 
 .rightScreen {
-    width: 1040px;
+    width: 1250px;
     height: 984px;
     background-color: #F9F9F9;
     display: flex;
@@ -43,7 +43,6 @@
 .quick_view {
     width: 357px;
     height: 357px;
-    border: 1px solid #D4D4D4;
 }
 
 .leftScreen {

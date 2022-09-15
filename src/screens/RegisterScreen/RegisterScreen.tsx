@@ -9,6 +9,7 @@ import InputSearch from "../../components/InputSearch/InputSearch";
 import Note from "../../components/Note/Note";
 import Toast from "../../components/Toast/Toast";
 import Gamification from "./Gamification/Gamification";
+import EmblemCard from "../../components/EmblemCard/EmblemCard";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
@@ -18,6 +19,7 @@ import {
   getRecordOfDay,
   removeTask,
   getHoursLastDay,
+  getHoursOfMonth,
 } from "../../services/backend/Tasks";
 
 const RegisterScreen = () => {
@@ -28,6 +30,7 @@ const RegisterScreen = () => {
   const [controller, setController] = useState(false);
   const [prevHours, setPrevHours] = useState(0);
   const [controllerPrevHours, setControllerPrevHours] = useState(false);
+  const [controllerEmblem, setControllerEmblem] = useState(false);
 
   // type task = {
   //   name: string;
@@ -111,26 +114,57 @@ const RegisterScreen = () => {
       .catch((err) => console.error(err));
   };
 
+  const getMonthHours = async () => {
+    await getHoursOfMonth("fabiana.kamo@rethink.dev") // ALTERAR
+      .then((response) => {
+        setPrevHours(response);
+        if (response >= 120) {
+          setControllerEmblem(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getTime();
     getPrevHours();
+    getMonthHours();
   }, []);
+
+  // FIX:
+  // Logica para perder o chapeu - 3 dias após não registrar as 6h diarias - Registrando normalmente no dia em que perdeu o chapéu, você ganhará novamente um chapéu -- PRIORITY
+  // Logica para ganhar o emblema - 1 mes depois de horas registradas -- PRIORITY
+  // Encontrar logica para o gif nao aparecer sempre que atualiza a pagina -- PRIORITY
 
   return (
     <div className={styles.register_container}>
       <div className={styles.modal_container}>
-        {controller && (
+        {/* {controller && (
           <Gamification
             setActive={() => setController(false)}
             id="outside"
-            type="Losing"
+            type="Win"
           />
-        )}
-        {controllerPrevHours && (
+        )} */}
+        {/* {controllerPrevHours && (
           <Gamification
             setActive={() => setControllerPrevHours(false)}
             id="outside"
             type="Degrading"
+          />
+        )} */}
+        {/* {controllerPrevHours && (
+          <Gamification
+            setActive={() => setControllerPrevHours(false)}
+            id="outside"
+            type="Losing"
+          />
+        )} */}
+        {controllerEmblem && (
+          <EmblemCard
+            badge="timeRecord"
+            content="Teste"
+            onClickCollect={() => setControllerEmblem(false)}
           />
         )}
       </div>

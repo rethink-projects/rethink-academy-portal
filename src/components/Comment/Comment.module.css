@@ -10,6 +10,31 @@
     padding: 20px;
 }
 
+.no_comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 291px;
+    height: 106px;
+    padding: 340px 0px 460px 0px;
+    gap: 12px;
+}
+
+.error_outline > svg {
+    width: 43px;
+    height: 43px;
+}
+
+.error_outline > svg > path {
+    color: #EAB308;
+}
+
+.no_comments > p {
+    font-size: 18px;
+    text-align: center;
+    color: #706E64;
+}
+
 .container_comments {
     width: 408px;
     height: 907px;

@@ -67,6 +67,7 @@ import starsGif from "./starsGif.gif";
 import hatDelivery from "./hatDelivery.gif";
 import hatDegrading from "./hatDegrading.gif";
 import hatStolen from "./hatStolen.gif";
+import hatWin from "./hatWin.svg";
 
 export const Images = {
   ProgressBack,
@@ -94,6 +95,7 @@ export const Images = {
   hatDelivery,
   hatDegrading,
   hatStolen,
+  hatWin,
   icons: {
     calendarIcon,
     eyeIcon,
