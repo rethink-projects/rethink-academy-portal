@@ -13,6 +13,7 @@ import SelectionTeam from "../../components/SelectionTeam/SelectionTeam";
 import { getUserFromBackend } from "../../services/backend/UserService";
 import Toast from "../../components/Toast/Toast";
 import Comment from "../../components/Comment/Comment";
+import TagChart from "../../components/TagChart/TagChart";
 
 const InternAnalisysScreen = () => {
   type Intern = {
@@ -67,7 +68,9 @@ const InternAnalisysScreen = () => {
           ]}
         />
         <SelectionTeam internSelected={handleEmailIntern} />
-        <div className={styles.intern_graph}></div>
+        <div className={styles.intern_graph}>
+          <TagChart />
+        </div>
         <div className={styles.intern_data}>
           <div className={styles.intern_data_historic}>
             <h1>Histórico de atividades</h1>
