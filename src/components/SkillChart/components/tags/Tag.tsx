@@ -73,7 +73,8 @@ const EvaluationTag = ({
             // setGraphData(getData);
           }}
         >
-          {item}
+          {item.length < 15 ? item : item.slice(0, 15) + "..."}
+          {/* {item} */}
         </button>
       ))}
     </div>

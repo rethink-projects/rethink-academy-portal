@@ -15,9 +15,10 @@ import Images from "../../../../assets";
 
 type notesCardProps = {
   studentEmail?: string;
+  height?: string;
 };
 
-const NotesCard = ({ studentEmail }: notesCardProps) => {
+const NotesCard = ({ studentEmail, height }: notesCardProps) => {
   const [notes, setNotes] = useState<noteType[]>([]);
 
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const NotesCard = ({ studentEmail }: notesCardProps) => {
   };
 
   return (
-    <div className={style.cardContainer}>
+    <div className={style.cardContainer} style={{ height: height }}>
       {notes.length > 0 ? (
         <div className={style.table}>
           <TableContent

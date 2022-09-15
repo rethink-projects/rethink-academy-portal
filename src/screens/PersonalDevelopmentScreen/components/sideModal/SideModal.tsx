@@ -13,7 +13,7 @@ import Textarea from "../../../../components/Textarea/Textarea";
 
 type modalProps = {
   onClose: VoidFunction;
-  stundentEmail?: string;
+  studentEmail?: string;
 };
 
 export type GetUserType = {
@@ -29,27 +29,10 @@ export type GetUserType = {
   exp: number;
 };
 
-const SideModal = ({ onClose = () => {}, stundentEmail }: modalProps) => {
+const SideModal = ({ onClose = () => {}, studentEmail }: modalProps) => {
   const { user } = useAuth();
-  // const [userByEmail, setUserByEmail] = useState<GetUserType>();
 
   const [disabledConfirm, setDisabledConfirm] = useState(false);
-
-  // const getUser = async () => {
-  //   try {
-  //     const userData = await axios.get(
-  //       `http://localhost:4000/api/user/${user.email}`
-  //     );
-  //     setUserByEmail(userData.data);
-  //     return;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-  // }, [user, stundentEmail]);
 
   const disabledConfirmClass = disabledConfirm
     ? styles.modal_actions_confirm_disabled
@@ -137,7 +120,7 @@ const SideModal = ({ onClose = () => {}, stundentEmail }: modalProps) => {
             />
           </div>
           <div className={styles.modal_down}>
-            <DropdownSideModal stundentEmail={stundentEmail} />
+            <DropdownSideModal studentEmail={studentEmail} />
           </div>
         </div>
       </div>

@@ -36,10 +36,10 @@ type GoalsInternType = {
 };
 
 type prospType = {
-  stundentEmail?: string | undefined;
+  studentEmail?: string | undefined;
 };
 
-const DropdownSideModal = ({ stundentEmail }: prospType) => {
+const DropdownSideModal = ({ studentEmail }: prospType) => {
   const { user } = useAuth();
   const [userByEmail, setUserByEmail] = useState<GetUserType>();
   const [goals, setGoals] = useState<GoalsType[]>([]);
@@ -58,7 +58,7 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
       if (user) {
         if (user.role === "AMBASSADOR") {
           const userData = await axios.get(
-            `http://localhost:4000/api/user/${stundentEmail}`
+            `http://localhost:4000/api/user/${studentEmail}`
           );
           setUserByEmail(userData.data);
         } else {
@@ -157,7 +157,7 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
   const createStudentGoalList = async (name: string) => {
     try {
       const newGoal = await axios.post(
-        `http://localhost:4000/api/goalList/${stundentEmail!}`,
+        `http://localhost:4000/api/goalList/${studentEmail!}`,
         { name }
       );
       setCreateGoalList(name);
@@ -165,39 +165,6 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const editGoal = (
-    id: string,
-    conclude?: boolean,
-    title?: string,
-    goalsListId?: string
-  ) => {
-    const goalsData = goals.map((goal: any) => {
-      if (goal.id === goalsListId) {
-        return {
-          ...goal,
-          goal: goal.goal.map((goalsIntern: any) => {
-            if (goalsIntern.id === id) {
-              return {
-                ...goalsIntern,
-                title,
-                conclude,
-              };
-            } else {
-              return {
-                ...goalsIntern,
-              };
-            }
-          }),
-        };
-      } else {
-        return {
-          ...goal,
-        };
-      }
-    });
-    setGoals(goalsData);
   };
 
   const updateGoal = async (

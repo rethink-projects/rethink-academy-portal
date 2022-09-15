@@ -175,7 +175,7 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
           {isModalOpen &&
             (studentEmail ? (
               <SideModal
-                stundentEmail={studentEmail}
+                studentEmail={studentEmail}
                 onClose={() => setModalOpen(false)}
               />
             ) : (

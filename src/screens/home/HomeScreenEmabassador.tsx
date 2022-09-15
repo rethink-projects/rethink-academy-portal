@@ -5,6 +5,7 @@ import Images from "../../assets";
 import { useNotification } from "../../context/NotificationContext";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import { getAllStudents } from "../../services/backend/UserService";
+import { useNavigate } from "react-router-dom";
 type userFromBackend = {
   id: string;
   email: string;
@@ -92,6 +93,8 @@ const HomeScreenEmabassador = ({ user }: any) => {
     },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <div className={Styles.home_limited_container}>
       <div className={Styles.home_container}>
@@ -141,7 +144,13 @@ const HomeScreenEmabassador = ({ user }: any) => {
           </div>
           <div className={Styles.cards_container}>
             {usersFilterd.map((intern, index) => (
-              <div className={Styles.student_card} key={index}>
+              <div
+                className={Styles.student_card}
+                key={index}
+                onClick={() =>
+                  navigate(`/dashboard/perfilDoEstagiario/${intern.email}`)
+                }
+              >
                 <div className={Styles.student_card_arrow} />
                 <div className={Styles.student_card_avatar}>
                   <img
@@ -158,7 +167,6 @@ const HomeScreenEmabassador = ({ user }: any) => {
                     {user.level}
                   </div>
                 </div>
-
                 <div className={Styles.student_card_text}>
                   <div>{intern.name + " " + intern.surname}</div>
                   <button className={Styles.card_role}>Engenharia</button>

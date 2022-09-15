@@ -16,6 +16,9 @@
   height: 447px;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  background-color: var(--color-base);
 }
 
 .graph_inner_container {

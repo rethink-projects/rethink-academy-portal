@@ -1,6 +1,6 @@
 .table_container {
   min-width: 377px;
-  /* max-height: 649px; */
+  height: 100%;
   max-height: calc(100vh - 200px);
   box-shadow: none !important;
 }

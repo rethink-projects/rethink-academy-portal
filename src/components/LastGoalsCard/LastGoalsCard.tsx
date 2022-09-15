@@ -107,7 +107,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
                   size="small"
                   text="Ver detalhes"
                   type="secondary"
-                  width={309}
+                  width={315}
                   onClick={() => {
                     setModalOpen(true);
                   }}
@@ -118,7 +118,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
           {isModalOpen &&
             (studentEmail ? (
               <SideModal
-                stundentEmail={studentEmail}
+                studentEmail={studentEmail}
                 onClose={() => setModalOpen(false)}
               />
             ) : (
@@ -200,7 +200,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
           {isModalOpen &&
             (studentEmail ? (
               <SideModal
-                stundentEmail={studentEmail}
+                studentEmail={studentEmail}
                 onClose={() => setModalOpen(false)}
               />
             ) : (
