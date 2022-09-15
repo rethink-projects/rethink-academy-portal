@@ -493,7 +493,6 @@ const ContractScreen = () => {
                     />
                   )}
                 />
-
                 <p>
                   {" "}
                   <LaptopMac /> Materiais Fornecidos
