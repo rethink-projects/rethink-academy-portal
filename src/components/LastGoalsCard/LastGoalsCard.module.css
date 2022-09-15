@@ -1,8 +1,9 @@
 .LastGoalsCard_container {
   display: flex;
   flex-direction: column;
-  width: 368px;
-  height: 198px;
+  max-width: 368px;
+  min-width: 357px;
+  /* height: 198px; */
   gap: 24px;
 }
 
@@ -24,18 +25,23 @@
 .LastGoalsCard_info {
   display: flex;
   flex-direction: column;
-  width: 328px;
-  height: 110px;
-  padding: 16px 20px;
+  max-width: 328px;
+  min-width: 309px;
+  /* height: 110px; */
+  padding: 18px 20px;
   gap: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
 }
 
 .LastGoalsCard_inner {
   display: flex;
   height: 72px;
   align-items: center;
+  justify-content: space-between;
+}
+
+.LastGoalsCard_inner_title_badge {
+  display: flex;
 }
 
 .LastGoalsCard_inner_info {
@@ -71,7 +77,8 @@
 }
 
 .LastGoalsCard_line {
-  width: 328px;
+  max-width: 328px;
+  min-width: 309px;
   height: 0px;
   opacity: 0.1;
   border: 0.5px solid var(--color-secondary);
@@ -85,6 +92,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  margin-top: 5px;
 }
 
 .progress_Goals {
@@ -107,4 +116,18 @@
   font-size: 12px;
   line-height: 150%;
   color: var(--color-tertiary);
+}
+
+.seeDetailsButton {
+  padding-top: 10px;
+}
+
+.cardTitle {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+
+  color: var(--color-secondary);
 }
