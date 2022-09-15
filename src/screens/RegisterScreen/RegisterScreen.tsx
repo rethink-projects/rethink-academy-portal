@@ -25,18 +25,22 @@ import {
 } from "../../services/backend/Tasks";
 
 import { update as updateUser } from "../../services/backend/UserService";
+import { useAuth } from "../../context/AuthContext";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);
   const [time, setTime] = useState(0);
-  // const [controller, setController] = useState(false);
+  const [controller, setController] = useState(false);
 
   const [prevHours, setPrevHours] = useState();
   const [controllerPrevHours, setControllerPrevHours] = useState(false);
 
-  // const [controllerEmblem, setControllerEmblem] = useState(false);
+  const [controllerEmblem, setControllerEmblem] = useState(false);
+
+  const { user } = useAuth();
+
   const [formData, setFormData] = useState<{
     taskName: string;
     date: string;
@@ -120,50 +124,72 @@ const RegisterScreen = () => {
     setUpdate(true);
   };
 
-  // const getTime = async () => {
-  //   await getRecordOfDay("fabiana.kamo@rethink.dev") // ALTERAR
-  //     .then((response) => {
-  //       let helper = 0;
-  //       response.map((record: any) => {
-  //         helper += record.time;
-  //       });
-  //       helper = helper / 60;
-  //       setTime(Math.trunc(helper));
-  //       if (Math.trunc(helper) >= 6) {
-  //         setController(true);
-  //       }
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
-
-  const getPrevHours = async () => {
-    await getHoursLastDay("fabiana.kamo@rethink.dev") // ALTERAR
-      .then((response) => {
-        setPrevHours(response);
-        if (response.hours < 6) {
-          // setControllerPrevHours(true);
-          updateUser({ receiveGIF: false }, response.user.email);
-        }
-      })
-      .catch((err) => console.error(err));
+  const getTime = async () => {
+    if (user) {
+      await getHoursLastDay(user.email) // ALTERAR
+        .then((response) => {
+          if (response) {
+            setTime(response.hours);
+            if (
+              response.hours >= 6 &&
+              response.user.receiveGIF !==
+                "1|" + new Date().toLocaleDateString()
+            ) {
+              setController(true);
+              updateUser(
+                { receiveGIF: "1|" + new Date().toLocaleDateString() },
+                response.user.email
+              );
+            }
+          }
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
-  // const getMonthHours = async () => {
-  //   await getHoursOfMonth("fabiana.kamo@rethink.dev") // ALTERAR
-  //     .then((response) => {
-  //       setPrevHours(response);
-  //       if (response >= 120) {
-  //         setControllerEmblem(true);
-  //       }
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
+  const getPrevHours = async () => {
+    if (user) {
+      await getHoursLastDay(user.email) // ALTERAR
+        .then((response) => {
+          setPrevHours(response);
+          if (
+            response &&
+            response.hours < 6 &&
+            response.user.receiveGIF !== "2|" + new Date().toLocaleDateString()
+          ) {
+            setControllerPrevHours(true);
+            updateUser(
+              { receiveGIF: "2|" + new Date().toLocaleDateString() },
+              response.user.email
+            );
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  const getMonthHours = async () => {
+    if (user) {
+      await getHoursOfMonth(user.email) // ALTERAR
+        .then((response) => {
+          setPrevHours(response);
+          if (response && response >= 120) {
+            setControllerEmblem(true);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
 
   useEffect(() => {
-    // getTime();
+    getTime();
     getPrevHours();
-    // getMonthHours();
-  }, []);
+    getMonthHours();
+  }, [user]);
+
+  if (!user) {
+    return <div></div>;
+  }
 
   // FIX:
   // Logica para perder o chapeu - 3 dias após não registrar as 6h diarias - Registrando normalmente no dia em que perdeu o chapéu, você ganhará novamente um chapéu -- PRIORITY
@@ -180,13 +206,13 @@ const RegisterScreen = () => {
   return (
     <div className={styles.register_container}>
       <div className={styles.modal_container}>
-        {/* {controller && (
+        {controller && (
           <Gamification
             setActive={() => setController(false)}
             id="outside"
             type="Win"
           />
-        )} */}
+        )}
         {controllerPrevHours && (
           <Gamification
             setActive={() => setControllerPrevHours(false)}
@@ -286,7 +312,10 @@ const RegisterScreen = () => {
                       <div className={styles.searchTasks_Tasks}>
                         {day.map((task) => {
                           return (
-                            <div className={styles.viewTasks_accordion}>
+                            <div
+                              className={styles.viewTasks_accordion}
+                              key={task.id}
+                            >
                               <AccordionMM
                                 key={task.id}
                                 id={task.id}
