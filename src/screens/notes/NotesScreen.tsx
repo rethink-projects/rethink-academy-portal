@@ -30,15 +30,13 @@ const NotesScreen = () => {
     setState(note);
   };
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
   const [categories, setCategories] = useState(state?.categories);
   const [isPublic, setIsPublic] = useState(state?.isPublic);
   const [title, setTitle] = useState(state?.title);
   const [content, setContent] = useState(state?.content);
 
   const [update, setUpdate] = useState(false);
-  const [updateReturn, setUpdateReturn] = useState("");
+  // const [updateReturn, setUpdateReturn] = useState("");
   const [allowRender, setAllowRender] = useState(false);
   const [allowGetNotes, setAllowGetNotes] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,16 +50,16 @@ const NotesScreen = () => {
 
   const navigate = useNavigate();
 
+  // --------------Functions-------------------
+
   const validateRoute = () => {
     let link = window.location.pathname.split("/");
-    // console.log(link);
     if (
       link.length === 4 &&
       link[link.length - 1] &&
       link[link.length - 1] != ""
     ) {
       if (user.role === "AMBASSADOR" && studentEmail === null) {
-        // console.log("***");
         setStudentEmail(link[link.length - 1]);
 
         setUpdate((current) => !current);
@@ -70,9 +68,6 @@ const NotesScreen = () => {
       } else if (user.role === "STUDENT") {
         navigate("/dashboard/notas");
         window.location.reload();
-        // setUpdate((current) => !current);
-        // setAllowRender(false);
-        // return false;
       }
     } else {
       setAllowRender(true);
@@ -81,40 +76,24 @@ const NotesScreen = () => {
   };
 
   const getNotes = async () => {
-    // console.log("chamou get notes");
-
     if (studentEmail === null) {
-      // console.log("-------------------------");
-
       const notes = await axios.get(
         `http://localhost:4000/api/note/${user.email}`
       );
       setNotes(notes.data.notesFormated);
-      return notes.data.notesFormated;
     } else {
-      // console.log("**");
-
       const notes = await axios.get(
         `http://localhost:4000/api/note/${studentEmail}`
       );
 
-      // console.log(
-      //   notes.data.notesFormated.filter((note: any) => note.isPublic === true)
-      // );
-
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)
       );
-      setUpdateReturn("*");
       setAllowRender(true);
-
-      return notes.data.notesFormated;
     }
   };
 
-  const createNote = () => {
-    // console.log("create");
-
+  const createNote = async () => {
     const newNote = {
       email: user.email,
       title: "Sem título",
@@ -128,21 +107,31 @@ const NotesScreen = () => {
       newNote.email = studentEmail;
     }
 
-    axios.post(`http://localhost:4000/api/note`, newNote);
+    const { data } = await axios.post(
+      `http://localhost:4000/api/note`,
+      newNote
+    );
+    console.log(data.note);
+    data.note.categories = [false, false, false];
 
-    setUpdateReturn("***");
-    setUpdate((current) => !current);
+    setNotes((prevValue) => [...prevValue, data.note]);
   };
 
-  const deleteNote = () => {
+  const deleteNote = async () => {
     if (state) {
-      axios.delete(`http://localhost:4000/api/note/${state.id}`);
+      const { data } = await axios.delete(
+        `http://localhost:4000/api/note/${state.id}`
+      );
+
+      const updateNotes = notes.filter((note) => state.id !== note.id);
+
+      setNotes(updateNotes);
     }
     setUpdate((current) => !current);
     setModalOpen(false);
   };
 
-  const saveNote = () => {
+  const saveNote = async () => {
     const updateNote = {
       title: title,
       categories: categories,
@@ -160,7 +149,17 @@ const NotesScreen = () => {
       }
     }
     if (state) {
-      axios.post(`http://localhost:4000/api/note/${state.id}`, updateNote);
+      const { data } = await axios.post(
+        `http://localhost:4000/api/note/${state.id}`,
+        updateNote
+      );
+
+      data.note.categories = categories;
+
+      const updateNotes = notes.filter((note) => state.id !== note.id);
+      updateNotes.push(data.note);
+
+      setNotes(updateNotes);
     }
     setUpdate((current) => !current);
   };
@@ -171,8 +170,6 @@ const NotesScreen = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
-
-    // console.log("user -> " + user?.name);
 
     // Validate Route
     if (user) {
@@ -194,9 +191,17 @@ const NotesScreen = () => {
       setTitle(undefined);
       setContent(undefined);
     }
-  }, [user, update, updateReturn, allowGetNotes]);
+  }, [user, allowGetNotes]);
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  useEffect(() => {
+    setState(undefined);
+    setCategories(undefined);
+    setIsPublic(undefined);
+    setTitle(undefined);
+    setContent(undefined);
+  }, [update]);
+
+  // --------------------------------------------------
 
   if (user && allowRender && !isLoading) {
     return (
