@@ -2,16 +2,33 @@
   display: flex;
   flex-direction: column;
 }
-.trash {
+.trash .tooltip_wrapper {
   height: 0;
   width: 100%;
 }
-.trash svg {
-  float: right;
+.trash {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 0;
+  width: 100%;
+}
+.trash * svg {
+  /* float: right; */
   position: relative;
   top: -61px;
   margin-right: 45px;
 }
+
+.trash * svg:hover {
+  cursor: pointer;
+}
+.trash svg {
+  /* float: right; */
+  position: relative;
+  top: -61px;
+  margin-right: 45px;
+}
+
 .trash svg:hover {
   cursor: pointer;
 }

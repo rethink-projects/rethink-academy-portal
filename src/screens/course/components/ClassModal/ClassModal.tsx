@@ -5,6 +5,7 @@ import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ClassModal.module.css";
 import { Validation } from "../../../types/CourseTypes";
 import IconTrash from "@mui/icons-material/DeleteOutlined";
+import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 const ClassModal = ({
   onClose,
@@ -49,12 +50,14 @@ const ClassModal = ({
       <form className={styles.container}>
         {typeEdit && (
           <div className={styles.trash}>
-            <IconTrash
-              sx={{ color: "var(--color-feedback-error)" }}
-              onClick={() => (
-                setValidationType("DELETE"), setValidationModalIsOpen(true)
-              )}
-            />
+            {/* <Tooltip direction={"bottom"} content={"Excluir"}> */}
+              <IconTrash
+                sx={{ color: "var(--color-feedback-error)" }}
+                onClick={() => (
+                  setValidationType("DELETE"), setValidationModalIsOpen(true)
+                )}
+              />
+            {/* </Tooltip> */}
           </div>
         )}
         <label>Nome da Aula:</label>
