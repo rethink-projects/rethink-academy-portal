@@ -34,7 +34,7 @@ const CourseScreen = () => {
   const [modules, setModules] = useState<Module[]>([]);
   const [modalModule, setModule] = useState<Module>();
   const [course, setCourse] = useState<CourseResponse>();
-
+  const [lessonsQnt, setLessonsQnt] = useState(0);
   const [trailName, setTrailName] = useState("");
   const [ambassador, setambassador] = useState<boolean>();
 
@@ -75,6 +75,13 @@ const CourseScreen = () => {
     setModuleModalIsOpen(true);
     setModuleName("");
   };
+
+
+  useEffect(() => {
+    let qnt = 0;
+    modules.map((module) => (qnt += module!.lessons!.length));
+    setLessonsQnt(qnt);
+  }, [modules]);
 
   if (
     !user ||
@@ -233,8 +240,8 @@ const CourseScreen = () => {
               level={getLevel(course.level)}
               learn={course.learning}
               module_class={{
-                module: totalModules,
-                class: totalLessons,
+                module: modules.length,
+                class: lessonsQnt,
               }}
               skills={course.skills}
               avatar={course.imageTeacher}

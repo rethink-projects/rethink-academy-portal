@@ -63,9 +63,6 @@ const Accordion = ({
   const confirmLessonChanges = () => {
     if (lessonModalType === "ADD") {
       addLessonReq();
-      // setTimeout(function () {
-      reRender();
-      // }, 100);
     } else if (validationType === "SAVE") {
       editLessonReq();
       lesson!.name = lessonName;
@@ -76,6 +73,9 @@ const Accordion = ({
 
       // lessons.remove(lesson!.indexOf, 1);
     }
+    setTimeout(function () {
+      reRender();
+    }, 200);
   };
 
   const setDeleteModuleModal = () => {
@@ -114,13 +114,17 @@ const Accordion = ({
   };
 
   const editLessonReq = async () => {
-    api.put("/lesson/" + lesson!.id, {
-      id: lesson!.id,
-      name: lessonName,
-      description: lessonDescription,
-      embedUrl: lessonEmbed,
-      moduleId: module.id,
-    });
+    api
+      .put("/lesson/" + lesson!.id, {
+        id: lesson!.id,
+        name: lessonName,
+        description: lessonDescription,
+        embedUrl: lessonEmbed,
+        moduleId: module.id,
+      })
+      .then(() => {
+        reRender();
+      });
   };
   const deleteLessonReq = async () => {
     api.delete("/lesson/" + lesson!.id);
