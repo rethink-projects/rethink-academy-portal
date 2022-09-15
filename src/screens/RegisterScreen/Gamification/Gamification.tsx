@@ -44,7 +44,9 @@ const Modal = ({
               alt="A GIF of a mage delivering a hat"
             />
           ) : (
-            <img src={Images.hatWin} alt="A hat with a text message" />
+            type === "Win" && (
+              <img src={Images.hatWin} alt="A hat with a text message" />
+            )
           )}
 
           {type === "Degrading" && (
