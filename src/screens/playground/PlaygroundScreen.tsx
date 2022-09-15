@@ -1,7 +1,7 @@
 /* eslint-disable no-sequences */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { Button } from "@mui/material";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
@@ -19,9 +19,7 @@ function PlaygroundScreen() {
     await initStorage();
   }, [initStorage]);
 
-  useEffect(() => {
-    console.log("TESTE");
-  }, [acceptedFiles]);
+  useEffect(() => {}, [acceptedFiles]);
   useEffect(() => {
     handleInitStorage();
   }, [handleInitStorage]);
@@ -44,6 +42,7 @@ function PlaygroundScreen() {
   if (!user) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className={styles.playground_container}>
       <div className={styles.main_content}>

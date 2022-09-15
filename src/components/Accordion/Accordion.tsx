@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Accordion.module.css";
+
 import IconCheckedCircle from "@mui/icons-material/CheckCircleOutline";
 import IconCircle from "@mui/icons-material/CircleOutlined";
 import IconMore from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -16,9 +17,9 @@ type Module = {
   name: string;
   blocked: boolean;
   completed: boolean;
-  lessons?: Array<Class>;
+  lessons?: Array<Lesson>;
 };
-type Class = {
+type Lesson = {
   id: string;
   name: string;
   url: string;
@@ -51,7 +52,7 @@ const Accordion = ({
   },
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const lessons: Array<Class> = module.lessons!;
+  const lessons: Array<Lesson> = module.lessons!;
 
   return (
     <div className={isOpen ? styles.container : ""}>
@@ -74,26 +75,25 @@ const Accordion = ({
           ) : (
             <IconCircle />
           )}
-          {/* isso ainda será alterado */}
-          {`Módulo 1 - ${module.name}`}
+          {`Módulo ${module.id} - ${module.name}`}
         </div>
         <div className={styles.right_side}>
           <IconMore />
         </div>
       </div>
       {isOpen && lessons != null && (
-        <div className={styles.Accordion_container}>
-          {lessons.map((lesson, index) => (
+        <div className={styles.acordeon_container}>
+          {lessons.map((lesson) => (
             <div
-              key={index}
-              className={styles.Accordion_item}
+              className={styles.acordeon_item}
+              key={lesson.id}
               style={{ width: width + 2 }}
             >
-              <div className={styles.Accordion_left_side}>
+              <div className={styles.acordeon_left_side}>
                 <IconVideoCam />
                 {lesson.name}
               </div>
-              <div className={styles.Accordion_right_side}>
+              <div className={styles.acordeon_right_side}>
                 {lesson.completed && <IconCheckedCircle />}
               </div>
             </div>

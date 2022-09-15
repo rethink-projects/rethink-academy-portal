@@ -15,6 +15,7 @@ import {
   getGroupTaskByTag,
   getRecordOfDay,
 } from "../../services/backend/Tasks";
+import { useAuth } from "../../context/AuthContext";
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
@@ -38,6 +39,7 @@ const Register = ({ type = "home", email }: RegisterProps) => {
     time: number;
   };
 
+  const { user } = useAuth();
   const [tags, setTags] = useState<Tag[]>([]);
   const [records, setRecords] = useState<Record[]>([]);
 
@@ -50,7 +52,7 @@ const Register = ({ type = "home", email }: RegisterProps) => {
           setRecords(response);
           let helper = 0;
           if (response) {
-            response.map((record: any) => {
+            response.forEach((record: any) => {
               helper += record.time;
             });
             helper = helper / 60;
@@ -63,13 +65,11 @@ const Register = ({ type = "home", email }: RegisterProps) => {
         .then((response) => {
           setTags(response);
           let helper = 0;
-          if (response) {
-            response.map((tag: any) => {
-              helper += tag.realTime;
-            });
-            helper = helper / 60;
-            setTime(Math.trunc(helper));
-          }
+          response.forEach((tag: any) => {
+            helper += tag.realTime;
+          });
+          helper = helper / 60;
+          setTime(Math.trunc(helper));
         })
         .catch((err) => console.error(err));
     }
@@ -164,8 +164,20 @@ const Register = ({ type = "home", email }: RegisterProps) => {
             }
           >
             <>
-              {type !== "home" &&
-                tags &&
+              {type === "home" ? (
+                records.length > 0 ? (
+                  records.map((record) => (
+                    <Tasks
+                      key={record.id}
+                      title={record.name}
+                      status={record.status}
+                      time={formatDate(record.hours, record.minutes)}
+                    />
+                  ))
+                ) : (
+                  <div>Você ainda não possui tasks hoje</div>
+                )
+              ) : (
                 tags.map((tag) => {
                   return (
                     <Tasks
@@ -175,18 +187,8 @@ const Register = ({ type = "home", email }: RegisterProps) => {
                       type={type}
                     />
                   );
-                })}
-
-              {type === "home" &&
-                records.length > 0 &&
-                records.map((record) => (
-                  <Tasks
-                    key={record.id}
-                    title={record.name}
-                    status={record.status}
-                    time={formatDate(record.hours, record.minutes)}
-                  />
-                ))}
+                })
+              )}
             </>
           </div>
         </div>
