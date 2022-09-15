@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PersonalDevelopmentChart from "./components/SkillChart/PersonalDevelopmentChart";
 import AuthProvider from "./context/AuthProvider";
 import CourseScreen from "./screens/course/CourseScreen";
 import Class from "./screens/class/Class";
@@ -35,7 +36,14 @@ function App() {
                 path="/dashboard/trilhas/:id/curso/:id/aulas/:id"
                 element={<Class />}
               />
-              <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route
+                path="/dashboard/yourDevelopment"
+                element={
+                  <PersonalDevelopmentChart
+                    email={"felipe.reggiane@rethink.dev"}
+                  />
+                }
+              />
               <Route
                 path="/dashboard/register/analysis"
                 element={<TaskAnalysisScreen />}
