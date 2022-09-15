@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import CardMetas from "../../components/CardMetas/CardMetas";
+import GoalsCard from "../../components/GoalsCard/GoalsCard";
 import CardNotas from "./components/CardNotas/CardNotas";
 import BreadCrumb from "../../components/Breadcrumb/Breadcrumb";
 import PersonalDevelopmentChart from "../../components/SkillChart/PersonalDevelopmentChart";
@@ -52,7 +52,7 @@ const PersonalDevelopmentScreen = () => {
               </div>
               <div className={style.metasContainer}>
                 <h2>Metas</h2>
-                <CardMetas studentEmail="amanda.duarte@rethink.dev" />
+                <GoalsCard studentEmail="amanda.duarte@rethink.dev" />
               </div>
             </div>
             <div className={style.bottomCardContainer}>

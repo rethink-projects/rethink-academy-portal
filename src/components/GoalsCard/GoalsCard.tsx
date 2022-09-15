@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styles from "./CardMetas.module.css";
+import styles from "./GoalsCard.module.css";
 
 import Checkbox from "../Checkbox/Checkbox";
 
@@ -30,7 +30,7 @@ type GoalsCardProps = {
   studentEmail?: string;
 };
 
-const CardMetas = ({ studentEmail }: GoalsCardProps) => {
+const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
   const { user } = useAuth();
 
   const [goalList, setGoalList] = useState<goalList>();
@@ -246,4 +246,4 @@ const CardMetas = ({ studentEmail }: GoalsCardProps) => {
   }
 };
 
-export default CardMetas;
+export default GoalsCard;
