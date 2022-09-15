@@ -59,7 +59,7 @@ type Main =
   | "troll";
 
 const CursosScreen = () => {
-  const [intern, setIntern] = useState<boolean>();
+  const [intern, setIntern] = useState<boolean>(true);
 
   const { user } = useAuth();
 
@@ -95,7 +95,7 @@ const CursosScreen = () => {
     setTrailMain(responseCourse.data.trailMain.toLowerCase());
     setCourses(responseCourse.data.data);
 
-    if (responseCourse.data.user.role != "STUDENT") setIntern(false);
+    if (user.role === "AMBASSADOR") setIntern(false);
   };
 
   useEffect(() => {
