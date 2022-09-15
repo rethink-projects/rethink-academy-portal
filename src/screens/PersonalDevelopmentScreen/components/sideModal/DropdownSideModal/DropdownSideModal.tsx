@@ -450,12 +450,12 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
               onClick={() => setAddGoalListOpen(true)}
             >
               <AddRoundedIcon className={styles.modal_newGoal_icon} />
-              <p>Adicionar nova meta</p>
+              <p>Adicionar novo grupo de metas</p>
             </div>
             {addGoalListOpen && (
               <div className={styles.modal_newGoal_action}>
                 <div className={styles.modal_newGoal_action_header}>
-                  <p>Dê um título a meta</p>
+                  <p>Adicionar novo grupo de metas</p>
                   <CloseRoundedIcon
                     onClick={() => setAddGoalListOpen(false)}
                     className={styles.modal_header_escape}
@@ -778,12 +778,12 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
               onClick={() => setAddGoalListOpen(true)}
             >
               <AddRoundedIcon className={styles.modal_newGoal_icon} />
-              <p>Adicionar nova meta</p>
+              <p> Adicionar novo grupo de metas</p>
             </div>
             {addGoalListOpen && (
               <div className={styles.modal_newGoal_action}>
                 <div className={styles.modal_newGoal_action_header}>
-                  <p>Dê um título a meta</p>
+                  <p>Adicionar novo grupo de metas</p>
                   <CloseRoundedIcon
                     onClick={() => setAddGoalListOpen(false)}
                     className={styles.modal_header_escape}
@@ -804,7 +804,11 @@ const DropdownSideModal = ({ stundentEmail }: prospType) => {
         <div className={styles.dropdown_noGoals_container}>
           <div className={styles.dropdown_noGoals_inner}>
             <img src={Images.noGoals} alt="icon if no have goals" />
-            <p>Não foi atribuído nenhuma meta</p>
+            {user.role === "AMBASSADOR" ? (
+              <p>Não foi atribuído nenhuma meta ao estagiário</p>
+            ) : (
+              <p>Não foi atribuído nenhuma meta</p>
+            )}
           </div>
         </div>
       </div>

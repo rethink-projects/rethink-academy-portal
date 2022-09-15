@@ -126,9 +126,9 @@ const SideModal = ({ onClose = () => {}, stundentEmail }: modalProps) => {
         <div className={styles.modal_container}>
           <div className={styles.modal_header}>
             <div className={styles.modal_header_text}>
-              <h1 className={styles.modal_header_title}>Suas metas</h1>
+              <h1 className={styles.modal_header_title}>Metas</h1>
               <p className={styles.modal_header_description}>
-                Acompanhe suas metas{" "}
+                Acompanhe as metas do estagiário{" "}
               </p>
             </div>
             <CloseRoundedIcon

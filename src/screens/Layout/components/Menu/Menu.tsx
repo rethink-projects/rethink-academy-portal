@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Images from "../../../../assets";
 import Avatar from "../../../../components/Avatar/Avatar";
 import { useAuth } from "../../../../context/AuthContext";
@@ -58,7 +58,13 @@ function Menu() {
         <div
           className={isOpen ? styles.menu_inner_open : styles.menu_inner_closed}
         >
-          <MenuItem isOpen={isOpen} text="Home" icon={Images.icons.IconHome} />
+          <Link to={"/dashboard"}>
+            <MenuItem
+              isOpen={isOpen}
+              text="Home"
+              icon={Images.icons.IconHome}
+            />
+          </Link>
           <MenuItem
             isOpen={isOpen}
             text="Seu Desenvolvimento"
@@ -78,6 +84,7 @@ function Menu() {
           <MenuItem
             isOpen={isOpen}
             text="Contrato"
+            onClick={() => {navigate("/dashboard/contrato");}}
             icon={Images.icons.ContractIcon}
           />
         </div>
