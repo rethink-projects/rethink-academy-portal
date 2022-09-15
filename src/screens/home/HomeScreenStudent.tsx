@@ -120,11 +120,6 @@ function HomeScreenStudent() {
           </div>
           <p className={Styles.emblems_text}>Emblemas</p>
         </div>
-        {/* {[1, 2, 3, 4, 5].map((item) => (
-          <div className={Styles.emblems_icons}>
-          
-          </div>
-        ))} */}
         <div className={Styles.emblems_icons_new_teste}>
           {badges &&
             badges.map((item: any) => (

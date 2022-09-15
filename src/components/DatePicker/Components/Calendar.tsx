@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { DateRange } from "react-date-range";
@@ -42,12 +43,6 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
     },
   ]);
 
-  useEffect(() => {
-    if (state) {
-      changeTasks();
-    }
-  }, [state, user]);
-
   const changeTasks = async () => {
     if (user) {
       await getDateFilter(
@@ -63,6 +58,12 @@ const CalendarComponent = ({ setTasks }: CalendarProps) => {
         .catch((err) => console.error(err));
     }
   };
+
+  useEffect(() => {
+    if (state) {
+      changeTasks();
+    }
+  }, [state, user]);
 
   const getFullDate = (data: Date) => {
     let month = (data.getMonth() + 1).toString();

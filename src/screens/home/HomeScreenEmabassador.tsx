@@ -71,22 +71,61 @@ const HomeScreenEmabassador = ({ user }: any) => {
     );
   }, [roleFilter]);
 
+  const getDateRange = (initialDate: Date, finalDate: Date) => {
+    const date: Date = new Date(initialDate.getTime());
+    let stages: {
+      finalDate: number;
+      dates: number[];
+    }[] = [
+      {
+        finalDate: new Date(2022, 2, 25).getTime(),
+        dates: [],
+      },
+      {
+        finalDate: new Date(2022, 3, 29).getTime(),
+        dates: [],
+      },
+      {
+        finalDate: new Date(2022, 8, 21).getTime(),
+        dates: [],
+      },
+    ];
+
+    let stageHelper = 0;
+    while (date <= finalDate) {
+      if (date.getTime() >= stages[stageHelper].finalDate) {
+        if (stageHelper < stages.length - 1) {
+          stageHelper++;
+        }
+      }
+      stages[stageHelper].dates.push(date.getTime());
+      date.setDate(date.getDate() + 1);
+    }
+    return stages;
+  };
+  const dateRanges = getDateRange(new Date(2022, 2, 7), new Date(2022, 8, 22));
   const progressInfo = [
     {
-      totalValue: 100,
-      relativeValue: 50,
+      totalValue: dateRanges[0].dates.length,
+      relativeValue: dateRanges[0].dates.filter(
+        (date) => date <= new Date().getTime()
+      ).length,
       title: "Boas vindas",
       desc: "Onboarding e Conhecimentos Gerais",
     },
     {
-      totalValue: 100,
-      relativeValue: 50,
+      totalValue: dateRanges[1].dates.length,
+      relativeValue: dateRanges[1].dates.filter(
+        (date) => date <= new Date().getTime()
+      ).length,
       title: "Nivelamento Técnico",
       desc: "Conhecimentos sobre o Ciclo do Produto e Metodologias Ágeis",
     },
     {
-      totalValue: 100,
-      relativeValue: 50,
+      totalValue: dateRanges[2].dates.length,
+      relativeValue: dateRanges[2].dates.filter(
+        (date) => date <= new Date().getTime()
+      ).length,
       title: "Projeto Prático",
       desc: "Colocar em ação todo o conhecimento aprendido em um projeto real",
     },
