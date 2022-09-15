@@ -29,3 +29,13 @@ export const getAllStudents = async () => {
     return;
   }
 };
+
+export const update = async (userData: any, email: string) => {
+  try {
+    const { data } = await api.patch(`/user/${email}`, userData);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

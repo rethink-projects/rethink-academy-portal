@@ -74,10 +74,22 @@ export const getHoursLastDay = async (email: string) => {
   }
 };
 
+export const getHoursOfThreeLastDays = async (email: string) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:4000/api/tasks/day/hours/${email}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
+
 export const getHoursOfMonth = async (email: string) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/hours/${email}`
+      `http://localhost:4000/api/tasks/month/hours/${email}`
     );
     return data;
   } catch (error) {

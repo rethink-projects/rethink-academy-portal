@@ -11,6 +11,7 @@ import Toast from "../../components/Toast/Toast";
 import Gamification from "./Gamification/Gamification";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
 import { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
@@ -22,17 +23,20 @@ import {
   getHoursLastDay,
   getHoursOfMonth,
 } from "../../services/backend/Tasks";
-import dayjs from "dayjs";
+
+import { update as updateUser } from "../../services/backend/UserService";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);
   const [time, setTime] = useState(0);
-  const [controller, setController] = useState(false);
-  const [prevHours, setPrevHours] = useState(0);
+  // const [controller, setController] = useState(false);
+
+  const [prevHours, setPrevHours] = useState();
   const [controllerPrevHours, setControllerPrevHours] = useState(false);
-  const [controllerEmblem, setControllerEmblem] = useState(false);
+
+  // const [controllerEmblem, setControllerEmblem] = useState(false);
   const [formData, setFormData] = useState<{
     taskName: string;
     date: string;
@@ -50,6 +54,16 @@ const RegisterScreen = () => {
     status: "",
     description: "",
   });
+
+  // type user = {
+  //   email: string;
+  //   role?: "STUDENT" | "AMBASSADOR" | "RETHINKER";
+  //   name?: string;
+  //   surname?: string;
+  //   avatar?: string;
+  //   main?: "ENGINEERING" | "DESIGN" | "PRODUCT";
+  //   receiveGIF: boolean;
+  // };
 
   // type task = {
   //   name: string;
@@ -106,54 +120,62 @@ const RegisterScreen = () => {
     setUpdate(true);
   };
 
-  const getTime = async () => {
-    await getRecordOfDay("fabiana.kamo@rethink.dev") // ALTERAR
-      .then((response) => {
-        let helper = 0;
-        response.map((record: any) => {
-          helper += record.time;
-        });
-        helper = helper / 60;
-        setTime(Math.trunc(helper));
-        if (Math.trunc(helper) >= 6) {
-          setController(true);
-        }
-      })
-      .catch((err) => console.error(err));
-  };
+  // const getTime = async () => {
+  //   await getRecordOfDay("fabiana.kamo@rethink.dev") // ALTERAR
+  //     .then((response) => {
+  //       let helper = 0;
+  //       response.map((record: any) => {
+  //         helper += record.time;
+  //       });
+  //       helper = helper / 60;
+  //       setTime(Math.trunc(helper));
+  //       if (Math.trunc(helper) >= 6) {
+  //         setController(true);
+  //       }
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
 
   const getPrevHours = async () => {
     await getHoursLastDay("fabiana.kamo@rethink.dev") // ALTERAR
       .then((response) => {
         setPrevHours(response);
-        if (response < 6) {
-          setControllerPrevHours(true);
+        if (response.hours < 6) {
+          // setControllerPrevHours(true);
+          updateUser({ receiveGIF: false }, response.user.email);
         }
       })
       .catch((err) => console.error(err));
   };
 
-  const getMonthHours = async () => {
-    await getHoursOfMonth("fabiana.kamo@rethink.dev") // ALTERAR
-      .then((response) => {
-        setPrevHours(response);
-        if (response >= 120) {
-          setControllerEmblem(true);
-        }
-      })
-      .catch((err) => console.error(err));
-  };
+  // const getMonthHours = async () => {
+  //   await getHoursOfMonth("fabiana.kamo@rethink.dev") // ALTERAR
+  //     .then((response) => {
+  //       setPrevHours(response);
+  //       if (response >= 120) {
+  //         setControllerEmblem(true);
+  //       }
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
 
   useEffect(() => {
-    getTime();
+    // getTime();
     getPrevHours();
-    getMonthHours();
+    // getMonthHours();
   }, []);
 
   // FIX:
   // Logica para perder o chapeu - 3 dias após não registrar as 6h diarias - Registrando normalmente no dia em que perdeu o chapéu, você ganhará novamente um chapéu -- PRIORITY
-  // Logica para ganhar o emblema - 1 mes depois de horas registradas -- PRIORITY
+
+  // Logica para ganhar o emblema - 1 mes depois de horas registradas -- PRIORITY  OK
+  // Entregar o emblema
+
   // Encontrar logica para o gif nao aparecer sempre que atualiza a pagina -- PRIORITY
+  // Aparecem todos os gif juntos
+
+  // Alterar email nos parametros das funçoes
+  // consertar rotas
 
   return (
     <div className={styles.register_container}>
@@ -165,13 +187,13 @@ const RegisterScreen = () => {
             type="Win"
           />
         )} */}
-        {/* {controllerPrevHours && (
+        {controllerPrevHours && (
           <Gamification
             setActive={() => setControllerPrevHours(false)}
             id="outside"
             type="Degrading"
           />
-        )} */}
+        )}
         {/* {controllerPrevHours && (
           <Gamification
             setActive={() => setControllerPrevHours(false)}
@@ -179,13 +201,13 @@ const RegisterScreen = () => {
             type="Losing"
           />
         )} */}
-        {controllerEmblem && (
+        {/* {controllerEmblem && (
           <EmblemCard
             badge="timeRecord"
             content="Teste"
             onClickCollect={() => setControllerEmblem(false)}
           />
-        )}
+        )} */}
       </div>
       <div className={styles.register_content}>
         <div className={styles.register_header}>
