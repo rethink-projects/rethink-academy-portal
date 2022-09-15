@@ -46,12 +46,11 @@ const NotesScreen = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const [notes, setNotes] = useState<noteType[]>([]);
+  const [studentEmail, setStudentEmail] = useState<any>(null);
 
   const { user } = useAuth();
-  // console.log(user);
-  const navigate = useNavigate();
 
-  const [studentEmail, setStudentEmail] = useState<any>(null);
+  const navigate = useNavigate();
 
   const validateRoute = () => {
     let link = window.location.pathname.split("/");
@@ -113,37 +112,6 @@ const NotesScreen = () => {
     }
   };
 
-  useEffect(() => {
-    // Loading
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-
-    // console.log("user -> " + user?.name);
-
-    // Validate Route
-    if (user) {
-      if (validateRoute()) {
-        setAllowGetNotes(true);
-      } else {
-        setAllowGetNotes(false);
-      }
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user && allowGetNotes) {
-      getNotes();
-
-      setState(undefined);
-      setCategories(undefined);
-      setIsPublic(undefined);
-      setTitle(undefined);
-      setContent(undefined);
-    }
-  }, [user, update, updateReturn, allowGetNotes]);
-
   const createNote = () => {
     // console.log("create");
 
@@ -196,6 +164,37 @@ const NotesScreen = () => {
     }
     setUpdate((current) => !current);
   };
+
+  useEffect(() => {
+    // Loading
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    // console.log("user -> " + user?.name);
+
+    // Validate Route
+    if (user) {
+      if (validateRoute()) {
+        setAllowGetNotes(true);
+      } else {
+        setAllowGetNotes(false);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user && allowGetNotes) {
+      getNotes();
+
+      setState(undefined);
+      setCategories(undefined);
+      setIsPublic(undefined);
+      setTitle(undefined);
+      setContent(undefined);
+    }
+  }, [user, update, updateReturn, allowGetNotes]);
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
