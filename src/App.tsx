@@ -9,7 +9,7 @@ import Layout from "./screens/Layout/Layout";
 import LoginScreen from "./screens/login/LoginScreen";
 import NotesScreen from "./screens/notes/NotesScreen";
 import TrilhasScreen from "./screens/trilhas/TrilhasScreen";
-import PersonalDevelopmentScreen from "./screens/desenvolvimentoPessoal/PersonalDevelopmentScreen";
+import PersonalDevelopmentScreen from "./screens/PersonalDevelopmentScreen/PersonalDevelopmentScreen";
 import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import CursosScreen from "./screens/CoursesScreen/CoursesScreen";
 import RequireAuth from "./services/auth";
