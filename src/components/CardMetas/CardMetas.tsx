@@ -7,7 +7,7 @@ import Checkbox from "../Checkbox/Checkbox";
 import Images from "../../assets/index";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import ModalLateral from "../../screens/desenvolvimentoPessoal/components/modalLateral/ModalLateral";
+import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
@@ -72,7 +72,7 @@ const CardMetas = ({ studentEmail }: GoalsCardProps) => {
 
   useEffect(() => {
     getGoalList();
-  }, [user, update]);
+  }, [user, update, isModalOpen]);
 
   const updateGoal = async (
     id: string,
@@ -172,7 +172,15 @@ const CardMetas = ({ studentEmail }: GoalsCardProps) => {
             onClick={() => setModalOpen(true)}
             className={styles.cardUltimasMetas_arrow}
           />
-          {isModalOpen && <ModalLateral onClose={() => setModalOpen(false)} />}
+          {isModalOpen &&
+            (studentEmail ? (
+              <SideModal
+                stundentEmail={studentEmail}
+                onClose={() => setModalOpen(false)}
+              />
+            ) : (
+              <SideModal onClose={() => setModalOpen(false)} />
+            ))}
         </div>
 
         <div className={styles.Metas_Container}>

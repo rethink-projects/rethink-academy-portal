@@ -6,6 +6,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
+import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
 
 type cardProps = {
   studentEmail?: string;
@@ -15,6 +16,8 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
   const { user } = useAuth();
   const [goalList, setGoalList] = useState<any>();
   const [goals, setGoals] = useState<any>();
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const getGoalList = async () => {
     if (user?.role === "STUDENT") {
@@ -46,7 +49,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
 
   useEffect(() => {
     getGoalList();
-  }, [user]);
+  }, [user, isModalOpen]);
 
   if (goals && goalList) {
     let completedGoals = goals.filter((goal: any) => goal.conclude === true);
@@ -75,7 +78,9 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
 
             {!studentEmail && (
               <ArrowForwardIosRoundedIcon
-                onClick={() => {}}
+                onClick={() => {
+                  setModalOpen(true);
+                }}
                 className={styles.LastGoalsCard_arrow}
               />
             )}
@@ -103,10 +108,22 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
                   text="Ver detalhes"
                   type="secondary"
                   width={309}
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
                 />
               </div>
             )}
           </div>
+          {isModalOpen &&
+            (studentEmail ? (
+              <SideModal
+                stundentEmail={studentEmail}
+                onClose={() => setModalOpen(false)}
+              />
+            ) : (
+              <SideModal onClose={() => setModalOpen(false)} />
+            ))}
         </div>
       </div>
     );
@@ -147,7 +164,9 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
             </div>
             {!studentEmail && (
               <ArrowForwardIosRoundedIcon
-                onClick={() => {}}
+                onClick={() => {
+                  setModalOpen(true);
+                }}
                 className={styles.LastGoalsCard_arrow}
               />
             )}
@@ -171,10 +190,22 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
                   text="Ver detalhes"
                   type="secondary"
                   width={309}
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
                 />
               </div>
             )}
           </div>
+          {isModalOpen &&
+            (studentEmail ? (
+              <SideModal
+                stundentEmail={studentEmail}
+                onClose={() => setModalOpen(false)}
+              />
+            ) : (
+              <SideModal onClose={() => setModalOpen(false)} />
+            ))}
         </div>
       </div>
     );

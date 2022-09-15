@@ -64,8 +64,9 @@ const EvaluationTag = ({
 
   return (
     <div className={styles.tag_container}>
-      {headers[header].map((item) => (
+      {headers[header].map((item, index) => (
         <button
+          key={index}
           className={handleClass(item)}
           onClick={() => {
             setSkill(item);
