@@ -22,8 +22,8 @@ const NotesCard = ({ studentEmail }: notesCardProps) => {
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  console.log(user);
-  console.log(studentEmail);
+  // console.log(user);
+  // console.log(studentEmail);
 
   useEffect(() => {
     if (user) {
