@@ -96,8 +96,7 @@ const AmbassadorViewTasksMM = ({ email }: TypeAmbassadorViewTasksMM) => {
               />
             </div>
           )}
-          {tasks &&
-            tasks.length > 0 &&
+          {tasks.length > 0 ? (
             tasks.map(
               (day: any[], index) =>
                 day[0] && (

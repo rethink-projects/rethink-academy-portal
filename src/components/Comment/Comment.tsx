@@ -26,7 +26,7 @@ const Comment = () => {
   const { user } = useAuth();
 
   const getComments = async () => {
-    const data = await getCommentsFromUser("gabriel.gomes@rethink.dev");
+    const data = await getCommentsFromUser("sthephany.tezza@rethink.dev");
     console.log({ data });
     setComments(data);
   };

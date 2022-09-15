@@ -45,7 +45,7 @@ const SelectionTeam = ({ internSelected }: TypeSelection) => {
   const getUserData = async () => {
     const data = await getAllStudents();
     setUserData(data);
-    setInterns(internsDataForMap(data));
+    if (data) setInterns(internsDataForMap(data));
   };
 
   const reloading = () => {
@@ -78,7 +78,7 @@ const SelectionTeam = ({ internSelected }: TypeSelection) => {
     }
   }, [team]);
 
-  if (usersData.length > 0) {
+  if (usersData && usersData.length > 0) {
     return (
       <div className={styles.containerSelectionTeam}>
         <Dropdown

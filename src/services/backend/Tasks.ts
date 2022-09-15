@@ -75,7 +75,7 @@ export const getHoursLastDay = async (email: string) => {
 
 export const getHoursOfMonth = async (email: string) => {
   try {
-    const { data } = await axios.get(
+    const { data } = await api.get(
       `http://localhost:4000/api/tasks/hours/${email}`
     );
     return data;

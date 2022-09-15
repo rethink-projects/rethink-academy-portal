@@ -12,6 +12,7 @@ import Register from "../../components/Register/Register";
 import SelectionTeam from "../../components/SelectionTeam/SelectionTeam";
 import { getUserFromBackend } from "../../services/backend/UserService";
 import Toast from "../../components/Toast/Toast";
+import Comment from "../../components/Comment/Comment";
 
 const InternAnalisysScreen = () => {
   type Intern = {
@@ -96,7 +97,9 @@ const InternAnalisysScreen = () => {
           </div>
         </div>
       </div>
-      <div className={styles.intern_comment}></div>
+      <div className={styles.intern_comment}>
+        <Comment />
+      </div>
     </div>
   );
 };
