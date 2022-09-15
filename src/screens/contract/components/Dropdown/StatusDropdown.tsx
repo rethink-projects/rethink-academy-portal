@@ -44,6 +44,10 @@ const StatusDropdown = ({
     });
   }, [id]);
 
+  useEffect(() => {
+    value ? setPlaceholder(value) : setPlaceholder(initialText);
+  }, [value]);
+
   let leftIcon;
 
   value === "Ativo"
@@ -54,7 +58,6 @@ const StatusDropdown = ({
     ? (leftIcon = <ErrorOutline sx={{ color: yellow[700] }} />)
     : (leftIcon = "");
 
-    console.log({value})
   return (
     <div className={styles.dropdown_container} style={{ width: width }}>
       <div

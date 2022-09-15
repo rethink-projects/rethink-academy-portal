@@ -83,6 +83,9 @@ const ContractScreen = () => {
 
   const getInfo = async (email: string) => {
     const info = await axios.get(`http://localhost:4000/api/info/${email}`);
+    info.data.info
+      ? setContractStatus(info.data.info.status)
+      : setContractStatus("");
     return info.data.info;
   };
 
@@ -158,36 +161,67 @@ const ContractScreen = () => {
     };
   }, [info, user]);
 
-  const handlerContractStatus = (value: any) => {
-    if (studentEmail) {
-      setContractStatus(value);
-      axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
-        status: value,
-      });
-      notify({
-        title: "Status do Contrato atualizado!",
-        type: "success",
-      });
+  const handlerContractStatus = async (value: any) => {
+    if (info) {
+      if (studentEmail) {
+        setContractStatus(value);
+        await axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+          status: value,
+        });
+        notify({
+          title: "Status do Contrato atualizado!",
+          type: "success",
+        });
+      }
+    } else {
+      try {
+        setContractStatus(value);
+        const info = await axios.post(`http://localhost:4000/api/info`, {
+          email: studentEmail,
+          status: value,
+        });
+        return;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const { handleSubmit, control } = useForm();
 
-  const onSubmit = (data: any) => {
-    if (studentEmail) {
-      axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
-        college: data.college,
-        semester: data.semester,
-        workTime: data.workTime,
-        transportationVoucher: data.transportationVoucher,
-        providedEquipment: data.providedEquipment,
-      });
-      notify({
-        title: "Informações atualizadas!",
-        type: "success",
-      });
-      handleClick();
-      setInfo(data);
+  const onSubmit = async (data: any) => {
+    if (info) {
+      if (studentEmail) {
+        await axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+          college: data.college,
+          semester: data.semester,
+          workTime: data.workTime,
+          transportationVoucher: data.transportationVoucher,
+          providedEquipment: data.providedEquipment,
+        });
+        notify({
+          title: "Informações atualizadas!",
+          type: "success",
+        });
+        handleClick();
+        setInfo(data);
+      }
+    } else {
+      try {
+        const info = await axios.post(`http://localhost:4000/api/info`, {
+          email: studentEmail,
+          college: data.college,
+          semester: data.semester,
+          workTime: data.workTime,
+          transportationVoucher: data.transportationVoucher,
+          providedEquipment: data.providedEquipment,
+        });
+        handleClick();
+        setInfo(data);
+        return;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
