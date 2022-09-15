@@ -9,19 +9,34 @@ import { useAuth } from "../../context/AuthContext";
 import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import { getUserFromBackend } from "../../services/backend/UserService";
 import { useEffect, useState } from "react";
+import Emblem from "../../components/Emblem/Emblem";
+import { getUserBadges } from "../../services/backend/BadgeService";
 
 function HomeScreenStudent() {
   const { user } = useAuth();
   const [userAtt, setUserAtt] = useState<any>({});
+  const [badges, setBadges] = useState<any>([]);
+
   const GetUser = async () => {
     const data = await getUserFromBackend(user.email);
     setUserAtt(data);
+    const badgesData = await getUserBadges(user.email);
+
+    let newBadges = [];
+    for (const key in badgesData) {
+      newBadges.push({ badgeNumber: badgesData[key].length, title: key });
+    }
+    setBadges(newBadges);
   };
 
   useEffect(() => {
     GetUser();
+    console.log(badges);
   }, []);
 
+  useEffect(() => {
+    console.log(badges);
+  }, [badges]);
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -105,20 +120,22 @@ function HomeScreenStudent() {
           </div>
           <p className={Styles.emblems_text}>Emblemas</p>
         </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-        </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-        </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
+        {/* {[1, 2, 3, 4, 5].map((item) => (
+          <div className={Styles.emblems_icons}>
+          
+          </div>
+        ))} */}
+        <div className={Styles.emblems_icons_new_teste}>
+          {badges &&
+            badges.map((item: any) => (
+              <div className={Styles.emblems_icons_new_teste_item}>
+                <Emblem
+                  badge={item.title}
+                  size="default"
+                  number={item.badgeNumber}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
