@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import style from "./CardNotas.module.css";
+import style from "./NotesCard.module.css";
 
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import TableContent, {
@@ -17,7 +17,7 @@ type notesCardProps = {
   studentEmail?: string;
 };
 
-const CardNotas = ({ studentEmail }: notesCardProps) => {
+const NotesCard = ({ studentEmail }: notesCardProps) => {
   const [notes, setNotes] = useState<noteType[]>([]);
 
   const navigate = useNavigate();
@@ -106,4 +106,4 @@ const CardNotas = ({ studentEmail }: notesCardProps) => {
   );
 };
 
-export default CardNotas;
+export default NotesCard;

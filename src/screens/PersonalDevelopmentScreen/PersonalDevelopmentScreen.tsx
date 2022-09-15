@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import GoalsCard from "../../components/GoalsCard/GoalsCard";
-import CardNotas from "./components/CardNotas/CardNotas";
+import NotesCard from "./components/NotesCard/NotesCard";
 import BreadCrumb from "../../components/Breadcrumb/Breadcrumb";
 import PersonalDevelopmentChart from "../../components/SkillChart/PersonalDevelopmentChart";
 import Spinner from "../../components/Spinner/Spinner";
@@ -48,7 +48,7 @@ const PersonalDevelopmentScreen = () => {
                   </button>
                 </div>
 
-                <CardNotas />
+                <NotesCard />
               </div>
               <div className={style.metasContainer}>
                 <h2>Metas</h2>
