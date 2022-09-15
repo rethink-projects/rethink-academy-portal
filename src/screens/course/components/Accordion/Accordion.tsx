@@ -40,7 +40,7 @@ const Accordion = ({
   reRender,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
-  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
+  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons ?? []);
   const [lesson, setLesson] = useState<Lesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
