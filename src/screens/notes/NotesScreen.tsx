@@ -61,7 +61,7 @@ const NotesScreen = () => {
       link[link.length - 1] &&
       link[link.length - 1] != ""
     ) {
-      if (user.role === "EMBASSADOR" && studentEmail === null) {
+      if (user.role === "AMBASSADOR" && studentEmail === null) {
         // console.log("***");
         setStudentEmail(link[link.length - 1]);
 
@@ -155,7 +155,7 @@ const NotesScreen = () => {
       content: "Por favor insira seu texto aqui...",
     };
 
-    if (user.role === "EMBASSADOR" && studentEmail) {
+    if (user.role === "AMBASSADOR" && studentEmail) {
       newNote.isPublic = true;
       newNote.email = studentEmail;
     }
@@ -184,7 +184,7 @@ const NotesScreen = () => {
     if (updateNote.title === "") {
       updateNote.title = "Sem título";
     }
-    if (user.role === "EMBASSADOR") {
+    if (user.role === "AMBASSADOR") {
       if (studentEmail != null) {
         updateNote.isPublic = true;
       } else {

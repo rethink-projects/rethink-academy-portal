@@ -42,7 +42,7 @@ const CardNotas = ({ studentEmail }: notesCardProps) => {
       );
       setNotes(notes.data.notesFormated);
       return notes.data.notesFormated;
-    } else if (user.role === "EMBASSADOR") {
+    } else if (user.role === "AMBASSADOR") {
       // console.log("**");
 
       const notes = await axios.get(

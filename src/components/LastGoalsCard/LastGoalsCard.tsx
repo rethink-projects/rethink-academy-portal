@@ -30,7 +30,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
         console.log(error);
       }
     }
-    if (user?.role === "EMBASSADOR") {
+    if (user?.role === "AMBASSADOR") {
       try {
         const studentGoalsList = await axios.get(
           `http://localhost:4000/api/goalList/${studentEmail}`
