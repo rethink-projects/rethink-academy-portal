@@ -121,7 +121,7 @@ const AmbassadorViewTasksMM = () => {
                               status={[task.status]}
                               time={`${task.startTime} às ${task.endTime}`}
                               size="large"
-                              hasIcons={true}
+                              hasIcons={false}
                               onClickDelete={handleDelete}
                             />
                           </div>

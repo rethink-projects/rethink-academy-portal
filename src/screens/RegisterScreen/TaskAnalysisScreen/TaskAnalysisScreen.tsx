@@ -15,7 +15,7 @@ const TaskAnalysisScreen = () => {
           <Breadcrumb
             breadcrumbItems={[
               { title: "Home", link: "/" },
-              { title: "Registro de Horas", link: "/register" },
+              { title: "Registro de Horas", link: "/dashboard/register" },
               { title: "Análise de Tarefas", link: "/analysis" },
             ]}
           />
