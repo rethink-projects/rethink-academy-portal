@@ -51,6 +51,7 @@ import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
 import level_Icon from "./level_Icon.svg";
+import chart from "./chart.svg";
 
 import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
@@ -59,6 +60,8 @@ import info from "./infoIcon.png";
 import HardSkillsIconNote from "./HardSkillsIconNote.svg";
 import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
 import DPIconNote from "./DPIconNote.svg";
+import privateNotes from "./privateNotes.svg";
+import avaliations from "./avaliations.svg";
 
 import chat from "./chat.png";
 import ProgressBack from "./ProgressBack.png";
@@ -102,8 +105,11 @@ export const Images = {
   arrowTask,
   homeBackground,
   icons: {
+    avaliations,
+    privateNotes,
     calendarIcon,
     eyeIcon,
+    chart,
     level_Icon,
     left: IconLeft,
     right: IconRight,

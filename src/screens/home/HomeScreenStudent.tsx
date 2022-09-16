@@ -92,7 +92,7 @@ function HomeScreenStudent() {
             <ProgressBar
               width={190}
               totalValue={48}
-              relativeValue={user.exp!}
+              relativeValue={userAtt.exp!}
             />
           </div>
         </div>

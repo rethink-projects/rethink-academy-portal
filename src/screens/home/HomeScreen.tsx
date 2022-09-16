@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/AuthContext";
-import HomeScreenEmabassador from "./HomeScreenEmabassador";
+import HomeScreenAmbassador from "./HomeScreenAmbassador";
 import HomeScreenStudent from "./HomeScreenStudent";
 
 function HomeScreen() {
@@ -7,9 +7,10 @@ function HomeScreen() {
   if (!user) {
     return <> Carregando...</>;
   }
-  if (user.role !== "STUDENT") {
-    return <HomeScreenEmabassador user={user} />;
-  } else return <HomeScreenStudent />;
+  if (user.role === "AMBASSADOR") {
+    return <HomeScreenAmbassador user={user} />;
+  }
+  return <HomeScreenStudent />;
 }
 
 export default HomeScreen;

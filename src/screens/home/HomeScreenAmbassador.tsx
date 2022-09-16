@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown";
-import Styles from "./HomeScreenEmabassador.module.css";
+import Styles from "./HomeScreenAmbassador.module.css";
 import Images from "../../assets";
 import { useNotification } from "../../context/NotificationContext";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -15,7 +15,7 @@ type userFromBackend = {
   main: string;
   avatar: string;
 };
-const HomeScreenEmabassador = ({ user }: any) => {
+const HomeScreenAmbassador = ({ user }: any) => {
   const { notify } = useNotification();
   const [end, setEnd] = useState(false);
   const [users, setUsers] = useState<userFromBackend[]>([]);
@@ -267,4 +267,4 @@ const HomeScreenEmabassador = ({ user }: any) => {
   );
 };
 
-export default HomeScreenEmabassador;
+export default HomeScreenAmbassador;

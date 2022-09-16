@@ -204,6 +204,8 @@
 
 @media all and (max-width: 1800px) {
   .home_container {
+    align-items: center;
+
     flex-direction: column;
   }
   .user_menu {
