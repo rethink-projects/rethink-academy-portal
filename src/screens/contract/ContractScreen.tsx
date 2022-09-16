@@ -157,7 +157,7 @@ const ContractScreen = () => {
 
   useEffect(() => {
     return () => {
-      user && getBadge();
+      user && user.role === "STUDENT" && getBadge();
     };
   }, [info, user]);
 
