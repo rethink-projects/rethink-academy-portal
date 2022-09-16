@@ -76,13 +76,15 @@ const Register = ({ type = "home", email }: RegisterProps) => {
     }
   };
 
-  useEffect(() => {
-    changeData();
-  }, []);
+  // useEffect(() => {
+  //   changeData();
+  // }, []);
 
   useEffect(() => {
     changeData();
   }, [email]);
+
+  console.log(email);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");

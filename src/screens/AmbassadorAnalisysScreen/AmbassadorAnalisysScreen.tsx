@@ -43,11 +43,12 @@ const InternAnalisysScreen = () => {
 
   const getData = async () => {
     try {
-      const { data } = await api.get(
-        "/chart/" + window.location.pathname.split("/")[4],
-        { params: tags !== "Gerais" ? { tags } : null }
-      );
-      setGraphData(data);
+      if (emailIntern) {
+        const { data } = await api.get("/chart/" + emailIntern, {
+          params: tags !== "Gerais" ? { tags } : null,
+        });
+        setGraphData(data);
+      }
     } catch (error: any) {
       console.log({ error: error.message });
     }
@@ -58,12 +59,24 @@ const InternAnalisysScreen = () => {
     getData();
   }, [tags, emailIntern]);
 
+  // const handleEmailIntern = (email: string) => {
+  //   if (email) {
+  //     navigate("/dashboard/register/analysis/" + email);
+  //     getData();
+  //     setIsEqual(true);
+  //   } else {
+  //     setEmailIntern(email);
+  //     setIsEqual(false);
+  //   }
+  //   console.log(emailIntern);
+  // };
+
   const handleEmailIntern = (email: string) => {
-    if (email) {
-      navigate("/dashboard/register/analysis/" + email);
-      getData();
+    console.log("email", email);
+    if (email === emailIntern) {
       setIsEqual(true);
     } else {
+      getData();
       setEmailIntern(email);
       setIsEqual(false);
     }
@@ -78,12 +91,6 @@ const InternAnalisysScreen = () => {
   useEffect(() => {
     if (!isEqual) getIntern();
   }, [isEqual, emailIntern]);
-
-  const { user } = useAuth();
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className={styles.intern_container}>

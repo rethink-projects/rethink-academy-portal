@@ -26,14 +26,15 @@ const Comment = () => {
   const { user } = useAuth();
 
   const getComments = async () => {
-    const data = await getCommentsFromUser("sthephany.tezza@rethink.dev");
-    console.log({ data });
-    setComments(data);
+    if (user) {
+      const data = await getCommentsFromUser(user.email);
+      if (data) setComments(data);
+    }
   };
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, [user]);
 
   const handleComment = async () => {
     const response = await createComment({

@@ -1,5 +1,5 @@
 .intern_container {
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: space-between;
     gap: 80px;
@@ -11,12 +11,9 @@
     gap: 18px;
     padding-left: 112px;
     padding-top: 28px;
-    
 }
 
 .intern_comment {
-    background: cornflowerblue;
-    width: 408px;
 }
 
 .intern_graph {

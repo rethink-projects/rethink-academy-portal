@@ -121,7 +121,10 @@ const AmbassadorViewTasksMM = ({ email }: TypeAmbassadorViewTasksMM) => {
                     <div className={styles.searchTasks_Tasks}>
                       {day.map((task) => {
                         return (
-                          <div className={styles.viewTasks_accordion}>
+                          <div
+                            className={styles.viewTasks_accordion}
+                            key={task.id}
+                          >
                             <AccordionMM
                               key={task.id}
                               id={task.id}
