@@ -34,7 +34,10 @@ function App() {
                 path="/dashboard/trilhas/:id/curso/:id/aulas/:id"
                 element={<Class />}
               />
-              <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route
+                path="/dashboard/registroDeHoras"
+                element={<RegisterScreen />}
+              />
               <Route
                 path="/dashboard/register/analysis"
                 element={<TaskAnalysisScreen />}

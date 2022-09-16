@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Images from "../../assets";
-import { removeTask } from "../../services/backend/Tasks";
 import AccordionMM from "../AccordionMM/AccordionMM";
 import { DatePicker } from "../DatePicker/DatePicker";
 import InputSearch from "../InputSearch/InputSearch";
@@ -47,11 +46,6 @@ const AmbassadorViewTasksMM = () => {
       });
     }
     return exist;
-  };
-
-  const handleDelete = (id: string) => {
-    removeTask(id);
-    setUpdate(true);
   };
 
   return (
@@ -122,7 +116,6 @@ const AmbassadorViewTasksMM = () => {
                               time={`${task.startTime} às ${task.endTime}`}
                               size="large"
                               hasIcons={false}
-                              onClickDelete={handleDelete}
                             />
                           </div>
                         );

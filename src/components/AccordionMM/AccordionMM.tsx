@@ -17,7 +17,8 @@ type AccordionMMProps = {
   tags: string[];
   status: string[];
   id: string;
-  onClickDelete: (id: string) => void;
+  onClickDelete?: (id: string) => void;
+  onClickUpdate?: (value: any) => void;
 };
 
 const AccordionMM = ({
@@ -31,11 +32,18 @@ const AccordionMM = ({
   status,
   id,
   onClickDelete,
+  onClickUpdate,
 }: AccordionMMProps) => {
   const [active, setActive] = useState(false);
 
   const handleDelete = () => {
-    onClickDelete(id);
+    onClickDelete!(id);
+  };
+
+  const handleUpdate = () => {
+    onClickUpdate!({
+      formData: { size, title, duration, description, time, tags, status, id },
+    });
   };
 
   return (
@@ -43,9 +51,11 @@ const AccordionMM = ({
       <div className={styles.accordion_blackBar}>
         {hasIcons && (
           <>
-            <Tooltip content="Editar" direction="top">
-              <img src={Images.icons.IconEdit} alt="A Edit Icon"></img>
-            </Tooltip>
+            <button onClick={() => handleUpdate()}>
+              <Tooltip content="Editar" direction="top">
+                <img src={Images.icons.IconEdit} alt="A Edit Icon"></img>
+              </Tooltip>
+            </button>
             <button onClick={() => handleDelete()}>
               <Tooltip content="Deletar" direction="top">
                 <img src={Images.icons.deleteIcon} alt=""></img>

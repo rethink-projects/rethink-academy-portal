@@ -13,19 +13,19 @@ import "../AddTask/AddTaskForm.css";
 import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import SimpleButton from "../SimpleButton/SimpleButton";
-import Tag from "../Tag/Tag";
-import { Times } from "./Times";
 import Textarea from "../Textarea/Textarea";
 import SingleDatePicker from "../DatePicker/SingleDatePicker";
-import dayjs, { Dayjs } from "dayjs";
+import Tag from "../Tag/Tag";
+import { Times } from "./Times";
+import { Dayjs } from "dayjs";
 
 // Backend
 import { createTask } from "../../services/backend/Tasks";
 
 type AddTaskProps = {
   formData: {
-    taskName: string;
-    date: string;
+    name: string;
+    taskDate: string;
     startTime: string;
     endTime: string;
     tag: string;
@@ -48,7 +48,12 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
   };
 
   const createUserTask = async () => {
-    await createTask(formData);
+    if (formData.id) {
+      console.log("entrou", formData);
+      // updateTask(id);
+      return;
+    }
+    await createTask({ ...formData, userEmail: "fabiana.kamo@rethink.dev" });
   };
 
   return (
@@ -96,16 +101,14 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
                 hasIcon={true}
                 nameInput={""}
                 right={<img src={Images.icons.editBlackIcon} alt="edit icon" />}
-                value={formData.taskName}
-                onChange={(e) =>
-                  handlerFormDataValues("taskName", e.target.value)
-                }
+                value={formData.name}
+                onChange={(e) => handlerFormDataValues("name", e.target.value)}
               />
             </div>
             <div className={styled.taskData}>
               <p>Data</p>
               <SingleDatePicker
-                formDataValue={formData.date}
+                formDataValue={formData.taskDate}
                 setFormDataValue={(date) => handlerFormDataValues("date", date)}
               />
             </div>

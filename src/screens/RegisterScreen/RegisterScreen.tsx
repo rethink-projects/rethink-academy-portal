@@ -23,6 +23,7 @@ import {
   getHoursLastDay,
   getHoursOfMonth,
   getHoursOfThreeLastDays,
+  getSingleTask,
 } from "../../services/backend/Tasks";
 import { update as updateUser } from "../../services/backend/UserService";
 import { giveBadge } from "../../services/backend/BadgeService";
@@ -40,16 +41,16 @@ const RegisterScreen = () => {
   const { user } = useAuth();
 
   const [formData, setFormData] = useState<{
-    taskName: string;
-    date: string;
+    name: string;
+    taskDate: string;
     startTime: string;
     endTime: string;
     tag: string;
     status: string;
     description: string;
   }>({
-    taskName: "",
-    date: new Date().toISOString(),
+    name: "",
+    taskDate: new Date().toISOString(),
     startTime: "",
     endTime: "",
     tag: "",
@@ -110,6 +111,11 @@ const RegisterScreen = () => {
   const handleDelete = (id: string) => {
     removeTask(id);
     setUpdate(true);
+  };
+
+  const handleUpdate = async (value: any) => {
+    // const {data} = await
+    // getSingleTask(value.id);
   };
 
   const getTime = async () => {
@@ -347,6 +353,7 @@ const RegisterScreen = () => {
                                 size="small"
                                 hasIcons={true}
                                 onClickDelete={handleDelete}
+                                onClickUpdate={handleUpdate}
                               />
                             </div>
                           );
