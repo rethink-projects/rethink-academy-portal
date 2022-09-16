@@ -13,6 +13,6 @@
   align-items: center;
 }
 
-.header_inner > a {
+.header_inner > button {
   margin-right: 20px;
 }
