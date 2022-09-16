@@ -55,9 +55,6 @@ const ModuleModal = ({
   const onConfirm = () => {
     if (type === "ADD") {
       addModuleReq();
-      setTimeout(function () {
-        reRender();
-      }, 100);
     } else if (type === "EDIT") {
       editModuleReq();
       module!.name = moduleName!;
@@ -74,10 +71,7 @@ const ModuleModal = ({
         courseId,
       })
       .then((response) => {
-        modules.push({
-          id: response.data.module.id,
-          name: moduleName!,
-        });
+        reRender();
       });
   };
 
