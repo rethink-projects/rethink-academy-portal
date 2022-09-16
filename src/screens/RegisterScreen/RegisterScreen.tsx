@@ -10,18 +10,16 @@ import Note from "../../components/Note/Note";
 import Toast from "../../components/Toast/Toast";
 import Gamification from "./Gamification/Gamification";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
-import { Dayjs } from "dayjs";
-import dayjs from "dayjs";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
 
 // Backend
 import {
-  getRecordOfDay,
   removeTask,
   getHoursLastDay,
   getHoursOfMonth,
+  getHoursOfThreeLastDays,
 } from "../../services/backend/Tasks";
 
 import { update as updateUser } from "../../services/backend/UserService";
@@ -32,11 +30,10 @@ const RegisterScreen = () => {
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);
   const [time, setTime] = useState(0);
-  const [controller, setController] = useState(false);
-
+  const [win, setWin] = useState(false);
   const [prevHours, setPrevHours] = useState();
-  const [controllerPrevHours, setControllerPrevHours] = useState(false);
-
+  const [degrading, setDegrading] = useState(false);
+  const [losing, setLosing] = useState(false);
   const [controllerEmblem, setControllerEmblem] = useState(false);
 
   const { user } = useAuth();
@@ -58,16 +55,6 @@ const RegisterScreen = () => {
     status: "",
     description: "",
   });
-
-  // type user = {
-  //   email: string;
-  //   role?: "STUDENT" | "AMBASSADOR" | "RETHINKER";
-  //   name?: string;
-  //   surname?: string;
-  //   avatar?: string;
-  //   main?: "ENGINEERING" | "DESIGN" | "PRODUCT";
-  //   receiveGIF: boolean;
-  // };
 
   // type task = {
   //   name: string;
@@ -126,16 +113,17 @@ const RegisterScreen = () => {
 
   const getTime = async () => {
     if (user) {
-      await getHoursLastDay(user.email) // ALTERAR
+      await getHoursLastDay(user.email)
         .then((response) => {
           if (response) {
             setTime(response.hours);
             if (
               response.hours >= 6 &&
+              response.hours <= 8 &&
               response.user.receiveGIF !==
                 "1|" + new Date().toLocaleDateString()
             ) {
-              setController(true);
+              setWin(true);
               updateUser(
                 { receiveGIF: "1|" + new Date().toLocaleDateString() },
                 response.user.email
@@ -149,7 +137,7 @@ const RegisterScreen = () => {
 
   const getPrevHours = async () => {
     if (user) {
-      await getHoursLastDay(user.email) // ALTERAR
+      await getHoursLastDay(user.email)
         .then((response) => {
           setPrevHours(response);
           if (
@@ -157,7 +145,7 @@ const RegisterScreen = () => {
             response.hours < 6 &&
             response.user.receiveGIF !== "2|" + new Date().toLocaleDateString()
           ) {
-            setControllerPrevHours(true);
+            setDegrading(true);
             updateUser(
               { receiveGIF: "2|" + new Date().toLocaleDateString() },
               response.user.email
@@ -168,13 +156,42 @@ const RegisterScreen = () => {
     }
   };
 
-  const getMonthHours = async () => {
+  const getThreeLastDays = async () => {
     if (user) {
-      await getHoursOfMonth(user.email) // ALTERAR
+      await getHoursOfThreeLastDays(user.email)
         .then((response) => {
           setPrevHours(response);
-          if (response && response >= 120) {
+          if (
+            response &&
+            response.hours === 0 &&
+            response.user.receiveGIF !== "3|" + new Date().toLocaleDateString()
+          ) {
+            setLosing(true);
+            updateUser(
+              { receiveGIF: "3|" + new Date().toLocaleDateString() },
+              response.user.email
+            );
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  const getMonthHours = async () => {
+    if (user) {
+      await getHoursOfMonth(user.email)
+        .then((response) => {
+          setPrevHours(response);
+          if (
+            response &&
+            response.hours >= 120 &&
+            response.user.receiveGIF !== "4|" + new Date().toLocaleDateString()
+          ) {
             setControllerEmblem(true);
+            updateUser(
+              { receiveGIF: "4|" + new Date().toLocaleDateString() },
+              response.user.email
+            );
           }
         })
         .catch((err) => console.error(err));
@@ -184,6 +201,7 @@ const RegisterScreen = () => {
   useEffect(() => {
     getTime();
     getPrevHours();
+    getThreeLastDays();
     getMonthHours();
   }, [user]);
 
@@ -191,49 +209,37 @@ const RegisterScreen = () => {
     return <div></div>;
   }
 
-  // FIX:
-  // Logica para perder o chapeu - 3 dias após não registrar as 6h diarias - Registrando normalmente no dia em que perdeu o chapéu, você ganhará novamente um chapéu -- PRIORITY
-
-  // Logica para ganhar o emblema - 1 mes depois de horas registradas -- PRIORITY  OK
-  // Entregar o emblema
-
-  // Encontrar logica para o gif nao aparecer sempre que atualiza a pagina -- PRIORITY
-  // Aparecem todos os gif juntos
-
-  // Alterar email nos parametros das funçoes
-  // consertar rotas
-
   return (
     <div className={styles.register_container}>
       <div className={styles.modal_container}>
-        {controller && (
+        {win && (
           <Gamification
-            setActive={() => setController(false)}
+            setActive={() => setWin(false)}
             id="outside"
             type="Win"
           />
         )}
-        {controllerPrevHours && (
+        {degrading && (
           <Gamification
-            setActive={() => setControllerPrevHours(false)}
+            setActive={() => setDegrading(false)}
             id="outside"
             type="Degrading"
           />
         )}
-        {/* {controllerPrevHours && (
+        {losing && (
           <Gamification
-            setActive={() => setControllerPrevHours(false)}
+            setActive={() => setLosing(false)}
             id="outside"
             type="Losing"
           />
-        )} */}
-        {/* {controllerEmblem && (
+        )}
+        {controllerEmblem && (
           <EmblemCard
             badge="timeRecord"
-            content="Teste"
+            content="Você registrou suas horas esse mês e mereceu um emblema!  "
             onClickCollect={() => setControllerEmblem(false)}
           />
-        )} */}
+        )}
       </div>
       <div className={styles.register_content}>
         <div className={styles.register_header}>
