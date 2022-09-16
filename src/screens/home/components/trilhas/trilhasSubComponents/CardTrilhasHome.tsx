@@ -43,8 +43,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
 
   useEffect(() => {
     const response = api.get("/user/watched/" + user.email).then((response) => {
-        setLessonUser(response.data);
-
+      setLessonUser(response.data);
     });
   }, []);
 
@@ -143,7 +142,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
     <div
       style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}
       className={containerClass}
-      onClick={handleClickTrail}
+      onClick={checkWhichTrilhaUnlock() ? handleClickTrail : () => {}}
     >
       <span className={styles.name_trilha}>{trail.name}</span>
       <div className={styles.divisoria}></div>
