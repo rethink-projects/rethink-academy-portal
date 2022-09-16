@@ -55,9 +55,6 @@ const ModuleModal = ({
   const onConfirm = () => {
     if (type === "ADD") {
       addModuleReq();
-      setTimeout(function () {
-        reRender();
-      }, 100);
     } else if (type === "EDIT") {
       editModuleReq();
       module!.name = moduleName!;
@@ -73,11 +70,8 @@ const ModuleModal = ({
         name: moduleName,
         courseId,
       })
-      .then((response) => {
-        modules.push({
-          id: response.data.module.id,
-          name: moduleName!,
-        });
+      .then(() => {
+        reRender();
       });
   };
 
@@ -88,7 +82,9 @@ const ModuleModal = ({
   };
 
   const deleteModuleReq = async () => {
-    await api.delete("/module/" + module!.id);
+    await api.delete("/module/" + module!.id).then(() => {
+      reRender();
+    });
   };
 
   return (

@@ -7,7 +7,9 @@
 
   font-size: 20px;
 }
-
+.zero {
+  opacity: 0.7;
+}
 .default {
   position: relative;
   width: 50px;
@@ -26,7 +28,9 @@
 
 /* img */
 
-.image > img {
+.big,
+.small,
+.default > img {
   width: inherit;
   height: inherit;
 }

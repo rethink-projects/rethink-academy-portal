@@ -188,3 +188,30 @@
   border-bottom: 1px solid #d4d4d4;
   justify-content: center;
 }
+
+.emblems_icons_new_teste {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.emblems_icons_new_teste_item {
+  padding: 31px 16px;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+@media all and (max-width: 1800px) {
+  .home_container {
+    align-items: center;
+
+    flex-direction: column;
+  }
+  .user_menu {
+    display: none;
+  }
+  .left_content {
+    justify-content: space-evenly;
+  }
+}

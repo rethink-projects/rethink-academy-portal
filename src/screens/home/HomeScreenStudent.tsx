@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Styles from "./HomeStudent.module.css";
 import Images from "../../assets";
 import AcademyProgress from "../../components/AcademyProgress/AcademyProgress";
@@ -9,47 +10,55 @@ import { useAuth } from "../../context/AuthContext";
 import TrilhasComponent from "./components/trilhas/TrilhasComponent";
 import { getUserFromBackend } from "../../services/backend/UserService";
 import { useEffect, useState } from "react";
+import Emblem from "../../components/Emblem/Emblem";
+import { getUserBadges } from "../../services/backend/BadgeService";
 
 function HomeScreenStudent() {
   const { user } = useAuth();
   const [userAtt, setUserAtt] = useState<any>({});
+  const [badges, setBadges] = useState<any>([]);
+
   const GetUser = async () => {
     const data = await getUserFromBackend(user.email);
     setUserAtt(data);
+    const badgesData = await getUserBadges(user.email);
+
+    let newBadges = [];
+    for (const key in badgesData) {
+      newBadges.push({ badgeNumber: badgesData[key].length, title: key });
+    }
+    setBadges(newBadges);
   };
 
   useEffect(() => {
     GetUser();
+    console.log(badges);
   }, []);
 
+  useEffect(() => {
+    console.log(badges);
+  }, [badges]);
   if (!user) {
     return <div>Loading...</div>;
   }
-
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
-
+  const getStudentMain = () => {
+    switch (user.main) {
+      case "ENGINEERING":
+        return "Engenharia";
+        break;
+      case "DESIGN":
+        return "Design";
+        break;
+      case "PRODUCT":
+        return "Produto";
+        break;
+    }
+  };
   return (
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name.split(" ")[0]} />
-        <LastGoalsCard
-          quantityGoals={10}
-          mounth={months[new Date().getMonth()]}
-          quantityGoalsCompleted={10}
-        />
+        <LastGoalsCard />
         <Register />
         <TrilhasComponent />
       </div>
@@ -59,7 +68,9 @@ function HomeScreenStudent() {
         </div>
 
         <p className={Styles.user_name}>{user.name}</p>
-        <p className={Styles.user_title}>{"Estagiário em Engenharia"}</p>
+        <p className={Styles.user_title}>
+          {"Estagiário em " + getStudentMain()}
+        </p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>
             <img
@@ -81,7 +92,7 @@ function HomeScreenStudent() {
             <ProgressBar
               width={190}
               totalValue={48}
-              relativeValue={user.exp!}
+              relativeValue={userAtt.exp!}
             />
           </div>
         </div>
@@ -105,20 +116,17 @@ function HomeScreenStudent() {
           </div>
           <p className={Styles.emblems_text}>Emblemas</p>
         </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-        </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-        </div>
-        <div className={Styles.emblems_icons}>
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
-          <img src={Images.Emblem} alt="Stage Emblem" />
+        <div className={Styles.emblems_icons_new_teste}>
+          {badges &&
+            badges.map((item: any) => (
+              <div className={Styles.emblems_icons_new_teste_item}>
+                <Emblem
+                  badge={item.title}
+                  size="default"
+                  number={item.badgeNumber}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

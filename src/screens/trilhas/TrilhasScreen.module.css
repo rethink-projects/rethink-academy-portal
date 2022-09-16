@@ -1,6 +1,6 @@
 .body {
-  background-color: var(--color-input);
   height: 100%;
+  background-color: var(--color-input);
 }
 
 .container {
@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 1448px;
-  margin: 40px auto;
+  margin: 24px auto;
 
   gap: 30px 0px;
 }

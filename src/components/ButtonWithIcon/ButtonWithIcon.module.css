@@ -33,7 +33,7 @@
   padding: 16px 32px;
 }
 
-.small {
+.small, .block {
   height: 40px;
   padding: 8px 32px;
 }

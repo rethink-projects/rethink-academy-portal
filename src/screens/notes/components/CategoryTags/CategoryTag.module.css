@@ -1,0 +1,37 @@
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px;
+  gap: 5px;
+
+  height: 28px;
+
+  background: #f9f9f9;
+
+  border: 1px solid #b6b4b4;
+  border-radius: 150px;
+
+  cursor: pointer;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #706e64;
+}
+
+.active {
+  background: #bde034;
+  border: 1px solid #bde034;
+  color: black;
+}

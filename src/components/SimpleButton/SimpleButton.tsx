@@ -18,7 +18,7 @@ const SimpleButton = ({
       className={`${styles[type]} ${styles[size]} ${styles.btn_default}`}
       onClick={onClick}
     >
-      <span>{text}</span>
+      {text}
     </button>
   );
 };

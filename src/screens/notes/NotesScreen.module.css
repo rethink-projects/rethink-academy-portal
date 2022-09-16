@@ -1,0 +1,193 @@
+.notes_container {
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+/* table container css */
+
+.container_extern {
+  padding-left: 30px;
+  padding-right: 10px;
+  padding-top: 24px;
+  width: 43%;
+}
+
+.table_header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.table_header_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.table_header_inner_title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  color: var(--color-secondary);
+}
+
+/* no notes warning */
+
+.noNotes_container {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 25%;
+}
+
+.noNotes_warning {
+  width: 240px;
+  height: 106px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  row-gap: 12px;
+}
+
+.noNotes_warning p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+
+  text-align: center;
+
+  color: #706e64;
+}
+
+/* text editor container css */
+
+.rightSideContainer {
+  right: 0px;
+  width: 57%;
+  height: calc(100vh - 72px);
+  border-width: 1px 0px 0px 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.textEditorContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  border-width: inherit;
+  border-style: inherit;
+  border-color: inherit;
+  background-color: inherit;
+}
+
+/* Header */
+
+.containerTop {
+  padding: 2vh 20px 2.2vh 0.83vw;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titleAndToggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  row-gap: 15px;
+}
+
+.titleAndToggle input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: 20vw;
+  background: none;
+  outline: none;
+  font-weight: 300;
+  font-size: 32px;
+  color: #1b1b1b;
+  opacity: 0.5;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Text Editor */
+
+.textEditor {
+  height: 75%;
+}
+
+/* Bottom */
+
+.containerBottom {
+  display: flex;
+  justify-content: flex-end;
+
+  border-width: 1px 0px 0px 0px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.saveDeleteButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  padding: 2.2vh 20px 5px 0vw;
+}
+
+.privateBtn:disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 32px;
+  gap: 10px;
+
+  border-radius: 2px;
+  border: 1px solid rgba(27, 27, 27, 0.1);
+  border-radius: 4px;
+
+  background: var(--color-base);
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #706e64;
+}
+
+.loadingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}

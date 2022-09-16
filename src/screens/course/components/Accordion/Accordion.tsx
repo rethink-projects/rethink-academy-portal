@@ -40,7 +40,7 @@ const Accordion = ({
   reRender,
 }: AccordionProps) => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
-  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons!);
+  const [lessons, setLessons] = useState<Array<Lesson>>(module.lessons ?? []);
   const [lesson, setLesson] = useState<Lesson>();
   const [lessonModalIsOpen, setLessonModalIsOpen] = useState(false);
   const [lessonName, setLessonName] = useState("");
@@ -63,20 +63,22 @@ const Accordion = ({
   const confirmLessonChanges = () => {
     if (lessonModalType === "ADD") {
       addLessonReq();
-      setTimeout(function () {
-        reRender();
-      }, 100);
-    } else {
+    } else if (validationType === "SAVE") {
       editLessonReq();
       lesson!.name = lessonName;
       lesson!.embedUrl = lessonEmbed;
+    } else {
+      deleteLessonReq();
+      lessons.splice(lessons.indexOf(lesson!), 1);
     }
+    setTimeout(function () {
+      reRender();
+    }, 200);
   };
 
   const setDeleteModuleModal = () => {
     setModule(module);
     setModuleName(module.name);
-
     openModuleModal(true);
     setModuleModalType("DELETE");
   };
@@ -109,12 +111,22 @@ const Accordion = ({
   };
 
   const editLessonReq = async () => {
-    api.put("/lesson/" + lesson!.id, {
-      id: lesson!.id,
-      name: lessonName,
-      description: lessonDescription,
-      embedUrl: lessonEmbed,
-      moduleId: module.id,
+    api
+      .put("/lesson/" + lesson!.id, {
+        id: lesson!.id,
+        name: lessonName,
+        description: lessonDescription,
+        embedUrl: lessonEmbed,
+        moduleId: module.id,
+      })
+      .then(() => {
+        lesson!.description = lessonDescription;
+      });
+  };
+
+  const deleteLessonReq = async () => {
+    api.delete("/lesson/" + lesson!.id).then(() => {
+      reRender();
     });
   };
 
@@ -131,7 +143,7 @@ const Accordion = ({
       {lessonModalIsOpen && (
         <ClassModal
           onClose={() => setLessonModalIsOpen(false)}
-          type={lessonModalType}
+          modalType={lessonModalType}
           className={lessonName}
           description={lessonDescription}
           embedLink={lessonEmbed}
@@ -139,6 +151,8 @@ const Accordion = ({
           setEmbedLink={setLessonEmbed}
           setDescription={setLessonDescription}
           onClickConfirm={confirmLessonChanges}
+          setValidationType={setValidationType}
+          validationType={validationType}
         />
       )}
       {validationModalIsOpen && (
@@ -218,16 +232,18 @@ const Accordion = ({
               </div>
               <div className={styles.accordion_right_side}>
                 {ambassador ? (
-                  <IconEdit
-                    onClick={() => (
-                      setLessonName(lesson.name),
-                      setLesson(lesson),
-                      setLessonDescription(lesson.description),
-                      setLessonEmbed(lesson.embedUrl),
-                      setLessonModalIsOpen(true),
-                      setLessonModalType("EDIT")
-                    )}
-                  />
+                  <Tooltip direction={"top"} content={"Editar"}>
+                    <IconEdit
+                      onClick={() => (
+                        setLessonName(lesson.name),
+                        setLesson(lesson),
+                        setLessonDescription(lesson.description),
+                        setLessonEmbed(lesson.embedUrl),
+                        setLessonModalIsOpen(true),
+                        setLessonModalType("EDIT")
+                      )}
+                    />
+                  </Tooltip>
                 ) : (
                   lessonComplete(lesson.id) && <IconCheckedCircle />
                 )}

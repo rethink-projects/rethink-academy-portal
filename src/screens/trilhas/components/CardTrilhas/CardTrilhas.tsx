@@ -1,5 +1,4 @@
 import styles from "./CardTrilhas.module.css";
-import image from "../../../../assets/academyCardTrilhas.png";
 import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
@@ -50,6 +49,7 @@ const CardTrilhas = ({
   trail,
   previous,
   setModal,
+  image,
 }: TypeCardTrilhas) => {
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
   const { user: userAuth } = useAuth();
@@ -189,7 +189,7 @@ const CardTrilhas = ({
           <p className={styles.card_content_description}>{trail.description}</p>
           {user === "student"
             ? lessonUser && (
-                <>
+                <div className={styles.container_progressbar}>
                   <div className={card_progressBar}>
                     <span>{`${calculoPorcentagem()}%`}</span>
                     <ProgressBar
@@ -209,10 +209,10 @@ const CardTrilhas = ({
                       trail.id
                     )} curso(s) concluído(s).`}
                   </p>
-                </>
+                </div>
               )
             : lessonUser && (
-                <>
+                <div className={styles.container_edit}>
                   <p className={styles.quantity_courses}>
                     {getCoursesFromTrail(trail.id)! > 1 ||
                     getCoursesFromTrail(trail.id) == 0
@@ -233,7 +233,7 @@ const CardTrilhas = ({
                       className={styles.overlap_button}
                     ></div>
                   </div>
-                </>
+                </div>
               )}
         </div>
       </div>

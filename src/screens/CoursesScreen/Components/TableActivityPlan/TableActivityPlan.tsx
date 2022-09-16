@@ -224,6 +224,7 @@ export default function TableActivityPlan({
       content: updatedRow.content,
       trailId: trailId,
     });
+
     return updatedRow;
   };
 
