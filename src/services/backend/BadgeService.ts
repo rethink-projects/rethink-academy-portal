@@ -11,3 +11,21 @@ export const getUserBadges = async (email: string) => {
     return;
   }
 };
+
+export const giveBadge = async (
+  badge: string,
+  email: string,
+  description: string
+) => {
+  try {
+    const { data } = await api.post("/badge/", {
+      badge,
+      email,
+      description,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

@@ -14,6 +14,9 @@ import EmblemCard from "../../components/EmblemCard/EmblemCard";
 //CSS
 import styles from "./RegisterScreen.module.css";
 
+// Context
+import { useAuth } from "../../context/AuthContext";
+
 // Backend
 import {
   removeTask,
@@ -21,9 +24,8 @@ import {
   getHoursOfMonth,
   getHoursOfThreeLastDays,
 } from "../../services/backend/Tasks";
-
 import { update as updateUser } from "../../services/backend/UserService";
-import { useAuth } from "../../context/AuthContext";
+import { giveBadge } from "../../services/backend/BadgeService";
 
 const RegisterScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
@@ -35,7 +37,6 @@ const RegisterScreen = () => {
   const [degrading, setDegrading] = useState(false);
   const [losing, setLosing] = useState(false);
   const [controllerEmblem, setControllerEmblem] = useState(false);
-
   const { user } = useAuth();
 
   const [formData, setFormData] = useState<{
@@ -198,6 +199,15 @@ const RegisterScreen = () => {
     }
   };
 
+  const giveUserBadge = async () => {
+    let dateFormated = new Date().toLocaleDateString().split("/");
+    dateFormated.shift();
+
+    if (user) {
+      await giveBadge("timeRecord", user.email, dateFormated.join("/"));
+    }
+  };
+
   useEffect(() => {
     getTime();
     getPrevHours();
@@ -237,7 +247,10 @@ const RegisterScreen = () => {
           <EmblemCard
             badge="timeRecord"
             content="Você registrou suas horas esse mês e mereceu um emblema!  "
-            onClickCollect={() => setControllerEmblem(false)}
+            onClickCollect={() => {
+              setControllerEmblem(false);
+              giveUserBadge();
+            }}
           />
         )}
       </div>
