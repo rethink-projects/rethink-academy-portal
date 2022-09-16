@@ -218,16 +218,18 @@ const Accordion = ({
               </div>
               <div className={styles.accordion_right_side}>
                 {ambassador ? (
-                  <IconEdit
-                    onClick={() => (
-                      setLessonName(lesson.name),
-                      setLesson(lesson),
-                      setLessonDescription(lesson.description),
-                      setLessonEmbed(lesson.embedUrl),
-                      setLessonModalIsOpen(true),
-                      setLessonModalType("EDIT")
-                    )}
-                  />
+                  <Tooltip content="Editar" direction="top">
+                    <IconEdit
+                      onClick={() => (
+                        setLessonName(lesson.name),
+                        setLesson(lesson),
+                        setLessonDescription(lesson.description),
+                        setLessonEmbed(lesson.embedUrl),
+                        setLessonModalIsOpen(true),
+                        setLessonModalType("EDIT")
+                      )}
+                    />
+                  </Tooltip>
                 ) : (
                   lessonComplete(lesson.id) && <IconCheckedCircle />
                 )}

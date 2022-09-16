@@ -84,7 +84,6 @@ const TrilhasScreen = () => {
 
     setModalIsOpen(false);
   };
-
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -98,19 +97,17 @@ const TrilhasScreen = () => {
           <div className={styles.text_container}>
             <div className={styles.title}>Cursos</div>
             <div className={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
+              Cada área possui uma trilha de ensino, com cursos desenvolvidos ou
+              selecionados pela Rethink. Primeiramente, você terá acesso ao
+              conteúdo da sua área, mas poderá desbloquear o acesso das outras
+              ao assistir cursos que são pré-requisitos. Bons estudos!
             </div>
           </div>
           {/* <div style={{ width: "100%" }}></div> */}
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}
-              user={user?.role === "AMBASSADOR" ? "teacher" : "student"}
+              user={userAuth?.role === "AMBASSADOR" ? "teacher" : "student"}
               onClick={(event: any) => handleClickCardTrails(event, item)}
               trail={item}
               setModal={() => setStateModalOnclick(item.id)}

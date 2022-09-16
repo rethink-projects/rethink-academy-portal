@@ -18,19 +18,22 @@ type EmblemProps = {
 };
 
 const Emblem = ({ badge, number = 1, size = "default" }: EmblemProps) => {
-  if (number > 0) {
-    return (
-      <div className={`${style[size]} ${style.image}`}>
-        <img src={Images.badge[badge]} alt={`Emblema de ${badge}`} />
-        {number > 1 && (
-          <div className={style.numberContainer}>
-            {number < 10 ? `0${number}` : number}
-          </div>
-        )}
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div
+      className={
+        number > 0
+          ? `${style[size]} ${style.image}`
+          : `${style[size]} ${style.image}  ${style.zero}`
+      }
+    >
+      <img src={Images.badge[badge]} alt={`Emblema de ${badge}`} />
+      {number > 1 && (
+        <div className={style.numberContainer}>
+          {number < 10 ? `0${number}` : number}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Emblem;
