@@ -111,7 +111,6 @@ const NotesScreen = () => {
       `http://localhost:4000/api/note`,
       newNote
     );
-    console.log(data.note);
     data.note.categories = [false, false, false];
 
     setNotes((prevValue) => [...prevValue, data.note]);
