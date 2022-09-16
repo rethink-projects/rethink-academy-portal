@@ -18,6 +18,7 @@ import LastGoalsCard from "../../components/LastGoalsCard/LastGoalsCard";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import PersonalDevelopmentChart from "../../components/SkillChart/PersonalDevelopmentChart";
 import NotesCard from "../PersonalDevelopmentScreen/components/NotesCard/NotesCard";
+import InternContractStatus from "../../components/InternContractStatus/InternContractStatus";
 
 const InternProfileScreen = () => {
   const { user } = useAuth();
@@ -66,7 +67,7 @@ const InternProfileScreen = () => {
           <div className={styles.userAmbassador_cards}>
             <div className={styles.userAmbassador_cards_firstLine}>
               <StudentInfoCard studentEmail={studentEmail} />
-              <div className={styles.cardContrato}>Contrato</div>
+              <InternContractStatus email={studentEmail} />
               <Register type={"ambassador"} />
               <LastGoalsCard studentEmail={studentEmail} />
             </div>

@@ -267,8 +267,9 @@ const ContractScreen = () => {
                   studentEmail.split(".")[0].charAt(0).toUpperCase() +
                   studentEmail.split(".")[0].slice(1)
                 }`,
-                link: "/contrato",
+                link: `/dashboard/perfilDoEstagiario/${studentEmail}`,
               },
+              { title: "Contrato", link: "/" },
             ]}
           />
         ) : (

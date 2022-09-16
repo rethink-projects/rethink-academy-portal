@@ -29,6 +29,8 @@
 .contract_title_ambassador {
   display: flex;
   width: 45.6vw;
+  max-width: 871px;
+  min-width: 692px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
@@ -123,7 +125,9 @@
 }
 
 .contract_current_status {
-  width: 90vh;
+  width: 45.6vw;
+  max-width: 862px;
+  min-width: 692px;
   display: flex;
   height: 80px;
   background: var(--color-base);
@@ -160,7 +164,7 @@
   gap: 10px;
 }
 
-@media screen and (max-width: 1420px) {
+@media screen and (max-width: 1460px) {
   .contract_info {
     transform: translateY(130px);
   }
