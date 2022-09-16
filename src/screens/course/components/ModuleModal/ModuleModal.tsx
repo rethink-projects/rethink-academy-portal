@@ -70,7 +70,7 @@ const ModuleModal = ({
         name: moduleName,
         courseId,
       })
-      .then((response) => {
+      .then(() => {
         reRender();
       });
   };
@@ -82,7 +82,9 @@ const ModuleModal = ({
   };
 
   const deleteModuleReq = async () => {
-    await api.delete("/module/" + module!.id);
+    await api.delete("/module/" + module!.id).then(() => {
+      reRender();
+    });
   };
 
   return (

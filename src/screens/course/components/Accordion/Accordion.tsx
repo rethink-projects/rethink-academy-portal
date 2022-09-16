@@ -70,8 +70,6 @@ const Accordion = ({
     } else {
       deleteLessonReq();
       lessons.splice(lessons.indexOf(lesson!), 1);
-
-      // lessons.remove(lesson!.indexOf, 1);
     }
     setTimeout(function () {
       reRender();
@@ -81,7 +79,6 @@ const Accordion = ({
   const setDeleteModuleModal = () => {
     setModule(module);
     setModuleName(module.name);
-
     openModuleModal(true);
     setModuleModalType("DELETE");
   };
@@ -123,11 +120,14 @@ const Accordion = ({
         moduleId: module.id,
       })
       .then(() => {
-        reRender();
+        lesson!.description = lessonDescription;
       });
   };
+
   const deleteLessonReq = async () => {
-    api.delete("/lesson/" + lesson!.id);
+    api.delete("/lesson/" + lesson!.id).then(() => {
+      reRender();
+    });
   };
 
   const lessonComplete = (id: string) => {

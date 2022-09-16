@@ -45,9 +45,6 @@ const CourseScreen = () => {
   const trailId = location.pathname.split("/")[3];
   const courseId = location.pathname.split("/")[5];
 
-  const [totalModules, setTotalModules] = useState(0);
-  const [totalLessons, setTotalLessons] = useState(0);
-
   const getCourse = async () => {
     const response = await api.get(`/course/${courseId}/${userEmail}`);
     setCourse(response.data.course);
