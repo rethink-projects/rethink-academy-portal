@@ -44,13 +44,17 @@ const CardCurso = ({
   let disabled = false;
 
   if (intern) {
-    icon = <IconVerified />;
+    icon = <IconVerified style={{ height: "19px", width: "19px" }} />;
     textButton = "Coletar emblema";
     if (concluded != 1) disabled = true;
     else if (emblem) {
       textButton = "Emblema obtido";
       disabled = true;
-      icon = <IconVerified style={{ color: "#9DBA2B" }} />;
+      icon = (
+        <IconVerified
+          style={{ color: "#9DBA2B", height: "19px", width: "19px" }}
+        />
+      );
     }
   }
 

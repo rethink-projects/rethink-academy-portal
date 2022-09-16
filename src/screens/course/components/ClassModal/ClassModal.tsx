@@ -35,7 +35,8 @@ const ClassModal = ({
       onClickConfirm={() =>
         typeAdd
           ? (onClose(), onClickConfirm())
-          : (setValidationType("SAVE"), setValidationModalIsOpen(true))
+          : (setValidationType && setValidationType("SAVE"),
+            setValidationModalIsOpen(true))
       }
       onClickCancel={() => onClose()}
     >
@@ -43,7 +44,7 @@ const ClassModal = ({
         <ValidationModal
           onClose={setValidationModalIsOpen}
           setParentIsOpen={onClose}
-          type={validationType}
+          type={validationType!}
           onClickConfirm={onClickConfirm}
         />
       )}
@@ -51,12 +52,13 @@ const ClassModal = ({
         {typeEdit && (
           <div className={styles.trash}>
             {/* <Tooltip direction={"bottom"} content={"Excluir"}> */}
-              <IconTrash
-                sx={{ color: "var(--color-feedback-error)" }}
-                onClick={() => (
-                  setValidationType("DELETE"), setValidationModalIsOpen(true)
-                )}
-              />
+            <IconTrash
+              sx={{ color: "var(--color-feedback-error)" }}
+              onClick={() => (
+                setValidationType && setValidationType("DELETE"),
+                setValidationModalIsOpen(true)
+              )}
+            />
             {/* </Tooltip> */}
           </div>
         )}

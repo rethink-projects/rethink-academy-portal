@@ -23,7 +23,9 @@ const ButtonWithIcon = ({
   return (
     <button
       onClick={onClick}
-      className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
+      className={`${style.btn_w_icon_right_default} ${style[type]} ${
+        style[size]
+      } ${typeEmblemCheck && style.emblemCheck}`}
       style={{ width: size === "block" ? "" : width }}
       disabled={type === "disabled"}
     >

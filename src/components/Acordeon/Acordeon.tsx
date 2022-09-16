@@ -179,7 +179,7 @@ const Acordeon = ({
           onClose={() => {
             setIsModalLessonOpen(false);
           }}
-          type={"EDIT"}
+          modalType={"EDIT"}
           className={selectedLesson.name}
           description={selectedLesson.description}
           embedLink={selectedLesson.embedUrl}
@@ -187,6 +187,7 @@ const Acordeon = ({
           setEmbedLink={setLessonUrl}
           setDescription={setLessonDescription}
           onClickConfirm={handleSubmitEditLesson}
+          validationType={"SAVE"}
         />
       )}
     </div>
