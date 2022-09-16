@@ -45,7 +45,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
   const [time, setTime] = useState(0);
 
   const changeData = async () => {
-    if (type === "home") {
+    if (type === "home" && user) {
       await getRecordOfDay(user.email)
         .then((response) => {
           setRecords(response);

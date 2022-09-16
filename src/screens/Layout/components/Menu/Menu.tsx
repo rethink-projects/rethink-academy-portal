@@ -70,23 +70,28 @@ function Menu() {
             text="Seu Desenvolvimento"
             icon={Images.icons.DevelopmentIcon}
           />
-          <MenuItem
-            isOpen={isOpen}
-            text="Cursos"
-            onClick={() => navigate("trilhas")}
-            icon={Images.icons.ratIcon}
-          />
-          <MenuItem
-            isOpen={isOpen}
-            text="Registro de Horas"
-            icon={Images.icons.ClockHome}
-          />
-          <MenuItem
-            isOpen={isOpen}
-            text="Contrato"
-            onClick={() => {navigate("/dashboard/contrato");}}
-            icon={Images.icons.ContractIcon}
-          />
+          <Link to={"/dashboard/trilhas"}>
+            <MenuItem
+              isOpen={isOpen}
+              text="Cursos"
+              onClick={() => navigate("trilhas")}
+              icon={Images.icons.ratIcon}
+            />
+          </Link>
+          <Link to={"/dashboard/registroDeHoras"}>
+            <MenuItem
+              isOpen={isOpen}
+              text="Registro de Horas"
+              icon={Images.icons.ClockHome}
+            />
+          </Link>
+          <Link to={"/dashboard/contratos"}>
+            <MenuItem
+              text="Contrato"
+              isOpen={isOpen}
+              icon={Images.icons.ContractIcon}
+            />
+          </Link>
         </div>
 
         <div

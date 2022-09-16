@@ -13,6 +13,7 @@ type TypeTrails = {
   id: string;
   description: string;
   weight: number;
+  imageUrl: string;
 };
 const TrilhasScreen = () => {
   let userEmail = "";
@@ -111,6 +112,7 @@ const TrilhasScreen = () => {
               onClick={(event: any) => handleClickCardTrails(event, item)}
               trail={item}
               setModal={() => setStateModalOnclick(item.id)}
+              image={item.imageUrl}
               previous={
                 index > 0
                   ? index === 1
