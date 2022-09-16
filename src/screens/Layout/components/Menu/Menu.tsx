@@ -85,7 +85,7 @@ function Menu() {
               icon={Images.icons.ClockHome}
             />
           </Link>
-          <Link to={"/dashboard/contratos"}>
+          <Link to={"/dashboard/contrato"}>
             <MenuItem
               text="Contrato"
               isOpen={isOpen}
