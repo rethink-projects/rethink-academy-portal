@@ -1,7 +1,7 @@
 .box {
   width: 100%;
   height: calc(100vh - 68px);
-  overflow-y: auto;
+  overflow-y: visible;
   background-color: #f9f9f9;
 }
 
@@ -19,6 +19,8 @@
   width: 848px;
 
   margin-top: 24px;
+  min-height: calc(100vh - 94px) !important;
+  flex-shrink: 0;
 }
 .header {
   display: flex;
