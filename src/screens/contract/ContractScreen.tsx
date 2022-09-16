@@ -146,7 +146,7 @@ const ContractScreen = () => {
     try {
       const badge = await axios.post(`http://localhost:4000/api/badge`, {
         badge: "goals",
-        email: "felipe.reggiane@rethink.dev",
+        email: user.email,
         description: "StatusDoContratoAtivo",
       });
       return;
@@ -179,6 +179,10 @@ const ContractScreen = () => {
         const info = await axios.post(`http://localhost:4000/api/info`, {
           email: studentEmail,
           status: value,
+        });
+        notify({
+          title: "Status do Contrato atualizado!",
+          type: "success",
         });
         return;
       } catch (error) {
@@ -215,6 +219,10 @@ const ContractScreen = () => {
           workTime: data.workTime,
           transportationVoucher: data.transportationVoucher,
           providedEquipment: data.providedEquipment,
+        });
+        notify({
+          title: "Informações atualizadas!",
+          type: "success",
         });
         handleClick();
         setInfo(data);
