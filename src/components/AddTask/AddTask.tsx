@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-// assets
+// Assets
 import Images from "../../assets";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-// styles
+// Styles
 import styles from "./AddTask.module.css";
 import styled from "../AddTask/AddTaskForm.module.css";
 import "../AddTask/AddTaskForm.css";
 
-// components
+// Components
 import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import SimpleButton from "../SimpleButton/SimpleButton";
@@ -18,6 +18,9 @@ import { Times } from "./Times";
 import Textarea from "../Textarea/Textarea";
 import SingleDatePicker from "../DatePicker/SingleDatePicker";
 import dayjs, { Dayjs } from "dayjs";
+
+// Backend
+import { createTask } from "../../services/backend/Tasks";
 
 type AddTaskProps = {
   formData: {
@@ -28,6 +31,8 @@ type AddTaskProps = {
     tag: string;
     status: string;
     description: string;
+    userEmail?: string;
+    id?: string;
   };
   setFormData: (value: any) => void;
 };
@@ -40,6 +45,10 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
     value: string | Dayjs | null
   ) => {
     setFormData((prevValue: any) => ({ ...prevValue, [data]: value }));
+  };
+
+  const createUserTask = async () => {
+    await createTask(formData);
   };
 
   return (
@@ -184,7 +193,10 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
               <SimpleButton
                 size={"block"}
                 text={"Finalizar Tarefa"}
-                onClick={() => console.log(formData)}
+                onClick={() => {
+                  createUserTask();
+                  console.log(formData);
+                }}
               />
             </div>
             <br />
