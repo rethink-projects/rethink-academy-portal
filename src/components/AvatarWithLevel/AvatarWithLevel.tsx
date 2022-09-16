@@ -1,6 +1,6 @@
-import { Style } from "@mui/icons-material";
 import React from "react";
 import style from "./AvatarWithLevel.module.css";
+import Images from "../../assets";
 
 type AvatarWithLevelProps = {
   studentLevel: number;
@@ -20,10 +20,7 @@ const AvatarWithLevel = ({
       />
       <div className={style.levelBadge}>
         <div className={style.level}>
-          <img
-            src="/static/media/level_Icon.004358a92590e04577854ccefa27c3a2.svg"
-            alt="Ícone de nível"
-          />
+          <img src={Images.icons.level_Icon} alt="Ícone de nível" />
           <span>{studentLevel}</span>
         </div>
       </div>

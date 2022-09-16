@@ -65,11 +65,13 @@ function Menu() {
               icon={Images.icons.IconHome}
             />
           </Link>
-          <MenuItem
-            isOpen={isOpen}
-            text="Seu Desenvolvimento"
-            icon={Images.icons.DevelopmentIcon}
-          />
+          <Link to={"/dashboard/desenvolvimentoPessoal"}>
+            <MenuItem
+              isOpen={isOpen}
+              text="Seu Desenvolvimento"
+              icon={Images.icons.DevelopmentIcon}
+            />
+          </Link>
           <Link to={"/dashboard/trilhas"}>
             <MenuItem
               isOpen={isOpen}

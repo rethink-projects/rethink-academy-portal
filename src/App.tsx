@@ -54,11 +54,13 @@ function App() {
                 element={<Class />}
               />
               <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route
+                path="/dashboard/desenvolvimentoPessoal"
+                element={<PersonalDevelopmentScreen />}
+              />
+              <Route path="/dashboard/notas" element={<NotesScreen />} />
             </Route>
-            <Route path="/desenvolvimentoPessoal" element={<Layout />}>
-              <Route index element={<PersonalDevelopmentScreen />} />
-            </Route>
-            <Route path="/playground" element={<PlaygroundScreen />} />
+
             <Route
               path="/playground"
               element={
@@ -67,9 +69,6 @@ function App() {
                 </RequireAuth>
               }
             />
-            <Route path="/dashboard/notas" element={<Layout />}>
-              <Route index element={<NotesScreen />} />
-            </Route>
           </Route>
         </Routes>
       </AuthProvider>

@@ -57,6 +57,9 @@
 .login_main_img {
   width: 45px;
 }
+body {
+  overflow-y: hidden !important;
+}
 
 @media all and (max-width: 820px) {
   .login_container {

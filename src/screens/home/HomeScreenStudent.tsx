@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Styles from "./HomeStudent.module.css";
 import Images from "../../assets";
 import AcademyProgress from "../../components/AcademyProgress/AcademyProgress";
@@ -40,28 +41,24 @@ function HomeScreenStudent() {
   if (!user) {
     return <div>Loading...</div>;
   }
-
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
-
+  const getStudentMain = () => {
+    switch (user.main) {
+      case "ENGINEERING":
+        return "Engenharia";
+        break;
+      case "DESIGN":
+        return "Design";
+        break;
+      case "PRODUCT":
+        return "Produto";
+        break;
+    }
+  };
   return (
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name.split(" ")[0]} />
         <LastGoalsCard />
-
         <Register />
         <TrilhasComponent />
       </div>
@@ -71,7 +68,9 @@ function HomeScreenStudent() {
         </div>
 
         <p className={Styles.user_name}>{user.name}</p>
-        <p className={Styles.user_title}>{"Estagiário em Engenharia"}</p>
+        <p className={Styles.user_title}>
+          {"Estagiário em " + getStudentMain()}
+        </p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>
             <img
