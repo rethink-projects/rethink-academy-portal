@@ -1,8 +1,8 @@
 .box {
   width: 100%;
   height: calc(100vh - 68px);
-  overflow-y: visible;
-  background-color: #f9f9f9;
+  overflow-y: auto;
+  background-color: var(--color-input);
 }
 
 .container {

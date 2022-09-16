@@ -34,8 +34,8 @@ const TrilhasScreen = () => {
 
   useEffect(() => {
     api.get("/user/" + userAuth?.email).then((response) => {
-      if (response.data.user) {
-        setUser(response.data.user);
+      if (response.data) {
+        setUser(response.data);
       }
     });
     api.get("/trail").then((response) => {

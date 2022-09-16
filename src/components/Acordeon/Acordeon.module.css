@@ -16,7 +16,7 @@
 }
 .module_container_closed:hover {
   border: 1px solid var(--color-tertiary-hover);
-  box-shadow: 0px 0px 0px 4px rgba(108, 111, 147, 0.1);
+  box-shadow: 0px 0px 0px 4px var(--color-acordeon-hover);
   z-index: 2;
 }
 
@@ -62,8 +62,18 @@
   cursor: pointer;
 }
 
+.acordeon_item_ambassador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+  width: 340px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
 .acordeon_item:hover {
-  background-color: #e2fa85;
+  background-color: var(--color-primary-hover);
 }
 
 .acordeon_left_side {

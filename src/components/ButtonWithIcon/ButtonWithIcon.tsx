@@ -7,6 +7,7 @@ type ButtonWithIconProps = {
   onClick?: () => void;
   width?: number;
   position: "left" | "right";
+  typeEmblemCheck?: boolean;
 };
 
 const ButtonWithIcon = ({
@@ -17,12 +18,15 @@ const ButtonWithIcon = ({
   icon,
   width = 181,
   onClick,
+  typeEmblemCheck = false,
 }: ButtonWithIconProps) => {
   return (
     <button
       onClick={onClick}
-      className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
-      style={{ width: size === "block" ? "": width }}
+      className={`${style.btn_w_icon_right_default} ${style[type]} ${
+        style[size]
+      } ${typeEmblemCheck && style.emblemCheck}`}
+      style={{ width: size === "block" ? "" : width }}
       disabled={type === "disabled"}
     >
       {position === "left" && icon}

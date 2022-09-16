@@ -41,7 +41,6 @@ interface UserResponse {
   watched: string[];
   role: "STUDENT" | "AMBASSADOR" | "RETHINKER";
   profile?: Profile;
-  // courseName: CourseResponse[];
 }
 
 interface Trail {
@@ -91,6 +90,7 @@ export interface CourseResponse {
 ///////////////////////////////////////////////////
 
 const Class = () => {
+  const [ambassador, setAmbassador] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -137,6 +137,11 @@ const Class = () => {
     const responseModule = await api.get(
       `/lesson/watched/${user.email}/${lessonId}?courseId=${courseId}`
     );
+    const responseUser = await api.get(`/user/${user.email}`);
+
+    setAmbassador(responseUser.data.role === "AMBASSADOR");
+    setLessonsWatched(responseUser.data.watched);
+
     setModules(responseModule.data.modules);
     setModuleOrder(responseModule.data.moduleOrder);
     setLessonOrder(responseModule.data.lessonOrder);
@@ -147,13 +152,15 @@ const Class = () => {
   useEffect(() => {
     if (user?.email) {
       const func = async () => {
-        const responseUser = await api.get(`/user/${user.email}`);
-        setLessonsWatched(responseUser.data.watched);
         getInfoLesson();
       };
       func();
     }
   }, [user, location.pathname]);
+
+  const onSubmitLesson = () => {
+    getInfoLesson();
+  };
 
   if (!urlLesson) {
     return <>Carregando</>;
@@ -246,6 +253,8 @@ const Class = () => {
                   completed: module.moduleCompleted,
                   classes: lessonsArray,
                 }}
+                isAmbassador={ambassador}
+                onClickSubmitLesson={() => onSubmitLesson()}
               />
             );
           })}

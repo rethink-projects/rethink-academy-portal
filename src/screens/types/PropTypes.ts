@@ -52,7 +52,7 @@ interface ClassModalProps {
   onClickConfirm: VoidFunction;
   modalType: "ADD" | "EDIT";
   validationType: Validation;
-  setValidationType: (value: Validation) => void;
+  setValidationType?: (value: Validation) => void;
 }
 export type {
   AccordionProps,

@@ -18,7 +18,7 @@ const ValidationModal = ({
     onClickConfirm();
     onClose(false);
   };
-  
+
   const typeSave = type === "SAVE";
 
   if (typeSave) {

@@ -1,7 +1,7 @@
 .class_container {
   display: flex;
   justify-content: space-between;
-  background-color: #f9f9f9;
+  background-color: var(--color-input);
 }
 
 .left_container {
@@ -30,7 +30,7 @@
   font-size: 24px;
   line-height: 120%;
 
-  color: #1b1b1b;
+  color: var(--color-secondary);
 }
 
 .class_video {
@@ -66,7 +66,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 120%;
-  color: #3b3b3b;
+  color: var(--color-secondary-hover);
 }
 
 .class_description > p {
@@ -75,14 +75,14 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #706e64;
+  color: var(--color-tertiary-active);
 }
 
 .class_class_list {
   padding-top: 20px;
   min-width: 376px;
   height: 992px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--color-opacity-1);
   padding-left: 8px;
   display: flex;
   flex-direction: column;
@@ -98,6 +98,6 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 120%;
-  color: #000000;
+  color: var(--color-secondary-dark);
   margin-bottom: 20px;
 }
