@@ -1,64 +1,30 @@
+import { ErrorData } from "@firebase/util";
+import { getDataGridUtilityClass } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../../../context/AuthContext";
+import { api } from "../../../../services/api";
 import { dataDois } from "../chart/BarChart";
 import styles from "./Tag.module.css";
 
-export const headers = {
-  ENGINEERING: [
-    "BackEnd",
-    "FrontEnd",
-    "HTML e CSS",
-    "React",
-    "JavaScript",
-    "TypeScript",
-  ],
-  DESIGN: [
-    "Pesquisas",
-    "Facilitação de Workshop",
-    "Wireframe e Fluxo",
-    "Design system",
-    "Product Design",
-    "Padronização e ",
-  ],
-  PRODUCT: [
-    "Produto",
-    "Pessoas",
-    "Processos",
-    "Estratégia",
-    "Performance",
-    "Evolução",
-  ],
-  SOFT: [
-    "Empatia",
-    "Resolução de Problemas",
-    "Comunicação",
-    "Inteligencia emocial",
-    "Autoconfiança",
-    "Gestão de tempo",
-  ],
-};
+export const headers = [
+  "Gerais",
+  "Reuniões Internas",
+  "Atividades Internas",
+  "Fup",
+  "1:1",
+  "Daily",
+];
 
 const EvaluationTag = ({
-  tagType,
-  setSkill,
-  skill,
+  tags,
+  setTags,
 }: {
-  tagType: "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT";
-  setSkill: (value: string) => void;
-  skill: string;
+  tags: string;
+  setTags: (value: any) => void;
 }) => {
-  // variaveis para controlar estado das tags ativo e inativo
-
-  const [header, setHeader] = useState<
-    "ENGINEERING" | "DESIGN" | "PRODUCT" | "SOFT"
-  >(tagType);
-
-  useEffect(() => {
-    setHeader(tagType);
-  }, [tagType]);
-
   const handleClass = (buttonSkill: string) => {
-    if (buttonSkill === skill) {
+    if (buttonSkill === tags) {
       return [styles.tag_button, styles.tag_button_active].join(" ");
     }
     return styles.tag_button;
@@ -66,12 +32,11 @@ const EvaluationTag = ({
 
   return (
     <div className={styles.tag_container}>
-      {headers[header].map((item) => (
+      {headers.map((item) => (
         <button
           className={handleClass(item)}
           onClick={() => {
-            setSkill(item);
-            // setGraphData(getData);
+            setTags(item);
           }}
         >
           {item}

@@ -65,9 +65,10 @@ const Register = ({ type = "home", email }: RegisterProps) => {
         .then((response) => {
           setTags(response);
           let helper = 0;
-          response.forEach((tag: any) => {
-            helper += tag.realTime;
-          });
+          response &&
+            response.forEach((tag: any) => {
+              helper += tag.realTime;
+            });
           helper = helper / 60;
           setTime(Math.trunc(helper));
         })

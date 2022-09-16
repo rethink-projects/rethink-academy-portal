@@ -49,7 +49,7 @@ function App() {
                 element={<TaskAnalysisScreen />}
               />
               <Route
-                path="/dashboard/register/analysis/ambassador"
+                path="/dashboard/register/analysis/:email"
                 element={<AmbassadorAnalisysScreen />}
               />
             </Route>

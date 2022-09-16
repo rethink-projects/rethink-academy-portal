@@ -14,6 +14,8 @@ import { getUserFromBackend } from "../../services/backend/UserService";
 import Toast from "../../components/Toast/Toast";
 import Comment from "../../components/Comment/Comment";
 import TagChart from "../../components/TagChart/TagChart";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 const InternAnalisysScreen = () => {
   type Intern = {
@@ -27,9 +29,39 @@ const InternAnalisysScreen = () => {
   const [emailIntern, setEmailIntern] = useState("");
   const [isEqual, setIsEqual] = useState(true);
   const [name, setName] = useState("");
+  const navigate = useNavigate();
+
+  const [graphData, setGraphData] = useState<
+    {
+      name: string;
+      skill: number;
+      pv: number;
+    }[]
+  >([]);
+
+  const [tags, setTags] = useState("Gerais");
+
+  const getData = async () => {
+    try {
+      const { data } = await api.get(
+        "/chart/" + window.location.pathname.split("/")[4],
+        { params: tags !== "Gerais" ? { tags } : null }
+      );
+      setGraphData(data);
+    } catch (error: any) {
+      console.log({ error: error.message });
+    }
+  };
+
+  useEffect(() => {
+    console.log({ emailIntern });
+    getData();
+  }, [tags, emailIntern]);
 
   const handleEmailIntern = (email: string) => {
-    if (email === emailIntern) {
+    if (email) {
+      navigate("/dashboard/register/analysis/" + email);
+      getData();
       setIsEqual(true);
     } else {
       setEmailIntern(email);
@@ -69,7 +101,7 @@ const InternAnalisysScreen = () => {
         />
         <SelectionTeam internSelected={handleEmailIntern} />
         <div className={styles.intern_graph}>
-          <TagChart />
+          <TagChart tags={tags} setTags={setTags} graphData={graphData} />
         </div>
         <div className={styles.intern_data}>
           <div className={styles.intern_data_historic}>

@@ -151,7 +151,27 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-const CustomBarChart = ({ graphData }: { graphData: any }) => {
+const CustomBarChart = ({
+  graphData,
+  hours,
+}: {
+  graphData: any;
+  hours?: boolean;
+}) => {
+  const months = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
   return (
     <ResponsiveContainer width="100%" height="65%">
       <BarChart
@@ -167,10 +187,14 @@ const CustomBarChart = ({ graphData }: { graphData: any }) => {
       >
         <CartesianGrid vertical={false} />
         <XAxis dataKey="name" />
-        <YAxis type="number" domain={[0, 5]} tickCount={6} />
+        {hours ? (
+          <YAxis type="number" domain={[0, 5]} tickCount={6} />
+        ) : (
+          <YAxis type="category" domain={months} tickCount={12} />
+        )}
         <Tooltip cursor={false} content={CustomTooltip} />
         <Bar
-          dataKey="skill"
+          dataKey={!hours ? "skill" : "hours"}
           stackId="a"
           fill="#82A8F8"
           barSize={40}
