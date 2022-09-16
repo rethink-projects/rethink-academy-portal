@@ -154,7 +154,11 @@ const NotesScreen = () => {
         updateNote
       );
 
-      data.note.categories = categories;
+      if (categories) {
+        data.note.categories = categories;
+      } else {
+        data.note.categories = state.categories;
+      }
 
       const updateNotes = notes.filter((note) => state.id !== note.id);
       updateNotes.push(data.note);
