@@ -45,16 +45,24 @@ export function useStorage() {
       helper.shift();
       helper = helper.join("/");
 
-      upsertBucket(helper, title, user.email);
+      const bucket = await upsertBucket(helper, title, user.email);
+
+      notify({
+        type: "success",
+        title: `Upload feito com sucesso`,
+      });
+      //console.log({ bucket });
+      return bucket;
     }
-    return notify({
-      type: "success",
-      title: `Upload feito com sucesso`,
-    });
   };
 
   const generateUrlToDownload = async (title: string) => {
-    const bucket = await getOneBucket(title, user.email);
+    const bucket = await getOneBucket(
+      window.btoa(title),
+      //Buffer.from(title).toString("base64"),
+      user.email
+    );
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     const { data, error } = await supabaseClient.storage
       .from(user.email)
       .createSignedUrl(bucket.url, 5000);
@@ -65,6 +73,7 @@ export function useStorage() {
       });
     }
     setUrl(data?.signedURL!);
+    window.open(data?.signedURL, "_blank");
     return notify({
       type: "success",
       title: `Url gerada com sucesso`,

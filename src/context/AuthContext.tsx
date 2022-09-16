@@ -9,7 +9,7 @@ export interface ICurrentUser {
   type?: TypeProvider;
   id: string;
   role: string;
-  main: string;
+  main: "ENGINEERING" | "DESIGN" | "PRODUCT";
   level: number;
   exp: number;
 }

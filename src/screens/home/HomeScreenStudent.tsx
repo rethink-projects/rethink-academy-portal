@@ -60,11 +60,8 @@ function HomeScreenStudent() {
     <div className={Styles.home_container}>
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name.split(" ")[0]} />
-        <LastGoalsCard
-          quantityGoals={10}
-          mounth={months[new Date().getMonth()]}
-          quantityGoalsCompleted={10}
-        />
+        <LastGoalsCard />
+
         <Register />
         <TrilhasComponent />
       </div>

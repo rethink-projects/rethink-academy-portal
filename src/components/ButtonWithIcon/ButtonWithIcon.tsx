@@ -1,7 +1,7 @@
 import style from "./ButtonWithIcon.module.css";
 type ButtonWithIconProps = {
   type: "primary" | "secondary" | "outline" | "disabled";
-  size: "large" | "medium" | "small";
+  size: "large" | "medium" | "small" | "block";
   text: string;
   icon: JSX.Element;
   onClick?: () => void;
@@ -22,7 +22,7 @@ const ButtonWithIcon = ({
     <button
       onClick={onClick}
       className={`${style.btn_w_icon_right_default} ${style[type]} ${style[size]}`}
-      style={{ width: width }}
+      style={{ width: size === "block" ? "": width }}
       disabled={type === "disabled"}
     >
       {position === "left" && icon}

@@ -19,6 +19,12 @@ import IconRight from "./IconRight.svg";
 import LogoutIcon from "./logoutIcon.svg";
 import ratIcon from "./ratIcon.svg";
 import IconToggle from "./toggleIcon.svg";
+import save from "./saveIcon.svg";
+import trash from "./trashIcon.svg";
+import academyHat from "./academyHat.svg";
+import lampIcon from "./lampIcon.svg";
+import dpIcon from "./dpIcon.svg";
+import infoNotes from "./infoIcon_notesScreen.svg";
 import trashIcon from "./trashIcon.svg";
 import editBlackIcon from "./editBlackIcon.svg";
 import one from "./lineOne.png";
@@ -36,18 +42,24 @@ import arrowTask from "./arrowTask.svg";
 import calendarIcon from "./calendarIcon.svg";
 import eyeIcon from "./eyeIcon.svg";
 
+import LastGoalsMedal from "./LastGoalsMedal.svg";
+import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
+import LastGoalsFlag from "./LastGoalsFlag.svg";
+import LastGoalsStar from "./MedalStarMetas.svg";
 import raArrow from "./login-arrow.svg";
 import logoRaSecondary from "./logo-r.svg";
 import logoRethink from "./logo-rethink.svg";
 import ratRa from "./ra-hat.svg";
 import level_Icon from "./level_Icon.svg";
-import LastGoalsAmpoule from "./LastGoalsAmpoule.svg";
-import LastGoalsMedal from "./LastGoalsMedal.svg";
-import LastGoalsFlag from "./LastGoalsFlag.svg";
 
 import Emblem from "./Emblem.png";
 import Emblem_Disable from "./Emblem_Disable.png";
 import info from "./infoIcon.png";
+
+import HardSkillsIconNote from "./HardSkillsIconNote.svg";
+import SoftSkillsIconNote from "./SoftSkillsIconNote.svg";
+import DPIconNote from "./DPIconNote.svg";
+
 import chat from "./chat.png";
 import ProgressBack from "./ProgressBack.png";
 import ProgressIcon from "./ProgressIcon.png";
@@ -64,6 +76,7 @@ import welcome from "./Welcome_Badge.svg";
 import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
+import noGoals from "./NoGoals.svg";
 export const Images = {
   ProgressBack,
   ProgressIcon,
@@ -74,17 +87,18 @@ export const Images = {
   checkbox,
   arrow,
   Emblem,
-  LastGoalsMedal,
-  LastGoalsFlag,
   chat,
   Emblem_Disable,
-  LastGoalsAmpoule,
   info,
   google: googleIcon,
   ratRa,
   raArrow,
   logoRethink,
   logoRaSecondary,
+  academyHat,
+  lamp: lampIcon,
+  desenvolvimentoPessoal: dpIcon,
+  infoNotes,
   arrowTask,
   homeBackground,
   icons: {
@@ -103,6 +117,8 @@ export const Images = {
     ratIcon,
     ContractIcon,
     DevelopmentIcon,
+    save,
+    trash,
     LogoutIcon,
     trashIcon,
     editBlackIcon,
@@ -118,7 +134,15 @@ export const Images = {
     two,
     three,
   },
+
+  LastGoalsMedal,
+  LastGoalsAmpoule,
+  LastGoalsFlag,
+  LastGoalsStar,
   avatar: avatarImage,
+  HardSkillsIconNote,
+  SoftSkillsIconNote,
+  DPIconNote,
   badge: {
     academy,
     studies,
@@ -131,6 +155,7 @@ export const Images = {
     troll,
   },
   starsGif,
+  noGoals,
 };
 
 export default Images;

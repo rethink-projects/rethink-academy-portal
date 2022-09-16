@@ -1,0 +1,51 @@
+.cardContainer {
+  width: 620px;
+  height: 386px;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.table {
+  max-height: 338px;
+
+  overflow-y: auto;
+}
+
+.noNotes_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+}
+
+.noNotes_warning {
+  width: 240px;
+  height: 106px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  row-gap: 12px;
+}
+
+.noNotes_warning p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+
+  text-align: center;
+
+  color: #706e64;
+}
