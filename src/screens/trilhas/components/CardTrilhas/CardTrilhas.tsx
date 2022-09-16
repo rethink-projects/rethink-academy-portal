@@ -1,5 +1,4 @@
 import styles from "./CardTrilhas.module.css";
-import image from "../../../../assets/academyCardTrilhas.png";
 import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
@@ -50,6 +49,7 @@ const CardTrilhas = ({
   trail,
   previous,
   setModal,
+  image,
 }: TypeCardTrilhas) => {
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
   const { user: userAuth } = useAuth();
