@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 24px;
   width: 368px;
-  height: 426px;
   background-color: var(--color-base);
 }
 

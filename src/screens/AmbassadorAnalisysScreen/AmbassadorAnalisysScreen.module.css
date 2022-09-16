@@ -1,8 +1,9 @@
 .intern_container {
-    height: 80vh;
+    height: 1056px;
     display: flex;
     justify-content: space-between;
     gap: 80px;
+    background: #F5F5F5;
 }
 
 .intern_body {
@@ -18,7 +19,7 @@
 
 .intern_graph {
     width: 1040px;
-    height: 500px;
+    height: 470px;
 }
 
 .intern_data {
