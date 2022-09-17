@@ -8,6 +8,7 @@ import { api } from "../../../../../services/api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
+  lessonUser: TypeLessonUser;
 };
 
 type TypeLessonUser = {
@@ -35,17 +36,12 @@ type TypeMaxLesson = {
   };
 };
 
-const CardTrilhasHome = ({ trail }: TrailType) => {
-  const { user } = useAuth();
+const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   const navigate = useNavigate();
 
-  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
-    const response = api.get("/user/watched/" + user.email).then((response) => {
-        setLessonUser(response.data);
 
-    });
   }, []);
 
   const getCoursesFromTrail = (trail: string) => {

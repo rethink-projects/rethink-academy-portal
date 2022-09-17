@@ -3,20 +3,50 @@ import IconMap from "@mui/icons-material/MapOutlined";
 import CardTrilhasHome from "./trilhasSubComponents/CardTrilhasHome";
 import { useEffect, useState } from "react";
 import { api } from "../../../../services/api";
+import { useAuth } from "../../../../context/AuthContext";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
 };
+type TypeLessonUser = {
+  maxLessons: Array<TypeMaxLesson>;
+  user: {
+    id: string;
+    email: string;
+    surnmae: string;
+    main: string;
+    watched: string[];
+    role: string;
+  };
+};
+type TypeMaxLesson = {
+  lessonsLength: number;
+  userLessonsLength: number;
+  completed: boolean;
+  name: string;
+  id: string;
+  trail: {
+    id: string;
+    name: string;
+    description: string;
+  };
+};
 
 //Componente a ser usado na HOME
 const TrilhasComponent = () => {
+  const { user } = useAuth();
+
   const [trails, setTrails] = useState<TrailType[]>();
+  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
     api.get("/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);
       }
+    });
+    api.get("/user/watched/" + user.email).then((response) => {
+      setLessonUser(response.data);
     });
   }, []);
 
@@ -30,7 +60,11 @@ const TrilhasComponent = () => {
       </div>
       <div className={styles.cards_container}>
         {trails?.map((trail: any) => (
-          <CardTrilhasHome key={trail.id} trail={trail} />
+          <CardTrilhasHome
+            key={trail.id}
+            trail={trail}
+            lessonUser={lessonUser!}
+          />
         ))}
       </div>
     </div>
