@@ -14,6 +14,31 @@ type TypeTrails = {
   description: string;
   weight: number;
   imageUrl: string;
+  main: string;
+};
+type TypeLessonUser = {
+  maxLessons: Array<TypeMaxLesson>;
+  user: {
+    id: string;
+    email: string;
+    surnmae: string;
+    main: string;
+    watched: string[];
+    role: string;
+  };
+};
+
+type TypeMaxLesson = {
+  lessonsLength: number;
+  userLessonsLength: number;
+  completed: boolean;
+  name: string;
+  id: string;
+  trail: {
+    id: string;
+    name: string;
+    description: string;
+  };
 };
 const TrilhasScreen = () => {
   let userEmail = "";
@@ -31,6 +56,7 @@ const TrilhasScreen = () => {
   const [valueDescriptionTrail, setValueDescriptionTrail] = useState("");
 
   const [trailUpdated, setTrailUpdated] = useState<TypeTrails>();
+  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
     api.get("/user/" + userAuth?.email).then((response) => {
@@ -44,6 +70,18 @@ const TrilhasScreen = () => {
       }
     });
   }, [modalIsOpen, userEmail]);
+
+  useEffect(() => {
+    console.log("aqui");
+    if (userEmail !== "")
+      api.get("/user/watched/" + userEmail).then((response) => {
+        if (response.data) {
+          console.log(userEmail);
+          console.log(response.data);
+          setLessonUser(response.data);
+        }
+      });
+  }, [userEmail]);
 
   const setStateModalOnclick = (trailId: string) => {
     const searchTrailUpdated = trails?.find((trail) => trail.id === trailId);
@@ -85,6 +123,9 @@ const TrilhasScreen = () => {
 
     setModalIsOpen(false);
   };
+  if (lessonUser === undefined || userEmail === "") {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -108,11 +149,12 @@ const TrilhasScreen = () => {
           {trails?.map((item, index) => (
             <CardTrilhas
               key={item.id}
-              user={userAuth?.role === "AMBASSADOR" ? "teacher" : "student"}
+              userRole={userAuth?.role === "STUDENT" ? "STUDENT" : "TEACHER"}
               onClick={(event: any) => handleClickCardTrails(event, item)}
               trail={item}
               setModal={() => setStateModalOnclick(item.id)}
               image={item.imageUrl}
+              lessonUser={lessonUser!}
               previous={
                 index > 0
                   ? index === 1
