@@ -1,10 +1,8 @@
 import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../../../context/AuthContext";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../../../services/api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
@@ -39,10 +37,7 @@ type TypeMaxLesson = {
 const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   const navigate = useNavigate();
 
-
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const getCoursesFromTrail = (trail: string) => {
     const allCourses = lessonUser?.maxLessons?.filter(
