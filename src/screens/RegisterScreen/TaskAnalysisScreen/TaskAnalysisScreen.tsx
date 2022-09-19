@@ -5,7 +5,9 @@ import AmbassadorViewTasksMM from "../../../components/AmbassadorViewTasksMM/Amb
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import Comment from "../../../components/Comment/Comment";
 import Register from "../../../components/Register/Register";
+import TagChart from "../../../components/TagChart/TagChart";
 import { useAuth } from "../../../context/AuthContext";
+import { api } from "../../../services/api";
 
 // css
 import styles from "./TaskAnalysisScreen.module.css";
@@ -16,6 +18,28 @@ const TaskAnalysisScreen = () => {
   const [userFromPathname, setUserFromPathname] = useState<false | string>(
     false
   );
+  const [graphData, setGraphData] = useState<
+    {
+      name: string;
+      skill: number;
+      pv: number;
+    }[]
+  >([]);
+
+  const getData = async () => {
+    try {
+      if (user) {
+        const { data } = await api.get("/chart/" + user.email, {
+          params: tags !== "Gerais" ? { tags } : null,
+        });
+        setGraphData(data);
+      }
+    } catch (error: any) {
+      console.log({ error: error.message });
+    }
+  };
+
+  const [tags, setTags] = useState("Gerais");
   const [breadcrumbData, setBreadcrumbData] = useState([
     { title: "Home", link: "/" },
     { title: "Registro de Horas", link: "/dashboard/register" },
@@ -23,15 +47,16 @@ const TaskAnalysisScreen = () => {
   ]);
 
   useEffect(() => {
-    const student = window.location.pathname.split("/")[4];
-    if (student) {
-      setUserFromPathname(student);
+    // const user = user.email;
+    if (user) {
+      getData();
+      setUserFromPathname(user.email);
       setBreadcrumbData((prevState) => [
         ...prevState,
-        { title: student.split(".")[0], link: "#" },
+        { title: user.name, link: "#" },
       ]);
     }
-  }, []);
+  }, [user]);
 
   if (userFromPathname && user.role !== "AMBASSADOR") {
     navigate("dashboard/register/analysis");
@@ -43,11 +68,13 @@ const TaskAnalysisScreen = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.rightScreen}>
+      <div className={styles.leftScreen}>
         <div className={styles.breadcrumb}>
           <Breadcrumb breadcrumbItems={breadcrumbData} />
         </div>
-        <div className={styles.graphic}></div>
+        <div className={styles.graphic}>
+          <TagChart tags={tags} setTags={setTags} graphData={graphData} />
+        </div>
         <div className={styles.bottom_container}>
           <div className={styles.task_history}>
             <AmbassadorViewTasksMM email={user.email} />
@@ -57,7 +84,7 @@ const TaskAnalysisScreen = () => {
           </div>
         </div>
       </div>
-      <div className={styles.leftScreen}>
+      <div className={styles.rightScreen}>
         <Comment student={userFromPathname && userFromPathname} />
       </div>
     </div>

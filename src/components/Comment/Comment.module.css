@@ -1,60 +1,58 @@
 .container {
-    width: 366px;
-    height: 1020px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 19px;
-    background: #FFFFFF;
-    border: 1px solid #D4D4D4;
-    padding: 20px;
+  width: 366px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 19px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  padding: 20px;
 }
 
 .no_comments {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 291px;
-    height: 106px;
-    padding: 340px 0px 460px 0px;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 291px;
+  height: 106px;
+  padding: 340px 0px 460px 0px;
+  gap: 12px;
 }
 
 .error_outline > svg {
-    width: 43px;
-    height: 43px;
+  width: 43px;
+  height: 43px;
 }
 
 .error_outline > svg > path {
-    color: #EAB308;
+  color: #eab308;
 }
 
 .no_comments > p {
-    font-size: 18px;
-    text-align: center;
-    color: #706E64;
+  font-size: 18px;
+  text-align: center;
+  color: #706e64;
 }
 
 .container_comments {
-    width: 408px;
-    height: 907px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  width: 408px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
 .line {
-    width: 368px;
-    opacity: 0.1;
-    border: 1px solid #000000;
-    background-color: #000000;
+  width: 368px;
+  opacity: 0.1;
+  border: 1px solid #000000;
+  background-color: #000000;
 }
 
 .make_comment {
-    width: 368px;
-    height: 46px;
-    display: flex;
-    gap: 8px;
+  width: 368px;
+  height: 46px;
+  display: flex;
+  gap: 8px;
 }
