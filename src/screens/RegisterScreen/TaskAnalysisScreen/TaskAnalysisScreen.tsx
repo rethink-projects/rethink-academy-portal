@@ -59,7 +59,7 @@ const TaskAnalysisScreen = () => {
   }, [user]);
 
   if (userFromPathname && user.role !== "AMBASSADOR") {
-    navigate("dashboard/register/analysis");
+    // navigate("dashboard/register/analysis");
   }
 
   if (!user) {
