@@ -105,7 +105,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
                   setValue={setCourseName}
                   options={getCoursesList()}
                   id={"1"}
-                  width={360}
+                  width={243}
                   leftIcon={<IconCourse />}
                 />
                 <span>Selecione um curso</span>
@@ -149,7 +149,7 @@ const CardProgress = ({ onClose, trailId }: TypeCardProgress) => {
                 setValue={setCourseName}
                 options={getCoursesList()}
                 id={"1"}
-                width={360}
+                width={243}
                 leftIcon={<IconCourse />}
               />
               <span>Selecione um curso</span>

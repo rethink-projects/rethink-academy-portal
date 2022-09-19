@@ -93,7 +93,7 @@ interface ModuleProgressResponse {
 }
 
 type Modal = "ADD" | "EDIT" | "DELETE";
-type Validation = "SAVE" | "DELETE";
+type Validation = "SAVE" | "DELETE" ;
 
 export type {
   UserLessons,

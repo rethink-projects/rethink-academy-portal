@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Textarea.module.css";
 
 type TextareaProps = {
-  type?: "default" | "small" | "large" | "block";
+  type?: "default" | "small" | "large" | "block" | "extraSmall";
   placeholder: string;
   onChangetext?: (e: any) => void;
   caption?: string;

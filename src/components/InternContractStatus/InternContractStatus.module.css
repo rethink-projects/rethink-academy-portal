@@ -1,0 +1,75 @@
+.container {
+  width: 357px;
+  height: 317px;
+  background: var(--color-base);
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+}
+
+.inner_container {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card_title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.card_tags {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card_standard_tag,
+.card_inactive_tag,
+.card_active_tag,
+.card_pending_tag {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-tertiary-hover);
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+  gap: 14px;
+  background: var(--color-base);
+  height: 48px;
+  border: 1px solid var(--color-icon-background);
+  border-radius: 4px;
+}
+
+.card_active_tag {
+  color: var(--color-secundary);
+  border: 1px solid var(--color-feedback-success);
+}
+
+.card_inactive_tag {
+  color: var(--color-secundary);
+  border: 1px solid var(--color-feedback-error);
+}
+
+.card_pending_tag {
+  color: var(--color-secundary);
+  border: 1px solid #eab308;
+}
+
+.card_inactive_tag svg {
+  color: var(--color-feedback-error);
+}
+
+.card_active_tag svg {
+  color: var(--color-feedback-success);
+}
+
+.card_pending_tag svg {
+  color: #eab308;
+}

@@ -1,6 +1,4 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { dataDois } from "../chart/BarChart";
 import styles from "./Tag.module.css";
 
 export const headers = {
@@ -66,15 +64,16 @@ const EvaluationTag = ({
 
   return (
     <div className={styles.tag_container}>
-      {headers[header].map((item) => (
+      {headers[header].map((item, index) => (
         <button
+          key={index}
           className={handleClass(item)}
           onClick={() => {
             setSkill(item);
             // setGraphData(getData);
           }}
         >
-          {item}
+          {item.length < 15 ? item : item.slice(0, 15) + "..."}
         </button>
       ))}
     </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CustomBarChart, { data } from "./components/chart/BarChart";
+import CustomBarChart from "./components/chart/BarChart";
 import Switch from "./components/switch/Switch";
 import Tag, { headers } from "./components/tags/Tag";
 import styles from "./PersonalDevelopmentChart.module.css";

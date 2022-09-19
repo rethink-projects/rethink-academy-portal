@@ -40,7 +40,7 @@
   font-size: 16px;
   line-height: 24px;
   color: var(--color-secondary);
-  background-color: #f9f9f9; /* Precisa colocar essa cor no colors.css */
+  background-color: var(--color-input);
 }
 
 .textarea_default::placeholder {
@@ -55,6 +55,16 @@
   outline: 1px solid var(--color-feedback);
   box-shadow: 0px 0px 0px 4.5px #4750d526; /* Precisa colocar essa cor no colors.css */
   border: 1px solid transparent;
+}
+
+.textarea_extraSmall{
+  display: flex;
+  width: 302px;
+  height: 17px !important;
+  align-items: center;
+  font-size: 14px;
+  line-height: 100%;
+  padding: 10px 8px;
 }
 
 .textarea_small {

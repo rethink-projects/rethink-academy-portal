@@ -4,10 +4,13 @@ import TrailModal from "../../../../components/TrailModal/TrailModal";
 import ValidationModal from "../ValidationModal/ValidationModal";
 import styles from "./ClassModal.module.css";
 import { Validation } from "../../../types/CourseTypes";
+import IconTrash from "@mui/icons-material/DeleteOutlined";
+import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 const ClassModal = ({
   onClose,
-  type,
+  modalType,
+  validationType,
   className,
   embedLink,
   description,
@@ -15,22 +18,22 @@ const ClassModal = ({
   setEmbedLink,
   setDescription,
   onClickConfirm,
+  setValidationType,
 }: ClassModalProps) => {
   let title;
+  const typeAdd = modalType === "ADD";
+  const typeEdit = modalType === "EDIT";
 
-  type === "ADD" ? title = ("Adicionar Aula") : title = ("Editar Aula");
+  typeAdd ? (title = "Adicionar Aula") : (title = "Editar Aula");
 
   const [validationModalIsOpen, setValidationModalIsOpen] = useState(false);
-  const [validationType, setValidationType] = useState<Validation>(
-    "SAVE"
-  );
 
   return (
     <TrailModal
       title={title}
       onClose={onClose}
       onClickConfirm={() =>
-        type === "ADD"
+        typeAdd
           ? (onClose(), onClickConfirm())
           : (setValidationType("SAVE"), setValidationModalIsOpen(true))
       }
@@ -45,6 +48,18 @@ const ClassModal = ({
         />
       )}
       <form className={styles.container}>
+        {typeEdit && (
+          <div className={styles.trash}>
+            {/* <Tooltip direction={"bottom"} content={"Excluir"}> */}
+              <IconTrash
+                sx={{ color: "var(--color-feedback-error)" }}
+                onClick={() => (
+                  setValidationType("DELETE"), setValidationModalIsOpen(true)
+                )}
+              />
+            {/* </Tooltip> */}
+          </div>
+        )}
         <label>Nome da Aula:</label>
         <input
           placeholder="Exemplo: Inovação e Design (07:50)"

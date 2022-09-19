@@ -39,7 +39,6 @@ interface ValidationModalProps {
 }
 
 interface ClassModalProps {
-  type: "ADD" | "EDIT";
   onClose: VoidFunction;
   oneButton?: boolean;
   nameButtonRight?: string;
@@ -51,6 +50,9 @@ interface ClassModalProps {
   setEmbedLink: (value: string) => void;
   setDescription: (value: string) => void;
   onClickConfirm: VoidFunction;
+  modalType: "ADD" | "EDIT";
+  validationType: Validation;
+  setValidationType: (value: Validation) => void;
 }
 export type {
   AccordionProps,

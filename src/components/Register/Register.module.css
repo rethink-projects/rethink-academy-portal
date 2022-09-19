@@ -184,7 +184,7 @@
   border-radius: 4px;
   color: var(--color-base);
   cursor: pointer;
-  margin-left: 16px;
+  margin: 0 8px;
 }
 
 .btnHours:hover {

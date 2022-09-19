@@ -65,31 +65,62 @@ function Menu() {
               icon={Images.icons.IconHome}
             />
           </Link>
-          <MenuItem
-            isOpen={isOpen}
-            text="Seu Desenvolvimento"
-            icon={Images.icons.DevelopmentIcon}
-          />
+
+          {user.role !== "AMBASSADOR" ? (
+            <>
+              <Link to={"/dashboard/desenvolvimentoPessoal"}>
+                <MenuItem
+                  isOpen={isOpen}
+                  text="Notas Privadas"
+                  icon={Images.icons.privateNotes}
+                />
+              </Link>
+              <Link to={"/dashboard/registroDeHoras"}>
+                <MenuItem
+                  isOpen={isOpen}
+                  text="Avaliações"
+                  icon={Images.icons.avaliations}
+                />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/dashboard/desenvolvimentoPessoal"}>
+                <MenuItem
+                  isOpen={isOpen}
+                  text="Seu Desenvolvimento"
+                  icon={Images.icons.DevelopmentIcon}
+                />
+              </Link>
+              <Link to={"/dashboard/registroDeHoras"}>
+                <MenuItem
+                  isOpen={isOpen}
+                  text="Registro de Horas"
+                  icon={Images.icons.ClockHome}
+                />
+              </Link>
+              <Link to={"/dashboard/register/analises"}>
+                <MenuItem
+                  text="Análise de Desempenho"
+                  isOpen={isOpen}
+                  icon={Images.icons.chart}
+                />
+              </Link>
+              <Link to={"/dashboard/contrato"}>
+                <MenuItem
+                  text="Contrato"
+                  isOpen={isOpen}
+                  icon={Images.icons.ContractIcon}
+                />
+              </Link>
+            </>
+          )}
           <Link to={"/dashboard/trilhas"}>
             <MenuItem
               isOpen={isOpen}
               text="Cursos"
               onClick={() => navigate("trilhas")}
               icon={Images.icons.ratIcon}
-            />
-          </Link>
-          <Link to={"/dashboard/registroDeHoras"}>
-            <MenuItem
-              isOpen={isOpen}
-              text="Registro de Horas"
-              icon={Images.icons.ClockHome}
-            />
-          </Link>
-          <Link to={"/dashboard/contratos"}>
-            <MenuItem
-              text="Contrato"
-              isOpen={isOpen}
-              icon={Images.icons.ContractIcon}
             />
           </Link>
         </div>
