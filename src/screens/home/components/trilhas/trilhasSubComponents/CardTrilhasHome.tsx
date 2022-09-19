@@ -37,8 +37,6 @@ type TypeMaxLesson = {
 const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
-
   const getCoursesFromTrail = (trail: string) => {
     const allCourses = lessonUser?.maxLessons?.filter(
       (course: any) => course.trail.id === trail
@@ -67,6 +65,15 @@ const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
     }
   };
 
+  let mainUser: string;
+  if (lessonUser?.user.main === "ENGINEERING") {
+    mainUser = "Engenharia";
+  } else if (lessonUser?.user.main === "DESIGN") {
+    mainUser = "Design";
+  } else if (lessonUser?.user.main === "PRODUCT") {
+    mainUser = "Produto";
+  } else return null;
+
   const atLeastOneCourseCompleted = (trail: string) => {
     return lessonUser?.maxLessons?.find(
       (course: any) =>
@@ -75,28 +82,16 @@ const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   };
 
   const checkWhichTrilhaUnlock = () => {
-    let mainUser;
-    if (lessonUser?.user.main === "ENGINEERING") {
-      mainUser = "Engenharia";
-    } else if (lessonUser?.user.main === "DESIGN") {
-      mainUser = "Design";
-    } else {
-      mainUser = "Produto";
-    }
-
-    if (trail.name.toLowerCase() === mainUser.toLowerCase()) {
+    if (
+      trail.name.toLowerCase() === mainUser.toLowerCase() ||
+      trail.name.toLowerCase() === "academy"
+    ) {
       return true;
-    }
-    if (trail.name.toLowerCase() === "academy") {
-      return true;
-    }
-    if (trail.name.toLowerCase() === "design") {
+    } else if (trail.name.toLowerCase() === "design") {
       return unlockTrilha("design");
-    }
-    if (trail.name.toLowerCase() === "engenharia") {
+    } else if (trail.name.toLowerCase() === "engenharia") {
       return unlockTrilha("engenharia");
-    }
-    if (trail.name.toLowerCase() === "produto") {
+    } else if (trail.name.toLowerCase() === "produto") {
       return unlockTrilha("produto");
     }
   };
@@ -124,12 +119,13 @@ const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   };
 
   const handleClickTrail = () => {
-    navigate(`trilhas/${trail.id}`);
+    if (checkWhichTrilhaUnlock()) navigate(`trilhas/${trail.id}`);
   };
 
   const containerClass = atLeastOneCourse()
     ? styles.container_completed
     : styles.container;
+
   return (
     <div
       style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}
