@@ -73,7 +73,6 @@ const CourseScreen = () => {
     setModuleName("");
   };
 
-
   useEffect(() => {
     let qnt = 0;
     modules.map((module) => (qnt += module!.lessons!.length));
@@ -142,7 +141,7 @@ const CourseScreen = () => {
             <CardAddCourse
               course={course}
               addCourse={false}
-              onClose={() => setClassModalIsOpen(false)}
+              onClose={() => (setClassModalIsOpen(false), getCourse())}
             />
           )}
 
