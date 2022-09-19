@@ -73,7 +73,6 @@ const CardTrilhas = ({
     const completedCourses = lessonUser.maxLessons.filter(
       (course: any) => course.trail.id === trail && course.completed
     ).length;
-    console.log(completedCourses + "asodaslkdmakslmdskam");
     return completedCourses;
   };
 

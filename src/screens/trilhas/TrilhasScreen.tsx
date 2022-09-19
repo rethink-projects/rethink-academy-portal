@@ -72,12 +72,9 @@ const TrilhasScreen = () => {
   }, [modalIsOpen, userEmail]);
 
   useEffect(() => {
-    console.log("aqui");
     if (userEmail !== "")
       api.get("/user/watched/" + userEmail).then((response) => {
         if (response.data) {
-          console.log(userEmail);
-          console.log(response.data);
           setLessonUser(response.data);
         }
       });
