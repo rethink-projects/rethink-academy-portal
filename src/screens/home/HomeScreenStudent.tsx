@@ -45,13 +45,10 @@ function HomeScreenStudent() {
     switch (user.main) {
       case "ENGINEERING":
         return "Engenharia";
-        break;
       case "DESIGN":
         return "Design";
-        break;
       case "PRODUCT":
         return "Produto";
-        break;
     }
   };
   return (
