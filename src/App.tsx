@@ -42,6 +42,10 @@ function App() {
                 path="/dashboard/register/analysis"
                 element={<TaskAnalysisScreen />}
               />
+              <Route
+                path="/dashboard/register/analysis/:email"
+                element={<TaskAnalysisScreen />}
+              />
             </Route>
           </Route>
           <Route

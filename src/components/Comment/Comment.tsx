@@ -14,9 +14,8 @@ import {
   getCommentsFromUser,
   removeComment,
 } from "../../services/backend/comments";
-import { CommitOutlined } from "@mui/icons-material";
 
-const Comment = () => {
+const Comment = ({ student: studentEmail }: { student?: string | false }) => {
   const [active, setActive] = useState(true);
   const [comments, setComments] = useState<
     { id: string; text: string; CommmentAuthor: any }[]
@@ -29,7 +28,7 @@ const Comment = () => {
     if (user) {
       const response = await createComment({
         text: description,
-        userEmail: user.email,
+        userEmail: studentEmail ? studentEmail : user.email,
         commentAuthor: user.email,
       });
 
@@ -48,7 +47,9 @@ const Comment = () => {
 
   const getComments = async () => {
     if (user) {
-      const data = await getCommentsFromUser(user.email);
+      const data = await getCommentsFromUser(
+        studentEmail ? studentEmail : user.email
+      );
       setComments(data);
     }
   };
