@@ -1,0 +1,58 @@
+.intern_container {
+    height: 1056px;
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    background: #F5F5F5;
+}
+
+.intern_body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-left: 112px;
+    padding-top: 28px;
+}
+
+.intern_comment {
+}
+
+.intern_graph {
+    width: 1040px;
+    height: 470px;
+}
+
+.intern_data {
+    display: flex;
+    gap: 54px;
+}
+
+.intern_data_historic {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.intern_data_historic h1 {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.error {
+    width: 620px;
+}
+
+.fastView {
+    width: 357px;
+}
+
+.intern_data_viewFast {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.intern_data_viewFast h1 {
+    font-weight: 500;
+    font-size: 20px;
+}

@@ -37,6 +37,10 @@ const TaskAnalysisScreen = () => {
     navigate("dashboard/register/analysis");
   }
 
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.rightScreen}>
@@ -46,10 +50,10 @@ const TaskAnalysisScreen = () => {
         <div className={styles.graphic}></div>
         <div className={styles.bottom_container}>
           <div className={styles.task_history}>
-            <AmbassadorViewTasksMM />
+            <AmbassadorViewTasksMM email={user.email} />
           </div>
           <div className={styles.quick_view}>
-            <Register type="intern" />
+            <Register email={user.email} />
           </div>
         </div>
       </div>

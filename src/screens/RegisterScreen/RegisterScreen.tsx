@@ -265,7 +265,7 @@ const RegisterScreen = () => {
           <div className={styles.register_breadcrumb}>
             <Breadcrumb
               breadcrumbItems={[
-                { title: "Home", link: "/" },
+                { title: "Home", link: "/dashboard" },
                 { title: "Registro de Horas", link: "/dashboard/register" },
               ]}
             />
@@ -307,12 +307,14 @@ const RegisterScreen = () => {
 
           <div className={styles.searchTasks_Tasks}>
             {!thereTask && (
-              <Toast
-                title=" Não existem tarefas cadastradas com esse nome!"
-                type="error"
-              />
+              <div className={styles.error}>
+                <Toast
+                  title=" Não existem tarefas cadastradas com esse nome!"
+                  type="error"
+                />
+              </div>
             )}
-            {tasks.length > 0 &&
+            {tasks.length > 0 ? (
               tasks.map(
                 (day: any[], index) =>
                   day[0] && (
@@ -361,7 +363,13 @@ const RegisterScreen = () => {
                       </div>
                     </div>
                   )
-              )}
+              )
+            ) : (
+              <Toast
+                title=" Não existem tarefas cadastradas nessa data!"
+                type="info"
+              />
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PersonalDevelopmentChart from "./components/SkillChart/PersonalDevelopmentChart";
 import AuthProvider from "./context/AuthProvider";
 import CourseScreen from "./screens/course/CourseScreen";
 import Class from "./screens/class/Class";
@@ -13,6 +14,7 @@ import CursosScreen from "./screens/CoursesScreen/CoursesScreen";
 import RequireAuth from "./services/auth";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import TaskAnalysisScreen from "./screens/RegisterScreen/TaskAnalysisScreen/TaskAnalysisScreen";
+import AmbassadorAnalisysScreen from "./screens/AmbassadorAnalisysScreen/AmbassadorAnalisysScreen";
 
 function App() {
   return (
@@ -39,12 +41,21 @@ function App() {
                 element={<RegisterScreen />}
               />
               <Route
+                path="/dashboard/yourDevelopment"
+                element={
+                  <PersonalDevelopmentChart
+                    email={"felipe.reggiane@rethink.dev"}
+                  />
+                }
+              />
+              <Route
                 path="/dashboard/register/analysis"
                 element={<TaskAnalysisScreen />}
               />
               <Route
                 path="/dashboard/register/analysis/:email"
-                element={<TaskAnalysisScreen />}
+                // element={<TaskAnalysisScreen />}
+                element={<AmbassadorAnalisysScreen />}
               />
             </Route>
           </Route>

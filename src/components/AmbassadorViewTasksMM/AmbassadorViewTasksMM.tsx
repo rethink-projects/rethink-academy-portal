@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Images from "../../assets";
+import { useAuth } from "../../context/AuthContext";
+import { removeTask } from "../../services/backend/Tasks";
 import AccordionMM from "../AccordionMM/AccordionMM";
-import { DatePicker } from "../DatePicker/DatePicker";
+import DatePicker from "../DatePicker/DatePicker";
 import InputSearch from "../InputSearch/InputSearch";
 import Toast from "../Toast/Toast";
 
 // CSS
 import styles from "./AmbassadorViewTasksMM.module.css";
 
-const AmbassadorViewTasksMM = () => {
+type TypeAmbassadorViewTasksMM = {
+  email: string;
+};
+
+const AmbassadorViewTasksMM = ({ email }: TypeAmbassadorViewTasksMM) => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [update, setUpdate] = useState(false);
   const [thereTask, setThereTask] = useState(true);
@@ -48,6 +54,15 @@ const AmbassadorViewTasksMM = () => {
     return exist;
   };
 
+  const handleDelete = (id: string) => {
+    removeTask(id);
+    setUpdate(true);
+  };
+
+  useEffect(() => {
+    changeData();
+  }, [email]);
+
   return (
     <div className={styles.viewTasks_container}>
       <div className={styles.viewTasks_header}>
@@ -58,14 +73,17 @@ const AmbassadorViewTasksMM = () => {
             placeholder="Search"
             onChange={filterWord}
             changeData={changeData}
+            disable={false}
           />
         </div>
+
         <DatePicker
           calendarPosition="right"
           placeholder="Placeholder"
           size="default"
           setTasks={setTasks}
           update={update}
+          email={email}
         />
       </div>
       <div className={styles.viewTasks_body}>
@@ -78,8 +96,7 @@ const AmbassadorViewTasksMM = () => {
               />
             </div>
           )}
-          {tasks &&
-            tasks.length > 0 &&
+          {tasks.length > 0 ? (
             tasks.map(
               (day: any[], index) =>
                 day[0] && (
@@ -104,7 +121,10 @@ const AmbassadorViewTasksMM = () => {
                     <div className={styles.searchTasks_Tasks}>
                       {day.map((task) => {
                         return (
-                          <div className={styles.viewTasks_accordion}>
+                          <div
+                            className={styles.viewTasks_accordion}
+                            key={task.id}
+                          >
                             <AccordionMM
                               key={task.id}
                               id={task.id}
@@ -123,11 +143,19 @@ const AmbassadorViewTasksMM = () => {
                     </div>
                   </div>
                 )
-            )}
+            )
+          ) : (
+            <div className={styles.error}>
+              <Toast
+                title=" Não existem tarefas cadastradas nessa data"
+                type="info"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default AmbassadorViewTasksMM;
+export default React.memo(AmbassadorViewTasksMM);

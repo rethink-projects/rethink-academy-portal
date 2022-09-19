@@ -65,7 +65,7 @@ function HomeScreenStudent() {
           mounth={months[new Date().getMonth()]}
           quantityGoalsCompleted={10}
         />
-        <Register />
+        <Register email={user.email} />
         <TrilhasComponent />
       </div>
       <div className={Styles.user_menu}>

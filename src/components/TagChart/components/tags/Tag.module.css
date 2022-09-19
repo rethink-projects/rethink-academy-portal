@@ -1,0 +1,33 @@
+.tag_container {
+  display: flex;
+  gap: 8px;
+}
+
+.tag_button {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-tertiary-active);
+  background-color: var(--color-input);
+
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  border-radius: 150px;
+
+  padding: 4px 12px;
+  transition: ease-in-out 0.3s;
+}
+
+.tag_button:hover {
+  background-color: var(--color-primary-active);
+  color: var(--color-secondary);
+  border: 1px solid rgba(27, 27, 27, 0.3);
+}
+
+.tag_button_active {
+  background-color: var(--color-primary);
+  color: var(--color-secondary-hover);
+  border: 1px solid rgba(27, 27, 27, 0.3);
+  transition: ease-in-out 0.3s;
+}

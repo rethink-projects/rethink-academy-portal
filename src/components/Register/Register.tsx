@@ -19,9 +19,10 @@ import { useAuth } from "../../context/AuthContext";
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
+  email: string;
 };
 
-const Register = ({ type = "home" }: RegisterProps) => {
+const Register = ({ type = "home", email }: RegisterProps) => {
   type Tag = {
     title: string;
     realTime: number;
@@ -47,7 +48,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
   const changeData = async () => {
     if (!user) return;
     if (type === "home") {
-      await getRecordOfDay(user.email)
+      await getRecordOfDay(email)
         .then((response) => {
           setRecords(response);
           let helper = 0;
@@ -61,13 +62,14 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag(user.email)
+      await getGroupTaskByTag(email)
         .then((response) => {
           setTags(response);
           let helper = 0;
-          response.forEach((tag: any) => {
-            helper += tag.realTime;
-          });
+          response &&
+            response.forEach((tag: any) => {
+              helper += tag.realTime;
+            });
           helper = helper / 60;
           setTime(Math.trunc(helper));
         })
@@ -75,9 +77,15 @@ const Register = ({ type = "home" }: RegisterProps) => {
     }
   };
 
+  // useEffect(() => {
+  //   changeData();
+  // }, []);
+
   useEffect(() => {
     changeData();
-  }, []);
+  }, [email]);
+
+  console.log(email);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");
@@ -99,6 +107,8 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
     return `${hours}h${minutes}min`;
   };
+
+  console.log(tags);
 
   return (
     <div className={styles.register_container}>
@@ -173,7 +183,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
                 ) : (
                   <div>Você ainda não possui tasks hoje</div>
                 )
-              ) : (
+              ) : tags && tags.length > 0 ? (
                 tags.map((tag) => {
                   return (
                     <Tasks
@@ -184,6 +194,8 @@ const Register = ({ type = "home" }: RegisterProps) => {
                     />
                   );
                 })
+              ) : (
+                <div>Estagiário não possui tarefas cadastradas.</div>
               )}
             </>
           </div>
@@ -198,4 +210,4 @@ const Register = ({ type = "home" }: RegisterProps) => {
   );
 };
 
-export default Register;
+export default React.memo(Register);
