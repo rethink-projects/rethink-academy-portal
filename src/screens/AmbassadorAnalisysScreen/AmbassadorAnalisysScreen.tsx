@@ -15,7 +15,7 @@ import Toast from "../../components/Toast/Toast";
 import Comment from "../../components/Comment/Comment";
 import TagChart from "../../components/TagChart/TagChart";
 import { useLocation, useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 const InternAnalisysScreen = () => {
   type Intern = {

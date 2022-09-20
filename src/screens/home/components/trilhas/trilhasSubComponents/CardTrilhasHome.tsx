@@ -4,7 +4,7 @@ import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../../../services/api";
+import { api } from "../../../../../services/backend/Api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
@@ -43,8 +43,7 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
 
   useEffect(() => {
     const response = api.get("/user/watched/" + user.email).then((response) => {
-        setLessonUser(response.data);
-
+      setLessonUser(response.data);
     });
   }, []);
 

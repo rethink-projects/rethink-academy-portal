@@ -2,7 +2,7 @@ import styles from "./TrilhasComponent.module.css";
 import IconMap from "@mui/icons-material/MapOutlined";
 import CardTrilhasHome from "./trilhasSubComponents/CardTrilhasHome";
 import { useEffect, useState } from "react";
-import { api } from "../../../../services/api";
+import { api } from "../../../../services/backend/Api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };

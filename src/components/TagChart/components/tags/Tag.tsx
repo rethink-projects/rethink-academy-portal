@@ -3,7 +3,7 @@ import { getDataGridUtilityClass } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../../context/AuthContext";
-import { api } from "../../../../services/api";
+import { api } from "../../../../services/backend/Api";
 import { dataDois } from "../chart/BarChart";
 import styles from "./Tag.module.css";
 

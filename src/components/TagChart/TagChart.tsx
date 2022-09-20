@@ -5,7 +5,7 @@ import Switch from "./components/switch/Switch";
 import Tag, { headers } from "./components/tags/Tag";
 import styles from "./TagChart.module.css";
 import { useAuth } from "../../context/AuthContext";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 type TagChartProps = {
   tags: string;

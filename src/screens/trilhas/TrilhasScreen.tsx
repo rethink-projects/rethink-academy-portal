@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 import { useAuth } from "../../context/AuthContext";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 type TypeTrails = {
   name: string;

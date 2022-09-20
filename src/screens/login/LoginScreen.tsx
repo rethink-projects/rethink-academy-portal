@@ -1,3 +1,4 @@
+import { gridColumnGroupsLookupSelector } from "@mui/x-data-grid";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Images from "../../assets";
@@ -9,17 +10,24 @@ import styles from "./Login.module.css";
 
 function LoginScreen() {
   const auth = useAuth();
+  const { user } = useAuth();
   const { notify } = useNotification();
   const navigate = useNavigate();
   async function handleGoogleLogin() {
     auth.signin("google", () => {
+      console.log(auth.user);
+    });
+  }
+
+  useEffect(() => {
+    if (user !== null) {
       notify({
         title: "Login Successful",
         type: "success",
       });
-      navigate("/dashboard");
-    });
-  }
+      navigate("/dashboard", { replace: true });
+    }
+  }, [user]);
 
   useEffect(() => {
     const localStorageUser = JSON.parse(
@@ -29,7 +37,7 @@ function LoginScreen() {
       auth.setCurrentUser(localStorageUser);
     }
     if (auth.user) {
-      navigate("/dashboard", { replace: true });
+      // navigate("/dashboard", { replace: true });
     }
   }, [auth, navigate]);
   return (

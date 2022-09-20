@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // API
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 // Styles
 import styles from "./CoursesScreen.module.css";

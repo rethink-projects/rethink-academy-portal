@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // API
-import { api } from "../../../../services/api";
+import { api } from "../../../../services/backend/Api";
 
 // TYPES
 import { ModuleModalProps } from "../../../types/PropTypes";

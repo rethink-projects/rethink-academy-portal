@@ -7,7 +7,7 @@ import Comment from "../../../components/Comment/Comment";
 import Register from "../../../components/Register/Register";
 import TagChart from "../../../components/TagChart/TagChart";
 import { useAuth } from "../../../context/AuthContext";
-import { api } from "../../../services/api";
+import { api } from "../../../services/backend/Api";
 
 // css
 import styles from "./TaskAnalysisScreen.module.css";

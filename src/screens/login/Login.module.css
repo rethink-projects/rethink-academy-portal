@@ -1,3 +1,7 @@
+* {
+  overflow-y: hidden;
+}
+
 .login_inner_arrow {
   width: 40%;
   position: absolute;
