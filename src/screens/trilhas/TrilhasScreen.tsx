@@ -82,6 +82,10 @@ const TrilhasScreen = () => {
 
     setModalIsOpen(false);
   };
+
+  if (!user) {
+    return <>carregando...</>;
+  }
   return (
     <div className={styles.body}>
       <div className={styles.container}>
