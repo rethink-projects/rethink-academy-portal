@@ -1,6 +1,7 @@
 .trilhas_container {
   display: flex;
   flex-direction: column;
+  min-width: 370px;
 }
 
 .trilhas_title_container {

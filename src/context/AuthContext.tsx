@@ -8,7 +8,7 @@ export interface ICurrentUser {
   email: string;
   type?: TypeProvider;
   id: string;
-  role: string;
+  role: "STUDENT" | "AMBASSADOR" | "RETHINKER";
   main: "ENGINEERING" | "DESIGN" | "PRODUCT";
   level: number;
   exp: number;

@@ -1,13 +1,11 @@
 import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../../../services/backend/Api";
 
 type TrailType = {
   trail: { name: string; id: string; description: string };
+  lessonUser: TypeLessonUser;
 };
 
 type TypeLessonUser = {
@@ -35,17 +33,8 @@ type TypeMaxLesson = {
   };
 };
 
-const CardTrilhasHome = ({ trail }: TrailType) => {
-  const { user } = useAuth();
+const CardTrilhasHome = ({ trail, lessonUser }: TrailType) => {
   const navigate = useNavigate();
-
-  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
-
-  useEffect(() => {
-    const response = api.get("/user/watched/" + user.email).then((response) => {
-      setLessonUser(response.data);
-    });
-  }, []);
 
   const getCoursesFromTrail = (trail: string) => {
     const allCourses = lessonUser?.maxLessons?.filter(
@@ -75,6 +64,15 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
     }
   };
 
+  let mainUser: string;
+  if (lessonUser?.user.main === "ENGINEERING") {
+    mainUser = "Engenharia";
+  } else if (lessonUser?.user.main === "DESIGN") {
+    mainUser = "Design";
+  } else if (lessonUser?.user.main === "PRODUCT") {
+    mainUser = "Produto";
+  } else return null;
+
   const atLeastOneCourseCompleted = (trail: string) => {
     return lessonUser?.maxLessons?.find(
       (course: any) =>
@@ -83,28 +81,16 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   };
 
   const checkWhichTrilhaUnlock = () => {
-    let mainUser;
-    if (lessonUser?.user.main === "ENGINEERING") {
-      mainUser = "Engenharia";
-    } else if (lessonUser?.user.main === "DESIGN") {
-      mainUser = "Design";
-    } else {
-      mainUser = "Produto";
-    }
-
-    if (trail.name.toLowerCase() === mainUser.toLowerCase()) {
+    if (
+      trail.name.toLowerCase() === mainUser.toLowerCase() ||
+      trail.name.toLowerCase() === "academy"
+    ) {
       return true;
-    }
-    if (trail.name.toLowerCase() === "academy") {
-      return true;
-    }
-    if (trail.name.toLowerCase() === "design") {
+    } else if (trail.name.toLowerCase() === "design") {
       return unlockTrilha("design");
-    }
-    if (trail.name.toLowerCase() === "engenharia") {
+    } else if (trail.name.toLowerCase() === "engenharia") {
       return unlockTrilha("engenharia");
-    }
-    if (trail.name.toLowerCase() === "produto") {
+    } else if (trail.name.toLowerCase() === "produto") {
       return unlockTrilha("produto");
     }
   };
@@ -132,12 +118,13 @@ const CardTrilhasHome = ({ trail }: TrailType) => {
   };
 
   const handleClickTrail = () => {
-    navigate(`trilhas/${trail.id}`);
+    if (checkWhichTrilhaUnlock()) navigate(`trilhas/${trail.id}`);
   };
 
   const containerClass = atLeastOneCourse()
     ? styles.container_completed
     : styles.container;
+
   return (
     <div
       style={checkWhichTrilhaUnlock() ? {} : { backgroundColor: "#f9f9f9" }}

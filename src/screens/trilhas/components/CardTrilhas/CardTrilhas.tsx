@@ -3,20 +3,23 @@ import PadLock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import EditIcon from "@mui/icons-material/BorderColorOutlined";
-import { useEffect, useState } from "react";
-
 import { useAuth } from "../../../../context/AuthContext";
-import { api } from "../../../../services/backend/Api";
 
-type TypeTrail = { name: string; id: string; description: string };
+type TypeTrail = {
+  name: string;
+  id: string;
+  description: string;
+  main: string;
+};
 
 type TypeCardTrilhas = {
-  user?: "student" | "teacher";
+  userRole?: "STUDENT" | "TEACHER";
   trail: TypeTrail;
   image?: string;
   onClick: (e: any) => void;
   previous: string;
   setModal: () => void;
+  lessonUser: TypeLessonUser;
 };
 
 type TypeLessonUser = {
@@ -45,37 +48,31 @@ type TypeMaxLesson = {
 };
 
 const CardTrilhas = ({
-  user = "student",
+  userRole = "STUDENT",
   onClick,
   trail,
   previous,
   setModal,
   image,
+  lessonUser,
 }: TypeCardTrilhas) => {
-  const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
-  const { user: userAuth } = useAuth();
-
-  useEffect(() => {
-    api.get("/user/watched/" + userAuth.email).then((response) => {
-      if (response.data) {
-        setLessonUser(response.data);
-      }
-    });
-  }, []);
-
   const getCoursesFromTrail = (trail: string) => {
-    const allCourses = lessonUser?.maxLessons?.filter(
+    const allCourses = lessonUser.maxLessons.filter(
       (course: any) => course.trail.id === trail
     ).length;
 
     return allCourses;
   };
+  let mainUser = "";
+  const { user } = useAuth();
+  if (user) mainUser = user.main;
+
+  if (mainUser === "") return <div>Loading...</div>;
 
   const getCompletedUserCourses = (trail: string) => {
-    const completedCourses = lessonUser?.maxLessons?.filter(
+    const completedCourses = lessonUser.maxLessons.filter(
       (course: any) => course.trail.id === trail && course.completed
     ).length;
-
     return completedCourses;
   };
 
@@ -99,16 +96,7 @@ const CardTrilhas = ({
   };
 
   const checkWhichTrilhaUnlock = () => {
-    let mainUser;
-    if (lessonUser?.user.main === "ENGINEERING") {
-      mainUser = "Engenharia";
-    } else if (lessonUser?.user.main === "DESIGN") {
-      mainUser = "Design";
-    } else {
-      mainUser = "Produto";
-    }
-
-    if (trail.name.toLowerCase() === mainUser.toLowerCase()) {
+    if (trail.main.toLowerCase() === mainUser.toLowerCase()) {
       return true;
     }
     if (trail.name.toLowerCase() === "academy") {
@@ -131,7 +119,7 @@ const CardTrilhas = ({
     if (max === 0) {
       return 0;
     }
-
+    if (completed === 0) return 0;
     return Math.floor((completed! / max!) * 100);
   };
 
@@ -147,7 +135,7 @@ const CardTrilhas = ({
     }
   };
 
-  if (!checkWhichTrilhaUnlock() && user === "student") {
+  if (!checkWhichTrilhaUnlock() && userRole === "STUDENT") {
     onClick = () => {};
   }
 
@@ -155,14 +143,14 @@ const CardTrilhas = ({
     ? styles.card_progressBar_complete
     : styles.card_progressBar_incomplete;
   const completedCourseClass_container =
-    atLeastOneCourse() && user === "student"
+    atLeastOneCourse() && userRole === "STUDENT"
       ? styles.container_completed
       : styles.container;
   const completedCourseClass_effect_img = atLeastOneCourse()
     ? styles.effect_image_completed
     : styles.effect_image_incomplete;
   const completedCourseClass_effect_card_hover =
-    atLeastOneCourse() && user === "student"
+    atLeastOneCourse() && userRole === "STUDENT"
       ? styles.effect_card_completed
       : styles.effect_card_incomplete;
   const videoBlockedClass = !checkWhichTrilhaUnlock()
@@ -179,14 +167,14 @@ const CardTrilhas = ({
           style={{ backgroundImage: `url(${image})` }}
           className={styles.card_image}
         >
-          {user === "student" && (
+          {userRole === "STUDENT" && (
             <div className={completedCourseClass_effect_img}></div>
           )}
         </div>
         <div className={styles.card_content}>
           <h1 className={styles.card_content_title}>{trail.name}</h1>
           <p className={styles.card_content_description}>{trail.description}</p>
-          {user === "student"
+          {userRole === "STUDENT"
             ? lessonUser && (
                 <div className={styles.container_progressbar}>
                   <div className={card_progressBar}>
@@ -236,7 +224,7 @@ const CardTrilhas = ({
               )}
         </div>
       </div>
-      {!checkWhichTrilhaUnlock() && user === "student" ? (
+      {!checkWhichTrilhaUnlock() && userRole === "STUDENT" ? (
         <div className={videoBlockedClass}>
           <div className={styles.container_padlock}>
             <PadLock />

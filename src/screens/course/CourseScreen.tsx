@@ -141,7 +141,7 @@ const CourseScreen = () => {
             <CardAddCourse
               course={course}
               addCourse={false}
-              onClose={() => setClassModalIsOpen(false)}
+              onClose={() => (setClassModalIsOpen(false), getCourse())}
             />
           )}
 
