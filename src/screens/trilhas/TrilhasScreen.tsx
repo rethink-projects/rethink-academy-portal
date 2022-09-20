@@ -1,12 +1,11 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 import { useAuth } from "../../context/AuthContext";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 type TypeTrails = {
   name: string;
@@ -110,13 +109,10 @@ const TrilhasScreen = () => {
     setValueNameTrail("");
     setValueImageTrail("");
 
-    const update = await axios.put(
-      "http://localhost:4000/api/trail/" + trailUpdated?.id,
-      {
-        name: valueNameTrail,
-        description: valueDescriptionTrail,
-      }
-    );
+    const update = await api.put("/trail/" + trailUpdated?.id, {
+      name: valueNameTrail,
+      description: valueDescriptionTrail,
+    });
 
     setModalIsOpen(false);
   };

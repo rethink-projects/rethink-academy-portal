@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { infoType } from "../../screens/contract/ContractScreen";
@@ -11,6 +10,7 @@ import {
 } from "@mui/icons-material";
 import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/backend/Api";
 
 type internEmailProps = {
   email: string;
@@ -30,11 +30,8 @@ const InternContractStatus = (email: internEmailProps) => {
   const getUser = async () => {
     if (email) {
       try {
-        const { data } = await axios.get(
-          `http://localhost:4000/api/info/${email.email}`
-        );
+        const { data } = await api.get(`/info/${email.email}`);
         setUserInfo(data.info);
-        console.log(data.info);
         return;
       } catch (error) {
         console.log(error);

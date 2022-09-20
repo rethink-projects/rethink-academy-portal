@@ -32,12 +32,8 @@ function HomeScreenStudent() {
 
   useEffect(() => {
     GetUser();
-    console.log(badges);
   }, []);
 
-  useEffect(() => {
-    console.log(badges);
-  }, [badges]);
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -56,7 +52,7 @@ function HomeScreenStudent() {
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name.split(" ")[0]} />
         <LastGoalsCard />
-        <Register />
+        <Register email={user.email} />
         <TrilhasComponent />
       </div>
       <div className={Styles.user_menu}>
@@ -66,7 +62,7 @@ function HomeScreenStudent() {
 
         <p className={Styles.user_name}>{user.name}</p>
         <p className={Styles.user_title}>
-          {"Estagiário em " + getStudentMain()}
+          {"Estagiário(a) em " + getStudentMain()}
         </p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>

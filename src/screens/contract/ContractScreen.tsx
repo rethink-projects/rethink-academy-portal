@@ -31,6 +31,7 @@ import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
+import { api } from "../../services/backend/Api";
 
 export type infoType = {
   email: string;
@@ -82,7 +83,7 @@ const ContractScreen = () => {
   };
 
   const getInfo = async (email: string) => {
-    const info = await axios.get(`http://localhost:4000/api/info/${email}`);
+    const info = await api.get(`/info/${email}`);
     info.data.info
       ? setContractStatus(info.data.info.status)
       : setContractStatus("");
@@ -91,21 +92,15 @@ const ContractScreen = () => {
 
   const getFiles = async () => {
     if (user.role === "AMBASSADOR" && studentEmail) {
-      const fileData = await axios.get<fileType>(
-        `http://localhost:4000/api/bucket`,
-        {
-          params: { email: studentEmail },
-        }
-      );
+      const fileData = await api.get<fileType>(`/bucket`, {
+        params: { email: studentEmail },
+      });
       setFiles(fileData.data);
       return fileData.data;
     } else {
-      const fileData = await axios.get<fileType>(
-        `http://localhost:4000/api/bucket`,
-        {
-          params: { email: user.email },
-        }
-      );
+      const fileData = await api.get<fileType>(`/bucket`, {
+        params: { email: user.email },
+      });
       setFiles(fileData.data);
       return fileData.data;
     }
@@ -129,9 +124,7 @@ const ContractScreen = () => {
 
   const getBadge = async () => {
     try {
-      const badge = await axios.get(
-        `http://localhost:4000/api/badge/${user.email}`
-      );
+      const badge = await api.get(`/badge/${user.email}`);
       if (!badge.data["goals"].includes("StatusDoContratoAtivo")) {
         giveBadge();
         setEmblemCardOpen(true);
@@ -144,7 +137,7 @@ const ContractScreen = () => {
 
   const giveBadge = async () => {
     try {
-      const badge = await axios.post(`http://localhost:4000/api/badge`, {
+      const badge = await api.post(`/badge`, {
         badge: "goals",
         email: user.email,
         description: "StatusDoContratoAtivo",
@@ -165,7 +158,7 @@ const ContractScreen = () => {
     if (info) {
       if (studentEmail) {
         setContractStatus(value);
-        await axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+        await api.post(`/info/${studentEmail}`, {
           status: value,
         });
         notify({
@@ -176,7 +169,7 @@ const ContractScreen = () => {
     } else {
       try {
         setContractStatus(value);
-        const info = await axios.post(`http://localhost:4000/api/info`, {
+        const info = await api.post(`/info`, {
           email: studentEmail,
           status: value,
         });
@@ -196,7 +189,7 @@ const ContractScreen = () => {
   const onSubmit = async (data: any) => {
     if (info) {
       if (studentEmail) {
-        await axios.post(`http://localhost:4000/api/info/${studentEmail}`, {
+        await api.post(`/info/${studentEmail}`, {
           college: data.college,
           semester: data.semester,
           workTime: data.workTime,
@@ -212,7 +205,7 @@ const ContractScreen = () => {
       }
     } else {
       try {
-        const info = await axios.post(`http://localhost:4000/api/info`, {
+        const info = await api.post(`/info`, {
           email: studentEmail,
           college: data.college,
           semester: data.semester,
@@ -292,7 +285,7 @@ const ContractScreen = () => {
       {user.role === "AMBASSADOR" ? (
         <div className={styles.contract_title_ambassador}>
           Contrato
-          <SelectionTeam setUserEmail={setStudentEmail} />
+          <SelectionTeam internSelected={setStudentEmail} />
         </div>
       ) : (
         <div className={styles.contract_title}>Contrato</div>
@@ -343,6 +336,7 @@ const ContractScreen = () => {
                     title={content.title}
                     type={"embassador"}
                     url={content.url}
+                    studentEmail={studentEmail}
                   />
                 ) : (
                   <DocumentCard

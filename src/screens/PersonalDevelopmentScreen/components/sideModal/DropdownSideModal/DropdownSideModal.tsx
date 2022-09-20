@@ -15,6 +15,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import Textarea from "../../../../../components/Textarea/Textarea";
+import { api } from "../../../../../services/backend/Api";
 
 type GoalsType = {
   id: string;
@@ -57,14 +58,10 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
     try {
       if (user) {
         if (user.role === "AMBASSADOR") {
-          const userData = await axios.get(
-            `http://localhost:4000/api/user/${studentEmail}`
-          );
+          const userData = await api.get(`/user/${studentEmail}`);
           setUserByEmail(userData.data);
         } else {
-          const userData = await axios.get(
-            `http://localhost:4000/api/user/${user.email}`
-          );
+          const userData = await api.get(`/user/${user.email}`);
           setUserByEmail(userData.data);
         }
       }
@@ -83,9 +80,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
     try {
       if (user.role === "AMBASSADOR") {
         if (userByEmail) {
-          const goalsGet = await axios.get(
-            `http://localhost:4000/api/goalList/${userByEmail.email}`
-          );
+          const goalsGet = await api.get(`/goalList/${userByEmail.email}`);
           if (goalsGet.data) {
             const goalsData = goalsGet.data.map((goal: GoalsType) => ({
               ...goal,
@@ -101,9 +96,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
         }
       } else {
         if (user) {
-          const goalsGet = await axios.get(
-            `http://localhost:4000/api/goalList/${user.email}`
-          );
+          const goalsGet = await api.get(`/goalList/${user.email}`);
           if (goalsGet.data) {
             const goalsData = goalsGet.data.map((goal: GoalsType) => ({
               ...goal,
@@ -130,9 +123,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
 
   const deleteStudentGoalList = async (id: string) => {
     try {
-      const newGoal = await axios.delete(
-        `http://localhost:4000/api/goalList/${id!}`
-      );
+      const newGoal = await api.delete(`/goalList/${id!}`);
       setDeleteGoalList(id);
       return;
     } catch (error) {
@@ -142,10 +133,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
 
   const updateStudentGoalList = async (id: string, name: string) => {
     try {
-      const newGoal = await axios.patch(
-        `http://localhost:4000/api/goalList/${id!}`,
-        { name }
-      );
+      const newGoal = await api.patch(`/goalList/${id!}`, { name });
       setUpdateGoalList(id);
       setNewTitleGoal("");
       return;
@@ -156,10 +144,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
 
   const createStudentGoalList = async (name: string) => {
     try {
-      const newGoal = await axios.post(
-        `http://localhost:4000/api/goalList/${studentEmail!}`,
-        { name }
-      );
+      const newGoal = await api.post(`/goalList/${studentEmail!}`, { name });
       setCreateGoalList(name);
       return;
     } catch (error) {
@@ -174,10 +159,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
     goalsListId?: string
   ) => {
     try {
-      const goalUpdate = await axios.patch(
-        `http://localhost:4000/api/goal/${id!}`,
-        { title, conclude }
-      );
+      const goalUpdate = await api.patch(`/goal/${id!}`, { title, conclude });
       const goalsData = await goals.map((goal: any) => {
         if (goal.id === goalsListId) {
           return {
@@ -217,10 +199,10 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
     title?: string
   ) => {
     try {
-      const goalCreate = await axios.post(
-        `http://localhost:4000/api/goal/${goalListId!}`,
-        { title, conclude }
-      );
+      const goalCreate = await api.post(`/goal/${goalListId!}`, {
+        title,
+        conclude,
+      });
       setCreateGoalList(title);
       setNewTitleGoal("");
       return;
@@ -231,9 +213,7 @@ const DropdownSideModal = ({ studentEmail }: prospType) => {
 
   const removeGoal = async (id: string, goalsListId: string) => {
     try {
-      const goalUpdate = await axios.delete(
-        `http://localhost:4000/api/goal/${id!}`
-      );
+      const goalUpdate = await api.delete(`/goal/${id!}`);
       setDeleteGoalList(id);
       return;
     } catch (error) {

@@ -66,7 +66,7 @@ function Menu() {
             />
           </Link>
 
-          {user.role !== "AMBASSADOR" ? (
+          {user.role === "AMBASSADOR" ? (
             <>
               <Link to={"/dashboard/desenvolvimentoPessoal"}>
                 <MenuItem
@@ -75,7 +75,7 @@ function Menu() {
                   icon={Images.icons.privateNotes}
                 />
               </Link>
-              <Link to={"/dashboard/registroDeHoras"}>
+              <Link to={"/dashboard/avaliacao"}>
                 <MenuItem
                   isOpen={isOpen}
                   text="Avaliações"
@@ -99,7 +99,7 @@ function Menu() {
                   icon={Images.icons.ClockHome}
                 />
               </Link>
-              <Link to={"/dashboard/register/analises"}>
+              <Link to={"/dashboard/registroDeHoras/analise"}>
                 <MenuItem
                   text="Análise de Desempenho"
                   isOpen={isOpen}

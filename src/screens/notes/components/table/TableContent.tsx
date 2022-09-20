@@ -18,6 +18,7 @@ import Tooltip from "../../../../components/Tooltip/Tooltip";
 import { useEffect, useState } from "react";
 
 import TextEditor from "../textEditor/TextEditor";
+import { api } from "../../../../services/backend/Api";
 
 export type noteType = {
   id: string;
@@ -62,7 +63,7 @@ const TableContent = ({
   const { user } = useAuth();
 
   const getNotes = async (email: string) => {
-    const notes = await axios.get(`http://localhost:4000/api/note/${email}`);
+    const notes = await api.get(`/note/${email}`);
 
     return notes.data.notesFormated;
   };

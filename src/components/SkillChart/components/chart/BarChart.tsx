@@ -1,4 +1,4 @@
-import React, { PureComponent, useEffect, useState } from "react";
+import React from "react";
 import styles from "./BarChart.module.css";
 import {
   BarChart,

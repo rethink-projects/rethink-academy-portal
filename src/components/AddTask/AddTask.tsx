@@ -1,49 +1,116 @@
 import React, { useState } from "react";
 
-// assets
+// Assets
 import Images from "../../assets";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-// styles
+// Styles
 import styles from "./AddTask.module.css";
 import styled from "../AddTask/AddTaskForm.module.css";
 import "../AddTask/AddTaskForm.css";
 
-// components
+// Components
 import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import SimpleButton from "../SimpleButton/SimpleButton";
+import Textarea from "../Textarea/Textarea";
+import SingleDatePicker from "../DatePicker/SingleDatePicker";
 import Tag from "../Tag/Tag";
-import { DatePicker } from "../DatePicker/DatePicker";
 import { Times } from "./Times";
+import { Dayjs } from "dayjs";
+
+// Backend
+import { createTask, updateTask } from "../../services/backend/Tasks";
+import { useNotification } from "../../context/NotificationContext";
+import { useAuth } from "../../context/AuthContext";
 
 type AddTaskProps = {
   formData: {
-    taskName: string;
-    date: string;
+    name: string;
+    taskDate: string;
     startTime: string;
     endTime: string;
-    tag: string;
+    tags: string;
     status: string;
     description: string;
+    userEmail?: string;
+    id?: string;
   };
   setFormData: (value: any) => void;
+  setUpdate: (value: any) => void;
+  active: boolean;
+  setActive: (value: boolean) => void;
 };
 
-function AddTask({}: AddTaskProps) {
+function AddTask({
+  formData,
+  setFormData,
+  setUpdate,
+  active,
+  setActive,
+}: AddTaskProps) {
   let iconImg = Images.arrowTask;
-  const [active, setActive] = useState(false);
-  const [formData, setFormData] = useState({
-    taskName: "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    tag: "",
-    status: "",
-    description: "",
-  });
-  const handlerFormDataValues = (data: string, value: string) => {
+  const { notify } = useNotification();
+  const { user } = useAuth();
+
+  const handlerFormDataValues = (
+    data: string,
+    value: string | Dayjs | null
+  ) => {
     setFormData((prevValue: any) => ({ ...prevValue, [data]: value }));
+  };
+
+  const verifyFormData = () => {
+    const newFormData = { ...formData, id: true, userEmail: true };
+    for (const key in newFormData) {
+      if (!newFormData[key as keyof typeof newFormData]) {
+        return key;
+      }
+    }
+    return false;
+  };
+
+  const createUserTask = async () => {
+    const verify = verifyFormData();
+    if (verify) {
+      notify({
+        title: `Você precisa preencher "${verify}"!`,
+        type: "error",
+      });
+      return;
+    }
+    if (formData.id) {
+      updateTask(formData.id, formData);
+      notify({
+        title: `Você alterou a task: "${formData.name}"!`,
+        type: "info",
+      });
+      setActive(false);
+    } else {
+      const { task } = await createTask({
+        ...formData,
+        userEmail: user.email,
+      });
+      if (task) {
+        notify({
+          title: `Task "${task.name}" criada com sucesso!`,
+          type: "success",
+        });
+
+        setActive(false);
+        setUpdate(true);
+      }
+    }
+
+    setFormData({
+      name: "",
+      taskDate: new Date().toISOString(),
+      startTime: "",
+      endTime: "",
+      tags: "",
+      status: "",
+      description: "",
+    });
   };
 
   return (
@@ -67,7 +134,7 @@ function AddTask({}: AddTaskProps) {
                 Você ainda não possui tarefas cadastradas!
               </p>
               <p className={styles.texttwo}>Comece por aqui</p>
-              <img className={styles.iconImg} src={iconImg} alt="arrow image" />
+              <img className={styles.iconImg} src={iconImg} alt="arrow " />
             </div>
           </>
         )}
@@ -86,23 +153,22 @@ function AddTask({}: AddTaskProps) {
             <div className={styled.taskName}>
               <p>Nome da atividade</p>
               <InputText
-                type={"default"}
-                placeholder={"Placeholder"}
+                type={"block"}
+                placeholder={"Digite aqui o nome da atividade ..."}
                 hasIcon={true}
                 nameInput={""}
                 right={<img src={Images.icons.editBlackIcon} alt="edit icon" />}
-                value={formData.taskName}
-                onChange={(e) =>
-                  handlerFormDataValues("taskName", e.target.value)
-                }
+                value={formData.name}
+                onChange={(e) => handlerFormDataValues("name", e.target.value)}
               />
             </div>
             <div className={styled.taskData}>
               <p>Data</p>
-              <DatePicker
-                size={"default"}
-                calendarPosition={"left"}
-                placeholder={"Adicione uma Data"}
+              <SingleDatePicker
+                formDataValue={formData.taskDate}
+                setFormDataValue={(date) =>
+                  handlerFormDataValues("taskDate", date)
+                }
               />
             </div>
             <div className={styled.taskTime}>
@@ -114,7 +180,6 @@ function AddTask({}: AddTaskProps) {
                   }}
                   value={formData.startTime}
                   width={252}
-                  initialText={"14:30"}
                   options={Times}
                   id={"startTime"}
                   leftIcon={<div />}
@@ -125,7 +190,6 @@ function AddTask({}: AddTaskProps) {
                   }}
                   value={formData.endTime}
                   width={252}
-                  initialText={"00:00"}
                   options={Times}
                   id={"endTime"}
                   leftIcon={<div />}
@@ -141,14 +205,15 @@ function AddTask({}: AddTaskProps) {
                   "Fup",
                   "1:1",
                   "Daily",
-                ].map((tag) => (
+                ].map((tag, index) => (
                   <Tag
+                    key={index}
                     size={"micro"}
                     color={"dark"}
-                    type={"tag"}
+                    type={"tags"}
                     text={tag}
                     hasIcon={false}
-                    active={formData.tag === tag}
+                    active={formData.tags === tag}
                     setActive={handlerFormDataValues}
                   />
                 ))}
@@ -158,8 +223,9 @@ function AddTask({}: AddTaskProps) {
               <p>Status</p>
               <div className={styled.label}>
                 {["Prioridade", "Em Progresso", "Validação", "Concluído"].map(
-                  (status) => (
+                  (status, index) => (
                     <Tag
+                      key={index}
                       size={"micro"}
                       color={"dark"}
                       type={"status"}
@@ -174,24 +240,25 @@ function AddTask({}: AddTaskProps) {
             </div>
             <div className={styled.taskDescription}>
               <p>Descrição</p>
-              <InputText
-                type={"large"}
-                placeholder={"Placeholder"}
-                hasIcon={false}
-                nameInput={""}
+              <Textarea
+                type={"block"}
                 value={formData.description}
-                onChange={(e) =>
+                onChangetext={(e) =>
                   handlerFormDataValues("description", e.target.value)
                 }
+                placeholder={"Adicione uma descrição"}
               />
             </div>
-            <SimpleButton
-              size={"small"}
-              text={"Finalizar Tarefa"}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
+            <div className={styled.simpleBtn}>
+              <SimpleButton
+                size={"block"}
+                text={"Finalizar Tarefa"}
+                onClick={() => {
+                  createUserTask();
+                }}
+              />
+            </div>
+            <br />
           </div>
         )}
       </div>

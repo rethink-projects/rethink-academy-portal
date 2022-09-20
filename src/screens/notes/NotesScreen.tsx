@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
 
 import style from "./NotesScreen.module.css";
 
@@ -22,6 +21,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import Images from "../../assets";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/backend/Api";
 
 const NotesScreen = () => {
   const [state, setState] = useState<noteType | null>();
@@ -77,14 +77,10 @@ const NotesScreen = () => {
 
   const getNotes = async () => {
     if (studentEmail === null) {
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${user.email}`
-      );
+      const notes = await api.get(`/note/${user.email}`);
       setNotes(notes.data.notesFormated);
     } else {
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${studentEmail}`
-      );
+      const notes = await api.get(`/note/${studentEmail}`);
 
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)
@@ -107,10 +103,7 @@ const NotesScreen = () => {
       newNote.email = studentEmail;
     }
 
-    const { data } = await axios.post(
-      `http://localhost:4000/api/note`,
-      newNote
-    );
+    const { data } = await api.post(`/note`, newNote);
     data.note.categories = [false, false, false];
 
     setNotes((prevValue) => [...prevValue, data.note]);
@@ -118,9 +111,7 @@ const NotesScreen = () => {
 
   const deleteNote = async () => {
     if (state) {
-      const { data } = await axios.delete(
-        `http://localhost:4000/api/note/${state.id}`
-      );
+      const { data } = await api.delete(`/note/${state.id}`);
 
       const updateNotes = notes.filter((note) => state.id !== note.id);
 
@@ -148,10 +139,7 @@ const NotesScreen = () => {
       }
     }
     if (state) {
-      const { data } = await axios.post(
-        `http://localhost:4000/api/note/${state.id}`,
-        updateNote
-      );
+      const { data } = await api.post(`/note/${state.id}`, updateNote);
 
       if (categories) {
         data.note.categories = categories;
@@ -218,7 +206,7 @@ const NotesScreen = () => {
                     { title: "Home", link: "/" },
                     {
                       title: "Seu desenvolvimento",
-                      link: "/desenvolvimentoPessoal",
+                      link: "/dashboard/desenvolvimentoPessoal",
                     },
                     { title: "Notas", link: "/notas" },
                   ]}

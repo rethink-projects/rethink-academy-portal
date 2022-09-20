@@ -16,12 +16,14 @@ import {
   getRecordOfDay,
 } from "../../services/backend/Tasks";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
+  email: string;
 };
 
-const Register = ({ type = "home" }: RegisterProps) => {
+const Register = ({ type = "home", email }: RegisterProps) => {
   type Tag = {
     title: string;
     realTime: number;
@@ -38,6 +40,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
     time: number;
   };
 
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [tags, setTags] = useState<Tag[]>([]);
   const [records, setRecords] = useState<Record[]>([]);
@@ -45,8 +48,9 @@ const Register = ({ type = "home" }: RegisterProps) => {
   const [time, setTime] = useState(0);
 
   const changeData = async () => {
-    if (type === "home" && user) {
-      await getRecordOfDay(user.email)
+    if (!user) return;
+    if (type === "home") {
+      await getRecordOfDay(email)
         .then((response) => {
           setRecords(response);
           let helper = 0;
@@ -60,13 +64,14 @@ const Register = ({ type = "home" }: RegisterProps) => {
         })
         .catch((err) => console.error(err));
     } else {
-      await getGroupTaskByTag(user.email)
+      await getGroupTaskByTag(email)
         .then((response) => {
           setTags(response);
           let helper = 0;
-          response.forEach((tag: any) => {
-            helper += tag.realTime;
-          });
+          response &&
+            response.forEach((tag: any) => {
+              helper += tag.realTime;
+            });
           helper = helper / 60;
           setTime(Math.trunc(helper));
         })
@@ -76,7 +81,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
 
   useEffect(() => {
     changeData();
-  }, []);
+  }, [email]);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");
@@ -172,7 +177,7 @@ const Register = ({ type = "home" }: RegisterProps) => {
                 ) : (
                   <div>Você ainda não possui tasks hoje</div>
                 )
-              ) : (
+              ) : tags && tags.length > 0 ? (
                 tags.map((tag) => {
                   return (
                     <Tasks
@@ -183,12 +188,19 @@ const Register = ({ type = "home" }: RegisterProps) => {
                     />
                   );
                 })
+              ) : (
+                <div>Estagiário não possui tarefas cadastradas.</div>
               )}
             </>
           </div>
         </div>
         {type === "ambassador" && (
-          <button className={styles.btnHours}>
+          <button
+            className={styles.btnHours}
+            onClick={() =>
+              navigate("/dashboard/registroDeHoras/analise/" + email)
+            }
+          >
             Ver registro de horas <ArrowForwardOutlinedIcon />
           </button>
         )}

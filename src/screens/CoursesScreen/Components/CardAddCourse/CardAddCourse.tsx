@@ -5,7 +5,7 @@ import Dropdown from "../../../../components/Dropdown/Dropdown";
 import { useEffect, useState } from "react";
 import TrailModal from "../../../../components/TrailModal/TrailModal";
 import { useNotification } from "../../../../context/NotificationContext";
-import { api } from "../../../../services/api";
+import { api } from "../../../../services/backend/Api";
 import { useLocation } from "react-router-dom";
 import { CourseResponse } from "../../../types/CourseTypes";
 

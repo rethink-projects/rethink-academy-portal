@@ -20,6 +20,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import PersonalDevelopmentChart from "../../components/SkillChart/PersonalDevelopmentChart";
 import NotesCard from "../PersonalDevelopmentScreen/components/NotesCard/NotesCard";
 import InternContractStatus from "../../components/InternContractStatus/InternContractStatus";
+import { api } from "../../services/backend/Api";
 
 const InternProfileScreen = () => {
   const { user } = useAuth();
@@ -29,14 +30,11 @@ const InternProfileScreen = () => {
 
   const URL = window.location.pathname.split("/");
   const studentEmail = URL[3];
-  console.log(studentEmail);
 
   const getStudentUser = async () => {
     try {
       if (studentEmail) {
-        const userData = await axios.get(
-          `http://localhost:4000/api/user/${studentEmail}`
-        );
+        const userData = await api.get(`/user/${studentEmail}`);
         setStudentUser(userData.data);
       }
 
@@ -69,7 +67,7 @@ const InternProfileScreen = () => {
             <div className={styles.userAmbassador_cards_firstLine}>
               <StudentInfoCard studentEmail={studentEmail} />
               <InternContractStatus email={studentEmail} />
-              <Register type={"ambassador"} />
+              <Register type={"ambassador"} email={studentEmail} />
               <LastGoalsCard studentEmail={studentEmail} />
             </div>
             <div className={styles.userAmbassador_cards_lastLine}>
@@ -78,7 +76,7 @@ const InternProfileScreen = () => {
                   <p>Evolução de Habilidades</p>
                   <div
                     className={styles.userAmbassador_cards_action}
-                    onClick={() => navigate(`/`)}
+                    onClick={() => navigate(`/dashboard/avaliacao`)}
                   >
                     <span>Ver mais</span>
                     <ArrowForwardRoundedIcon />

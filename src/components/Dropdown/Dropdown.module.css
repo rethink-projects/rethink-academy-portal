@@ -2,15 +2,13 @@
 /* ------- COM TAMANHOS DEFAULT -------*/
 
 .dropdown_container {
-  flex-shrink: 0;
-  /* min-width: 242px; */
-  align-items: flex-start;
+  position: relative;
 }
 
 .dropdown,
 .dropdown_option {
-  box-sizing: border-box;
   cursor: pointer;
+  box-sizing: border-box;
 
   color: var(--color-tertiary-active);
   font-weight: 400;
@@ -33,12 +31,6 @@
   padding-right: 11.25px;
 }
 
-.dropdown .inner_left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
 .inner_left svg {
   width: 21px;
 }
@@ -47,7 +39,6 @@
   max-height: 300px;
   overflow-y: auto;
   position: absolute;
-  width: inherit;
 }
 .dropdown_option {
   display: flex;
@@ -56,7 +47,6 @@
   background-color: var(--color-base);
 
   padding: 0 12px;
-  
 }
 .dropdown_option:hover {
   background-color: #e2fa85;

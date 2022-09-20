@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { api } from "../../services/backend/Api";
 
 import AvatarWithLevel from "../AvatarWithLevel/AvatarWithLevel";
 
@@ -16,10 +17,7 @@ const StudentInfoCard = ({ studentEmail }: StudentInfoCardProps) => {
 
   const getStudent = async () => {
     try {
-      const studentInfo = await axios.get(
-        `http://localhost:4000/api/user/${studentEmail}`
-      );
-      console.log(studentInfo.data);
+      const studentInfo = await api.get(`/user/${studentEmail}`);
       setStudent(studentInfo.data);
     } catch (error) {
       console.log(error);

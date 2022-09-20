@@ -24,6 +24,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
+import { api } from "../../../../services/backend/Api";
 
 type TableActivityPlanType = {
   user?: string;
@@ -93,7 +94,7 @@ export default function TableActivityPlan({
   };
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/stage/" + trailId).then((response) => {
+    api.get("/stage/" + trailId).then((response) => {
       if (response.data) {
         const data = response.data.map((data: any) => {
           return {
@@ -175,7 +176,7 @@ export default function TableActivityPlan({
   };
 
   const handleDeleteClick = (id: GridRowId) => () => {
-    axios.delete("http://localhost:4000/api/stage/" + id);
+    api.delete("/stage/" + id);
 
     setRows(rows?.filter((row) => row.id !== id));
   };
@@ -209,7 +210,7 @@ export default function TableActivityPlan({
       console.error("algo deu errado");
     }
 
-    axios.post("http://localhost:4000/api/stage/" + updatedRow.id, {
+    api.post("/stage/" + updatedRow.id, {
       stage: updatedRow.stage,
       start: verify ? start : new Date(updatedRow.start),
       finish: verify ? finish : new Date(updatedRow.finish),

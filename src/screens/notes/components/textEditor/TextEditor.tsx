@@ -15,8 +15,6 @@ const TextEditor = ({
   noteData,
   getContent,
 }: textEditorProps) => {
-  // console.log("teste");
-  // console.log({ noteData });
   const [value, setValue] = useState<any>({});
   useEffect(() => {
     if (noteData) {

@@ -4,7 +4,7 @@ import styles from "./Class.module.css";
 import IconVideoCam from "@mui/icons-material/VideocamOutlined";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 import Acordeon from "../../components/Acordeon/Acordeon";
 
 interface LessonResponse {

@@ -8,7 +8,7 @@ import CardCourseProgress from "./components/CardCourseProgress";
 import IconCourse from "@mui/icons-material/TopicOutlined";
 import IconAvatar from "@mui/icons-material/SupervisorAccountOutlined";
 import IconClose from "@mui/icons-material/Close";
-import { api } from "../../../../services/api";
+import { api } from "../../../../services/backend/Api";
 import IconInfo from "@mui/icons-material/InfoOutlined";
 
 import {

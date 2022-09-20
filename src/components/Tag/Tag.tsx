@@ -17,7 +17,7 @@ type TagProps = {
 const Tag = ({
   color = "light",
   size = "default",
-  type = "tag",
+  type = "tags",
   hasIcon = true,
   text,
   active = false,
@@ -30,31 +30,26 @@ const Tag = ({
         !active ? "" : color === "dark" ? styles.activeDark : styles.activeLight
       }`}
     >
-      <div className={styles.divLeft}>
-        {hasIcon == true && (
+      {hasIcon === true && (
+        <div className={styles.divLeft}>
           <div onClick={() => setActive(type, text)} className={styles.AddIcon}>
             <AddIcon />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className={styles.divCenter}>
         <p>{text}</p>
       </div>
 
-      <div className={styles.divRight}>
-        {hasIcon == true && (
-          <>
-            <div className={styles.barra}></div>
-            <div
-              onClick={() => setActive(type, "")}
-              className={styles.ClearIcon}
-            >
-              <ClearIcon className="ClearIcon" />
-            </div>
-          </>
-        )}
-      </div>
+      {hasIcon === true && (
+        <div className={styles.divRight}>
+          <div className={styles.barra}></div>
+          <div onClick={() => setActive(type, "")} className={styles.ClearIcon}>
+            <ClearIcon className="ClearIcon" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

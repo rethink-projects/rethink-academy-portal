@@ -1,7 +1,6 @@
 import styles from "./CardTrilhasHome.module.css";
 import IconPadlock from "@mui/icons-material/LockOutlined";
 import ProgressBar from "../../../../../components/ProgressBar/ProgressBar";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 type TrailType = {

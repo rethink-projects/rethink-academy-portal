@@ -29,7 +29,7 @@ const Note = () => {
   const [notes, setNotes] = useState<Note[]>([]);
 
   const changeNotes = async () => {
-    await getStickerNotesByUserEmail("sthephany.tezza@rethink.dev")
+    await getStickerNotesByUserEmail(user.email)
       .then((response) => {
         setNotes(response.stickerNotes);
       })
@@ -55,7 +55,7 @@ const Note = () => {
   };
 
   const handleNote = async () => {
-    await createStickerNotes(description, "sthephany.tezza@rethink.dev");
+    await createStickerNotes(description, user.email);
 
     changeNotes();
 
@@ -66,7 +66,9 @@ const Note = () => {
     await removeStickerNotes(id);
     changeNotes();
   };
-
+  if (!user) {
+    return <>carregando...</>;
+  }
   return (
     <div className={styles.note_container}>
       <h5 className={styles.note_title}>Lembretes</h5>

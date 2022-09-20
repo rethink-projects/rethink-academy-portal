@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // API & CONTEXTS
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";

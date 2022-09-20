@@ -7,24 +7,24 @@ import Dropdown from "../Dropdown/Dropdown";
 // Styles
 import styles from "./SelectionTeam.module.css";
 
-const SelectionTeam = ({
-  setUserEmail,
-}: {
-  setUserEmail?: (value: string) => void;
-}) => {
+type TypeSelection = {
+  internSelected?: (value: string) => void;
+};
+
+const SelectionTeam = ({ internSelected }: TypeSelection) => {
   type Intern = {
     id: string;
     name: string;
     main: string;
     avatar: string;
+    email: string;
     postion?: number;
     left?: number;
-    email: string;
   };
 
   let linearGradient =
     "linear-gradient(0deg, rgba(218, 218, 218, 0.65), rgba(218, 218, 218, 0.65))";
-  const [idSelected, setIdSelected] = useState("");
+  const [emailSelected, setEmailSelected] = useState("");
 
   const [usersData, setUserData] = useState<Intern[]>([]);
 
@@ -45,7 +45,7 @@ const SelectionTeam = ({
   const getUserData = async () => {
     const data = await getAllStudents();
     setUserData(data);
-    setInterns(internsDataForMap(data));
+    if (data) setInterns(internsDataForMap(data));
   };
 
   const reloading = () => {
@@ -54,9 +54,9 @@ const SelectionTeam = ({
     }
   };
 
-  const handleIdSelected = (id: string, userEmail?: string) => {
-    setIdSelected(id);
-    setUserEmail && setUserEmail(userEmail!);
+  const handleEmailSelected = (email: string) => {
+    setEmailSelected(email);
+    if (internSelected) internSelected(email);
   };
 
   const [team, setTeam] = useState("");
@@ -69,7 +69,7 @@ const SelectionTeam = ({
   }, []);
 
   useEffect(() => {
-    handleIdSelected("");
+    handleEmailSelected("");
     if (team !== "ALL") {
       setInterns(usersData.filter((Intern) => Intern.main === team));
       setInterns((prevState) => internsDataForMap(prevState));
@@ -78,7 +78,7 @@ const SelectionTeam = ({
     }
   }, [team]);
 
-  if (usersData.length > 0) {
+  if (usersData && usersData.length > 0) {
     return (
       <div className={styles.containerSelectionTeam}>
         <Dropdown
@@ -96,12 +96,12 @@ const SelectionTeam = ({
             interns.map((intern) => {
               return (
                 <div
-                  onClick={() => handleIdSelected(intern.id, intern.email)}
+                  onClick={() => handleEmailSelected(intern.email)}
                   key={intern.id}
                   className={`${styles.containerSelectionTeam_contentIcons_image} ${styles.contentIcons_absolute}`}
                   style={{
                     backgroundImage:
-                      idSelected === intern.id
+                      emailSelected === intern.email
                         ? `url(${intern.avatar})`
                         : `${linearGradient}, url(${intern.avatar}) `,
                     backgroundSize: "cover",

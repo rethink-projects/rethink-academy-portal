@@ -10,6 +10,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
+import { api } from "../../services/backend/Api";
 
 type goalList = {
   id: number;
@@ -38,16 +39,10 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
   const [update, setUpdate] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  // console.log(goalList);
-  // console.log(goals);
-  // console.log(studentEmail);
-
   const getGoalList = async () => {
     if (user?.role === "STUDENT") {
       try {
-        const userGoalsList = await axios.get(
-          `http://localhost:4000/api/goalList/${user.email}`
-        );
+        const userGoalsList = await api.get(`/goalList/${user.email}`);
         setGoalList(userGoalsList.data[userGoalsList.data.length - 1]);
         setGoals(userGoalsList.data[userGoalsList.data.length - 1].goal);
         return;
@@ -57,9 +52,7 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
     }
     if (user?.role === "AMBASSADOR") {
       try {
-        const studentGoalsList = await axios.get(
-          `http://localhost:4000/api/goalList/${studentEmail}`
-        );
+        const studentGoalsList = await api.get(`/goalList/${studentEmail}`);
 
         setGoalList(studentGoalsList.data[studentGoalsList.data.length - 1]);
         setGoals(studentGoalsList.data[studentGoalsList.data.length - 1].goal);
@@ -81,10 +74,7 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
     goalsListId?: string
   ) => {
     try {
-      const goalUpdate = await axios.patch(
-        `http://localhost:4000/api/goal/${id!}`,
-        { conclude }
-      );
+      const goalUpdate = await api.patch(`/goal/${id!}`, { conclude });
       setUpdate((current) => !current);
       const goalsData = await goals.map((goal: any) => {
         if (goal.id === goalsListId) {
@@ -124,7 +114,6 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
     goalListId: string,
     props: any
   ) => {
-    // console.log(props);
     updateGoal(id, props.props, title, goalListId);
     goals &&
       setGoals(() =>

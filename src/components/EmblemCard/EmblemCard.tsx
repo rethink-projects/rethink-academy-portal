@@ -7,7 +7,7 @@ import Emblem from "../Emblem/Emblem";
 
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import axios from "axios";
-import { api } from "../../services/api";
+import { api } from "../../services/backend/Api";
 
 type EmblemCardProps = {
   title?: string;

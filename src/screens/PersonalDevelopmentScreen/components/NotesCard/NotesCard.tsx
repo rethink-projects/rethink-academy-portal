@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
 import axios from "axios";
 import Images from "../../../../assets";
+import { api } from "../../../../services/backend/Api";
 
 type notesCardProps = {
   studentEmail?: string;
@@ -23,8 +24,6 @@ const NotesCard = ({ studentEmail, height }: notesCardProps) => {
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  // console.log(user);
-  // console.log(studentEmail);
 
   useEffect(() => {
     if (user) {
@@ -33,26 +32,12 @@ const NotesCard = ({ studentEmail, height }: notesCardProps) => {
   }, [user, studentEmail]);
 
   const getNotes = async () => {
-    // console.log("chamou get notes");
-
     if (!studentEmail) {
-      // console.log("-------------------------");
-
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${user.email}`
-      );
+      const notes = await api.get(`/note/${user.email}`);
       setNotes(notes.data.notesFormated);
       return notes.data.notesFormated;
     } else if (user.role === "AMBASSADOR") {
-      // console.log("**");
-
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${studentEmail}`
-      );
-
-      // console.log(
-      //   notes.data.notesFormated.filter((note: any) => note.isPublic === true)
-      // );
+      const notes = await api.get(`/note/${studentEmail}`);
 
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)

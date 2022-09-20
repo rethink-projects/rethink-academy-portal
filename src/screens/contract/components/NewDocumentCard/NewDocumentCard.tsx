@@ -31,12 +31,10 @@ const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
 
     if (file) {
       const bucket = await uploadFile(file.name, acceptedFiles[0], file.name);
-      console.log({ bucket });
       setFiles((prevValue: any[]) =>
         //prevValue.push({ title: file.name, id: file.name, url: file.name })
 
         {
-          console.log("PREV VALUE", prevValue);
           prevValue.push({
             title: bucket.title,
             id: bucket.id,
@@ -63,7 +61,7 @@ const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
         </div>
         <span>Novo documento</span>
         {!acceptedFiles[0] ? (
-          <p>Selecione ou arraste e solte o seu arquivo</p>
+          <p>Selecione o arquivo que deseja fazer upload</p>
         ) : (
           acceptedFiles.map((file: FileWithPath) => (
             <p key={file.path}>{file.path}</p>

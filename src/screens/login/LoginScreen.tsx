@@ -6,20 +6,28 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 
 import styles from "./Login.module.css";
+import "./Login.css";
 
 function LoginScreen() {
   const auth = useAuth();
+  const { user } = useAuth();
   const { notify } = useNotification();
   const navigate = useNavigate();
   async function handleGoogleLogin() {
     auth.signin("google", () => {
+      console.log(auth.user);
+    });
+  }
+
+  useEffect(() => {
+    if (user !== null) {
       notify({
         title: "Login Successful",
         type: "success",
       });
-      navigate("/dashboard");
-    });
-  }
+      navigate("/dashboard", { replace: true });
+    }
+  }, [user]);
 
   useEffect(() => {
     const localStorageUser = JSON.parse(
@@ -29,7 +37,7 @@ function LoginScreen() {
       auth.setCurrentUser(localStorageUser);
     }
     if (auth.user) {
-      navigate("/dashboard", { replace: true });
+      // navigate("/dashboard", { replace: true });
     }
   }, [auth, navigate]);
   return (
