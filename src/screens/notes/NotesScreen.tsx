@@ -206,7 +206,7 @@ const NotesScreen = () => {
                     { title: "Home", link: "/" },
                     {
                       title: "Seu desenvolvimento",
-                      link: "/desenvolvimentoPessoal",
+                      link: "/dashboard/desenvolvimentoPessoal",
                     },
                     { title: "Notas", link: "/notas" },
                   ]}
