@@ -52,6 +52,7 @@ const CourseScreen = () => {
     setambassador(response.data.role === "AMBASSADOR");
     setModules(response.data.modules);
     setWatched(response.data.watched);
+    setLessonsQnt(response.data.lessonQnt);
   };
 
   useEffect(() => {
@@ -59,6 +60,14 @@ const CourseScreen = () => {
       getCourse();
     }
   }, [userEmail]);
+
+  useEffect(() => {
+    if (ambassador) {
+      let qnt = 0;
+      modules.map((module) => (qnt += module!.lessons!.length));
+      setLessonsQnt(qnt);
+    }
+  }, [modules]);
 
   const getLevel = (level: string) => {
     if (level === "HIGH") return "Avançado";
@@ -72,12 +81,6 @@ const CourseScreen = () => {
     setModuleModalIsOpen(true);
     setModuleName("");
   };
-
-  useEffect(() => {
-    let qnt = 0;
-    modules.map((module) => (qnt += module!.lessons!.length));
-    setLessonsQnt(qnt);
-  }, [modules]);
 
   if (
     !user ||
