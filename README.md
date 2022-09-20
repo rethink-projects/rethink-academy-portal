@@ -193,16 +193,15 @@ Abaixo vamos explicar um pouco sobre como iremos trabalhar no github:
 ### Participantes.
 
 [x] - Filipe Prado
+[x] - Gabriel Gomes
 [x] - Fernando Henrique
 [x] - Felipe Reggiane
 [x] - Lucas Araújo
-[x] - Sthéphany Tezza
 [x] - Gabriel Melo
+[x] - Sthéphany Tezza
 [x] - Fabiana Kamo
-[x] - Gabriel Gomes
 [x] - Ana Clara Ramos
 [x] - Amanda Duarte
-[x] - Gabriel Gomes 2
 [x] - Carolina Valeriano
 
 <p align="right">(<a href="#top">Voltar ao topo</a>)</p>

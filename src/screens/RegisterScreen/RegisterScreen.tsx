@@ -13,6 +13,7 @@ import EmblemCard from "../../components/EmblemCard/EmblemCard";
 
 //CSS
 import styles from "./RegisterScreen.module.css";
+import "./RegisterScreen.css";
 
 // Context
 import { useAuth } from "../../context/AuthContext";

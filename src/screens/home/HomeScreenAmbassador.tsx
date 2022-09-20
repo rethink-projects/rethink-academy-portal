@@ -49,6 +49,16 @@ const HomeScreenAmbassador = ({ user }: any) => {
       return;
     }
   };
+  const getStudentMain = (main: string) => {
+    switch (main) {
+      case "ENGINEERING":
+        return "Engenharia";
+      case "DESIGN":
+        return "Design";
+      case "PRODUCT":
+        return "Produto";
+    }
+  };
 
   const getAllUsersWithRoleStudent = async () => {
     const data = await getAllStudents();
@@ -209,7 +219,9 @@ const HomeScreenAmbassador = ({ user }: any) => {
                   </div>
                   <div className={Styles.student_card_text}>
                     <div>{intern.name + " " + intern.surname}</div>
-                    <button className={Styles.card_role}>Engenharia</button>
+                    <button className={Styles.card_role}>
+                      {getStudentMain(intern.main)}
+                    </button>
                   </div>
                 </div>
               ))}
