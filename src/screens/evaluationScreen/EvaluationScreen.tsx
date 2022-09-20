@@ -11,7 +11,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 // style
 import styles from "./EvaluationScreen.module.css";
 import BasicEditingGrid from "./components/evalutionTable/EvaluationTable";
-import axios from "axios";
+
 import { Navigate } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 

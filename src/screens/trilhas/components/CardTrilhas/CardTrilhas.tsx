@@ -4,8 +4,9 @@ import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import EditIcon from "@mui/icons-material/BorderColorOutlined";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { useAuth } from "../../../../context/AuthContext";
+import { api } from "../../../../services/backend/Api";
 
 type TypeTrail = { name: string; id: string; description: string };
 
@@ -55,7 +56,7 @@ const CardTrilhas = ({
   const { user: userAuth } = useAuth();
 
   useEffect(() => {
-    axios.get("/user/watched/" + userAuth.email).then((response) => {
+    api.get("/user/watched/" + userAuth.email).then((response) => {
       if (response.data) {
         setLessonUser(response.data);
       }

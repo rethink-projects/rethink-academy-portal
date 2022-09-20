@@ -1,4 +1,3 @@
-import axios from "axios";
 import { api } from "./Api";
 
 export const getSingleTask = async (id: string) => {

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../../context/AuthContext";
-import axios from "axios";
 
 import styles from "./DropdownSideModal.module.css";
 import Images from "../../../../../assets";

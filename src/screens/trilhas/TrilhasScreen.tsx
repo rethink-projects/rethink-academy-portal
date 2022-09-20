@@ -1,7 +1,7 @@
 import styles from "./TrilhasScreen.module.css";
 import CardTrilhas from "./components/CardTrilhas/CardTrilhas";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEditCardTrilhas";
 import { useAuth } from "../../context/AuthContext";
@@ -33,11 +33,11 @@ const TrilhasScreen = () => {
   const [trailUpdated, setTrailUpdated] = useState<TypeTrails>();
 
   useEffect(() => {
-    api.get("/user/" + userAuth?.email).then((response) => {
-      if (response.data.user) {
-        setUser(response.data.user);
-      }
-    });
+    // api.get("/user/" + userAuth?.email).then((response) => {
+    //   if (response.data.user) {
+    //     setUser(response.data.user);
+    //   }
+    // });
     api.get("/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);
@@ -83,8 +83,8 @@ const TrilhasScreen = () => {
     setModalIsOpen(false);
   };
 
-  if (!user) {
-    return <>carregando...</>;
+  if (!userAuth) {
+    return <>teste</>;
   }
   return (
     <div className={styles.body}>

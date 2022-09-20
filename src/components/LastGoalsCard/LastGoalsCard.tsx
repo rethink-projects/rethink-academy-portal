@@ -5,7 +5,7 @@ import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
+
 import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
 import { api } from "../../services/backend/Api";
 

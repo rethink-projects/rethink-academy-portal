@@ -8,7 +8,7 @@ import { style } from "@mui/system";
 
 import DropdownSideModal from "./DropdownSideModal/DropdownSideModal";
 import { useAuth } from "../../../../context/AuthContext";
-import axios from "axios";
+
 import Textarea from "../../../../components/Textarea/Textarea";
 
 type modalProps = {

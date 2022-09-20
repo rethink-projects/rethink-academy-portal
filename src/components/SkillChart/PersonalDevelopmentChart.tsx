@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CustomBarChart from "./components/chart/BarChart";
 import Switch from "./components/switch/Switch";

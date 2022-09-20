@@ -9,7 +9,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import ProgressBar from "../ProgressBar/ProgressBar";
 import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
 import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
+
 import { api } from "../../services/backend/Api";
 
 type goalList = {
