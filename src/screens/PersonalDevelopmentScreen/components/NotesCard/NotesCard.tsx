@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
 import axios from "axios";
 import Images from "../../../../assets";
+import { api } from "../../../../services/backend/Api";
 
 type notesCardProps = {
   studentEmail?: string;
@@ -32,15 +33,11 @@ const NotesCard = ({ studentEmail, height }: notesCardProps) => {
 
   const getNotes = async () => {
     if (!studentEmail) {
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${user.email}`
-      );
+      const notes = await api.get(`/note/${user.email}`);
       setNotes(notes.data.notesFormated);
       return notes.data.notesFormated;
     } else if (user.role === "AMBASSADOR") {
-      const notes = await axios.get(
-        `http://localhost:4000/api/note/${studentEmail}`
-      );
+      const notes = await api.get(`/note/${studentEmail}`);
 
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)

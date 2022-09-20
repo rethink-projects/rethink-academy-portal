@@ -75,13 +75,10 @@ const TrilhasScreen = () => {
     setValueNameTrail("");
     setValueImageTrail("");
 
-    const update = await axios.put(
-      "http://localhost:4000/api/trail/" + trailUpdated?.id,
-      {
-        name: valueNameTrail,
-        description: valueDescriptionTrail,
-      }
-    );
+    const update = await api.put("/trail/" + trailUpdated?.id, {
+      name: valueNameTrail,
+      description: valueDescriptionTrail,
+    });
 
     setModalIsOpen(false);
   };

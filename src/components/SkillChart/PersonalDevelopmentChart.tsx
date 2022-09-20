@@ -5,6 +5,7 @@ import Switch from "./components/switch/Switch";
 import Tag, { headers } from "./components/tags/Tag";
 import styles from "./PersonalDevelopmentChart.module.css";
 import { useAuth } from "../../context/AuthContext";
+import { api } from "../../services/backend/Api";
 
 type internEmailProps = {
   email?: string;
@@ -38,9 +39,7 @@ const PersonalDevelopmentChart = (email: internEmailProps) => {
   const getUser = async () => {
     if (email) {
       try {
-        const { data } = await axios.get(
-          `http://localhost:4000/api/user/${email.email}`
-        );
+        const { data } = await api.get(`/user/${email.email}`);
         setUserByEmail(data);
         return;
       } catch (error) {
@@ -60,16 +59,14 @@ const PersonalDevelopmentChart = (email: internEmailProps) => {
   const getData = async () => {
     try {
       if (user && email && user.role === "AMBASSADOR") {
-        const { data } = await axios.get(
-          `http://localhost:4000/api/evaluate/chartData/${email.email}`,
-          { params: { skill, header: tagType } }
-        );
+        const { data } = await api.get(`/evaluate/chartData/${email.email}`, {
+          params: { skill, header: tagType },
+        });
         return await data.chartData;
       } else {
-        const { data } = await axios.get(
-          `http://localhost:4000/api/evaluate/chartData/${user.email}`,
-          { params: { skill, header: tagType } }
-        );
+        const { data } = await api.get(`/evaluate/chartData/${user.email}`, {
+          params: { skill, header: tagType },
+        });
         return await data.chartData;
       }
     } catch (error) {

@@ -8,6 +8,7 @@ import {
 } from "@mui/x-data-grid-generator";
 import axios, { AxiosResponse } from "axios";
 import { fontSize } from "@mui/system";
+import { api } from "../../../../services/backend/Api";
 
 type BasicEditingGridType = {
   role: "ENGINEERING" | "DESIGN" | "PRODUCT";
@@ -104,8 +105,8 @@ export default function BasicEditingGrid({
   // get evaluates from datebase and save in evaluations using useState
   const getEvaluations = async (month: string) => {
     try {
-      const evaluationsData = await axios.get<evaluationUserType[]>(
-        `http://localhost:4000/api/evaluate/${month}?skillType=${skill}`,
+      const evaluationsData = await api.get<evaluationUserType[]>(
+        `/evaluate/${month}?skillType=${skill}`,
         { params: { skill } }
       );
       setEvaluations(evaluationsData.data);
@@ -231,38 +232,35 @@ export default function BasicEditingGrid({
   const createNewEvaluate = async (tableData: any, value: string) => {
     try {
       const newValue = parseInt(value);
-      await axios.post<evaluationUserType[]>(
-        `http://localhost:4000/api/evaluate`,
-        {
-          month: month,
-          userEmail: tableData.row.email,
-          skillType: skill,
-          skill1:
-            tableData.field === headers[role][0]
-              ? newValue
-              : tableData.row[headers[role][0]],
-          skill2:
-            tableData.field === headers[role][1]
-              ? newValue
-              : tableData.row[headers[role][1]],
-          skill3:
-            tableData.field === headers[role][2]
-              ? newValue
-              : tableData.row[headers[role][2]],
-          skill4:
-            tableData.field === headers[role][3]
-              ? newValue
-              : tableData.row[headers[role][3]],
-          skill5:
-            tableData.field === headers[role][4]
-              ? newValue
-              : tableData.row[headers[role][4]],
-          skill6:
-            tableData.field === headers[role][5]
-              ? newValue
-              : tableData.row[headers[role][5]],
-        }
-      );
+      await api.post<evaluationUserType[]>(`/evaluate`, {
+        month: month,
+        userEmail: tableData.row.email,
+        skillType: skill,
+        skill1:
+          tableData.field === headers[role][0]
+            ? newValue
+            : tableData.row[headers[role][0]],
+        skill2:
+          tableData.field === headers[role][1]
+            ? newValue
+            : tableData.row[headers[role][1]],
+        skill3:
+          tableData.field === headers[role][2]
+            ? newValue
+            : tableData.row[headers[role][2]],
+        skill4:
+          tableData.field === headers[role][3]
+            ? newValue
+            : tableData.row[headers[role][3]],
+        skill5:
+          tableData.field === headers[role][4]
+            ? newValue
+            : tableData.row[headers[role][4]],
+        skill6:
+          tableData.field === headers[role][5]
+            ? newValue
+            : tableData.row[headers[role][5]],
+      });
       if (month) {
         await getEvaluations(month);
       }
@@ -274,8 +272,8 @@ export default function BasicEditingGrid({
 
   const updateEvaluate = async (row: any, value: string) => {
     try {
-      const updateResponse = await axios.patch<evaluationUserType[]>(
-        `http://localhost:4000/api/evaluate/${row.id}`,
+      const updateResponse = await api.patch<evaluationUserType[]>(
+        `/evaluate/${row.id}`,
         {
           value: value,
           main: role,

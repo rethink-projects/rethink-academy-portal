@@ -8,6 +8,7 @@ import {
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import { useStorage } from "../../../../services/supabase/storage";
 import axios from "axios";
+import { api } from "../../../../services/backend/Api";
 
 type CardType = {
   type: "embassador" | "student";
@@ -31,7 +32,7 @@ const DocumentCard = (documentContent: fileType & CardType) => {
   };
 
   const deleteFile = async (id: string) => {
-    await axios.delete(`http://localhost:4000/api/bucket/${id}`);
+    await api.delete(`/bucket/${id}`);
     documentContent.setIsDeleted(id);
   };
 

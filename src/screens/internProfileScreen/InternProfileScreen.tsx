@@ -20,6 +20,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import PersonalDevelopmentChart from "../../components/SkillChart/PersonalDevelopmentChart";
 import NotesCard from "../PersonalDevelopmentScreen/components/NotesCard/NotesCard";
 import InternContractStatus from "../../components/InternContractStatus/InternContractStatus";
+import { api } from "../../services/backend/Api";
 
 const InternProfileScreen = () => {
   const { user } = useAuth();
@@ -33,9 +34,7 @@ const InternProfileScreen = () => {
   const getStudentUser = async () => {
     try {
       if (studentEmail) {
-        const userData = await axios.get(
-          `http://localhost:4000/api/user/${studentEmail}`
-        );
+        const userData = await api.get(`/user/${studentEmail}`);
         setStudentUser(userData.data);
       }
 

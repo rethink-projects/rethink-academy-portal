@@ -55,13 +55,11 @@ const CardTrilhas = ({
   const { user: userAuth } = useAuth();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/user/watched/" + userAuth.email)
-      .then((response) => {
-        if (response.data) {
-          setLessonUser(response.data);
-        }
-      });
+    axios.get("/user/watched/" + userAuth.email).then((response) => {
+      if (response.data) {
+        setLessonUser(response.data);
+      }
+    });
   }, []);
 
   const getCoursesFromTrail = (trail: string) => {

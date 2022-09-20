@@ -7,6 +7,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import SideModal from "../../screens/PersonalDevelopmentScreen/components/sideModal/SideModal";
+import { api } from "../../services/backend/Api";
 
 type cardProps = {
   studentEmail?: string;
@@ -22,9 +23,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
   const getGoalList = async () => {
     if (user?.role === "STUDENT") {
       try {
-        const userGoalsList = await axios.get(
-          `http://localhost:4000/api/goalList/${user.email}`
-        );
+        const userGoalsList = await api.get(`/goalList/${user.email}`);
         setGoalList(userGoalsList.data[userGoalsList.data.length - 1]);
 
         setGoals(userGoalsList.data[userGoalsList.data.length - 1].goal);
@@ -35,9 +34,7 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
     }
     if (user?.role === "AMBASSADOR") {
       try {
-        const studentGoalsList = await axios.get(
-          `http://localhost:4000/api/goalList/${studentEmail}`
-        );
+        const studentGoalsList = await api.get(`/goalList/${studentEmail}`);
         setGoalList(studentGoalsList.data[studentGoalsList.data.length - 1]);
         setGoals(studentGoalsList.data[studentGoalsList.data.length - 1].goal);
         return;

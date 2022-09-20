@@ -72,7 +72,7 @@ export const getRecordOfDay = async (email: string) => {
 
 export const removeTask = async (id: string) => {
   try {
-    const { data } = await api.delete(`http://localhost:4000/api/tasks/${id}`);
+    const { data } = await api.delete(`/tasks/${id}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -82,9 +82,7 @@ export const removeTask = async (id: string) => {
 
 export const getHoursLastDay = async (email: string) => {
   try {
-    const { data } = await api.get(
-      `http://localhost:4000/api/tasks/hours/${email}`
-    );
+    const { data } = await api.get(`/tasks/hours/${email}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -94,9 +92,7 @@ export const getHoursLastDay = async (email: string) => {
 
 export const getHoursOfThreeLastDays = async (email: string) => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/day/hours/${email}`
-    );
+    const { data } = await api.get(`/tasks/day/hours/${email}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -106,9 +102,7 @@ export const getHoursOfThreeLastDays = async (email: string) => {
 
 export const getHoursOfMonth = async (email: string) => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:4000/api/tasks/month/hours/${email}`
-    );
+    const { data } = await api.get(`/tasks/month/hours/${email}`);
     return data;
   } catch (error) {
     console.log(error);

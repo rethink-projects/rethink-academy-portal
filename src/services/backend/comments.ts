@@ -1,9 +1,8 @@
 import axios from "axios";
+import { api } from "./Api";
 
 export const getCommentsFromUser = async (email: string) => {
-  const { data } = await axios.get(
-    `http://localhost:4000/api/comments/${email}`
-  );
+  const { data } = await api.get(`/comments/${email}`);
   return data;
 };
 
@@ -16,7 +15,7 @@ export const createComment = async ({
   userEmail: string;
   commentAuthor: string;
 }) => {
-  const { data } = await axios.post(`http://localhost:4000/api/comments`, {
+  const { data } = await api.post(`/comments`, {
     text,
     userEmail,
     commentAuthor,
@@ -26,9 +25,7 @@ export const createComment = async ({
 
 export const removeComment = async (id: string) => {
   try {
-    const { data } = await axios.delete(
-      `http://localhost:4000/api/comments/${id}`
-    );
+    const { data } = await api.delete(`/comments/${id}`);
     return data;
   } catch (error) {
     console.log(error);
