@@ -20,7 +20,9 @@ import { Times } from "./Times";
 import { Dayjs } from "dayjs";
 
 // Backend
-import { createTask } from "../../services/backend/Tasks";
+import { createTask, updateTask } from "../../services/backend/Tasks";
+import { useNotification } from "../../context/NotificationContext";
+import { useAuth } from "../../context/AuthContext";
 
 type AddTaskProps = {
   formData: {
@@ -28,18 +30,29 @@ type AddTaskProps = {
     taskDate: string;
     startTime: string;
     endTime: string;
-    tag: string;
+    tags: string;
     status: string;
     description: string;
     userEmail?: string;
     id?: string;
   };
   setFormData: (value: any) => void;
+  setUpdate: (value: any) => void;
+  active: boolean;
+  setActive: (value: boolean) => void;
 };
 
-function AddTask({ formData, setFormData }: AddTaskProps) {
+function AddTask({
+  formData,
+  setFormData,
+  setUpdate,
+  active,
+  setActive,
+}: AddTaskProps) {
   let iconImg = Images.arrowTask;
-  const [active, setActive] = useState(false);
+  const { notify } = useNotification();
+  const { user } = useAuth();
+
   const handlerFormDataValues = (
     data: string,
     value: string | Dayjs | null
@@ -47,13 +60,57 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
     setFormData((prevValue: any) => ({ ...prevValue, [data]: value }));
   };
 
+  const verifyFormData = () => {
+    const newFormData = { ...formData, id: true, userEmail: true };
+    for (const key in newFormData) {
+      if (!newFormData[key as keyof typeof newFormData]) {
+        return key;
+      }
+    }
+    return false;
+  };
+
   const createUserTask = async () => {
-    if (formData.id) {
-      console.log("entrou", formData);
-      // updateTask(id);
+    const verify = verifyFormData();
+    if (verify) {
+      notify({
+        title: `Você precisa preencher "${verify}"!`,
+        type: "error",
+      });
       return;
     }
-    await createTask({ ...formData, userEmail: "fabiana.kamo@rethink.dev" });
+    if (formData.id) {
+      updateTask(formData.id, formData);
+      notify({
+        title: `Você alterou a task: "${formData.name}"!`,
+        type: "info",
+      });
+      setActive(false);
+    } else {
+      const { task } = await createTask({
+        ...formData,
+        userEmail: user.email,
+      });
+      if (task) {
+        notify({
+          title: `Task "${task.name}" criada com sucesso!`,
+          type: "success",
+        });
+
+        setActive(false);
+        setUpdate(true);
+      }
+    }
+
+    setFormData({
+      name: "",
+      taskDate: new Date().toISOString(),
+      startTime: "",
+      endTime: "",
+      tags: "",
+      status: "",
+      description: "",
+    });
   };
 
   return (
@@ -97,7 +154,7 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
               <p>Nome da atividade</p>
               <InputText
                 type={"block"}
-                placeholder={"Placeholder"}
+                placeholder={"Digite aqui o nome da atividade ..."}
                 hasIcon={true}
                 nameInput={""}
                 right={<img src={Images.icons.editBlackIcon} alt="edit icon" />}
@@ -109,7 +166,9 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
               <p>Data</p>
               <SingleDatePicker
                 formDataValue={formData.taskDate}
-                setFormDataValue={(date) => handlerFormDataValues("date", date)}
+                setFormDataValue={(date) =>
+                  handlerFormDataValues("taskDate", date)
+                }
               />
             </div>
             <div className={styled.taskTime}>
@@ -121,7 +180,6 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
                   }}
                   value={formData.startTime}
                   width={252}
-                  initialText={"14:30"}
                   options={Times}
                   id={"startTime"}
                   leftIcon={<div />}
@@ -132,7 +190,6 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
                   }}
                   value={formData.endTime}
                   width={252}
-                  initialText={"00:00"}
                   options={Times}
                   id={"endTime"}
                   leftIcon={<div />}
@@ -153,10 +210,10 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
                     key={index}
                     size={"micro"}
                     color={"dark"}
-                    type={"tag"}
+                    type={"tags"}
                     text={tag}
                     hasIcon={false}
-                    active={formData.tag === tag}
+                    active={formData.tags === tag}
                     setActive={handlerFormDataValues}
                   />
                 ))}
@@ -198,7 +255,6 @@ function AddTask({ formData, setFormData }: AddTaskProps) {
                 text={"Finalizar Tarefa"}
                 onClick={() => {
                   createUserTask();
-                  console.log(formData);
                 }}
               />
             </div>

@@ -51,7 +51,6 @@ export function useStorage() {
         type: "success",
         title: `Upload feito com sucesso`,
       });
-      //console.log({ bucket });
       return bucket;
     }
   };
@@ -62,7 +61,6 @@ export function useStorage() {
       //Buffer.from(title).toString("base64"),
       user.email
     );
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     const { data, error } = await supabaseClient.storage
       .from(user.email)
       .createSignedUrl(bucket.url, 5000);

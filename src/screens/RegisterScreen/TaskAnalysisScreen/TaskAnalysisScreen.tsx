@@ -47,7 +47,6 @@ const TaskAnalysisScreen = () => {
   ]);
 
   useEffect(() => {
-    // const user = user.email;
     if (user) {
       getData();
       setUserFromPathname(user.email);
@@ -57,6 +56,10 @@ const TaskAnalysisScreen = () => {
       ]);
     }
   }, [user]);
+
+  useEffect(() => {
+    getData();
+  }, [tags]);
 
   if (userFromPathname && user.role !== "AMBASSADOR") {
     // navigate("dashboard/register/analysis");
@@ -80,7 +83,7 @@ const TaskAnalysisScreen = () => {
             <AmbassadorViewTasksMM email={user.email} />
           </div>
           <div className={styles.quick_view}>
-            <Register email={user.email} />
+            <Register email={user.email} type="intern" />
           </div>
         </div>
       </div>

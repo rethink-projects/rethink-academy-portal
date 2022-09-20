@@ -32,12 +32,8 @@ function HomeScreenStudent() {
 
   useEffect(() => {
     GetUser();
-    console.log(badges);
   }, []);
 
-  useEffect(() => {
-    console.log(badges);
-  }, [badges]);
   if (!user) {
     return <div>Loading...</div>;
   }

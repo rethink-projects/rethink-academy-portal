@@ -86,7 +86,7 @@ const Comment = ({ student: studentEmail }: { student?: string | false }) => {
                   " " +
                   comment.CommmentAuthor.surname
                 }
-                title={`${comment.CommmentAuthor.role} of ${comment.CommmentAuthor.main}`}
+                title={`${comment.CommmentAuthor.role.toLowerCase()} of ${comment.CommmentAuthor.main.toLowerCase()}`}
                 avatar={comment.CommmentAuthor.avatar}
                 CommenterEmail={comment.CommmentAuthor.email}
               />

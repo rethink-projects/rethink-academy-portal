@@ -1,58 +1,59 @@
 .intern_container {
-    height: 1056px;
-    display: flex;
-    justify-content: space-between;
-    gap: 80px;
-    background: #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  background: #f5f5f5;
 }
 
 .intern_body {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding-left: 112px;
-    padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-left: 95px;
+  padding-top: 28px;
 }
 
-.intern_comment {
+.intern_graph > div {
+  background: var(--color-base);
+  width: 1040px;
+  margin: 0;
 }
 
-.intern_graph {
-    width: 1040px;
-    height: 470px;
+.intern_comment > div {
+  height: 96%;
+  /* background-color: red; */
 }
 
 .intern_data {
-    display: flex;
-    gap: 54px;
+  display: flex;
+  gap: 54px;
 }
 
 .intern_data_historic {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .intern_data_historic h1 {
-    font-weight: 500;
-    font-size: 20px;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .error {
-    width: 620px;
+  width: 620px;
 }
 
 .fastView {
-    width: 357px;
+  width: 357px;
 }
 
 .intern_data_viewFast {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .intern_data_viewFast h1 {
-    font-weight: 500;
-    font-size: 20px;
+  font-weight: 500;
+  font-size: 20px;
 }

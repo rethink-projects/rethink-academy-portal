@@ -14,7 +14,7 @@ import { getUserFromBackend } from "../../services/backend/UserService";
 import Toast from "../../components/Toast/Toast";
 import Comment from "../../components/Comment/Comment";
 import TagChart from "../../components/TagChart/TagChart";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 const InternAnalisysScreen = () => {
@@ -24,9 +24,11 @@ const InternAnalisysScreen = () => {
     name: string;
     surname: string;
   };
-
+  const location = useLocation();
   const [intern, setIntern] = useState<Intern>();
-  const [emailIntern, setEmailIntern] = useState("");
+  const [emailIntern, setEmailIntern] = useState(
+    location.pathname.split("/")[4]
+  );
   const [isEqual, setIsEqual] = useState(true);
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -55,29 +57,15 @@ const InternAnalisysScreen = () => {
   };
 
   useEffect(() => {
-    console.log({ emailIntern });
     getData();
   }, [tags, emailIntern]);
 
-  // const handleEmailIntern = (email: string) => {
-  //   if (email) {
-  //     navigate("/dashboard/register/analysis/" + email);
-  //     getData();
-  //     setIsEqual(true);
-  //   } else {
-  //     setEmailIntern(email);
-  //     setIsEqual(false);
-  //   }
-  //   console.log(emailIntern);
-  // };
-
   const handleEmailIntern = (email: string) => {
-    console.log("email", email);
     if (email === emailIntern) {
       setIsEqual(true);
     } else {
       getData();
-      setEmailIntern(email);
+      email && setEmailIntern(email);
       setIsEqual(false);
     }
   };
@@ -85,12 +73,18 @@ const InternAnalisysScreen = () => {
   const getIntern = async () => {
     const data = await getUserFromBackend(emailIntern);
     setIntern(data);
-    setName(data.name);
+    if (data) {
+      setName(data.name);
+    }
   };
 
   useEffect(() => {
     if (!isEqual) getIntern();
   }, [isEqual, emailIntern]);
+
+  useEffect(() => {
+    getIntern();
+  }, []);
 
   return (
     <div className={styles.intern_container}>
@@ -140,7 +134,7 @@ const InternAnalisysScreen = () => {
         </div>
       </div>
       <div className={styles.intern_comment}>
-        <Comment />
+        <Comment student={emailIntern} />
       </div>
     </div>
   );

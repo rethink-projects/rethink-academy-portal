@@ -26,9 +26,9 @@ export const createTask = async (taskData: any) => {
   return data;
 };
 
-export const updateTask = async (id: string) => {
+export const updateTask = async (id: string, task: any) => {
   try {
-    const { data } = await api.put(`/tasks/${id}`);
+    const { data } = await api.put(`/tasks/${task.id}`, task);
     return data;
   } catch (error) {
     console.log(error);

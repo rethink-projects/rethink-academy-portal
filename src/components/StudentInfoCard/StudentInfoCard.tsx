@@ -19,7 +19,6 @@ const StudentInfoCard = ({ studentEmail }: StudentInfoCardProps) => {
       const studentInfo = await axios.get(
         `http://localhost:4000/api/user/${studentEmail}`
       );
-      console.log(studentInfo.data);
       setStudent(studentInfo.data);
     } catch (error) {
       console.log(error);

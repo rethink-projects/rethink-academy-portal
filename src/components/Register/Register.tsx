@@ -16,6 +16,7 @@ import {
   getRecordOfDay,
 } from "../../services/backend/Tasks";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type RegisterProps = {
   type?: "ambassador" | "intern" | "home";
@@ -39,6 +40,7 @@ const Register = ({ type = "home", email }: RegisterProps) => {
     time: number;
   };
 
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [tags, setTags] = useState<Tag[]>([]);
   const [records, setRecords] = useState<Record[]>([]);
@@ -77,15 +79,9 @@ const Register = ({ type = "home", email }: RegisterProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   changeData();
-  // }, []);
-
   useEffect(() => {
     changeData();
   }, [email]);
-
-  console.log(email);
 
   let colorIcon = "";
   type === "home" ? (colorIcon = "red") : (colorIcon = "black");
@@ -107,8 +103,6 @@ const Register = ({ type = "home", email }: RegisterProps) => {
 
     return `${hours}h${minutes}min`;
   };
-
-  console.log(tags);
 
   return (
     <div className={styles.register_container}>
@@ -201,7 +195,12 @@ const Register = ({ type = "home", email }: RegisterProps) => {
           </div>
         </div>
         {type === "ambassador" && (
-          <button className={styles.btnHours}>
+          <button
+            className={styles.btnHours}
+            onClick={() =>
+              navigate("/dashboard/registroDeHoras/analise/" + email)
+            }
+          >
             Ver registro de horas <ArrowForwardOutlinedIcon />
           </button>
         )}
@@ -210,4 +209,4 @@ const Register = ({ type = "home", email }: RegisterProps) => {
   );
 };
 
-export default React.memo(Register);
+export default Register;

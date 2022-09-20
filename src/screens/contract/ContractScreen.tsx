@@ -292,7 +292,7 @@ const ContractScreen = () => {
       {user.role === "AMBASSADOR" ? (
         <div className={styles.contract_title_ambassador}>
           Contrato
-          <SelectionTeam setUserEmail={setStudentEmail} />
+          <SelectionTeam internSelected={setStudentEmail} />
         </div>
       ) : (
         <div className={styles.contract_title}>Contrato</div>

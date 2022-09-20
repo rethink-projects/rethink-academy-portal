@@ -42,7 +42,6 @@ const PersonalDevelopmentChart = (email: internEmailProps) => {
           `http://localhost:4000/api/user/${email.email}`
         );
         setUserByEmail(data);
-        console.log({ data });
         return;
       } catch (error) {
         console.log(error);
@@ -86,7 +85,6 @@ const PersonalDevelopmentChart = (email: internEmailProps) => {
       fetchData();
     }
     getUser();
-    console.log({ userByEmail });
   }, []);
 
   useEffect(() => {
@@ -99,10 +97,8 @@ const PersonalDevelopmentChart = (email: internEmailProps) => {
   }, [skill, user, email]);
 
   useEffect(() => {
-    console.log(skillType);
     if (skillType === false) {
       setTagType("SOFT");
-      console.log(tagType);
       setSkill("Empatia");
     } else {
       user.role === "AMBASSADOR"

@@ -17,7 +17,7 @@ type TagProps = {
 const Tag = ({
   color = "light",
   size = "default",
-  type = "tag",
+  type = "tags",
   hasIcon = true,
   text,
   active = false,

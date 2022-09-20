@@ -21,7 +21,6 @@ const SingleDatePicker = ({
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
     if (newValue) {
-      console.log(newValue.format());
       setFormDataValue(newValue.format());
     }
   };

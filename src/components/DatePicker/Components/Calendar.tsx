@@ -26,10 +26,11 @@ type task = {
 
 type CalendarProps = {
   setTasks?: (value: task[]) => void;
+  setUpdate: (value: boolean) => void;
   update?: boolean;
 };
 
-const CalendarComponent = ({ setTasks, update }: CalendarProps) => {
+const CalendarComponent = ({ setTasks, update, setUpdate }: CalendarProps) => {
   const { user } = useAuth();
 
   const date = new Date();
@@ -51,7 +52,10 @@ const CalendarComponent = ({ setTasks, update }: CalendarProps) => {
   }, [state, user]);
 
   useEffect(() => {
-    if (update) changeTasks();
+    if (update) {
+      changeTasks();
+      setUpdate(false);
+    }
   }, [update]);
 
   const changeTasks = async () => {

@@ -39,39 +39,28 @@ const RegisterScreen = () => {
   const [losing, setLosing] = useState(false);
   const [controllerEmblem, setControllerEmblem] = useState(false);
   const { user } = useAuth();
+  const [active, setActive] = useState(false);
 
   const [formData, setFormData] = useState<{
     name: string;
     taskDate: string;
     startTime: string;
     endTime: string;
-    tag: string;
+    tags: string;
     status: string;
     description: string;
+    userEmail?: string;
+    id?: string;
   }>({
     name: "",
     taskDate: new Date().toISOString(),
-    startTime: "",
-    endTime: "",
-    tag: "",
+    startTime: "09:00",
+    endTime: "09:15",
+    tags: "",
     status: "",
     description: "",
+    userEmail: user && user.email,
   });
-
-  // type task = {
-  //   name: string;
-  //   description: string;
-  //   taskDate: string;
-  //   startDate: string;
-  //   endDate: string;
-  //   startTime: string;
-  //   endTime: string;
-  //   tags: string;
-  //   status: string;
-  //   userEmail: string;
-  //   duration: string;
-  //   time: string;
-  // };
 
   const changeData = () => {
     setThereTask(true);
@@ -82,7 +71,7 @@ const RegisterScreen = () => {
     let exist = false;
 
     if (filter.length > 0) {
-      filter.map((task) => {
+      filter.forEach((task) => {
         if (task[0]) {
           exist = true;
         }
@@ -113,9 +102,18 @@ const RegisterScreen = () => {
     setUpdate(true);
   };
 
-  const handleUpdate = async (value: any) => {
-    // const {data} = await
-    // getSingleTask(value.id);
+  const handleUpdate = async (task: any) => {
+    setActive(true);
+    setFormData({
+      description: task.description,
+      endTime: task.endTime,
+      id: task.id,
+      name: task.name,
+      startTime: task.startTime,
+      status: task.status,
+      tags: task.tags,
+      taskDate: `${task.realTaskDate}`,
+    });
   };
 
   const getTime = async () => {
@@ -277,7 +275,13 @@ const RegisterScreen = () => {
             <div className={styles.container_title}>
               <p className={styles.title}>Registro de Tarefas</p>
             </div>
-            <AddTask formData={formData} setFormData={setFormData} />
+            <AddTask
+              formData={formData}
+              setFormData={setFormData}
+              setUpdate={setUpdate}
+              active={active}
+              setActive={setActive}
+            />
           </div>
           <div className={styles.register_reminders}>
             <Note />
@@ -299,7 +303,11 @@ const RegisterScreen = () => {
             <p>Calendário</p>
           </div>
           <div className={styles.searchTasks_Calendar}>
-            <CalendarComponent setTasks={setTasks} update={update} />
+            <CalendarComponent
+              setTasks={setTasks}
+              update={update}
+              setUpdate={setUpdate}
+            />
           </div>
           <div className={styles.searchTasks_TasksTitle}>
             <p>Tasks e Reuniões</p>
@@ -355,7 +363,7 @@ const RegisterScreen = () => {
                                 size="small"
                                 hasIcons={true}
                                 onClickDelete={handleDelete}
-                                onClickUpdate={handleUpdate}
+                                onClickUpdate={() => handleUpdate(task)}
                               />
                             </div>
                           );

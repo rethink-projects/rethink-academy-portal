@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 24px;
   width: 368px;
-  background-color: var(--color-base);
 }
 
 .register_title {
@@ -37,6 +36,7 @@
 }
 
 .register_content {
+  background-color: var(--color-base);
   border: 1px solid var(--color-opacity-1);
   border-radius: 4px 4px 0px 0px;
   display: flex;
