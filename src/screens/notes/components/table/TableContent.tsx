@@ -10,7 +10,6 @@ import { Box } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 
 import { useAuth } from "../../../../context/AuthContext";
-import axios from "axios";
 
 import Images from "../../../../assets/index";
 import style from "./TableContent.module.css";

@@ -58,11 +58,11 @@ const TrilhasScreen = () => {
   const [lessonUser, setLessonUser] = useState<TypeLessonUser>();
 
   useEffect(() => {
-    api.get("/user/" + userAuth?.email).then((response) => {
-      if (response.data.user) {
-        setUser(response.data.user);
-      }
-    });
+    // api.get("/user/" + userAuth?.email).then((response) => {
+    //   if (response.data.user) {
+    //     setUser(response.data.user);
+    //   }
+    // });
     api.get("/trail").then((response) => {
       if (response.data.trail) {
         setTrails(response.data.trail);

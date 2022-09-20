@@ -1,4 +1,3 @@
-import axios from "axios";
 import { api } from "./Api";
 
 export const getCommentsFromUser = async (email: string) => {

@@ -10,7 +10,7 @@ import TableContent, {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
-import axios from "axios";
+
 import Images from "../../../../assets";
 import { api } from "../../../../services/backend/Api";
 

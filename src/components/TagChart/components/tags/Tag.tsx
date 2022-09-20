@@ -1,6 +1,6 @@
 import { ErrorData } from "@firebase/util";
 import { getDataGridUtilityClass } from "@mui/x-data-grid";
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../../context/AuthContext";
 import { api } from "../../../../services/backend/Api";

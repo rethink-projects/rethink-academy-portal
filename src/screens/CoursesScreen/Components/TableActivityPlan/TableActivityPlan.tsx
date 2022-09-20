@@ -21,7 +21,7 @@ import { randomId } from "@mui/x-data-grid-generator";
 import styles from "./TableActivityPlan.module.css";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import axios from "axios";
+
 import { useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { api } from "../../../../services/backend/Api";
