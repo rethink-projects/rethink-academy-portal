@@ -61,7 +61,7 @@ const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
         </div>
         <span>Novo documento</span>
         {!acceptedFiles[0] ? (
-          <p>Selecione ou arraste e solte o seu arquivo</p>
+          <p>Selecione o arquivo que deseja fazer upload</p>
         ) : (
           acceptedFiles.map((file: FileWithPath) => (
             <p key={file.path}>{file.path}</p>
