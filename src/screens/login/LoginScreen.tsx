@@ -1,4 +1,3 @@
-import { gridColumnGroupsLookupSelector } from "@mui/x-data-grid";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Images from "../../assets";
@@ -7,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 
 import styles from "./Login.module.css";
+import "./Login.css";
 
 function LoginScreen() {
   const auth = useAuth();
