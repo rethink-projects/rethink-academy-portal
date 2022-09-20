@@ -68,7 +68,7 @@ const InternProfileScreen = () => {
             <div className={styles.userAmbassador_cards_firstLine}>
               <StudentInfoCard studentEmail={studentEmail} />
               <InternContractStatus email={studentEmail} />
-              <Register type={"ambassador"} email={user.email} />
+              <Register type={"ambassador"} email={studentEmail} />
               <LastGoalsCard studentEmail={studentEmail} />
             </div>
             <div className={styles.userAmbassador_cards_lastLine}>
@@ -77,7 +77,7 @@ const InternProfileScreen = () => {
                   <p>Evolução de Habilidades</p>
                   <div
                     className={styles.userAmbassador_cards_action}
-                    onClick={() => navigate(`/`)}
+                    onClick={() => navigate(`/dashboard/avaliacao`)}
                   >
                     <span>Ver mais</span>
                     <ArrowForwardRoundedIcon />

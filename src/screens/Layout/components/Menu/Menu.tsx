@@ -75,7 +75,7 @@ function Menu() {
                   icon={Images.icons.privateNotes}
                 />
               </Link>
-              <Link to={"/dashboard/registroDeHoras"}>
+              <Link to={"/dashboard/avaliacao"}>
                 <MenuItem
                   isOpen={isOpen}
                   text="Avaliações"
