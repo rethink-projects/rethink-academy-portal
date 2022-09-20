@@ -5,6 +5,7 @@ import { getOneBucket, upsertBucket } from "../backend/BucketService";
 import { supabaseClient } from "./client";
 
 const bucket = "rethink-academy-storage";
+
 export const uploadContractByName = async (avatarFile: File, name: string) => {
   const { data, error } = await supabaseClient.storage
     .from(bucket)
@@ -55,14 +56,17 @@ export function useStorage() {
     }
   };
 
-  const generateUrlToDownload = async (title: string) => {
+  const generateUrlToDownload = async (
+    title: string,
+    studentEmail?: string
+  ) => {
     const bucket = await getOneBucket(
       window.btoa(title),
       //Buffer.from(title).toString("base64"),
-      user.email
+      studentEmail ? studentEmail : user.email
     );
     const { data, error } = await supabaseClient.storage
-      .from(user.email)
+      .from(studentEmail ? studentEmail : user.email)
       .createSignedUrl(bucket.url, 5000);
     if (error) {
       return notify({

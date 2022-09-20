@@ -7,11 +7,11 @@ import {
 } from "@mui/icons-material";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon/ButtonWithIcon";
 import { useStorage } from "../../../../services/supabase/storage";
-import axios from "axios";
 import { api } from "../../../../services/backend/Api";
 
 type CardType = {
   type: "embassador" | "student";
+  studentEmail?: string;
 };
 
 export type fileType = {
@@ -28,7 +28,10 @@ const DocumentCard = (documentContent: fileType & CardType) => {
   const iconDelete = <DeleteOutline />;
 
   const handleDownloadUrl = async (url: string) => {
-    await generateUrlToDownload(documentContent.url);
+    await generateUrlToDownload(
+      documentContent.url,
+      documentContent.studentEmail
+    );
   };
 
   const deleteFile = async (id: string) => {

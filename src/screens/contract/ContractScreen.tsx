@@ -336,6 +336,7 @@ const ContractScreen = () => {
                     title={content.title}
                     type={"embassador"}
                     url={content.url}
+                    studentEmail={studentEmail}
                   />
                 ) : (
                   <DocumentCard
