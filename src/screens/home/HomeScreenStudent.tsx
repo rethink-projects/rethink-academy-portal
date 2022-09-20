@@ -62,7 +62,7 @@ function HomeScreenStudent() {
 
         <p className={Styles.user_name}>{user.name}</p>
         <p className={Styles.user_title}>
-          {"Estagiário em " + getStudentMain()}
+          {"Estagiário(a) em " + getStudentMain()}
         </p>
         <div className={Styles.user_status}>
           <div className={Styles.user_status_content}>

@@ -7,10 +7,10 @@ function HomeScreen() {
   if (!user) {
     return <> Carregando...</>;
   }
-  if (user.role === "AMBASSADOR") {
-    return <HomeScreenAmbassador user={user} />;
+  if (user.role === "STUDENT") {
+    return <HomeScreenStudent />;
   }
-  return <HomeScreenStudent />;
+  return <HomeScreenAmbassador user={user} />;
 }
 
 export default HomeScreen;
