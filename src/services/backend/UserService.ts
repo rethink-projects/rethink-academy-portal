@@ -2,7 +2,9 @@ import { api } from "./Api";
 
 export const changeUserAvatar = async (avatar: string, email: string) => {
   try {
-    const { data } = await api.post(`/user/${email}`, { avatar });
+    console.log("mudou avatar");
+    const { data } = await api.patch(`/user/${email}`, { avatar });
+    console.log({ data });
     return data;
   } catch (error) {
     console.log(error);
