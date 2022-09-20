@@ -37,9 +37,7 @@ const Modal = ({
   };
 
   // parte para mostrar o onClick do confirm.
-  const handleClickConfirm = () => {
-    console.log(true);
-  };
+  const handleClickConfirm = () => {};
 
   if (!onClickConfirm) {
     onClickConfirm = handleClickConfirm;

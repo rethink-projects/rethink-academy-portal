@@ -11,7 +11,8 @@
 }
 
 .divRight,
-.divLeft, .divCenter {
+.divLeft,
+.divCenter {
   display: flex;
 }
 
@@ -35,8 +36,8 @@
 .dark {
   /* background-color: var(--color-tag-dark);
   color: var(--color-base); */
-  background-color: #F9F9F9;
-  color: #706E64;
+  background-color: #f9f9f9;
+  color: #706e64;
   border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
@@ -47,8 +48,8 @@
 .dark:hover {
   /* background-color: var(--color-tag-hover-dark);
   color: var(--color-base); */
-  background-color: #9DBA2B;
-  color: #1B1B1B;
+  background-color: #9dba2b;
+  color: #1b1b1b;
   border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
@@ -60,8 +61,8 @@
   /* background-color: var(--color-base);
   border: 1px solid var(--color-tag-dark);
   color: var(--color-tag-dark); */
-  background-color: #BDE034;
-  color: #3B3B3B;
+  background-color: #bde034;
+  color: #3b3b3b;
   border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
@@ -73,8 +74,8 @@
 .dark:active {
   /* background-color: var(--color-tag-font-light);
   color: var(--color-base); */
-  background-color: #9DBA2B;
-  color: #1B1B1B;
+  background-color: #9dba2b;
+  color: #1b1b1b;
   border: 1px solid rgba(27, 27, 27, 0.3);
 }
 
@@ -194,9 +195,8 @@
 
 /* Micro */
 .micro {
-  padding: 3px 3px;
+  padding: 3px 7px;
   height: 13px;
-  min-width: 61px;
   font-size: 12px;
   gap: 4px;
 }

@@ -32,12 +32,8 @@ function HomeScreenStudent() {
 
   useEffect(() => {
     GetUser();
-    console.log(badges);
   }, []);
 
-  useEffect(() => {
-    console.log(badges);
-  }, [badges]);
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -45,13 +41,10 @@ function HomeScreenStudent() {
     switch (user.main) {
       case "ENGINEERING":
         return "Engenharia";
-        break;
       case "DESIGN":
         return "Design";
-        break;
       case "PRODUCT":
         return "Produto";
-        break;
     }
   };
   return (
@@ -59,7 +52,7 @@ function HomeScreenStudent() {
       <div className={Styles.left_content}>
         <AcademyProgress name={user.name.split(" ")[0]} />
         <LastGoalsCard />
-        <Register />
+        <Register email={user.email} />
         <TrilhasComponent />
       </div>
       <div className={Styles.user_menu}>

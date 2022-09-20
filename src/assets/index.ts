@@ -79,6 +79,11 @@ import welcome from "./Welcome_Badge.svg";
 import troll from "./Troll_Badge.svg";
 import starsGif from "./starsGif.gif";
 
+import hatDelivery from "./hatDelivery.gif";
+import hatDegrading from "./hatDegrading.gif";
+import hatStolen from "./hatStolen.gif";
+import hatWin from "./hatWin.svg";
+
 import noGoals from "./NoGoals.svg";
 export const Images = {
   ProgressBack,
@@ -104,6 +109,10 @@ export const Images = {
   infoNotes,
   arrowTask,
   homeBackground,
+  hatDelivery,
+  hatDegrading,
+  hatStolen,
+  hatWin,
   icons: {
     avaliations,
     privateNotes,

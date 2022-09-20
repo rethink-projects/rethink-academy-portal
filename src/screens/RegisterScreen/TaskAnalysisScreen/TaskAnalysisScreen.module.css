@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+}
+
+.leftScreen {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 80px;
+}
+
+.breadcrumb {
+  padding: 28px 0px 24px 0;
+}
+
+.graphic > div {
+  margin: 0;
+  width: 1040px;
+  height: 447px;
+  background-color: #ffffff;
+}
+
+.bottom_container {
+  display: flex;
+  flex-direction: row;
+  gap: 63px;
+  padding-top: 18px;
+}
+
+.task_history {
+  width: 620px;
+  height: 467px;
+}
+
+.quick_view {
+  width: 357px;
+  height: 357px;
+}
+
+.rightScreen {
+  display: flex;
+  justify-content: space-between;
+  background-color: red;
+}

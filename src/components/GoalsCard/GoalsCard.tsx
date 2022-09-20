@@ -38,10 +38,6 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
   const [update, setUpdate] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  // console.log(goalList);
-  // console.log(goals);
-  // console.log(studentEmail);
-
   const getGoalList = async () => {
     if (user?.role === "STUDENT") {
       try {
@@ -124,7 +120,6 @@ const GoalsCard = ({ studentEmail }: GoalsCardProps) => {
     goalListId: string,
     props: any
   ) => {
-    // console.log(props);
     updateGoal(id, props.props, title, goalListId);
     goals &&
       setGoals(() =>

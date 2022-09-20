@@ -29,7 +29,6 @@ const InternProfileScreen = () => {
 
   const URL = window.location.pathname.split("/");
   const studentEmail = URL[3];
-  console.log(studentEmail);
 
   const getStudentUser = async () => {
     try {
@@ -69,7 +68,7 @@ const InternProfileScreen = () => {
             <div className={styles.userAmbassador_cards_firstLine}>
               <StudentInfoCard studentEmail={studentEmail} />
               <InternContractStatus email={studentEmail} />
-              <Register type={"ambassador"} />
+              <Register type={"ambassador"} email={user.email} />
               <LastGoalsCard studentEmail={studentEmail} />
             </div>
             <div className={styles.userAmbassador_cards_lastLine}>

@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./InputText.module.css";
 
 type InputTextProps = {
-  type: "micro" | "default" | "small" | "large" | "block";
+  type: "micro" | "default" | "small" | "large" | "block" | "extraLarge";
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hasIcon: Boolean;
@@ -71,6 +71,13 @@ const InputText = ({
       input = styles.inputText_inputLarge;
       icon = styles.inputText_iconLarge;
       field = styles.inputText_fieldLarge;
+      break;
+    case "extraLarge":
+      container = styles.inputText_containerExtraLarge;
+      inputLabel = styles.inputText_labelDefault;
+      input = styles.inputText_inputExtraLarge;
+      icon = styles.inputText_iconDefault;
+      field = styles.inputText_fieldDefault;
       break;
   }
 

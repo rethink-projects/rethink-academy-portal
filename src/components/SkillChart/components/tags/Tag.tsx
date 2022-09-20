@@ -74,7 +74,6 @@ const EvaluationTag = ({
           }}
         >
           {item.length < 15 ? item : item.slice(0, 15) + "..."}
-          {/* {item} */}
         </button>
       ))}
     </div>

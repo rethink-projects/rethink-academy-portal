@@ -1,0 +1,28 @@
+.css-1v994a0 {
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    color: #1B1B1B !important;
+    text-transform: capitalize !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+}
+
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    background: #BDE034 !important;
+}
+
+
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    background: #BDE034 !important;
+}
+
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
+    background: #E2FA85 !important;
+    border-radius: 50% !important;
+    margin: auto auto;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root:hover {
+    background: #E2FA85 !important;
+}

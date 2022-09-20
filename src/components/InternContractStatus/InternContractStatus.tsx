@@ -34,7 +34,6 @@ const InternContractStatus = (email: internEmailProps) => {
           `http://localhost:4000/api/info/${email.email}`
         );
         setUserInfo(data.info);
-        console.log(data.info);
         return;
       } catch (error) {
         console.log(error);

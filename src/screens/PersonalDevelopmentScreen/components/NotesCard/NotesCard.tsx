@@ -23,8 +23,6 @@ const NotesCard = ({ studentEmail, height }: notesCardProps) => {
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  // console.log(user);
-  // console.log(studentEmail);
 
   useEffect(() => {
     if (user) {
@@ -33,26 +31,16 @@ const NotesCard = ({ studentEmail, height }: notesCardProps) => {
   }, [user, studentEmail]);
 
   const getNotes = async () => {
-    // console.log("chamou get notes");
-
     if (!studentEmail) {
-      // console.log("-------------------------");
-
       const notes = await axios.get(
         `http://localhost:4000/api/note/${user.email}`
       );
       setNotes(notes.data.notesFormated);
       return notes.data.notesFormated;
     } else if (user.role === "AMBASSADOR") {
-      // console.log("**");
-
       const notes = await axios.get(
         `http://localhost:4000/api/note/${studentEmail}`
       );
-
-      // console.log(
-      //   notes.data.notesFormated.filter((note: any) => note.isPublic === true)
-      // );
 
       setNotes(
         notes.data.notesFormated.filter((note: any) => note.isPublic === true)

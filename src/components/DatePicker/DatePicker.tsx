@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import pt from "date-fns/locale/pt";
 
@@ -31,31 +31,51 @@ type task = {
 
 type DatePickerProps = {
   hasIcon?: boolean;
-  size: "large" | "default" | "small" | "micro";
+  size: "large" | "default" | "small" | "micro" | "block";
   calendarPosition: "left" | "right";
   placeholder: string;
   setTasks?: (value: task[]) => void;
   update?: boolean;
+  email?: string;
 };
 
-export const DatePicker = ({
+const DatePicker = ({
   hasIcon = false,
   size = "default",
   calendarPosition: position = "left",
   placeholder = "Placeholder",
   setTasks,
   update,
+  email,
 }: DatePickerProps) => {
   const { user } = useAuth();
 
   const [active, setActive] = useState(false);
 
+  const date = new Date();
+  const modifiedDate = new Date(
+    date.valueOf() - date.getTimezoneOffset() * 60000
+  );
+
+  let month = modifiedDate.getMonth().toString();
+  let day = modifiedDate.getDate().toString();
+  let year = modifiedDate.getFullYear().toString();
+
+  if (parseInt(month, 10) < 10) {
+    month = "0" + month;
+  }
+  if (parseInt(day, 10) < 10) {
+    day = "0" + day;
+  }
+
+  const dateBase = new Date(parseInt(year), parseInt(month), parseInt(day));
+
   const [state, setState] = useState<
     { startDate?: Date; endDate?: Date; key?: string }[]
   >([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: dateBase,
+      endDate: dateBase,
       key: "selection",
     },
   ]);
@@ -97,12 +117,11 @@ export const DatePicker = ({
 
   useEffect(() => {
     if (update) changeTasks();
-  }, [update]);
+  }, [update, email]);
 
   const changeTasks = async () => {
-    // if (user) {
     await getDateFilter(
-      "sthephany.tezza@rethink.dev",
+      email ? email : user.email,
       getFullDate(state[0].startDate!),
       getFullDate(state[0].endDate!)
     )
@@ -144,7 +163,11 @@ export const DatePicker = ({
                 <img src={Images.icons.eyeIcon} alt="An eye icon" />
               </>
             )}
-            <p>{`${dateInitial} à ${dateFinal}`}</p>
+            <p>
+              {dateInitial !== dateFinal
+                ? `${dateInitial} à ${dateFinal}`
+                : `${dateInitial}/${year}`}
+            </p>
           </div>
           <div className={styles.datePicker_calendarIcon}>
             <img src={Images.icons.calendarIcon} alt="A calendar icon" />
@@ -170,3 +193,5 @@ export const DatePicker = ({
     </div>
   );
 };
+
+export default React.memo(DatePicker);

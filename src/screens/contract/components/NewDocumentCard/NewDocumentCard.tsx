@@ -31,12 +31,10 @@ const NewDocumentCard = ({ setFiles }: { setFiles: (value: any) => void }) => {
 
     if (file) {
       const bucket = await uploadFile(file.name, acceptedFiles[0], file.name);
-      console.log({ bucket });
       setFiles((prevValue: any[]) =>
         //prevValue.push({ title: file.name, id: file.name, url: file.name })
 
         {
-          console.log("PREV VALUE", prevValue);
           prevValue.push({
             title: bucket.title,
             id: bucket.id,

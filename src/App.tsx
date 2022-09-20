@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PersonalDevelopmentChart from "./components/SkillChart/PersonalDevelopmentChart";
 import AuthProvider from "./context/AuthProvider";
 import Class from "./screens/class/Class";
 
@@ -15,6 +16,8 @@ import PlaygroundScreen from "./screens/playground/PlaygroundScreen";
 import CursosScreen from "./screens/CoursesScreen/CoursesScreen";
 import RequireAuth from "./services/auth";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
+import TaskAnalysisScreen from "./screens/RegisterScreen/TaskAnalysisScreen/TaskAnalysisScreen";
+import AmbassadorAnalisysScreen from "./screens/AmbassadorAnalisysScreen/AmbassadorAnalisysScreen";
 import ContractScreen from "./screens/contract/ContractScreen";
 import InternProfileScreen from "./screens/internProfileScreen/InternProfileScreen";
 
@@ -53,7 +56,19 @@ function App() {
                 path="/dashboard/trilhas/:id/curso/:id/aulas/:id"
                 element={<Class />}
               />
-              <Route path="/dashboard/register" element={<RegisterScreen />} />
+              <Route
+                path="/dashboard/registroDeHoras"
+                element={<RegisterScreen />}
+              />
+              <Route
+                path="/dashboard/registroDeHoras/analise"
+                element={<TaskAnalysisScreen />}
+              />
+              <Route
+                path="/dashboard/registroDeHoras/analise/:email"
+                // element={<TaskAnalysisScreen />}
+                element={<AmbassadorAnalisysScreen />}
+              />
               <Route
                 path="/dashboard/desenvolvimentoPessoal"
                 element={<PersonalDevelopmentScreen />}
