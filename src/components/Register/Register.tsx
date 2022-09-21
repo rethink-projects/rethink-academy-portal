@@ -142,6 +142,7 @@ const Register = ({ type = "home", email }: RegisterProps) => {
               <div
                 className={styles.register_header_infos_arrow}
                 onClick={() => navigate("/dashboard/registroDeHoras")}
+                style={{ cursor: "pointer" }}
               >
                 <ArrowForwardIosIcon />
               </div>
