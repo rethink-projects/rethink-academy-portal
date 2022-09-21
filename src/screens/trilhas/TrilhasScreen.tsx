@@ -6,6 +6,7 @@ import { ModalEditCardTrilhas } from "./components/ModalEditCardTrilhas/ModalEdi
 import { useAuth } from "../../context/AuthContext";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { api } from "../../services/backend/Api";
+import Spinner from "../../components/Spinner/Spinner";
 
 type TypeTrails = {
   name: string;
@@ -117,7 +118,11 @@ const TrilhasScreen = () => {
     setModalIsOpen(false);
   };
   if (lessonUser === undefined || userEmail === "") {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loadingPage}>
+        <Spinner type="light" size="big" isLoading={true} />
+      </div>
+    );
   }
   return (
     <div className={styles.body}>
