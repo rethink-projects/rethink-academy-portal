@@ -68,7 +68,7 @@ function Menu() {
 
           {user.role === "AMBASSADOR" ? (
             <>
-              <Link to={"/dashboard/desenvolvimentoPessoal"}>
+              <Link to={"/dashboard/notas"}>
                 <MenuItem
                   isOpen={isOpen}
                   text="Notas Privadas"

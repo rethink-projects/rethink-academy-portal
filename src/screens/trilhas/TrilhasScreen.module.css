@@ -29,3 +29,12 @@
   font-size: 16px;
   line-height: 150%;
 }
+
+.loadingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}

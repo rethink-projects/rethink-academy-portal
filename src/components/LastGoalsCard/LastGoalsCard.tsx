@@ -24,9 +24,12 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
     if (user?.role === "STUDENT") {
       try {
         const userGoalsList = await api.get(`/goalList/${user.email}`);
-        setGoalList(userGoalsList.data[userGoalsList.data.length - 1]);
 
-        setGoals(userGoalsList.data[userGoalsList.data.length - 1].goal);
+        if (userGoalsList.data.length > 0) {
+          setGoalList(userGoalsList.data[userGoalsList.data.length - 1]);
+          setGoals(userGoalsList.data[userGoalsList.data.length - 1].goal);
+        }
+
         return;
       } catch (error) {
         console.log(error);
@@ -35,8 +38,14 @@ const LastGoalsCard = ({ studentEmail }: cardProps) => {
     if (user?.role === "AMBASSADOR") {
       try {
         const studentGoalsList = await api.get(`/goalList/${studentEmail}`);
-        setGoalList(studentGoalsList.data[studentGoalsList.data.length - 1]);
-        setGoals(studentGoalsList.data[studentGoalsList.data.length - 1].goal);
+
+        if (studentGoalsList.data.length > 0) {
+          setGoalList(studentGoalsList.data[studentGoalsList.data.length - 1]);
+          setGoals(
+            studentGoalsList.data[studentGoalsList.data.length - 1].goal
+          );
+        }
+
         return;
       } catch (error) {
         console.log(error);
