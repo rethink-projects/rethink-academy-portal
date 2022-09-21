@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { api } from "../../services/backend/Api";
 import Acordeon from "../../components/Acordeon/Acordeon";
+import Spinner from "../../components/Spinner/Spinner";
 
 interface LessonResponse {
   completed: boolean;
@@ -156,7 +157,11 @@ const Class = () => {
   }, [user, location.pathname]);
 
   if (!urlLesson) {
-    return <>Carregando</>;
+    return (
+      <div className={styles.loadingPage}>
+        <Spinner type="light" size="big" isLoading={true} />
+      </div>
+    );
   }
   return (
     <div className={styles.class_container}>

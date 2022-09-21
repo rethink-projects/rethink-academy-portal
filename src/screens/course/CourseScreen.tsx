@@ -24,6 +24,7 @@ import styles from "./CourseScreen.module.css";
 
 // TYPES
 import { CourseResponse, Module, Modal } from "../types/CourseTypes";
+import Spinner from "../../components/Spinner/Spinner";
 
 const CourseScreen = () => {
   let userEmail = "";
@@ -88,7 +89,11 @@ const CourseScreen = () => {
     userEmail === "" ||
     ambassador === undefined
   ) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loadingPage}>
+        <Spinner type="light" size="big" isLoading={true} />
+      </div>
+    );
   }
   return (
     <div className={styles.box}>

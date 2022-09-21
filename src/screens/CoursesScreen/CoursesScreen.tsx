@@ -28,6 +28,7 @@ import CardCourse from "./Components/CardCourse/CardCourse";
 import CardAddCourse from "./Components/CardAddCourse/CardAddCourse";
 import CardSyllabus from "./Components/CardSyllabus/CardSyllabus";
 import EmblemCard from "../../components/EmblemCard/EmblemCard";
+import Spinner from "../../components/Spinner/Spinner";
 
 interface CoursesWatched {
   courseStyle: "COURSE" | "WORKSHOP" | "TRAINING" | "LECTURE";
@@ -104,9 +105,13 @@ const CursosScreen = () => {
     }
   }, [user]);
 
-  // if (!user || trailName === "" || intern === undefined) {
-  //   return <div>Loading...</div>;
-  // }
+  if (!user || trailName === "" || intern === undefined) {
+    return (
+      <div className={styles.loadingPage}>
+        <Spinner type="light" size="big" isLoading={true} />
+      </div>
+    );
+  }
 
   const onSubmitCourse = () => {
     if (editCourseIsOpen) {
