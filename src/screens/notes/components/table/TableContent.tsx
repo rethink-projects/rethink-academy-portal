@@ -118,6 +118,7 @@ const TableContent = ({
               key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               onClick={() => handleClick(row)}
+              style={{ cursor: "pointer" }}
             >
               <TableCell
                 className={style.table_body_nota}
