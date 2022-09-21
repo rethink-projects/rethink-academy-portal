@@ -58,7 +58,7 @@ const Comment = ({ student: studentEmail }: { student?: string | false }) => {
     if (user) {
       getComments();
     }
-  }, [user]);
+  }, [user, studentEmail]);
 
   if (!user) return <div> carregando...</div>;
 
