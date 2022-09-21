@@ -42,7 +42,7 @@ const TaskAnalysisScreen = () => {
   const [tags, setTags] = useState("Gerais");
   const [breadcrumbData, setBreadcrumbData] = useState([
     { title: "Home", link: "/" },
-    { title: "Registro de Horas", link: "/dashboard/register" },
+    { title: "Registro de Horas", link: "/dashboard/registroDeHoras" },
     { title: "Análise de Tarefas", link: "#" },
   ]);
 
