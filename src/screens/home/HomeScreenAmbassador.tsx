@@ -72,6 +72,9 @@ const HomeScreenAmbassador = ({ user }: any) => {
 
   useEffect(() => {
     getAllUsersWithRoleStudent();
+    if (new Date().getTime() > new Date(2022, 8, 22).getTime()) {
+      setEnd(true);
+    }
   }, []);
 
   useEffect(() => {
