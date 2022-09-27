@@ -14,6 +14,7 @@ type userFromBackend = {
   role: string;
   main: string;
   avatar: string;
+  level?: number;
 };
 const HomeScreenAmbassador = ({ user }: any) => {
   const { notify } = useNotification();
@@ -49,6 +50,7 @@ const HomeScreenAmbassador = ({ user }: any) => {
       return;
     }
   };
+
   const getStudentMain = (main: string) => {
     switch (main) {
       case "ENGINEERING":
@@ -217,7 +219,7 @@ const HomeScreenAmbassador = ({ user }: any) => {
                         className={Styles.avatar_icon}
                         alt="Rethink Arrow"
                       />
-                      {user.level}
+                      {intern.level}
                     </div>
                   </div>
                   <div className={Styles.student_card_text}>
